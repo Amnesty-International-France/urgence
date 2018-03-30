@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TextInput, Animated } from 'react-native';
-import { Text } from 'glamorous-native';
+import { View, StyleSheet, Animated, Text } from 'react-primitives';
+import glamorous from 'glamorous-primitives';
 
 const styles = StyleSheet.create({
   app: {
@@ -24,6 +24,11 @@ const styles = StyleSheet.create({
   }
 });
 
+const StyledTitle = glamorous.text({
+  fontSize: 16,
+  color: 'white'
+});
+
 class App extends Component {
   state = {
     text: '',
@@ -44,15 +49,10 @@ class App extends Component {
     return (
       <Animated.View style={[styles.app, { opacity: fadeAnim }]}>
         <View style={styles.appHeader}>
-          <Text style={styles.appTitle}>Welcome to React ⚛️</Text>
+          <StyledTitle>Welcome to React ⚛️</StyledTitle>
         </View>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
-        />
       </Animated.View>
-    )
+    );
   }
 }
 
