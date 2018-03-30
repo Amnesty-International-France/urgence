@@ -15,9 +15,6 @@
     "test-native": "node node_modules/jest/bin/jest.js --watch",
     "test": "npm run test-web && npm run test-native"
   },
-  "jest": {
-    "preset": "jest-expo"
-  },
   "dependencies": {
     "expo": "25.0.0",
     "react": "16.3.0",
