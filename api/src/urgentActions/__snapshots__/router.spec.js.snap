@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Urgent Actions API Integration Tests GET /api/urgentActions 1`] = `"[{\\"id\\":1,\\"title\\":\\"Hello world!\\"},{\\"id\\":2,\\"title\\":\\"All your bases belong to us!\\"}]"`;

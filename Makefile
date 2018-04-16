@@ -23,6 +23,9 @@ connect-api:
 psql:
 	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
 
+test:
+	$(DOCKER_COMPOSE) run --rm api bash -ci 'yarn test'
+
 DB_MIGRATE = $(DOCKER_COMPOSE) run --rm --no-deps api sh -c "./node_modules/.bin/db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
