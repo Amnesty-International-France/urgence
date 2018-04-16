@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Animated } from 'react-primitives';
+import { View, StyleSheet, Text } from 'react-primitives';
 import glamorous from 'glamorous-primitives';
+import { Router, Link, Route } from './gateway/ReactRouter';
 
 const styles = StyleSheet.create({
     app: {
@@ -26,33 +27,35 @@ const styles = StyleSheet.create({
 
 const StyledTitle = glamorous.text({
     fontSize: 16,
-    color: 'white',
+    // color: 'white',
 });
 
-class App extends Component {
-    state = {
-        text: '',
-        fadeAnim: new Animated.Value(0), // Initial value for opacity: 0
-    };
+const Home = () => <StyledTitle>Home</StyledTitle>;
 
-    componentDidMount() {
-        Animated.timing(
-            // Animate over time
-            this.state.fadeAnim, // The animated value to drive
-            {
-                toValue: 1, // Animate to opacity: 1 (opaque)
-                duration: 10000, // Make it take a while
-            },
-        ).start(); // Starts the animation
-    }
+const About = () => <StyledTitle>About</StyledTitle>;
+
+class App extends Component {
     render() {
-        const { fadeAnim } = this.state;
         return (
-            <Animated.View style={[styles.app, { opacity: fadeAnim }]}>
-                <View style={styles.appHeader}>
-                    <StyledTitle>Welcome to React ⚛️</StyledTitle>
+            <Router>
+                <View>
+                    <View>
+                        <View>
+                            <Link to="/">
+                                <Text>Home</Text>
+                            </Link>
+                        </View>
+                        <View>
+                            <Link to="/about">
+                                <Text>About</Text>
+                            </Link>
+                        </View>
+                    </View>
+
+                    <Route exact path="/" component={Home} />
+                    <Route path="/about" component={About} />
                 </View>
-            </Animated.View>
+            </Router>
         );
     }
 }
