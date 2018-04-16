@@ -17,7 +17,7 @@ exports.up = function(db, cb) {
       CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 
       CREATE TABLE urgent_action (
-          id uuid NOT NULL,
+          id uuid NOT NULL DEFAULT uuid_generate_v4(),
           title text NOT NULL
       );
 

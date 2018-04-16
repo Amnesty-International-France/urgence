@@ -7,6 +7,9 @@ const getUrgentActions = async (client) => client.query(`
     FROM urgent_action
 `);
 
+const truncate = async (client) => client.query(`TRUNCATE urgent_action`);
+
 module.exports = {
     getUrgentActions,
+    truncate,
 };

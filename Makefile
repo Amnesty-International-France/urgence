@@ -39,3 +39,6 @@ migration-new: ## make create-migration MIGRATION_TITLE=whatever-title
 
 migration-down: ## make create-migration NB_MIGRATIONS=2
 	$(DB_MIGRATE) down -c ${NB_MIGRATIONS}"
+
+populate-db:
+	$(DOCKER_COMPOSE) run --rm api bash -ci 'node src/bin/populateDb.js'
