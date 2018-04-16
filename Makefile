@@ -19,3 +19,6 @@ logs:
 
 connect-api:
 	$(DOCKER_COMPOSE) exec api bash -ci 'yarn'
+
+psql:
+	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
