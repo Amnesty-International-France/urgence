@@ -6,6 +6,7 @@ DOCKER_COMPOSE = docker-compose -p reaction-rapide
 install:
 	yarn
 	$(DOCKER_COMPOSE) run --rm --no-deps api bash -ci 'yarn'
+	$(DOCKER_COMPOSE) run --rm --no-deps front bash -ci 'yarn'
 
 start:
 	$(DOCKER_COMPOSE) up -d

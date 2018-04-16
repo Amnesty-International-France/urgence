@@ -14,3 +14,13 @@ services:
             - "4000:4000"
         user: "${UID}:${GID}"
         working_dir: /app
+    front:
+        image: node:9
+        command: "npm run start-web"
+        volumes:
+            - "./front:/app"
+        environment:
+            - NODE_ENV=development
+        ports:
+            - "3000:3000"
+        working_dir: /app
