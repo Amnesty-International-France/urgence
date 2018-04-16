@@ -1,15 +1,6 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
-
-# dependencies
-node_modules
-
-# production
 /front/build
-
-# misc
-.vscode
-.DS_Store
-
+node_modules
 npm-debug.log*
+var/data/
 yarn-debug.log*
 yarn-error.log*
