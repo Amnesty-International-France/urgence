@@ -1,9 +1,6 @@
-const express = require('express');
 const supertest = require('supertest');
+const server = require('../server');
 
 module.exports = (router) => {
-    const app = express();
-    app.use(router);
-
-    return supertest(app);
+    return supertest(server);
 };

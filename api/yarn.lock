@@ -629,6 +629,10 @@ cliui@^4.0.0:
     strip-ansi "^4.0.0"
     wrap-ansi "^2.0.0"
 
+co-postgres-queries@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/co-postgres-queries/-/co-postgres-queries-1.2.2.tgz#f137c5ef05cc4a4b752a713c695b70669b4fd407"
+
 co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
@@ -2998,7 +3002,7 @@ pg-types@~1.12.1:
     postgres-date "~1.0.0"
     postgres-interval "^1.1.0"
 
-pg@^7.4.1:
+pg@7.4.1, pg@^7.4.1:
   version "7.4.1"
   resolved "https://registry.yarnpkg.com/pg/-/pg-7.4.1.tgz#f3411c8ddf9f692322fe05e7017a1888e47f78f1"
   dependencies:

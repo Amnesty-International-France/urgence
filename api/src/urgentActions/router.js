@@ -1,15 +1,11 @@
 const { Router } = require('express');
+const { getUrgentActions } = require('./repository');
 
 const router = new Router();
 
-router.get('/api/urgentActions', (req, res) => {
-    return res.status(200).json([{
-        id: 1,
-        title: 'Hello world!',
-    }, {
-        id: 2,
-        title: 'All your bases belong to us!',
-    }]);
+router.get('/api/urgentActions', async (req, res) => {
+    const urgentActions = await getUrgentActions(req.dbClient);
+    return res.status(200).json(urgentActions);
 });
 
 module.exports = router;

@@ -6,6 +6,10 @@ camelcase@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
+co-postgres-queries@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/co-postgres-queries/-/co-postgres-queries-1.2.2.tgz#f137c5ef05cc4a4b752a713c695b70669b4fd407"
+
 convict@4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/convict/-/convict-4.2.0.tgz#ce88041fbec85f79d58d862ad738a5f40d2cef83"
