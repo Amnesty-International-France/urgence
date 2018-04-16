@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+    api:
+        image: node:9
+        command: "yarn start"
+        volumes:
+            - "./api:/app"
+            - "/tmp:/tmp"
+        environment:
+            - NODE_ENV=development
+            - HOME=/tmp
+        ports:
+            - "4000:4000"
+        user: "${UID}:${GID}"
+        working_dir: /app
