@@ -9,7 +9,7 @@ services:
             - "./config:/app/config"
             - "/tmp:/tmp"
         environment:
-            - NODE_ENV
+            - NODE_ENV=development
             - HOME=/tmp
         ports:
             - "4000:4000"
@@ -20,13 +20,6 @@ services:
 
     db:
         image: postgres:10
-        volumes:
-            - "./var/data:/var/lib/postgresql/data/"
-            - "/etc/passwd:/etc/passwd:ro"
-        environment:
-            - POSTGRES_USER=amnesty
-            - POSTGRES_PASSWORD
-            - POSTGRES_DB=reaction-rapide
         expose:
             - "5432"
         user: "${UID}:${GID}"

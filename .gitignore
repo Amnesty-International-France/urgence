@@ -2,5 +2,6 @@
 node_modules
 npm-debug.log*
 var/data/
+var/data-test/
 yarn-debug.log*
 yarn-error.log*

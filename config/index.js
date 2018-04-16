@@ -24,7 +24,7 @@ const config = convict({
         },
         password: {
             format: String,
-            default: '',
+            default: 'amnesty',
             env: 'POSTGRES_PASSWORD',
         },
         database: {

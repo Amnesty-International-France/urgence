@@ -1,7 +1,8 @@
 export UID=$(shell id -u)
 export GID=$(shell id -g)
 
-DOCKER_COMPOSE = docker-compose -p reaction-rapide
+DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
+DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
 
 install:
 	yarn
@@ -24,7 +25,7 @@ psql:
 	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
 
 test:
-	$(DOCKER_COMPOSE) run --rm api bash -ci 'yarn test'
+	$(DOCKER_COMPOSE_TEST) run --rm api bash -ci 'yarn test'
 
 DB_MIGRATE = $(DOCKER_COMPOSE) run --rm --no-deps api sh -c "./node_modules/.bin/db-migrate \
 	--config=database.js \

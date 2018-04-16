@@ -2,7 +2,7 @@ const batchInsert = require('co-postgres-queries/queries/batchInsert');
 const config = require('../../../config');
 
 const getClient = require('../db/client');
-console.log(config);
+
 if (config.env === 'production') {
     throw new Error('Populating database in production is forbidden!');
 }
