@@ -10,6 +10,33 @@ const config = convict({
         format: 'port',
         default: 4000,
         env: 'PORT',
+    },
+    db: {
+        host: {
+            format: String,
+            default: 'db',
+            env: 'POSTGRES_HOST',
+        },
+        user: {
+            format: String,
+            default: 'amnesty',
+            env: 'POSTGRES_USER',
+        },
+        password: {
+            format: String,
+            default: '',
+            env: 'POSTGRES_PASSWORD',
+        },
+        database: {
+            format: String,
+            default: 'reaction-rapide',
+            env: 'POSTGRES_DATABASE',
+        },
+        schema: {
+            format: String,
+            default: 'reaction-rapide',
+            env: 'POSTGRES_DATABASE'
+        }
     }
 });
 

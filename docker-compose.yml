@@ -6,6 +6,7 @@ services:
         command: "yarn start"
         volumes:
             - "./api:/app"
+            - "./config:/app/config"
             - "/tmp:/tmp"
         environment:
             - NODE_ENV=development
