@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Title from './primitives/Title';
+import Title from './themes/Title';
 
 const Home = () => <Title>Home</Title>;
 

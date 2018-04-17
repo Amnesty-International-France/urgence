@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Title from './primitives/Title';
+import Title from './themes/Title';
 
 const UA = ({
     match: {
