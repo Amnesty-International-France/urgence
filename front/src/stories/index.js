@@ -5,4 +5,4 @@ import App from '../App';
 import Title from '../themes/Title';
 
 storiesOf('App', module).add('default', () => <App />);
-storiesOf('Tilte', module).add('Home title', () => <Title>Home</Title>);
+storiesOf('Title', module).add('Home title', () => <Title>Home</Title>);

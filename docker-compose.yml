@@ -36,3 +36,14 @@ services:
         ports:
             - "3000:3000"
         working_dir: /app
+
+    storybook:
+        image: node:9
+        command: "npm run storybook"
+        volumes:
+            - "./front:/app"
+        environment:
+            - NODE_ENV=development
+        ports:
+            - "9009:9009"
+        working_dir: /app
