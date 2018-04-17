@@ -13,7 +13,13 @@ describe('generateUrl', () => {
         expect(generateUrl('ua', { id: 'id_value' })).toBe('/ua/id_value');
     });
 
-    it('should generate home url per default', () => {
-        expect(generateUrl()).toBe('/');
+    it('should throw error if receiving unknow route', () => {
+        expect(() => generateUrl()).toThrow(
+            'Unknown route undefined passed to generateUrl',
+        );
+
+        expect(() => generateUrl('bad_route')).toThrow(
+            'Unknown route bad_route passed to generateUrl',
+        );
     });
 });

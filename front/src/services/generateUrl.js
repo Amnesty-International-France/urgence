@@ -3,7 +3,8 @@ export default (name, params = {}) => {
         case 'ua':
             return `/ua/${params.id || ':id'}`;
         case 'home':
-        default:
             return '/';
+        default:
+            throw new Error(`Unknown route ${name} passed to generateUrl`);
     }
 };
