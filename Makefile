@@ -26,29 +26,15 @@ psql:
 	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
 
 test:
-	$(MAKE) migration-test
 	$(DOCKER_COMPOSE_TEST) run --rm api yarn test ; $(DOCKER_COMPOSE_TEST) stop
 
 test-watch:
-	$(MAKE) migration-test
 	$(DOCKER_COMPOSE_TEST) run --rm api yarn run test-watch
 
 DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "./node_modules/.bin/db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
 	-e api
-
-DB_MIGRATE_TEST = $(DOCKER_COMPOSE_TEST) run --rm api sh -c "./node_modules/.bin/db-migrate \
-	--config=database.js \
-	--migrations-dir=migrations \
-	-e api
-
-test-start-dockers:
-	mkdir -p var/data-test # we can't commit it as PostGres wants an empty folder
-	$(DOCKER_COMPOSE_TEST) up -d
-
-	# we need to wait for PG database to be initialized before proceeding
-	until $(DOCKER_COMPOSE_TEST) run --rm db pg_isready -U postgres -h db; do sleep 1; done
 
 test-stop-dockers:
 	$(DOCKER_COMPOSE_TEST) down
@@ -61,10 +47,6 @@ migration-new: ## make create-migration MIGRATION_TITLE=whatever-title
 
 migration-down: ## make create-migration NB_MIGRATIONS=2
 	$(DB_MIGRATE) down -c ${NB_MIGRATIONS}"
-
-migration-test: test-start-dockers
-	$(DB_MIGRATE_TEST) up"
-	$(MAKE) test-stop-dockers
 
 populate-db:
 	$(DOCKER_COMPOSE) run --rm api bash -ci 'node src/bin/populateDb.js'
