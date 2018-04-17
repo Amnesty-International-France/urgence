@@ -1,15 +1,19 @@
-const select = require('co-postgres-queries/queries/select');
+const { crud } = require('co-postgres-queries');
 
-const client = require('../db/client');
+const urgentActionCrudQueries = crud({
+    table: 'urgent_action',
+    writableCols: ['id', 'title'],
+    returnCols: ['id', 'title'],
+});
 
-const getUrgentActions = async (client) => client.query(`
-    SELECT id, title
-    FROM urgent_action
-`);
+const getUrgentActions = async (client) => client.query(urgentActionCrudQueries.select({
+    limit: 10,
+    offset: 0,
+}));
 
-const truncate = async (client) => client.query(`TRUNCATE urgent_action`);
+const insertUrgentAction = async (client, urgentAction) => client.query(urgentActionCrudQueries.insertOne(urgentAction));
 
 module.exports = {
     getUrgentActions,
-    truncate,
+    insertUrgentAction,
 };

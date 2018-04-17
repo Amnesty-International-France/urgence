@@ -35,7 +35,7 @@ const config = convict({
         schema: {
             format: String,
             default: 'reaction-rapide',
-            env: 'POSTGRES_DATABASE'
+            env: 'POSTGRES_SCHEMA'
         }
     }
 });

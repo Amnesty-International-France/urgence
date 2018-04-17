@@ -4,13 +4,13 @@ services:
     api:
         environment:
             - NODE_ENV=test
+            - POSTGRES_DATABASE=reaction-rapide-test
         volumes:
             - "./var/data-test:/var/lib/postgresql/data/"
 
     db:
         volumes:
             - "./var/data-test:/var/lib/postgresql/data/"
-            - "/etc/passwd:/etc/passwd:ro"
         environment:
             - POSTGRES_USER=amnesty
             - POSTGRES_PASSWORD=amnesty

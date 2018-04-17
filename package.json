@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "convict": "4.2.0"
+  },
+  "devDependencies": {
+    "uuid-by-string": "0.6.0"
   }
 }
