@@ -27,7 +27,7 @@ psql:
 
 test:
 	$(MAKE) migration-test
-	$(DOCKER_COMPOSE_TEST) run --rm api yarn test
+	$(DOCKER_COMPOSE_TEST) run --rm api yarn test ; $(DOCKER_COMPOSE_TEST) stop
 
 test-watch:
 	$(MAKE) migration-test
@@ -55,6 +55,7 @@ migration-down: ## make create-migration NB_MIGRATIONS=2
 migration-test:
 	mkdir -p var/data-test # we can't commit it as PostGres wants an empty folder
 	$(DB_MIGRATE_TEST) up"
+	sleep 1
 
 populate-db:
 	$(DOCKER_COMPOSE) run --rm api bash -ci 'node src/bin/populateDb.js'
