@@ -1,6 +1,9 @@
 {
   "dependencies": {
-    "convict": "4.2.0"
+    "convict": "4.2.0",
+    "express-graphql": "0.6.12",
+    "graphql": "0.13.2",
+    "graphql-tag": "2.8.0"
   },
   "devDependencies": {
     "uuid-by-string": "0.6.0"
