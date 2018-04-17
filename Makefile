@@ -1,13 +1,9 @@
 export UID=$(shell id -u)
 export GID=$(shell id -g)
 
-<<<<<<< HEAD
 DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
 DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
-=======
-DOCKER_COMPOSE = docker-compose -p reaction-rapide
-DOCKER_COMPOSE_E2E = docker-compose -f docker-compose.e2e.yml -p reaction-rapide-e2e
->>>>>>> 5e9e5a8... bootstrap e2e test
+DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.e2e.yml
 
 install:
 	yarn
@@ -77,4 +73,3 @@ test-e2e:
 
 debug-e2e:
 	$(DOCKER_COMPOSE_E2E) run test-e2e
->>>>>>> 5e9e5a8... bootstrap e2e test
