@@ -11,6 +11,12 @@ env:
   global:
     - NODE_ENV=test
 
+install:
+  - make install
+
+script:
+  - make test
+
 cache:
   directories:
     - node_modules
