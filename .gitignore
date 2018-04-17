@@ -5,3 +5,4 @@ var/data/
 var/data-test/
 yarn-debug.log*
 yarn-error.log*
+/front/.expo
