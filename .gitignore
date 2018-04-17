@@ -6,3 +6,4 @@ var/data-test/
 yarn-debug.log*
 yarn-error.log*
 /front/.expo
+var/deploy.key

@@ -16,7 +16,8 @@
     "pg": "7.4.1"
   },
   "scripts": {
-    "start": "nodemon ./src/index.js",
+    "start-dev": "nodemon ./src/index.js",
+    "start": "node ./src/index.js",
     "test": "jest --ci --forceExit",
     "test-watch": "jest --watch"
   },

@@ -2,6 +2,7 @@ version: '3'
 
 services:
     api:
+        command: "yarn run start-dev"
         environment:
             - NODE_ENV=test
             - POSTGRES_DATABASE=reaction-rapide-test
