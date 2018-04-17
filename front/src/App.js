@@ -1,58 +1,20 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Animated } from 'react-primitives';
-import glamorous from 'glamorous-primitives';
+import { View } from 'react-primitives';
+import { Router, Route } from './gateway/ReactRouter';
 
-const styles = StyleSheet.create({
-    app: {
-        flex: 1,
-    },
-    appHeader: {
-        flex: 1,
-        backgroundColor: '#222',
-        padding: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    appTitle: {
-        fontSize: 16,
-        color: 'white',
-    },
-    appIntro: {
-        flex: 2,
-        fontSize: 30,
-        textAlign: 'center',
-    },
-});
-
-const StyledTitle = glamorous.text({
-    fontSize: 16,
-    color: 'white',
-});
+import generateUrl from './services/generateUrl';
+import Home from './Home';
+import UA from './UA';
 
 class App extends Component {
-    state = {
-        text: '',
-        fadeAnim: new Animated.Value(0), // Initial value for opacity: 0
-    };
-
-    componentDidMount() {
-        Animated.timing(
-            // Animate over time
-            this.state.fadeAnim, // The animated value to drive
-            {
-                toValue: 1, // Animate to opacity: 1 (opaque)
-                duration: 10000, // Make it take a while
-            },
-        ).start(); // Starts the animation
-    }
     render() {
-        const { fadeAnim } = this.state;
         return (
-            <Animated.View style={[styles.app, { opacity: fadeAnim }]}>
-                <View style={styles.appHeader}>
-                    <StyledTitle>Welcome to React ⚛️</StyledTitle>
+            <Router>
+                <View>
+                    <Route exact path={generateUrl('home')} component={Home} />
+                    <Route path={generateUrl('ua')} component={UA} />
                 </View>
-            </Animated.View>
+            </Router>
         );
     }
 }
