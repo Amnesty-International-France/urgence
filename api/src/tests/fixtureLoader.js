@@ -1,17 +1,17 @@
 const uuidByString = require('uuid-by-string');
+
+const query = require('../db/client');
 const { insertUrgentAction } = require('../urgentActions/repository');
 
-module.exports = client => {
-    const createUrgentAction = urgentAction => insertUrgentAction(client, {
-        title: "Commutation of William Montgomery's sentence",
-        ...urgentAction,
-        id: uuidByString(urgentAction.title || "Commutation of William Montgomery's sentence")
-    });
+const createUrgentAction = async urgentAction => insertUrgentAction({
+    title: "Commutation of William Montgomery's sentence",
+    ...urgentAction,
+    id: uuidByString(urgentAction.title || "Commutation of William Montgomery's sentence")
+});
 
-    const truncateAll = () => client.query('TRUNCATE urgent_action');
+const truncateAll = async () => query('TRUNCATE urgent_action');
 
-    return {
-        createUrgentAction,
-        truncateAll,
-    };
+module.exports = {
+    createUrgentAction,
+    truncateAll,
 };

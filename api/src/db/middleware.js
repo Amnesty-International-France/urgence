@@ -6,11 +6,14 @@ module.exports = async (req, res, next) => {
     try {
         client = await getClient();
         req.dbClient = client;
-        next();
     } catch (err) {
-        client.end();
+        if (client) {
+            client.end();
+        }
+
         return next(err);
     }
 
+    next();
     client.release();
 };
