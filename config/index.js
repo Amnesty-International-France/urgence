@@ -3,7 +3,7 @@ const convict = require('convict');
 const config = convict({
     env: {
         format: ['production', 'staging', 'development', 'test'],
-        default: '',
+        default: 'development',
         env: 'NODE_ENV',
     },
     port: {
@@ -24,7 +24,7 @@ const config = convict({
         },
         password: {
             format: String,
-            default: '',
+            default: 'amnesty',
             env: 'POSTGRES_PASSWORD',
         },
         database: {
@@ -35,7 +35,7 @@ const config = convict({
         schema: {
             format: String,
             default: 'reaction-rapide',
-            env: 'POSTGRES_DATABASE'
+            env: 'POSTGRES_SCHEMA'
         }
     }
 });
