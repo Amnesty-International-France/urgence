@@ -7,10 +7,10 @@ services:
         volumes:
             - ".:/app"
             - "./config:/app/config"
-            - "/tmp/amnesty:/tmp"
+            - "/tmp:/tmp"
         environment:
             - NODE_ENV=development
-            - HOME=/tmp/amnesty
+            - HOME=/tmp
         ports:
             - "4000:4000"
         user: "${UID}:${GID}"
@@ -31,10 +31,10 @@ services:
         command: "npm run start-web"
         volumes:
             - "./front:/app"
-            - "/tmp/amnesty:/tmp"
+            - "/tmp:/tmp"
         environment:
             - NODE_ENV=development
-            - HOME=/tmp/amnesty
+            - HOME=/tmp
         ports:
             - "3000:3000"
         working_dir: /app
@@ -44,7 +44,7 @@ services:
         command: "npm run storybook"
         volumes:
             - "./front:/app"
-            - "/tmp/amnesty:/tmp"
+            - "/tmp:/tmp"
         environment:
             - NODE_ENV=development
         ports:

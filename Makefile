@@ -7,7 +7,6 @@ DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.y
 install:
 	yarn
 	mkdir -p var/data # we can't commit it as PostGres wants an empty folder
-	mkdir -p /tmp/amnesty # cache folder: need to create it as standard user to preserve permissions
 	$(DOCKER_COMPOSE) run --rm --no-deps api bash -ci 'yarn'
 	$(DOCKER_COMPOSE) run --rm --no-deps front bash -ci 'yarn'
 
@@ -21,7 +20,7 @@ logs:
 	$(DOCKER_COMPOSE) logs -f
 
 connect-api:
-	$(DOCKER_COMPOSE) exec api bash -ci 'yarn'
+	$(DOCKER_COMPOSE) exec api bash
 
 psql:
 	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
@@ -44,6 +43,16 @@ DB_MIGRATE_TEST = $(DOCKER_COMPOSE_TEST) run --rm api sh -c "./node_modules/.bin
 	--migrations-dir=migrations \
 	-e api
 
+test-start-dockers:
+	mkdir -p var/data-test # we can't commit it as PostGres wants an empty folder
+	$(DOCKER_COMPOSE_TEST) up -d
+
+	# we need to wait for PG database to be initialized before proceeding
+	until $(DOCKER_COMPOSE_TEST) run --rm db pg_isready -U postgres -h db; do sleep 1; done
+
+test-stop-dockers:
+	$(DOCKER_COMPOSE_TEST) down
+
 migration:
 	$(DB_MIGRATE) up"
 
@@ -53,10 +62,9 @@ migration-new: ## make create-migration MIGRATION_TITLE=whatever-title
 migration-down: ## make create-migration NB_MIGRATIONS=2
 	$(DB_MIGRATE) down -c ${NB_MIGRATIONS}"
 
-migration-test:
-	mkdir -p var/data-test # we can't commit it as PostGres wants an empty folder
+migration-test: test-start-dockers
 	$(DB_MIGRATE_TEST) up"
-	sleep 1
+	$(MAKE) test-stop-dockers
 
 populate-db:
 	$(DOCKER_COMPOSE) run --rm api bash -ci 'node src/bin/populateDb.js'
