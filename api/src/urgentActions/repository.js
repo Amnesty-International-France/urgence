@@ -13,9 +13,14 @@ const getUrgentActions = async () => query(urgentActionCrudQueries.select({
     offset: 0,
 }));
 
+const getUrgentAction = async (id) => query(urgentActionCrudQueries.selectOne(id));
+
 const insertUrgentAction = async (urgentAction) => query(urgentActionCrudQueries.insertOne(urgentAction));
 
 module.exports = {
+    getUrgentAction,
     getUrgentActions,
     insertUrgentAction,
 };
+
+
