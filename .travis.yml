@@ -20,3 +20,4 @@ script:
 cache:
   directories:
     - node_modules
+    - /tmp/amnesty

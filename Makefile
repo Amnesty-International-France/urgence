@@ -7,6 +7,7 @@ DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.y
 install:
 	yarn
 	mkdir -p var/data # we can't commit it as PostGres wants an empty folder
+	mkdir -p /tmp/amnesty # cache folder: need to create it as standard user to preserve permissions
 	$(DOCKER_COMPOSE) run --rm --no-deps api bash -ci 'yarn'
 	$(DOCKER_COMPOSE) run --rm --no-deps front bash -ci 'yarn'
 
