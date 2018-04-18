@@ -44,8 +44,8 @@ services:
         environment:
             - NODE_ENV=development
             - HOME=/tmp
-        ports:
-            - "3000:3000"
+        expose:
+            - "3000"
         working_dir: /app
         user: "${UID}:${GID}"
 
