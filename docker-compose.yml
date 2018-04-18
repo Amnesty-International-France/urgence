@@ -60,3 +60,17 @@ services:
         ports:
             - "9009:9009"
         working_dir: /app
+
+    admin:
+        image: node:9
+        command: "npm run start-web"
+        volumes:
+            - "./admin:/app"
+            - "/tmp:/tmp"
+        environment:
+            - NODE_ENV=development
+            - HOME=/tmp
+        expose:
+            - "5000"
+        working_dir: /app
+        user: "${UID}:${GID}"
