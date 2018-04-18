@@ -8,7 +8,7 @@ module.exports = gql`
 
     type Query {
         UrgentAction(id: ID!): UrgentAction
-        allUrgentActions(perPage: Int, page: Int): [UrgentAction]
+        allUrgentActions(perPage: Int, page: Int, sortField: String, sortOrder: String): [UrgentAction]
         _allUrgentActionsMeta(page: Int, perPage: Int, sortField: String, sortOrder: String): ListMetadata
     }
 

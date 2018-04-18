@@ -9,7 +9,7 @@ const {
 
 module.exports = {
     Query: {
-        allUrgentActions: () => getUrgentActions(),
+        allUrgentActions: (_, { perPage, page, sortField, sortOrder }) => getUrgentActions({ perPage, page, sortField, sortOrder }),
         UrgentAction: (_, { id }) => getUrgentAction(id),
         _allUrgentActionsMeta: () => countUrgentActions()
     },

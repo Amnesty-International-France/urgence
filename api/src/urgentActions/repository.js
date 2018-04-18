@@ -8,9 +8,11 @@ const urgentActionCrudQueries = crud({
     returnCols: ['id', 'title'],
 });
 
-const getUrgentActions = async () => query(urgentActionCrudQueries.select({
-    limit: 10,
-    offset: 0,
+const getUrgentActions = async ({ perPage, page, sortField, sortOrder }) => query(urgentActionCrudQueries.select({
+    limit: perPage,
+    offset: page * perPage,
+    sort: sortField,
+    sortDir: sortOrder,
 }));
 
 const countUrgentActions = async () => query(urgentActionCrudQueries.countAll());
