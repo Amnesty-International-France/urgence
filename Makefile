@@ -17,7 +17,7 @@ install-staging:
 	$(DOCKER_COMPOSE) run --rm --no-deps front bash -ci 'yarn --production'
 
 start:
-	$(DOCKER_COMPOSE) up -d
+	$(DOCKER_COMPOSE) up --force-recreate -d
 
 start-staging:
 	$(DOCKER_COMPOSE_STAGING) up -d
