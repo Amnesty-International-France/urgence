@@ -81,6 +81,7 @@ selenium-debug:
 
 test-e2e:
 	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
+	sleep 10
 	$(DOCKER_COMPOSE_E2E) run test-e2e
 
 debug-e2e:
