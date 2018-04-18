@@ -6,6 +6,8 @@
     "graphql-tag": "2.8.0"
   },
   "devDependencies": {
+    "shipit-cli": "4.0.2",
+    "shipit-deploy": "4.0.2",
     "uuid-by-string": "0.6.0"
   }
 }

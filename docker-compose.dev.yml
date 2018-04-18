@@ -1,13 +1,13 @@
 version: '3'
 
 services:
+    api:
+        command: "yarn run start-dev"
+
     db:
         volumes:
             - "./var/data:/var/lib/postgresql/data/"
-            - "/etc/passwd:/etc/passwd:ro"
         environment:
             - POSTGRES_USER=amnesty
             - POSTGRES_PASSWORD=amnesty
             - POSTGRES_DB=reaction-rapide
-        expose:
-            - "5432"

@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+    api:
+        command: "yarn start"
+        environment:
+            - NODE_ENV=production
+            - HOME=/tmp
+            - POSTGRES_PASSWORD
+        ports:
+            - "4000:4000"
+        user: "${UID}:${GID}"
+        working_dir: /app/api
+        depends_on:
+            - db
+
+    db:
+        environment:
+            - POSTGRES_USER=amnesty
+            - POSTGRES_PASSWORD
+            - POSTGRES_DB=reaction-rapide
+        volumes:
+            - "~/amnesty/data:/var/lib/postgresql/data/"
