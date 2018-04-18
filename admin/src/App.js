@@ -10,7 +10,7 @@ class App extends Component {
         this.state = { dataProvider: null };
     }
 
-    async componentDidMount() {
+    async componentWillMount() {
         const dataProvider = await dataProviderFactory();
 
         this.setState({ dataProvider });
@@ -25,7 +25,13 @@ class App extends Component {
 
         return (
             <Admin dataProvider={dataProvider}>
-                <Resource name="UrgentAction" list={UrgentActionList} edit={UrgentActionEdit} create={UrgentActionCreate} remove={Delete} />
+                <Resource
+                    name="UrgentAction"
+                    list={UrgentActionList}
+                    edit={UrgentActionEdit}
+                    create={UrgentActionCreate}
+                    remove={Delete}
+                />
             </Admin>
         );
     }

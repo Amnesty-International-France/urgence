@@ -1,8 +1,9 @@
-const { getUrgentAction, getUrgentActions } = require('./repository');
+const { getUrgentAction, getUrgentActions, countUrgentActions } = require('./repository');
 
 module.exports = {
     Query: {
-        UrgentActions: () => getUrgentActions(),
+        allUrgentActions: () => getUrgentActions(),
         UrgentAction: (_, { id }) => getUrgentAction(id),
+        _allUrgentActionsMeta: () => countUrgentActions()
     },
 };
