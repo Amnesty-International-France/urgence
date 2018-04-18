@@ -51,7 +51,7 @@ DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "./node_modules/.bin/db-migrat
 test-stop-dockers:
 	$(DOCKER_COMPOSE_TEST) down
 
-DB_MIGRATE_PRODUCTION = $(DOCKER_COMPOSE_STAGING) run --rm api sh -c "./node_modules/.bin/db-migrate \
+DB_MIGRATE_STAGING = $(DOCKER_COMPOSE_STAGING) run --rm api sh -c "./node_modules/.bin/db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
 	-e api
