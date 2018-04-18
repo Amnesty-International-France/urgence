@@ -17,13 +17,17 @@ const countUrgentActions = async () => query(urgentActionCrudQueries.countAll())
 
 const getUrgentAction = async (id) => query(urgentActionCrudQueries.selectOne(id));
 
-const insertUrgentAction = async (urgentAction) => query(urgentActionCrudQueries.insertOne(urgentAction));
+const createUrgentAction = async (urgentAction) => query(urgentActionCrudQueries.insertOne(urgentAction));
+const updateUrgentAction = async (id, urgentAction) => query(urgentActionCrudQueries.updateOne(id, urgentAction));
+const removeUrgentAction = async (id) => query(urgentActionCrudQueries.removeOne(id));
 
 module.exports = {
     getUrgentAction,
     getUrgentActions,
     countUrgentActions,
-    insertUrgentAction,
+    createUrgentAction,
+    updateUrgentAction,
+    removeUrgentAction,
 };
 
 

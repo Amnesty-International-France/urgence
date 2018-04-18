@@ -1,4 +1,11 @@
-const { getUrgentAction, getUrgentActions, countUrgentActions } = require('./repository');
+const {
+    getUrgentAction,
+    getUrgentActions,
+    countUrgentActions,
+    createUrgentAction,
+    updateUrgentAction,
+    removeUrgentAction
+} = require('./repository');
 
 module.exports = {
     Query: {
@@ -6,4 +13,9 @@ module.exports = {
         UrgentAction: (_, { id }) => getUrgentAction(id),
         _allUrgentActionsMeta: () => countUrgentActions()
     },
+    Mutation: {
+        createUrgentAction: (_, data) => createUrgentAction(data),
+        updateUrgentAction: (_, { id, ...data }) => updateUrgentAction(id, data),
+        deleteUrgentAction: (_, id) => removeUrgentAction(id),
+    }
 };

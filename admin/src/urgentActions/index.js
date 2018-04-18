@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    MobileGrid,
     Create,
     Datagrid,
     Edit,
@@ -24,7 +23,6 @@ export const UrgentActionList = withStyles(listStyles)(({ classes, ...props }) =
         perPage={25}
     >
         <Responsive
-            xsmall={<MobileGrid />}
             medium={
                 <Datagrid>
                     <TextField source="title" />
