@@ -10,7 +10,7 @@ module.exports = shipit => {
             repositoryUrl: 'git@github.com:marmelab/amnesty-reaction-rapide.git',
         },
         staging: {
-            branch: 'shipit',
+            branch: process.env.BRANCH || 'master',
             key: path.join(__dirname, 'var/deploy.key'),
             deployTo: BASE_FOLDER,
             servers: 'ubuntu@52.17.15.141',
