@@ -3,7 +3,7 @@ import buildApolloClient from 'ra-data-graphql-simple';
 export default () => {
     const getGqlResource = resource => {
         switch (resource) {
-            case 'UrgentAction':
+            case 'Action Urgentes':
                 return 'UrgentAction';
 
             default:

@@ -5,10 +5,7 @@ import { UrgentActionCreate, UrgentActionEdit, UrgentActionList } from './urgent
 import dataProviderFactory from './dataProvider';
 
 class App extends Component {
-    constructor() {
-        super();
-        this.state = { dataProvider: null };
-    }
+    state = { dataProvider: null };
 
     async componentWillMount() {
         const dataProvider = await dataProviderFactory();
@@ -26,7 +23,7 @@ class App extends Component {
         return (
             <Admin dataProvider={dataProvider}>
                 <Resource
-                    name="UrgentAction"
+                    name="Action Urgentes"
                     list={UrgentActionList}
                     edit={UrgentActionEdit}
                     create={UrgentActionCreate}
