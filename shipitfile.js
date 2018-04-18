@@ -1,9 +1,9 @@
 const path = require('path');
 
-const BASE_FOLDER = '/home/ubuntu/amnesty/';
+const BASE_FOLDER = '/home/ubuntu/amnesty';
 
 module.exports = shipit => {
-    require('shipit-deploy')(shipit)
+    require('shipit-deploy')(shipit);
 
     shipit.initConfig({
         default: {
@@ -26,7 +26,7 @@ module.exports = shipit => {
     shipit.blTask('migrate', async () => {
         await shipit.remote(`bash -ci "mkdir -p ${BASE_FOLDER}data"`);
         await shipit.remote('bash -ci "make migration-prod"', {
-            cwd: `${BASE_FOLDER}current/`,
+            cwd: `${BASE_FOLDER}/current/`,
         });
     });
 
