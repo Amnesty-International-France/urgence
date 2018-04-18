@@ -3,6 +3,7 @@ export GID=$(shell id -g)
 
 DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
 DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
+DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.e2e.yml
 
 install:
 	yarn
@@ -59,3 +60,16 @@ migration-test:
 
 populate-db:
 	$(DOCKER_COMPOSE) run --rm api bash -ci 'node src/bin/populateDb.js'
+
+selenium:
+	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
+
+selenium-debug:
+	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chromedebug
+
+test-e2e:
+	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
+	$(DOCKER_COMPOSE_E2E) run test-e2e
+
+debug-e2e:
+	$(DOCKER_COMPOSE_E2E) run test-e2e

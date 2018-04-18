@@ -14,6 +14,7 @@
     "ios": "react-native-scripts ios",
     "test-native": "node node_modules/jest/bin/jest.js --watch",
     "test": "npm run test-web && npm run test-native",
+    "test-e2e": "jest ./e2e",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
@@ -40,6 +41,7 @@
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.8.0",
     "eslint-import-resolver-node": "0.3.2",
+    "eslint-plugin-jest": "21.15.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-mocha": "4.11.0",
     "eslint-plugin-mocha-no-only": "0.0.6",
@@ -49,6 +51,7 @@
     "prettier": "1.12.0",
     "react-native-scripts": "1.12.1",
     "react-test-renderer": "16.2.0",
+    "selenium-webdriver": "3.6.0",
     "@storybook/react": "3.4.1",
     "@storybook/addon-actions": "3.4.1",
     "@storybook/addon-links": "3.4.1",
