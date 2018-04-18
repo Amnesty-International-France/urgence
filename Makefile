@@ -4,14 +4,14 @@ export GID=$(shell id -g)
 DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
 DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
 DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.e2e.yml
-DOCKER_COMPOSE_PRODUCTION = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.prod.yml
+DOCKER_COMPOSE_STAGING = docker-compose -p reaction-rapide-staging -f docker-compose.yml -f docker-compose.staging.yml
 
 install:
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api yarn
 	$(DOCKER_COMPOSE) run --rm --no-deps api bash -ci 'yarn'
 	$(DOCKER_COMPOSE) run --rm --no-deps front bash -ci 'yarn'
 
-install-prod:
+install-staging:
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api bash -ci 'yarn --production'
 	$(DOCKER_COMPOSE) run --rm --no-deps api bash -ci 'yarn --production'
 	$(DOCKER_COMPOSE) run --rm --no-deps front bash -ci 'yarn --production'
@@ -19,11 +19,11 @@ install-prod:
 start:
 	$(DOCKER_COMPOSE) up -d
 
-start-prod:
-	$(DOCKER_COMPOSE_PRODUCTION) up -d
+start-staging:
+	$(DOCKER_COMPOSE_STAGING) up -d
 
-stop-prod:
-	$(DOCKER_COMPOSE_PRODUCTION) down
+stop-staging:
+	$(DOCKER_COMPOSE_STAGING) down
 
 stop:
 	$(DOCKER_COMPOSE) down
@@ -51,7 +51,7 @@ DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "./node_modules/.bin/db-migrat
 test-stop-dockers:
 	$(DOCKER_COMPOSE_TEST) down
 
-DB_MIGRATE_PRODUCTION = $(DOCKER_COMPOSE_PRODUCTION) run --rm api sh -c "./node_modules/.bin/db-migrate \
+DB_MIGRATE_PRODUCTION = $(DOCKER_COMPOSE_STAGING) run --rm api sh -c "./node_modules/.bin/db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
 	-e api
@@ -66,8 +66,8 @@ migration-new: ## make create-migration MIGRATION_TITLE=whatever-title
 migration-down: ## make create-migration NB_MIGRATIONS=2
 	$(DB_MIGRATE) down -c ${NB_MIGRATIONS}"
 
-migration-prod:
-	$(DB_MIGRATE_PRODUCTION) up"
+migration-staging:
+	$(DB_MIGRATE_STAGING) up"
 
 populate-db:
 	$(DOCKER_COMPOSE) run --rm api bash -ci 'node src/bin/populateDb.js'
