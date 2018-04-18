@@ -4,6 +4,12 @@ services:
     api:
         command: "yarn run start-dev"
 
+    nginx:
+        volumes:
+            - ./var/nginx/dev.conf:/etc/nginx/conf.d/default.conf
+            - ./var/nginx/nginx.crt:/etc/nginx/conf.d/selfsigned.crt
+            - ./var/nginx/nginx.key:/etc/nginx/conf.d/selfsigned.key
+
     db:
         volumes:
             - "./var/data:/var/lib/postgresql/data/"

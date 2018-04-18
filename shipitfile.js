@@ -10,7 +10,7 @@ module.exports = shipit => {
             repositoryUrl: 'git@github.com:marmelab/amnesty-reaction-rapide.git',
         },
         staging: {
-            branch: 'shipit',
+            branch: process.env.BRANCH || 'master',
             key: path.join(__dirname, 'var/deploy.key'),
             deployTo: BASE_FOLDER,
             servers: 'ubuntu@52.17.15.141',
@@ -18,20 +18,20 @@ module.exports = shipit => {
     });
 
     shipit.blTask('install', async () => {
-        await shipit.remote('bash -ci "make install-prod"', {
+        await shipit.remote('bash -ci "make install-staging"', {
             cwd: `${BASE_FOLDER}/current/`,
         });
     });
 
     shipit.blTask('migrate', async () => {
         await shipit.remote(`bash -ci "mkdir -p ${BASE_FOLDER}data"`);
-        await shipit.remote('bash -ci "make migration-prod"', {
+        await shipit.remote('bash -ci "make migration-staging"', {
             cwd: `${BASE_FOLDER}/current/`,
         });
     });
 
     shipit.blTask('start', async () => {
-        await shipit.remote('bash -ci "make stop-prod start-prod"', {
+        await shipit.remote('bash -ci "make stop-staging start-staging"', {
             cwd: `${BASE_FOLDER}/current/`,
         });
     });

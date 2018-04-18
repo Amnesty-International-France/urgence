@@ -25,6 +25,16 @@ services:
             - "5432"
         user: "${UID}:${GID}"
 
+    nginx:
+        image: nginx
+        ports:
+            - "80:80"
+            - "443:443"
+        depends_on:
+            - api
+            - front
+            - storybook
+
     front:
         image: node:9
         command: "npm run start-web"
