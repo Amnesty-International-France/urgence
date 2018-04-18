@@ -18,7 +18,8 @@
         "import",
         "react",
         "prettier",
-        "mocha-no-only"
+        "mocha-no-only",
+        "jest"
     ],
     "rules": {
         "mocha-no-only/mocha-no-only": ["error"],

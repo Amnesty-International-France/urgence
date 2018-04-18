@@ -41,6 +41,7 @@
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.8.0",
     "eslint-import-resolver-node": "0.3.2",
+    "eslint-plugin-jest": "21.15.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-mocha": "4.11.0",
     "eslint-plugin-mocha-no-only": "0.0.6",
