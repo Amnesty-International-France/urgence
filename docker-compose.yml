@@ -34,6 +34,7 @@ services:
             - "/tmp:/tmp"
         environment:
             - NODE_ENV=development
+            - HOME=/tmp
         ports:
             - "3000:3000"
         working_dir: /app
@@ -43,6 +44,7 @@ services:
         command: "npm run storybook"
         volumes:
             - "./front:/app"
+            - "/tmp:/tmp"
         environment:
             - NODE_ENV=development
         ports:

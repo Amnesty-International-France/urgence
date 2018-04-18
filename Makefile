@@ -21,17 +21,15 @@ logs:
 	$(DOCKER_COMPOSE) logs -f
 
 connect-api:
-	$(DOCKER_COMPOSE) exec api bash -ci 'yarn'
+	$(DOCKER_COMPOSE) exec api bash
 
 psql:
 	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
 
 test:
-	$(MAKE) migration-test
 	$(DOCKER_COMPOSE_TEST) run --rm api yarn test ; $(DOCKER_COMPOSE_TEST) stop
 
 test-watch:
-	$(MAKE) migration-test
 	$(DOCKER_COMPOSE_TEST) run --rm api yarn run test-watch
 
 DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "./node_modules/.bin/db-migrate \
@@ -39,10 +37,8 @@ DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "./node_modules/.bin/db-migrat
 	--migrations-dir=migrations \
 	-e api
 
-DB_MIGRATE_TEST = $(DOCKER_COMPOSE_TEST) run --rm api sh -c "./node_modules/.bin/db-migrate \
-	--config=database.js \
-	--migrations-dir=migrations \
-	-e api
+test-stop-dockers:
+	$(DOCKER_COMPOSE_TEST) down
 
 migration:
 	$(DB_MIGRATE) up"
@@ -52,11 +48,6 @@ migration-new: ## make create-migration MIGRATION_TITLE=whatever-title
 
 migration-down: ## make create-migration NB_MIGRATIONS=2
 	$(DB_MIGRATE) down -c ${NB_MIGRATIONS}"
-
-migration-test:
-	mkdir -p var/data-test # we can't commit it as PostGres wants an empty folder
-	$(DB_MIGRATE_TEST) up"
-	sleep 1
 
 populate-db:
 	$(DOCKER_COMPOSE) run --rm api bash -ci 'node src/bin/populateDb.js'
