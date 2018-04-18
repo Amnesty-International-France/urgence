@@ -18,20 +18,20 @@ module.exports = shipit => {
     });
 
     shipit.blTask('install', async () => {
-        await shipit.remote('bash -ci "make install-prod"', {
+        await shipit.remote('bash -ci "make install-staging"', {
             cwd: `${BASE_FOLDER}/current/`,
         });
     });
 
     shipit.blTask('migrate', async () => {
         await shipit.remote(`bash -ci "mkdir -p ${BASE_FOLDER}data"`);
-        await shipit.remote('bash -ci "make migration-prod"', {
+        await shipit.remote('bash -ci "make migration-staging"', {
             cwd: `${BASE_FOLDER}/current/`,
         });
     });
 
     shipit.blTask('start', async () => {
-        await shipit.remote('bash -ci "make stop-prod start-prod"', {
+        await shipit.remote('bash -ci "make stop-staging start-staging"', {
             cwd: `${BASE_FOLDER}/current/`,
         });
     });
