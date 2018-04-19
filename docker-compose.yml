@@ -60,3 +60,19 @@ services:
         ports:
             - "9009:9009"
         working_dir: /app
+
+    admin:
+        image: node:9
+        command: "npm run start"
+        volumes:
+            - "./admin:/app"
+            - "/tmp:/tmp"
+        environment:
+            - PORT=5000
+            - NODE_ENV=development
+            - HOME=/tmp
+            - REACT_APP_API_URL="https://localhost/api"
+        expose:
+            - "5000"
+        working_dir: /app
+        user: "${UID}:${GID}"

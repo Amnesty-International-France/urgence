@@ -7,7 +7,7 @@ const graphqlRouter = require('./graphql/router');
 
 const app = express();
 
-app.use(graphqlRouter);
+app.use('/', graphqlRouter);
 app.use(errorHandler);
 
 if (!module.parent) {

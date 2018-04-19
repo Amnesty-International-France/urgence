@@ -12,7 +12,7 @@ services:
         command: npm run test
 
     api:
-        command: "yarn run start-dev"
+        command: "npm run start-dev"
         environment:
             NODE_ENV: test
             POSTGRES_DATABASE: reaction-rapide-test

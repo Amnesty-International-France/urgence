@@ -1,7 +1,7 @@
 const batchInsert = require('co-postgres-queries/queries/batchInsert');
 const config = require('../../../config');
 
-const getClient = require('../db/client');
+const client = require('../db/client');
 
 if (config.env === 'production') {
     throw new Error('Populating database in production is forbidden!');
@@ -19,8 +19,7 @@ const batchInsertQuery = batchInsert.default({
     returnCols: ['title'],
 })(urgentActions);
 
-getClient()
-    .then(client => client.query(batchInsertQuery))
+client(batchInsertQuery)
     .then(rows => {
         console.log(`Success: ${rows.length} records have been inserted`)
         process.exit(0);

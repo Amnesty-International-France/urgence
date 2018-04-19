@@ -6,6 +6,18 @@ const config = convict({
         default: 'development',
         env: 'NODE_ENV',
     },
+    url: {
+        front: {
+            format: String,
+            default: 'http://localhost/',
+            env: 'FRONT_URL',
+        },
+        admin: {
+            format: String,
+            default: 'http://localhost/admin',
+            env: 'ADMIN_URL',
+        },
+    },
     port: {
         format: 'port',
         default: 4000,

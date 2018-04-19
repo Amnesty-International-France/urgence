@@ -2,7 +2,7 @@ version: '3'
 
 services:
     api:
-        command: "yarn start"
+        command: "npm run start"
         environment:
             - NODE_ENV=staging
             - HOME=/tmp
