@@ -10,12 +10,12 @@ const config = convict({
         front: {
             format: String,
             default: 'http://localhost/',
-            env: 'POSTGRES_USER',
+            env: 'FRONT_URL',
         },
         admin: {
             format: String,
             default: 'http://localhost/admin',
-            env: 'POSTGRES_USER',
+            env: 'ADMIN_URL',
         },
     },
     port: {

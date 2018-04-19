@@ -3,7 +3,7 @@ import buildApolloClient from 'ra-data-graphql-simple';
 export default () => {
     const getGqlResource = resource => {
         switch (resource) {
-            case 'Action Urgentes':
+            case 'Urgent Actions':
                 return 'UrgentAction';
 
             default:
@@ -13,7 +13,7 @@ export default () => {
 
     return buildApolloClient({
         clientOptions: {
-            uri: 'http://localhost:4000',
+            uri: process.env.REACT_APP_API_URL,
         },
     }).then(dataProvider => (type, resource, params) =>
         dataProvider(type, getGqlResource(resource), params)

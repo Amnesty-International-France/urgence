@@ -19,7 +19,7 @@ const listStyles = {
 export const UrgentActionList = withStyles(listStyles)(({ classes, ...props }) => (
     <List
         {...props}
-        title={'Action Urgentes'}
+        title={'Urgent Actions'}
         sort={{ field: 'date', order: 'DESC' }}
         perPage={25}
     >

@@ -23,7 +23,7 @@ class App extends Component {
         return (
             <Admin dataProvider={dataProvider}>
                 <Resource
-                    name="Action Urgentes"
+                    name="Urgent Actions"
                     list={UrgentActionList}
                     edit={UrgentActionEdit}
                     create={UrgentActionCreate}
