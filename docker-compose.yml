@@ -31,6 +31,7 @@ services:
             - "80:80"
             - "443:443"
         depends_on:
+            - admin
             - api
             - front
             - storybook
