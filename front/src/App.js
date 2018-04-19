@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-primitives';
-import { Router, Route } from './gateway/ReactRouter';
 
+import { Router, Route } from './gateway/ReactRouter';
 import generateUrl from './services/generateUrl';
 import Home from './Home';
 import UA from './UA';

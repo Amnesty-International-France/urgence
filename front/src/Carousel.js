@@ -4,6 +4,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { withRouter } from './gateway/ReactRouter';
+
 const settings = {
     dots: true,
     infinite: true,
@@ -13,15 +15,29 @@ const settings = {
 };
 
 class Carousel extends Component {
+    afterChange = index => {
+        const { history } = this.props;
+        history.push(`/ua/${index}`);
+    };
     render() {
-        const { children } = this.props;
+        const { children, initialSlide = 0 } = this.props;
 
-        return <Slider settings={settings}>{children}</Slider>;
+        return (
+            <Slider
+                settings={settings}
+                initialSlide={initialSlide}
+                afterChange={this.afterChange}
+            >
+                {children}
+            </Slider>
+        );
     }
 }
 
 Carousel.propTypes = {
-    children: PropTypes.node,
+    children: PropTypes.node.isRequired,
+    initialSlide: PropTypes.number,
+    history: PropTypes.object.isRequired,
 };
 
-export default Carousel;
+export default withRouter(Carousel);
