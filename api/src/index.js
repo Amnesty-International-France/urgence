@@ -15,8 +15,7 @@ app.use(
         credentials: true,
     }),
 );
-app.post('/', graphqlRouter);
-app.get('/', graphqlRouter);
+app.use('/', graphqlRouter);
 app.use(errorHandler);
 
 if (!module.parent) {

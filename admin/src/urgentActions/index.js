@@ -36,7 +36,7 @@ export const UrgentActionList = withStyles(listStyles)(({ classes, ...props }) =
 
 const UrgentActionTitle = ({ record }) => (
     <span>
-        Action Urgente: {record.title}
+        {record.title}
     </span>
 );
 

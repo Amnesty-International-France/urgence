@@ -8,14 +8,14 @@ DOCKER_COMPOSE_STAGING = docker-compose -p reaction-rapide-staging -f docker-com
 
 install:
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api npm install
-	$(DOCKER_COMPOSE) run --rm --no-deps api bash -ci 'npm install'
-	$(DOCKER_COMPOSE) run --rm --no-deps front bash -ci 'npm install'
+	$(DOCKER_COMPOSE) run --rm --no-deps api npm install
+	$(DOCKER_COMPOSE) run --rm --no-deps front npm install
 	$(DOCKER_COMPOSE) run --rm --no-deps admin npm install
 
 install-staging:
-	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api bash -ci 'npm install --production'
-	$(DOCKER_COMPOSE) run --rm --no-deps api bash -ci 'npm install --production'
-	$(DOCKER_COMPOSE) run --rm --no-deps front bash -ci 'npm install --production'
+	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api npm install --production
+	$(DOCKER_COMPOSE) run --rm --no-deps api npm install --production
+	$(DOCKER_COMPOSE) run --rm --no-deps front npm install --production
 	$(DOCKER_COMPOSE) run --rm --no-deps admin npm install --production
 
 start:
@@ -72,7 +72,7 @@ migration-staging:
 	$(DB_MIGRATE_STAGING) up"
 
 populate-db:
-	$(DOCKER_COMPOSE) run --rm api bash -ci 'node src/bin/populateDb.js'
+	$(DOCKER_COMPOSE) run --rm api node src/bin/populateDb.js
 
 selenium:
 	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
