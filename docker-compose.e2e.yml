@@ -36,6 +36,9 @@ services:
     links:
       - hub
       - app-e2e
+    depends_on:
+      - hub
+      - chrome
     environment:
       NODE_ENV: test
     command: npm run test-e2e

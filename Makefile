@@ -37,11 +37,12 @@ connect-api:
 psql:
 	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
 
-test:
-	$(DOCKER_COMPOSE_TEST) run --rm api yarn test ; $(DOCKER_COMPOSE_TEST) stop
+
+test-unit:
+	$(DOCKER_COMPOSE_TEST) run --rm test yarn test ; $(DOCKER_COMPOSE_TEST) stop
 
 test-watch:
-	$(DOCKER_COMPOSE_TEST) run --rm api yarn run test-watch
+	$(DOCKER_COMPOSE_TEST) run --rm test yarn run test-watch
 
 DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "./node_modules/.bin/db-migrate \
 	--config=database.js \
@@ -80,6 +81,7 @@ selenium-debug:
 
 test-e2e:
 	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
+	sleep 10
 	$(DOCKER_COMPOSE_E2E) run test-e2e
 
 debug-e2e:
@@ -87,3 +89,5 @@ debug-e2e:
 
 deploy-staging:
 	npx shipit staging deploy
+
+test: test-unit test-e2e
