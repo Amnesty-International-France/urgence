@@ -1,44 +1,47 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-primitives';
+import { View, StyleSheet, Dimensions } from 'react-primitives';
 import PropTypes from 'prop-types';
-
-import ScrollView from './gateway/ScrollView';
+import Sideswipe from 'react-native-sideswipe';
 
 const { width } = Dimensions.get('window');
-const height = width * 0.8;
 
-const Carousel = ({ children }) => (
-    <View style={styles.scrollContainer}>
-        <ScrollView
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-        >
-            {children.map((child, index) => (
-                <View key={index} style={styles.item}>
-                    {child}
-                </View>
-            ))}
-        </ScrollView>
-    </View>
-);
+class Carousel extends Component {
+    state = {
+        currentIndex: 0,
+    };
+    renderItem({ item }) {
+        return <View style={styles.container}>{item}</View>;
+    }
+
+    render() {
+        const children = this.props.children;
+
+        return (
+            <Sideswipe
+                index={this.state.currentIndex}
+                onIndexChange={index =>
+                    this.setState(() => ({ currentIndex: index }))
+                }
+                data={children}
+                renderItem={this.renderItem}
+                itemWidth={width}
+                style={{ width }}
+            />
+        );
+    }
+}
 
 Carousel.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-const styles = StyleSheet.create({
-    scrollContainer: {
-        height,
-    },
-    item: {
+var styles = StyleSheet.create({
+    container: {
         width,
-        height,
-    },
-    text: {
-        textAlign: 'center',
-        marginTop: '50%',
-        fontSize: 32,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
     },
 });
 

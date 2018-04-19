@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-primitives';
+import { View } from 'react-primitives';
 import glamorous from 'glamorous-primitives';
 
 import Carousel from './Carousel';
@@ -8,6 +8,7 @@ const Item = glamorous.view({
     backgroundColor: 'darkorange',
     padding: 50,
     textAlign: 'center',
+    width: '100%',
 });
 
 const ItemText = glamorous.text({
