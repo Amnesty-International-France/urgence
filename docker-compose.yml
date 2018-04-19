@@ -25,17 +25,6 @@ services:
             - "5432"
         user: "${UID}:${GID}"
 
-    nginx:
-        image: nginx
-        ports:
-            - "80:80"
-            - "443:443"
-        depends_on:
-            - admin
-            - api
-            - front
-            - storybook
-
     front:
         image: node:9
         command: "npm run start-web"
@@ -45,8 +34,8 @@ services:
         environment:
             - NODE_ENV=development
             - HOME=/tmp
-        expose:
-            - "3000"
+        ports:
+            - "3000:3000"
         working_dir: /app
         user: "${UID}:${GID}"
 
@@ -73,8 +62,8 @@ services:
             - PORT=5000
             - NODE_ENV=development
             - HOME=/tmp
-            - REACT_APP_API_URL="https://localhost/api"
-        expose:
-            - "5000"
+            - REACT_APP_API_URL=http://localhost:4000/
+        ports:
+            - "5000:5000"
         working_dir: /app
         user: "${UID}:${GID}"
