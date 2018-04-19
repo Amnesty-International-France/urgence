@@ -17,13 +17,18 @@
     "uuid-by-string": "0.6.0"
   },
   "jest": {
-    "setupFiles": ["jest-canvas-mock"],
+    "setupFiles": [
+      "jest-canvas-mock"
+    ],
     "moduleDirectories": [
       "node_modules",
       "front/node_modules",
       "api/node_modules"
     ],
     "testEnvironment": "jsdom",
-    "testPathIgnorePatterns": ["node_modules", "e2e"]
+    "testPathIgnorePatterns": [
+      "node_modules",
+      "e2e"
+    ]
   }
 }

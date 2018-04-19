@@ -60,6 +60,7 @@ services:
         expose:
             - "9009"
         working_dir: /app
+        user: "${UID}:${GID}"
 
     admin:
         image: node:9
