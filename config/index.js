@@ -6,6 +6,18 @@ const config = convict({
         default: 'development',
         env: 'NODE_ENV',
     },
+    url: {
+        front: {
+            format: String,
+            default: 'http://localhost/',
+            env: 'POSTGRES_USER',
+        },
+        admin: {
+            format: String,
+            default: 'http://localhost/admin',
+            env: 'POSTGRES_USER',
+        },
+    },
     port: {
         format: 'port',
         default: 4000,

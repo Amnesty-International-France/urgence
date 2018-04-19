@@ -63,11 +63,12 @@ services:
 
     admin:
         image: node:9
-        command: "npm run start-web"
+        command: "npm run start"
         volumes:
             - "./admin:/app"
             - "/tmp:/tmp"
         environment:
+            - PORT=5000
             - NODE_ENV=development
             - HOME=/tmp
         expose:
