@@ -57,9 +57,10 @@ services:
             - "/tmp:/tmp"
         environment:
             - NODE_ENV=development
-        ports:
-            - "9009:9009"
+        expose:
+            - "9009"
         working_dir: /app
+        user: "${UID}:${GID}"
 
     admin:
         image: node:9
