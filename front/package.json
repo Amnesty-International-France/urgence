@@ -23,7 +23,6 @@
     "react": "16.3.0",
     "react-dom": "16.3.0",
     "react-native": "0.52.0",
-    "react-native-sideswipe": "1.4.1",
     "react-native-web": "0.5.3",
     "react-primitives": "0.5.0",
     "react-router": "4.2.0",
