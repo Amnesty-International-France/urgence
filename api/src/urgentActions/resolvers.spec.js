@@ -16,8 +16,13 @@ describe('Urgent Actions Resolvers', () => {
 
         describe('UrgentActions', () => {
             it('should query all available urgent actions', async () => {
-                await resolvers.Query.UrgentActions();
-                expect(repository.getUrgentActions).toHaveBeenCalledWith();
+                await resolvers.Query.allUrgentActions(null, { perPage: 10, page: 0 });
+                expect(repository.getUrgentActions).toHaveBeenCalledWith({
+                    page: 0,
+                    perPage: 10,
+                    sortField: undefined,
+                    sortOrder: undefined,
+                });
             });
         });
     });
