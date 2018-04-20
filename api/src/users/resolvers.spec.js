@@ -1,14 +1,8 @@
-import lolex from 'lolex';
 import jwtDecode from 'jwt-decode';
 
 import { createToken, login } from "./resolvers";
 
 describe('Users Resolvers', () => {
-    let clock;
-    beforeEach(() => {
-        clock = lolex.install({ now: new Date('2017-01-01') });
-    });
-
     describe('createToken', () => {
         it('should return a signed JWT token containing user data', () => {
             const token = createToken({ role: 'admin' });
@@ -17,7 +11,7 @@ describe('Users Resolvers', () => {
         });
 
         it('should correctly set expiration date', () => {
-            const token = createToken({ role: 'admin' });
+            const token = createToken({ role: 'admin' }, new Date('2017-01-01'));
             const decodedToken = jwtDecode(token);
             expect(decodedToken.expiration).toBe('2017-01-01T06:00:00.000Z');
         });
@@ -48,8 +42,4 @@ describe('Users Resolvers', () => {
             expect(true).toBe(false);
         });
     });
-
-    afterEach(() => {
-        clock.uninstall();
-    })
 });

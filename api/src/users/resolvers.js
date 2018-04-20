@@ -3,8 +3,8 @@ import jwt from 'jsonwebtoken';
 
 import config from '../../../config';
 
-export const createToken = (user) => {
-    const expiration = addHours(new Date(), config.admin.authentication.sessionDuration).toISOString();
+export const createToken = (user, now = new Date()) => {
+    const expiration = addHours(now, config.admin.authentication.sessionDuration).toISOString();
 
     return jwt.sign({
         ...user,
