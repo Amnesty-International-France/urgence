@@ -1,11 +1,4 @@
-const {
-    getUrgentAction,
-    getUrgentActions,
-    countUrgentActions,
-    createUrgentAction,
-    updateUrgentAction,
-    removeUrgentAction
-} = require('./repository');
+import { getUrgentActions, getUrgentAction, countUrgentActions, removeUrgentAction } from "./repository";
 
 export const UrgentActionsResolver = {
     Query: {

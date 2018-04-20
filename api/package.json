@@ -27,7 +27,10 @@
     "test-watch": "jest --watch"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "jest": "22.4.3",
+    "lolex": "^2.3.2",
     "nodemon": "1.17.3",
     "supertest": "3.0.0"
   }

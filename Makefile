@@ -36,6 +36,8 @@ connect-api:
 psql:
 	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
 
+test: test-unit test-e2e
+
 test-unit:
 	$(DOCKER_COMPOSE_TEST) run --rm test npm run test ; $(DOCKER_COMPOSE_TEST) stop
 
@@ -87,8 +89,6 @@ debug-e2e:
 
 deploy-staging:
 	npx shipit staging deploy
-
-test: test-unit test-e2e
 
 install-admin:
 	$(DOCKER_COMPOSE) run --rm --no-deps admin npm install

@@ -9,6 +9,9 @@ services:
         environment:
             NODE_ENV: test
             POSTGRES_DATABASE: reaction-rapide-test
+            ADMIN_USERNAME: admin
+            ADMIN_PASSWORD: password
+            JWT_SECRET_KEY: foobarS3CR3T
         command: npm run test
 
     api:
