@@ -1,10 +1,9 @@
-const cors = require('cors');
-const express = require('express');
+import cors from 'cors';
+import express from 'express';
 
-const config = require('../../config');
-const errorHandler = require('./errorHandler');
-
-const graphqlRouter = require('./graphql/router');
+import config from '../../config';
+import errorHandler from './errorHandler';
+import { graphqlRouter } from './graphql/router';
 
 const app = express();
 
@@ -17,8 +16,9 @@ app.use(cors({
 app.use('/', graphqlRouter);
 app.use(errorHandler);
 
-if (!module.parent) {
+if (!process.env.NODE_ENV !== 'test') {
     app.listen(config.port);
 }
 
-module.exports = app;
+export default app;
+
