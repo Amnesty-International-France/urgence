@@ -7,7 +7,7 @@ const {
     removeUrgentAction
 } = require('./repository');
 
-module.exports = {
+export const UrgentActionsResolver = {
     Query: {
         allUrgentActions: (_, { perPage, page, sortField, sortOrder }) => getUrgentActions({ perPage, page, sortField, sortOrder }),
         UrgentAction: (_, { id }) => getUrgentAction(id),

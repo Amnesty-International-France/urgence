@@ -1,13 +1,13 @@
-const graphqlHTTP = require('express-graphql');
-const { makeExecutableSchema } = require('graphql-tools');
+import graphqlHTTP from 'express-graphql';
+import { makeExecutableSchema } from 'graphql-tools';
 
-const config = require('../../../config');
-const typeDefs = require('../graphql/typeDefs');
-const resolvers = require('../graphql/resolvers');
+import config from '../../../config';
+import { typeDefs } from '../graphql/typeDefs';
+import { resolvers } from '../graphql/resolvers';
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
-module.exports = graphqlHTTP({
+export const graphqlRouter = graphqlHTTP({
     schema,
     graphiql: config.env !== 'production',
     logger: console,

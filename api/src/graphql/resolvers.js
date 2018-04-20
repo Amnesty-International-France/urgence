@@ -1,3 +1,7 @@
-const UrgentActionsResolvers = require('../urgentActions/resolvers');
+import { UrgentActionsResolver } from "../urgentActions/resolvers";
+import { UsersResolvers } from "../users/resolvers";
 
-module.exports = [UrgentActionsResolvers];
+export const resolvers = [
+    UrgentActionsResolver,
+    UsersResolvers,
+];

@@ -31,6 +31,31 @@ const config = convict({
             env: 'CORS_ALLOWED_ORIGIN',
         },
     },
+    admin: {
+        authentication: {
+            username: {
+                format: String,
+                default: '',
+                env: 'ADMIN_USERNAME',
+            },
+            password: {
+                format: String,
+                default: '',
+                env: 'ADMIN_PASSWORD',
+            },
+            jwtSecret: {
+                doc: 'Secret key used to generate the JSON Web tokens',
+                format: 'String',
+                default: 0,
+                env: 'JWT_SECRET_KEY',
+            },
+            sessionDuration: {
+                doc: 'How many time a token is valid (in hours)',
+                format: 'int',
+                default: 6,
+            },
+        },
+    },
     db: {
         host: {
             format: String,

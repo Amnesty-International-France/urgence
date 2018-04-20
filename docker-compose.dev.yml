@@ -3,6 +3,10 @@ version: '3'
 services:
     api:
         command: "npm run start-dev"
+        environment:
+            - ADMIN_USERNAME=admin
+            - ADMIN_PASSWORD=password
+            - JWT_SECRET_KEY=foobarS3CR3T!
 
     db:
         volumes:
