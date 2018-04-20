@@ -9,7 +9,7 @@ import Home from './Home';
 import UA from './UA';
 
 const client = new ApolloClient({
-    uri: 'http://localhost:4000',
+    uri: process.env.REACT_APP_API_URL,
 });
 
 class App extends Component {

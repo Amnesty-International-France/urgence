@@ -23,6 +23,8 @@ services:
             - ADMIN_USERNAME=admin
             - ADMIN_PASSWORD=password
             - JWT_SECRET_KEY=foobarS3CR3T!
+        ports:
+            - "4000:4000"
 
     db:
         volumes:
@@ -31,30 +33,3 @@ services:
             - POSTGRES_USER=amnesty
             - POSTGRES_PASSWORD=amnesty
             - POSTGRES_DB=reaction-rapide
-
-    storybook:
-        image: node:9
-        command: "npm run storybook"
-        volumes:
-            - "./front:/app"
-            - "/tmp:/tmp"
-        environment:
-            - NODE_ENV=development
-        expose:
-            - "9009"
-        working_dir: /app
-        user: "${UID}:${GID}"
-
-    front:
-        image: node:9
-        command: "npm run start-web"
-        volumes:
-            - "./front:/app"
-            - "/tmp:/tmp"
-        environment:
-            - NODE_ENV=development
-            - HOME=/tmp
-        ports:
-            - "3000:3000"
-        working_dir: /app
-        user: "${UID}:${GID}"

@@ -1,15 +1,6 @@
 version: '3'
 
 services:
-    app-e2e:
-        image: node:9
-        command: npm run start-web
-        volumes:
-            - "./front:/app"
-        environment:
-            - NODE_ENV=development
-        working_dir: /app
-
     hub:
         image: selenium/hub:2.53.0
 
@@ -21,13 +12,15 @@ services:
             - hub
         links:
             - hub
-            - app-e2e
+            - front
+            - api
 
     chromedebug:
         image: selenium/node-chrome-debug:2.53.0
         links:
             - hub
-            - app-e2e
+            - front
+            - api
         ports:
             - 5900:5900
 
@@ -35,7 +28,8 @@ services:
         image: node:9
         links:
             - hub
-            - app-e2e
+            - front
+            - api
         depends_on:
             - hub
             - chrome
@@ -53,9 +47,16 @@ services:
             - "./front:/app"
             - "/tmp:/tmp"
         environment:
+            - REACT_APP_API_URL=http://localhost:4000/
             - NODE_ENV=development
             - HOME=/tmp
         ports:
             - "3000:3000"
         working_dir: /app
         user: "${UID}:${GID}"
+
+    api:
+        command: npm run start-dev
+        environment:
+        NODE_ENV: development
+        POSTGRES_DATABASE: reaction-rapide-test

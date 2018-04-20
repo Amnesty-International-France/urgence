@@ -4,7 +4,7 @@ export GID=$(shell id -g)
 DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
 DOCKER_COMPOSE_BUILD = docker-compose -p reaction-rapide-build -f docker-compose.build.yml
 DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
-DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.e2e.yml
+DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
 DOCKER_COMPOSE_STAGING = docker-compose -p reaction-rapide-staging -f docker-compose.yml -f docker-compose.staging.yml
 
 install: install-admin
