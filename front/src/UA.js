@@ -1,21 +1,27 @@
 import React from 'react';
-import glamorous from 'glamorous-primitives';
+import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Text, View } from 'react-primitives';
+import { withRouter } from 'react-router';
 
 import Title from './themes/Title';
 
-const UA = () => (
+const UA = ({
+    match: {
+        params: { id },
+    },
+}) => (
     <Query
         query={gql`
-            query {
-                UrgentAction(id: "7ed78132-4b66-4320-a9f2-dd9c1a6552c2") {
+            query urgentAction($id: ID!) {
+                UrgentAction(id: $id) {
                     id
                     title
                 }
             }
         `}
+        variables={{ id }}
     >
         {({ loading, error, data }) => {
             if (loading) {
@@ -26,7 +32,7 @@ const UA = () => (
                 );
             }
             if (error) {
-                return <Text>Error: {error}</Text>;
+                return <Text>Error: {error.message}</Text>;
             }
 
             if (!data.UrgentAction) {
@@ -35,18 +41,15 @@ const UA = () => (
 
             return <Title>{data.UrgentAction.title}</Title>;
         }}
-        {/* <Carousel>
-            <Item>
-                <ItemText>1</ItemText>
-            </Item>
-            <Item>
-                <ItemText>2</ItemText>
-            </Item>
-            <Item>
-                <ItemText>3</ItemText>
-            </Item>
-        </Carousel> */}
     </Query>
 );
 
-export default UA;
+UA.propTypes = {
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            id: PropTypes.string.isRequired,
+        }),
+    }).isRequired,
+};
+
+export default withRouter(UA);
