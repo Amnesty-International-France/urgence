@@ -1,5 +1,13 @@
 import buildApolloClient from 'ra-data-graphql-simple';
 
+export const graphqlClientOptions = {
+    uri: process.env.REACT_APP_API_URL,
+};
+
+export const getApolloClient = () => buildApolloClient({
+    clientOptions: graphqlClientOptions,
+});
+
 export default () => {
     const getGqlResource = resource => {
         switch (resource) {
@@ -11,11 +19,7 @@ export default () => {
         }
     };
 
-    return buildApolloClient({
-        clientOptions: {
-            uri: process.env.REACT_APP_API_URL,
-        },
-    }).then(dataProvider => (type, resource, params) =>
+    return getApolloClient().then(dataProvider => (type, resource, params) =>
         dataProvider(type, getGqlResource(resource), params)
     );
 };

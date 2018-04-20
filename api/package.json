@@ -4,12 +4,14 @@
   "main": "index.js",
   "private": true,
   "dependencies": {
+    "apollo-boost": "^0.1.4",
     "co-postgres-queries": "1.2.2",
     "convict": "4.2.0",
     "cors": "^2.8.4",
     "date-fns": "^1.29.0",
     "db-migrate": "0.11.1",
     "db-migrate-pg": "0.4.0",
+    "esm": "^3.0.19",
     "express": "4.16.3",
     "express-graphql": "0.6.12",
     "graphql": "0.13.2",
@@ -30,6 +32,7 @@
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "jest": "22.4.3",
+    "lolex": "^2.3.2",
     "nodemon": "1.17.3",
     "supertest": "3.0.0"
   }

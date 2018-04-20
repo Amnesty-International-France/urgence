@@ -20,7 +20,7 @@
   "jest": {
     "setupFiles": [
       "jest-canvas-mock",
-      "./front/src/setup-test"
+      "./setup-test"
     ],
     "moduleDirectories": [
       "node_modules",

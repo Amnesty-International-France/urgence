@@ -3,6 +3,7 @@ import { Admin, Resource, Delete } from 'react-admin';
 
 import { UrgentActionCreate, UrgentActionEdit, UrgentActionList } from './urgentActions';
 import dataProviderFactory from './dataProvider';
+import { authProvider } from './authentication/authProvider';
 
 class App extends Component {
     state = { dataProvider: null };
@@ -21,7 +22,10 @@ class App extends Component {
         }
 
         return (
-            <Admin dataProvider={dataProvider}>
+            <Admin
+                authProvider={authProvider}
+                dataProvider={dataProvider}
+            >
                 <Resource
                     name="Urgent Actions"
                     list={UrgentActionList}

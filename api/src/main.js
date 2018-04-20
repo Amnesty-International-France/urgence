@@ -8,7 +8,7 @@ import { graphqlRouter } from './graphql/router';
 const app = express();
 
 app.use(cors({
-    origin: config.cors.allowedOrigin,
+    origin: (origin, cb) => !origin || origin === 'http://localhost:5000' || origin === 'http://localhost:4000' ? cb(null, true) : cb(new Error('Not allowed by CORS')),
     allowedHeaders: 'Origin,Content-Type,Accept,Authorization',
     credentials: true,
 }));
