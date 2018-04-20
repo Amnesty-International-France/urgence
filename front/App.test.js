@@ -2,22 +2,6 @@ import React from 'react';
 import App from './App';
 import renderer from 'react-test-renderer';
 
-window.matchMedia =
-    window.matchMedia ||
-    function() {
-        return {
-            matches: false,
-            addListener: function() {},
-            removeListener: function() {},
-        };
-    };
-
-window.requestAnimationFrame =
-    window.requestAnimationFrame ||
-    function(callback) {
-        setTimeout(callback, 0);
-    };
-
 it('renders without crashing', () => {
     const rendered = renderer.create(<App />).toJSON();
     expect(rendered).toBeTruthy();

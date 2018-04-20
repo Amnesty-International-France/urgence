@@ -1,48 +1,37 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-primitives';
+import React from 'react';
+import { Dimensions } from 'react-primitives';
 import PropTypes from 'prop-types';
-import Sideswipe from 'react-native-sideswipe';
+import glamorous from 'glamorous-primitives';
 
-const { width } = Dimensions.get('window');
+import ScrollView from './gateway/ScrollView';
 
-class Carousel extends Component {
-    state = {
-        currentIndex: 0,
-    };
-    renderItem({ item }) {
-        return <View style={styles.container}>{item}</View>;
-    }
+const { width, height } = Dimensions.get('window');
 
-    render() {
-        const children = this.props.children;
+const ScrollContainer = glamorous.view({
+    height,
+});
 
-        return (
-            <Sideswipe
-                index={this.state.currentIndex}
-                onIndexChange={index =>
-                    this.setState(() => ({ currentIndex: index }))
-                }
-                data={children}
-                renderItem={this.renderItem}
-                itemWidth={width}
-                style={{ width }}
-            />
-        );
-    }
-}
+const ChildContainer = glamorous.view({
+    width,
+    height,
+});
+
+const Carousel = ({ children }) => (
+    <ScrollContainer>
+        <ScrollView
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+        >
+            {children.map((child, index) => (
+                <ChildContainer key={index}>{child}</ChildContainer>
+            ))}
+        </ScrollView>
+    </ScrollContainer>
+);
 
 Carousel.propTypes = {
     children: PropTypes.node.isRequired,
 };
-
-var styles = StyleSheet.create({
-    container: {
-        width,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'transparent',
-    },
-});
 
 export default Carousel;
