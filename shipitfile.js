@@ -17,28 +17,40 @@ module.exports = shipit => {
         },
     });
 
-    shipit.blTask('install', async () => {
-        await shipit.remote('bash -ci "make install-staging"', {
-            cwd: `${BASE_FOLDER}/current/`,
-        });
+    // shipit.blTask('foo', async () => {
+
+    // });
+    shipit.on('published', async () => {
+        await shipit.remote('make install-staging', { cwd: shipit.releasePath });
+        await shipit.remote('make stop-staging start-staging', { cwd: shipit.releasePath });
     });
 
-    shipit.blTask('migrate', async () => {
-        await shipit.remote(`bash -ci "mkdir -p ${BASE_FOLDER}data"`);
-        await shipit.remote('bash -ci "make migration-staging"', {
-            cwd: `${BASE_FOLDER}/current/`,
-        });
-    });
+    // shipit.task('admin', async () => {
+    //
+    // });
 
-    shipit.blTask('start', async () => {
-        await shipit.remote('bash -ci "make stop-staging start-staging"', {
-            cwd: `${BASE_FOLDER}/current/`,
-        });
-    });
+    // shipit.blTask('install', async () => {
+    //     await shipit.remote('bash -ci "make install-staging"', {
+    //         cwd: `${BASE_FOLDER}/current/`,
+    //     });
+    // });
 
-    shipit.on('deployed', async () => {
-        await shipit.start('install');
-        await shipit.start('migrate');
-        await shipit.start('start');
-    });
+    // shipit.blTask('migrate', async () => {
+    //     await shipit.remote(`bash -ci "mkdir -p ${BASE_FOLDER}data"`);
+    //     await shipit.remote('bash -ci "make migration-staging"', {
+    //         cwd: `${BASE_FOLDER}/current/`,
+    //     });
+    // });
+
+    // shipit.blTask('start', async () => {
+    //     await shipit.remote('bash -ci "make stop-staging start-staging"', {
+    //         cwd: `${BASE_FOLDER}/current/`,
+    //     });
+    // });
+
+    // shipit.on('deployed', async () => {
+    //     await shipit.start('install');
+    //     await shipit.start('migrate');
+    //     await shipit.start('start');
+    // });
 }
