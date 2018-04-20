@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Title from './themes/Title';
+import { Redirect } from './gateway/ReactRouter';
 
-const Home = () => <Title>Home</Title>;
+const Home = () => <Redirect to="/UA/0" />;
 
 export default Home;
