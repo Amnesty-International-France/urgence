@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import glamorous from 'glamorous-primitives';
 
@@ -16,12 +15,8 @@ const ItemText = glamorous.text({
     color: 'white',
 });
 
-const UA = ({
-    match: {
-        params: { id },
-    },
-}) => (
-    <Carousel initialSlide={id}>
+const UA = () => (
+    <Carousel>
         <Item>
             <ItemText>1</ItemText>
         </Item>
@@ -33,13 +28,5 @@ const UA = ({
         </Item>
     </Carousel>
 );
-
-UA.propTypes = {
-    match: PropTypes.shape({
-        params: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-        }),
-    }),
-};
 
 export default UA;

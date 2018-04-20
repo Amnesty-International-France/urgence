@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
-import { withRouter } from './gateway/ReactRouter';
 
 const settings = {
     dots: true,
@@ -14,30 +12,12 @@ const settings = {
     slidesToScroll: 1,
 };
 
-class Carousel extends Component {
-    afterChange = index => {
-        const { history } = this.props;
-        history.push(`/ua/${index}`);
-    };
-    render() {
-        const { children, initialSlide = 0 } = this.props;
-
-        return (
-            <Slider
-                settings={settings}
-                initialSlide={initialSlide}
-                afterChange={this.afterChange}
-            >
-                {children}
-            </Slider>
-        );
-    }
-}
+const Carousel = ({ children }) => (
+    <Slider settings={settings}>{children}</Slider>
+);
 
 Carousel.propTypes = {
     children: PropTypes.node.isRequired,
-    initialSlide: PropTypes.number,
-    history: PropTypes.object.isRequired,
 };
 
-export default withRouter(Carousel);
+export default Carousel;
