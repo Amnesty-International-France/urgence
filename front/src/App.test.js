@@ -27,12 +27,15 @@ describe('App', () => {
         addMockFunctionsToSchema({ schema, mocks });
         const apolloCache = new InMemoryCache(window.__APOLLO_STATE__);
 
+        // const mockNetworkInterface = mockNetworkInterfaceWithSchema({ schema });
+
         client = new ApolloClient({
             cache: apolloCache,
             link: new SchemaLink({ schema }),
         });
-    });
 
+        console.log({ client });
+    });
     it('renders without crashing', () => {
         const rendered = renderer.create(<App client={client} />).toJSON();
         expect(rendered).toBeTruthy();
