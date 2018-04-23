@@ -6,14 +6,14 @@ import { ApolloProvider } from 'react-apollo';
 import { Router, Route } from './gateway/ReactRouter';
 import generateUrl from './services/generateUrl';
 import Home from './Home';
-import UA from './UA';
+import UrgentAction from './UrgentAction';
 
 const App = ({ client }) => (
     <ApolloProvider client={client}>
         <Router>
             <View>
                 <Route exact path={generateUrl('home')} component={Home} />
-                <Route path={generateUrl('ua')} component={UA} />
+                <Route path={generateUrl('ua')} component={UrgentAction} />
             </View>
         </Router>
     </ApolloProvider>

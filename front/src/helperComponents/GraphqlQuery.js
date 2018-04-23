@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import { Text, View } from 'react-primitives';
 
-import Title from '../themes/Title';
-
 const GraphqlQuery = ({ query, variables, render }) => (
     <Query query={query} variables={variables}>
         {({ loading, error, data }) => {
@@ -17,10 +15,6 @@ const GraphqlQuery = ({ query, variables, render }) => (
             }
             if (error) {
                 return <Text>Error: {error.message}</Text>;
-            }
-
-            if (!data.UrgentAction) {
-                return <Title>Not found</Title>;
             }
 
             return render(data);
