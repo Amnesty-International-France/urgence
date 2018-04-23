@@ -22,42 +22,27 @@ module.exports = shipit => {
         await shipit.local(`cp -R ./admin/build ${shipit.workspace}/admin/`);
     });
 
+    shipit.blTask('buildFront', async () => {
+        await shipit.local('make build-staging');
+        await shipit.local(`cp -R ./front/build ${shipit.workspace}/front/`);
+    });
+
+    shipit.blTask('buildStorybook', async () => {
+        await shipit.local('make build-storybook');
+        await shipit.local(`cp -R ./front/storybook-static ${shipit.workspace}/front/storybook`);
+    });
+
     shipit.on('fetched', async () => {
-        await shipit.start('buildAdmin');
+        await Promise.all([
+            shipit.start('buildAdmin'),
+            shipit.start('buildFront'),
+            shipit.start('buildStorybook'),
+        ]);
     });
 
     shipit.on('published', async () => {
         await shipit.remote('make install-staging', { cwd: shipit.releasePath });
         await shipit.remote('make stop-staging start-staging', { cwd: shipit.releasePath });
     });
-
-    // shipit.task('admin', async () => {
-    //
-    // });
-
-    // shipit.blTask('install', async () => {
-    //     await shipit.remote('bash -ci "make install-staging"', {
-    //         cwd: `${BASE_FOLDER}/current/`,
-    //     });
-    // });
-
-    // shipit.blTask('migrate', async () => {
-    //     await shipit.remote(`bash -ci "mkdir -p ${BASE_FOLDER}data"`);
-    //     await shipit.remote('bash -ci "make migration-staging"', {
-    //         cwd: `${BASE_FOLDER}/current/`,
-    //     });
-    // });
-
-    // shipit.blTask('start', async () => {
-    //     await shipit.remote('bash -ci "make stop-staging start-staging"', {
-    //         cwd: `${BASE_FOLDER}/current/`,
-    //     });
-    // });
-
-    // shipit.on('deployed', async () => {
-    //     await shipit.start('install');
-    //     await shipit.start('migrate');
-    //     await shipit.start('start');
-    // });
 }
 

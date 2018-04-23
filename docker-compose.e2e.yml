@@ -1,47 +1,61 @@
 version: '3'
 
 services:
-  app-e2e:
-    image: node:9
-    command: npm run start-web
-    volumes:
-      - "./front:/app"
-    environment:
-      - NODE_ENV=development
-    working_dir: /app
+    app-e2e:
+        image: node:9
+        command: npm run start-web
+        volumes:
+            - "./front:/app"
+        environment:
+            - NODE_ENV=development
+        working_dir: /app
 
-  hub:
-    image: selenium/hub:2.53.0
+    hub:
+        image: selenium/hub:2.53.0
 
-  chrome:
-    image: selenium/node-chrome:2.53.0
-    environment:
-      - HUB_PORT_4444_TCP_ADDR=hub
-    depends_on:
-      - hub
-    links:
-      - hub
-      - app-e2e
+    chrome:
+        image: selenium/node-chrome:2.53.0
+        environment:
+            - HUB_PORT_4444_TCP_ADDR=hub
+        depends_on:
+            - hub
+        links:
+            - hub
+            - app-e2e
 
-  chromedebug:
-    image: selenium/node-chrome-debug:2.53.0
-    links:
-      - hub
-      - app-e2e
-    ports:
-      - 5900:5900
+    chromedebug:
+        image: selenium/node-chrome-debug:2.53.0
+        links:
+            - hub
+            - app-e2e
+        ports:
+            - 5900:5900
 
-  test-e2e:
-    image: node:9
-    links:
-      - hub
-      - app-e2e
-    depends_on:
-      - hub
-      - chrome
-    environment:
-      NODE_ENV: test
-    command: npm run test-e2e
-    volumes:
-      - ./front:/app
-    working_dir: /app
+    test-e2e:
+        image: node:9
+        links:
+            - hub
+            - app-e2e
+        depends_on:
+            - hub
+            - chrome
+        environment:
+            NODE_ENV: test
+        command: npm run test-e2e
+        volumes:
+            - ./front:/app
+        working_dir: /app
+
+    front:
+        image: node:9
+        command: "npm run start-web"
+        volumes:
+            - "./front:/app"
+            - "/tmp:/tmp"
+        environment:
+            - NODE_ENV=development
+            - HOME=/tmp
+        ports:
+            - "3000:3000"
+        working_dir: /app
+        user: "${UID}:${GID}"

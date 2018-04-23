@@ -94,5 +94,11 @@ deploy-staging:
 install-admin:
 	$(DOCKER_COMPOSE) run --rm --no-deps admin npm install
 
+build-storybook:
+	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps storybook
+
+build-staging:
+	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_staging
+
 build-admin-staging:
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_staging

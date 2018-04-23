@@ -21,8 +21,6 @@ services:
         command: [sh, -c, "chmod -R o+X /app; chmod -R o+r /app/admin/build/; nginx -g 'daemon off;'"]
         depends_on:
             - api
-            - front
-            - storybook
 
     db:
         environment:

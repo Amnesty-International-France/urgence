@@ -12,3 +12,25 @@ services:
             REACT_APP_API_URL: https://amnesty.marmelab.com/api/
         user: "${UID}:${GID}"
         working_dir: /app
+
+    front_staging:
+        image: node:9
+        command: "npm run build-web"
+        volumes:
+            - ./front:/app
+        environment:
+            NODE_ENV: production
+            REACT_APP_API_URL: https://amnesty.marmelab.com/api/
+        user: "${UID}:${GID}"
+        working_dir: /app
+
+    storybook:
+        image: node:9
+        command: "npm run build-storybook"
+        volumes:
+            - ./front:/app
+        environment:
+            NODE_ENV: production
+            PUBLIC_URL: https://amnesty.marmelab.com/storybook/
+        user: "${UID}:${GID}"
+        working_dir: /app
