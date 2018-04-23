@@ -22,3 +22,14 @@ services:
         expose:
             - "5432"
         user: "${UID}:${GID}"
+
+    front:
+        image: node:9
+        command: "npm run start-web"
+        volumes:
+            - "./front:/app"
+            - "/tmp:/tmp"
+        environment:
+            - HOME=/tmp
+        working_dir: /app
+        user: "${UID}:${GID}"

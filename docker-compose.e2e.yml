@@ -41,22 +41,13 @@ services:
         working_dir: /app
 
     front:
-        image: node:9
         command: "npm run start-web"
-        volumes:
-            - "./front:/app"
-            - "/tmp:/tmp"
         environment:
             - REACT_APP_API_URL=http://localhost:4000/
             - NODE_ENV=development
-            - HOME=/tmp
-        ports:
-            - "3000:3000"
-        working_dir: /app
-        user: "${UID}:${GID}"
 
     api:
         command: npm run start-dev
         environment:
-        NODE_ENV: development
-        POSTGRES_DATABASE: reaction-rapide-test
+            NODE_ENV: development
+            POSTGRES_DATABASE: reaction-rapide-test
