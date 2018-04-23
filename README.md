@@ -8,4 +8,22 @@ Grab project dependencies, and your launch Docker containers:
 make install start
 ```
 
-API should now be available on `https://localhost:4000/`.
+You can now access different applications:
+
+* API: https://localhost:4000/
+* Admin: https://localhost:5000/
+* Front app: https://localhost:3000/
+
+## Deployment
+
+Deployment on staging is done through the command:
+
+``` sh
+make deploy-staging
+```
+
+By default, it deploys `master` branch. However, it is possible to deploy another branch by setting a `BRANCH` environment variable. For instance:
+
+``` sh
+BRANCH=feature deploy-staging
+```

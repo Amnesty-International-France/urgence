@@ -2,6 +2,7 @@ export UID=$(shell id -u)
 export GID=$(shell id -g)
 
 DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
+DOCKER_COMPOSE_BUILD = docker-compose -p reaction-rapide-build -f docker-compose.build.yml
 DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
 DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.e2e.yml
 DOCKER_COMPOSE_STAGING = docker-compose -p reaction-rapide-staging -f docker-compose.yml -f docker-compose.staging.yml
@@ -93,6 +94,5 @@ test: test-unit test-e2e
 install-admin:
 	$(DOCKER_COMPOSE) run --rm --no-deps admin npm install
 
-build-admin:
-	cd admin && npm install --save query-string@5.1.1 && cd node_modules/ra-core && npm install --save query-string@5.1.1
-	cd admin && npm run build
+build-admin-staging:
+	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_staging
