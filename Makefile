@@ -6,17 +6,14 @@ DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.y
 DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.e2e.yml
 DOCKER_COMPOSE_STAGING = docker-compose -p reaction-rapide-staging -f docker-compose.yml -f docker-compose.staging.yml
 
-install:
+install: install-admin
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api npm install
 	$(DOCKER_COMPOSE) run --rm --no-deps api npm install
 	$(DOCKER_COMPOSE) run --rm --no-deps front npm install
-	$(DOCKER_COMPOSE) run --rm --no-deps admin npm install
 
 install-staging:
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api npm install --production
 	$(DOCKER_COMPOSE) run --rm --no-deps api npm install --production
-	$(DOCKER_COMPOSE) run --rm --no-deps front npm install --production
-	$(DOCKER_COMPOSE) run --rm --no-deps admin npm install --production
 
 start:
 	$(DOCKER_COMPOSE) up --force-recreate -d
@@ -92,3 +89,10 @@ deploy-staging:
 	npx shipit staging deploy
 
 test: test-unit test-e2e
+
+install-admin:
+	$(DOCKER_COMPOSE) run --rm --no-deps admin npm install
+
+build-admin:
+	cd admin && npm install --save query-string@5.1.1 && cd node_modules/ra-core && npm install --save query-string@5.1.1
+	cd admin && npm run build

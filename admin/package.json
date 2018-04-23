@@ -33,6 +33,7 @@
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
+    "query-string": "^5.1.1",
     "ra-data-graphql-simple": "2.0.0-RC1",
     "raf": "3.4.0",
     "react": "16.3.2",
