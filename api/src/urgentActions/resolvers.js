@@ -1,5 +1,3 @@
-import GraphQLJSON from 'graphql-type-json';
-
 import {
     getUrgentAction,
     getUrgentActions,
@@ -17,8 +15,7 @@ export const UrgentActionsResolver = {
     },
     Mutation: {
         createUrgentAction: (_, data) => createUrgentAction(data),
-        updateUrgentAction: (_, { id, ...data }) => updateUrgentAction(id, data),
+        updateUrgentAction: (_, { id, ...data }) => console.log({ _, data }) || updateUrgentAction(id, data),
         deleteUrgentAction: (_, id) => removeUrgentAction(id),
     },
-    JSON: GraphQLJSON,
 };

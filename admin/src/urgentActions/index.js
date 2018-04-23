@@ -9,6 +9,10 @@ import {
     SimpleForm,
     TextField,
     TextInput,
+    ArrayInput,
+    SimpleFormIterator,
+    SelectInput,
+    DateField
 } from 'react-admin';
 import withStyles from 'material-ui/styles/withStyles';
 
@@ -44,10 +48,37 @@ const editStyles = {
     clear: { clear: 'both' },
 };
 
+const positionChoices = [{ id: 'top', name: 'Top' }, { id: 'bottom', name: 'Bottom' }];
+const colorChoices = ['000000', 'FFFF00', 'FFFFFF', 'd2026d', 'df3725', 'ed8122'].map(color => ({
+    id: color,
+    name: <div style={{ background: `#${color}`, width: '100%', height: '2rem' }} />
+}));
+
 export const UrgentActionEdit = withStyles(editStyles)(({ classes, ...props }) => (
     <Edit title={<UrgentActionTitle />} {...props}>
         <SimpleForm>
-            <TextInput source="title" />
+            <TextInput source="title" label="title" />
+            <ArrayInput source="story">
+                <SimpleFormIterator>
+                    <TextInput source="content" />
+                    <h3>medium</h3>
+                    <TextInput source="medium.title" label="title" />
+                    <TextInput source="medium.src" label="src" />
+                    <h3>theme</h3>
+                    <SelectInput
+                        source="theme.position"
+                        label="position"
+                        choices={positionChoices}
+                        />
+                    <SelectInput
+                        source="theme.background"
+                        label="background"
+                        choices={colorChoices}
+                    />
+                </SimpleFormIterator>
+            </ArrayInput>
+            <DateField source="creation_date" />
+            <DateField source="last_edition_date" />
         </SimpleForm>
     </Edit>
 ));

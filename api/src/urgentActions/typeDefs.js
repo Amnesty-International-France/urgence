@@ -1,13 +1,42 @@
 import gql from 'graphql-tag';
 
 export const urgentActionsTypeDefs = gql`
-    scalar JSON
-
     scalar DATE
+
+    type Medium {
+        title: String
+        src: String
+    }
+
+    enum Position {
+        top
+        bottom
+    }
+
+    enum Color {
+        "000000"
+        FFFF00
+        FFFFFF
+        d2026d
+        df3725
+        ed8122
+    }
+
+    type Theme {
+        position: Position
+        backgroundColor: Color
+    }
+
+    type StoryStep {
+        content: String
+        medium: Medium
+        theme: Theme
+    }
+
     type UrgentAction {
         id: ID!
         title: String!
-        story: JSON
+        story: [StoryStep]
         creation_date: DATE
         last_edition_date: DATE
     }
@@ -20,7 +49,13 @@ export const urgentActionsTypeDefs = gql`
 
     extend type Mutation {
         createUrgentAction(title: String): UrgentAction
-        updateUrgentAction(id: ID!, title: String): UrgentAction
+        updateUrgentAction(
+            id: ID!,
+            title: String!,
+            story: [StoryStep],
+            creation_date: DATE,
+            last_edition_date: DATE,
+        ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
     }
 
