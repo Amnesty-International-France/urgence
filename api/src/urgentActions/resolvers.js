@@ -1,4 +1,13 @@
-import { getUrgentActions, getUrgentAction, countUrgentActions, removeUrgentAction } from "./repository";
+import GraphQLJSON from 'graphql-type-json';
+
+import {
+    getUrgentAction,
+    getUrgentActions,
+    countUrgentActions,
+    createUrgentAction,
+    updateUrgentAction,
+    removeUrgentAction
+} from "./repository";
 
 export const UrgentActionsResolver = {
     Query: {
@@ -10,5 +19,6 @@ export const UrgentActionsResolver = {
         createUrgentAction: (_, data) => createUrgentAction(data),
         updateUrgentAction: (_, { id, ...data }) => updateUrgentAction(id, data),
         deleteUrgentAction: (_, id) => removeUrgentAction(id),
-    }
+    },
+    JSON: GraphQLJSON,
 };

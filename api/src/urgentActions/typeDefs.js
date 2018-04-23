@@ -1,9 +1,15 @@
 import gql from 'graphql-tag';
 
 export const urgentActionsTypeDefs = gql`
+    scalar JSON
+
+    scalar DATE
     type UrgentAction {
         id: ID!
         title: String!
+        story: JSON
+        creation_date: DATE
+        last_edition_date: DATE
     }
 
     extend type Query {

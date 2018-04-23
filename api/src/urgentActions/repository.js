@@ -4,8 +4,8 @@ const query = require('../db/client');
 
 const urgentActionCrudQueries = crud({
     table: 'urgent_action',
-    writableCols: ['id', 'title'],
-    returnCols: ['id', 'title'],
+    writableCols: ['id', 'title', 'story', 'creation_date', 'last_edition_date'],
+    returnCols: ['id', 'title', 'story', 'creation_date', 'last_edition_date'],
 });
 
 export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }) => query(urgentActionCrudQueries.select({
