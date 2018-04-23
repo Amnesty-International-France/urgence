@@ -14,11 +14,12 @@ services:
             - "80:80"
             - "443:443"
         volumes:
+            - .:/app
             - ./var/nginx/staging.conf:/etc/nginx/conf.d/default.conf
             - /etc/letsencrypt/live/amnesty.marmelab.com/fullchain.pem:/etc/nginx/conf.d/selfsigned.crt
             - /etc/letsencrypt/live/amnesty.marmelab.com/privkey.pem:/etc/nginx/conf.d/selfsigned.key
+        command: [sh, -c, "chmod -R o+X /app; chmod -R o+r /app/admin/build/; nginx -g 'daemon off;'"]
         depends_on:
-            - admin
             - api
             - front
             - storybook

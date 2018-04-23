@@ -17,9 +17,15 @@ module.exports = shipit => {
         },
     });
 
-    // shipit.blTask('foo', async () => {
+    shipit.blTask('buildAdmin', async () => {
+        await shipit.local('make build-admin-staging');
+        await shipit.local(`cp -R ./admin/build ${shipit.workspace}/admin/`);
+    });
 
-    // });
+    shipit.on('fetched', async () => {
+        await shipit.start('buildAdmin');
+    });
+
     shipit.on('published', async () => {
         await shipit.remote('make install-staging', { cwd: shipit.releasePath });
         await shipit.remote('make stop-staging start-staging', { cwd: shipit.releasePath });
@@ -54,3 +60,4 @@ module.exports = shipit => {
     //     await shipit.start('start');
     // });
 }
+
