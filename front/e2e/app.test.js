@@ -1,13 +1,12 @@
-import { By } from 'selenium-webdriver';
 import driver from './driver';
 
 describe(
     'app',
     () => {
         it('should display home', async () => {
-            await driver.get('http://app-e2e:3000');
-            const text = await driver.findElement(By.tagName('body')).getText();
-            expect(text).toBe('1\nNext');
+            await driver.get('http://front:3000/ua/0');
+            const title = await driver.getTitle();
+            expect(title).toBe('React App');
         });
     },
     20000,

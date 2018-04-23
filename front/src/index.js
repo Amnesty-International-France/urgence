@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ApolloClient from 'apollo-boost';
+
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const client = new ApolloClient({
+    uri: process.env.REACT_APP_API_URL,
+});
+
+ReactDOM.render(<App client={client} />, document.getElementById('root'));
 registerServiceWorker();

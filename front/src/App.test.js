@@ -1,9 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
+import renderer from 'react-test-renderer';
 
-it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
-    ReactDOM.unmountComponentAtNode(div);
+import getApolloClientMock from '../testUtils/getApolloClientMock';
+
+describe('App', () => {
+    let client;
+
+    beforeAll(() => {
+        client = getApolloClientMock();
+    });
+
+    it('renders without crashing', () => {
+        const rendered = renderer.create(<App client={client} />).toJSON();
+        expect(rendered).toBeTruthy();
+    });
 });

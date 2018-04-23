@@ -23,6 +23,8 @@ services:
             - ADMIN_USERNAME=admin
             - ADMIN_PASSWORD=password
             - JWT_SECRET_KEY=foobarS3CR3T!
+        ports:
+            - "4000:4000"
 
     db:
         volumes:
@@ -46,15 +48,9 @@ services:
         user: "${UID}:${GID}"
 
     front:
-        image: node:9
-        command: "npm run start-web"
-        volumes:
-            - "./front:/app"
-            - "/tmp:/tmp"
         environment:
+            - REACT_APP_API_URL=http://localhost:4000/
             - NODE_ENV=development
             - HOME=/tmp
         ports:
             - "3000:3000"
-        working_dir: /app
-        user: "${UID}:${GID}"

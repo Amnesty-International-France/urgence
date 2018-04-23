@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import HybridApp from './src/App';
-export default class NativeApp extends React.Component {
+
+export default class NativeApp extends Component {
     render() {
-        return <HybridApp />;
+        const { client } = this.props;
+        return <HybridApp client={client} />;
     }
 }
+
+NativeApp.propTypes = {
+    client: PropTypes.object.isRequired,
+};
