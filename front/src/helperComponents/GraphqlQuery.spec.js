@@ -13,7 +13,7 @@ describe('GrapĥqlQuery', () => {
             expect(render.mock.calls[0]).toEqual(['data']);
         });
 
-        it('should return `Loading...` wrapped in Text and not call render', () => {
+        it('should return `Loading...` wrapped in Text and not call render when loading is true', () => {
             const render = jest.fn();
             const result = handleLoading(render)({ loading: true });
 
@@ -21,7 +21,7 @@ describe('GrapĥqlQuery', () => {
             expect(render.mock.calls.length).toBe(0);
         });
 
-        it('should return error wrapped in Text and not call render', () => {
+        it('should return error wrapped in Text and not call render receiving an error', () => {
             const render = jest.fn();
             const result = handleLoading(render)({ error: new Error('Boom') });
 
