@@ -3,11 +3,6 @@ import jwtDecode from 'jwt-decode';
 import { createToken, login } from "./resolvers";
 
 describe('Users Resolvers', () => {
-    let clock;
-    beforeEach(() => {
-        clock = lolex.install({ now: new Date('2017-01-01') });
-    });
-
     describe('createToken', () => {
         it('should return a signed JWT token containing user data', () => {
             const token = createToken({ role: 'admin' });
@@ -47,8 +42,4 @@ describe('Users Resolvers', () => {
             expect(true).toBe(false);
         });
     });
-
-    afterEach(() => {
-        clock.uninstall();
-    })
 });

@@ -39,7 +39,7 @@ psql:
 test: test-unit test-e2e
 
 test-unit:
-	$(DOCKER_COMPOSE_TEST) run --rm test npm run test ; $(DOCKER_COMPOSE_TEST) stop
+	$(DOCKER_COMPOSE_TEST) run --rm test npm run test
 
 test-watch:
 	$(DOCKER_COMPOSE_TEST) run --rm test npm run test-watch
