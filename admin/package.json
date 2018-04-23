@@ -98,5 +98,8 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "jsonwebtoken": "^8.2.1"
   }
 }

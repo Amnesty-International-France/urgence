@@ -1,6 +1,5 @@
 import jwtDecode from 'jwt-decode';
 import { isFuture } from 'date-fns';
-import jwt from 'jsonwebtoken';
 
 import {
     AUTH_ERROR,
