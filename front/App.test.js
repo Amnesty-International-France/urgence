@@ -1,36 +1,14 @@
 import React from 'react';
 import App from './App';
 import renderer from 'react-test-renderer';
-import ApolloClient from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { SchemaLink } from 'apollo-link-schema';
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+
+import getApolloClientMock from './testUtils/getApolloClientMock';
 
 describe('App', () => {
     let client;
+
     beforeAll(() => {
-        const typeDefs = `
-        type UrgentAction {
-            id: ID
-            title: String
-        }
-
-        type Query {
-            UrgentAction: UrgentAction
-        }
-        `;
-        const mocks = {
-            UrgentAction: () => null,
-        };
-
-        const schema = makeExecutableSchema({ typeDefs });
-        addMockFunctionsToSchema({ schema, mocks });
-        const apolloCache = new InMemoryCache(window.__APOLLO_STATE__);
-
-        client = new ApolloClient({
-            cache: apolloCache,
-            link: new SchemaLink({ schema }),
-        });
+        client = getApolloClientMock();
     });
 
     it('renders without crashing', () => {
