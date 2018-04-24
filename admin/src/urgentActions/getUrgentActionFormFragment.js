@@ -8,6 +8,8 @@ import {
     SelectInput,
     DateField,
     required,
+    FileInput,
+    ImageField
 } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
 import get from 'lodash.get';
@@ -40,8 +42,12 @@ export default ({ edit }) => (
                     validate={required()}
                 />
                 <label>medium</label>
+                <TextInput  source="medium.src" label="src" />
                 <TextInput  validate={validateMedium} source="medium.title" label="title" />
-                <TextInput  validate={validateMedium} source="medium.src" label="src" />
+                <TextInput source="medium.title" label="title" />
+                <FileInput validate={validateMedium} source="medium.src" label="src">
+                    <ImageField source="medium.src" title="title" />
+                </FileInput>
                 <label>theme</label>
                 <SelectInput
                     validate={required()}
