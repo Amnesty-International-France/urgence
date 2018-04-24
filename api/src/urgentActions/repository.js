@@ -20,5 +20,9 @@ export const countUrgentActions = async () => query(urgentActionCrudQueries.coun
 export const getUrgentAction = async (id) => query(urgentActionCrudQueries.selectOne(id));
 
 export const createUrgentAction = async (urgentAction) => query(urgentActionCrudQueries.insertOne(urgentAction));
-export const updateUrgentAction = async (id, urgentAction) => query(urgentActionCrudQueries.updateOne(id, urgentAction));
+export const updateUrgentAction = async (id, urgentAction, last_edition_date = new Date()) =>
+    query(urgentActionCrudQueries.updateOne(id, {
+        ...urgentAction,
+        last_edition_date,
+    }));
 export const removeUrgentAction = async (id) => query(urgentActionCrudQueries.removeOne(id));

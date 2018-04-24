@@ -1,5 +1,11 @@
 import { UrgentActionsResolver } from './resolvers';
-import { getUrgentAction, getUrgentActions } from './repository';
+import {
+    getUrgentAction,
+    getUrgentActions,
+    createUrgentAction,
+    updateUrgentAction,
+    removeUrgentAction,
+} from './repository';
 
 const resolvers = require('./resolvers');
 
@@ -16,7 +22,7 @@ describe('Urgent Actions Resolvers', () => {
             });
         });
 
-        describe('UrgentActions', () => {
+        describe('allUrgentActions', () => {
             it('should query all available urgent actions', async () => {
                 await UrgentActionsResolver.Query.allUrgentActions(null, {
                     perPage: 10,
@@ -30,6 +36,60 @@ describe('Urgent Actions Resolvers', () => {
                     sortField: 'id',
                     sortOrder: 'asc',
                 });
+            });
+        });
+
+        describe('createUrgentAction', () => {
+            it('should create given urgent action', async () => {
+                await UrgentActionsResolver.Mutation.createUrgentAction(null, {
+                    title: 'test',
+                    story: [{
+                        content: 'this is a test',
+                        displayOptions: {
+                            position: 'top',
+                            backgroundColor: 'FFFF00',
+                        },
+                        medium: {
+                            src: 'picture.gif',
+                            title: 'a picture',
+                        }
+                    }]
+                });
+                expect(createUrgentAction).toHaveBeenCalledWith({
+                    title: 'test',
+                    story: '[{"content":"this is a test","displayOptions":{"position":"top","backgroundColor":"FFFF00"},"medium":{"src":"picture.gif","title":"a picture"}}]',
+                });
+            });
+        });
+
+        describe('updateUrgentAction', () => {
+            it('should update urgent action with given id with remaining data', async () => {
+                await UrgentActionsResolver.Mutation.updateUrgentAction(null, {
+                    id: 'id',
+                    title: 'test',
+                    story: [{
+                        content: 'this is a test',
+                        displayOptions: {
+                            position: 'top',
+                            backgroundColor: 'FFFF00',
+                        },
+                        medium: {
+                            src: 'picture.gif',
+                            title: 'a picture',
+                        }
+                    }]
+                });
+                expect(updateUrgentAction).toHaveBeenCalledWith('id', {
+                    title: 'test',
+                    story: '[{"content":"this is a test","displayOptions":{"position":"top","backgroundColor":"FFFF00"},"medium":{"src":"picture.gif","title":"a picture"}}]',
+                });
+            });
+        });
+
+        describe('deleteUrgentAction', () => {
+            it('should remove urgent action with given id', async () => {
+                await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id');
+                expect(removeUrgentAction).toHaveBeenCalledWith('id');
             });
         });
     });
