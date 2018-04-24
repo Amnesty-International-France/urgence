@@ -8,7 +8,7 @@ export const urgentActionsTypeDefs = gql`
         src: String
     }
 
-    input ThemeInput {
+    input DisplayOptionsInput {
         position: Position
         backgroundColor: Color
     }
@@ -16,7 +16,7 @@ export const urgentActionsTypeDefs = gql`
     input StoryStepInput {
         content: String
         medium: MediumInput
-        theme: ThemeInput
+        displayOptions: DisplayOptionsInput
     }
 
     type Medium {
@@ -38,7 +38,7 @@ export const urgentActionsTypeDefs = gql`
         ed8122
     }
 
-    type Theme {
+    type DisplayOptions {
         position: Position
         backgroundColor: Color
     }
@@ -46,7 +46,7 @@ export const urgentActionsTypeDefs = gql`
     type StoryStep {
         content: String
         medium: Medium
-        theme: Theme
+        displayOptions: DisplayOptions
     }
 
     type UrgentAction {

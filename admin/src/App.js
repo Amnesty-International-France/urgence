@@ -23,6 +23,7 @@ class App extends Component {
 
         return (
             <Admin
+                locale="en"
                 authProvider={authProvider}
                 dataProvider={dataProvider}
             >

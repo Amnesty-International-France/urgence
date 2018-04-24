@@ -12,6 +12,9 @@ import RichTextInput from 'ra-input-rich-text';
 
 import { positionChoices, colorChoices } from './choices';
 
+const Color = ({ record }) =>
+    <div style={{ background: `#${record.name}`, width: '100%', height: '2rem' }} />;
+
 export default ({ edit }) => (
     <SimpleForm>
         <LongTextInput source="title" label="title" />
@@ -23,14 +26,15 @@ export default ({ edit }) => (
                 <TextInput source="medium.src" label="src" />
                 <label>theme</label>
                 <SelectInput
-                    source="theme.position"
+                    source="displayOptions.position"
                     label="position"
                     choices={positionChoices}
-                    />
+                />
                 <SelectInput
-                    source="theme.backgroundColor"
+                    source="displayOptions.backgroundColor"
                     label="background"
                     choices={colorChoices}
+                    optionText={<Color />}
                 />
             </SimpleFormIterator>
         </ArrayInput>
