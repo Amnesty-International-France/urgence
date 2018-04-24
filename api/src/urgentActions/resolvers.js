@@ -1,3 +1,5 @@
+import { path, assocPath } from 'ramda';
+
 import {
     getUrgentAction,
     getUrgentActions,
@@ -6,6 +8,7 @@ import {
     updateUrgentAction,
     removeUrgentAction
 } from "./repository";
+
 
 export const UrgentActionsResolver = {
     Query: {
@@ -18,10 +21,15 @@ export const UrgentActionsResolver = {
             ...data,
             story: JSON.stringify(story),
         }),
-        updateUrgentAction: (_, { id, story, ...data }) => updateUrgentAction(id, {
-            ...data,
-            story: JSON.stringify(story),
-        }),
+        updateUrgentAction: async (_, { id, story, ...data }) => {
+            const images = story.map((storyStep) => path(['medium', 'src'], storyStep));
+            const srcs = await Promise.all(images.map(v => v ? 'uploaded' : null));
+            const uploadedStory = story.map((storyStep, index) => assocPath(['medium', 'src'], srcs[index], storyStep));
+            return updateUrgentAction(id, {
+                ...data,
+                story: JSON.stringify(uploadedStory),
+            });
+        },
         deleteUrgentAction: (_, id) => removeUrgentAction(id),
     },
 };

@@ -1,6 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import bodyParser from 'body-parser';
+import { apolloUploadExpress } from 'apollo-upload-server'
 
 import config from '../../config';
 import errorHandler from './errorHandler';
@@ -16,7 +17,7 @@ app.use(cors({
 if (config.env !== 'production') {
     app.get('/graphiql', graphiqlRouter);
 }
-app.use('/', bodyParser.json(), graphqlRouter);
+app.use('/', bodyParser.json(), apolloUploadExpress(), graphqlRouter);
 
 app.use(errorHandler);
 
