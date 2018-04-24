@@ -1,19 +1,16 @@
 import React from 'react';
 import {
     Delete,
-    Create,
     Datagrid,
     EditButton,
     List,
     Responsive,
-    SimpleForm,
     TextField,
-    TextInput,
 } from 'react-admin';
 import withStyles from 'material-ui/styles/withStyles';
-import UrgentActionEdit from './UrgentActionEdit';
 
-import UrgentActionTitle from './UrgentActionTitle';
+import UrgentActionEdit from './UrgentActionEdit';
+import UrgentActionCreate from './UrgentActionCreate';
 
 const listStyles = {
     total: { fontWeight: 'bold' },
@@ -35,23 +32,6 @@ export const UrgentActionList = withStyles(listStyles)(({ classes, ...props }) =
             }
         />
     </List>
-));
-
-const createStyles = {
-    width: { width: '5em' },
-    widthFormGroup: { display: 'inline-block' },
-    height: { width: '5em' },
-    heightFormGroup: { display: 'inline-block', marginLeft: 32 },
-};
-
-export const UrgentActionCreate = withStyles(
-    createStyles
-)(({ classes, ...props }) => (
-    <Create title={<UrgentActionTitle />} {...props}>
-        <SimpleForm>
-            <TextInput source="title" />
-        </SimpleForm>
-    </Create>
 ));
 
 export default {
