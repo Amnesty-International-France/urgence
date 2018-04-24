@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 export const Image = ({ className, src, title }) => (
-    <img className={className} src={src} title={title} alt={title} />
+    <div
+        className={className}
+        style={{
+            backgroundImage: `url(${src})`,
+        }}
+        title={title}
+    />
 );
 
 Image.propTypes = {
@@ -13,8 +19,13 @@ Image.propTypes = {
 };
 
 export default glamorous(Image)({
-    display: 'block',
-    height: 'auto',
-    maxWidth: '100%',
-    objectFit: 'cover',
+    backgroundSize: 'cover',
+    '& img': {
+        maxWidth: '100%',
+    },
+    '&:after': {
+        content: ' ',
+        display: 'block',
+        paddingBottom: '56.25%',
+    },
 });

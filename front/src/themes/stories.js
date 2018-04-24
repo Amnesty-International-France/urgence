@@ -6,7 +6,11 @@ import Image from './Image';
 
 storiesOf('User Interface', module)
     .add('Image', () => (
-        <Fragment>
+        <div
+            style={{
+                maxWidth: 620,
+            }}
+        >
             <Image
                 src="/img/abdolfatah-soltani.jpg"
                 title="Abdolfatah Soltani, avocat iranien spécialisé dans la défense des droits humains."
@@ -15,7 +19,7 @@ storiesOf('User Interface', module)
                 This image is responsive: resize your browser to see it in
                 action!
             </p>
-        </Fragment>
+        </div>
     ))
     .add('Rich Text', () => (
         <RichText
