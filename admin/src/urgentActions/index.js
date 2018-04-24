@@ -71,7 +71,7 @@ export const UrgentActionEdit = withStyles(editStyles)(({ classes, ...props }) =
                         choices={positionChoices}
                         />
                     <SelectInput
-                        source="theme.background"
+                        source="theme.backgroundColor"
                         label="background"
                         choices={colorChoices}
                     />

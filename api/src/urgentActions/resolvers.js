@@ -15,7 +15,10 @@ export const UrgentActionsResolver = {
     },
     Mutation: {
         createUrgentAction: (_, data) => createUrgentAction(data),
-        updateUrgentAction: (_, { id, ...data }) => console.log({ _, data }) || updateUrgentAction(id, data),
+        updateUrgentAction: (_, { id, story, ...data }) => updateUrgentAction(id, {
+            ...data,
+            story: JSON.stringify(story),
+        }),
         deleteUrgentAction: (_, id) => removeUrgentAction(id),
     },
 };

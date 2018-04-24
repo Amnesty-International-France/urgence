@@ -3,6 +3,22 @@ import gql from 'graphql-tag';
 export const urgentActionsTypeDefs = gql`
     scalar DATE
 
+    input MediumInput {
+        title: String
+        src: String
+    }
+
+    input ThemeInput {
+        position: Position
+        backgroundColor: Color
+    }
+
+    input StoryStepInput {
+        content: String
+        medium: MediumInput
+        theme: ThemeInput
+    }
+
     type Medium {
         title: String
         src: String
@@ -50,11 +66,11 @@ export const urgentActionsTypeDefs = gql`
     extend type Mutation {
         createUrgentAction(title: String): UrgentAction
         updateUrgentAction(
-            id: ID!,
-            title: String!,
-            story: [StoryStep],
-            creation_date: DATE,
-            last_edition_date: DATE,
+            id: ID!
+            title: String!
+            story: [StoryStepInput]
+            creation_date: DATE
+            last_edition_date: DATE
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
     }

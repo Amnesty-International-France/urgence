@@ -1,9 +1,10 @@
 import cors from 'cors';
 import express from 'express';
+import bodyParser from 'body-parser';
 
 import config from '../../config';
 import errorHandler from './errorHandler';
-import { graphqlRouter } from './graphql/router';
+import { graphqlRouter, graphiqlRouter } from './graphql/router';
 
 const app = express();
 
@@ -12,8 +13,11 @@ app.use(cors({
     allowedHeaders: 'Origin,Content-Type,Accept,Authorization',
     credentials: true,
 }));
+if (config.env !== 'production') {
+    app.get('/graphiql', graphiqlRouter);
+}
+app.use('/', bodyParser.json(), graphqlRouter);
 
-app.use('/', graphqlRouter);
 app.use(errorHandler);
 
 if (!process.env.NODE_ENV !== 'test') {
