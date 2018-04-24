@@ -8,7 +8,7 @@ storiesOf('User Interface', module)
     .add('Image', () => (
         <Fragment>
             <Image
-                src="/abdolfatah-soltani.jpg"
+                src="/img/abdolfatah-soltani.jpg"
                 title="Abdolfatah Soltani, avocat iranien spécialisé dans la défense des droits humains."
             />
             <p>

@@ -37,6 +37,7 @@ export default glamorous(StoryStep)({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    overflow: 'auto',
     fontSize: 24,
     '& > *': {
         flex: '1 0 0',
