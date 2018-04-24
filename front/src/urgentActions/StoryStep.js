@@ -10,8 +10,13 @@ export const StoryStep = ({ className, medium, displayOptions, content }) => (
         className={className}
         style={{ backgroundColor: displayOptions.backgroundColor }}
     >
-        <Image {...medium} />
+        {medium &&
+            displayOptions.mediumPosition === 'top' && <Image {...medium} />}
+
         <RichText html={content} />
+
+        {medium &&
+            displayOptions.mediumPosition === 'bottom' && <Image {...medium} />}
     </div>
 );
 
@@ -22,9 +27,9 @@ StoryStep.propTypes = {
         src: PropTypes.string.isRequired,
     }),
     displayOptions: PropTypes.shape({
-        position: PropTypes.oneOf(['top', 'bottom']),
+        mediumPosition: PropTypes.oneOf(['top', 'bottom']),
         backgroundColor: PropTypes.string.isRequired,
-    }),
+    }).isRequired,
     content: PropTypes.string.isRequired,
 };
 
