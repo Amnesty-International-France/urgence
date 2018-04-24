@@ -4,6 +4,7 @@ import glamorous from 'glamorous';
 
 import RichText from '../themes/RichText';
 import Image from '../themes/Image';
+import { StoryStepPropType } from '../propTypes';
 
 export const StoryStep = ({ className, medium, displayOptions, content }) => (
     <div
@@ -22,15 +23,7 @@ export const StoryStep = ({ className, medium, displayOptions, content }) => (
 
 StoryStep.propTypes = {
     className: PropTypes.string,
-    medium: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        src: PropTypes.string.isRequired,
-    }),
-    displayOptions: PropTypes.shape({
-        mediumPosition: PropTypes.oneOf(['top', 'bottom']),
-        backgroundColor: PropTypes.string.isRequired,
-    }).isRequired,
-    content: PropTypes.string.isRequired,
+    ...StoryStepPropType,
 };
 
 export default glamorous(StoryStep)({
