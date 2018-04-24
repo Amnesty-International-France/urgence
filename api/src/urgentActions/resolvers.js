@@ -14,7 +14,10 @@ export const UrgentActionsResolver = {
         _allUrgentActionsMeta: () => countUrgentActions()
     },
     Mutation: {
-        createUrgentAction: (_, data) => createUrgentAction(data),
+        createUrgentAction: (_, { story, ...data}) => createUrgentAction({
+            ...data,
+            story: JSON.stringify(story),
+        }),
         updateUrgentAction: (_, { id, story, ...data }) => updateUrgentAction(id, {
             ...data,
             story: JSON.stringify(story),

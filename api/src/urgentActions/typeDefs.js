@@ -64,7 +64,12 @@ export const urgentActionsTypeDefs = gql`
     }
 
     extend type Mutation {
-        createUrgentAction(title: String): UrgentAction
+        createUrgentAction(
+            title: String
+            story: [StoryStepInput]
+            creation_date: DATE
+            last_edition_date: DATE
+        ): UrgentAction
         updateUrgentAction(
             id: ID!
             title: String!

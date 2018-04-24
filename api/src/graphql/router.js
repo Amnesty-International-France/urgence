@@ -10,13 +10,11 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export const graphqlRouter = graphqlExpress({
     schema,
-    logFunction: console.log,
+    // logFunction: console.log,
     formatParams: ({ variables, ...rest }) => {
         if (!variables) {
             return rest;
         }
-        console.log('raw variables : ', JSON.stringify(variables), null, 4);
-        console.log('sanitized variables', JSON.stringify(omitDeep(['__typename'], variables)), null, 4);
         return {
             variables: omitDeep(['__typename'], variables),
             ...rest
