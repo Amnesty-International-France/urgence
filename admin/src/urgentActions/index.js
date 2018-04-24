@@ -9,11 +9,13 @@ import {
     SimpleForm,
     TextField,
     TextInput,
+    LongTextInput,
     ArrayInput,
     SimpleFormIterator,
     SelectInput,
     DateField
 } from 'react-admin';
+import RichTextInput from 'ra-input-rich-text';
 import withStyles from 'material-ui/styles/withStyles';
 
 const listStyles = {
@@ -57,14 +59,14 @@ const colorChoices = ['000000', 'FFFF00', 'FFFFFF', 'd2026d', 'df3725', 'ed8122'
 export const UrgentActionEdit = withStyles(editStyles)(({ classes, ...props }) => (
     <Edit title={<UrgentActionTitle />} {...props}>
         <SimpleForm>
-            <TextInput source="title" label="title" />
+            <LongTextInput source="title" label="title" />
             <ArrayInput source="story">
                 <SimpleFormIterator>
-                    <TextInput source="content" />
-                    <h3>medium</h3>
+                    <RichTextInput source="content" />
+                    <label>medium</label>
                     <TextInput source="medium.title" label="title" />
                     <TextInput source="medium.src" label="src" />
-                    <h3>theme</h3>
+                    <label>theme</label>
                     <SelectInput
                         source="theme.position"
                         label="position"
