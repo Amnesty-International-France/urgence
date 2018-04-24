@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Admin, Resource, Delete } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 
-import { UrgentActionCreate, UrgentActionEdit, UrgentActionList } from './urgentActions';
+import urgentAction from './urgentActions';
 import dataProviderFactory from './dataProvider';
 import { authProvider } from './authentication/authProvider';
 
@@ -26,13 +26,7 @@ class App extends Component {
                 authProvider={authProvider}
                 dataProvider={dataProvider}
             >
-                <Resource
-                    name="Urgent Actions"
-                    list={UrgentActionList}
-                    edit={UrgentActionEdit}
-                    create={UrgentActionCreate}
-                    remove={Delete}
-                />
+                <Resource {...urgentAction} />
             </Admin>
         );
     }
