@@ -42,8 +42,8 @@ services:
             - "/tmp:/tmp"
         environment:
             - NODE_ENV=development
-        expose:
-            - "9009"
+        ports:
+            - "9009:9009"
         working_dir: /app
         user: "${UID}:${GID}"
 
