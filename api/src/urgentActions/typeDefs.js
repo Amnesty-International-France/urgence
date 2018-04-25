@@ -30,12 +30,12 @@ export const urgentActionsTypeDefs = gql`
     }
 
     enum Color {
-        "000000"
-        FFFF00
-        FFFFFF
-        d2026d
-        df3725
-        ed8122
+        black
+        white
+        yellow
+        red
+        orange
+        pink
     }
 
     type DisplayOptions {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
@@ -6,15 +6,35 @@ import Carousel from '../themes/Carousel';
 import StoryStep from '../urgentActions/StoryStep';
 import { StoryStepPropType } from '../propTypes';
 
-const Story = ({ className, story }) => (
-    <Carousel className={className}>
-        {story.map(step => <StoryStep key={step.content} {...step} />)}
-    </Carousel>
+export const Story = ({ className, loading, story }) => (
+    <Fragment>
+        {loading && <p className="loading">Loading...</p>}
+
+        {!loading && (
+            <Fragment>
+                {(!story || !story.length) && (
+                    <p className="error">
+                        This urgent action does not exist anymore.
+                    </p>
+                )}
+
+                {story &&
+                    story.length > 0 && (
+                        <Carousel className={className}>
+                            {story.map(step => (
+                                <StoryStep key={step.content} {...step} />
+                            ))}
+                        </Carousel>
+                    )}
+            </Fragment>
+        )}
+    </Fragment>
 );
 
 Story.propTypes = {
     className: PropTypes.string,
-    story: PropTypes.arrayOf(StoryStepPropType),
+    loading: PropTypes.bool.isRequired,
+    story: PropTypes.arrayOf(PropTypes.shape(StoryStepPropType)),
 };
 
 export default glamorous(Story)({

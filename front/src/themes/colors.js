@@ -1,4 +1,8 @@
-export const brightYellow = '#ffff00';
-export const tomato = '#df3725';
-export const darkHotPink = '#d2026d';
-export const dustyOrange = '#ed8122';
+export const colors = {
+    black: '#000000',
+    white: '#ffffff',
+    yellow: '#ffff00',
+    red: '#df3725',
+    pink: '#d2026d',
+    orange: '#ed8122',
+};

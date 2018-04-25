@@ -5,11 +5,12 @@ import glamorous from 'glamorous';
 import RichText from '../themes/RichText';
 import Image from '../themes/Image';
 import { StoryStepPropType } from '../propTypes';
+import { colors } from '../themes/colors';
 
 export const StoryStep = ({ className, medium, displayOptions, content }) => (
     <div
         className={className}
-        style={{ backgroundColor: displayOptions.backgroundColor }}
+        style={{ backgroundColor: colors[displayOptions.backgroundColor] }}
     >
         {medium &&
             displayOptions.mediumPosition === 'top' && <Image {...medium} />}

@@ -1,39 +1,52 @@
+import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
 import { Query } from 'react-apollo';
-
-const UrgentAction = ({ title }) => (
-    <div>
-        <h1>Title: {title}</h1>
-    </div>
-);
-
-UrgentAction.propTypes = {
-    title: PropTypes.string.isRequired,
-};
+import Story from './Story';
 
 const query = gql`
     query urgentAction($id: ID!) {
         UrgentAction(id: $id) {
-            id
-            title
+            story {
+                displayOptions {
+                    mediumPosition
+                    backgroundColor
+                }
+                medium {
+                    src
+                    title
+                }
+                content
+            }
         }
     }
 `;
 
-export const UrgentActionWithQuery = ({
+export const UrgentAction = ({
     match: {
         params: { id },
     },
 }) => (
     <Query query={query} variables={{ id }}>
-        {({ data }) => <UrgentAction {...data.UrgentAction} />}
+        {({ data, error, loading }) => {
+            if (error) {
+                console.error(error);
+                return null;
+            }
+
+            return (
+                <Story
+                    loading={loading}
+                    story={get(data, 'UrgentAction.story')}
+                />
+            );
+        }}
     </Query>
 );
 
-UrgentActionWithQuery.propTypes = {
+UrgentAction.propTypes = {
     match: PropTypes.shape({
         params: PropTypes.shape({
             id: PropTypes.string.isRequired,
@@ -41,4 +54,4 @@ UrgentActionWithQuery.propTypes = {
     }),
 };
 
-export default withRouter(UrgentActionWithQuery);
+export default withRouter(UrgentAction);
