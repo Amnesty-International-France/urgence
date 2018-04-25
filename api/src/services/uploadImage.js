@@ -11,7 +11,7 @@ export default async upload => {
     if (typeof upload === 'string') {
         return upload;
     }
-    const { stream, filename, mimetype, encoding } = await upload.rawFile;
+    const { stream, filename } = await upload.rawFile;
 
     const id = shortid.generate();
     const path = `${config.uploadDir}/${id}-${filename}`;
@@ -27,7 +27,7 @@ export default async upload => {
                 reject(error);
             })
             .pipe(fs.createWriteStream(path))
-            .on('error', error => reject(error))
+            .on('error', reject)
             .on('finish', () => resolve(url))
     );
 }

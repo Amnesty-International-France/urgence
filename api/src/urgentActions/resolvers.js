@@ -8,7 +8,8 @@ import {
     updateUrgentAction,
     removeUrgentAction
 } from "./repository";
-import uploadImage from '../services/uploadImage';
+import uploadImageFromStory from '../services/uploadImageFromStory';
+
 
 
 export const UrgentActionsResolver = {
@@ -18,15 +19,17 @@ export const UrgentActionsResolver = {
         _allUrgentActionsMeta: () => countUrgentActions()
     },
     Mutation: {
-        createUrgentAction: (_, { story, ...data}) => createUrgentAction({
-            ...data,
-            story: JSON.stringify(story),
-        }),
+        createUrgentAction: async (_, { story, ...data}) => {
+            const uploadedStory = await uploadImageFromStory(story);
+
+            return createUrgentAction({
+                ...data,
+                story: JSON.stringify(uploadedStory),
+            });
+        },
         updateUrgentAction: async (_, { id, story, ...data }) => {
-            console.log(story[0].medium);
-            const images = story.map((storyStep) => path(['medium', 'src'], storyStep));
-            const srcs = await Promise.all(images.map(uploadImage));
-            const uploadedStory = story.map((storyStep, index) => assocPath(['medium', 'src'], srcs[index], storyStep));
+            const uploadedStory = await uploadImageFromStory(story);
+
             return updateUrgentAction(id, {
                 ...data,
                 story: JSON.stringify(uploadedStory),
