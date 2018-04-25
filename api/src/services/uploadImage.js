@@ -7,6 +7,10 @@ export default async upload => {
     if (!upload) {
         return null;
     }
+
+    if (typeof upload === 'string') {
+        return upload;
+    }
     const { stream, filename, mimetype, encoding } = await upload.rawFile;
 
     const id = shortid.generate();
