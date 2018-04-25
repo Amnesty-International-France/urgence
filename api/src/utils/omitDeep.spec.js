@@ -2,7 +2,7 @@ import omitDeep from './omitDeep';
 
 describe('omitDeep', () => {
     it('should omit keys from object', () => {
-        expect(omitDeep(['do', 'not', 'want', '__typename'], {
+        expect(omitDeep(['do', 'not', 'want', '__typename'])({
             do: 'remove',
             not: 'reject',
             want: 'discard',
@@ -13,7 +13,7 @@ describe('omitDeep', () => {
     });
 
     it('should omit keys from array of Object', () => {
-        expect(omitDeep(['do', 'not', 'want', '__typename'], [{
+        expect(omitDeep(['do', 'not', 'want', '__typename'])([{
             do: 'remove',
             keep: 'value1'
         }, {
@@ -30,7 +30,7 @@ describe('omitDeep', () => {
     });
 
     it('should work recursively', () => {
-        expect(omitDeep(['do', 'not', 'want'], {
+        expect(omitDeep(['do', 'not', 'want'])({
             do: 'remove',
             not: 'reject',
             want: 'discard',
