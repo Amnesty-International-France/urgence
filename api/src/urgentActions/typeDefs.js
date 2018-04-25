@@ -2,10 +2,11 @@ import gql from 'graphql-tag';
 
 export const urgentActionsTypeDefs = gql`
     scalar DATE
+    scalar Upload
 
     input MediumInput {
         title: String!
-        src: String!
+        src: Upload!
     }
 
     input DisplayOptionsInput {
@@ -21,7 +22,7 @@ export const urgentActionsTypeDefs = gql`
 
     type Medium {
         title: String!
-        src: String!
+        src: Upload!
     }
 
     enum Position {

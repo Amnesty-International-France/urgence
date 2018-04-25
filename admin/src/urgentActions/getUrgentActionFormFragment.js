@@ -6,8 +6,9 @@ import {
     ArrayInput,
     SimpleFormIterator,
     SelectInput,
-    DateField,
     required,
+    ImageInput,
+    ImageField
 } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
 import get from 'lodash.get';
@@ -41,7 +42,10 @@ export default ({ edit }) => (
                 />
                 <label>medium</label>
                 <TextInput  validate={validateMedium} source="medium.title" label="title" />
-                <TextInput  validate={validateMedium} source="medium.src" label="src" />
+                <ImageInput validate={validateMedium} source="medium.src" label="src">
+                    <ImageField source="medium.src" title="preview" />
+                </ImageInput>
+                <TextInput disabled source="medium.src" title="preview" />
                 <label>theme</label>
                 <SelectInput
                     validate={required()}
@@ -58,11 +62,5 @@ export default ({ edit }) => (
                 />
             </SimpleFormIterator>
         </ArrayInput>
-        {
-            edit && (<span>
-                <DateField source="creation_date" />
-                <DateField source="last_edition_date" />
-            </span>)
-        }
     </SimpleForm>
 );

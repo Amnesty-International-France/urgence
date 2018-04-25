@@ -82,6 +82,16 @@ const config = convict({
             default: 'reaction-rapide',
             env: 'POSTGRES_SCHEMA'
         }
+    },
+    uploadDir: {
+        format: String,
+        default: '/app/var/upload',
+        env: 'UPLOAD_DIR'
+    },
+    uploadUrl: {
+        format: String,
+        default: 'http://localhost:4000/static',
+        env: 'UPLOAD_URL'
     }
 });
 

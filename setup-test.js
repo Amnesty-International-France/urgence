@@ -1,6 +1,8 @@
 const enzyme = require('enzyme');
 const Adapter = require('enzyme-adapter-react-16');
 
+global.fetch = require('unfetch');
+
 enzyme.configure({ adapter: new Adapter() });
 
 global.matchMedia =

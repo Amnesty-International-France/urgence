@@ -1,11 +1,19 @@
 import buildApolloClient from 'ra-data-graphql-simple';
+import { createUploadLink } from 'apollo-upload-client';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
 export const graphqlClientOptions = {
     uri: process.env.REACT_APP_API_URL,
 };
 
+const client = new ApolloClient({
+    link: createUploadLink(graphqlClientOptions),
+    cache: new InMemoryCache(),
+});
+
 export const getApolloClient = () => buildApolloClient({
-    clientOptions: graphqlClientOptions,
+    client,
 });
 
 export default () => {

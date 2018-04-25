@@ -6,10 +6,12 @@ import {
     updateUrgentAction,
     removeUrgentAction,
 } from './repository';
+import { uploadImageFromStory } from '../services/uploadImageFromStory';
 
 const resolvers = require('./resolvers');
 
 jest.mock('./repository');
+jest.mock('../services/uploadImageFromStory');
 
 describe('Urgent Actions Resolvers', () => {
     describe('Queries', () => {
@@ -41,6 +43,7 @@ describe('Urgent Actions Resolvers', () => {
 
         describe('createUrgentAction', () => {
             it('should create given urgent action', async () => {
+                uploadImageFromStory.mockImplementation(() => 'uploadedStory');
                 await UrgentActionsResolver.Mutation.createUrgentAction(null, {
                     title: 'test',
                     story: [{
@@ -55,15 +58,29 @@ describe('Urgent Actions Resolvers', () => {
                         }
                     }]
                 });
+
+                expect(uploadImageFromStory).toHaveBeenCalledWith([{
+                    content: 'this is a test',
+                    displayOptions: {
+                        position: 'top',
+                        backgroundColor: 'FFFF00',
+                    },
+                    medium: {
+                        src: 'picture.gif',
+                        title: 'a picture',
+                    }
+                }]);
+
                 expect(createUrgentAction).toHaveBeenCalledWith({
                     title: 'test',
-                    story: '[{"content":"this is a test","displayOptions":{"position":"top","backgroundColor":"FFFF00"},"medium":{"src":"picture.gif","title":"a picture"}}]',
+                    story: '"uploadedStory"',
                 });
             });
         });
 
         describe('updateUrgentAction', () => {
             it('should update urgent action with given id with remaining data', async () => {
+                uploadImageFromStory.mockImplementation(() => 'uploadedStory');
                 await UrgentActionsResolver.Mutation.updateUrgentAction(null, {
                     id: 'id',
                     title: 'test',
@@ -79,9 +96,22 @@ describe('Urgent Actions Resolvers', () => {
                         }
                     }]
                 });
+
+                expect(uploadImageFromStory).toHaveBeenCalledWith([{
+                    content: 'this is a test',
+                    displayOptions: {
+                        position: 'top',
+                        backgroundColor: 'FFFF00',
+                    },
+                    medium: {
+                        src: 'picture.gif',
+                        title: 'a picture',
+                    }
+                }]);
+
                 expect(updateUrgentAction).toHaveBeenCalledWith('id', {
                     title: 'test',
-                    story: '[{"content":"this is a test","displayOptions":{"position":"top","backgroundColor":"FFFF00"},"medium":{"src":"picture.gif","title":"a picture"}}]',
+                    story: '"uploadedStory"',
                 });
             });
         });
