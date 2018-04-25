@@ -40,6 +40,7 @@ module.exports = shipit => {
     shipit.on('fetched', async () => {
         await Promise.all([
             shipit.start('buildAdmin'),
+            shipit.start('buildApi'),
             shipit.start('buildFront'),
             shipit.start('buildStorybook'),
         ]);
