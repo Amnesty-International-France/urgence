@@ -4,24 +4,24 @@ export const urgentActionsTypeDefs = gql`
     scalar DATE
 
     input MediumInput {
-        title: String
-        src: String
+        title: String!
+        src: String!
     }
 
     input DisplayOptionsInput {
-        position: Position
-        backgroundColor: Color
+        position: Position!
+        backgroundColor: Color!
     }
 
     input StoryStepInput {
-        content: String
-        medium: MediumInput
-        displayOptions: DisplayOptionsInput
+        content: String!
+        medium: MediumInput!
+        displayOptions: DisplayOptionsInput!
     }
 
     type Medium {
-        title: String
-        src: String
+        title: String!
+        src: String!
     }
 
     enum Position {
@@ -39,14 +39,14 @@ export const urgentActionsTypeDefs = gql`
     }
 
     type DisplayOptions {
-        position: Position
-        backgroundColor: Color
+        position: Position!
+        backgroundColor: Color!
     }
 
     type StoryStep {
-        content: String
+        content: String!
         medium: Medium
-        displayOptions: DisplayOptions
+        displayOptions: DisplayOptions!
     }
 
     type UrgentAction {
@@ -65,7 +65,7 @@ export const urgentActionsTypeDefs = gql`
 
     extend type Mutation {
         createUrgentAction(
-            title: String
+            title: String!
             story: [StoryStepInput]
             creation_date: DATE
             last_edition_date: DATE
