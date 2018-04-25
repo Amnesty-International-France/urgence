@@ -9,7 +9,7 @@ export const urgentActionsTypeDefs = gql`
     }
 
     input DisplayOptionsInput {
-        position: Position!
+        mediumPosition: Position!
         backgroundColor: Color!
     }
 
@@ -39,7 +39,7 @@ export const urgentActionsTypeDefs = gql`
     }
 
     type DisplayOptions {
-        position: Position!
+        mediumPosition: Position!
         backgroundColor: Color!
     }
 

@@ -45,8 +45,8 @@ export default ({ edit }) => (
                 <label>theme</label>
                 <SelectInput
                     validate={required()}
-                    source="displayOptions.position"
-                    label="position"
+                    source="displayOptions.mediumPosition"
+                    label="medium position"
                     choices={positionChoices}
                 />
                 <SelectInput
