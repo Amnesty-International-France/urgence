@@ -7,6 +7,9 @@ import dataProviderFactory from './dataProvider';
 import { authProvider } from './authentication/authProvider';
 import { generateClassName } from './generateClassName';
 
+import { theme } from './theme';
+import { Title } from './Title';
+
 class App extends Component {
     state = { dataProvider: null };
 
@@ -27,6 +30,8 @@ class App extends Component {
             <JssProvider generateClassName={generateClassName}>
                 <Admin
                     locale="en"
+                    theme={theme}
+                    title={<Title />}
                     authProvider={authProvider}
                     dataProvider={dataProvider}
                 >
