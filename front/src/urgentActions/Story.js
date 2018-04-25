@@ -6,30 +6,27 @@ import Carousel from '../themes/Carousel';
 import StoryStep from '../urgentActions/StoryStep';
 import { StoryStepPropType } from '../propTypes';
 
-export const Story = ({ className, loading, story }) => (
-    <Fragment>
-        {loading && <p className="loading">Loading...</p>}
+export const Story = ({ className, loading, story }) =>
+    loading ? (
+        <p className="loading">Loading...</p>
+    ) : (
+        <Fragment>
+            {(!story || !story.length) && (
+                <p className="error">
+                    This urgent action does not exist anymore.
+                </p>
+            )}
 
-        {!loading && (
-            <Fragment>
-                {(!story || !story.length) && (
-                    <p className="error">
-                        This urgent action does not exist anymore.
-                    </p>
+            {story &&
+                story.length > 0 && (
+                    <Carousel className={className}>
+                        {story.map(step => (
+                            <StoryStep key={step.content} {...step} />
+                        ))}
+                    </Carousel>
                 )}
-
-                {story &&
-                    story.length > 0 && (
-                        <Carousel className={className}>
-                            {story.map(step => (
-                                <StoryStep key={step.content} {...step} />
-                            ))}
-                        </Carousel>
-                    )}
-            </Fragment>
-        )}
-    </Fragment>
-);
+        </Fragment>
+    );
 
 Story.propTypes = {
     className: PropTypes.string,
