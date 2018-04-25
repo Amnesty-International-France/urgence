@@ -5,8 +5,8 @@ import { ApolloProvider } from 'react-apollo';
 
 import { Router, Route } from './gateway/ReactRouter';
 import generateUrl from './services/generateUrl';
+import UrgentAction from './urgentActions/UrgentAction';
 import Home from './Home';
-import UrgentAction from './UrgentAction';
 
 const App = ({ client }) => (
     <ApolloProvider client={client}>
