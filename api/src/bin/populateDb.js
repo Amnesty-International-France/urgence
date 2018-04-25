@@ -8,14 +8,23 @@ if (config.env === 'production') {
 }
 
 const urgentActions = [
-    { title: "José Napoleón Tarrillo Astonitas' Murder" },
-    { title: 'Mexico: 48 Asylum Applicants Risk to Be Expulsed' },
-    { title: "Commutation of William Montgomery's sentence" },
+    {
+        title: "VIET-NAM : LE PARQUET INSISTE POUR QUE SOIT EXECUTE UN PRISONNIER CONDAMNE A MORT DEPUIS 10 ANS",
+        story: JSON.stringify([{
+            content: `Ho Duy Hai a été condamné à mort en 2008 après avoir été déclaré coupable de pillage de biens et de meurtre. En 2015, la Commission des Affaires judiciaires de l'Assemblée nationale a demandé le réexamen de son cas après avoir découvert de graves erreurs de procédure dans cette affaire. Le 7 décembre, le responsable du parquet de Long An a insisté, lors d'un discours à la télévision, pour que son exécution soit accélérée.`,
+            displayOptions: {
+                mediumPosition: 'top',
+                backgroundColor: 'FFFF00',
+            }
+        }])
+    },
+    { title: 'Mexico: 48 Asylum Applicants Risk to Be Expulsed', story: JSON.stringify([]) },
+    { title: "Commutation of William Montgomery's sentence", story: JSON.stringify([]) },
 ];
 
 const batchInsertQuery = batchInsert.default({
     table: 'urgent_action',
-    writableCols: ['title'],
+    writableCols: ['title', 'story'],
     returnCols: ['title'],
 })(urgentActions);
 

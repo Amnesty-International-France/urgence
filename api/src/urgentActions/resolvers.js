@@ -1,4 +1,11 @@
-import { getUrgentActions, getUrgentAction, countUrgentActions, removeUrgentAction } from "./repository";
+import {
+    getUrgentAction,
+    getUrgentActions,
+    countUrgentActions,
+    createUrgentAction,
+    updateUrgentAction,
+    removeUrgentAction
+} from "./repository";
 
 export const UrgentActionsResolver = {
     Query: {
@@ -7,8 +14,14 @@ export const UrgentActionsResolver = {
         _allUrgentActionsMeta: () => countUrgentActions()
     },
     Mutation: {
-        createUrgentAction: (_, data) => createUrgentAction(data),
-        updateUrgentAction: (_, { id, ...data }) => updateUrgentAction(id, data),
+        createUrgentAction: (_, { story, ...data}) => createUrgentAction({
+            ...data,
+            story: JSON.stringify(story),
+        }),
+        updateUrgentAction: (_, { id, story, ...data }) => updateUrgentAction(id, {
+            ...data,
+            story: JSON.stringify(story),
+        }),
         deleteUrgentAction: (_, id) => removeUrgentAction(id),
-    }
+    },
 };

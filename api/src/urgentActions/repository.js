@@ -4,8 +4,8 @@ const query = require('../db/client');
 
 const urgentActionCrudQueries = crud({
     table: 'urgent_action',
-    writableCols: ['id', 'title'],
-    returnCols: ['id', 'title'],
+    writableCols: ['id', 'title', 'story', 'creation_date', 'last_edition_date'],
+    returnCols: ['id', 'title', 'story', 'creation_date', 'last_edition_date'],
 });
 
 export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }) => query(urgentActionCrudQueries.select({
@@ -20,5 +20,9 @@ export const countUrgentActions = async () => query(urgentActionCrudQueries.coun
 export const getUrgentAction = async (id) => query(urgentActionCrudQueries.selectOne(id));
 
 export const createUrgentAction = async (urgentAction) => query(urgentActionCrudQueries.insertOne(urgentAction));
-export const updateUrgentAction = async (id, urgentAction) => query(urgentActionCrudQueries.updateOne(id, urgentAction));
+export const updateUrgentAction = async (id, urgentAction, last_edition_date = new Date()) =>
+    query(urgentActionCrudQueries.updateOne(id, {
+        ...urgentAction,
+        last_edition_date,
+    }));
 export const removeUrgentAction = async (id) => query(urgentActionCrudQueries.removeOne(id));
