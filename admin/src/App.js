@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Admin, Resource } from 'react-admin';
+import JssProvider from 'react-jss/lib/JssProvider';
 
 import urgentAction from './urgentActions';
 import dataProviderFactory from './dataProvider';
 import { authProvider } from './authentication/authProvider';
+import { generateClassName } from './generateClassName';
 
 class App extends Component {
     state = { dataProvider: null };
@@ -22,13 +24,15 @@ class App extends Component {
         }
 
         return (
-            <Admin
-                locale="en"
-                authProvider={authProvider}
-                dataProvider={dataProvider}
-            >
-                <Resource {...urgentAction} />
-            </Admin>
+            <JssProvider generateClassName={generateClassName}>
+                <Admin
+                    locale="en"
+                    authProvider={authProvider}
+                    dataProvider={dataProvider}
+                >
+                    <Resource {...urgentAction} />
+                </Admin>
+            </JssProvider>
         );
     }
 }
