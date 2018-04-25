@@ -13,7 +13,7 @@ const omitTypeName = omitDeep(['__typename']);
 
 export const graphqlRouter = graphqlExpress({
     schema,
-    logFunction: console.log,
+    // logFunction: console.log,
     formatParams: ({ variables, ...rest }) => {
         if (!variables) {
             return rest;

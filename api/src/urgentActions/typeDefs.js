@@ -6,7 +6,7 @@ export const urgentActionsTypeDefs = gql`
 
     input MediumInput {
         title: String!
-        src: String!
+        src: Upload!
     }
 
     input DisplayOptionsInput {

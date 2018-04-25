@@ -1,10 +1,29 @@
+import fs from 'fs';
+import shortid from 'shortid';
+
+import config from '../../../config';
+
 export default async upload => {
     if (!upload) {
         return null;
     }
-    const result = await upload;
-    // const { id, path } = await storeFS({ stream, filename });
-    // return storeDB({ id, filename, mimetype, encoding, path });
-    console.log({ result });
-    return 'uploaded';
+    const { stream, filename, mimetype, encoding } = await upload.rawFile;
+
+    const id = shortid.generate();
+    const path = `${config.uploadDir}/${id}-${filename}`;
+    const url = `${config.uploadUrl}/${id}-${filename}`;
+
+    return new Promise((resolve, reject) =>
+        stream
+            .on('error', error => {
+                if (stream.truncated) {
+                    // Delete the truncated file
+                    fs.unlinkSync(path);
+                }
+                reject(error);
+            })
+            .pipe(fs.createWriteStream(path))
+            .on('error', error => reject(error))
+            .on('finish', () => resolve(url))
+    );
 }

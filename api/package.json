@@ -22,7 +22,8 @@
     "jsonwebtoken": "^8.2.1",
     "jwt-decode": "^2.2.0",
     "pg": "7.4.1",
-    "ramda": "0.25.0"
+    "ramda": "0.25.0",
+    "shortid": "^2.2.8"
   },
   "scripts": {
     "start-dev": "nodemon --exec babel-node -- ./src/index.js",
