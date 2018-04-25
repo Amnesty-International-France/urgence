@@ -8,9 +8,8 @@ import {
     updateUrgentAction,
     removeUrgentAction
 } from "./repository";
-import uploadImageFromStory from '../services/uploadImageFromStory';
 
-
+import { uploadImageFromStory } from '../services/uploadImageFromStory';
 
 export const UrgentActionsResolver = {
     Query: {

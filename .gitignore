@@ -9,4 +9,4 @@ yarn-error.log*
 /front/.expo
 var/deploy.key
 /admin/build
-api/upload
+var/upload

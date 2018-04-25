@@ -9,7 +9,7 @@ import { graphqlRouter, graphiqlRouter } from './graphql/router';
 
 const app = express();
 
-app.use('/static', express.static('upload'));
+app.use('/static', express.static(config.uploadDir));
 app.use(cors({
     origin: config.cors.allowedOrigin,
     allowedHeaders: 'Origin,Content-Type,Accept,Authorization',

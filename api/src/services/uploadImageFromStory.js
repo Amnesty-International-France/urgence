@@ -1,8 +1,8 @@
 import { path, assocPath } from 'ramda';
 
-import uploadImage from './uploadImage';
+import { uploadImage } from './uploadImage';
 
-export default async story => {
+export const uploadImageFromStory = async story => {
     const images = story.map((storyStep) => path(['medium', 'src'], storyStep));
     const srcs = await Promise.all(images.map(img => uploadImage(img)));
 

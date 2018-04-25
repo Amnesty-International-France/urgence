@@ -3,7 +3,7 @@ import shortid from 'shortid';
 
 import config from '../../../config';
 
-export default async upload => {
+export const uploadImage = async upload => {
     if (!upload) {
         return null;
     }
