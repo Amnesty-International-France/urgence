@@ -8,6 +8,7 @@ import {
     updateUrgentAction,
     removeUrgentAction
 } from "./repository";
+import uploadImage from '../services/uploadImage';
 
 
 export const UrgentActionsResolver = {
@@ -23,7 +24,7 @@ export const UrgentActionsResolver = {
         }),
         updateUrgentAction: async (_, { id, story, ...data }) => {
             const images = story.map((storyStep) => path(['medium', 'src'], storyStep));
-            const srcs = await Promise.all(images.map(v => v ? 'uploaded' : null));
+            const srcs = await Promise.all(images.map(uploadImage));
             const uploadedStory = story.map((storyStep, index) => assocPath(['medium', 'src'], srcs[index], storyStep));
             return updateUrgentAction(id, {
                 ...data,
