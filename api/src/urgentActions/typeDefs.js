@@ -53,8 +53,8 @@ export const urgentActionsTypeDefs = gql`
         id: ID!
         title: String!
         story: [StoryStep]
-        creation_date: DATE
-        last_edition_date: DATE
+        creation_date: DATE!
+        last_edition_date: DATE!
     }
 
     extend type Query {
@@ -67,15 +67,15 @@ export const urgentActionsTypeDefs = gql`
         createUrgentAction(
             title: String!
             story: [StoryStepInput]
-            creation_date: DATE
-            last_edition_date: DATE
+            creation_date: DATE!
+            last_edition_date: DATE!
         ): UrgentAction
         updateUrgentAction(
             id: ID!
             title: String!
             story: [StoryStepInput]
-            creation_date: DATE
-            last_edition_date: DATE
+            creation_date: DATE!
+            last_edition_date: DATE!
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
     }
