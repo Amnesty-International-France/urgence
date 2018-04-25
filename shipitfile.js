@@ -32,9 +32,15 @@ module.exports = shipit => {
         await shipit.local(`cp -R ./front/storybook-static ${shipit.workspace}/front/storybook`);
     });
 
+    shipit.blTask('buildApi', async () => {
+        await shipit.local('make build-api');
+        await shipit.local(`cp -R ./api/dist ${shipit.workspace}/api/dist`);
+    });
+
     shipit.on('fetched', async () => {
         await Promise.all([
             shipit.start('buildAdmin'),
+            shipit.start('buildApi'),
             shipit.start('buildFront'),
             shipit.start('buildStorybook'),
         ]);

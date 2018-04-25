@@ -1,3 +1,4 @@
+/api/dist/
 /front/build
 /front/storybook-static
 node_modules

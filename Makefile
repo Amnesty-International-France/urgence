@@ -102,3 +102,6 @@ build-staging:
 
 build-admin-staging:
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_staging
+
+build-api:
+	$(DOCKER_COMPOSE) run --rm --no-deps api npm run build

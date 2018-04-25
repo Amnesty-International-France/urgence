@@ -10,6 +10,9 @@ services:
         environment:
             - NODE_ENV=development
             - HOME=/tmp
+            - ADMIN_USERNAME
+            - ADMIN_PASSWORD
+            - JWT_SECRET_KEY
         user: "${UID}:${GID}"
         working_dir: /app/api
         depends_on:
