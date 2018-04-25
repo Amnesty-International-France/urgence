@@ -42,10 +42,10 @@ export default ({ edit }) => (
                 />
                 <label>medium</label>
                 <TextInput  validate={validateMedium} source="medium.title" label="title" />
-                <TextInput source="medium.src" title="preview" />
                 <ImageInput validate={validateMedium} source="medium.src" label="src">
                     <ImageField source="medium.src" title="preview" />
                 </ImageInput>
+                <TextInput disabled source="medium.src" title="preview" />
                 <label>theme</label>
                 <SelectInput
                     validate={required()}
