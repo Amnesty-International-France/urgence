@@ -18,8 +18,8 @@ const urgentActions = [
             }
         }])
     },
-    { title: 'Mexico: 48 Asylum Applicants Risk to Be Expulsed' },
-    { title: "Commutation of William Montgomery's sentence" },
+    { title: 'Mexico: 48 Asylum Applicants Risk to Be Expulsed', story: JSON.stringify([]) },
+    { title: "Commutation of William Montgomery's sentence", story: JSON.stringify([]) },
 ];
 
 const batchInsertQuery = batchInsert.default({
