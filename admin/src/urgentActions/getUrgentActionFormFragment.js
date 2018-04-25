@@ -17,7 +17,7 @@ import { positionChoices, colorChoices } from './choices';
 const Color = ({ record }) =>
     <div style={{ background: `#${record.name}`, width: '100%', height: '2rem' }} />;
 
-const validateMedium = (value, record, _, key) => {
+export const validateMedium = (value, record, _, key) => {
     const mediumKey = key.split('.').slice(0, -1).join('.');
     const titleKey = `${mediumKey}.title`;
     const srcKey = `${mediumKey}.src`;
