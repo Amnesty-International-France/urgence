@@ -1,6 +1,6 @@
-const omitDeep = (keys, data) => {
+const omitDeep = keys => data => {
     if (Array.isArray(data)) {
-        return data.map(data => omitDeep(keys, data));
+        return data.map(data => omitDeep(keys)(data));
     }
     if (Object.prototype.toString.call(data) === '[object Object]') {
         return Object.keys(data).reduce((acc, key) => {
@@ -10,12 +10,11 @@ const omitDeep = (keys, data) => {
 
             return {
                 ...acc,
-                [key]: omitDeep(keys, data[key]),
+                [key]: omitDeep(keys)(data[key]),
             };
         }, {});
     }
     return data;
-
 }
 
 export default omitDeep;

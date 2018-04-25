@@ -12,7 +12,7 @@ const urgentActions = [
         title: "VIET-NAM : LE PARQUET INSISTE POUR QUE SOIT EXECUTE UN PRISONNIER CONDAMNE A MORT DEPUIS 10 ANS",
         story: JSON.stringify([{
             content: `Ho Duy Hai a été condamné à mort en 2008 après avoir été déclaré coupable de pillage de biens et de meurtre. En 2015, la Commission des Affaires judiciaires de l'Assemblée nationale a demandé le réexamen de son cas après avoir découvert de graves erreurs de procédure dans cette affaire. Le 7 décembre, le responsable du parquet de Long An a insisté, lors d'un discours à la télévision, pour que son exécution soit accélérée.`,
-            theme: {
+            displayOptions: {
                 position: 'top',
                 backgroundColor: 'FFFF00',
             }

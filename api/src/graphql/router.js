@@ -1,5 +1,6 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
+import { assoc, prop } from 'ramda';
 
 import config from '../../../config';
 import { typeDefs } from '../graphql/typeDefs';
@@ -8,6 +9,8 @@ import omitDeep from '../utils/omitDeep';
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
+const omitTypeName = omitDeep(['__typename']);
+
 export const graphqlRouter = graphqlExpress({
     schema,
     logFunction: console.log,
@@ -15,8 +18,9 @@ export const graphqlRouter = graphqlExpress({
         if (!variables) {
             return rest;
         }
+
         return {
-            variables: omitDeep(['__typename'], variables),
+            variables: omitTypeName(variables),
             ...rest
         };
     }

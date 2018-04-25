@@ -15,7 +15,7 @@ export const urgentActionsTypeDefs = gql`
 
     input StoryStepInput {
         content: String!
-        medium: MediumInput!
+        medium: MediumInput
         displayOptions: DisplayOptionsInput!
     }
 
