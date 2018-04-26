@@ -8,8 +8,22 @@ services:
             - ./admin:/app
         environment:
             NODE_ENV: production
-            PUBLIC_URL: https://amnesty.marmelab.com/admin/
+            PUBLIC_URL: https://amnesty.marmelab.com/admin
             REACT_APP_API_URL: https://amnesty.marmelab.com/api
+            REACT_APP_FRONT_BASE_URL: https://amnesty.marmelab.com
+        user: "${UID}:${GID}"
+        working_dir: /app
+
+    admin_dev:
+        image: node:9
+        command: [sh, -c, "npm install --save query-string@5.1.1 && cd node_modules/ra-core && npm install --save query-string@5.1.1 && cd /app && npm run build"]
+        volumes:
+            - ./admin:/app
+        environment:
+            NODE_ENV: production
+            PUBLIC_URL: http://localhost/admin
+            REACT_APP_API_URL: http://localhost/api
+            REACT_APP_FRONT_BASE_URL: http://localhost
         user: "${UID}:${GID}"
         working_dir: /app
 
@@ -21,6 +35,17 @@ services:
         environment:
             NODE_ENV: production
             REACT_APP_API_URL: https://amnesty.marmelab.com/api
+        user: "${UID}:${GID}"
+        working_dir: /app
+
+    front_dev:
+        image: node:9
+        command: "npm run build-web"
+        volumes:
+            - ./front:/app
+        environment:
+            NODE_ENV: production
+            REACT_APP_API_URL: http://localhost/api
         user: "${UID}:${GID}"
         working_dir: /app
 

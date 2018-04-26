@@ -23,7 +23,7 @@ module.exports = shipit => {
     });
 
     shipit.blTask('buildFront', async () => {
-        await shipit.local('make build-staging');
+        await shipit.local('make build-front-staging');
         await shipit.local(`cp -R ./front/build ${shipit.workspace}/front/`);
     });
 
@@ -33,7 +33,7 @@ module.exports = shipit => {
     });
 
     shipit.blTask('buildApi', async () => {
-        await shipit.local('make build-api');
+        await shipit.local('make build-api-staging');
         await shipit.local(`cp -R ./api/dist ${shipit.workspace}/api/dist`);
     });
 
