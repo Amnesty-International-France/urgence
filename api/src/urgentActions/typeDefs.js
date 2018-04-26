@@ -21,7 +21,6 @@ export const urgentActionsTypeDefs = gql`
     }
 
     input MessageTemplateInput {
-        type: String!
         value: String!
     }
 
@@ -60,7 +59,6 @@ export const urgentActionsTypeDefs = gql`
     }
 
     type ParagraphTemplate {
-        type: ParagraphTemplateType!
         value: String!
     }
 
