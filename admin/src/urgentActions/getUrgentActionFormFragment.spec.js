@@ -10,13 +10,13 @@ describe('validateMedium', () => {
         ]
     };
 
-    it('should return undefined if both strc and title are set forr the corresponding key', () => {
+    it('should return undefined if both src and title are set for the corresponding key', () => {
         expect(
             validateMedium('osef', record, null, 'story[0].medium.src')
         ).toBe(undefined);
     });
 
-    it('should return undefined if neither strc or title are set for the corresponding key', () => {
+    it('should return undefined if neither src or title are set for the corresponding key', () => {
         expect(
             validateMedium('osef', record, null, 'story[1].medium.src')
         ).toBe(undefined);
@@ -25,12 +25,12 @@ describe('validateMedium', () => {
     it('should return error message if only src is set for the corresponding key', () => {
         expect(
             validateMedium('osef', record, null, 'story[2].medium.src')
-        ).toBe('You need to specify both src and tilte for medium or none of them');
+        ).toBe('You need to specify both src and title for medium or none of them');
     });
 
     it('should return error message if only title is set for the corresponding key', () => {
         expect(
             validateMedium('osef', record, null, 'story[3].medium.src')
-        ).toBe('You need to specify both src and tilte for medium or none of them');
+        ).toBe('You need to specify both src and title for medium or none of them');
     });
 });
