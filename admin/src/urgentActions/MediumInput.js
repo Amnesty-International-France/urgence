@@ -7,6 +7,7 @@ import {
     ImageField
 } from 'react-admin';
 import { withStyles } from 'material-ui/styles';
+import { ImagePreview } from '../form/ImagePreview';
 
 const styles = {
     root: {
@@ -28,7 +29,7 @@ export const MediumInput = ({ classes, source }) => (
         </div>
         <div className={classes.imageWrapper}>
             <ImageInput source="src" label="File">
-                <ImageField source="src" title="Preview" />
+                <ImagePreview />
             </ImageInput>
         </div>
     </div>
