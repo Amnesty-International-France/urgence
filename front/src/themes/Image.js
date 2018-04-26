@@ -6,7 +6,9 @@ export const Image = ({ className, src, title }) => (
     <div
         className={className}
         style={{
-            backgroundImage: `url(${src})`,
+            backgroundImage: `url(${
+                process.env.REACT_APP_API_URL
+            }/static/${src})`,
         }}
         title={title}
     />
