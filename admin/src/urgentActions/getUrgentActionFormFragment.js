@@ -16,7 +16,7 @@ import get from 'lodash.get';
 import { positionChoices, colorChoices } from './choices';
 
 const Color = ({ record }) =>
-    <div style={{ background: `#${record.name}`, width: '100%', height: '2rem' }} />;
+    <div style={{ background: record.name, width: '100%', height: '2rem' }} />;
 
 export const validateMedium = (value, record, _, key) => {
     const mediumKey = key.split('.').slice(0, -1).join('.');

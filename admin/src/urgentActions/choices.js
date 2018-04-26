@@ -1,5 +1,10 @@
 export const positionChoices = [{ id: 'top', name: 'Top' }, { id: 'bottom', name: 'Bottom' }];
-export const colorChoices = ['000000', 'FFFF00', 'FFFFFF', 'd2026d', 'df3725', 'ed8122'].map(color => ({
-    id: color,
-    name: color,
-}));
+
+export const colorChoices = [
+    { id: 'black', name: '#000000' },
+    { id: 'white', name: '#ffffff' },
+    { id: 'yellow', name: '#ffff00' },
+    { id: 'red', name: '#df3725' },
+    { id: 'pink', name: '#d2026d' },
+    { id: 'orange', name: '#ed8122' },
+];
