@@ -33,7 +33,7 @@ module.exports = shipit => {
     });
 
     shipit.blTask('buildApi', async () => {
-        await shipit.local('make build-api-staging');
+        await shipit.local('make build-api');
         await shipit.local(`cp -R ./api/dist ${shipit.workspace}/api/dist`);
     });
 
