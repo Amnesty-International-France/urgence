@@ -9,7 +9,7 @@ services:
         environment:
             NODE_ENV: production
             PUBLIC_URL: https://amnesty.marmelab.com/admin/
-            REACT_APP_API_URL: https://amnesty.marmelab.com/api/
+            REACT_APP_API_URL: https://amnesty.marmelab.com/api
         user: "${UID}:${GID}"
         working_dir: /app
 
@@ -20,7 +20,7 @@ services:
             - ./front:/app
         environment:
             NODE_ENV: production
-            REACT_APP_API_URL: https://amnesty.marmelab.com/api/
+            REACT_APP_API_URL: https://amnesty.marmelab.com/api
         user: "${UID}:${GID}"
         working_dir: /app
 
@@ -31,6 +31,6 @@ services:
             - ./front:/app
         environment:
             NODE_ENV: production
-            PUBLIC_URL: https://amnesty.marmelab.com/storybook/
+            PUBLIC_URL: https://amnesty.marmelab.com/storybook
         user: "${UID}:${GID}"
         working_dir: /app

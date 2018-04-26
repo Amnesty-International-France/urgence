@@ -14,8 +14,8 @@ export const uploadImage = async upload => {
     const { stream, filename } = await upload.rawFile;
 
     const id = shortid.generate();
-    const path = `${config.uploadDir}/${id}-${filename}`;
-    const url = `${config.uploadUrl}/${id}-${filename}`;
+    const savedFilename = `${id}-${filename}`;
+    const path = `${config.uploadDir}/${savedFilename}`;
 
     return new Promise((resolve, reject) =>
         stream
@@ -28,6 +28,6 @@ export const uploadImage = async upload => {
             })
             .pipe(fs.createWriteStream(path))
             .on('error', reject)
-            .on('finish', () => resolve(url))
+            .on('finish', () => resolve(savedFilename))
     );
 }
