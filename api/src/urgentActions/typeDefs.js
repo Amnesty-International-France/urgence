@@ -20,6 +20,10 @@ export const urgentActionsTypeDefs = gql`
         displayOptions: DisplayOptionsInput!
     }
 
+    input MessageTemplateInput {
+        value: String!
+    }
+
     type Medium {
         title: String!
         src: Upload!
@@ -39,6 +43,10 @@ export const urgentActionsTypeDefs = gql`
         pink
     }
 
+    enum ParagraphTemplateType {
+        fixed
+    }
+
     type DisplayOptions {
         mediumPosition: Position!
         backgroundColor: Color!
@@ -50,10 +58,16 @@ export const urgentActionsTypeDefs = gql`
         displayOptions: DisplayOptions!
     }
 
+    type ParagraphTemplate {
+        value: String!
+    }
+
     type UrgentAction {
         id: ID!
         title: String!
         story: [StoryStep]!
+        call_to_action: String!
+        message_template: [ParagraphTemplate]!
         creation_date: DATE!
         last_edition_date: DATE!
     }
@@ -68,11 +82,15 @@ export const urgentActionsTypeDefs = gql`
         createUrgentAction(
             title: String!
             story: [StoryStepInput]!
+            call_to_action: String!
+            message_template: [MessageTemplateInput]!
         ): UrgentAction
         updateUrgentAction(
             id: ID!
             title: String!
             story: [StoryStepInput]!
+            call_to_action: String!
+            message_template: [MessageTemplateInput]!
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
     }
