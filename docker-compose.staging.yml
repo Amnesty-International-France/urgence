@@ -1,6 +1,9 @@
 version: '3'
 
 services:
+    admin:
+        environment:
+            - REACT_APP_FRONT_BASE_URL=https://amnesty.marmelab.com
     api:
         command: "npm run start"
         environment:

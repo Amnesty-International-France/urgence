@@ -12,6 +12,7 @@ services:
             ADMIN_USERNAME: admin
             ADMIN_PASSWORD: password
             JWT_SECRET_KEY: foobarS3CR3T
+            REACT_APP_FRONT_BASE_URL: http://localhost:3000
         command: npm run test
 
     api:
