@@ -2,10 +2,12 @@ const { crud } = require('co-postgres-queries');
 
 const query = require('../db/client');
 
+const columns = ['id', 'title', 'story', 'call_to_action', 'message_template', 'creation_date', 'last_edition_date'];
+
 const urgentActionCrudQueries = crud({
     table: 'urgent_action',
-    writableCols: ['id', 'title', 'story', 'creation_date', 'last_edition_date'],
-    returnCols: ['id', 'title', 'story', 'creation_date', 'last_edition_date'],
+    writableCols: columns,
+    returnCols: columns,
 });
 
 export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }) => query(urgentActionCrudQueries.select({

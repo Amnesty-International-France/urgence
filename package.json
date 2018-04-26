@@ -3,7 +3,8 @@
     "convict": "4.2.0",
     "express-graphql": "0.6.12",
     "graphql": "0.13.2",
-    "graphql-tag": "2.8.0"
+    "graphql-tag": "2.8.0",
+    "redux-form": "^7.3.0"
   },
   "scripts": {
     "test": "jest --ci --forceExit",

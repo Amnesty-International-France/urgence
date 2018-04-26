@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-    SimpleForm,
+    FormTab,
+    TabbedForm,
     TextInput,
     LongTextInput,
     ArrayInput,
@@ -10,9 +11,12 @@ import {
     ImageInput,
     ImageField
 } from 'react-admin';
-import RichTextInput from 'ra-input-rich-text';
+
+import RichTextInput from '../form/RichTextInput';
+
 import get from 'lodash.get';
 
+import ParagraphTemplateInput from './ParagraphTemplateInput';
 import { positionChoices, colorChoices } from './choices';
 
 const Color = ({ record }) =>
@@ -28,39 +32,51 @@ export const validateMedium = (value, record, _, key) => {
         return undefined;
     }
 
-    return 'You need to specify both src and tilte for medium or none of them';
+    return 'You need to specify both src and title for medium or none of them';
 };
 
-export default ({ edit }) => (
-    <SimpleForm>
-        <LongTextInput source="title" label="title" validate={required()} />
-        <ArrayInput source="story" >
-            <SimpleFormIterator>
-                <RichTextInput
-                    source="content"
-                    validate={required()}
-                />
-                <label>medium</label>
-                <TextInput  validate={validateMedium} source="medium.title" label="title" />
-                <ImageInput validate={validateMedium} source="medium.src" label="src">
-                    <ImageField source="medium.src" title="preview" />
-                </ImageInput>
-                <TextInput disabled source="medium.src" title="preview" />
-                <label>theme</label>
-                <SelectInput
-                    validate={required()}
-                    source="displayOptions.mediumPosition"
-                    label="medium position"
-                    choices={positionChoices}
-                />
-                <SelectInput
-                    validate={required()}
-                    source="displayOptions.backgroundColor"
-                    label="background"
-                    choices={colorChoices}
-                    optionText={<Color />}
-                />
-            </SimpleFormIterator>
-        </ArrayInput>
-    </SimpleForm>
+export default ({ edit, record }) => (
+    <TabbedForm>
+        <FormTab label="General">
+            <LongTextInput source="title" validate={required()} />
+        </FormTab>
+        <FormTab label="Story">
+            <ArrayInput source="story">
+                <SimpleFormIterator>
+                    <RichTextInput
+                        source="content"
+                        validate={required()}
+                    />
+                    <label>medium</label>
+                    <TextInput  validate={validateMedium} source="medium.title" label="title" />
+                    <ImageInput validate={validateMedium} source="medium.src" label="src">
+                        <ImageField source="medium.src" title="Preview" />
+                    </ImageInput>
+                    <TextInput disabled source="medium.src" title="Preview" />
+                    <label>theme</label>
+                    <SelectInput
+                        validate={required()}
+                        source="displayOptions.mediumPosition"
+                        label="Medium position"
+                        choices={positionChoices}
+                    />
+                    <SelectInput
+                        validate={required()}
+                        source="displayOptions.backgroundColor"
+                        label="Background color"
+                        choices={colorChoices}
+                        optionText={<Color />}
+                    />
+                </SimpleFormIterator>
+            </ArrayInput>
+        </FormTab>
+        <FormTab label="Message">
+            <RichTextInput label="Call to Action" source="call_to_action" validate={required()} />
+            <ArrayInput label="Paragraph Templates" source="message_template">
+                <SimpleFormIterator>
+                    <ParagraphTemplateInput source="" />
+                </SimpleFormIterator>
+            </ArrayInput>
+        </FormTab>
+    </TabbedForm>
 );

@@ -28,16 +28,34 @@ const urgentActions = [
                 mediumPosition: 'top',
                 backgroundColor: 'orange',
             }
-        }])
+        }]),
+        call_to_action: "<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>",
+        message_template: JSON.stringify([
+            {
+                value: `
+                    <p>Dear Minister,</p>
+                    <p>I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.</p>
+                `,
+            },
+            {
+                value: `
+                    <p>On 5 July, police arrested Idil Eser along with seven other human rights defenders and two trainers, who were simply attending a workshop in Istanbul.</p>
+                `,
+            },
+            {
+                value: `
+                    <p>They were doing nothing wrong. They are being investigated on suspicion of "membership of an armed terrorist organization", a baseless and ridiculous accusation.</p>
+                `,
+            },
+        ]),
     },
-    { title: 'Mexico: 48 Asylum Applicants Risk to Be Expulsed', story: JSON.stringify([]) },
-    { title: "Commutation of William Montgomery's sentence", story: JSON.stringify([]) },
 ];
 
+const columns = ['title', 'story', 'call_to_action', 'message_template'];
 const batchInsertQuery = batchInsert.default({
     table: 'urgent_action',
-    writableCols: ['title', 'story'],
-    returnCols: ['title'],
+    writableCols: columns,
+    returnCols: columns,
 })(urgentActions);
 
 client(batchInsertQuery)

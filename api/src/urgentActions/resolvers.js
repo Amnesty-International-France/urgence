@@ -18,20 +18,22 @@ export const UrgentActionsResolver = {
         _allUrgentActionsMeta: () => countUrgentActions()
     },
     Mutation: {
-        createUrgentAction: async (_, { story, ...data}) => {
+        createUrgentAction: async (_, { story, message_template, ...data}) => {
             const uploadedStory = await uploadImageFromStory(story);
 
             return createUrgentAction({
                 ...data,
                 story: JSON.stringify(uploadedStory),
+                message_template: JSON.stringify(message_template),
             });
         },
-        updateUrgentAction: async (_, { id, story, ...data }) => {
+        updateUrgentAction: async (_, { id, story, message_template, ...data }) => {
             const uploadedStory = await uploadImageFromStory(story);
 
             return updateUrgentAction(id, {
                 ...data,
                 story: JSON.stringify(uploadedStory),
+                message_template: JSON.stringify(message_template),
             });
         },
         deleteUrgentAction: (_, id) => removeUrgentAction(id),
