@@ -38,4 +38,10 @@ describe('<PreviewLink />', () => {
         test([], true);
         test([{}], false);
     });
+
+    it('should return null if no record is given', () => {
+        const props = { ...defaultProps, record: null };
+        const wrapper = shallow(<PreviewLink {...props} />);
+        expect(wrapper.instance()).toBe(null);
+    })
 });

@@ -5,11 +5,13 @@ import Button from 'material-ui/Button';
 import Visibility from '@material-ui/icons/Visibility';
 import { generateAppUrl } from '../generateUrl';
 
-export const PreviewLink = ({ record: { id, story } }) => (
+const hasStory = record => record.story && record.story.length > 0;
+
+export const PreviewLink = ({ record }) => !record ? null : (
     <Button
         color="primary"
-        href={generateAppUrl('urgentAction', { id })}
-        disabled={!story || story.length === 0}
+        href={generateAppUrl('urgentAction', { id: record.id })}
+        disabled={!hasStory(record)}
     >
         <Visibility />&nbsp;
         View

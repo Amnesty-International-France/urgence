@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Admin, Resource } from 'react-admin';
 import JssProvider from 'react-jss/lib/JssProvider';
-import createHistory from 'history/createBrowserHistory';
 
 import urgentAction from './urgentActions';
 import dataProviderFactory from './dataProvider';
@@ -10,8 +9,6 @@ import { generateClassName } from './generateClassName';
 
 import { theme } from './theme';
 import { Title } from './Title';
-
-const history = createHistory();
 
 class App extends Component {
     state = { dataProvider: null };
@@ -34,7 +31,6 @@ class App extends Component {
                 <Admin
                     locale="en"
                     theme={theme}
-                    history={history}
                     title={<Title />}
                     authProvider={authProvider}
                     dataProvider={dataProvider}

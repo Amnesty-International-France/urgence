@@ -5,9 +5,13 @@ import {
 
 import UrgentActionTitle from './UrgentActionTitle';
 import getUrgentActionFormFragment from './getUrgentActionFormFragment';
+import { UrgentActionsFormActions } from './UrgentActionsFormActions';
 
 export default (props) => (
-    <Edit title={<UrgentActionTitle />} {...props}>
+    <Edit
+        actions={<UrgentActionsFormActions />}
+        title={<UrgentActionTitle />} {...props}
+    >
         {getUrgentActionFormFragment({ edit: true })}
     </Edit>
 );
