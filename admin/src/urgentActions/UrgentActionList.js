@@ -7,6 +7,9 @@ import {
     TextField,
     DateField,
 } from 'react-admin';
+import { PreviewLink } from './PreviewLink';
+
+const dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 
 export default (props) => (
     <List
@@ -19,9 +22,14 @@ export default (props) => (
             medium={
                 <Datagrid>
                     <TextField source="title" />
-                    <DateField source="creation_date" />
-                    <DateField source="last_edition_date" />
+                    <DateField
+                        showTime
+                        label="Last Updated"
+                        options={dateFormat}
+                        source="last_edition_date"
+                    />
                     <EditButton />
+                    <PreviewLink />
                 </Datagrid>
             }
         />
