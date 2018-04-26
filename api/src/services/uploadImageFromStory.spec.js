@@ -24,12 +24,12 @@ describe('uploadImageFromStory', () => {
         ]);
     });
 
-    it('should call uploadImage with undefined for storystep with no medium and initialize medium with no src', async () => {
+    it('should call uploadImage with undefined for storystep with no medium and do not change the story item', async () => {
         uploadImage.mockImplementation(v => v);
         expect(await uploadImageFromStory([
             { no: 'medium' },
         ])).toEqual([
-            { no: 'medium', medium: { src: undefined } },
+            { no: 'medium' },
         ]);
 
         expect(uploadImage).toHaveBeenCalledWith(undefined);
