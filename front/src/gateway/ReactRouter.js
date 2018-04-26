@@ -1,6 +1,6 @@
 export {
     Link,
-    BrowserRouter as Router,
+    HashRouter as Router,
     Route,
     Redirect,
     withRouter,
