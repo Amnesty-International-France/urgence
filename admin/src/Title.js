@@ -13,7 +13,7 @@ const styles = {
 
 export const Title = () => (
     <div style={styles.root}>
-        <img src="/logo.svg" alt="Amnesty International" title="Amnesty International" style={styles.img} />
+        <img src={`${process.env.PUBLIC_URL}logo.svg`} alt="Amnesty International" title="Amnesty International" style={styles.img} />
         Réaction Rapide
     </div>
 );
