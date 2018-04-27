@@ -35,7 +35,5 @@ Story.propTypes = {
 };
 
 export default glamorous(Story)({
-    maxWidth: 360,
     height: '100vh',
-    maxHeight: 540,
 });
