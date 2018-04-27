@@ -7,6 +7,7 @@ services:
             - NODE_ENV=staging
             - POSTGRES_PASSWORD
             - CORS_ALLOWED_ORIGIN="https://amnesty.marmelab.com"
+            - UPLOAD_DIR=/app/uploads
 
     nginx:
         image: nginx
