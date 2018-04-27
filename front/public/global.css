@@ -8,6 +8,10 @@ body {
     line-height: 1.3;
 }
 
+body .slick-slider {
+    overflow: hidden;
+}
+
 body .slick-list, body .slick-track, body .slick-slide, body .slick-slide > div {
     height: 100%;
 }
