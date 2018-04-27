@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import get from 'lodash.get';
 import {
     TextInput,
     ImageInput,
-    ImageField
 } from 'react-admin';
 import { withStyles } from 'material-ui/styles';
 import { ImagePreview } from '../form/ImagePreview';
@@ -21,14 +19,14 @@ const styles = {
     },
 };
 
-export const MediumInput = ({ classes, source }) => (
+export const MediumInput = ({ classes, source, record }) => (
     <div className={classes.root}>
         <label>medium</label>
         <div className={classes.titleWrapper}>
             <TextInput source="title" label="Medium title" /><br />
         </div>
         <div className={classes.imageWrapper}>
-            <ImageInput source="src" label="File">
+            <ImageInput record={record} source={`${source}.src`} label="File">
                 <ImagePreview />
             </ImageInput>
         </div>
