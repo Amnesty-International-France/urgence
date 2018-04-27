@@ -11,7 +11,12 @@ export const uploadImage = async upload => {
     if (typeof upload === 'string') {
         return upload;
     }
-    const { stream, filename } = await upload.rawFile;
+
+    const rawFile = await upload.rawFile;
+    if (!rawFile.stream) {
+        throw new Error('Upload failed please retry');
+    }
+    const { stream, filename } = rawFile;
 
     const id = shortid.generate();
     const savedFilename = `${id}-${filename}`;
