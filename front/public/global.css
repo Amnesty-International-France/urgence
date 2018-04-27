@@ -11,3 +11,11 @@ body {
 body .slick-list, body .slick-track, body .slick-slide, body .slick-slide > div {
     height: 100%;
 }
+
+.ql-size-large {
+    font-size: 32px;
+}
+
+.ql-size-huge {
+    font-size: 48px;
+}
