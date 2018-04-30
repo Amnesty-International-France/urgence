@@ -1,10 +1,13 @@
 import get from 'lodash.get';
 import React from 'react';
-import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
+
 import Story from './Story';
+import { routeMatch } from '../propTypes';
+import generateUrl from '../services/generateUrl';
 
 const query = gql`
     query urgentAction($id: ID!) {
@@ -26,7 +29,7 @@ const query = gql`
 
 export const UrgentAction = ({
     match: {
-        params: { id },
+        params: { id, step, page },
     },
 }) => (
     <Query query={query} variables={{ id }}>
@@ -36,22 +39,29 @@ export const UrgentAction = ({
                 return null;
             }
 
-            return (
-                <Story
-                    loading={loading}
-                    story={get(data, 'UrgentAction.story')}
-                />
-            );
+            if (!step) {
+                return <Redirect to={generateUrl('story', { id })} />;
+            }
+
+            if (!step || step === 'story') {
+                return (
+                    <Story
+                        loading={loading}
+                        story={get(data, 'UrgentAction.story')}
+                        page={page}
+                    />
+                );
+            }
+
+            if (step === 'message') {
+                return 'message';
+            }
         }}
     </Query>
 );
 
 UrgentAction.propTypes = {
-    match: PropTypes.shape({
-        params: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-        }).isRequired,
-    }),
+    match: routeMatch,
 };
 
 export default withRouter(UrgentAction);
