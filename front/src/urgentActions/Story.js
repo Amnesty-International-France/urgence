@@ -12,10 +12,14 @@ export class Story extends Component {
     afterChange = page => {
         const {
             match: {
-                params: { id },
+                params: { id, page: currentPage },
             },
             history,
         } = this.props;
+
+        if (page.toString() === currentPage) {
+            return;
+        }
         history.push(generateUrl('story', { id, page }));
     };
 
