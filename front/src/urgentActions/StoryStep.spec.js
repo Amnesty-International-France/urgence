@@ -83,4 +83,15 @@ describe('<StoryStep />', () => {
         const richText = wrapper.find('RichText');
         expect(richText.prop('html')).toBe('<p>Hello world!</p>');
     });
+
+    it('should display ActButton if last is true', () => {
+        const props = {
+            ...defaultProps,
+            last: true,
+        };
+
+        const wrapper = shallow(<StoryStep {...props} />);
+        const actButton = wrapper.find('ActButton');
+        expect(actButton).toHaveLength(1);
+    });
 });

@@ -20,8 +20,12 @@ export const Story = ({ className, loading, story }) =>
             {story &&
                 story.length > 0 && (
                     <Carousel className={className}>
-                        {story.map(step => (
-                            <StoryStep key={step.content} {...step} />
+                        {story.map((step, index) => (
+                            <StoryStep
+                                key={step.content}
+                                {...step}
+                                last={index === story.length - 1}
+                            />
                         ))}
                     </Carousel>
                 )}

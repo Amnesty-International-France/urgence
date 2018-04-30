@@ -4,10 +4,17 @@ import glamorous from 'glamorous';
 
 import RichText from '../themes/RichText';
 import Image from '../themes/Image';
+import ActButton from './ActButton';
 import { StoryStepPropType } from '../propTypes';
 import { colors } from '../themes/colors';
 
-export const StoryStep = ({ className, medium, displayOptions, content }) => (
+export const StoryStep = ({
+    className,
+    medium,
+    displayOptions,
+    content,
+    last,
+}) => (
     <div
         className={className}
         style={{ backgroundColor: colors[displayOptions.backgroundColor] }}
@@ -17,6 +24,7 @@ export const StoryStep = ({ className, medium, displayOptions, content }) => (
 
         <RichText html={content} />
 
+        {last && <ActButton />}
         {medium &&
             displayOptions.mediumPosition === 'bottom' && <Image {...medium} />}
     </div>
@@ -24,13 +32,12 @@ export const StoryStep = ({ className, medium, displayOptions, content }) => (
 
 StoryStep.propTypes = {
     className: PropTypes.string,
+    last: PropTypes.bool,
     ...StoryStepPropType,
 };
 
 export default glamorous(StoryStep)({
     height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
     overflow: 'auto',
     fontSize: 24,
     '& > *': {
