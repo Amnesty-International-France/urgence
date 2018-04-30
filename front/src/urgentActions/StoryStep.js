@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
 
 import RichText from '../themes/RichText';
 import Image from '../themes/Image';
 import ActButton from './ActButton';
 import { StoryStepPropType } from '../propTypes';
 import { colors } from '../themes/colors';
+import CarouselSlide from '../themes/CarouselSlide';
 
 export const StoryStep = ({
     className,
@@ -15,9 +15,9 @@ export const StoryStep = ({
     content,
     last,
 }) => (
-    <div
+    <CarouselSlide
+        backgroundColor={colors[displayOptions.backgroundColor]}
         className={className}
-        style={{ backgroundColor: colors[displayOptions.backgroundColor] }}
     >
         {medium &&
             displayOptions.mediumPosition === 'top' && <Image {...medium} />}
@@ -27,7 +27,7 @@ export const StoryStep = ({
         {last && <ActButton />}
         {medium &&
             displayOptions.mediumPosition === 'bottom' && <Image {...medium} />}
-    </div>
+    </CarouselSlide>
 );
 
 StoryStep.propTypes = {
@@ -36,14 +36,4 @@ StoryStep.propTypes = {
     ...StoryStepPropType,
 };
 
-export default glamorous(StoryStep)({
-    height: '100%',
-    overflow: 'auto',
-    fontSize: 24,
-    '& > *': {
-        flex: '1 0 0',
-    },
-    '& .rich-text': {
-        padding: '2rem 3rem',
-    },
-});
+export default StoryStep;

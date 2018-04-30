@@ -10,10 +10,13 @@ export const Carousel = ({
     className,
     initialSlide,
     afterChange,
+    vertical,
 }) => (
     <Slider
         className={className}
         infinite={false}
+        vertical={vertical}
+        verticalSwiping={vertical}
         afterChange={afterChange}
         initialSlide={initialSlide}
     >
@@ -26,10 +29,15 @@ Carousel.propTypes = {
     initialSlide: PropTypes.string,
     children: PropTypes.node.isRequired,
     afterChange: PropTypes.func,
+    vertical: PropTypes.bool,
 };
 
 export default glamorous(Carousel)({
+    height: '100%',
     '.slick-slide > div': {
+        height: '100%',
+    },
+    '.slick-slider': {
         height: '100%',
     },
 });
