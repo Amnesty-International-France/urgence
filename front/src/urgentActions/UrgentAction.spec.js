@@ -1,7 +1,6 @@
-import React from 'react';
 import { shallow } from 'enzyme';
 
-import { UrgentAction } from './UrgentAction';
+import { renderUrgentAction } from './UrgentAction';
 
 const defaultStep = {
     content: '',
@@ -12,22 +11,15 @@ const defaultStep = {
 };
 
 describe('<UrgentAction />', () => {
-    describe('render', () => {
-        const defaultProps = {
-            match: {
-                params: {
-                    id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
-                },
-            },
+    describe('renderUrgentAction', () => {
+        const defaultParams = {
+            id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
+            step: 'story',
+            page: '1',
         };
 
         it('should return null if there is a GraphQL error', () => {
-            const props = { ...defaultProps };
-            const wrapper = shallow(<UrgentAction {...props} />);
-
-            const render = wrapper.prop('children');
-
-            const renderedComponent = render({
+            const renderedComponent = renderUrgentAction(defaultParams)({
                 data: {},
                 error: 'An error occured',
             });
@@ -36,12 +28,9 @@ describe('<UrgentAction />', () => {
         });
 
         it('should display story with retrieved GraphQL data', () => {
-            const props = { ...defaultProps };
-            const wrapper = shallow(<UrgentAction {...props} />);
-            const render = wrapper.prop('children');
-
             const renderedComponent = shallow(
-                render({
+                renderUrgentAction(defaultParams)({
+                    loading: false,
                     data: {
                         UrgentAction: {
                             story: [
@@ -52,11 +41,10 @@ describe('<UrgentAction />', () => {
                             ],
                         },
                     },
-                    loading: false,
                 }),
             );
 
-            expect(renderedComponent.prop('story')[0].id).toBe(
+            expect(renderedComponent.props().render().props.story[0].id).toBe(
                 '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
             );
         });

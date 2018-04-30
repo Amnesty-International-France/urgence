@@ -27,36 +27,42 @@ const query = gql`
     }
 `;
 
+export const renderUrgentAction = ({ step, page, id }) => ({
+    data,
+    error,
+    loading,
+}) => {
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    if (!step) {
+        return <Redirect to={generateUrl('story', { id })} />;
+    }
+
+    if (step === 'story') {
+        return (
+            <Story
+                loading={loading}
+                story={get(data, 'UrgentAction.story')}
+                page={page}
+            />
+        );
+    }
+
+    if (step === 'message') {
+        return 'message';
+    }
+};
+
 export const UrgentAction = ({
     match: {
         params: { id, step, page },
     },
 }) => (
     <Query query={query} variables={{ id }}>
-        {({ data, error, loading }) => {
-            if (error) {
-                console.error(error);
-                return null;
-            }
-
-            if (!step) {
-                return <Redirect to={generateUrl('story', { id })} />;
-            }
-
-            if (!step || step === 'story') {
-                return (
-                    <Story
-                        loading={loading}
-                        story={get(data, 'UrgentAction.story')}
-                        page={page}
-                    />
-                );
-            }
-
-            if (step === 'message') {
-                return 'message';
-            }
-        }}
+        {renderUrgentAction({ step, page, id })}
     </Query>
 );
 

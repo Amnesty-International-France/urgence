@@ -15,6 +15,8 @@ describe('<Story />', () => {
     const defaultProps = {
         story: [defaultStep],
         loading: false,
+        match: { params: {} },
+        history: { push: () => null },
     };
 
     it('should display a loading message while loading', () => {

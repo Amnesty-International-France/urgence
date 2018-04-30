@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { StoryStep } from './StoryStep';
+import ActButton from './ActButton';
 
 describe('<StoryStep />', () => {
     const defaultProps = {
@@ -91,7 +92,7 @@ describe('<StoryStep />', () => {
         };
 
         const wrapper = shallow(<StoryStep {...props} />);
-        const actButton = wrapper.find('ActButton');
+        const actButton = wrapper.find(ActButton);
         expect(actButton).toHaveLength(1);
     });
 });
