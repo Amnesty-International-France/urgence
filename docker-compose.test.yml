@@ -13,6 +13,7 @@ services:
             ADMIN_PASSWORD: password
             JWT_SECRET_KEY: foobarS3CR3T
             REACT_APP_FRONT_BASE_URL: http://localhost:3000
+            REACT_APP_API_URL: http://localhost:4000
         command: npm run test
 
     api:
