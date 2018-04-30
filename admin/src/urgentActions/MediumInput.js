@@ -5,6 +5,8 @@ import {
     ImageInput,
 } from 'react-admin';
 import { withStyles } from 'material-ui/styles';
+import get from 'lodash.get';
+
 import { ImagePreview } from '../form/ImagePreview';
 
 const styles = {
@@ -19,14 +21,27 @@ const styles = {
     },
 };
 
+export const validateMedium = (value, record, _, key) => {
+    console.log({ value, record, key });
+    const mediumKey = key.split('.').slice(0, -1).join('.');
+    const titleKey = `${mediumKey}.title`;
+    const srcKey = `${mediumKey}.src`;
+    const title = get(record, titleKey);
+    const src = get(record, srcKey);
+    if ((title && src) || (!title && !src)) {
+        return undefined;
+    }
+    return 'You need to specify both src and title for medium or none of them';
+};
+
 export const MediumInput = ({ classes, source, record }) => (
     <div className={classes.root}>
         <label>medium</label>
         <div className={classes.titleWrapper}>
-            <TextInput source="title" label="Medium title" /><br />
+            <TextInput validate={validateMedium} source={`${source}.title`} label="Medium title" /><br />
         </div>
         <div className={classes.imageWrapper}>
-            <ImageInput record={record} source={`${source}.src`} label="File">
+            <ImageInput validate={validateMedium} record={record} source={`${source}.src`} label="File">
                 <ImagePreview />
             </ImageInput>
         </div>
