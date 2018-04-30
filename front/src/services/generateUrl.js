@@ -2,10 +2,12 @@ export default (name, params = {}) => {
     switch (name) {
         case 'ua':
             return `/ua/${params.id || ':id'}`;
-        case 'message':
-            return `/ua/${params.id}/message/${params.page || 0}`;
         case 'story':
             return `/ua/${params.id}/story/${params.page || 0}`;
+        case 'act':
+            return `/ua/${params.id}/act`;
+        case 'message':
+            return `/ua/${params.id}/message/${params.page || 0}`;
         case 'home':
             return '/';
         default:

@@ -5,12 +5,14 @@ import { Link } from '../themes/Link';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 
-const ActButton = ({ match: { params } }) => (
-    <Link to={generateUrl('act', params)} label="OK J'agis!" />
-);
+const ToMessageButton = ({
+    match: {
+        params: { id },
+    },
+}) => <Link to={generateUrl('message', { id })} label="Voir le message" />;
 
-ActButton.propTypes = {
+ToMessageButton.propTypes = {
     match: routeMatch,
 };
 
-export default withRouter(ActButton);
+export default withRouter(ToMessageButton);

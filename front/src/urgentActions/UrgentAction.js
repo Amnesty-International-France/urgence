@@ -6,6 +6,8 @@ import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
 import Story from './Story';
+import Act from './Act';
+import Message from './message/Message';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 
@@ -22,6 +24,11 @@ const query = gql`
                     title
                 }
                 content
+            }
+            call_to_action
+            object_indication
+            message_template {
+                value
             }
         }
     }
@@ -51,8 +58,17 @@ export const renderUrgentAction = ({ step, page, id }) => ({
         );
     }
 
+    if (step === 'act') {
+        return <Act callToAction={get(data, 'UrgentAction.call_to_action')} />;
+    }
+
     if (step === 'message') {
-        return 'message';
+        return (
+            <Message
+                messageTemplate={get(data, 'UrgentAction.message_template')}
+                objectIndication={get(data, 'UrgentAction.object_indication')}
+            />
+        );
     }
 };
 
