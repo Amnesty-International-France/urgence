@@ -6,7 +6,7 @@ import CarouselSlide from '../../themes/CarouselSlide';
 
 export const MessageStep = ({ className, content }) => (
     <CarouselSlide className={className}>
-        <RichText html={content} />
+        <RichText html={content.replace(/\n/g, '<br>')} />
     </CarouselSlide>
 );
 
