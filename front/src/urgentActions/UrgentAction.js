@@ -34,7 +34,7 @@ const query = gql`
     }
 `;
 
-export const renderUrgentAction = ({ step, page, id }) => ({
+export const renderUrgentAction = ({ step, id }) => ({
     data,
     error,
     loading,
@@ -50,11 +50,7 @@ export const renderUrgentAction = ({ step, page, id }) => ({
 
     if (step === 'story') {
         return (
-            <Story
-                loading={loading}
-                story={get(data, 'UrgentAction.story')}
-                page={page}
-            />
+            <Story loading={loading} story={get(data, 'UrgentAction.story')} />
         );
     }
 
@@ -67,6 +63,7 @@ export const renderUrgentAction = ({ step, page, id }) => ({
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
                 objectIndication={get(data, 'UrgentAction.object_indication')}
+                loading={loading}
             />
         );
     }

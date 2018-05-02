@@ -8,7 +8,7 @@ import ObjectStep from './ObjectStep';
 import { routeMatch } from '../../propTypes';
 import generateUrl from '../../services/generateUrl';
 
-class Message extends Component {
+export class Message extends Component {
     afterChange = page => {
         const {
             match: {
@@ -28,12 +28,15 @@ class Message extends Component {
             messageTemplate,
             objectIndication,
             className,
+            loading,
             match: {
                 params: { page },
             },
         } = this.props;
 
-        return (
+        return loading ? (
+            <p className="loading">Loading...</p>
+        ) : (
             <Fragment>
                 {(!messageTemplate || !messageTemplate.length) && (
                     <p className="error">
@@ -67,6 +70,7 @@ Message.propTypes = {
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
     match: routeMatch,
+    loading: PropTypes.bool.isRequired,
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
