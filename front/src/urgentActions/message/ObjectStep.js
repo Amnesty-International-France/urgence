@@ -4,14 +4,16 @@ import glamorous from 'glamorous';
 
 import RichText from '../../themes/RichText';
 import CarouselSlide from '../../themes/CarouselSlide';
-
+import sessionData from '../../sessionData';
 export class ObjectStep extends Component {
     state = {
-        object: '',
+        object: sessionData.getObject() || '',
     };
 
     changeObject = e => {
-        this.setState({ object: e.target.value });
+        const object = e.target.value;
+        this.setState({ object });
+        sessionData.setObject(object);
     };
 
     render() {
