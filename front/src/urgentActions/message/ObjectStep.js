@@ -7,8 +7,17 @@ import { MailTo } from '../../themes/MailTo';
 import CarouselSlide from '../../themes/CarouselSlide';
 import sessionData from '../../sessionData';
 
-const templateToBody = template =>
-    template.map(({ value }) => value).join('\n');
+const templateToBodyText = template =>
+    encodeURIComponent(
+        template
+            .map(({ value }) =>
+                value
+                    .replace(/<br>/g, '\n\n')
+                    .replace(/<.*?>/g, '')
+                    .trim(),
+            )
+            .join('\n\n'),
+    );
 
 export class ObjectStep extends Component {
     state = {
@@ -41,7 +50,7 @@ export class ObjectStep extends Component {
                     label="Send mail"
                     disabled={!object}
                     subject={object}
-                    body={templateToBody(messageTemplate)}
+                    body={templateToBodyText(messageTemplate)}
                 />
             </CarouselSlide>
         );

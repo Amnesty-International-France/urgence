@@ -7,7 +7,6 @@ import MessageStep from './MessageStep';
 import ObjectStep from './ObjectStep';
 import { routeMatch } from '../../propTypes';
 import generateUrl from '../../services/generateUrl';
-import sessionData from '../../sessionData';
 
 export class Message extends Component {
     afterChange = page => {
