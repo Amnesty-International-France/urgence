@@ -7,6 +7,7 @@ import MessageStep from './MessageStep';
 import ObjectStep from './ObjectStep';
 import { routeMatch } from '../../propTypes';
 import generateUrl from '../../services/generateUrl';
+import sessionData from '../../sessionData';
 
 export class Message extends Component {
     afterChange = page => {
@@ -26,7 +27,6 @@ export class Message extends Component {
     render() {
         const {
             messageTemplate,
-            objectIndication,
             className,
             loading,
             match: {
@@ -55,7 +55,7 @@ export class Message extends Component {
                             {messageTemplate.map(({ value }) => (
                                 <MessageStep key={value} content={value} />
                             ))}
-                            <ObjectStep objectIndication={objectIndication} />
+                            <ObjectStep messageTemplate={messageTemplate} />
                         </Carousel>
                     )}
             </Fragment>
