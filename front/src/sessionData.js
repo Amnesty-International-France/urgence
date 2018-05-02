@@ -1,6 +1,6 @@
 export const sessionData = storage => ({
     getObject: () => storage.getItem('amnesty_object'),
-    setObject: value => {
+    setObject(value) {
         storage.setItem('amnesty_object', value);
         return this;
     },
