@@ -25,9 +25,9 @@ export default glamorous(CarouselSlide)({
     '& > *': {
         flex: '1 0 0',
     },
-    '& .rich-text': {
+    '& .rich-text, & > p': {
         padding: '2rem 3rem',
-        lineHeight: '3rem',
+        lineHeight: '1.5em',
         textAlign: 'justify',
     },
 });

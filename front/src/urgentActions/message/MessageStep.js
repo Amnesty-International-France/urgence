@@ -4,16 +4,15 @@ import PropTypes from 'prop-types';
 import RichText from '../../themes/RichText';
 import CarouselSlide from '../../themes/CarouselSlide';
 
-export const StoryStep = ({ className, content }) => (
+export const MessageStep = ({ className, content }) => (
     <CarouselSlide className={className}>
         <RichText html={content} />
     </CarouselSlide>
 );
 
-StoryStep.propTypes = {
+MessageStep.propTypes = {
     className: PropTypes.string,
     content: PropTypes.string,
-    last: PropTypes.bool,
 };
 
-export default StoryStep;
+export default MessageStep;

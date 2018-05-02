@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 
 import Carousel from '../../themes/Carousel';
 import MessageStep from './MessageStep';
+import ObjectStep from './ObjectStep';
 import { routeMatch } from '../../propTypes';
 import generateUrl from '../../services/generateUrl';
 
@@ -25,6 +26,7 @@ class Message extends Component {
     render() {
         const {
             messageTemplate,
+            objectIndication,
             className,
             match: {
                 params: { page },
@@ -50,6 +52,7 @@ class Message extends Component {
                             {messageTemplate.map(({ value }) => (
                                 <MessageStep key={value} content={value} />
                             ))}
+                            <ObjectStep objectIndication={objectIndication} />
                         </Carousel>
                     )}
             </Fragment>
@@ -61,6 +64,7 @@ Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(
         PropTypes.shape({ value: PropTypes.string.isRequired }),
     ),
+    objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
     match: routeMatch,
     history: PropTypes.shape({
