@@ -27,5 +27,7 @@ export default glamorous(CarouselSlide)({
     },
     '& .rich-text': {
         padding: '2rem 3rem',
+        lineHeight: '3rem',
+        textAlign: 'justify',
     },
 });
