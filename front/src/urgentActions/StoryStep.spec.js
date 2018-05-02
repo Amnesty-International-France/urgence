@@ -55,7 +55,7 @@ describe('<StoryStep />', () => {
         };
 
         const wrapper = shallow(<StoryStep {...props} />);
-        const image = wrapper.find('div').childAt(0);
+        const image = wrapper.childAt(0);
         expect(image.is('glamorous(Image)')).toBeTruthy();
     });
 
@@ -69,7 +69,7 @@ describe('<StoryStep />', () => {
         };
 
         const wrapper = shallow(<StoryStep {...props} />);
-        const image = wrapper.find('div').childAt(1);
+        const image = wrapper.childAt(1);
 
         expect(image.is('glamorous(Image)')).toBeTruthy();
     });

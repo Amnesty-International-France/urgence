@@ -2,23 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
-export const StoryStep = ({ className, backgroundColor, children }) => (
+export const CarouselSlide = ({ className, backgroundColor, children }) => (
     <div className={className} style={{ backgroundColor }}>
         {children}
     </div>
 );
 
-StoryStep.propTypes = {
+CarouselSlide.propTypes = {
     className: PropTypes.string,
     backgroundColor: PropTypes.string,
     children: PropTypes.node.isRequired,
 };
 
-StoryStep.defauldProps = {
+CarouselSlide.defauldProps = {
     backgroundColor: 'white',
 };
 
-export default glamorous(StoryStep)({
+export default glamorous(CarouselSlide)({
     height: window.innerHeight,
     overflow: 'auto',
     fontSize: 24,
