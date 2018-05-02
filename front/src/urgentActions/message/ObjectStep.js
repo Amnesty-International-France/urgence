@@ -6,18 +6,7 @@ import RichText from '../../themes/RichText';
 import { MailTo } from '../../themes/MailTo';
 import CarouselSlide from '../../themes/CarouselSlide';
 import sessionData from '../../sessionData';
-
-const templateToBodyText = template =>
-    encodeURIComponent(
-        template
-            .map(({ value }) =>
-                value
-                    .replace(/<br>/g, '\n\n')
-                    .replace(/<.*?>/g, '')
-                    .trim(),
-            )
-            .join('\n\n'),
-    );
+import { templateToBodyText } from './templateToBodyText';
 
 export class ObjectStep extends Component {
     state = {

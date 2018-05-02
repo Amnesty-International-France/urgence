@@ -5,7 +5,9 @@ import { Button } from '../themes/Button';
 
 export const MailTo = ({ mail = '', subject, body, label, disabled }) => (
     <a
-        href={`mailto:${mail}?subject=${subject}&body=${body}`}
+        href={`mailto:${mail}?subject=${encodeURIComponent(
+            subject,
+        )}&body=${encodeURIComponent(body)}`}
         target="_blank"
         disabled={disabled}
     >

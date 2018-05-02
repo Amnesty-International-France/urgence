@@ -10,6 +10,7 @@ describe('<ObjectStep />', () => {
     const defaultProps = {
         objectIndication:
             'Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.',
+        messageTemplate: [],
     };
 
     it('should display objectIndication as HTML', () => {
