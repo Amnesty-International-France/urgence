@@ -12,10 +12,13 @@ const StyledButton = glamorous.button({
     '&:active': {
         backgroundColor: 'rgb(44, 103, 161)',
     },
+    '&:disabled': {
+        backgroundColor: 'grey',
+    },
 });
 
-export const Button = ({ label, onClick, className }) => (
-    <StyledButton className={className} onClick={onClick}>
+export const Button = ({ label, onClick, className, disabled }) => (
+    <StyledButton className={className} onClick={onClick} disabled={disabled}>
         {label.toUpperCase()}
     </StyledButton>
 );
@@ -23,5 +26,6 @@ export const Button = ({ label, onClick, className }) => (
 Button.propTypes = {
     label: PropTypes.string.isRequired,
     className: PropTypes.string,
+    disabled: PropTypes.bool,
     onClick: PropTypes.func,
 };

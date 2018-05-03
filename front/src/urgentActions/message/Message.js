@@ -25,8 +25,8 @@ export class Message extends Component {
 
     render() {
         const {
-            messageTemplate,
             objectIndication,
+            messageTemplate,
             className,
             loading,
             match: {
@@ -55,7 +55,10 @@ export class Message extends Component {
                             {messageTemplate.map(({ value }) => (
                                 <MessageStep key={value} content={value} />
                             ))}
-                            <ObjectStep objectIndication={objectIndication} />
+                            <ObjectStep
+                                objectIndication={objectIndication}
+                                messageTemplate={messageTemplate}
+                            />
                         </Carousel>
                     )}
             </Fragment>

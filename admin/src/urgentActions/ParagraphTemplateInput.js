@@ -1,12 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { addField } from 'react-admin';
-import { RichTextInput } from '../form/RichTextInput';
-
+import { addField, LongTextInput } from 'react-admin';
 
 export const ParagraphTemplateInput = ({ source }) => (
-    <RichTextInput source={`${source}value`} label="Content" />
+    <LongTextInput source={`${source}value`} label="Content" />
 );
 
 ParagraphTemplateInput.propTypes = {
