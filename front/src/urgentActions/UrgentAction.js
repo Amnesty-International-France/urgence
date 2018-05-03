@@ -18,6 +18,7 @@ const query = gql`
                 displayOptions {
                     mediumPosition
                     backgroundColor
+                    color
                 }
                 medium {
                     src
