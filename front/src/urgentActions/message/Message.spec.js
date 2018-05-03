@@ -2,6 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Message } from './Message';
+import sessionData from '../../sessionData';
+
+jest.mock('../../sessionData.js');
 
 describe('Message', () => {
     const defaultStep = [
@@ -50,7 +53,8 @@ describe('Message', () => {
         expect(slider.childAt(2).prop('content')).toBe('three');
     });
 
-    it('display a carousel with last child being objectStep with objectIndication', () => {
+    it('display a carousel with last child being objectStep with objectIndication object from sessionData', () => {
+        sessionData.getMailObject.mockImplementation(() => 'object value');
         const wrapper = shallow(<Message {...defaultProps} />);
 
         const slider = wrapper.find('glamorous(Carousel)');
@@ -58,5 +62,7 @@ describe('Message', () => {
         expect(slider.childAt(3).prop('objectIndication')).toBe(
             'object indication',
         );
+
+        expect(slider.childAt(3).prop('object')).toBe('object value');
     });
 });
