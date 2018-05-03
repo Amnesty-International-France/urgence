@@ -1,14 +1,14 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
 import { withRouter } from 'react-router';
 
-import Carousel from '../themes/Carousel';
-import StoryStep from '../urgentActions/StoryStep';
-import { StoryStepPropType, routeMatch } from '../propTypes';
-import generateUrl from '../services/generateUrl';
+import Carousel from '../../themes/Carousel';
+import MessageStep from './MessageStep';
+import ObjectStep from './ObjectStep';
+import { routeMatch } from '../../propTypes';
+import generateUrl from '../../services/generateUrl';
 
-export class Story extends Component {
+export class Message extends Component {
     afterChange = page => {
         const {
             match: {
@@ -20,14 +20,15 @@ export class Story extends Component {
         if (page.toString() === currentPage) {
             return;
         }
-        history.push(generateUrl('story', { id, page }));
+        history.push(generateUrl('message', { id, page }));
     };
 
     render() {
         const {
+            messageTemplate,
+            objectIndication,
             className,
             loading,
-            story,
             match: {
                 params: { page },
             },
@@ -37,26 +38,24 @@ export class Story extends Component {
             <p className="loading">Loading...</p>
         ) : (
             <Fragment>
-                {(!story || !story.length) && (
+                {(!messageTemplate || !messageTemplate.length) && (
                     <p className="error">
                         Cette action urgent n&#39;existe plus.
                     </p>
                 )}
 
-                {story &&
-                    story.length > 0 && (
+                {messageTemplate &&
+                    messageTemplate.length > 0 && (
                         <Carousel
                             initialSlide={page}
                             className={className}
                             afterChange={this.afterChange}
+                            vertical={true}
                         >
-                            {story.map((step, index) => (
-                                <StoryStep
-                                    key={step.content}
-                                    {...step}
-                                    hasActButton={index === story.length - 1}
-                                />
+                            {messageTemplate.map(({ value }) => (
+                                <MessageStep key={value} content={value} />
                             ))}
+                            <ObjectStep objectIndication={objectIndication} />
                         </Carousel>
                     )}
             </Fragment>
@@ -64,18 +63,17 @@ export class Story extends Component {
     }
 }
 
-Story.propTypes = {
+Message.propTypes = {
+    messageTemplate: PropTypes.arrayOf(
+        PropTypes.shape({ value: PropTypes.string.isRequired }),
+    ),
+    objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
+    match: routeMatch,
     loading: PropTypes.bool.isRequired,
-    story: PropTypes.arrayOf(PropTypes.shape(StoryStepPropType)),
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
-    match: routeMatch,
 };
 
-export default withRouter(
-    glamorous(Story)({
-        height: '100vh',
-    }),
-);
+export default withRouter(Message);

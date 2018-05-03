@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { StoryStep } from './StoryStep';
+import ActButton from './ActButton';
 
 describe('<StoryStep />', () => {
     const defaultProps = {
@@ -54,7 +55,7 @@ describe('<StoryStep />', () => {
         };
 
         const wrapper = shallow(<StoryStep {...props} />);
-        const image = wrapper.find('div').childAt(0);
+        const image = wrapper.childAt(0);
         expect(image.is('glamorous(Image)')).toBeTruthy();
     });
 
@@ -68,7 +69,7 @@ describe('<StoryStep />', () => {
         };
 
         const wrapper = shallow(<StoryStep {...props} />);
-        const image = wrapper.find('div').childAt(1);
+        const image = wrapper.childAt(1);
 
         expect(image.is('glamorous(Image)')).toBeTruthy();
     });
@@ -82,5 +83,16 @@ describe('<StoryStep />', () => {
         const wrapper = shallow(<StoryStep {...props} />);
         const richText = wrapper.find('RichText');
         expect(richText.prop('html')).toBe('<p>Hello world!</p>');
+    });
+
+    it('should display ActButton if hasActButton is true', () => {
+        const props = {
+            ...defaultProps,
+            hasActButton: true,
+        };
+
+        const wrapper = shallow(<StoryStep {...props} />);
+        const actButton = wrapper.find(ActButton);
+        expect(actButton).toHaveLength(1);
     });
 });

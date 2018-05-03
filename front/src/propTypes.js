@@ -11,3 +11,7 @@ export const StoryStepPropType = {
     }).isRequired,
     content: PropTypes.string.isRequired,
 };
+
+export const routeMatch = PropTypes.shape({
+    params: PropTypes.object.isRequired,
+});

@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import RichText from './RichText';
 import Image from './Image';
+import { Button } from './Button';
 
 storiesOf('User Interface', module)
     .add('Image', () => (
@@ -31,4 +32,7 @@ storiesOf('User Interface', module)
                 <marquee>It can even bring some magnificent sliding text!</marquee>
             `}
         />
+    ))
+    .add('Button', () => (
+        <Button label="click me" onClick={() => alert('clicked')} />
     ));

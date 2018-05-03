@@ -15,6 +15,8 @@ describe('<Story />', () => {
     const defaultProps = {
         story: [defaultStep],
         loading: false,
+        match: { params: {} },
+        history: { push: () => null },
     };
 
     it('should display a loading message while loading', () => {
@@ -54,5 +56,21 @@ describe('<Story />', () => {
 
         expect(slider.childAt(0).prop('content')).toBe('Hello');
         expect(slider.childAt(1).prop('content')).toBe('World');
+    });
+
+    it('past last property to last item in story', () => {
+        const props = {
+            ...defaultProps,
+            story: [
+                { ...defaultStep, content: 'Hello' },
+                { ...defaultStep, content: 'World' },
+            ],
+        };
+        const wrapper = shallow(<Story {...props} />);
+
+        const slider = wrapper.find('glamorous(Carousel)');
+
+        expect(slider.childAt(0).prop('hasActButton')).toBe(false);
+        expect(slider.childAt(1).prop('hasActButton')).toBe(true);
     });
 });

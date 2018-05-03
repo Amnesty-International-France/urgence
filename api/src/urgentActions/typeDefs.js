@@ -67,6 +67,7 @@ export const urgentActionsTypeDefs = gql`
         title: String!
         story: [StoryStep]!
         call_to_action: String!
+        object_indication: String!
         message_template: [ParagraphTemplate]!
         creation_date: DATE!
         last_edition_date: DATE!
@@ -83,6 +84,7 @@ export const urgentActionsTypeDefs = gql`
             title: String!
             story: [StoryStepInput]!
             call_to_action: String!
+            object_indication: String!
             message_template: [MessageTemplateInput]!
         ): UrgentAction
         updateUrgentAction(
@@ -90,6 +92,7 @@ export const urgentActionsTypeDefs = gql`
             title: String!
             story: [StoryStepInput]!
             call_to_action: String!
+            object_indication: String!
             message_template: [MessageTemplateInput]!
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
