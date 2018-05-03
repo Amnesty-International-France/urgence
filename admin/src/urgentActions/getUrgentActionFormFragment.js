@@ -9,7 +9,7 @@ import {
     SelectInput,
     required,
     ImageInput,
-    ImageField
+    ImageField,
 } from 'react-admin';
 
 import RichTextInput from '../form/RichTextInput';
@@ -35,7 +35,14 @@ export const validateMedium = (value, record, _, key) => {
     return 'You need to specify both src and title for medium or none of them';
 };
 
-export default ({ edit, record, ...rest }) => (
+export const validateMail = text =>
+    text && text
+        .split(';')
+        .find(
+            t => !t.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
+        ) ? 'Must contain only mail separated by ";"' : null;
+
+export default ({ edit }) => (
     <TabbedForm>
         <FormTab label="General">
             <LongTextInput source="title" validate={required()} />
@@ -71,6 +78,9 @@ export default ({ edit, record, ...rest }) => (
             </ArrayInput>
         </FormTab>
         <FormTab label="Message">
+            <LongTextInput label="Mail" source="recipient.mail" validate={[validateMail, required()]} />
+            <LongTextInput label="Copies to" source="recipient.copies_to" validate={validateMail} />
+            <LongTextInput label="CCI" source="recipient.cci" validate={validateMail} />
             <RichTextInput label="Call to Action" source="call_to_action" isRequired />
             <RichTextInput label="Object indication" source="object_indication" isRequired />
             <ArrayInput label="Paragraph Templates" source="message_template">
