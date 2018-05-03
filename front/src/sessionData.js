@@ -4,6 +4,11 @@ export const sessionData = storage => ({
         storage.setItem('amnesty_mail_object', value);
         return this;
     },
+    getSignature: () => storage.getItem('amnesty_signature'),
+    setSignature(value) {
+        storage.setItem('amnesty_signature', value);
+        return this;
+    },
 });
 
 export default sessionData(window.sessionStorage);

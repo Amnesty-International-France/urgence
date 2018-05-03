@@ -27,4 +27,31 @@ describe('sessionData', () => {
             );
         });
     });
+
+    describe('.getSignature', () => {
+        it('calls storage.getItem(amnesty_signature) and returns its result', () => {
+            const storage = {
+                getItem: jest.fn(() => 'signature value'),
+            };
+
+            expect(sessionData(storage).getSignature()).toBe('signature value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_signature');
+        });
+    });
+
+    describe('.setMailObject', () => {
+        it('calls storage.setItem(amnesty_signature, value) and returns itself', () => {
+            const storage = {
+                setItem: jest.fn(),
+            };
+
+            const mySessionData = sessionData(storage);
+
+            expect(mySessionData.setSignature('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith(
+                'amnesty_signature',
+                'value',
+            );
+        });
+    });
 });

@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import Carousel from '../../themes/Carousel';
 import MessageStep from './MessageStep';
 import ObjectStep from './ObjectStep';
+import SignatureStep from './SignatureStep';
 import { routeMatch } from '../../propTypes';
 import generateUrl from '../../services/generateUrl';
 
@@ -57,6 +58,10 @@ export class Message extends Component {
                                 <MessageStep key={value} content={value} />
                             ))}
                             <ObjectStep
+                                objectIndication={objectIndication}
+                                messageTemplate={messageTemplate}
+                            />
+                            <SignatureStep
                                 objectIndication={objectIndication}
                                 messageTemplate={messageTemplate}
                                 recipient={recipient}
