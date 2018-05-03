@@ -5,11 +5,21 @@ import { Button } from '../themes/Button';
 
 export const MailTo = ({ recipient = {}, subject, body, label, disabled }) => (
     <a
-        href={`mailto:${recipient.mail}?subject=${encodeURIComponent(
-            subject,
-        )}&body=${encodeURIComponent(body)}&cc=${encodeURIComponent(
-            recipient.copies_to,
-        )}&bcc=${encodeURIComponent(recipient.cci)}`}
+        href={`mailto:${encodeURIComponent(
+            recipient.mail,
+        )}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+            body,
+        )}`
+            .concat(
+                recipient.copies_to
+                    ? `&cc=${encodeURIComponent(recipient.copies_to)}`
+                    : '',
+            )
+            .concat(
+                recipient.cci
+                    ? `&bcc=${encodeURIComponent(recipient.cci)}`
+                    : '',
+            )}
         target="_blank"
         disabled={disabled}
     >
