@@ -12,6 +12,7 @@ export const urgentActionsTypeDefs = gql`
     input DisplayOptionsInput {
         mediumPosition: Position!
         backgroundColor: Color!
+        color: Color
     }
 
     input StoryStepInput {
@@ -50,6 +51,7 @@ export const urgentActionsTypeDefs = gql`
     type DisplayOptions {
         mediumPosition: Position!
         backgroundColor: Color!
+        color: Color
     }
 
     type StoryStep {
