@@ -35,17 +35,7 @@ export const validateMedium = (value, record, _, key) => {
     return 'You need to specify both src and title for medium or none of them';
 };
 
-const requiredRichText = (value, ...rest) => {
-    console.log({ value });
-    if (!value || value === "<p><br></p>") {
-        console.log('not set');
-        return 'Required';
-    }
-
-    return undefined;
-};
-
-export default ({ edit, record }) => (
+export default ({ edit, record, ...rest }) => (
     <TabbedForm>
         <FormTab label="General">
             <LongTextInput source="title" validate={required()} />
@@ -55,7 +45,7 @@ export default ({ edit, record }) => (
                 <SimpleFormIterator>
                     <RichTextInput
                         source="content"
-                        validate={required()}
+                        isRequired
                     />
                     <label>medium</label>
                     <TextInput  validate={validateMedium} source="medium.title" label="title" />
@@ -81,8 +71,8 @@ export default ({ edit, record }) => (
             </ArrayInput>
         </FormTab>
         <FormTab label="Message">
-            <RichTextInput label="Call to Action" source="call_to_action" validate={requiredRichText} />
-            <RichTextInput label="Object indication" source="object_indication" validate={requiredRichText} />
+            <RichTextInput label="Call to Action" source="call_to_action" isRequired />
+            <RichTextInput label="Object indication" source="object_indication" isRequired />
             <ArrayInput label="Paragraph Templates" source="message_template">
                 <SimpleFormIterator>
                     <ParagraphTemplateInput source="" />
