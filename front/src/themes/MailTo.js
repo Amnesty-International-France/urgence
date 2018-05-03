@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../themes/Button';
 
-export const MailTo = ({ mail = '', subject, body, label, disabled }) => (
+export const MailTo = ({ recipient = {}, subject, body, label, disabled }) => (
     <a
-        href={`mailto:${mail}?subject=${encodeURIComponent(
+        href={`mailto:${recipient.mail}?subject=${encodeURIComponent(
             subject,
-        )}&body=${encodeURIComponent(body)}`}
+        )}&body=${encodeURIComponent(body)}&cc=${encodeURIComponent(
+            recipient.copies_to,
+        )}&bcc=${encodeURIComponent(recipient.cci)}`}
         target="_blank"
         disabled={disabled}
     >
@@ -21,4 +23,9 @@ MailTo.propTypes = {
     body: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
+    recipient: PropTypes.shape({
+        mail: PropTypes.string.isRequired,
+        copies_to: PropTypes.string,
+        cci: PropTypes.string,
+    }).isRequired,
 };

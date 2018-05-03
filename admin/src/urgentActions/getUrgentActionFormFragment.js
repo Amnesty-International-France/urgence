@@ -37,10 +37,10 @@ export const validateMedium = (value, record, _, key) => {
 
 export const validateMail = text =>
     text && text
-        .split(';')
+        .split(',')
         .find(
             t => !t.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
-        ) ? 'Must contain only mail separated by ";"' : null;
+        ) ? 'Must contain only mail separated by ","' : null;
 
 export default ({ edit }) => (
     <TabbedForm>

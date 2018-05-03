@@ -29,6 +29,7 @@ export class Message extends Component {
             messageTemplate,
             className,
             loading,
+            recipient,
             match: {
                 params: { page },
             },
@@ -58,6 +59,7 @@ export class Message extends Component {
                             <ObjectStep
                                 objectIndication={objectIndication}
                                 messageTemplate={messageTemplate}
+                                recipient={recipient}
                             />
                         </Carousel>
                     )}
@@ -76,6 +78,11 @@ Message.propTypes = {
     loading: PropTypes.bool.isRequired,
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
+    }).isRequired,
+    recipient: PropTypes.shape({
+        mail: PropTypes.string.isRequired,
+        copies_to: PropTypes.string,
+        cci: PropTypes.string,
     }).isRequired,
 };
 
