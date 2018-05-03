@@ -8,8 +8,15 @@ import ObjectStep from './ObjectStep';
 import SignatureStep from './SignatureStep';
 import { routeMatch } from '../../propTypes';
 import generateUrl from '../../services/generateUrl';
+import sessionData from '../../sessionData';
+import SendMail from './SendMail';
 
 export class Message extends Component {
+    state = {
+        object: sessionData.getMailObject(),
+        signature: sessionData.getSignature(),
+    };
+
     afterChange = page => {
         const {
             match: {
@@ -24,6 +31,18 @@ export class Message extends Component {
         history.push(generateUrl('message', { id, page }));
     };
 
+    changeObject = e => {
+        const object = e.target.value;
+        this.setState({ object });
+        sessionData.setMailObject(object);
+    };
+
+    changeSignature = e => {
+        const signature = e.target.value;
+        this.setState({ signature });
+        sessionData.setSignature(signature);
+    };
+
     render() {
         const {
             objectIndication,
@@ -35,6 +54,8 @@ export class Message extends Component {
                 params: { page },
             },
         } = this.props;
+
+        const { signature, object } = this.state;
 
         return loading ? (
             <p className="loading">Loading...</p>
@@ -58,13 +79,22 @@ export class Message extends Component {
                                 <MessageStep key={value} content={value} />
                             ))}
                             <ObjectStep
+                                object={object}
+                                changeObject={this.changeObject}
                                 objectIndication={objectIndication}
                                 messageTemplate={messageTemplate}
                             />
                             <SignatureStep
-                                objectIndication={objectIndication}
-                                messageTemplate={messageTemplate}
-                                recipient={recipient}
+                                signature={signature}
+                                changeSignature={this.changeSignature}
+                                action={
+                                    <SendMail
+                                        recipient={recipient}
+                                        messageTemplate={messageTemplate}
+                                        signature={signature}
+                                        object={object}
+                                    />
+                                }
                             />
                         </Carousel>
                     )}
