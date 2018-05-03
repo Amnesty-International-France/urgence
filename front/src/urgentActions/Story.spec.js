@@ -70,7 +70,7 @@ describe('<Story />', () => {
 
         const slider = wrapper.find('glamorous(Carousel)');
 
-        expect(slider.childAt(0).prop('last')).toBe(false);
-        expect(slider.childAt(1).prop('last')).toBe(true);
+        expect(slider.childAt(0).prop('hasActButton')).toBe(false);
+        expect(slider.childAt(1).prop('hasActButton')).toBe(true);
     });
 });

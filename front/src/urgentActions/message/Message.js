@@ -40,7 +40,7 @@ export class Message extends Component {
             <Fragment>
                 {(!messageTemplate || !messageTemplate.length) && (
                     <p className="error">
-                        This urgent action does not exist anymore.
+                        Cette action urgent n&#39;existe plus.
                     </p>
                 )}
 

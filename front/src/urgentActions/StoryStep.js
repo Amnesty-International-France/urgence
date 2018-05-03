@@ -13,7 +13,7 @@ export const StoryStep = ({
     medium,
     displayOptions,
     content,
-    last,
+    hasActButton,
 }) => (
     <CarouselSlide
         backgroundColor={colors[displayOptions.backgroundColor]}
@@ -24,7 +24,7 @@ export const StoryStep = ({
 
         <RichText html={content} />
 
-        {last && <ActButton />}
+        {hasActButton && <ActButton />}
         {medium &&
             displayOptions.mediumPosition === 'bottom' && <Image {...medium} />}
     </CarouselSlide>
@@ -32,7 +32,7 @@ export const StoryStep = ({
 
 StoryStep.propTypes = {
     className: PropTypes.string,
-    last: PropTypes.bool,
+    hasActButton: PropTypes.bool,
     ...StoryStepPropType,
 };
 

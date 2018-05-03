@@ -23,19 +23,19 @@ describe('<ObjectStep />', () => {
         expect(richText.prop('html')).toBe('<p>hello world</p>');
     });
 
-    it('should display a textarea with value = session.data.getObject()', () => {
-        sessionData.getObject.mockImplementation(() => 'object in storage');
+    it('should display a textarea with value = session.data.getMailObject()', () => {
+        sessionData.getMailObject.mockImplementation(() => 'object in storage');
 
         const wrapper = shallow(<ObjectStep {...defaultProps} />);
         const textarea = wrapper.find('textarea');
         expect(textarea.prop('value')).toBe('object in storage');
     });
 
-    it('should call sessionData.setObject with event value when triggering textarea onChange', () => {
+    it('should call sessionData.setMailObject with event value when triggering textarea onChange', () => {
         const wrapper = shallow(<ObjectStep {...defaultProps} />);
         const textarea = wrapper.find('textarea');
 
         textarea.simulate('change', { target: { value: 'new value' } });
-        expect(sessionData.setObject).toHaveBeenCalledWith('new value');
+        expect(sessionData.setMailObject).toHaveBeenCalledWith('new value');
     });
 });

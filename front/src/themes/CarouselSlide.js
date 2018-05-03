@@ -19,14 +19,14 @@ CarouselSlide.defauldProps = {
 };
 
 export default glamorous(CarouselSlide)({
-    height: window.innerHeight,
+    height: '100vh',
     overflow: 'auto',
     fontSize: 24,
     '& > *': {
         flex: '1 0 0',
     },
     '& .rich-text, & > p': {
-        padding: '2rem 3rem',
+        padding: '2em 3em',
         lineHeight: '1.5em',
         textAlign: 'justify',
     },

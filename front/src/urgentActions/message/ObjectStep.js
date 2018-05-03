@@ -7,13 +7,13 @@ import CarouselSlide from '../../themes/CarouselSlide';
 import sessionData from '../../sessionData';
 export class ObjectStep extends Component {
     state = {
-        object: sessionData.getObject() || '',
+        object: sessionData.getMailObject() || '',
     };
 
     changeObject = e => {
         const object = e.target.value;
         this.setState({ object });
-        sessionData.setObject(object);
+        sessionData.setMailObject(object);
     };
 
     render() {

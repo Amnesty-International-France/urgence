@@ -85,10 +85,10 @@ describe('<StoryStep />', () => {
         expect(richText.prop('html')).toBe('<p>Hello world!</p>');
     });
 
-    it('should display ActButton if last is true', () => {
+    it('should display ActButton if hasActButton is true', () => {
         const props = {
             ...defaultProps,
-            last: true,
+            hasActButton: true,
         };
 
         const wrapper = shallow(<StoryStep {...props} />);

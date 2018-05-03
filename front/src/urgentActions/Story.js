@@ -39,7 +39,7 @@ export class Story extends Component {
             <Fragment>
                 {(!story || !story.length) && (
                     <p className="error">
-                        This urgent action does not exist anymore.
+                        Cette action urgent n&#39;existe plus.
                     </p>
                 )}
 
@@ -54,7 +54,7 @@ export class Story extends Component {
                                 <StoryStep
                                     key={step.content}
                                     {...step}
-                                    last={index === story.length - 1}
+                                    hasActButton={index === story.length - 1}
                                 />
                             ))}
                         </Carousel>

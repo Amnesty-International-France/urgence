@@ -8,7 +8,7 @@ const StyledButton = glamorous.button({
     padding: '1rem',
     color: 'white',
     width: '100%',
-    margin: '20px 0',
+    margin: '1rem 0',
     '&:active': {
         backgroundColor: 'rgb(44, 103, 161)',
     },

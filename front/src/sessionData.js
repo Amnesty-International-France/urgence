@@ -1,7 +1,7 @@
 export const sessionData = storage => ({
-    getObject: () => storage.getItem('amnesty_object'),
-    setObject(value) {
-        storage.setItem('amnesty_object', value);
+    getMailObject: () => storage.getItem('amnesty_mail_object'),
+    setMailObject(value) {
+        storage.setItem('amnesty_mail_object', value);
         return this;
     },
 });

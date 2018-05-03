@@ -1,28 +1,28 @@
 import { sessionData } from './sessionData';
 
 describe('sessionData', () => {
-    describe('.getObject', () => {
-        it('call storage.getItem(amnesty_opbject) and return its result', () => {
+    describe('.getMailObject', () => {
+        it('calls storage.getItem(amnesty_opbject) and returns its result', () => {
             const storage = {
                 getItem: jest.fn(() => 'object value'),
             };
 
-            expect(sessionData(storage).getObject()).toBe('object value');
-            expect(storage.getItem).toHaveBeenCalledWith('amnesty_object');
+            expect(sessionData(storage).getMailObject()).toBe('object value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_mail_object');
         });
     });
 
-    describe('.setObject', () => {
-        it('call storage.setItem(amnesty_opbject, value) and return itself', () => {
+    describe('.setMailObject', () => {
+        it('calls storage.setItem(amnesty_object, value) and returns itself', () => {
             const storage = {
                 setItem: jest.fn(),
             };
 
             const mySessionData = sessionData(storage);
 
-            expect(mySessionData.setObject('value')).toEqual(mySessionData);
+            expect(mySessionData.setMailObject('value')).toEqual(mySessionData);
             expect(storage.setItem).toHaveBeenCalledWith(
-                'amnesty_object',
+                'amnesty_mail_object',
                 'value',
             );
         });
