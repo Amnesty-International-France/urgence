@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../themes/Button';
 
-export const MailTo = ({ recipient = {}, subject, body, label, disabled }) => (
+export const MailTo = ({
+    recipient = {},
+    subject,
+    body,
+    label,
+    disabled,
+    afterMail,
+}) => (
     <a
         href={`mailto:${encodeURIComponent(
             recipient.mail,
@@ -23,7 +30,7 @@ export const MailTo = ({ recipient = {}, subject, body, label, disabled }) => (
         target="_blank"
         disabled={disabled}
     >
-        <Button label={label} disabled={disabled} />
+        <Button label={label} disabled={disabled} onClick={afterMail} />
     </a>
 );
 

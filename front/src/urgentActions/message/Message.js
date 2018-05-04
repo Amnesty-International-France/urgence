@@ -31,6 +31,15 @@ export class Message extends Component {
         history.push(generateUrl('message', { id, page }));
     };
 
+    afterMail = () => {
+        const {
+            history,
+            match: { params },
+        } = this.props;
+
+        history.push(generateUrl('thanks', params));
+    };
+
     changeObject = e => {
         const object = e.target.value;
         this.setState({ object });
@@ -93,6 +102,7 @@ export class Message extends Component {
                                         messageTemplate={messageTemplate}
                                         signature={signature}
                                         object={object}
+                                        afterMail={this.afterMail}
                                     />
                                 }
                             />
