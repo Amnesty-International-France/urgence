@@ -20,7 +20,7 @@ CarouselSlide.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-CarouselSlide.defauldProps = {
+CarouselSlide.defaultProps = {
     backgroundColor: 'white',
     color: 'black',
 };
