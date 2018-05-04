@@ -3,11 +3,13 @@ import { shallow } from 'enzyme';
 
 import { StoryStep } from './StoryStep';
 import ActButton from './ActButton';
+import { colors } from '../themes/colors';
 
 describe('<StoryStep />', () => {
     const defaultProps = {
         displayOptions: {
             backgroundColor: 'red',
+            color: 'white',
             mediumPosition: 'top',
         },
         medium: {
@@ -16,6 +18,14 @@ describe('<StoryStep />', () => {
         },
         content: 'Abdolfatah Soltani is a Human Rights Iranian lawyer.',
     };
+
+    it('should displayCarouselSlide with backgroundColor and color props', () => {
+        const wrapper = shallow(<StoryStep {...defaultProps} />);
+
+        const carouselSlide = wrapper.find('glamorous(CarouselSlide)');
+        expect(carouselSlide.prop('backgroundColor')).toBe(colors.red);
+        expect(carouselSlide.prop('color')).toBe(colors.white);
+    });
 
     it('should display a picture with correct URL and title if any is provided', () => {
         const props = {

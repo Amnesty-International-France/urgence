@@ -17,6 +17,7 @@ export const StoryStep = ({
 }) => (
     <CarouselSlide
         backgroundColor={colors[displayOptions.backgroundColor]}
+        color={colors[displayOptions.color]}
         className={className}
     >
         {medium &&

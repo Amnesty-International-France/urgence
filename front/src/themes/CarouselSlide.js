@@ -2,8 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
-export const CarouselSlide = ({ className, backgroundColor, children }) => (
-    <div className={className} style={{ backgroundColor }}>
+export const CarouselSlide = ({
+    className,
+    backgroundColor,
+    color,
+    children,
+}) => (
+    <div className={className} style={{ backgroundColor, color }}>
         {children}
     </div>
 );
@@ -11,11 +16,13 @@ export const CarouselSlide = ({ className, backgroundColor, children }) => (
 CarouselSlide.propTypes = {
     className: PropTypes.string,
     backgroundColor: PropTypes.string,
+    color: PropTypes.string,
     children: PropTypes.node.isRequired,
 };
 
-CarouselSlide.defauldProps = {
+CarouselSlide.defaultProps = {
     backgroundColor: 'white',
+    color: 'black',
 };
 
 export default glamorous(CarouselSlide)({

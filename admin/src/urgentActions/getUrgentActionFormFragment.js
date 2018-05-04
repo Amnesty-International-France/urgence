@@ -74,6 +74,13 @@ export default ({ edit }) => (
                         choices={colorChoices}
                         optionText={<Color />}
                     />
+                    <SelectInput
+                        validate={required()}
+                        source="displayOptions.color"
+                        label="Text color"
+                        choices={colorChoices}
+                        optionText={<Color />}
+                    />
                 </SimpleFormIterator>
             </ArrayInput>
         </FormTab>
