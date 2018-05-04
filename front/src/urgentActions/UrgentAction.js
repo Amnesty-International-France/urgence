@@ -7,6 +7,7 @@ import { Query } from 'react-apollo';
 
 import Story from './Story';
 import Act from './Act';
+import Thanks from './Thanks';
 import Message from './message/Message';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
@@ -73,6 +74,10 @@ export const renderUrgentAction = ({ step, id }) => ({
                 loading={loading}
             />
         );
+    }
+
+    if (step === 'thanks') {
+        return <Thanks />;
     }
 };
 
