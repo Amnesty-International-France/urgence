@@ -14,6 +14,20 @@ services:
         user: "${UID}:${GID}"
         working_dir: /app/admin
 
+    admin_prod:
+        image: node:9
+        command: [sh, -c, "npm install --save query-string@5.1.1 && cd node_modules/ra-core && npm install --save query-string@5.1.1 && cd /app && npm run build"]
+        volumes:
+            - ./admin:/app
+        environment:
+            NODE_ENV: production
+            PUBLIC_URL: https://rapide.amnesty.fr/admin
+            REACT_APP_API_URL: https://rapide.amnesty.fr/api
+            REACT_APP_FRONT_BASE_URL: https://rapide.amnesty.fr
+        user: "${UID}:${GID}"
+        working_dir: /app
+
+
     admin_dev:
         image: node:9
         command: [sh, -c, "npm install --save query-string@5.1.1 && cd node_modules/ra-core && npm install --save query-string@5.1.1 && cd /app/admin && npm run build"]
@@ -35,6 +49,17 @@ services:
         environment:
             NODE_ENV: production
             REACT_APP_API_URL: https://amnesty.marmelab.com/api
+        user: "${UID}:${GID}"
+        working_dir: /app
+
+    front_prod:
+        image: node:9
+        command: "npm run build-web"
+        volumes:
+            - ./front:/app
+        environment:
+            NODE_ENV: production
+            REACT_APP_API_URL: https://rapide.amnesty.fr/api
         user: "${UID}:${GID}"
         working_dir: /app
 

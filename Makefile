@@ -114,7 +114,10 @@ debug-e2e:
 	$(DOCKER_COMPOSE_E2E) run test-e2e
 
 deploy-staging:
-	npx shipit staging deploy
+	NODE_ENV=staging npx shipit staging deploy
+
+deploy-prod:
+	NODE_ENV=production npx shipit production deploy
 
 install-admin:
 	$(DOCKER_COMPOSE) run --rm --no-deps admin npm install
@@ -125,17 +128,45 @@ build-storybook:
 build-front-staging:
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_staging
 
-build-admin-staging:
-	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_staging
-
-build-api:
-	$(DOCKER_COMPOSE) run --rm --no-deps api npm run build
+build-front-prod:
+	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_prod
 
 build-front-dev:
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_dev
 
+build-front:
+ifeq ($(NODE_ENV),"staging")
+	$(MAKE) build-front-staging
+else
+    ifeq ($(NODE_ENV),"production")
+		$(MAKE) build-front-prod
+    else
+		$(MAKE) build-front-dev
+    endif
+endif
+
+build-admin-staging:
+	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_staging
+
+build-admin-prod:
+	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_prod
+
 build-admin-dev:
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_dev
+
+build-admin:
+ifeq ($(NODE_ENV), "staging")
+	$(MAKE) build-admin-staging
+else
+    ifeq ($(NODE_ENV), "production")
+		$(MAKE) build-admin-prod
+    else
+		$(MAKE) build-admin-dev
+    endif
+endif
+
+build-api:
+	$(DOCKER_COMPOSE) run --rm --no-deps api npm run build
 
 build-dev: build-front-dev build-admin-dev
 

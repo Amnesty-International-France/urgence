@@ -15,15 +15,20 @@ module.exports = shipit => {
             deployTo: BASE_FOLDER,
             servers: 'ubuntu@52.17.15.141',
         },
+        production: {
+            branch: process.env.BRANCH || 'master',
+            deployTo: '/home/amnesty',
+            servers: 'amnesty@rapide.amnesty.fr',
+        }
     });
 
     shipit.blTask('buildAdmin', async () => {
-        await shipit.local('make build-admin-staging');
+        await shipit.local(`NODE_ENV=${process.env.NODE_ENV} make build-admin`);
         await shipit.local(`cp -R ./admin/build ${shipit.workspace}/admin/`);
     });
 
     shipit.blTask('buildFront', async () => {
-        await shipit.local('make build-front-staging');
+        await shipit.local(`NODE_ENV=${process.env.NODE_ENV} make build-front`);
         await shipit.local(`cp -R ./front/build ${shipit.workspace}/front/`);
     });
 
