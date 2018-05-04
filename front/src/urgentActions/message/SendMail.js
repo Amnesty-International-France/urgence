@@ -7,7 +7,7 @@ import { templateToBodyText } from './templateToBodyText';
 export const SendMail = ({ messageTemplate, recipient, object, signature }) => (
     <MailTo
         disabled={!object || !signature}
-        label="Send mail"
+        label="Envoyer"
         recipient={recipient}
         subject={object}
         body={templateToBodyText(messageTemplate, signature)}
