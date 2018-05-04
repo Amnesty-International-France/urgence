@@ -30,6 +30,11 @@ const query = gql`
             message_template {
                 value
             }
+            recipient {
+                mail
+                copies_to
+                cci
+            }
         }
     }
 `;
@@ -63,6 +68,7 @@ export const renderUrgentAction = ({ step, id }) => ({
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
                 objectIndication={get(data, 'UrgentAction.object_indication')}
+                recipient={get(data, 'UrgentAction.recipient')}
                 loading={loading}
             />
         );

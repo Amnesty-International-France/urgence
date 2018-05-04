@@ -20,7 +20,12 @@ export class ObjectStep extends Component {
     };
 
     render() {
-        const { objectIndication, messageTemplate, className } = this.props;
+        const {
+            objectIndication,
+            messageTemplate,
+            className,
+            recipient,
+        } = this.props;
         const { object } = this.state;
 
         return (
@@ -37,6 +42,7 @@ export class ObjectStep extends Component {
                 <RichText html={objectIndication} />
                 <MailTo
                     label="Send mail"
+                    recipient={recipient}
                     disabled={!object}
                     subject={object}
                     body={templateToBodyText(messageTemplate)}
@@ -52,6 +58,11 @@ ObjectStep.propTypes = {
     messageTemplate: PropTypes.arrayOf(
         PropTypes.shape({ value: PropTypes.string.isRequired }),
     ),
+    recipient: PropTypes.shape({
+        mail: PropTypes.string.isRequired,
+        copies_to: PropTypes.string,
+        cci: PropTypes.string,
+    }).isRequired,
 };
 
 export default glamorous(ObjectStep)({

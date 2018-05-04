@@ -24,6 +24,12 @@ export const urgentActionsTypeDefs = gql`
         value: String!
     }
 
+    input RecipientInput {
+        mail: String!
+        copies_to: String
+        cci: String
+    }
+
     type Medium {
         title: String!
         src: Upload!
@@ -62,6 +68,12 @@ export const urgentActionsTypeDefs = gql`
         value: String!
     }
 
+    type Recipient {
+        mail: String!
+        copies_to: String
+        cci: String
+    }
+
     type UrgentAction {
         id: ID!
         title: String!
@@ -71,6 +83,7 @@ export const urgentActionsTypeDefs = gql`
         message_template: [ParagraphTemplate]!
         creation_date: DATE!
         last_edition_date: DATE!
+        recipient: Recipient
     }
 
     extend type Query {
@@ -86,6 +99,7 @@ export const urgentActionsTypeDefs = gql`
             call_to_action: String!
             object_indication: String!
             message_template: [MessageTemplateInput]!
+            recipient: RecipientInput!
         ): UrgentAction
         updateUrgentAction(
             id: ID!
@@ -94,6 +108,7 @@ export const urgentActionsTypeDefs = gql`
             call_to_action: String!
             object_indication: String!
             message_template: [MessageTemplateInput]!
+            recipient: RecipientInput!
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
     }
