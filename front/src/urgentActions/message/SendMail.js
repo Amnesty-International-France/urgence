@@ -4,13 +4,20 @@ import PropTypes from 'prop-types';
 import { MailTo } from '../../themes/MailTo';
 import { templateToBodyText } from './templateToBodyText';
 
-export const SendMail = ({ messageTemplate, recipient, object, signature }) => (
+export const SendMail = ({
+    messageTemplate,
+    recipient,
+    object,
+    signature,
+    afterMail,
+}) => (
     <MailTo
         disabled={!object || !signature}
         label="Envoyer"
         recipient={recipient}
         subject={object}
         body={templateToBodyText(messageTemplate, signature)}
+        afterMail={afterMail}
     />
 );
 
@@ -26,6 +33,7 @@ SendMail.propTypes = {
     }).isRequired,
     object: PropTypes.string,
     signature: PropTypes.string,
+    afterMail: PropTypes.func,
 };
 
 export default SendMail;
