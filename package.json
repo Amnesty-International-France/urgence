@@ -22,6 +22,7 @@
       "jest-canvas-mock",
       "./setup-test"
     ],
+    "restoreMocks": true,
     "moduleDirectories": [
       "node_modules",
       "front/node_modules",

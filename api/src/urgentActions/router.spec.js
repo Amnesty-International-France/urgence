@@ -28,8 +28,48 @@ describe('Urgent Actions Router', () => {
             expect(response.status).toBe(200);
         });
 
-        describe('PDF content', () => {
-            it('should display all chosen paragraphs');
+        describe('Letter Content', () => {
+            it('should display all chosen paragraphs', async () => {
+                const pdfSpy = jest.spyOn(pdf, 'create');
+
+                const urgentAction = await createUrgentAction({
+                    message_template: JSON.stringify([
+                        { value: 'Dear Minister,' },
+                        { value: 'I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.' }
+                    ]),
+                });
+
+                const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
+                expect(response.status).toBe(200);
+
+                const renderedLetter = pdfSpy.mock.calls[0][0];
+                expect(renderedLetter).toContain('<p>Dear Minister,</p>');
+                expect(renderedLetter).toContain('<p>I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.</p>');
+            });
+
+            it('should display given subject', async () => {
+                const pdfSpy = jest.spyOn(pdf, 'create');
+
+                const urgentAction = await createUrgentAction();
+
+                const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf?subject=Asking%20for%20a%20fair%20trial`);
+                expect(response.status).toBe(200);
+
+                const renderedLetter = pdfSpy.mock.calls[0][0];
+                expect(renderedLetter).toContain('<h3 class="subject">Asking for a fair trial</h3>');
+            });
+
+            it('should display passed signature', async () => {
+                const pdfSpy = jest.spyOn(pdf, 'create');
+
+                const urgentAction = await createUrgentAction();
+
+                const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf?signature=John%20Doe`);
+                expect(response.status).toBe(200);
+
+                const renderedLetter = pdfSpy.mock.calls[0][0];
+                expect(renderedLetter).toContain('<p class="signature">John Doe</p>');
+            });
         });
     });
 

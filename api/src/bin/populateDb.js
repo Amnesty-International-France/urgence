@@ -33,18 +33,18 @@ const urgentActions = [
         message_template: JSON.stringify([
             {
                 value: `
-                    <p>Dear Minister,</p>
-                    <p>I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.</p>
+                    Dear Minister,
+                    I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.
                 `,
             },
             {
                 value: `
-                    <p>On 5 July, police arrested Idil Eser along with seven other human rights defenders and two trainers, who were simply attending a workshop in Istanbul.</p>
+                    On 5 July, police arrested Idil Eser along with seven other human rights defenders and two trainers, who were simply attending a workshop in Istanbul.
                 `,
             },
             {
                 value: `
-                    <p>They were doing nothing wrong. They are being investigated on suspicion of "membership of an armed terrorist organization", a baseless and ridiculous accusation.</p>
+                    They were doing nothing wrong. They are being investigated on suspicion of "membership of an armed terrorist organization", a baseless and ridiculous accusation.
                 `,
             },
         ]),
@@ -67,5 +67,3 @@ client(batchInsertQuery)
         console.error(err);
         process.exit(1);
     });
-
-
