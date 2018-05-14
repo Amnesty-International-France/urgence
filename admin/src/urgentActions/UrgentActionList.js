@@ -7,7 +7,9 @@ import {
     TextField,
     DateField,
 } from 'react-admin';
-import { PreviewLink } from './PreviewLink';
+
+import PreviewLink from './PreviewLink';
+import PreviewLetter from './PreviewLetter';
 
 const dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 
@@ -30,6 +32,7 @@ export default (props) => (
                     />
                     <EditButton />
                     <PreviewLink />
+                    <PreviewLetter />
                 </Datagrid>
             }
         />
