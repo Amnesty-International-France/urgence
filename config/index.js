@@ -90,7 +90,7 @@ const config = convict({
     },
     uploadUrl: {
         format: String,
-        default: 'http://localhost:6000',
+        default: 'http://localhost',
         env: 'UPLOAD_URL'
     }
 });
