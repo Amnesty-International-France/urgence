@@ -85,7 +85,7 @@ const config = convict({
     },
     uploadDir: {
         format: String,
-        default: '/app/var/upload',
+        default: '/app/var/uploads',
         env: 'UPLOAD_DIR'
     },
     uploadUrl: {
