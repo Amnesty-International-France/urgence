@@ -18,8 +18,10 @@ export const uploadImage = async upload => {
     }
     const { stream, filename } = rawFile;
 
+    const extension = filename.split('.').pop();
+
     const id = shortid.generate();
-    const savedFilename = `${id}-${filename}`;
+    const savedFilename = `${id}.${extension}`;
     const path = `${config.uploadDir}/${savedFilename}`;
 
     return new Promise((resolve, reject) =>
@@ -33,6 +35,6 @@ export const uploadImage = async upload => {
             })
             .pipe(fs.createWriteStream(path))
             .on('error', reject)
-            .on('finish', () => resolve(savedFilename))
+            .on('finish', () => resolve(path))
     );
 }
