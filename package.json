@@ -6,8 +6,8 @@
     "graphql-tag": "2.8.0"
   },
   "scripts": {
-    "test": "jest --ci --forceExit",
-    "test-watch": "jest --watch"
+    "test": "NODE_ENV=test jest --ci --forceExit",
+    "test-watch": "NODE_ENV=test jest --watch"
   },
   "devDependencies": {
     "jest": "22.4.3",
@@ -22,6 +22,7 @@
       "jest-canvas-mock",
       "./setup-test"
     ],
+    "restoreMocks": true,
     "moduleDirectories": [
       "node_modules",
       "front/node_modules",

@@ -38,7 +38,7 @@ connect-api:
 psql:
 	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
 
-test: test-unit test-e2e
+test: migration-test test-unit test-e2e
 
 test-unit:
 	$(DOCKER_COMPOSE_TEST) run --rm test npm run test
@@ -46,15 +46,20 @@ test-unit:
 test-watch:
 	$(DOCKER_COMPOSE_TEST) run --rm test npm run test-watch
 
-DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "./node_modules/.bin/db-migrate \
+test-stop-dockers:
+	$(DOCKER_COMPOSE_TEST) down
+
+DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && ./node_modules/.bin/db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
 	-e api
 
-test-stop-dockers:
-	$(DOCKER_COMPOSE_TEST) down
+DB_MIGRATE_TEST = $(DOCKER_COMPOSE_TEST) run --rm test sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && ./api/node_modules/.bin/db-migrate \
+	--config=./api/database.js \
+	--migrations-dir=/app/api/migrations \
+	-e api
 
-DB_MIGRATE_STAGING = $(DOCKER_COMPOSE_STAGING) run --rm api sh -c "./node_modules/.bin/db-migrate \
+DB_MIGRATE_STAGING = $(DOCKER_COMPOSE_STAGING) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && ./node_modules/.bin/db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
 	-e api
@@ -68,6 +73,10 @@ migration-new: ## make create-migration MIGRATION_TITLE=whatever-title
 
 migration-down: ## make create-migration NB_MIGRATIONS=2
 	$(DB_MIGRATE) down -c ${NB_MIGRATIONS}"
+
+migration-test:
+	mkdir -p var/data-test/
+	$(DB_MIGRATE_TEST) up"
 
 migration-staging:
 	$(DB_MIGRATE_STAGING) up"

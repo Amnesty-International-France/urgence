@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, follow" />
+    <style>
+        body {
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .message {
+            margin-top: 6cm;
+        }
+
+        .signature {
+            margin-top: 3cm;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h3 class="subject">{{ subject }}</h3>
+        {% for message in urgentAction.message_template %}
+            <p>{{ message.value }}</p>
+        {% endfor %}
+        <p class="signature">{{ signature }}</p>
+    </div>
+</body>
+</html>
