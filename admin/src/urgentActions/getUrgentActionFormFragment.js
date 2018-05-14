@@ -30,6 +30,7 @@ export default ({ edit }) => (
             <ArrayInput source="story">
                 <SimpleFormIterator>
                     <RichTextInput
+                        label="content"
                         source="content"
                         isRequired
                     />

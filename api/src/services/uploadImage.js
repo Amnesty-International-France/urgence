@@ -1,13 +1,14 @@
 import fs from 'fs';
 import shortid from 'shortid';
+import path from 'path';
 
 import config from '../../../config';
 
 export const getSavedFileName = filename => {
-    const extension = filename.split('.').pop();
+    const extension = path.extname(filename);
     const id = shortid.generate();
 
-    return `${id}.${extension}`;
+    return `${id}${extension}`;
 }
 
 export const uploadImage = async upload => {
