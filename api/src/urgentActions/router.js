@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+import frLocale from 'date-fns/locale/fr';
 import path from 'path';
 import pdf from 'html-pdf';
 import { Router } from 'express';
@@ -22,6 +24,7 @@ urgentActionsRouter.get('/:id.pdf', async (req, res) => {
     }
 
     const urgentActionLetter = nunjucks.render(path.join(__dirname, './letter.html'), {
+        date: format(new Date(), 'DD MMMM YYYY', { locale: frLocale }),
         signature,
         subject,
         urgentAction,
@@ -29,7 +32,7 @@ urgentActionsRouter.get('/:id.pdf', async (req, res) => {
 
     return pdf.create(urgentActionLetter, {
         format: 'A4',
-        border: '1cm',
+        border: '1.5cm',
     }).toStream((err, stream) => {
         stream.pipe(res);
     });
