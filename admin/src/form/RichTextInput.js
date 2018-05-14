@@ -5,7 +5,7 @@ import { Labeled, required as originalRequired } from 'react-admin';
 import { default as BaseRichTextInput } from 'ra-input-rich-text';
 
 const toolbarOptions = [
-    [{ size: ['normal', 'large', 'huge']}, 'bold', 'italic']
+    [{ size: [false, 'large', 'huge']}, 'bold', 'italic']
 ];
 
 const stripHTML = text => text ? text.replace(/<.*?>/g, '') : text;
