@@ -8,6 +8,7 @@ services:
             - POSTGRES_PASSWORD
             - CORS_ALLOWED_ORIGIN="https://amnesty.marmelab.com"
             - UPLOAD_DIR=/app/uploads
+            - UPLOAD_URL=https://amnesty.marmelab.com/static
 
     nginx:
         image: nginx
