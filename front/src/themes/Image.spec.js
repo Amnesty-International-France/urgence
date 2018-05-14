@@ -5,7 +5,9 @@ import { Image } from './Image';
 
 describe('<Image />', () => {
     it('should render a div with correct background image and title', () => {
-        const wrapper = shallow(<Image src="foo.jpg" title="Hello!" />);
+        const wrapper = shallow(
+            <Image src="http://localhost:4000/static/foo.jpg" title="Hello!" />,
+        );
         const image = wrapper.find('div');
 
         expect(image.prop('style').backgroundImage).toBe(

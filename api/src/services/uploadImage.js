@@ -1,7 +1,15 @@
 import fs from 'fs';
 import shortid from 'shortid';
+import path from 'path';
 
 import config from '../../../config';
+
+export const getSavedFileName = filename => {
+    const extension = path.extname(filename);
+    const id = shortid.generate();
+
+    return `${id}${extension}`;
+}
 
 export const uploadImage = async upload => {
     if (!upload) {
@@ -18,9 +26,9 @@ export const uploadImage = async upload => {
     }
     const { stream, filename } = rawFile;
 
-    const id = shortid.generate();
-    const savedFilename = `${id}-${filename}`;
-    const path = `${config.uploadDir}/${savedFilename}`;
+    const savedFileName = getSavedFileName(filename);
+    const path = `${config.uploadDir}/${savedFileName}`;
+    const url = `${config.uploadUrl}/${savedFileName}`;
 
     return new Promise((resolve, reject) =>
         stream
@@ -33,6 +41,6 @@ export const uploadImage = async upload => {
             })
             .pipe(fs.createWriteStream(path))
             .on('error', reject)
-            .on('finish', () => resolve(savedFilename))
+            .on('finish', () => resolve(url))
     );
 }

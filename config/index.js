@@ -85,12 +85,12 @@ const config = convict({
     },
     uploadDir: {
         format: String,
-        default: '/app/var/upload',
+        default: '/app/var/uploads',
         env: 'UPLOAD_DIR'
     },
     uploadUrl: {
         format: String,
-        default: 'http://localhost:4000/static',
+        default: 'http://localhost',
         env: 'UPLOAD_URL'
     }
 });

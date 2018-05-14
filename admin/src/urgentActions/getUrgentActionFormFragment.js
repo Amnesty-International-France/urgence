@@ -2,38 +2,17 @@ import React from 'react';
 import {
     FormTab,
     TabbedForm,
-    TextInput,
-    LongTextInput,
     ArrayInput,
     SimpleFormIterator,
-    SelectInput,
+    LongTextInput,
     required,
-    ImageInput,
-    ImageField,
 } from 'react-admin';
 
 import RichTextInput from '../form/RichTextInput';
 
-import get from 'lodash.get';
-
 import ParagraphTemplateInput from './ParagraphTemplateInput';
-import { positionChoices, colorChoices } from './choices';
-
-const Color = ({ record }) =>
-    <div style={{ background: record.name, width: '100%', height: '2rem' }} />;
-
-export const validateMedium = (value, record, _, key) => {
-    const mediumKey = key.split('.').slice(0, -1).join('.');
-    const titleKey = `${mediumKey}.title`;
-    const srcKey = `${mediumKey}.src`;
-    const title = get(record, titleKey);
-    const src = get(record, srcKey);
-    if ((title && src) || (!title && !src)) {
-        return undefined;
-    }
-
-    return 'You need to specify both src and title for medium or none of them';
-};
+import MediumInput from './MediumInput';
+import DisplayOptionsInput from './DisplayOptionsInput';
 
 export const validateMail = text =>
     text && text
@@ -51,36 +30,12 @@ export default ({ edit }) => (
             <ArrayInput source="story">
                 <SimpleFormIterator>
                     <RichTextInput
+                        label="content"
                         source="content"
                         isRequired
                     />
-                    <label>medium</label>
-                    <TextInput  validate={validateMedium} source="medium.title" label="title" />
-                    <ImageInput validate={validateMedium} source="medium.src" label="src">
-                        <ImageField source="medium.src" title="Preview" />
-                    </ImageInput>
-                    <TextInput disabled source="medium.src" title="Preview" />
-                    <label>theme</label>
-                    <SelectInput
-                        validate={required()}
-                        source="displayOptions.mediumPosition"
-                        label="Medium position"
-                        choices={positionChoices}
-                    />
-                    <SelectInput
-                        validate={required()}
-                        source="displayOptions.backgroundColor"
-                        label="Background color"
-                        choices={colorChoices}
-                        optionText={<Color />}
-                    />
-                    <SelectInput
-                        validate={required()}
-                        source="displayOptions.color"
-                        label="Text color"
-                        choices={colorChoices}
-                        optionText={<Color />}
-                    />
+                    <MediumInput source="medium" />
+                    <DisplayOptionsInput source="displayOptions" />
                 </SimpleFormIterator>
             </ArrayInput>
         </FormTab>
