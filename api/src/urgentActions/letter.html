@@ -9,11 +9,25 @@
             line-height: 1.5;
         }
 
+        .date {
+            margin-left: 60%;
+        }
+
         .message {
             margin-top: 6cm;
         }
 
+        .subject {
+            margin-top: 1cm;
+            font-size: 14px;
+        }
+
+        .subject strong {
+            text-decoration: underline;
+        }
+
         .signature {
+            font-size: 14px;
             margin-top: 3cm;
             text-align: right;
         }
@@ -21,7 +35,10 @@
 </head>
 <body>
     <div class="message">
-        <h3 class="subject">{{ subject }}</h3>
+        <p class="date">Le {{ date }}</p>
+        <h3 class="subject">
+            <strong>Objet :</strong> {{ subject }}
+        </h3>
         {% for message in urgentAction.message_template %}
             <p>{{ message.value }}</p>
         {% endfor %}

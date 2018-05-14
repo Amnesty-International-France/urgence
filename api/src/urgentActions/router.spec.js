@@ -1,5 +1,6 @@
 import request from 'supertest';
 import pdf from 'html-pdf';
+import lolex from 'lolex';
 
 import app from '../server';
 import { createUrgentAction, truncateAll } from '../tests/fixtureLoader';
@@ -29,6 +30,11 @@ describe('Urgent Actions Router', () => {
         });
 
         describe('Letter Content', () => {
+            let clock;
+            beforeEach(() => {
+                clock = lolex.install({ now: new Date('2018-05-14 12:00:00')});
+            });
+
             it('should display all chosen paragraphs', async () => {
                 const pdfSpy = jest.spyOn(pdf, 'create');
 
@@ -56,7 +62,7 @@ describe('Urgent Actions Router', () => {
                 expect(response.status).toBe(200);
 
                 const renderedLetter = pdfSpy.mock.calls[0][0];
-                expect(renderedLetter).toContain('<h3 class="subject">Asking for a fair trial</h3>');
+                expect(renderedLetter).toContain('Asking for a fair trial');
             });
 
             it('should display passed signature', async () => {
@@ -69,6 +75,23 @@ describe('Urgent Actions Router', () => {
 
                 const renderedLetter = pdfSpy.mock.calls[0][0];
                 expect(renderedLetter).toContain('<p class="signature">John Doe</p>');
+            });
+
+            it('should display current date', async () => {
+                const pdfSpy = jest.spyOn(pdf, 'create');
+
+                const urgentAction = await createUrgentAction();
+                const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
+                expect(response.status).toBe(200);
+
+                const renderedLetter = pdfSpy.mock.calls[0][0];
+                expect(renderedLetter).toContain('Le 14 mai 2018');
+            });
+
+            afterEach(() => {
+                if (clock) {
+                    clock.uninstall();
+                }
             });
         });
     });
