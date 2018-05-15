@@ -1,11 +1,27 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+@font-face {
+    font-family: 'Amnesty Trade Gothic';
+    src: url('fonts/AmnestyTradeGothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Amnesty Trade Gothic';
+    src: url('fonts/AmnestyTradeGothic-Bd2.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
 body {
-    font-family: 'Arial Narrow', Arial, sans-serif;
-    line-height: 1.3;
+    font-family: 'Amnesty Trade Gothic', 'Arial', sans-serif;
+    line-height: 26px;
+    font-size: 20px;
 }
 
 body .slick-slider {
@@ -17,7 +33,8 @@ body .slick-list, body .slick-track, body .slick-slide, body .slick-slide > div 
 }
 
 .ql-size-large {
-    font-size: 32px;
+    font-weight: bold;
+    font-size: 28px;
 }
 
 .ql-size-huge {

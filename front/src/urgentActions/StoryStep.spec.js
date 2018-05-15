@@ -3,12 +3,13 @@ import { shallow } from 'enzyme';
 
 import { StoryStep } from './StoryStep';
 import ActButton from './ActButton';
-import { colors } from '../themes/colors';
+import { colors, white, black } from '../themes/colors';
 
 describe('<StoryStep />', () => {
     const defaultProps = {
+        className: 'story-step',
         displayOptions: {
-            backgroundColor: 'red',
+            backgroundColor: white,
             color: 'white',
             mediumPosition: 'top',
         },
@@ -19,12 +20,12 @@ describe('<StoryStep />', () => {
         content: 'Abdolfatah Soltani is a Human Rights Iranian lawyer.',
     };
 
-    it('should displayCarouselSlide with backgroundColor and color props', () => {
+    it('should displayCarouselSlide with correct backgroundColor (and then color)', () => {
         const wrapper = shallow(<StoryStep {...defaultProps} />);
 
-        const carouselSlide = wrapper.find('glamorous(CarouselSlide)');
-        expect(carouselSlide.prop('backgroundColor')).toBe(colors.red);
-        expect(carouselSlide.prop('color')).toBe(colors.white);
+        const storyStep = wrapper.find('.story-step');
+        expect(storyStep.prop('style').backgroundColor).toBe(white);
+        expect(storyStep.prop('style').color).toBe(black);
     });
 
     it('should display a picture with correct URL and title if any is provided', () => {
@@ -65,7 +66,7 @@ describe('<StoryStep />', () => {
         };
 
         const wrapper = shallow(<StoryStep {...props} />);
-        const image = wrapper.childAt(0);
+        const image = wrapper.childAt(0).childAt(0);
         expect(image.is('glamorous(Image)')).toBeTruthy();
     });
 
@@ -79,8 +80,7 @@ describe('<StoryStep />', () => {
         };
 
         const wrapper = shallow(<StoryStep {...props} />);
-        const image = wrapper.childAt(1);
-
+        const image = wrapper.childAt(1).childAt(0);
         expect(image.is('glamorous(Image)')).toBeTruthy();
     });
 

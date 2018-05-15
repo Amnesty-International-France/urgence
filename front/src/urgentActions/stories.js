@@ -2,68 +2,67 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import StoryStep from './StoryStep';
-import {
-    dustyOrange,
-    tomato,
-    darkHotPink,
-    brightYellow,
-} from '../themes/colors';
 import Story from './Story';
+import { black, yellow, pink } from '../themes/colors';
+
+const defaultStoryProps = {
+    medium: {
+        src: '/img/abdolfatah-soltani.jpg',
+        title: 'Abdolfatah Soltani',
+    },
+    displayOptions: {
+        mediumPosition: 'top',
+        backgroundColor: black,
+    },
+    content: `
+        <p>
+            Le 26 mars, une cour d'appel militaire a confirmé <span class="ql-size-large">la condamnation à mort</span> des deux hommes,
+            à l'issue d'un procès manifestement inique fondé sur des « aveux » extorqués sous la torture durant leur disparition forcée.
+        </p>
+    `,
+};
 
 storiesOf('Story Step', module)
-    .add('With Top Picture', () => (
-        <div style={{ maxWidth: 360, height: '100vh', maxHeight: 540 }}>
+    .add('Top Picture, Black Background', () => (
+        <div style={{ height: '100vh' }}>
+            <StoryStep {...defaultStoryProps} />
+        </div>
+    ))
+    .add('Top Picture, Yellow Background', () => (
+        <div style={{ height: '100vh' }}>
             <StoryStep
-                medium={{
-                    src: '/img/abdolfatah-soltani.jpg',
-                    title: 'Abdolfatah Soltani',
-                }}
+                {...defaultStoryProps}
                 displayOptions={{
-                    mediumPosition: 'top',
-                    backgroundColor: dustyOrange,
+                    ...defaultStoryProps.displayOptions,
+                    backgroundColor: yellow,
                 }}
-                content={`
-                    <p>
-                        <span style="font-size: 36px;">Abdolfatah Soltani</span> est un avocat iranien
-                        célèbre, spécialisé dans la défense des droits humains.
-                    </p>
-                `}
             />
         </div>
     ))
-    .add('With Bottom Picture', () => (
-        <div style={{ maxWidth: 360, height: '100vh', maxHeight: 540 }}>
+    .add('Top Picture, Pink Background', () => (
+        <div style={{ height: '100vh' }}>
             <StoryStep
-                medium={{
-                    src: '/img/old-jail.jpg',
-                    title: 'Jail',
-                }}
+                {...defaultStoryProps}
                 displayOptions={{
+                    ...defaultStoryProps.displayOptions,
+                    backgroundColor: pink,
+                }}
+            />
+        </div>
+    ))
+    .add('No Picture, Yellow Background', () => (
+        <div style={{ height: '100vh' }}>
+            <StoryStep {...defaultStoryProps} medium={null} />
+        </div>
+    ))
+    .add('Bottom Picture, Black Background', () => (
+        <div style={{ height: '100vh' }}>
+            <StoryStep
+                {...defaultStoryProps}
+                displayOptions={{
+                    ...defaultStoryProps.displayOptions,
                     mediumPosition: 'bottom',
-                    backgroundColor: tomato,
                 }}
-                content={`
-                    <p>
-                        En septembre 2011, il est emprisonné sur la base de <span style="font-size: 36px;">
-                        fausses accusations</span> d'atteintes à la sécurité nationale.
-                    </p>
-                `}
-            />
-        </div>
-    ))
-    .add('Without Picture', () => (
-        <div style={{ maxWidth: 360, height: '100vh', maxHeight: 540 }}>
-            <StoryStep
-                displayOptions={{
-                    mediumPosition: 'top',
-                    backgroundColor: darkHotPink,
-                }}
-                content={`
-                    <p>
-                        Le 21 mars 2018, Abdolfattah Soltani entame une
-                        <span style="font-size: 36px;">grève de la faim</span>.
-                    </p>
-                `}
             />
         </div>
     ));
