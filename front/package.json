@@ -73,6 +73,7 @@
     "react-svg-loader": "^2.1.0",
     "react-test-renderer": "^16.2.0",
     "selenium-webdriver": "^3.6.0",
+    "storybook-react-router": "^1.0.1",
     "unfetch": "^3.0.0"
   }
 }
