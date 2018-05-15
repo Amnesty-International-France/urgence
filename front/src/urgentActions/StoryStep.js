@@ -1,12 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import glamorous from 'glamorous';
 
 import RichText from '../themes/RichText';
 import Image from '../themes/Image';
 import ActButton from './ActButton';
 import { StoryStepPropType } from '../propTypes';
-import { colors } from '../themes/colors';
-import CarouselSlide from '../themes/CarouselSlide';
+import { textColorForBackgroundColor } from '../themes/colors';
+
+const styles = {
+    '&': {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+    },
+
+    '& .image': {
+        flex: '1 0 0',
+    },
+
+    '& .image > div': {
+        height: '100%',
+    },
+
+    '& .content': {
+        display: 'flex',
+        flex: '1 0 0',
+        padding: '21px 38px 0 24px',
+    },
+};
 
 export const StoryStep = ({
     className,
@@ -15,20 +37,37 @@ export const StoryStep = ({
     content,
     hasActButton,
 }) => (
-    <CarouselSlide
-        backgroundColor={colors[displayOptions.backgroundColor]}
-        color={colors[displayOptions.color]}
+    <div
         className={className}
+        style={{
+            backgroundColor: displayOptions.backgroundColor,
+            color: textColorForBackgroundColor(displayOptions.backgroundColor),
+            paddingBottom: medium ? 50 : null,
+        }}
     >
-        {medium &&
-            displayOptions.mediumPosition === 'top' && <Image {...medium} />}
+        {medium && displayOptions.mediumPosition === 'top' && (
+            <div className="image">
+                <Image {...medium} />
+            </div>
+        )}
 
-        <RichText html={content} />
+        <div
+            className="content"
+            style={{
+                alignItems: !medium ? 'center' : null,
+            }}
+        >
+            <RichText html={content} />
+        </div>
 
         {hasActButton && <ActButton />}
-        {medium &&
-            displayOptions.mediumPosition === 'bottom' && <Image {...medium} />}
-    </CarouselSlide>
+
+        {medium && displayOptions.mediumPosition === 'bottom' && (
+            <div className="image">
+                <Image {...medium} />
+            </div>
+        )}
+    </div>
 );
 
 StoryStep.propTypes = {
@@ -37,4 +76,4 @@ StoryStep.propTypes = {
     ...StoryStepPropType,
 };
 
-export default StoryStep;
+export default glamorous(StoryStep)(styles);
