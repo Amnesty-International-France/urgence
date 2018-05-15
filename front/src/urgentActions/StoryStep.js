@@ -15,6 +15,14 @@ const styles = {
         height: '100%',
     },
 
+    '& .image': {
+        flex: '1 0 0',
+    },
+
+    '& .image > div': {
+        height: '100%',
+    },
+
     '& .content': {
         display: 'flex',
         flex: '1 0 0',

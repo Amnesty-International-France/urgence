@@ -52,7 +52,14 @@ storiesOf('Story Step', module)
     ))
     .add('No Picture, Yellow Background', () => (
         <div style={{ height: '100vh' }}>
-            <StoryStep {...defaultStoryProps} medium={null} />
+            <StoryStep
+                {...defaultStoryProps}
+                medium={null}
+                displayOptions={{
+                    ...defaultStoryProps.displayOptions,
+                    backgroundColor: yellow,
+                }}
+            />
         </div>
     ))
     .add('Bottom Picture, Black Background', () => (
