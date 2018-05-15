@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import { addField, SelectInput, Labeled, required } from 'react-admin';

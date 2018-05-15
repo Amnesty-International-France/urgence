@@ -4,6 +4,10 @@ import { storiesOf } from '@storybook/react';
 import RichText from './RichText';
 import Image from './Image';
 import { Button } from './Button';
+import LoadingScreen from './LoadingScreen';
+
+storiesOf('Screens', module)
+    .add('Loading Screen', () => <LoadingScreen />);
 
 storiesOf('User Interface', module)
     .add('Image', () => (
