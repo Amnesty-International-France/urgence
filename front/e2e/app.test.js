@@ -163,6 +163,15 @@ describe(
             },
             20000,
         );
+
+        it('should display thanks step', async () => {
+            await driver.get(
+                `http://front:3000/#/ua/${urgentAction.id}/thanks`,
+            );
+            const title = await driver.findElement(By.tagName('h1')).getText();
+
+            expect(title).toBe('Merci de votre soutien !');
+        });
     },
     20000,
 );
