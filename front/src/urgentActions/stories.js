@@ -28,6 +28,20 @@ storiesOf('Story Step', module)
             <StoryStep {...defaultStoryProps} />
         </div>
     ))
+    .add('Top Picture, All Text Sizes', () => (
+        <div style={{ height: '100vh' }}>
+            <StoryStep
+                {...defaultStoryProps}
+                content={`
+                    <p>
+                        Le 26 mars, une cour d'appel militaire a confirmé <span class="ql-size-large">la condamnation à mort</span> des deux hommes,
+                        à l'issue d'un procès manifestement inique fondé sur des « aveux » extorqués sous la <span class="ql-size-huge">torture</span>
+                        durant leur disparition forcée.
+                    </p>
+                `}
+            />
+        </div>
+    ))
     .add('Top Picture, Yellow Background', () => (
         <div style={{ height: '100vh' }}>
             <StoryStep

@@ -38,5 +38,6 @@ body .slick-list, body .slick-track, body .slick-slide, body .slick-slide > div 
 }
 
 .ql-size-huge {
-    font-size: 48px;
+    font-weight: bold;
+    font-size: 42px;
 }
