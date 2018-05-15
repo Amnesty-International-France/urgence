@@ -3,7 +3,7 @@ import pdf from 'html-pdf';
 import lolex from 'lolex';
 
 import app from '../server';
-import { createUrgentAction, truncateAll } from '../tests/fixtureLoader';
+import fixtureLoader from '../tests/fixtureLoader';
 
 describe('Urgent Actions Router', () => {
     describe('/urgent-actions/${id}.pdf', () => {
@@ -24,7 +24,7 @@ describe('Urgent Actions Router', () => {
         });
 
         it('should return a 200 response if urgent action exists', async () => {
-            const urgentAction = await createUrgentAction();
+            const urgentAction = await fixtureLoader.createUrgentAction();
             const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
             expect(response.status).toBe(200);
         });
@@ -38,11 +38,11 @@ describe('Urgent Actions Router', () => {
             it('should display all chosen paragraphs', async () => {
                 const pdfSpy = jest.spyOn(pdf, 'create');
 
-                const urgentAction = await createUrgentAction({
-                    message_template: JSON.stringify([
+                const urgentAction = await fixtureLoader.createUrgentAction({
+                    message_template: [
                         { value: 'Dear Minister,' },
                         { value: 'I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.' }
-                    ]),
+                    ],
                 });
 
                 const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
@@ -56,7 +56,7 @@ describe('Urgent Actions Router', () => {
             it('should display given subject', async () => {
                 const pdfSpy = jest.spyOn(pdf, 'create');
 
-                const urgentAction = await createUrgentAction();
+                const urgentAction = await fixtureLoader.createUrgentAction();
 
                 const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf?subject=Asking%20for%20a%20fair%20trial`);
                 expect(response.status).toBe(200);
@@ -68,7 +68,7 @@ describe('Urgent Actions Router', () => {
             it('should display passed signature', async () => {
                 const pdfSpy = jest.spyOn(pdf, 'create');
 
-                const urgentAction = await createUrgentAction();
+                const urgentAction = await fixtureLoader.createUrgentAction();
 
                 const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf?signature=John%20Doe`);
                 expect(response.status).toBe(200);
@@ -80,7 +80,7 @@ describe('Urgent Actions Router', () => {
             it('should display current date', async () => {
                 const pdfSpy = jest.spyOn(pdf, 'create');
 
-                const urgentAction = await createUrgentAction();
+                const urgentAction = await fixtureLoader.createUrgentAction();
                 const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
                 expect(response.status).toBe(200);
 
@@ -97,6 +97,6 @@ describe('Urgent Actions Router', () => {
     });
 
     afterEach(async () => {
-        await truncateAll();
+        await fixtureLoader.truncateAll();
     });
 });
