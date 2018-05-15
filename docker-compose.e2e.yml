@@ -57,7 +57,7 @@ services:
 
     api:
         command: npm run start-dev
-        links:
+        depends_on:
             - db-e2e
         environment:
             - NODE_ENV=test
