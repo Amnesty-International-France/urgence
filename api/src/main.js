@@ -14,7 +14,7 @@ app.use(cors({
     credentials: true,
 }));
 
-if (process.NODE_ENV === 'test') {
+if (process.env.NODE_ENV === 'test') {
     app.use('/test', testRouter);
 }
 

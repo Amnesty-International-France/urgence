@@ -70,6 +70,7 @@ services:
         expose:
             - "5432"
         environment:
+            - NODE_ENV=test
             - POSTGRES_USER=amnesty
             - POSTGRES_PASSWORD=amnesty
             - POSTGRES_DB=reaction-rapide-e2e

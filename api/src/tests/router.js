@@ -7,11 +7,8 @@ export const testRouter = new Router();
 
 console.log(JSON.stringify(urgentAction.story));
 
-testRouter.get('/createUrgentAction', async (req, res) => {
-    const id = await fixtureLoader.createUrgentAction(urgentAction);
-
-    res.send({ id });
-});
+testRouter.get('/createUrgentAction', async (req, res) =>
+    res.send(await fixtureLoader.createUrgentAction(urgentAction)));
 
 
 testRouter.delete('/clearDb', async (req, res) => {
