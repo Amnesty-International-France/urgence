@@ -125,43 +125,25 @@ install-admin:
 build-storybook:
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps storybook
 
-build-front-staging:
-	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_staging
-
-build-front-prod:
-	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_prod
-
-build-front-dev:
-	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_dev
-
 build-front:
 ifeq ($(NODE_ENV),"staging")
-	$(MAKE) build-front-staging
+	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_staging
 else
     ifeq ($(NODE_ENV),"production")
-		$(MAKE) build-front-prod
+		$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_prod
     else
-		$(MAKE) build-front-dev
+		$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_dev
     endif
 endif
 
-build-admin-staging:
-	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_staging
-
-build-admin-prod:
-	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_prod
-
-build-admin-dev:
-	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_dev
-
 build-admin:
 ifeq ($(NODE_ENV), "staging")
-	$(MAKE) build-admin-staging
+	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_staging
 else
     ifeq ($(NODE_ENV), "production")
-		$(MAKE) build-admin-prod
+		$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_prod
     else
-		$(MAKE) build-admin-dev
+		$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_dev
     endif
 endif
 
