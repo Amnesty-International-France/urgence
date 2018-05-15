@@ -31,10 +31,12 @@
     "testEnvironment": "jsdom",
     "testPathIgnorePatterns": [
       "node_modules",
-      "e2e"
+      "e2e",
+      "api/dist"
     ],
     "moduleNameMapper": {
-      "\\.(css)$": "<rootDir>/__mocks__/styleMock.js"
+      "\\.svg$": "<rootDir>/__mocks__/svgMock.js",
+      "\\.css$": "<rootDir>/__mocks__/styleMock.js"
     }
   }
 }

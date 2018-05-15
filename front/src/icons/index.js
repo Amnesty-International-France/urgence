@@ -1,0 +1,1 @@
+export AmnestyCandle from './AmnestyCandle';
