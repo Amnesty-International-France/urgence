@@ -34,17 +34,10 @@ const styles = {
     },
 };
 
-const contentAlignment = (medium, displayOptions) => !medium ? 'center' :
-    displayOptions.mediumPosition === 'bottom' ? 'flex-end' :
-    null;
+const contentAlignment = (medium, displayOptions) =>
+    !medium ? 'center' : displayOptions.mediumPosition === 'bottom' ? 'flex-end' : null;
 
-export const StoryStep = ({
-    className,
-    medium,
-    displayOptions,
-    content,
-    hasActButton,
-}) => (
+export const StoryStep = ({ className, medium, displayOptions, content, hasActButton }) => (
     <div
         className={className}
         style={{
@@ -52,11 +45,12 @@ export const StoryStep = ({
             color: textColorForBackgroundColor(displayOptions.backgroundColor),
         }}
     >
-        {medium && displayOptions.mediumPosition === 'top' && (
-            <div className="image">
-                <Image {...medium} />
-            </div>
-        )}
+        {medium &&
+            displayOptions.mediumPosition === 'top' && (
+                <div className="image">
+                    <Image {...medium} />
+                </div>
+            )}
 
         <div
             className="content"
@@ -70,11 +64,12 @@ export const StoryStep = ({
 
         {hasActButton && <ActButton />}
 
-        {medium && displayOptions.mediumPosition === 'bottom' && (
-            <div className="image">
-                <Image {...medium} />
-            </div>
-        )}
+        {medium &&
+            displayOptions.mediumPosition === 'bottom' && (
+                <div className="image">
+                    <Image {...medium} />
+                </div>
+            )}
     </div>
 );
 

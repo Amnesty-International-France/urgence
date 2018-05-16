@@ -1,42 +1,31 @@
 {
-  "dependencies": {
-    "convict": "4.2.0",
-    "express-graphql": "0.6.12",
-    "graphql": "0.13.2",
-    "graphql-tag": "2.8.0"
-  },
-  "scripts": {
-    "test": "NODE_ENV=test jest --ci --forceExit",
-    "test-watch": "NODE_ENV=test jest --watch"
-  },
-  "devDependencies": {
-    "jest": "22.4.3",
-    "jest-canvas-mock": "1.0.2",
-    "jest-cli": "22.4.3",
-    "shipit-cli": "4.0.2",
-    "shipit-deploy": "4.0.2",
-    "uuid-by-string": "0.6.0"
-  },
-  "jest": {
-    "setupFiles": [
-      "jest-canvas-mock",
-      "./setup-test"
-    ],
-    "restoreMocks": true,
-    "moduleDirectories": [
-      "node_modules",
-      "front/node_modules",
-      "api/node_modules"
-    ],
-    "testEnvironment": "jsdom",
-    "testPathIgnorePatterns": [
-      "node_modules",
-      "e2e",
-      "api/dist"
-    ],
-    "moduleNameMapper": {
-      "\\.svg$": "<rootDir>/__mocks__/svgMock.js",
-      "\\.css$": "<rootDir>/__mocks__/styleMock.js"
+    "dependencies": {
+        "convict": "4.2.0",
+        "express-graphql": "0.6.12",
+        "graphql": "0.13.2",
+        "graphql-tag": "2.8.0"
+    },
+    "scripts": {
+        "test": "NODE_ENV=test jest --ci --forceExit",
+        "test-watch": "NODE_ENV=test jest --watch"
+    },
+    "devDependencies": {
+        "jest": "22.4.3",
+        "jest-canvas-mock": "1.0.2",
+        "jest-cli": "22.4.3",
+        "shipit-cli": "4.0.2",
+        "shipit-deploy": "4.0.2",
+        "uuid-by-string": "0.6.0"
+    },
+    "jest": {
+        "setupFiles": ["jest-canvas-mock", "./setup-test"],
+        "restoreMocks": true,
+        "moduleDirectories": ["node_modules", "front/node_modules", "api/node_modules"],
+        "testEnvironment": "jsdom",
+        "testPathIgnorePatterns": ["node_modules", "e2e", "api/dist", "front/scripts/"],
+        "moduleNameMapper": {
+            "\\.svg$": "<rootDir>/__mocks__/svgMock.js",
+            "\\.css$": "<rootDir>/__mocks__/styleMock.js"
+        }
     }
-  }
 }
