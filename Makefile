@@ -38,7 +38,7 @@ connect-api:
 psql:
 	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
 
-test: migration-test test-unit migration-e2e test-e2e
+test: migration-test test-unit test-e2e
 
 test-unit:
 	$(DOCKER_COMPOSE_TEST) run --rm test npm run test
@@ -99,6 +99,7 @@ selenium-debug:
 	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chromedebug
 
 test-e2e:
+	$(MAKE) migration-e2e
 	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
 	sleep 10
 	$(DOCKER_COMPOSE_E2E) run test-e2e

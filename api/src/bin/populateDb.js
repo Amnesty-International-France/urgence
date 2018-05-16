@@ -1,7 +1,8 @@
 const batchInsert = require('co-postgres-queries/queries/batchInsert');
-const config = require('../../../config');
 
+const config = require('../../../config');
 const client = require('../db/client');
+import colors from '../../../front/src/themes/colors';
 
 if (config.env === 'production') {
     throw new Error('Populating database in production is forbidden!');
@@ -14,22 +15,22 @@ const urgentActions = [
             content: 'Ho Duy Hai a été condamné à mort en 2008 après avoir été déclaré coupable de pillage de biens et de meurtre.',
             displayOptions: {
                 mediumPosition: 'top',
-                backgroundColor: 'yellow',
-                color: 'black',
+                backgroundColor: colors.yellow,
+                color: colors.black,
             }
         }, {
             content: "En 2015, la Commission des Affaires judiciaires de l'Assemblée nationale a demandé le réexamen de son cas après avoir découvert de graves erreurs de procédure.",
             displayOptions: {
                 mediumPosition: 'bottom',
-                backgroundColor: 'pink',
-                color: 'black',
+                backgroundColor: colors.pink,
+                color: colors.black,
             }
         }, {
             content: "Le 7 décembre, le responsable du parquet de Long An a insisté, lors d'un discours à la télévision, pour que son exécution soit accélérée.",
             displayOptions: {
                 mediumPosition: 'top',
-                backgroundColor: 'orange',
-                color: 'black',
+                backgroundColor: colors.orange,
+                color: colors.black,
             }
         }]),
         call_to_action: "<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>",

@@ -4,7 +4,7 @@ const query = require('../db/client');
 
 import { createUrgentAction as insertUrgentAction } from '../urgentActions/repository';
 
-const createUrgentAction = async ({ story, message_template, ...urgentAction } = {}) => {
+export const createUrgentAction = async ({ story, message_template, ...urgentAction } = {}) => {
     const defaultUrgentAction = {
         title: "Commutation of William Montgomery's sentence",
     };
@@ -16,9 +16,4 @@ const createUrgentAction = async ({ story, message_template, ...urgentAction } =
     });
 };
 
-const truncateAll = async () => query('TRUNCATE urgent_action');
-
-export default {
-    createUrgentAction,
-    truncateAll,
-};
+export const truncateAll = async () => query('TRUNCATE urgent_action');
