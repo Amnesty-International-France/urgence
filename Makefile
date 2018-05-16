@@ -38,7 +38,7 @@ connect-api:
 psql:
 	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
 
-test: migration-test test-unit
+test: migration-test test-unit test-e2e
 
 test-unit:
 	$(DOCKER_COMPOSE_TEST) run --rm test npm run test
