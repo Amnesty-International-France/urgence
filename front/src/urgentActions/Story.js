@@ -69,9 +69,10 @@ const styles = {
     },
 };
 
-const rightArrowColor = step => get(step, 'displayOptions.mediumPosition') === 'bottom' ?
-    '#fff' :
-    textColorForBackgroundColor(step.displayOptions.backgroundColor);
+const rightArrowColor = step =>
+    get(step, 'displayOptions.mediumPosition') === 'bottom'
+        ? '#fff'
+        : textColorForBackgroundColor(step.displayOptions.backgroundColor);
 
 export class Story extends Component {
     afterChange = page => {
@@ -123,29 +124,40 @@ export class Story extends Component {
                             className={className}
                             infinite={false}
                             afterChange={this.afterChange}
-                            initialSlide={page}
+                            initialSlide={parseInt(page, 10)}
                             ref={this.initSlider}
                         >
                             {story.map((step, index) => (
                                 <div
                                     className={classnames({
                                         slide: true,
-                                        'with-bottom-media': get(step, 'displayOptions.mediumPosition') === 'bottom',
+                                        'with-bottom-media':
+                                            get(
+                                                step,
+                                                'displayOptions.mediumPosition',
+                                            ) === 'bottom',
                                     })}
                                     key={step.id}
                                 >
                                     <div className="story-step">
                                         <StoryStep
                                             {...step}
-                                            hasActButton={index === story.length - 1}
+                                            hasActButton={
+                                                index === story.length - 1
+                                            }
                                         />
                                     </div>
 
                                     <div
                                         className="bottom"
                                         style={{
-                                            backgroundColor: step.displayOptions.backgroundColor,
-                                            color: textColorForBackgroundColor(step.displayOptions.backgroundColor),
+                                            backgroundColor:
+                                                step.displayOptions
+                                                    .backgroundColor,
+                                            color: textColorForBackgroundColor(
+                                                step.displayOptions
+                                                    .backgroundColor,
+                                            ),
                                         }}
                                     >
                                         <div className="counter">
@@ -156,7 +168,9 @@ export class Story extends Component {
                                             <div className="next-arrow">
                                                 <RightArrow
                                                     onClick={this.nextSlide}
-                                                    color={rightArrowColor(step)}
+                                                    color={rightArrowColor(
+                                                        step,
+                                                    )}
                                                     size={28}
                                                 />
                                             </div>
