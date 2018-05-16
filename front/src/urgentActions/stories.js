@@ -94,6 +94,7 @@ storiesOf('Story', module)
     .add('Full Story', () => (
         <div style={{ height: '100vh' }}>
             <Story
+                loading={false}
                 history={history}
                 match={{
                     params: {

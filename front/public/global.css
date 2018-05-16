@@ -35,7 +35,7 @@ body .slick-slider {
     overflow: hidden;
 }
 
-body .slick-list, body .slick-track, body .slick-slide, body .slick-slide > div {
+body .slick-list, body .slick-track, body .slick-slide, body .slick-slide > div, body .slick-slider {
     height: 100%;
 }
 

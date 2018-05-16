@@ -1,14 +1,17 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { withRouter } from 'react-router';
+import Slider from 'react-slick';
 
-import Carousel from '../themes/Carousel';
 import StoryStep from '../urgentActions/StoryStep';
 import { StoryStepPropType, routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import { textColorForBackgroundColor } from '../themes/colors';
 import { RightArrow } from '../icons/RightArrow';
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const styles = {
     '&': {
@@ -22,6 +25,12 @@ const styles = {
 
     '& .story-step': {
         flex: '1 0 0',
+    },
+
+    '& .slide': {
+        height: '100%',
+        flexDirection: 'column',
+        display: 'flex !important',
     },
 
     '& .bottom': {
@@ -64,6 +73,14 @@ export class Story extends Component {
         history.push(generateUrl('story', { id, page }));
     };
 
+    initSlider = slider => {
+        this.slider = slider;
+    };
+
+    nextSlide = () => {
+        this.slider.slickNext();
+    };
+
     render() {
         const {
             className,
@@ -86,21 +103,23 @@ export class Story extends Component {
 
                 {story &&
                     story.length > 0 && (
-                        <Carousel
-                            initialSlide={page}
+                        <Slider
                             className={className}
+                            infinite={false}
                             afterChange={this.afterChange}
+                            initialSlide={page}
+                            ref={this.initSlider}
                         >
                             {story.map((step, index) => (
-                                <Fragment key={step.content}>
+                                <div className="slide" key={step.id}>
                                     <div className="story-step">
                                         <StoryStep
                                             {...step}
-                                            // hasActButton={index === story.length - 1}
+                                            hasActButton={index === story.length - 1}
                                         />
                                     </div>
-                                    <div
-                                        className="bottom"
+
+                                    <div className="bottom"
                                         style={{
                                             backgroundColor: step.displayOptions.backgroundColor,
                                             color: textColorForBackgroundColor(step.displayOptions.backgroundColor),
@@ -113,15 +132,16 @@ export class Story extends Component {
                                         {index + 1 < story.length && (
                                             <div className="next-arrow">
                                                 <RightArrow
+                                                    onClick={this.nextSlide}
                                                     color={textColorForBackgroundColor(step.displayOptions.backgroundColor)}
                                                     size={28}
                                                 />
                                             </div>
                                         )}
                                     </div>
-                                </Fragment>
+                                </div>
                             ))}
-                        </Carousel>
+                        </Slider>
                     )}
             </Fragment>
         );
