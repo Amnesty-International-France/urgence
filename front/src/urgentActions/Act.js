@@ -4,7 +4,7 @@ import glamorous from 'glamorous';
 
 import RichText from '../themes/RichText';
 import ToMessageButton from './ToMessageButton';
-import { colors } from '../themes/colors';
+import { pink, white } from '../themes/colors';
 
 export const Act = ({ callToAction, className }) => (
     <div className={className}>
@@ -25,8 +25,8 @@ export default glamorous(Act)({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    backgroundColor: colors.pink,
-    color: colors.white,
+    backgroundColor: pink,
+    color: white,
     height: '100vh',
     '& h1': {
         marginTop: '122px',
