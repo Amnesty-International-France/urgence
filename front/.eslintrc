@@ -18,15 +18,7 @@
     "rules": {
         "react/display-name": "off",
         "mocha-no-only/mocha-no-only": ["error"],
-        "prettier/prettier": [
-            "error",
-            {
-                "printWidth": 100,
-                "singleQuote": true,
-                "tabWidth": 4,
-                "trailingComma": "all"
-            }
-        ],
+        "prettier/prettier": ["error"],
         "import/no-extraneous-dependencies": "off",
         "no-console": ["error", { "allow": ["warn", "error"] }],
         "no-unused-vars": ["error", { "ignoreRestSiblings": true }],
