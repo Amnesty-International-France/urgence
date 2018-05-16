@@ -17,6 +17,8 @@ services:
 
     chromedebug:
         image: selenium/node-chrome-debug:2.53.0
+        environment:
+            - HUB_PORT_4444_TCP_ADDR=hub
         links:
             - hub
             - front
@@ -48,13 +50,27 @@ services:
             - "/tmp:/tmp"
         environment:
             - HOME=/tmp
-            - REACT_APP_API_URL=http://localhost:4000
+            - REACT_APP_API_URL=http://api:4000
             - NODE_ENV=development
         working_dir: /app
         user: "${UID}:${GID}"
 
     api:
         command: npm run start-dev
+        depends_on:
+            - db-e2e
         environment:
-            NODE_ENV: development
-            POSTGRES_DATABASE: reaction-rapide-test
+            - NODE_ENV=test
+            - JWT_SECRET_KEY=jwtsecret
+            - POSTGRES_DATABASE=reaction-rapide-e2e
+            - POSTGRES_HOST=db-e2e
+
+    db-e2e:
+        image: postgres:10
+        expose:
+            - "5432"
+        environment:
+            - NODE_ENV=test
+            - POSTGRES_USER=amnesty
+            - POSTGRES_PASSWORD=amnesty
+            - POSTGRES_DB=reaction-rapide-e2e

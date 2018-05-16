@@ -64,6 +64,11 @@ DB_MIGRATE_STAGING = $(DOCKER_COMPOSE_STAGING) run --rm api sh -c "/app/var/wait
 	--migrations-dir=migrations \
 	-e api
 
+DB_MIGRATE_E2E = $(DOCKER_COMPOSE_E2E) run --rm api sh -c "/app/var/wait-for-it.sh -h db-e2e -p 5432 -t 30 && ./node_modules/.bin/db-migrate \
+	--config=database.js \
+	--migrations-dir=migrations \
+	-e api
+
 migration:
 	mkdir -p var/data # we can't commit it as PostGres wants an empty folder
 	$(DB_MIGRATE) up"
@@ -81,6 +86,9 @@ migration-test:
 migration-staging:
 	$(DB_MIGRATE_STAGING) up"
 
+migration-e2e:
+	$(DB_MIGRATE_E2E) up"
+
 populate-db:
 	$(DOCKER_COMPOSE) run --rm api node src/bin/populateDb.js
 
@@ -91,6 +99,7 @@ selenium-debug:
 	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chromedebug
 
 test-e2e:
+	$(MAKE) migration-e2e
 	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
 	sleep 10
 	$(DOCKER_COMPOSE_E2E) run test-e2e

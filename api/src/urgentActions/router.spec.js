@@ -39,10 +39,10 @@ describe('Urgent Actions Router', () => {
                 const pdfSpy = jest.spyOn(pdf, 'create');
 
                 const urgentAction = await createUrgentAction({
-                    message_template: JSON.stringify([
+                    message_template: [
                         { value: 'Dear Minister,' },
                         { value: 'I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.' }
-                    ]),
+                    ],
                 });
 
                 const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
