@@ -13,6 +13,9 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
+        '@media (min-aspect-ratio: 1/1)': {
+            flexDirection: 'row',
+        },
     },
 
     '& .image': {

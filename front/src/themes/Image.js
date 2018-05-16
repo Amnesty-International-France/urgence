@@ -20,6 +20,7 @@ Image.propTypes = {
 
 export default glamorous(Image)({
     backgroundSize: 'cover',
+    backgroundPosition: 'center',
     '& img': {
         maxWidth: '100%',
     },
