@@ -1,32 +1,33 @@
-import cors from 'cors';
-import express from 'express';
-import bodyParser from 'body-parser';
-import { apolloUploadExpress } from 'apollo-upload-server'
+import cors from "cors";
+import express from "express";
+import bodyParser from "body-parser";
+import { apolloUploadExpress } from "apollo-upload-server";
 
-import config from '../../config';
-import errorHandler from './errorHandler';
-import { graphqlRouter, graphiqlRouter } from './graphql/router';
-import { urgentActionsRouter } from './urgentActions/router';
-import testRouter from './tests/router';
+import config from "../../config";
+import errorHandler from "./errorHandler";
+import { graphqlRouter, graphiqlRouter } from "./graphql/router";
+import { urgentActionsRouter } from "./urgentActions/router";
 
 const app = express();
 
-app.use(cors({
+app.use(
+  cors({
     origin: config.cors.allowedOrigin,
-    allowedHeaders: 'Origin,Content-Type,Accept,Authorization',
-    credentials: true,
-}));
+    allowedHeaders: "Origin,Content-Type,Accept,Authorization",
+    credentials: true
+  })
+);
 
-if (process.env.NODE_ENV === 'test') {
-    app.use('/test', testRouter);
+if (process.env.NODE_ENV === "test") {
+  app.use("/test", require("./tests/router"));
 }
 
-if (config.env !== 'production') {
-    app.get('/graphiql', graphiqlRouter);
+if (config.env !== "production") {
+  app.get("/graphiql", graphiqlRouter);
 }
 
-app.use('/urgent-actions', urgentActionsRouter);
-app.post('/', bodyParser.json(), apolloUploadExpress(), graphqlRouter);
+app.use("/urgent-actions", urgentActionsRouter);
+app.post("/", bodyParser.json(), apolloUploadExpress(), graphqlRouter);
 app.use(errorHandler);
 
 export default app;
