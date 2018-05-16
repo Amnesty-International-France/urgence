@@ -1,4 +1,3 @@
-import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
