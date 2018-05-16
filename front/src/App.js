@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ApolloProvider } from 'react-apollo';
 import { Switch } from 'react-router-dom';
+import glamorous from 'glamorous';
 
 import { Router, Route } from './gateway/ReactRouter';
 import generateUrl from './services/generateUrl';
 import UrgentAction from './urgentActions/UrgentAction';
 import Home from './Home';
-import glamorous from 'glamorous';
 
 export const styles = {
     '&': {
