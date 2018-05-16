@@ -2,8 +2,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import StoryStep from './StoryStep';
-import Story from './Story';
-import { black, yellow, pink } from '../themes/colors';
+import { WithStylesStory as Story } from './Story';
+import { black, yellow, pink, orange } from '../themes/colors';
+import { routerDecorator, history } from '../../.storybook/decorators';
 
 const defaultStoryProps = {
     medium: {
@@ -88,66 +89,78 @@ storiesOf('Story Step', module)
         </div>
     ));
 
-storiesOf('Story', module).add('Full Story', () => (
-    <Story
-        story={[
-            {
-                medium: {
-                    src: '/img/abdolfatah-soltani.jpg',
-                    title: 'Abdolfatah Soltani',
-                },
-                displayOptions: {
-                    mediumPosition: 'top',
-                    backgroundColor: dustyOrange,
-                },
-                content: `
-                    <p>
-                        <span style="font-size: 36px;">Abdolfatah Soltani</span> est un avocat iranien
-                        célèbre, spécialisé dans la défense des droits humains.
-                    </p>
-                `,
-            },
-            {
-                displayOptions: {
-                    mediumPosition: 'top',
-                    backgroundColor: brightYellow,
-                },
-                content: `
-                    <p>
-                        Il se bat contre les <span style="font-size: 36px;">discriminations</span>, la <span style="font-size: 36px;">torture</span>
-                        et les procès iniques, et participe à l'établissement d'un projet visant à faire <span style="font-size: 36px;">abroger
-                        la peine de mort en Iran</span>.
-                    </p>
-                `,
-            },
-            {
-                medium: {
-                    src: '/img/old-jail.jpg',
-                    title: 'Jail',
-                },
-                displayOptions: {
-                    mediumPosition: 'bottom',
-                    backgroundColor: tomato,
-                },
-                content: `
-                    <p>
-                        En septembre 2011, il est emprisonné sur la base de <span style="font-size: 36px;">
-                        fausses accusations</span> d'atteintes à la sécurité nationale.
-                    </p>
-                `,
-            },
-            {
-                displayOptions: {
-                    mediumPosition: 'top',
-                    backgroundColor: darkHotPink,
-                },
-                content: `
-                    <p>
-                        Le 21 mars 2018, Abdolfattah Soltani entame une
-                        <span style="font-size: 36px;">grève de la faim</span>.
-                    </p>
-                `,
-            },
-        ]}
-    />
-));
+storiesOf('Story', module)
+    .addDecorator(routerDecorator)
+    .add('Full Story', () => (
+        <div style={{ height: '100vh' }}>
+            <Story
+                loading={false}
+                history={history}
+                match={{
+                    params: {
+                        id: '4ea88eef-18c7-47d7-90ab-cd160909268f',
+                        page: 0,
+                    },
+                }}
+                story={[
+                    {
+                        medium: {
+                            src: '/img/abdolfatah-soltani.jpg',
+                            title: 'Abdolfatah Soltani',
+                        },
+                        displayOptions: {
+                            mediumPosition: 'top',
+                            backgroundColor: black,
+                        },
+                        content: `
+                            <p>
+                                <span class="ql-size-large">Abdolfatah Soltani</span> est un avocat iranien
+                                célèbre, spécialisé dans la défense des droits humains.
+                            </p>
+                        `,
+                    },
+                    {
+                        displayOptions: {
+                            mediumPosition: 'top',
+                            backgroundColor: yellow,
+                        },
+                        content: `
+                            <p>
+                                Il se bat contre les <span class="ql-size-large">discriminations</span>, la <span class="ql-size-large">torture</span>
+                                et les procès iniques, et participe à l'établissement d'un projet visant à faire <span class="ql-size-large">abroger
+                                la peine de mort en Iran</span>.
+                            </p>
+                        `,
+                    },
+                    {
+                        medium: {
+                            src: '/img/old-jail.jpg',
+                            title: 'Jail',
+                        },
+                        displayOptions: {
+                            mediumPosition: 'bottom',
+                            backgroundColor: orange,
+                        },
+                        content: `
+                            <p>
+                                En septembre 2011, il est emprisonné sur la base de <span class="ql-size-large">
+                                fausses accusations</span> d'atteintes à la sécurité nationale.
+                            </p>
+                        `,
+                    },
+                    {
+                        displayOptions: {
+                            mediumPosition: 'top',
+                            backgroundColor: pink,
+                        },
+                        content: `
+                            <p>
+                                Le 21 mars 2018, Abdolfattah Soltani entame une
+                                <span class="ql-size-large">grève de la faim</span>.
+                            </p>
+                        `,
+                    },
+                ]}
+            />
+        </div>
+    ));

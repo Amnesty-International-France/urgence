@@ -42,7 +42,6 @@ export const StoryStep = ({
         style={{
             backgroundColor: displayOptions.backgroundColor,
             color: textColorForBackgroundColor(displayOptions.backgroundColor),
-            paddingBottom: medium ? 50 : null,
         }}
     >
         {medium && displayOptions.mediumPosition === 'top' && (

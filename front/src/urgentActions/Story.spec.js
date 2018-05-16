@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import { Story } from './Story';
 
 const defaultStep = {
+    id: '1',
     content: '',
     displayOptions: {
         mediumPosition: 'top',
@@ -46,31 +47,44 @@ describe('<Story />', () => {
         const props = {
             ...defaultProps,
             story: [
-                { ...defaultStep, content: 'Hello' },
-                { ...defaultStep, content: 'World' },
+                { ...defaultStep, id: '1', content: 'Hello' },
+                { ...defaultStep, id: '2', content: 'World' },
             ],
         };
+
         const wrapper = shallow(<Story {...props} />);
-
-        const slider = wrapper.find('glamorous(Carousel)');
-
-        expect(slider.childAt(0).prop('content')).toBe('Hello');
-        expect(slider.childAt(1).prop('content')).toBe('World');
+        const storySteps = wrapper.find('glamorous(StoryStep)');
+        expect(storySteps.map(s => s.prop('content'))).toEqual(['Hello', 'World']);
     });
 
     it('past last property to last item in story', () => {
         const props = {
             ...defaultProps,
             story: [
-                { ...defaultStep, content: 'Hello' },
-                { ...defaultStep, content: 'World' },
+                { ...defaultStep, id: 1, content: 'Hello' },
+                { ...defaultStep, id: 2, content: 'World' },
             ],
         };
+
         const wrapper = shallow(<Story {...props} />);
+        const storySteps = wrapper.find('glamorous(StoryStep)');
 
-        const slider = wrapper.find('glamorous(Carousel)');
+        expect(storySteps.at(0).prop('hasActButton')).toBe(false);
+        expect(storySteps.at(1).prop('hasActButton')).toBe(true);
+    });
 
-        expect(slider.childAt(0).prop('hasActButton')).toBe(false);
-        expect(slider.childAt(1).prop('hasActButton')).toBe(true);
+    it('should display a slide counter for each slide', () => {
+        const props = {
+            ...defaultProps,
+            story: [
+                { ...defaultStep, id: 1, content: 'Foo' },
+                { ...defaultStep, id: 2, content: 'Bar' },
+                { ...defaultStep, id: 3, content: 'Quz' },
+            ],
+        };
+
+        const wrapper = shallow(<Story {...props} />);
+        const counters = wrapper.find('.counter');
+        expect(counters.map(c => c.text())).toEqual(['1/3', '2/3', '3/3']);
     });
 });

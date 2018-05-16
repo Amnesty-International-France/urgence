@@ -18,6 +18,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Amnesty Trade Gothic Condensed';
+    src: url('fonts/AmnestyTradeGothic-Cn18.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     font-family: 'Amnesty Trade Gothic', 'Arial', sans-serif;
     line-height: 26px;
@@ -28,7 +35,7 @@ body .slick-slider {
     overflow: hidden;
 }
 
-body .slick-list, body .slick-track, body .slick-slide, body .slick-slide > div {
+body .slick-list, body .slick-track, body .slick-slide, body .slick-slide > div, body .slick-slider {
     height: 100%;
 }
 

@@ -1,12 +1,61 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { withRouter } from 'react-router';
+import Slider from 'react-slick';
 
-import Carousel from '../themes/Carousel';
 import StoryStep from '../urgentActions/StoryStep';
 import { StoryStepPropType, routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
+import { textColorForBackgroundColor } from '../themes/colors';
+import { RightArrow } from '../icons/RightArrow';
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+const styles = {
+    '&': {
+        height: '100vh',
+    },
+
+    '& .slick-slide > div': {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+
+    '& .story-step': {
+        flex: '1 0 0',
+    },
+
+    '& .slide': {
+        height: '100%',
+        flexDirection: 'column',
+        display: 'flex !important',
+    },
+
+    '& .bottom': {
+        flex: '0 0 50px',
+        alignItems: 'center',
+        padding: '17px 24px',
+        display: 'flex',
+    },
+
+    '& .bottom > *': {
+        flex: '1 0 0',
+    },
+
+    '& .next-arrow': {
+        position: 'relative',
+        top: 4,
+        textAlign: 'right',
+    },
+
+    '& .counter': {
+        fontFamily: 'Amnesty Trade Gothic Condensed',
+        fontSize: 18,
+        lineHeight: '22px',
+    },
+};
 
 export class Story extends Component {
     afterChange = page => {
@@ -17,10 +66,19 @@ export class Story extends Component {
             history,
         } = this.props;
 
-        if (page.toString() === currentPage) {
+        if (page === +currentPage) {
             return;
         }
+
         history.push(generateUrl('story', { id, page }));
+    };
+
+    initSlider = slider => {
+        this.slider = slider;
+    };
+
+    nextSlide = () => {
+        this.slider.slickNext();
     };
 
     render() {
@@ -45,19 +103,45 @@ export class Story extends Component {
 
                 {story &&
                     story.length > 0 && (
-                        <Carousel
-                            initialSlide={page}
+                        <Slider
                             className={className}
+                            infinite={false}
                             afterChange={this.afterChange}
+                            initialSlide={page}
+                            ref={this.initSlider}
                         >
                             {story.map((step, index) => (
-                                <StoryStep
-                                    key={step.content}
-                                    {...step}
-                                    hasActButton={index === story.length - 1}
-                                />
+                                <div className="slide" key={step.id}>
+                                    <div className="story-step">
+                                        <StoryStep
+                                            {...step}
+                                            hasActButton={index === story.length - 1}
+                                        />
+                                    </div>
+
+                                    <div className="bottom"
+                                        style={{
+                                            backgroundColor: step.displayOptions.backgroundColor,
+                                            color: textColorForBackgroundColor(step.displayOptions.backgroundColor),
+                                        }}
+                                    >
+                                        <div className="counter">
+                                            {index + 1}/{story.length}
+                                        </div>
+
+                                        {index + 1 < story.length && (
+                                            <div className="next-arrow">
+                                                <RightArrow
+                                                    onClick={this.nextSlide}
+                                                    color={textColorForBackgroundColor(step.displayOptions.backgroundColor)}
+                                                    size={28}
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
                             ))}
-                        </Carousel>
+                        </Slider>
                     )}
             </Fragment>
         );
@@ -74,8 +158,6 @@ Story.propTypes = {
     match: routeMatch,
 };
 
-export default withRouter(
-    glamorous(Story)({
-        height: '100vh',
-    }),
-);
+export const WithStylesStory = glamorous(Story)(styles);
+
+export default withRouter(WithStylesStory);
