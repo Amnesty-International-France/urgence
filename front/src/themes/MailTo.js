@@ -3,30 +3,13 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../themes/Button';
 
-export const MailTo = ({
-    recipient = {},
-    subject,
-    body,
-    label,
-    disabled,
-    afterMail,
-}) => (
+export const MailTo = ({ recipient = {}, subject, body, label, disabled, afterMail }) => (
     <a
-        href={`mailto:${encodeURIComponent(
-            recipient.mail,
-        )}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
-            body,
-        )}`
-            .concat(
-                recipient.copies_to
-                    ? `&cc=${encodeURIComponent(recipient.copies_to)}`
-                    : '',
-            )
-            .concat(
-                recipient.cci
-                    ? `&bcc=${encodeURIComponent(recipient.cci)}`
-                    : '',
-            )}
+        href={`mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
+            subject,
+        )}&body=${encodeURIComponent(body)}`
+            .concat(recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '')
+            .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '')}
         target="_blank"
         disabled={disabled}
     >
@@ -35,6 +18,7 @@ export const MailTo = ({
 );
 
 MailTo.propTypes = {
+    afterMail: PropTypes.func.isRequired,
     mail: PropTypes.string.isRequired,
     subject: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,

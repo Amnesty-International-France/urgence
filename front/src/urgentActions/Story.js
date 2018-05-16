@@ -113,9 +113,7 @@ export class Story extends Component {
         ) : (
             <Fragment>
                 {(!story || !story.length) && (
-                    <p className="error">
-                        Cette action urgent n&#39;existe plus.
-                    </p>
+                    <p className="error">Cette action urgent n&#39;existe plus.</p>
                 )}
 
                 {story &&
@@ -132,31 +130,23 @@ export class Story extends Component {
                                     className={classnames({
                                         slide: true,
                                         'with-bottom-media':
-                                            get(
-                                                step,
-                                                'displayOptions.mediumPosition',
-                                            ) === 'bottom',
+                                            get(step, 'displayOptions.mediumPosition') === 'bottom',
                                     })}
-                                    key={step.id}
+                                    key={step.content}
                                 >
                                     <div className="story-step">
                                         <StoryStep
                                             {...step}
-                                            hasActButton={
-                                                index === story.length - 1
-                                            }
+                                            hasActButton={index === story.length - 1}
                                         />
                                     </div>
 
                                     <div
                                         className="bottom"
                                         style={{
-                                            backgroundColor:
-                                                step.displayOptions
-                                                    .backgroundColor,
+                                            backgroundColor: step.displayOptions.backgroundColor,
                                             color: textColorForBackgroundColor(
-                                                step.displayOptions
-                                                    .backgroundColor,
+                                                step.displayOptions.backgroundColor,
                                             ),
                                         }}
                                     >
@@ -168,9 +158,7 @@ export class Story extends Component {
                                             <div className="next-arrow">
                                                 <RightArrow
                                                     onClick={this.nextSlide}
-                                                    color={rightArrowColor(
-                                                        step,
-                                                    )}
+                                                    color={rightArrowColor(step)}
                                                     size={28}
                                                 />
                                             </div>

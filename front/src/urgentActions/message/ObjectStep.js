@@ -5,16 +5,11 @@ import glamorous from 'glamorous';
 import RichText from '../../themes/RichText';
 import CarouselSlide from '../../themes/CarouselSlide';
 
-export const ObjectStep = ({
-    objectIndication,
-    object,
-    changeObject,
-    className,
-}) => (
+export const ObjectStep = ({ objectIndication, object, changeObject, className }) => (
     <CarouselSlide className={className}>
         <p>
-            Parce que les messages uniques ont plus d&#39;impact, nous vous
-            invitons à personnaliser son sujet.
+            Parce que les messages uniques ont plus d&#39;impact, nous vous invitons à personnaliser
+            son sujet.
         </p>
         <textarea rows="5" value={object} onChange={changeObject} />
         <RichText html={objectIndication} />

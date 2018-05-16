@@ -1,5 +1,9 @@
 import PropTypes from 'prop-types';
 
+export const UrgentActionPropType = {
+    story: PropTypes.arrayOf(PropTypes.shape(StoryStepPropType)),
+};
+
 export const StoryStepPropType = {
     medium: PropTypes.shape({
         title: PropTypes.string.isRequired,

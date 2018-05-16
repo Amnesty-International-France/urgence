@@ -4,16 +4,11 @@ import glamorous from 'glamorous';
 
 import CarouselSlide from '../../themes/CarouselSlide';
 
-export const SignatureStep = ({
-    signature,
-    changeSignature,
-    action,
-    className,
-}) => (
+export const SignatureStep = ({ signature, changeSignature, action, className }) => (
     <CarouselSlide className={className}>
         <p>
-            Parce que les actions uniques sont un message personnel, nous vous
-            invitons à renseigner vos noms et prénoms.
+            Parce que les actions uniques sont un message personnel, nous vous invitons à renseigner
+            vos noms et prénoms.
         </p>
         <textarea rows="5" value={signature} onChange={changeSignature} />
         {action}

@@ -13,10 +13,7 @@ const App = ({ client }) => (
         <Router>
             <View>
                 <Route exact path={generateUrl('home')} component={Home} />
-                <Route
-                    path={'/ua/:id/:step?/:page?'}
-                    component={UrgentAction}
-                />
+                <Route path={'/ua/:id/:step?/:page?'} component={UrgentAction} />
             </View>
         </Router>
     </ApolloProvider>

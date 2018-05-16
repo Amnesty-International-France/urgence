@@ -71,9 +71,7 @@ export class Message extends Component {
         ) : (
             <Fragment>
                 {(!messageTemplate || !messageTemplate.length) && (
-                    <p className="error">
-                        Cette action urgent n&#39;existe plus.
-                    </p>
+                    <p className="error">Cette action urgent n&#39;existe plus.</p>
                 )}
 
                 {messageTemplate &&
@@ -114,9 +112,7 @@ export class Message extends Component {
 }
 
 Message.propTypes = {
-    messageTemplate: PropTypes.arrayOf(
-        PropTypes.shape({ value: PropTypes.string.isRequired }),
-    ),
+    messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
     match: routeMatch,

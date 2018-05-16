@@ -1,7 +1,1 @@
-export {
-    Link,
-    HashRouter as Router,
-    Route,
-    Redirect,
-    withRouter,
-} from 'react-router-dom';
+export { Link, HashRouter as Router, Route, Redirect, withRouter } from 'react-router-dom';

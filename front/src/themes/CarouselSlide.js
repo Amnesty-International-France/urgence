@@ -2,12 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
-export const CarouselSlide = ({
-    className,
-    backgroundColor,
-    color,
-    children,
-}) => (
+export const CarouselSlide = ({ className, backgroundColor, color, children }) => (
     <div className={className} style={{ backgroundColor, color }}>
         {children}
     </div>

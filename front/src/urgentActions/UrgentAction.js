@@ -41,11 +41,8 @@ const query = gql`
     }
 `;
 
-export const renderUrgentAction = ({ step, id }) => ({
-    data,
-    error,
-    loading,
-}) => {
+// eslint-disable-next-line
+export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) => {
     if (error) {
         console.error(error);
         return null;
@@ -56,9 +53,7 @@ export const renderUrgentAction = ({ step, id }) => ({
     }
 
     if (step === 'story') {
-        return (
-            <Story loading={loading} story={get(data, 'UrgentAction.story')} />
-        );
+        return <Story loading={loading} story={get(data, 'UrgentAction.story')} />;
     }
 
     if (step === 'act') {
