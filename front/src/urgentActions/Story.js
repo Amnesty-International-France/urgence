@@ -27,7 +27,6 @@ const styles = {
 
     '& .story-step': {
         flex: '1 0 0',
-        background: 'red',
     },
 
     '& .bottom': {
