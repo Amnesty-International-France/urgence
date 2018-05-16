@@ -1,3 +1,4 @@
+import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
@@ -29,9 +30,13 @@ const styles = {
     '& .content': {
         display: 'flex',
         flex: '1 0 0',
-        padding: '21px 38px 0 24px',
+        padding: '21px 38px 21px 24px',
     },
 };
+
+const contentAlignment = (medium, displayOptions) => !medium ? 'center' :
+    displayOptions.mediumPosition === 'bottom' ? 'flex-end' :
+    null;
 
 export const StoryStep = ({
     className,
@@ -56,7 +61,8 @@ export const StoryStep = ({
         <div
             className="content"
             style={{
-                alignItems: !medium ? 'center' : null,
+                alignItems: contentAlignment(medium, displayOptions),
+                paddingBottom: displayOptions.mediumPosition === 'bottom' ? 21 : 0,
             }}
         >
             <RichText html={content} />
