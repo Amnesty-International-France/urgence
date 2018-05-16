@@ -4,11 +4,7 @@ import PropTypes from 'prop-types';
 import Candle from './candle.svg';
 
 export const AmnestyCandle = ({ color, size }) => (
-    <Candle
-        fill={color}
-        width={size}
-        height={size}
-    />
+    <Candle fill={color} width={size} height={size} />
 );
 
 AmnestyCandle.propTypes = {

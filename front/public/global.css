@@ -25,6 +25,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Amnesty Trade Gothic Condensed';
+    src: url('fonts/AmnestyTradeGothic-Bd-Condensed-20.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
 body {
     font-family: 'Amnesty Trade Gothic', 'Arial', sans-serif;
     line-height: 26px;
