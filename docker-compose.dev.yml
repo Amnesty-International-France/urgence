@@ -52,13 +52,13 @@ services:
         image: node:9
         command: "npm run start-web"
         volumes:
-            - "./front:/app"
+            - ".:/app"
             - "/tmp:/tmp"
         environment:
             - HOME=/tmp
             - REACT_APP_API_URL=http://localhost:4000
             - NODE_ENV=development
-        working_dir: /app
+        working_dir: /app/front
         user: "${UID}:${GID}"
         ports:
             - "3000:3000"

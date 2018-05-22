@@ -8,6 +8,8 @@ import { Router, Route } from './gateway/ReactRouter';
 import generateUrl from './services/generateUrl';
 import UrgentAction from './urgentActions/UrgentAction';
 import Home from './Home';
+import AppLogo from './themes/AppLogo';
+import { ThemeProvider } from './themes/ThemeContext';
 
 export const styles = {
     '&': {
@@ -18,14 +20,17 @@ export const styles = {
 
 const App = ({ className, client }) => (
     <ApolloProvider client={client}>
-        <div className={className}>
-            <Router>
-                <Switch>
-                    <Route exact path={generateUrl('home')} component={Home} />
-                    <Route path={'/ua/:id/:step?/:page?'} component={UrgentAction} />
-                </Switch>
-            </Router>
-        </div>
+        <ThemeProvider>
+            <div className={className}>
+                <AppLogo />
+                <Router>
+                    <Switch>
+                        <Route exact path={generateUrl('home')} component={Home} />
+                        <Route path={'/ua/:id/:step?/:page?'} component={UrgentAction} />
+                    </Switch>
+                </Router>
+            </div>
+        </ThemeProvider>
     </ApolloProvider>
 );
 

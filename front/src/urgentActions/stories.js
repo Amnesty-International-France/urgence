@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import StoryStep from './StoryStep';
 import { WithStylesStory as Story } from './Story';
@@ -14,7 +15,7 @@ const defaultStoryProps = {
     },
     displayOptions: {
         mediumPosition: 'top',
-        backgroundColor: black,
+        backgroundColor: 'black',
     },
     content: `
         <p>
@@ -50,7 +51,7 @@ storiesOf('Story Step', module)
                 {...defaultStoryProps}
                 displayOptions={{
                     ...defaultStoryProps.displayOptions,
-                    backgroundColor: yellow,
+                    backgroundColor: 'yellow',
                 }}
             />
         </div>
@@ -61,7 +62,7 @@ storiesOf('Story Step', module)
                 {...defaultStoryProps}
                 displayOptions={{
                     ...defaultStoryProps.displayOptions,
-                    backgroundColor: pink,
+                    backgroundColor: 'pink',
                 }}
             />
         </div>
@@ -73,7 +74,7 @@ storiesOf('Story Step', module)
                 medium={null}
                 displayOptions={{
                     ...defaultStoryProps.displayOptions,
-                    backgroundColor: yellow,
+                    backgroundColor: 'yellow',
                 }}
             />
         </div>
@@ -95,6 +96,9 @@ storiesOf('Story', module)
     .add('Full Story', () => (
         <div style={{ height: '100vh' }}>
             <Story
+                context={{
+                    changeLogoColor: action('Changing logo color'),
+                }}
                 loading={false}
                 history={history}
                 match={{
@@ -111,7 +115,7 @@ storiesOf('Story', module)
                         },
                         displayOptions: {
                             mediumPosition: 'top',
-                            backgroundColor: black,
+                            backgroundColor: 'black',
                         },
                         content: `
                             <p>
@@ -123,7 +127,7 @@ storiesOf('Story', module)
                     {
                         displayOptions: {
                             mediumPosition: 'top',
-                            backgroundColor: yellow,
+                            backgroundColor: 'yellow',
                         },
                         content: `
                             <p>
@@ -140,7 +144,7 @@ storiesOf('Story', module)
                         },
                         displayOptions: {
                             mediumPosition: 'bottom',
-                            backgroundColor: orange,
+                            backgroundColor: 'orange',
                         },
                         content: `
                             <p>
@@ -152,7 +156,7 @@ storiesOf('Story', module)
                     {
                         displayOptions: {
                             mediumPosition: 'top',
-                            backgroundColor: pink,
+                            backgroundColor: 'pink',
                         },
                         content: `
                             <p>

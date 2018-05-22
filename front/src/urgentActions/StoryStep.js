@@ -6,7 +6,7 @@ import RichText from '../themes/RichText';
 import Image from '../themes/Image';
 import ActButton from './ActButton';
 import { StoryStepPropType } from '../propTypes';
-import { textColorForBackgroundColor, colors } from '../themes/colors';
+import { textColorForBackgroundColor, colors, black, white, yellow } from '../themes/colors';
 
 const styles = {
     '&': {
@@ -35,6 +35,19 @@ const styles = {
 
 const contentAlignment = (medium, displayOptions) =>
     !medium ? 'center' : displayOptions.mediumPosition === 'bottom' ? 'flex-end' : null;
+
+export const getLogoColor = step => {
+    const backgroundColor = colors[step.displayOptions.backgroundColor];
+    if (step.medium && step.displayOptions.mediumPosition === 'top') {
+        return white;
+    }
+
+    if (backgroundColor === yellow) {
+        return black;
+    }
+
+    return white;
+};
 
 export const StoryStep = ({ className, medium, displayOptions, content, hasActButton }) => (
     <div

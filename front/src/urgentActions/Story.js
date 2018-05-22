@@ -5,15 +5,17 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { withRouter } from 'react-router';
 import Slider from 'react-slick';
+import { compose } from 'recompose';
 
-import StoryStep from '../urgentActions/StoryStep';
+import StoryStep, { getLogoColor } from '../urgentActions/StoryStep';
 import { StoryStepPropType, routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
-import { textColorForBackgroundColor, colors } from '../themes/colors';
-import { RightArrow } from '../icons/RightArrow';
+import { textColorForBackgroundColor, colors, black } from '../themes/colors';
+import { RightArrow } from '../icons';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { withThemeContext } from '../themes/ThemeContext';
 
 const styles = {
     '&': {
@@ -81,12 +83,14 @@ export class Story extends Component {
                 params: { id, page: currentPage },
             },
             history,
+            story,
         } = this.props;
 
         if (page === +currentPage) {
             return;
         }
 
+        this.props.context.changeLogoColor(getLogoColor(story[page]));
         history.push(generateUrl('story', { id, page }));
     };
 
@@ -98,6 +102,19 @@ export class Story extends Component {
         this.slider.slickNext();
     };
 
+    componentDidUpdate(prevProps) {
+        const {
+            story,
+            match: {
+                params: { page },
+            },
+        } = this.props;
+
+        if ((!prevProps.story && story) || prevProps.match.params.page !== page) {
+            this.props.context.changeLogoColor(getLogoColor(story[page]));
+        }
+    }
+
     render() {
         const {
             className,
@@ -107,7 +124,7 @@ export class Story extends Component {
                 params: { page },
             },
         } = this.props;
-        console.log(this.props.story); // eslint-disable-line
+
         return loading ? (
             <p className="loading">Loading...</p>
         ) : (
@@ -176,6 +193,9 @@ export class Story extends Component {
 
 Story.propTypes = {
     className: PropTypes.string,
+    context: PropTypes.shape({
+        changeLogoColor: PropTypes.func.isRequired,
+    }).isRequired,
     loading: PropTypes.bool.isRequired,
     story: PropTypes.arrayOf(PropTypes.shape(StoryStepPropType)),
     history: PropTypes.shape({
@@ -186,4 +206,4 @@ Story.propTypes = {
 
 export const WithStylesStory = glamorous(Story)(styles);
 
-export default withRouter(WithStylesStory);
+export default compose(withRouter, withThemeContext)(WithStylesStory);
