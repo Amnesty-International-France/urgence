@@ -131,7 +131,7 @@ export class Story extends Component {
         ) : (
             <Fragment>
                 {(!story || !story.length) && (
-                    <p className="error">Cette action urgent n&#39;existe plus.</p>
+                    <p className="error">Cette action urgente n&#39;existe plus.</p>
                 )}
 
                 {story &&
