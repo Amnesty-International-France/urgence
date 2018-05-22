@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 
-import Carousel from '../../themes/Carousel';
 import MessageStep from './MessageStep';
 import ObjectStep from './ObjectStep';
 import SignatureStep from './SignatureStep';
@@ -53,16 +52,7 @@ export class Message extends Component {
     };
 
     render() {
-        const {
-            objectIndication,
-            messageTemplate,
-            className,
-            loading,
-            recipient,
-            match: {
-                params: { page },
-            },
-        } = this.props;
+        const { objectIndication, messageTemplate, loading, recipient } = this.props;
 
         const { signature, object } = this.state;
 
@@ -76,14 +66,9 @@ export class Message extends Component {
 
                 {messageTemplate &&
                     messageTemplate.length > 0 && (
-                        <Carousel
-                            initialSlide={page}
-                            className={className}
-                            afterChange={this.afterChange}
-                            vertical={true}
-                        >
-                            {messageTemplate.map(({ value }) => (
-                                <MessageStep key={value} content={value} />
+                        <div>
+                            {messageTemplate.map(({ value }, index) => (
+                                <MessageStep key={value} content={value} darken={!!(index % 2)} />
                             ))}
                             <ObjectStep
                                 object={object}
@@ -104,7 +89,7 @@ export class Message extends Component {
                                     />
                                 }
                             />
-                        </Carousel>
+                        </div>
                     )}
             </Fragment>
         );
