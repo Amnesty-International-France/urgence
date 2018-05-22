@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { By, until } from 'selenium-webdriver';
+import { until } from 'selenium-webdriver';
 
 import driver from './driver';
 import storyPageFactory from './pages/story';
@@ -16,9 +16,7 @@ describe('app', () => {
     let urgentAction;
 
     beforeAll(async () => {
-        urgentAction = await fetch(
-            'http://api:4000/test/createUrgentAction',
-        ).then(r => r.json());
+        urgentAction = await fetch('http://api:4000/test/createUrgentAction').then(r => r.json());
     });
 
     it(
@@ -40,9 +38,7 @@ describe('app', () => {
 
             await storyPage.act();
 
-            await driver.wait(
-                until.urlIs(`http://front:3000/#/ua/${urgentAction.id}/act`),
-            );
+            await driver.wait(until.urlIs(`http://front:3000/#/ua/${urgentAction.id}/act`));
         },
         20000,
     );
@@ -60,9 +56,7 @@ describe('app', () => {
 
         await actPage.displayMessage();
 
-        await driver.wait(
-            until.urlIs(`http://front:3000/#/ua/${urgentAction.id}/message/0`),
-        );
+        await driver.wait(until.urlIs(`http://front:3000/#/ua/${urgentAction.id}/message/0`));
     });
 
     it(
