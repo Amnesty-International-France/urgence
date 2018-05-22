@@ -1,11 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
 
 import MessageStep from './MessageStep';
 import SignatureStep from './SignatureStep';
-import { routeMatch } from '../../propTypes';
-import generateUrl from '../../services/generateUrl';
 import sessionData from '../../sessionData';
 import SendMail from './SendMail';
 
@@ -15,35 +12,6 @@ export class Message extends Component {
         signature: sessionData.getSignature(),
     };
 
-    afterChange = page => {
-        const {
-            match: {
-                params: { id, page: currentPage },
-            },
-            history,
-        } = this.props;
-
-        if (page.toString() === currentPage) {
-            return;
-        }
-        history.push(generateUrl('message', { id, page }));
-    };
-
-    afterMail = () => {
-        const {
-            history,
-            match: { params },
-        } = this.props;
-
-        history.push(generateUrl('thanks', params));
-    };
-
-    changeObject = e => {
-        const object = e.target.value;
-        this.setState({ object });
-        sessionData.setMailObject(object);
-    };
-
     changeSignature = e => {
         const signature = e.target.value;
         this.setState({ signature });
@@ -51,7 +19,7 @@ export class Message extends Component {
     };
 
     render() {
-        const { messageTemplate, loading, recipient } = this.props;
+        const { messageTemplate, loading, recipient, action } = this.props;
 
         const { signature, object } = this.state;
 
@@ -82,6 +50,7 @@ export class Message extends Component {
                                     />
                                 }
                             />
+                            <div className="action">{action}</div>
                         </div>
                     )}
             </Fragment>
@@ -93,16 +62,13 @@ Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
-    match: routeMatch,
     loading: PropTypes.bool.isRequired,
-    history: PropTypes.shape({
-        push: PropTypes.func.isRequired,
-    }).isRequired,
     recipient: PropTypes.shape({
         mail: PropTypes.string.isRequired,
         copies_to: PropTypes.string,
         cci: PropTypes.string,
     }).isRequired,
+    action: PropTypes.node.isRequired,
 };
 
-export default withRouter(Message);
+export default Message;

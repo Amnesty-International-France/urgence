@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 
 import { MailTo } from '../../themes/MailTo';
 import { templateToBodyText } from './templateToBodyText';
+import generateUrl from '../../services/generateUrl';
+import { routeMatch } from '../../propTypes';
 
-export const SendMail = ({ messageTemplate, recipient, object, signature, afterMail }) => (
-    <MailTo
-        disabled={!object || !signature}
-        label="Envoyer"
-        recipient={recipient}
-        subject={object}
-        body={templateToBodyText(messageTemplate, signature)}
-        afterMail={afterMail}
-    />
-);
+export class SendMail extends Component {
+    afterMail = () => {
+        const {
+            history,
+            match: { params },
+        } = this.props;
+
+        history.push(generateUrl('thanks', params));
+    };
+
+    render() {
+        const { messageTemplate, recipient, object, signature } = this.props;
+
+        return (
+            <MailTo
+                disabled={!object || !signature}
+                label="Envoyer"
+                recipient={recipient}
+                subject={object}
+                body={templateToBodyText(messageTemplate, signature)}
+                afterMail={this.afterMail}
+            />
+        );
+    }
+}
 
 SendMail.propTypes = {
     className: PropTypes.string,
@@ -25,7 +43,10 @@ SendMail.propTypes = {
     }).isRequired,
     object: PropTypes.string,
     signature: PropTypes.string,
-    afterMail: PropTypes.func,
+    match: routeMatch,
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
-export default SendMail;
+export default withRouter(SendMail);

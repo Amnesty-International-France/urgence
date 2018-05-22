@@ -2,11 +2,15 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { ObjectStep } from './ObjectStep';
+import sessionData from '../sessionData';
+
+jest.mock('../sessionData');
+
+sessionData.getMailObject.mockImplementation(() => 'session object value');
 
 describe('<ObjectStep />', () => {
     const defaultProps = {
         object: 'object value',
-        changeObject: jest.fn(),
         objectIndication:
             'Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.',
         messageTemplate: [],
@@ -23,19 +27,17 @@ describe('<ObjectStep />', () => {
         expect(richText.prop('html')).toBe('<p>hello world</p>');
     });
 
-    it('should display a textarea with value = props.object', () => {
+    it('should display a input with value = props.object', () => {
         const wrapper = shallow(<ObjectStep {...defaultProps} />);
-        const textarea = wrapper.find('textarea');
-        expect(textarea.prop('value')).toBe('object value');
+        const input = wrapper.find('input');
+        expect(input.prop('value')).toBe('session object value');
     });
 
-    it('should call changeObject with event value when triggering textarea onChange', () => {
+    it('should call sessionData.setMailObject with event value when triggering input onChange', () => {
         const wrapper = shallow(<ObjectStep {...defaultProps} />);
-        const textarea = wrapper.find('textarea');
+        const input = wrapper.find('input');
 
-        textarea.simulate('change', { target: { value: 'new value' } });
-        expect(defaultProps.changeObject).toHaveBeenCalledWith({
-            target: { value: 'new value' },
-        });
+        input.simulate('change', { target: { value: 'new value' } });
+        expect(sessionData.setMailObject).toHaveBeenCalledWith('new value');
     });
 });

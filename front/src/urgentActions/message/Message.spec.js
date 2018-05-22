@@ -95,7 +95,7 @@ describe('Message', () => {
 
         const slider = wrapper.find('glamorous(Carousel)');
 
-        const action = slider.childAt(4).prop('action');
+        const action = slider.childAt(3).prop('action');
 
         expect(action.props.recipient).toBe(defaultProps.recipient);
         expect(action.props.messageTemplate).toBe(defaultStep);

@@ -70,7 +70,6 @@ ObjectStep.propTypes = {
     className: PropTypes.string,
     objectIndication: PropTypes.string.isRequired,
     object: PropTypes.string.isRequired,
-    changeObject: PropTypes.func.isRequired,
 };
 
 export default glamorous(ObjectStep)(styles);

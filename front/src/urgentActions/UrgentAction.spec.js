@@ -93,7 +93,6 @@ describe('<UrgentAction />', () => {
                 data: {
                     ...defaultProps.data,
                     UrgentAction: {
-                        ...defaultProps.data,
                         message_template: [{ value: 'first message' }, { value: 'second message' }],
                         object_indication: 'object indication',
                         recipient: {
@@ -122,8 +121,12 @@ describe('<UrgentAction />', () => {
                 const params = {
                     step: 'thanks',
                 };
-
-                const props = { ...defaultProps };
+                const props = {
+                    loading: false,
+                    data: {
+                        UrgentAction: {},
+                    },
+                };
                 const renderedComponent = shallow(renderUrgentAction(params)(props));
                 expect(renderedComponent.type().name).toBe('Thanks');
             });

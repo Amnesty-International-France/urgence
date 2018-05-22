@@ -14,6 +14,7 @@ import Message from './message/Message';
 import ObjectStep from './ObjectStep';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
+import ToObjectButton from './ToObjectButton';
 
 const query = gql`
     query urgentAction($id: ID!) {
@@ -48,7 +49,6 @@ const query = gql`
     }
 `;
 
-// eslint-disable-next-line
 export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) => {
     if (error) {
         console.error(error);
@@ -73,6 +73,7 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
                 messageTemplate={get(data, 'UrgentAction.message_template')}
                 recipient={get(data, 'UrgentAction.recipient')}
                 loading={loading}
+                action={<ToObjectButton />}
             />
         );
     }
