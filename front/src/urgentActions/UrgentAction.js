@@ -15,6 +15,10 @@ import ObjectStep from './ObjectStep';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import ToObjectButton from './ToObjectButton';
+import ToSignatureButton from './ToSignatureButton';
+import SignatureStep from './SignatureStep';
+import SendMail from './message/SendMail';
+import { SessionDataProvider } from '../SessionDataContext';
 
 const query = gql`
     query urgentAction($id: ID!) {
@@ -55,6 +59,10 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
         return null;
     }
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     if (!step) {
         return <Redirect to={generateUrl('story', { id })} />;
     }
@@ -71,7 +79,6 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
         return (
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
-                recipient={get(data, 'UrgentAction.recipient')}
                 loading={loading}
                 action={<ToObjectButton />}
             />
@@ -83,6 +90,21 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
             <ObjectStep
                 objectIndication={get(data, 'UrgentAction.object_indication')}
                 loading={loading}
+                action={<ToSignatureButton />}
+            />
+        );
+    }
+
+    if (step === 'signature') {
+        return (
+            <SignatureStep
+                action={
+                    <SendMail
+                        recipient={get(data, 'UrgentAction.recipient')}
+                        messageTemplate={get(data, 'UrgentAction.message_template')}
+                        afterMail={this.afterMail}
+                    />
+                }
             />
         );
     }
@@ -109,9 +131,11 @@ export const UrgentAction = ({
         params: { id, step, page },
     },
 }) => (
-    <Query query={query} variables={{ id }}>
-        {renderUrgentAction({ step, page, id })}
-    </Query>
+    <SessionDataProvider>
+        <Query query={query} variables={{ id }}>
+            {renderUrgentAction({ step, page, id })}
+        </Query>
+    </SessionDataProvider>
 );
 
 UrgentAction.propTypes = {

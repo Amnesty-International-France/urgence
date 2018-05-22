@@ -6,6 +6,7 @@ import { MailTo } from '../../themes/MailTo';
 import { templateToBodyText } from './templateToBodyText';
 import generateUrl from '../../services/generateUrl';
 import { routeMatch } from '../../propTypes';
+import { SessionDataConsumer } from '../../SessionDataContext';
 
 export class SendMail extends Component {
     afterMail = () => {
@@ -16,19 +17,22 @@ export class SendMail extends Component {
 
         history.push(generateUrl('thanks', params));
     };
-
     render() {
-        const { messageTemplate, recipient, object, signature } = this.props;
+        const { messageTemplate, recipient } = this.props;
 
         return (
-            <MailTo
-                disabled={!object || !signature}
-                label="Envoyer"
-                recipient={recipient}
-                subject={object}
-                body={templateToBodyText(messageTemplate, signature)}
-                afterMail={this.afterMail}
-            />
+            <SessionDataConsumer>
+                {({ object, signature }) => (
+                    <MailTo
+                        disabled={!object || !signature}
+                        label="Envoyer"
+                        recipient={recipient}
+                        subject={object}
+                        body={templateToBodyText(messageTemplate, signature)}
+                        afterMail={this.afterMail}
+                    />
+                )}
+            </SessionDataConsumer>
         );
     }
 }
@@ -41,8 +45,6 @@ SendMail.propTypes = {
         copies_to: PropTypes.string,
         cci: PropTypes.string,
     }).isRequired,
-    object: PropTypes.string,
-    signature: PropTypes.string,
     match: routeMatch,
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,

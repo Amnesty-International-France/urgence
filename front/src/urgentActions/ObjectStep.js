@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 import RichText from '../themes/RichText';
-import Link from '../themes/Link';
-import sessionData from '../sessionData';
+import { SessionDataConsumer } from '../SessionDataContext';
 
 const styles = {
     height: '100vh',
@@ -35,20 +34,9 @@ const styles = {
     padding: '2rem 2rem',
 };
 
-export class ObjectStep extends Component {
-    state = {
-        object: sessionData.getMailObject(),
-    };
-    changeObject = e => {
-        const object = e.target.value;
-        this.setState({ object });
-        sessionData.setMailObject(object);
-    };
-    render() {
-        const { objectIndication, className } = this.props;
-        const { object } = this.state;
-
-        return (
+export const ObjectStep = ({ objectIndication, className, action }) => (
+    <SessionDataConsumer>
+        {({ object, changeObject }) => (
             <div className={className}>
                 <p>
                     Parce que les messages uniques ont plus d&#39;impact, nous vous invitons à
@@ -56,20 +44,21 @@ export class ObjectStep extends Component {
                 </p>
                 <input
                     value={object}
-                    onChange={this.changeObject}
+                    onChange={changeObject}
                     placeholder="Objet de votre message"
                 />
                 <RichText html={objectIndication} />
-                <Link to={''} label="Valider" />
+                {action}
             </div>
-        );
-    }
-}
+        )}
+    </SessionDataConsumer>
+);
 
 ObjectStep.propTypes = {
     className: PropTypes.string,
     objectIndication: PropTypes.string.isRequired,
     object: PropTypes.string.isRequired,
+    action: PropTypes.node.isRequired,
 };
 
 export default glamorous(ObjectStep)(styles);
