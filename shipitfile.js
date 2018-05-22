@@ -17,6 +17,7 @@ module.exports = shipit => {
         },
         production: {
             branch: process.env.BRANCH || 'master',
+            key: path.join(__dirname, 'var/deploy-prod.key'),
             deployTo: '/home/amnesty',
             servers: 'amnesty@rapide.amnesty.fr',
         }
