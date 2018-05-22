@@ -2,15 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
+import { black, yellow } from './colors';
+
 const StyledButton = glamorous.button({
-    backgroundColor: 'rgb(24, 93, 141)',
+    backgroundColor: yellow,
     border: 'none',
-    padding: '1rem',
-    color: 'white',
-    width: '100%',
-    margin: '1rem 0',
+    color: black,
+    padding: '0 0.5em',
+    display: 'block',
+    margin: '0 1em',
+    fontFamily: 'Amnesty Trade Gothic Condensed',
+    fontWeight: 'bold',
+    fontSize: 27,
+    height: 42,
     '&:active': {
-        backgroundColor: 'rgb(44, 103, 161)',
+        backgroundColor: yellow,
     },
     '&:disabled': {
         backgroundColor: 'grey',

@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import StoryStep from './StoryStep';
 import { WithStylesStory as Story } from './Story';
+import Act from './Act';
 import { black, yellow, pink, orange } from '../themes/colors';
 import { routerDecorator, history } from '../../.storybook/decorators';
 
@@ -163,4 +164,10 @@ storiesOf('Story', module)
                 ]}
             />
         </div>
+    ));
+
+storiesOf('Act', module)
+    .addDecorator(routerDecorator)
+    .add('Act', () => (
+        <Act callToAction="<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>" />
     ));
