@@ -6,8 +6,7 @@ import Image from './Image';
 import { Button } from './Button';
 import LoadingScreen from './LoadingScreen';
 
-storiesOf('Screens', module)
-    .add('Loading Screen', () => <LoadingScreen />);
+storiesOf('Screens', module).add('Loading Screen', () => <LoadingScreen />);
 
 storiesOf('User Interface', module)
     .add('Image', () => (
@@ -20,10 +19,7 @@ storiesOf('User Interface', module)
                 src="/img/abdolfatah-soltani.jpg"
                 title="Abdolfatah Soltani, avocat iranien spécialisé dans la défense des droits humains."
             />
-            <p>
-                This image is responsive: resize your browser to see it in
-                action!
-            </p>
+            <p>This image is responsive: resize your browser to see it in action!</p>
         </div>
     ))
     .add('Rich Text', () => (
@@ -37,6 +33,4 @@ storiesOf('User Interface', module)
             `}
         />
     ))
-    .add('Button', () => (
-        <Button label="click me" onClick={() => alert('clicked')} />
-    ));
+    .add('Button', () => <Button label="click me" onClick={() => alert('clicked')} />);

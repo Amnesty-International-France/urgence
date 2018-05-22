@@ -9,7 +9,7 @@ import Slider from 'react-slick';
 import StoryStep from '../urgentActions/StoryStep';
 import { StoryStepPropType, routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
-import { textColorForBackgroundColor } from '../themes/colors';
+import { textColorForBackgroundColor, colors } from '../themes/colors';
 import { RightArrow } from '../icons/RightArrow';
 
 import 'slick-carousel/slick/slick.css';
@@ -107,7 +107,7 @@ export class Story extends Component {
                 params: { page },
             },
         } = this.props;
-
+        console.log(this.props.story); // eslint-disable-line
         return loading ? (
             <p className="loading">Loading...</p>
         ) : (
@@ -144,7 +144,8 @@ export class Story extends Component {
                                     <div
                                         className="bottom"
                                         style={{
-                                            backgroundColor: step.displayOptions.backgroundColor,
+                                            backgroundColor:
+                                                colors[step.displayOptions.backgroundColor],
                                             color: textColorForBackgroundColor(
                                                 step.displayOptions.backgroundColor,
                                             ),
