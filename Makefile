@@ -6,6 +6,7 @@ DOCKER_COMPOSE_BUILD = docker-compose -p reaction-rapide-build -f docker-compose
 DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
 DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
 DOCKER_COMPOSE_STAGING = docker-compose -p reaction-rapide-staging -f docker-compose.yml -f docker-compose.staging.yml
+DOCKER_COMPOSE_PROD = docker-compose -p reaction-rapide-prod -f docker-compose.yml -f docker-compose.prod.yml
 DOCKER_COMPOSE_DEV_NGINX = docker-compose -p reaction-rapide-dev-nginx -f docker-compose.yml -f docker-compose.dev-nginx.yml
 
 install: install-admin
@@ -20,14 +21,20 @@ install-staging:
 start:
 	$(DOCKER_COMPOSE) up --force-recreate -d
 
+stop:
+	$(DOCKER_COMPOSE) down
+
 start-staging:
 	$(DOCKER_COMPOSE_STAGING) up -d
 
 stop-staging:
 	$(DOCKER_COMPOSE_STAGING) down
 
-stop:
-	$(DOCKER_COMPOSE) down
+start-prod:
+	$(DOCKER_COMPOSE_PROD) up -d
+
+stop-prod:
+	$(DOCKER_COMPOSE_PROD) down
 
 logs:
 	$(DOCKER_COMPOSE) logs -f
@@ -70,6 +77,11 @@ DB_MIGRATE_STAGING = $(DOCKER_COMPOSE_STAGING) run --rm api sh -c "/app/var/wait
 	--migrations-dir=migrations \
 	-e api
 
+DB_MIGRATE_PROD = $(DOCKER_COMPOSE_PROD) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && ./node_modules/.bin/db-migrate \
+	--config=database.js \
+	--migrations-dir=migrations \
+	-e api
+
 DB_MIGRATE_E2E = $(DOCKER_COMPOSE_E2E) run --rm api sh -c "/app/var/wait-for-it.sh -h db-e2e -p 5432 -t 30 && ./node_modules/.bin/db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
@@ -90,6 +102,9 @@ migration-test:
 	$(DB_MIGRATE_TEST) up"
 
 migration-staging:
+	$(DB_MIGRATE_STAGING) up"
+
+migration-prod:
 	$(DB_MIGRATE_STAGING) up"
 
 migration-e2e:

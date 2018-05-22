@@ -53,7 +53,15 @@ module.exports = shipit => {
 
     shipit.on('published', async () => {
         await shipit.remote('make install-staging', { cwd: shipit.releasePath });
-        await shipit.remote('make stop-staging start-staging', { cwd: shipit.releasePath });
+        switch (process.env.NODE_ENV) {
+            case 'staging':
+                return shipit.remote('make stop-staging start-staging', { cwd: shipit.releasePath });
+            case 'production':
+                return shipit.remote('make stop-prod start-prod', { cwd: shipit.releasePath });
+            default:
+                return;
+        }
+
     });
 }
 
