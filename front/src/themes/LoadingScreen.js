@@ -17,10 +17,7 @@ const styles = {
 
 export const LoadingScreen = ({ className }) => (
     <div className={className}>
-        <AmnestyCandle
-            color="#fff"
-            size={133}
-        />
+        <AmnestyCandle color="#fff" size={133} />
     </div>
 );
 
