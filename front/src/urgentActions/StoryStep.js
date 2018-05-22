@@ -6,7 +6,7 @@ import RichText from '../themes/RichText';
 import Image from '../themes/Image';
 import ActButton from './ActButton';
 import { StoryStepPropType } from '../propTypes';
-import { textColorForBackgroundColor } from '../themes/colors';
+import { textColorForBackgroundColor, colors } from '../themes/colors';
 
 const styles = {
     '&': {
@@ -40,7 +40,7 @@ export const StoryStep = ({ className, medium, displayOptions, content, hasActBu
     <div
         className={className}
         style={{
-            backgroundColor: displayOptions.backgroundColor,
+            backgroundColor: colors[displayOptions.backgroundColor],
             color: textColorForBackgroundColor(displayOptions.backgroundColor),
         }}
     >
