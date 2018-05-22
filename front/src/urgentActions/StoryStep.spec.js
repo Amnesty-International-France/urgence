@@ -3,13 +3,13 @@ import { shallow } from 'enzyme';
 
 import { StoryStep } from './StoryStep';
 import ActButton from './ActButton';
-import { colors, white, black } from '../themes/colors';
+import { white, black } from '../themes/colors';
 
 describe('<StoryStep />', () => {
     const defaultProps = {
         className: 'story-step',
         displayOptions: {
-            backgroundColor: white,
+            backgroundColor: 'white',
             color: 'white',
             mediumPosition: 'top',
         },
