@@ -11,6 +11,7 @@ import Story from './Story';
 import Act from './Act';
 import Thanks from './Thanks';
 import Message from './message/Message';
+import ObjectStep from './ObjectStep';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 
@@ -70,8 +71,16 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
         return (
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
-                objectIndication={get(data, 'UrgentAction.object_indication')}
                 recipient={get(data, 'UrgentAction.recipient')}
+                loading={loading}
+            />
+        );
+    }
+
+    if (step === 'object') {
+        return (
+            <ObjectStep
+                objectIndication={get(data, 'UrgentAction.object_indication')}
                 loading={loading}
             />
         );

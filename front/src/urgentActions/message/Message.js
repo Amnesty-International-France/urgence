@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 
 import MessageStep from './MessageStep';
-import ObjectStep from './ObjectStep';
 import SignatureStep from './SignatureStep';
 import { routeMatch } from '../../propTypes';
 import generateUrl from '../../services/generateUrl';
@@ -52,7 +51,7 @@ export class Message extends Component {
     };
 
     render() {
-        const { objectIndication, messageTemplate, loading, recipient } = this.props;
+        const { messageTemplate, loading, recipient } = this.props;
 
         const { signature, object } = this.state;
 
@@ -70,12 +69,6 @@ export class Message extends Component {
                             {messageTemplate.map(({ value }, index) => (
                                 <MessageStep key={value} content={value} darken={!!(index % 2)} />
                             ))}
-                            <ObjectStep
-                                object={object}
-                                changeObject={this.changeObject}
-                                objectIndication={objectIndication}
-                                messageTemplate={messageTemplate}
-                            />
                             <SignatureStep
                                 signature={signature}
                                 changeSignature={this.changeSignature}
