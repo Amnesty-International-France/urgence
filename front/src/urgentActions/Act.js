@@ -44,7 +44,7 @@ export default glamorous(Act)({
         fontWeight: 'bold',
     },
     '& a': {
-        alignSelf: 'center',
+        margin: '0 1em',
         marginBottom: '53px',
     },
 });

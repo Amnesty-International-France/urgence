@@ -23,7 +23,6 @@ export default glamorous(Link)({
     backgroundColor: yellow,
     color: black,
     padding: '0 0.5em',
-    margin: '0 1em',
     fontFamily: 'Amnesty Trade Gothic Condensed',
     fontWeight: 'bold',
     fontSize: 27,
