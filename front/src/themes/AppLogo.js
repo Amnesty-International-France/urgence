@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 import { AmnestyCandle } from '../icons';
-import { ThemeConsumer } from './ThemeContext';
+import { withThemeContext } from './ThemeContext';
 
 const styles = {
     position: 'absolute',
@@ -15,20 +15,17 @@ const styles = {
     },
 };
 
-export const AppLogo = ({ className }) => (
-    <ThemeConsumer>
-        {context => {
-            return (
-                <div className={className}>
-                    <AmnestyCandle size={33} color={context.logoColor} />
-                </div>
-            );
-        }}
-    </ThemeConsumer>
+export const AppLogo = ({ className, context }) => (
+    <div className={className}>
+        <AmnestyCandle size={33} color={context.logoColor} />
+    </div>
 );
 
 AppLogo.propTypes = {
     className: PropTypes.string,
+    context: PropTypes.shape({
+        logoColor: PropTypes.string,
+    }).isRequired,
 };
 
-export default glamorous(AppLogo)(styles);
+export default glamorous(withThemeContext(AppLogo))(styles);

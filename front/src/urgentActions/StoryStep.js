@@ -1,3 +1,4 @@
+import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
@@ -36,13 +37,13 @@ const styles = {
 const contentAlignment = (medium, displayOptions) =>
     !medium ? 'center' : displayOptions.mediumPosition === 'bottom' ? 'flex-end' : null;
 
-export const getLogoColor = step => {
-    const backgroundColor = colors[step.displayOptions.backgroundColor];
+export const getLogoColorForStep = step => {
+    const backgroundColor = colors[get(step, 'displayOptions.backgroundColor')];
     if (step.medium && step.displayOptions.mediumPosition === 'top') {
         return white;
     }
 
-    if (backgroundColor === yellow) {
+    if (backgroundColor === yellow || backgroundColor === white) {
         return black;
     }
 

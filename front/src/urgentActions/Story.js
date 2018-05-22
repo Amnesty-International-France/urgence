@@ -7,7 +7,7 @@ import { withRouter } from 'react-router';
 import Slider from 'react-slick';
 import { compose } from 'recompose';
 
-import StoryStep, { getLogoColor } from '../urgentActions/StoryStep';
+import StoryStep, { getLogoColorForStep } from '../urgentActions/StoryStep';
 import { StoryStepPropType, routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import { textColorForBackgroundColor, colors, black } from '../themes/colors';
@@ -90,7 +90,7 @@ export class Story extends Component {
             return;
         }
 
-        this.props.context.changeLogoColor(getLogoColor(story[page]));
+        this.props.context.changeLogoColor(getLogoColorForStep(story[page]));
         history.push(generateUrl('story', { id, page }));
     };
 
@@ -111,7 +111,7 @@ export class Story extends Component {
         } = this.props;
 
         if ((!prevProps.story && story) || prevProps.match.params.page !== page) {
-            this.props.context.changeLogoColor(getLogoColor(story[page]));
+            this.props.context.changeLogoColor(getLogoColorForStep(story[page]));
         }
     }
 

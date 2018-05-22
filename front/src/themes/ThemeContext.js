@@ -22,8 +22,8 @@ ThemeProvider.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
+export const ThemeConsumer = Consumer;
+
 export const withThemeContext = BaseComponent => props => (
     <ThemeConsumer>{context => <BaseComponent context={context} {...props} />}</ThemeConsumer>
 );
-
-export const ThemeConsumer = Consumer;
