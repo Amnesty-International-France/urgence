@@ -19,7 +19,7 @@ app.use(
 );
 
 if (process.env.NODE_ENV === "test") {
-  app.use("/test", require("./tests/router"));
+  app.use("/test", require("./tests/router").default);
 }
 
 if (config.env !== "production") {
