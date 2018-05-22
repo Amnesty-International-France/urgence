@@ -43,9 +43,14 @@ const styles = {
         bottom: 0,
         height: 50,
         width: '100vw',
-        color: '#fff !important',
-        backgroundColor: 'transparent !important',
-        background: 'linear-gradient(#0000, #000f)',
+        '@media (max-aspect-ratio: 1/1)': {
+            color: '#fff !important',
+            backgroundColor: 'transparent !important',
+            background: 'linear-gradient(#0000, #000f)',
+            '& svg': {
+                fill: '#fff !important',
+            },
+        },
     },
 
     '& .slide': {
@@ -71,10 +76,7 @@ const styles = {
     },
 };
 
-const rightArrowColor = step =>
-    get(step, 'displayOptions.mediumPosition') === 'bottom'
-        ? '#fff'
-        : textColorForBackgroundColor(step.displayOptions.backgroundColor);
+const rightArrowColor = step => textColorForBackgroundColor(step.displayOptions.backgroundColor);
 
 export class Story extends Component {
     afterChange = page => {
