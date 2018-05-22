@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { StoryStep } from './StoryStep';
+import { StoryStep, getLogoColorForStep } from './StoryStep';
 import ActButton from './ActButton';
-import { white, black } from '../themes/colors';
+import { white, black, pink, yellow, orange } from '../themes/colors';
 
 describe('<StoryStep />', () => {
     const defaultProps = {
@@ -104,5 +104,37 @@ describe('<StoryStep />', () => {
         const wrapper = shallow(<StoryStep {...props} />);
         const actButton = wrapper.find(ActButton);
         expect(actButton).toHaveLength(1);
+    });
+
+    describe('getLogoColorForStep', () => {
+        it('should return white if there is a top medium', () => {
+            const step = {
+                medium: {},
+                displayOptions: {
+                    mediumPosition: 'top',
+                },
+            };
+
+            expect(getLogoColorForStep(step)).toBe(white);
+        });
+
+        it('should return black for yellow and white, white otherwise', () => {
+            const test = (backgroundColor, expectedLogoColor) => {
+                const step = {
+                    medium: {},
+                    displayOptions: {
+                        backgroundColor,
+                    },
+                };
+
+                expect(getLogoColorForStep(step)).toBe(expectedLogoColor);
+            };
+
+            test('yellow', black);
+            test('pink', white);
+            test('orange', white);
+            test('white', black);
+            test('black', white);
+        });
     });
 });

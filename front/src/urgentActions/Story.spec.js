@@ -7,13 +7,16 @@ const defaultStep = {
     id: '1',
     content: '',
     displayOptions: {
-        mediumPosition: 'top',
+        mediumPosition: 'bottom',
         backgroundColor: 'red',
     },
 };
 
 describe('<Story />', () => {
     const defaultProps = {
+        context: {
+            changeLogoColor: () => {},
+        },
         story: [defaultStep],
         loading: false,
         match: { params: {} },
@@ -86,5 +89,89 @@ describe('<Story />', () => {
         const wrapper = shallow(<Story {...props} />);
         const counters = wrapper.find('.counter');
         expect(counters.map(c => c.text())).toEqual(['1/3', '2/3', '3/3']);
+    });
+
+    describe('After Switching Slide', () => {
+        it('should update logo color in context', () => {
+            const props = {
+                ...defaultProps,
+                story: [
+                    { ...defaultStep, id: 1, displayOptions: { backgroundColor: 'white' } },
+                    { ...defaultStep, id: 2, displayOptions: { backgroundColor: 'black' } },
+                    { ...defaultStep, id: 3, displayOptions: { backgroundColor: 'black' } },
+                ],
+                context: {
+                    changeLogoColor: jest.fn(),
+                },
+            };
+
+            const wrapper = shallow(<Story {...props} />);
+            const slider = wrapper.find('Slider');
+            const afterChange = slider.prop('afterChange');
+
+            afterChange(1);
+
+            expect(props.context.changeLogoColor).toHaveBeenCalledWith('#fff');
+        });
+    });
+
+    it('should set correct logo color when receiving a new story', () => {
+        const props = {
+            ...defaultProps,
+            match: {
+                params: {
+                    page: 0,
+                },
+            },
+            context: {
+                changeLogoColor: jest.fn(),
+            },
+            story: null,
+        };
+
+        const wrapper = shallow(<Story {...props} />);
+        wrapper.setProps({
+            ...props,
+            story: [
+                {
+                    ...defaultStep,
+                    displayOptions: {
+                        backgroundColor: 'yellow',
+                    },
+                },
+            ],
+        });
+
+        expect(props.context.changeLogoColor).toHaveBeenCalledWith('#000');
+    });
+
+    it('should set correct logo color when current page number change', () => {
+        const props = {
+            ...defaultProps,
+            match: {
+                params: {
+                    page: 0,
+                },
+            },
+            story: [
+                { ...defaultStep, id: 1, displayOptions: { backgroundColor: 'white' } },
+                { ...defaultStep, id: 2, displayOptions: { backgroundColor: 'yellow' } },
+            ],
+            context: {
+                changeLogoColor: jest.fn(),
+            },
+        };
+
+        const wrapper = shallow(<Story {...props} />);
+        wrapper.setProps({
+            ...props,
+            match: {
+                params: {
+                    page: 1,
+                },
+            },
+        });
+
+        expect(props.context.changeLogoColor).toHaveBeenCalledWith('#000');
     });
 });
