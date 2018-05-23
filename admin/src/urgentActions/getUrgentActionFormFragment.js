@@ -1,11 +1,12 @@
 import React from 'react';
 import {
-    FormTab,
-    TabbedForm,
     ArrayInput,
-    SimpleFormIterator,
+    FormTab,
     LongTextInput,
     required,
+    SimpleFormIterator,
+    TabbedForm,
+    TextInput,
 } from 'react-admin';
 
 import RichTextInput from '../form/RichTextInput';
@@ -15,11 +16,12 @@ import MediumInput from './MediumInput';
 import DisplayOptionsInput from './DisplayOptionsInput';
 
 export const validateMail = text =>
-    text && text
+    text &&
+    text
         .split(',')
-        .find(
-            t => !t.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
-        ) ? 'Must contain only mail separated by ","' : null;
+        .find(t => !t.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
+        ? 'Must contain only mail separated by ","'
+        : null;
 
 export default ({ edit }) => (
     <TabbedForm>
@@ -29,18 +31,18 @@ export default ({ edit }) => (
         <FormTab label="Story">
             <ArrayInput source="story">
                 <SimpleFormIterator>
-                    <RichTextInput
-                        label="content"
-                        source="content"
-                        isRequired
-                    />
+                    <RichTextInput label="content" source="content" isRequired />
                     <MediumInput source="medium" />
                     <DisplayOptionsInput source="displayOptions" />
                 </SimpleFormIterator>
             </ArrayInput>
         </FormTab>
         <FormTab label="Message">
-            <LongTextInput label="Mail" source="recipient.mail" validate={[validateMail, required()]} />
+            <LongTextInput
+                label="Mail"
+                source="recipient.mail"
+                validate={[validateMail, required()]}
+            />
             <LongTextInput label="Copies to" source="recipient.copies_to" validate={validateMail} />
             <LongTextInput label="CCI" source="recipient.cci" validate={validateMail} />
             <RichTextInput label="Call to Action" source="call_to_action" isRequired />
@@ -50,6 +52,10 @@ export default ({ edit }) => (
                     <ParagraphTemplateInput source="" />
                 </SimpleFormIterator>
             </ArrayInput>
+        </FormTab>
+        <FormTab label="Thanks Screen">
+            <TextInput label="Title" source="email_thank.title" validate={[required()]} />
+            <LongTextInput label="Text" source="email_thank.text" />
         </FormTab>
     </TabbedForm>
 );

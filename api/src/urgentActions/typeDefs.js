@@ -1,7 +1,8 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag';
 
 export const urgentActionsTypeDefs = gql`
     scalar DATE
+
     scalar Upload
 
     input MediumInput {
@@ -29,6 +30,11 @@ export const urgentActionsTypeDefs = gql`
         mail: String!
         copies_to: String
         cci: String
+    }
+
+    input ThankInput {
+        title: String
+        text: String
     }
 
     type Medium {
@@ -76,6 +82,11 @@ export const urgentActionsTypeDefs = gql`
         cci: String
     }
 
+    type Thanks {
+        title: String
+        text: String
+    }
+
     type UrgentAction {
         id: ID!
         title: String!
@@ -86,12 +97,23 @@ export const urgentActionsTypeDefs = gql`
         creation_date: DATE!
         last_edition_date: DATE!
         recipient: Recipient
+        email_thank: Thanks
     }
 
     extend type Query {
         UrgentAction(id: ID!): UrgentAction
-        allUrgentActions(perPage: Int, page: Int, sortField: String, sortOrder: String): [UrgentAction]
-        _allUrgentActionsMeta(page: Int, perPage: Int, sortField: String, sortOrder: String): ListMetadata
+        allUrgentActions(
+            perPage: Int
+            page: Int
+            sortField: String
+            sortOrder: String
+        ): [UrgentAction]
+        _allUrgentActionsMeta(
+            page: Int
+            perPage: Int
+            sortField: String
+            sortOrder: String
+        ): ListMetadata
     }
 
     extend type Mutation {
@@ -102,6 +124,7 @@ export const urgentActionsTypeDefs = gql`
             object_indication: String!
             message_template: [MessageTemplateInput]!
             recipient: RecipientInput!
+            email_thank: ThankInput!
         ): UrgentAction
         updateUrgentAction(
             id: ID!
@@ -111,6 +134,7 @@ export const urgentActionsTypeDefs = gql`
             object_indication: String!
             message_template: [MessageTemplateInput]!
             recipient: RecipientInput!
+            email_thank: ThankInput!
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
     }

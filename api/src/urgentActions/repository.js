@@ -2,7 +2,18 @@ const { crud } = require('co-postgres-queries');
 
 const query = require('../db/client');
 
-const columns = ['id', 'title', 'story', 'call_to_action', 'object_indication', 'message_template', 'recipient', 'creation_date', 'last_edition_date'];
+const columns = [
+    'id',
+    'title',
+    'story',
+    'call_to_action',
+    'object_indication',
+    'message_template',
+    'recipient',
+    'email_thank',
+    'creation_date',
+    'last_edition_date',
+];
 
 const urgentActionCrudQueries = crud({
     table: 'urgent_action',
@@ -10,21 +21,28 @@ const urgentActionCrudQueries = crud({
     returnCols: columns,
 });
 
-export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }) => query(urgentActionCrudQueries.select({
-    limit: perPage,
-    offset: page * perPage,
-    sort: sortField,
-    sortDir: sortOrder,
-}));
+export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }) =>
+    query(
+        urgentActionCrudQueries.select({
+            limit: perPage,
+            offset: page * perPage,
+            sort: sortField,
+            sortDir: sortOrder,
+        }),
+    );
 
 export const countUrgentActions = async () => query(urgentActionCrudQueries.countAll());
 
-export const getUrgentAction = async (id) => query(urgentActionCrudQueries.selectOne(id));
+export const getUrgentAction = async id => query(urgentActionCrudQueries.selectOne(id));
 
-export const createUrgentAction = async (urgentAction) => query(urgentActionCrudQueries.insertOne(urgentAction));
+export const createUrgentAction = async urgentAction =>
+    query(urgentActionCrudQueries.insertOne(urgentAction));
+
 export const updateUrgentAction = async (id, urgentAction, last_edition_date = new Date()) =>
-    query(urgentActionCrudQueries.updateOne(id, {
-        ...urgentAction,
-        last_edition_date,
-    }));
-export const removeUrgentAction = async (id) => query(urgentActionCrudQueries.removeOne(id));
+    query(
+        urgentActionCrudQueries.updateOne(id, {
+            ...urgentAction,
+            last_edition_date,
+        }),
+    );
+export const removeUrgentAction = async id => query(urgentActionCrudQueries.removeOne(id));
