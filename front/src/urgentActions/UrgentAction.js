@@ -5,6 +5,8 @@ import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
+import sessionData from '../sessionData';
+import { Email } from '../icons';
 import Story from './Story';
 import Act from './Act';
 import Thanks from './Thanks';
@@ -76,7 +78,19 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 
     if (step === 'thanks') {
-        return <Thanks {...get(data, 'UrgentAction.email_thank')} />;
+        const subject = sessionData.getMailObject();
+        const signature = sessionData.getSignature();
+
+        return (
+            <Thanks
+                {...get(data, 'UrgentAction.email_thank')}
+                actions={() => (
+                    <a href={generateUrl('letter', { id, signature, subject })} download>
+                        <Email />
+                    </a>
+                )}
+            />
+        );
     }
 };
 

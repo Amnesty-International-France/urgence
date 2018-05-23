@@ -1,3 +1,5 @@
+import { stringify } from 'qs';
+
 export default (name, params = {}) => {
     switch (name) {
         case 'ua':
@@ -12,6 +14,16 @@ export default (name, params = {}) => {
             return `/ua/${params.id}/thanks`;
         case 'home':
             return '/';
+
+        case 'letter': {
+            const { subject, signature } = params;
+
+            return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}.pdf?${stringify({
+                subject,
+                signature,
+            })}`;
+        }
+
         default:
             throw new Error(`Unknown route ${name} passed to generateUrl`);
     }

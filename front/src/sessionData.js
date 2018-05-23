@@ -11,4 +11,4 @@ export const sessionData = storage => ({
     },
 });
 
-export default sessionData(window.sessionStorage);
+export default sessionData(global.sessionStorage);
