@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { pink, white } from '../themes/colors';
-import { Email, Share } from '../icons';
 
 const styles = {
     display: 'flex',
@@ -49,24 +48,25 @@ const styles = {
     },
 };
 
-export const Thanks = ({ className }) => (
+export const Thanks = ({ className, title, text, actions }) => (
     <div className={className}>
         <div className="content">
-            <h1>Merci de votre soutien !</h1>
-            <p className="text">
-                Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou
-                partager cette histoire avec vos amis.
-            </p>
+            <h1>{title}</h1>
+            {text && <p className="text">{text}</p>}
         </div>
-        <div className="actions">
-            <Email />
-            <Share />
-        </div>
+        <div className="actions">{actions()}</div>
     </div>
 );
 
 Thanks.propTypes = {
     className: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string,
+    actions: PropTypes.func,
+};
+
+Thanks.defaultProps = {
+    actions: () => {},
 };
 
 export default glamorous(Thanks)(styles);

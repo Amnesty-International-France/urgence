@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -6,6 +6,7 @@ import StoryStep from './StoryStep';
 import { WithStylesStory as Story } from './Story';
 import Act from './Act';
 import Thanks from './Thanks';
+import { Email, Share } from '../icons';
 import { routerDecorator, history } from '../../.storybook/decorators';
 
 const defaultStoryProps = {
@@ -178,4 +179,15 @@ storiesOf('Act', module)
 
 storiesOf('Screens', module)
     .addDecorator(story => <div style={{ height: '100vh', width: '100vw' }}>{story()}</div>)
-    .add('Thanks Screen', () => <Thanks />);
+    .add('Thanks Screen', () => (
+        <Thanks
+            title="Merci de votre soutien !"
+            text="Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis."
+            actions={() => (
+                <Fragment>
+                    <Email onClick={action('send-letter')} />
+                    <Share onClick={action('share')} />
+                </Fragment>
+            )}
+        />
+    ));
