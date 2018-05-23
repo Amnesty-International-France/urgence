@@ -68,6 +68,7 @@ const styles = {
         position: 'relative',
         top: 4,
         textAlign: 'right',
+        fontSize: 28,
     },
 
     '& .counter': {
@@ -179,8 +180,7 @@ export class Story extends Component {
                                             <div className="next-arrow">
                                                 <RightArrow
                                                     onClick={this.nextSlide}
-                                                    color={rightArrowColor(step)}
-                                                    size={28}
+                                                    fill={rightArrowColor(step)}
                                                 />
                                             </div>
                                         )}

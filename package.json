@@ -15,14 +15,27 @@
         "jest-cli": "22.4.3",
         "shipit-cli": "4.0.2",
         "shipit-deploy": "4.0.2",
+        "svgr": "^1.9.2",
         "uuid-by-string": "0.6.0"
     },
     "jest": {
-        "setupFiles": ["jest-canvas-mock", "./setup-test"],
+        "setupFiles": [
+            "jest-canvas-mock",
+            "./setup-test"
+        ],
         "restoreMocks": true,
-        "moduleDirectories": ["node_modules", "front/node_modules", "api/node_modules"],
+        "moduleDirectories": [
+            "node_modules",
+            "front/node_modules",
+            "api/node_modules"
+        ],
         "testEnvironment": "jsdom",
-        "testPathIgnorePatterns": ["node_modules", "e2e", "api/dist", "front/scripts/"],
+        "testPathIgnorePatterns": [
+            "node_modules",
+            "e2e",
+            "api/dist",
+            "front/scripts/"
+        ],
         "moduleNameMapper": {
             "\\.svg$": "<rootDir>/__mocks__/svgMock.js",
             "\\.css$": "<rootDir>/__mocks__/styleMock.js"

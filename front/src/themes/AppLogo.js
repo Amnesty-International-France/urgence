@@ -7,6 +7,7 @@ import { withThemeContext } from './ThemeContext';
 
 const styles = {
     position: 'absolute',
+    fontSize: 33,
     top: 14,
     left: 14,
     zIndex: 100,
@@ -17,7 +18,7 @@ const styles = {
 
 export const AppLogo = ({ className, context }) => (
     <div className={className}>
-        <AmnestyCandle size={33} color={context.logoColor} />
+        <AmnestyCandle fill={context.logoColor} />
     </div>
 );
 

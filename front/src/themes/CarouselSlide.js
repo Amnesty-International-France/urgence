@@ -30,6 +30,5 @@ export default glamorous(CarouselSlide)({
     '& .rich-text, & > p': {
         padding: '2em 3em',
         lineHeight: '1.5em',
-        textAlign: 'justify',
     },
 });

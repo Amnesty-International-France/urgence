@@ -17,6 +17,6 @@ describe('<AppLogo />', () => {
         };
 
         const wrapper = shallow(<AppLogo {...props} />);
-        expect(wrapper.find('AmnestyCandle').prop('color')).toBe('blue');
+        expect(wrapper.find('AmnestyCandle').prop('fill')).toBe('blue');
     });
 });
