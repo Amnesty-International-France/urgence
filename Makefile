@@ -105,7 +105,7 @@ migration-staging:
 	$(DB_MIGRATE_STAGING) up"
 
 migration-prod:
-	$(DB_MIGRATE_STAGING) up"
+	$(DB_MIGRATE_PROD) up"
 
 migration-e2e:
 	$(DB_MIGRATE_E2E) up"
