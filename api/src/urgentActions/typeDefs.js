@@ -30,6 +30,7 @@ export const urgentActionsTypeDefs = gql`
         mail: String!
         copies_to: String
         cci: String
+        postal_address: String
     }
 
     input ThankInput {
@@ -80,6 +81,7 @@ export const urgentActionsTypeDefs = gql`
         mail: String!
         copies_to: String
         cci: String
+        postal_address: String
     }
 
     type Thanks {
