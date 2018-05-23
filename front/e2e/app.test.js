@@ -95,8 +95,13 @@ describe('app', () => {
 
     it('should display thanks step', async () => {
         await thanksPage.navigate(urgentAction.id);
-        const title = await thanksPage.getTitle();
 
+        const title = await thanksPage.getTitle();
         expect(title).toBe('Merci de votre soutien !');
+
+        const text = await thanksPage.getText();
+        expect(text).toBe(
+            "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
+        );
     });
 });
