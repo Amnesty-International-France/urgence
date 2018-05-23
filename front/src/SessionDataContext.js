@@ -27,7 +27,7 @@ export class SessionDataProvider extends Component {
     changeSignature = event => {
         const signature = event.target.value;
         this.setState({ signature });
-        sessionData.setMailSignature(signature);
+        sessionData.setSignature(signature);
     };
 
     render() {
