@@ -5,11 +5,15 @@ import driver from './driver';
 import storyPageFactory from './pages/story';
 import actPageFactory from './pages/act';
 import messagePageFactory from './pages/message';
+import objectPageFactory from './pages/object';
+import signaturePageFactory from './pages/signature';
 import thanksPageFactory from './pages/thanks';
 
 const storyPage = storyPageFactory(driver);
 const actPage = actPageFactory(driver);
 const messagePage = messagePageFactory(driver);
+const objectPage = objectPageFactory(driver);
+const signaturePage = signaturePageFactory(driver);
 const thanksPage = thanksPageFactory(driver);
 
 describe('app', () => {
@@ -56,37 +60,57 @@ describe('app', () => {
 
         await actPage.displayMessage();
 
-        await driver.wait(until.urlIs(`http://front:3000/#/ua/${urgentAction.id}/message/0`));
+        await driver.wait(until.urlIs(`http://front:3000/#/ua/${urgentAction.id}/message`));
     });
 
     it(
         'should display message steps',
         async () => {
             await messagePage.navigate(urgentAction.id, 0);
-            const text1 = await messagePage.getActiveText();
-            expect(text1).toBe(urgentAction.message_template[0].value);
+            const messages = await messagePage.getMessages();
+            expect(messages[0]).toBe(urgentAction.message_template[0].value);
 
-            await messagePage.nextStep();
-            const text2 = await messagePage.getActiveText();
-            expect(text2).toBe(urgentAction.message_template[1].value);
+            expect(messages[1]).toBe(urgentAction.message_template[1].value);
 
-            await messagePage.nextStep();
-            const text3 = await messagePage.getActiveText();
-            expect(text3).toBe(urgentAction.message_template[2].value);
+            expect(messages[2]).toBe(urgentAction.message_template[2].value);
 
-            await messagePage.nextStep();
-            const text4 = await messagePage.getActiveText();
-            expect(text4).toBe(
+            await messagePage.next();
+        },
+        20000,
+    );
+
+    it(
+        'should display subject steps',
+        async () => {
+            await objectPage.navigate(urgentAction.id);
+            const indication = await objectPage.getIndication();
+            expect(indication).toBe(
                 'Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.',
             );
 
-            await messagePage.enterText('My subject');
+            await objectPage.enterText('My subject');
 
-            await messagePage.nextStep();
+            await objectPage.validate();
 
-            await messagePage.enterText('My name');
+            // await objectPage.nextStep();
 
-            const mailTo = await messagePage.getMailTo();
+            // await objectPage.enterText('My name');
+
+            // const mailTo = await objectPage.getMailTo();
+            // expect(mailTo).toContain('subject=My%20subject');
+            // expect(mailTo).toContain('My%20name');
+        },
+        20000,
+    );
+
+    it(
+        'should display signature steps',
+        async () => {
+            await signaturePage.navigate(urgentAction.id);
+
+            await signaturePage.enterText('My name');
+
+            const mailTo = await signaturePage.getMailTo();
             expect(mailTo).toContain('subject=My%20subject');
             expect(mailTo).toContain('My%20name');
         },
