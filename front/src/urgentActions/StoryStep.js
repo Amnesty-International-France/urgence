@@ -47,7 +47,7 @@ const contentAlignment = (medium, displayOptions) =>
 
 export const getLogoColorForStep = step => {
     const backgroundColor = colors[get(step, 'displayOptions.backgroundColor')];
-    if (step.medium && step.displayOptions.mediumPosition === 'top') {
+    if (step.medium && get(step, 'displayOptions.mediumPosition') === 'top') {
         return white;
     }
 

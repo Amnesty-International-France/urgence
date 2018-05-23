@@ -136,5 +136,14 @@ describe('<StoryStep />', () => {
             test('white', black);
             test('black', white);
         });
+
+        it('should render correctly even if no displayOptions is passed', () => {
+            const step = {
+                medium: {},
+                displayOptions: null,
+            };
+
+            getLogoColorForStep(step);
+        });
     });
 });
