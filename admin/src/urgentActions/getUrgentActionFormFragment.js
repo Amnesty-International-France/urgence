@@ -18,7 +18,7 @@ import DisplayOptionsInput from './DisplayOptionsInput';
 
 export default ({ edit }) => (
     <TabbedForm>
-        {/* <FormTab label="General">
+        <FormTab label="General">
             <LongTextInput source="title" validate={required()} />
         </FormTab>
         <FormTab label="Story">
@@ -29,7 +29,7 @@ export default ({ edit }) => (
                     <DisplayOptionsInput source="displayOptions" />
                 </SimpleFormIterator>
             </ArrayInput>
-        </FormTab> */}
+        </FormTab>
         <FormTab label="Message">
             <RecipientInput label="Recipient" />
             <RichTextInput label="Call to Action" source="call_to_action" isRequired />
