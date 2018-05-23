@@ -1,13 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import isEmail from 'validator/lib/isEmail';
-import { withStyles, Typography, Card, CardHeader, CardContent } from 'material-ui';
+import { withStyles, Card, CardHeader, CardContent } from 'material-ui';
 import ContactEmail from '@material-ui/icons/ContactMail';
 
-import { Labeled, LongTextInput, TextInput, required } from 'react-admin';
+import { LongTextInput, TextInput } from 'react-admin';
 import { pink } from '../../../front/src/themes/colors';
-
-// const isEmail = email => email && validator.isEmail(email);
 
 const styles = {
     root: {
@@ -18,7 +15,7 @@ const styles = {
         color: pink,
     },
     wrapper: {
-        marginTop: -48,
+        marginTop: -24,
         display: 'flex',
     },
     emails: {
@@ -30,31 +27,46 @@ const styles = {
     },
 };
 
-export const validateEmailsList = text =>
-    text && text.split(',').find(email => !isEmail(email))
-        ? 'Must contain only mail separated by ","'
-        : null;
+// export const validateEmailsList = text =>
+//     text && text.split(',').find(email => !isEmail(email))
+//         ? 'Must contain only mail separated by ","'
+//         : null;
+//     text && text.split(',').find(email => !isEmail(email))
+//         ? 'Must contain only mail separated by ","'
+//         : null;
 
 export const RecipientInput = ({ classes, label, ...rest }) => (
     <Card className={classes.root}>
-        <CardHeader avatar={<ContactEmail className={classes.avatar} />} title="Recipient" />
+        <CardHeader avatar={<ContactEmail className={classes.avatar} />} title={label} />
         <CardContent>
             <div className={classes.wrapper}>
                 <div className={classes.emails}>
-                    <p>
-                        <TextInput fullWidth type="email" label="Mail" source="recipient.mail" />
-                    </p>
-                    <p>
-                        <TextInput fullWidth label="Copies to" source="recipient.copies_to" />
-                    </p>
-                    <p>
-                        <TextInput fullWidth label="CCI" source="recipient.cci" />
-                    </p>
+                    <TextInput
+                        fullWidth
+                        type="email"
+                        label="Mail"
+                        source="recipient.mail"
+                        // validate={[required, email]}
+                    />
+                    <TextInput
+                        fullWidth
+                        label="Copies to"
+                        source="recipient.copies_to"
+                        // validate={validateEmailsList}
+                    />
+                    <TextInput
+                        fullWidth
+                        label="CCI"
+                        source="recipient.cci"
+                        // validate={validateEmailsList}
+                    />
                 </div>
                 <div className={classes.postalAddress}>
-                    <p>
-                        <LongTextInput label="Postal Address" source="recipient.postal_address" />
-                    </p>
+                    <LongTextInput
+                        label="Postal Address"
+                        source="recipient.postal_address"
+                        // validate={required()}
+                    />
                 </div>
             </div>
         </CardContent>
@@ -66,13 +78,3 @@ RecipientInput.propTypes = {
 };
 
 export default withStyles(styles)(RecipientInput);
-
-/*
-<LongTextInput
-                label="Mail"
-                source="recipient.mail"
-                validate={[validateMail, required()]}
-            />
-            <LongTextInput label="Copies to" source="recipient.copies_to" validate={validateMail} />
-            <LongTextInput label="CCI" source="recipient.cci" validate={validateMail} />
-            */
