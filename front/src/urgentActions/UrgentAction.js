@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
+import { Email } from '../icons';
 import Story from './Story';
 import Act from './Act';
 import Thanks from './Thanks';
@@ -76,7 +77,21 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 
     if (step === 'thanks') {
-        return <Thanks {...get(data, 'UrgentAction.email_thank')} />;
+        const {
+            amnesty_mail_object: subject,
+            amnesty_signature: signature,
+        } = global.sessionStorage;
+
+        return (
+            <Thanks
+                {...get(data, 'UrgentAction.email_thank')}
+                actions={() => (
+                    <a href={generateUrl('letter', { id, signature, subject })} download>
+                        <Email />
+                    </a>
+                )}
+            />
+        );
     }
 };
 
