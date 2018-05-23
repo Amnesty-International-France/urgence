@@ -37,6 +37,10 @@ const query = gql`
                 copies_to
                 cci
             }
+            email_thank {
+                title
+                text
+            }
         }
     }
 `;
@@ -72,7 +76,7 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 
     if (step === 'thanks') {
-        return <Thanks />;
+        return <Thanks {...get(data, 'UrgentAction.email_thank')} />;
     }
 };
 
