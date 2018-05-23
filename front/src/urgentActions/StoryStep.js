@@ -17,6 +17,14 @@ const styles = {
         '@media (min-aspect-ratio: 1/1)': {
             flexDirection: 'row',
         },
+
+        '@media (min-width: 1024px)': {
+            padding: '10vh 10vw',
+
+            '& a': {
+                alignSelf: 'flex-end',
+            },
+        },
     },
 
     '& .image': {
