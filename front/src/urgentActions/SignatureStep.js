@@ -7,11 +7,13 @@ import { withBlackLogo } from '../themes/ThemeContext';
 
 export const renderSignatureStep = ({ action, className }) => ({ signature, changeSignature }) => (
     <div className={className}>
-        <p>
-            Parce que les actions uniques sont un message personnel, nous vous invitons à renseigner
-            vos noms et prénoms.
-        </p>
-        <textarea rows="5" value={signature} onChange={changeSignature} />
+        <div>
+            <p>
+                Parce que les actions uniques sont un message personnel, nous vous invitons à renseigner
+                vos noms et prénoms.
+            </p>
+            <textarea rows="3" value={signature} onChange={changeSignature} />
+        </div>
         <div className="action">{action}</div>
     </div>
 );
@@ -34,7 +36,11 @@ export default glamorous(withBlackLogo(SignatureStep))({
     justifyContent: 'space-between',
     '& textarea': {
         width: '100%',
-        fontSize: 24,
+        fontSize: 14,
+        fontFamily: 'Amnesty Trade Gothic',
+        margin: '2em 0',
+        lineHeight: 1.5,
+        padding: '0 15px',
     },
     '& .action': {
         marginTop: '53px',
