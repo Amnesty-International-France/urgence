@@ -18,7 +18,7 @@ export const SignatureStep = ({ action, className }) => (
                     value={signature}
                     onChange={e => changeSignature(e.target.value)}
                 />
-                {action}
+                <div className="action">{action}</div>
             </div>
         )}
     </SessionDataConsumer>
@@ -30,11 +30,17 @@ SignatureStep.propTypes = {
 };
 
 export default glamorous(withBlackLogo(SignatureStep))({
+    display: 'flex',
+    flexDirection: 'column',
     backgroundColor: 'white',
     height: '100vh',
+    padding: '105px 2rem 53px',
+    justifyContent: 'space-between',
     '& textarea': {
-        width: '80%',
+        width: '100%',
         fontSize: 24,
-        margin: '2rem 3rem',
+    },
+    '& .action': {
+        marginTop: '53px',
     },
 });

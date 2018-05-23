@@ -1,9 +1,25 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import glamorous from 'glamorous';
 
+import { white, black } from '../../themes/colors';
 import MessageStep from './MessageStep';
+import { withBlackLogo } from '../../themes/ThemeContext';
 
-export const Message = ({ messageTemplate, loading, action }) =>
+const styles = {
+    padding: '105px 0 53px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    backgroundColor: white,
+    color: black,
+    height: '100vh',
+    '& .action': {
+        margin: '62px 1em 0',
+    },
+};
+
+export const Message = ({ messageTemplate, loading, action, className }) =>
     loading ? (
         <p className="loading">Loading...</p>
     ) : (
@@ -14,10 +30,12 @@ export const Message = ({ messageTemplate, loading, action }) =>
 
             {messageTemplate &&
                 messageTemplate.length > 0 && (
-                    <div>
-                        {messageTemplate.map(({ value }, index) => (
-                            <MessageStep key={value} content={value} darken={!!(index % 2)} />
-                        ))}
+                    <div className={className}>
+                        <div>
+                            {messageTemplate.map(({ value }, index) => (
+                                <MessageStep key={value} content={value} darken={!!(index % 2)} />
+                            ))}
+                        </div>
                         <div className="action">{action}</div>
                     </div>
                 )}
@@ -32,4 +50,4 @@ Message.propTypes = {
     action: PropTypes.node.isRequired,
 };
 
-export default Message;
+export default glamorous(withBlackLogo(Message))(styles);

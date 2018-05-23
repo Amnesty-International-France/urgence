@@ -11,9 +11,8 @@ const styles = {
     height: '100vh',
     overflow: 'auto',
     fontSize: 24,
-    '& > *': {
-        flex: '1 0 0',
-    },
+    display: 'flex',
+    flexDirection: 'column',
     '& p': {
         fontFamily: 'Amnesty Trade Gothic',
         fontWeight: 'bold',
@@ -25,15 +24,17 @@ const styles = {
         fontSize: '1rem',
         fontStyle: 'italic',
         color: '#C1C1C1',
+        flex: 1,
     },
     '& input': {
         margin: '2em 0',
         width: '100%',
         fontSize: 14,
         lineHeight: '40px',
+        height: 40,
         padding: '0 15px',
     },
-    padding: '2rem 2rem',
+    padding: '105px 2rem 53px',
 };
 
 export const ObjectStep = ({ objectIndication, className, action }) => (
@@ -50,7 +51,7 @@ export const ObjectStep = ({ objectIndication, className, action }) => (
                     placeholder="Objet de votre message"
                 />
                 <RichText html={objectIndication} />
-                {action(!object)}
+                <div className="action">{action(!object)}</div>
             </div>
         )}
     </SessionDataConsumer>
