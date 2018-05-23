@@ -90,7 +90,7 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
             <ObjectStep
                 objectIndication={get(data, 'UrgentAction.object_indication')}
                 loading={loading}
-                action={<ToSignatureButton />}
+                action={disabled => <ToSignatureButton disabled={disabled} />}
             />
         );
     }

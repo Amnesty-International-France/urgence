@@ -4,8 +4,10 @@ import glamorous from 'glamorous';
 
 import RichText from '../themes/RichText';
 import { SessionDataConsumer } from '../SessionDataContext';
+import { withBlackLogo } from '../themes/ThemeContext';
 
 const styles = {
+    backgroundColor: 'white',
     height: '100vh',
     overflow: 'auto',
     fontSize: 24,
@@ -44,11 +46,11 @@ export const ObjectStep = ({ objectIndication, className, action }) => (
                 </p>
                 <input
                     value={object}
-                    onChange={changeObject}
+                    onChange={e => changeObject(e.target.value)}
                     placeholder="Objet de votre message"
                 />
                 <RichText html={objectIndication} />
-                {action}
+                {action(!object)}
             </div>
         )}
     </SessionDataConsumer>
@@ -57,8 +59,7 @@ export const ObjectStep = ({ objectIndication, className, action }) => (
 ObjectStep.propTypes = {
     className: PropTypes.string,
     objectIndication: PropTypes.string.isRequired,
-    object: PropTypes.string.isRequired,
     action: PropTypes.node.isRequired,
 };
 
-export default glamorous(ObjectStep)(styles);
+export default glamorous(withBlackLogo(ObjectStep))(styles);

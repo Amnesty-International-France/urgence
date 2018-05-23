@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import glamorous from 'glamorous';
+import classnames from 'classnames';
 
 import { black, yellow } from './colors';
 
 export const Link = ({ to, label, disabled, className }) => (
-    <RouterLink to={to} disabled={disabled} className={className}>
+    <RouterLink to={to} className={classnames(className, { disabled: disabled })}>
         {label}
     </RouterLink>
 );
@@ -34,7 +35,8 @@ export default glamorous(Link)({
     '&:active': {
         backgroundColor: yellow,
     },
-    '&:disabled': {
+    '&.disabled': {
         backgroundColor: 'grey',
+        pointerEvents: 'none',
     },
 });
