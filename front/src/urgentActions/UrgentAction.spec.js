@@ -101,19 +101,56 @@ describe('<UrgentAction />', () => {
                     },
                 },
             };
-            const renderedComponent = shallow(renderUrgentAction(params)(props))
-                .props()
-                .render();
+            const wrapper = shallow(renderUrgentAction(params)(props));
 
-            expect(renderedComponent.props.messageTemplate).toBe(
-                props.data.UrgentAction.message_template,
-            );
+            expect(wrapper.prop('messageTemplate')).toBe(props.data.UrgentAction.message_template);
+        });
 
-            expect(renderedComponent.props.objectIndication).toBe('object indication');
+        it('should display subject with retrieved GraphQL data if step is object', () => {
+            const params = {
+                step: 'object',
+            };
+            const props = {
+                loading: false,
+                data: {
+                    UrgentAction: {
+                        message_template: [{ value: 'first message' }, { value: 'second message' }],
+                        object_indication: 'object indication',
+                        recipient: {
+                            mail: 'mail',
+                        },
+                    },
+                },
+            };
+            const wrapper = shallow(renderUrgentAction(params)(props));
 
-            expect(renderedComponent.props.recipient).toEqual({
-                mail: 'mail',
-            });
+            expect(wrapper.prop('objectIndication')).toBe('object indication');
+        });
+
+        it('should display signatureStep with retrieved GraphQL data if step is signature', () => {
+            const params = {
+                step: 'signature',
+            };
+            const props = {
+                loading: false,
+                data: {
+                    UrgentAction: {
+                        message_template: [{ value: 'first message' }, { value: 'second message' }],
+                        object_indication: 'object indication',
+                        recipient: {
+                            mail: 'mail',
+                        },
+                    },
+                },
+            };
+            const wrapper = shallow(renderUrgentAction(params)(props));
+
+            const sendMail = wrapper.prop('action');
+            expect(sendMail.props.recipient).toEqual({ mail: 'mail' });
+            expect(sendMail.props.messageTemplate).toEqual([
+                { value: 'first message' },
+                { value: 'second message' },
+            ]);
         });
 
         describe('Thanks Step', () => {

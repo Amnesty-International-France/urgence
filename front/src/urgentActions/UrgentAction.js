@@ -102,7 +102,6 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
                     <SendMail
                         recipient={get(data, 'UrgentAction.recipient')}
                         messageTemplate={get(data, 'UrgentAction.message_template')}
-                        afterMail={this.afterMail}
                     />
                 }
             />

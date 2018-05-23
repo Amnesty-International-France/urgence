@@ -1,43 +1,49 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
-import { SendMail } from './SendMail';
+import { renderSendMail, SendMail } from './SendMail';
+import MailTo from '../../themes/MailTo';
 
-describe('sendMail', () => {
+describe('renderSendMail', () => {
     const defaultProps = {
         messageTemplate: [{ value: 'hello' }, { value: 'world' }],
-        signature: 'signature',
         recipient: { mail: 'mail' },
+        afterMail: jest.fn(),
+    };
+    const defaultContext = {
+        signature: 'signature',
         object: 'object',
-        history: {
-            push: jest.fn(),
-        },
-        match: {
-            params: { id: 'id' },
-        },
     };
 
     it('should render MailTo with body computed from messageTemplate and signature', () => {
-        const wrapper = shallow(<SendMail {...defaultProps} />);
+        const wrapper = shallow(renderSendMail(defaultProps)(defaultContext));
 
         expect(wrapper.find('MailTo').prop('body')).toBe('hello\n\nworld\n\nsignature');
     });
 
     it('should render MailTo with recipient props', () => {
-        const wrapper = shallow(<SendMail {...defaultProps} />);
+        const wrapper = shallow(renderSendMail(defaultProps)(defaultContext));
 
         expect(wrapper.find('MailTo').prop('recipient')).toBe(defaultProps.recipient);
+        expect(wrapper.find('MailTo').prop('afterMail')).toBe(defaultProps.afterMail);
     });
 
     it('should render MailTo with object props', () => {
-        const wrapper = shallow(<SendMail {...defaultProps} />);
+        const wrapper = shallow(renderSendMail(defaultProps)(defaultContext));
 
         expect(wrapper.find('MailTo').prop('subject')).toBe('object');
     });
 
-    it('should call history.push with thanks url when clicked', () => {
-        const wrapper = mount(<SendMail {...defaultProps} />);
-        wrapper.find('Button').simulate('click');
-        expect(defaultProps.history.push).toHaveBeenCalledWith('/ua/id/thanks');
+    it('afterMail should call history.push with thanks url when clicked', () => {
+        const props = {
+            ...defaultProps,
+            match: { params: { id: 'id' } },
+            history: {
+                push: jest.fn(),
+            },
+        };
+        const wrapper = shallow(<SendMail {...props} />, defaultContext);
+        wrapper.instance().afterMail();
+        expect(props.history.push).toHaveBeenCalledWith('/ua/id/thanks');
     });
 });

@@ -18,12 +18,14 @@ export class SessionDataProvider extends Component {
         signature: sessionData.getSignature(),
     };
 
-    changeObject = object => {
+    changeObject = event => {
+        const object = event.target.value;
         this.setState({ object });
         sessionData.setMailObject(object);
     };
 
-    changeSignature = signature => {
+    changeSignature = event => {
+        const signature = event.target.value;
         this.setState({ signature });
         sessionData.setMailSignature(signature);
     };

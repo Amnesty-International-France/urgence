@@ -8,6 +8,17 @@ import generateUrl from '../../services/generateUrl';
 import { routeMatch } from '../../propTypes';
 import { SessionDataConsumer } from '../../SessionDataContext';
 
+export const renderSendMail = ({ messageTemplate, recipient, afterMail }) => ({ object, signature }) => (
+    <MailTo
+        disabled={!object || !signature}
+        label="Envoyer"
+        recipient={recipient}
+        subject={object}
+        body={templateToBodyText(messageTemplate, signature)}
+        afterMail={afterMail}
+    />
+);
+
 export class SendMail extends Component {
     afterMail = () => {
         const {
@@ -22,16 +33,7 @@ export class SendMail extends Component {
 
         return (
             <SessionDataConsumer>
-                {({ object, signature }) => (
-                    <MailTo
-                        disabled={!object || !signature}
-                        label="Envoyer"
-                        recipient={recipient}
-                        subject={object}
-                        body={templateToBodyText(messageTemplate, signature)}
-                        afterMail={this.afterMail}
-                    />
-                )}
+                {renderSendMail({ messageTemplate, recipient, afterMail: this.afterMail })}
             </SessionDataConsumer>
         );
     }

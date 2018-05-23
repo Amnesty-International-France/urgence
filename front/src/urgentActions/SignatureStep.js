@@ -5,23 +5,19 @@ import glamorous from 'glamorous';
 import { SessionDataConsumer } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
 
+export const renderSignatureStep = ({ action, className }) => ({ signature, changeSignature }) => (
+    <div className={className}>
+        <p>
+            Parce que les actions uniques sont un message personnel, nous vous invitons à renseigner
+            vos noms et prénoms.
+        </p>
+        <textarea rows="5" value={signature} onChange={changeSignature} />
+        <div className="action">{action}</div>
+    </div>
+);
+
 export const SignatureStep = ({ action, className }) => (
-    <SessionDataConsumer>
-        {({ signature, changeSignature }) => (
-            <div className={className}>
-                <p>
-                    Parce que les actions uniques sont un message personnel, nous vous invitons à
-                    renseigner vos noms et prénoms.
-                </p>
-                <textarea
-                    rows="5"
-                    value={signature}
-                    onChange={e => changeSignature(e.target.value)}
-                />
-                <div className="action">{action}</div>
-            </div>
-        )}
-    </SessionDataConsumer>
+    <SessionDataConsumer>{renderSignatureStep({ action, className })}</SessionDataConsumer>
 );
 
 SignatureStep.propTypes = {

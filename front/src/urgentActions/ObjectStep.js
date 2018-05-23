@@ -37,24 +37,23 @@ const styles = {
     padding: '105px 2rem 53px',
 };
 
-export const ObjectStep = ({ objectIndication, className, action }) => (
-    <SessionDataConsumer>
-        {({ object, changeObject }) => (
-            <div className={className}>
-                <p>
-                    Parce que les messages uniques ont plus d&#39;impact, nous vous invitons à
-                    personnaliser son sujet.
-                </p>
-                <input
-                    value={object}
-                    onChange={e => changeObject(e.target.value)}
-                    placeholder="Objet de votre message"
-                />
-                <RichText html={objectIndication} />
-                <div className="action">{action(!object)}</div>
-            </div>
-        )}
-    </SessionDataConsumer>
+export const renderObjectStep = ({ objectIndication, className, action }) => ({
+    object,
+    changeObject,
+}) => (
+    <div className={className}>
+        <p>
+            Parce que les messages uniques ont plus d&#39;impact, nous vous invitons à personnaliser
+            son sujet.
+        </p>
+        <input value={object} onChange={changeObject} placeholder="Objet de votre message" />
+        <RichText html={objectIndication} />
+        <div className="action">{action(!object)}</div>
+    </div>
+);
+
+export const ObjectStep = props => (
+    <SessionDataConsumer>{renderObjectStep(props)}</SessionDataConsumer>
 );
 
 ObjectStep.propTypes = {
