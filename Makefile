@@ -38,6 +38,12 @@ connect-api:
 psql:
 	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
 
+update-icons-components:
+	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app front bash -ci "\
+		./node_modules/.bin/svgr --no-semi --icon --ids -d front/src/icons front/src/icons && \
+		./node_modules/.bin/prettier --write front/src/icons/*.js \
+	"
+
 test: migration-test test-unit test-e2e
 
 test-unit:

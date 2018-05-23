@@ -148,10 +148,6 @@ module.exports = {
                             compact: true,
                         },
                     },
-                    {
-                        test: /\.svg$/,
-                        use: [{ loader: 'babel-loader' }, { loader: 'react-svg-loader' }],
-                    },
                     // The notation here is somewhat confusing.
                     // "postcss" loader applies autoprefixer to our CSS.
                     // "css" loader resolves paths in CSS and adds assets as dependencies.
