@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 import { SessionDataConsumer } from '../SessionDataContext';
+import { withBlackLogo } from '../themes/ThemeContext';
 
 export const SignatureStep = ({ action, className }) => (
     <SessionDataConsumer>
@@ -12,7 +13,11 @@ export const SignatureStep = ({ action, className }) => (
                     Parce que les actions uniques sont un message personnel, nous vous invitons à
                     renseigner vos noms et prénoms.
                 </p>
-                <textarea rows="5" value={signature} onChange={changeSignature} />
+                <textarea
+                    rows="5"
+                    value={signature}
+                    onChange={e => changeSignature(e.target.value)}
+                />
                 {action}
             </div>
         )}
@@ -24,7 +29,9 @@ SignatureStep.propTypes = {
     action: PropTypes.node,
 };
 
-export default glamorous(SignatureStep)({
+export default glamorous(withBlackLogo(SignatureStep))({
+    backgroundColor: 'white',
+    height: '100vh',
     '& textarea': {
         width: '80%',
         fontSize: 24,

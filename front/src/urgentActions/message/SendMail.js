@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 
-import { MailTo } from '../../themes/MailTo';
+import MailTo from '../../themes/MailTo';
 import { templateToBodyText } from './templateToBodyText';
 import generateUrl from '../../services/generateUrl';
 import { routeMatch } from '../../propTypes';
