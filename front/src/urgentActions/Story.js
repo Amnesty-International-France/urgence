@@ -7,15 +7,16 @@ import { withRouter } from 'react-router';
 import Slider from 'react-slick';
 import { compose } from 'recompose';
 
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 import StoryStep, { getLogoColorForStep } from '../urgentActions/StoryStep';
 import { StoryStepPropType, routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
-import { textColorForBackgroundColor, colors, black } from '../themes/colors';
+import { textColorForBackgroundColor, colors } from '../themes/colors';
 import { RightArrow } from '../icons';
-
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import { withThemeContext } from '../themes/ThemeContext';
+import LoadingScreen from '../themes/LoadingScreen';
 
 const styles = {
     '&': {
@@ -128,11 +129,11 @@ export class Story extends Component {
         } = this.props;
 
         return loading ? (
-            <p className="loading">Loading...</p>
+            <LoadingScreen />
         ) : (
             <Fragment>
                 {(!story || !story.length) && (
-                    <p className="error">Cette action urgent n&#39;existe plus.</p>
+                    <p className="error">Cette action urgente n&#39;existe plus.</p>
                 )}
 
                 {story &&

@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Story } from './Story';
+import LoadingScreen from '../themes/LoadingScreen';
 
 const defaultStep = {
     id: '1',
@@ -23,11 +24,11 @@ describe('<Story />', () => {
         history: { push: () => null },
     };
 
-    it('should display a loading message while loading', () => {
+    it('should display loading screen while loading', () => {
         const props = { ...defaultProps, loading: true };
         const wrapper = shallow(<Story {...props} />);
 
-        const loading = wrapper.find('.loading');
+        const loading = wrapper.find(LoadingScreen);
         expect(loading.length).toBe(1);
     });
 
