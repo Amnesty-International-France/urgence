@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
+import sessionData from '../sessionData';
 import { Email } from '../icons';
 import Story from './Story';
 import Act from './Act';
@@ -77,10 +78,8 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 
     if (step === 'thanks') {
-        const {
-            amnesty_mail_object: subject,
-            amnesty_signature: signature,
-        } = global.sessionStorage;
+        const subject = sessionData.getMailObject();
+        const signature = sessionData.getSignature();
 
         return (
             <Thanks

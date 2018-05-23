@@ -1,6 +1,9 @@
 import { shallow } from 'enzyme';
 
 import { renderUrgentAction } from './UrgentAction';
+import sessionData from '../sessionData';
+
+jest.mock('../sessionData.js');
 
 const defaultStep = {
     content: '',
@@ -11,10 +14,6 @@ const defaultStep = {
 };
 
 describe('<UrgentAction />', () => {
-    beforeEach(() => {
-        global.sessionStorage = {};
-    });
-
     describe('renderUrgentAction', () => {
         const defaultParams = {
             id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
@@ -135,10 +134,8 @@ describe('<UrgentAction />', () => {
                     step: 'thanks',
                 };
 
-                global.sessionStorage = {
-                    amnesty_mail_object: 'Hello World!',
-                    amnesty_signature: 'John Doe',
-                };
+                sessionData.getMailObject.mockImplementation(() => 'Hello World!');
+                sessionData.getSignature.mockImplementation(() => 'John Doe');
 
                 const props = { ...defaultProps };
 

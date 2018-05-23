@@ -7,11 +7,7 @@ import sessionData from '../../sessionData';
 jest.mock('../../sessionData.js');
 
 describe('Message', () => {
-    const defaultStep = [
-        { value: 'one' },
-        { value: 'two' },
-        { value: 'three' },
-    ];
+    const defaultStep = [{ value: 'one' }, { value: 'two' }, { value: 'three' }];
     const defaultProps = {
         messageTemplate: defaultStep,
         objectIndication: 'object indication',
@@ -62,14 +58,10 @@ describe('Message', () => {
 
         const slider = wrapper.find('glamorous(Carousel)');
 
-        expect(slider.childAt(3).prop('objectIndication')).toBe(
-            'object indication',
-        );
+        expect(slider.childAt(3).prop('objectIndication')).toBe('object indication');
 
         expect(slider.childAt(3).prop('object')).toBe('object value');
-        expect(slider.childAt(3).prop('changeObject')).toBe(
-            wrapper.instance().changeObject,
-        );
+        expect(slider.childAt(3).prop('changeObject')).toBe(wrapper.instance().changeObject);
     });
 
     it('display a carousel with last child being signatureStep with signature from sessionData', () => {
@@ -79,9 +71,7 @@ describe('Message', () => {
         const slider = wrapper.find('glamorous(Carousel)');
 
         expect(slider.childAt(4).prop('signature')).toBe('signature value');
-        expect(slider.childAt(4).prop('changeSignature')).toBe(
-            wrapper.instance().changeSignature,
-        );
+        expect(slider.childAt(4).prop('changeSignature')).toBe(wrapper.instance().changeSignature);
     });
 
     it('changeObject should call sessionData.setMailObject with event value', () => {
