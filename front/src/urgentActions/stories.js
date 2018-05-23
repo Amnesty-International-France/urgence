@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import StoryStep from './StoryStep';
 import { WithStylesStory as Story } from './Story';
 import Act from './Act';
-import { black, yellow, pink, orange } from '../themes/colors';
+import Thanks from './Thanks';
 import { routerDecorator, history } from '../../.storybook/decorators';
 
 const defaultStoryProps = {
@@ -175,3 +175,7 @@ storiesOf('Act', module)
     .add('Act', () => (
         <Act callToAction="<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>" />
     ));
+
+storiesOf('Screens', module)
+    .addDecorator(story => <div style={{ height: '100vh', width: '100vw' }}>{story()}</div>)
+    .add('Thanks Screen', () => <Thanks />);
