@@ -15,7 +15,7 @@ const styles = {
     color: black,
     height: '100vh',
     '& .action': {
-        margin: '62px 1em 0',
+        margin: '62px 1em 53px',
     },
 };
 
