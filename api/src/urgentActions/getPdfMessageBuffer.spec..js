@@ -2,9 +2,9 @@ import lolex from 'lolex';
 import pdf from 'html-pdf';
 
 import { createUrgentAction, truncateAll } from '../tests/fixtureLoader';
-import { getPdfMessageStream } from './getPdfMessageStream';
+import { getPdfMessageBuffer } from './getPdfMessageBuffer';
 
-describe('getPdfMessageStream', () => {
+describe('getPdfMessageBuffer', () => {
     const defaultUrgentAction = {
         recipient: {},
     };
@@ -28,7 +28,7 @@ describe('getPdfMessageStream', () => {
             ],
         };
 
-        await getPdfMessageStream(urgentAction);
+        await getPdfMessageBuffer(urgentAction);
 
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('<p>Dear Minister,</p>');
@@ -42,7 +42,7 @@ describe('getPdfMessageStream', () => {
 
         const urgentAction = await createUrgentAction();
 
-        await getPdfMessageStream(urgentAction, 'Asking for a fair trial');
+        await getPdfMessageBuffer(urgentAction, 'Asking for a fair trial');
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('Asking for a fair trial');
     });
@@ -50,7 +50,7 @@ describe('getPdfMessageStream', () => {
     it('should display passed signature', async () => {
         const pdfSpy = jest.spyOn(pdf, 'create');
 
-        await getPdfMessageStream(defaultUrgentAction, '', 'John Doe');
+        await getPdfMessageBuffer(defaultUrgentAction, '', 'John Doe');
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('<p class="signature">John Doe</p>');
     });
@@ -65,7 +65,7 @@ describe('getPdfMessageStream', () => {
             },
         };
 
-        await getPdfMessageStream(urgentAction);
+        await getPdfMessageBuffer(urgentAction);
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('2 Kaplan Street');
     });
@@ -73,7 +73,7 @@ describe('getPdfMessageStream', () => {
     it('should display current date', async () => {
         const pdfSpy = jest.spyOn(pdf, 'create');
 
-        await getPdfMessageStream(defaultUrgentAction);
+        await getPdfMessageBuffer(defaultUrgentAction);
 
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('Le 14 mai 2018');

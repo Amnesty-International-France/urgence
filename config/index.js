@@ -80,19 +80,55 @@ const config = convict({
         schema: {
             format: String,
             default: 'reaction-rapide',
-            env: 'POSTGRES_SCHEMA'
-        }
+            env: 'POSTGRES_SCHEMA',
+        },
     },
     uploadDir: {
         format: String,
         default: '/app/var/uploads',
-        env: 'UPLOAD_DIR'
+        env: 'UPLOAD_DIR',
     },
     uploadUrl: {
         format: String,
         default: 'http://localhost',
-        env: 'UPLOAD_URL'
-    }
+        env: 'UPLOAD_URL',
+    },
+    mailer: {
+        emitter: {
+            format: String,
+            default: '',
+            env: 'MAIL_EMITTER',
+        },
+        smtp: {
+            host: {
+                format: String,
+                default: 'smtp.mailgun.org',
+                env: 'SMTP_HOST',
+            },
+            port: {
+                format: 'int',
+                default: 465,
+                env: 'SMTP_PORT',
+            },
+            ignoreTLS: {
+                format: Boolean,
+                default: false,
+                env: 'SMTP_IGNORE_TLS',
+            },
+            auth: {
+                user: {
+                    format: String,
+                    default: 'postmaster',
+                    env: 'SMTP_USER',
+                },
+                password: {
+                    format: String,
+                    default: '',
+                    env: 'SMTP_PASSWORD',
+                },
+            },
+        },
+    },
 });
 
 // Perform validation
