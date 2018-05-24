@@ -1,6 +1,5 @@
 import request from 'supertest';
 import pdf from 'html-pdf';
-import lolex from 'lolex';
 
 import app from '../server';
 import { createUrgentAction, truncateAll } from '../tests/fixtureLoader';
@@ -29,99 +28,6 @@ describe('Urgent Actions Router', () => {
             const urgentAction = await createUrgentAction();
             const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
             expect(response.status).toBe(200);
-        });
-
-        describe('Letter Content', () => {
-            let clock;
-            beforeEach(() => {
-                clock = lolex.install({ now: new Date('2018-05-14 12:00:00') });
-            });
-
-            it('should display all chosen paragraphs', async () => {
-                const pdfSpy = jest.spyOn(pdf, 'create');
-
-                const urgentAction = await createUrgentAction({
-                    message_template: [
-                        { value: 'Dear Minister,' },
-                        {
-                            value:
-                                'I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.',
-                        },
-                    ],
-                });
-
-                const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
-                expect(response.status).toBe(200);
-
-                const renderedLetter = pdfSpy.mock.calls[0][0];
-                expect(renderedLetter).toContain('<p>Dear Minister,</p>');
-                expect(renderedLetter).toContain(
-                    '<p>I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.</p>',
-                );
-            });
-
-            it('should display given subject', async () => {
-                const pdfSpy = jest.spyOn(pdf, 'create');
-
-                const urgentAction = await createUrgentAction();
-
-                const response = await request(app).get(
-                    `/urgent-actions/${
-                        urgentAction.id
-                    }.pdf?subject=Asking%20for%20a%20fair%20trial`,
-                );
-                expect(response.status).toBe(200);
-
-                const renderedLetter = pdfSpy.mock.calls[0][0];
-                expect(renderedLetter).toContain('Asking for a fair trial');
-            });
-
-            it('should display passed signature', async () => {
-                const pdfSpy = jest.spyOn(pdf, 'create');
-
-                const urgentAction = await createUrgentAction();
-
-                const response = await request(app).get(
-                    `/urgent-actions/${urgentAction.id}.pdf?signature=John%20Doe`,
-                );
-                expect(response.status).toBe(200);
-
-                const renderedLetter = pdfSpy.mock.calls[0][0];
-                expect(renderedLetter).toContain('<p class="signature">John Doe</p>');
-            });
-
-            it('should display recipient postal address', async () => {
-                const pdfSpy = jest.spyOn(pdf, 'create');
-
-                const urgentAction = await createUrgentAction({
-                    recipient: {
-                        postal_address: 'Aryeh Deri\n2 Kaplan Street',
-                    },
-                });
-
-                const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
-                expect(response.status).toBe(200);
-
-                const renderedLetter = pdfSpy.mock.calls[0][0];
-                expect(renderedLetter).toContain('2 Kaplan Street');
-            });
-
-            it('should display current date', async () => {
-                const pdfSpy = jest.spyOn(pdf, 'create');
-
-                const urgentAction = await createUrgentAction();
-                const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
-                expect(response.status).toBe(200);
-
-                const renderedLetter = pdfSpy.mock.calls[0][0];
-                expect(renderedLetter).toContain('Le 14 mai 2018');
-            });
-
-            afterEach(() => {
-                if (clock) {
-                    clock.uninstall();
-                }
-            });
         });
     });
 
