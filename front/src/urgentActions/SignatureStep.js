@@ -32,24 +32,18 @@ SignatureStep.propTypes = {
     action: PropTypes.node,
 };
 
-export class SignatureStepWithSessionData extends Component {
-    setSignature = event => this.props.setSignature(event.target.value);
-    render() {
-        const { action, className } = this.props;
-        return (
-            <SessionDataConsumer>
-                {({ signature, setSignature }) => (
-                    <SignatureStep
-                        action={action}
-                        className={className}
-                        signature={signature}
-                        setSignature={setSignature}
-                    />
-                )}
-            </SessionDataConsumer>
-        );
-    }
-}
+export const SignatureStepWithSessionData = ({ action, className }) => (
+    <SessionDataConsumer>
+        {({ signature, setSignature }) => (
+            <SignatureStep
+                action={action}
+                className={className}
+                signature={signature}
+                setSignature={setSignature}
+            />
+        )}
+    </SessionDataConsumer>
+);
 
 SignatureStepWithSessionData.propTypes = {
     setSignature: PropTypes.func.isRequired,

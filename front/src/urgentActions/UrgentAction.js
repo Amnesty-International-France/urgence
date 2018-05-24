@@ -16,7 +16,9 @@ import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import ToObjectButton from './ToObjectButton';
 import ToSignatureButton from './ToSignatureButton';
+import ToAddressButton from './ToAddressButton';
 import SignatureStep from './SignatureStep';
+import Address from './Address';
 import SendMail from './message/SendMail';
 import { SessionDataProvider } from '../SessionDataContext';
 import LoadingScreen from '../themes/LoadingScreen';
@@ -114,23 +116,20 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 
     if (step === 'thanks') {
-        const subject = sessionData.getMailObject();
-        const signature = sessionData.getSignature();
-
         return (
             <Thanks
                 {...get(data, 'UrgentAction.email_thank')}
-                actions={() => (
-                    <a href={generateUrl('letter', { id, signature, subject })} download>
-                        <Email />
-                    </a>
-                )}
+                actions={() => <ToAddressButton />}
             />
         );
     }
 
     if (step === 'thanks-letter') {
         return <Thanks {...get(data, 'UrgentAction.letter_thank')} />;
+    }
+
+    if (step === 'address') {
+        return <Address />;
     }
 };
 

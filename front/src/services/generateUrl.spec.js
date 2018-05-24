@@ -41,6 +41,10 @@ describe('generateUrl', () => {
         expect(generateUrl('thanks', { id: 'id_value' })).toBe('/ua/id_value/thanks');
     });
 
+    it('should generate url for ua/id/address', () => {
+        expect(generateUrl('address', { id: 'id_value' })).toBe('/ua/id_value/address');
+    });
+
     it('should throw error if receiving unknow route', () => {
         expect(() => generateUrl()).toThrow('Unknown route undefined passed to generateUrl');
 

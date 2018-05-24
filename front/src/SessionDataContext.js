@@ -8,6 +8,7 @@ const { Provider, Consumer } = createContext({
     signature: null,
     setObject: () => null,
     setSignature: () => null,
+    setAddress: () => null,
 });
 
 export const SessionDataConsumer = Consumer;
@@ -16,6 +17,7 @@ export class SessionDataProvider extends Component {
     state = {
         object: sessionData.getMailObject(),
         signature: sessionData.getSignature(),
+        address: sessionData.getAddress(),
     };
 
     setObject = object => {
@@ -28,6 +30,11 @@ export class SessionDataProvider extends Component {
         sessionData.setSignature(signature);
     };
 
+    setAddress = address => {
+        this.setState({ address });
+        sessionData.setAddress(address);
+    };
+
     render() {
         return (
             <Provider
@@ -35,6 +42,7 @@ export class SessionDataProvider extends Component {
                     ...this.state,
                     setObject: this.setObject,
                     setSignature: this.setSignature,
+                    setAddress: this.setAddress,
                 }}
             >
                 {this.props.children}
