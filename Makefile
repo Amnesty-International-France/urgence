@@ -141,10 +141,10 @@ build-storybook:
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps storybook
 
 build-front:
-ifeq ($(NODE_ENV),"staging")
+ifeq ($(NODE_ENV),staging)
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_staging
 else
-    ifeq ($(NODE_ENV),"production")
+    ifeq ($(NODE_ENV),production)
 		$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_prod
     else
 		$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_dev
@@ -152,10 +152,10 @@ else
 endif
 
 build-admin:
-ifeq ($(NODE_ENV), "staging")
+ifeq ($(NODE_ENV), staging)
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_staging
 else
-    ifeq ($(NODE_ENV), "production")
+    ifeq ($(NODE_ENV), production)
 		$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_prod
     else
 		$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_dev
