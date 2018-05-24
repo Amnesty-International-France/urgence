@@ -3,25 +3,35 @@ import isUUID from 'validator/lib/isUUID';
 
 import nunjucks from 'nunjucks';
 import { getUrgentAction } from './repository';
-import { getPdfMessageStream } from './getPdfMessageStream';
+import { getPdfMessageBuffer } from './getPdfMessageBuffer';
+import { sendMail } from '../mailer';
+import { getLetterMailBody } from './letterMailBody';
 
 export const urgentActionsRouter = new Router();
 
-urgentActionsRouter.get('/:id.pdf', async (req, res) => {
+urgentActionsRouter.post('/:id/send', async (req, res) => {
     const { id } = req.params;
     if (!isUUID(id)) {
         return res.status(400).send(`Invalid UUID format: ${id}`);
     }
 
-    const { signature, subject } = req.query;
+    const { signature, subject } = req.body;
 
     const urgentAction = await getUrgentAction(id);
     if (!urgentAction) {
         return res.status(404).send('Not Found');
     }
 
-    const pdfStream = await getPdfMessageStream(urgentAction);
-    pdfStream.pipe(res);
-});
+    const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, signature);
+    await sendMail(
+        'jonathan@marmelab.com',
+        'On y est presque !',
+        getLetterMailBody({ signature, urgentAction }),
+        {
+            filename: 'letter.pdf',
+            content: pdfBuffer,
+        },
+    );
 
-export default urgentActionsRouter;
+    return res.end();
+});

@@ -18,12 +18,23 @@ services:
         working_dir: /app/admin
         user: "${UID}:${GID}"
 
+    maildev:
+        image: djfarrelly/maildev
+        expose:
+            - "25"
+        ports:
+            - "1080:80"
+
     api:
         command: "npm run start-dev"
         environment:
             - ADMIN_USERNAME=admin
             - ADMIN_PASSWORD=password
             - JWT_SECRET_KEY=foobarS3CR3T!
+            - SMTP_HOST=maildev
+            - SMTP_PORT=25
+            - SMTP_USER
+            - SMTP_IGNORE_TLS=true
         ports:
             - "4000:4000"
 

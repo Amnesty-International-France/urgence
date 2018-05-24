@@ -7,10 +7,10 @@ describe('<ObjectStep />', () => {
     const defaultProps = {
         objectIndication:
             'Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.',
-        action: jest.fn().mockReturnValue('action'),
+        action: () => 'action',
         className: 'class',
         object: 'object value',
-        setObject: jest.fn(),
+        setObject: () => {},
     };
 
     describe('renderOnjectStep', () => {
@@ -20,7 +20,7 @@ describe('<ObjectStep />', () => {
                 objectIndication: '<p>hello world</p>',
             };
 
-            const wrapper = shallow(<ObjectStep{...props} />);
+            const wrapper = shallow(<ObjectStep {...props} />);
             const richText = wrapper.find('RichText');
             expect(richText.prop('html')).toBe('<p>hello world</p>');
         });
@@ -32,27 +32,40 @@ describe('<ObjectStep />', () => {
         });
 
         it('should call action props with true if object is set', () => {
-            shallow(<ObjectStep {...defaultProps} />);
-            expect(defaultProps.action).toHaveBeenCalledWith(false);
-        });
-
-        it('should call action props with false if object is not set', () => {
             const props = {
                 ...defaultProps,
+                action: jest.fn(),
+            };
+
+            shallow(<ObjectStep {...props} />);
+            expect(props.action).toHaveBeenCalledWith(false);
+        });
+
+        it('should call action props with true if object is not set', () => {
+            const props = {
+                ...defaultProps,
+                action: jest.fn(),
                 object: null,
             };
+
             shallow(<ObjectStep {...props} />);
-            expect(defaultProps.action).toHaveBeenCalledWith(false);
+            expect(props.action).toHaveBeenCalledWith(true);
         });
 
         it('should render Input with value = context.object and onChange = context.setObject', () => {
-            const wrapper = shallow(<ObjectStep {...defaultProps} />);
+            const props = {
+                ...defaultProps,
+                setObject: jest.fn(),
+            };
+
+            const wrapper = shallow(<ObjectStep {...props} />);
             const input = wrapper.find('input');
+
             expect(input.prop('value')).toBe('object value');
             expect(input.prop('onChange')).toBe(wrapper.instance().setObject);
 
             wrapper.instance().setObject({ target: { value: 'new value' } });
-            expect(defaultProps.setObject).toBeCalledWith('new value');
+            expect(props.setObject).toBeCalledWith('new value');
         });
     });
 });

@@ -26,8 +26,9 @@ if (config.env !== 'production') {
     app.get('/graphiql', graphiqlRouter);
 }
 
+app.use(bodyParser.json());
 app.use('/urgent-actions', urgentActionsRouter);
-app.post('/', bodyParser.json(), apolloUploadExpress(), graphqlRouter);
+app.post('/', apolloUploadExpress(), graphqlRouter);
 app.use(errorHandler);
 
 export default app;

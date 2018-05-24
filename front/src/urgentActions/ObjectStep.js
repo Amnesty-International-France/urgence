@@ -67,7 +67,7 @@ ObjectStep.propTypes = {
     className: PropTypes.string,
     objectIndication: PropTypes.string.isRequired,
     action: PropTypes.func.isRequired,
-    object: PropTypes.string.isRequired,
+    object: PropTypes.string,
     setObject: PropTypes.func.isRequired,
 };
 

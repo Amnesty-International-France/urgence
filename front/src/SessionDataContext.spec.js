@@ -7,8 +7,10 @@ import sessionData from './sessionData';
 jest.mock('./sessionData.js');
 
 describe('SessionDataContext', () => {
-    sessionData.getMailObject.mockImplementation(() => 'object value');
-    sessionData.getSignature.mockImplementation(() => 'signature value');
+    beforeEach(() => {
+        sessionData.getMailObject.mockImplementation(() => 'object value');
+        sessionData.getSignature.mockImplementation(() => 'signature value');
+    });
 
     it('should have state from sessionData', () => {
         const wrapper = shallow(<SessionDataProvider>OK</SessionDataProvider>);
