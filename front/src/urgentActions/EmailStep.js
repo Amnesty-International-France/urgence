@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { compose } from 'recompose';
 
-import { SessionDataConsumer } from '../SessionDataContext';
+import { withSessionData } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
 
 export class EmailStep extends Component {
@@ -33,26 +34,7 @@ EmailStep.propTypes = {
     action: PropTypes.node,
 };
 
-export const EmailStepWithSessionData = ({ action, className }) => (
-    <SessionDataConsumer>
-        {({ address, setEmail }) => (
-            <EmailStep
-                action={action}
-                className={className}
-                address={address}
-                setEmail={setEmail}
-            />
-        )}
-    </SessionDataConsumer>
-);
-
-EmailStepWithSessionData.propTypes = {
-    setEmail: PropTypes.func.isRequired,
-    className: PropTypes.string,
-    action: PropTypes.node,
-};
-
-export default glamorous(withBlackLogo(EmailStepWithSessionData))({
+export default glamorous(compose(withBlackLogo, withSessionData)(EmailStep))({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',

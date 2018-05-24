@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { compose } from 'recompose';
 
-import { SessionDataConsumer } from '../SessionDataContext';
+import { withSessionData } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
 
 export class SignatureStep extends Component {
@@ -32,26 +33,7 @@ SignatureStep.propTypes = {
     action: PropTypes.node,
 };
 
-export const SignatureStepWithSessionData = ({ action, className }) => (
-    <SessionDataConsumer>
-        {({ signature, setSignature }) => (
-            <SignatureStep
-                action={action}
-                className={className}
-                signature={signature}
-                setSignature={setSignature}
-            />
-        )}
-    </SessionDataConsumer>
-);
-
-SignatureStepWithSessionData.propTypes = {
-    setSignature: PropTypes.func.isRequired,
-    className: PropTypes.string,
-    action: PropTypes.node,
-};
-
-export default glamorous(withBlackLogo(SignatureStepWithSessionData))({
+export default glamorous(compose(withBlackLogo, withSessionData)(SignatureStep))({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',

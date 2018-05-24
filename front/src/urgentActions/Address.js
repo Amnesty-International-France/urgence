@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { compose } from 'recompose';
 
-import { SessionDataConsumer } from '../SessionDataContext';
+import { withSessionData } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
 
 export class Address extends Component {
@@ -33,26 +34,7 @@ Address.propTypes = {
     action: PropTypes.node,
 };
 
-export const AddressWithSessionData = ({ action, className }) => (
-    <SessionDataConsumer>
-        {({ address, setAddress }) => (
-            <Address
-                action={action}
-                className={className}
-                address={address}
-                setAddress={setAddress}
-            />
-        )}
-    </SessionDataConsumer>
-);
-
-AddressWithSessionData.propTypes = {
-    setAddress: PropTypes.func.isRequired,
-    className: PropTypes.string,
-    action: PropTypes.node,
-};
-
-export default glamorous(withBlackLogo(AddressWithSessionData))({
+export default glamorous(compose(withBlackLogo, withSessionData)(Address))({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
