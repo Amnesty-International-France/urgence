@@ -16,7 +16,7 @@ module.exports = shipit => {
             servers: 'ubuntu@52.17.15.141',
         },
         production: {
-            branch: process.env.BRANCH || 'master',
+            branch: 'master',
             key: path.join(__dirname, 'var/deploy-prod.key'),
             deployTo: '/home/amnesty',
             servers: 'amnesty@rapide.amnesty.fr',
