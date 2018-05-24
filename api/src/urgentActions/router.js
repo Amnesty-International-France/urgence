@@ -25,17 +25,25 @@ urgentActionsRouter.get('/:id.pdf', async (req, res) => {
 
     const urgentActionLetter = nunjucks.render(path.join(__dirname, './letter.html'), {
         date: format(new Date(), 'DD MMMM YYYY', { locale: frLocale }),
+        recipientAddress: urgentAction.recipient.postal_address,
         signature,
         subject,
         urgentAction,
     });
 
-    return pdf.create(urgentActionLetter, {
-        format: 'A4',
-        border: '1.5cm',
-    }).toStream((err, stream) => {
-        stream.pipe(res);
-    });
+    return pdf
+        .create(urgentActionLetter, {
+            format: 'A4',
+            border: {
+                top: '3.81cm',
+                left: '2cm',
+                bottom: '2cm',
+                right: '2cm',
+            },
+        })
+        .toStream((err, stream) => {
+            stream.pipe(res);
+        });
 });
 
 export default urgentActionsRouter;

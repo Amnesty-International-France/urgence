@@ -7,7 +7,9 @@ import { createUrgentAction as insertUrgentAction } from '../urgentActions/repos
 export const createUrgentAction = async ({ story, message_template, ...urgentAction } = {}) => {
     const defaultUrgentAction = {
         title: "Commutation of William Montgomery's sentence",
+        recipient: {},
     };
+
     return insertUrgentAction({
         ...defaultUrgentAction,
         ...urgentAction,
