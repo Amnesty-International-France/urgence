@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import { createTransport } from 'nodemailer';
 
 import { mailer as mailerConfig } from '../../config';
 
@@ -7,8 +7,7 @@ if (!mailerConfig.smtp.user) {
     delete smtpConfig.auth;
 }
 
-const transporter = nodemailer.createTransport(smtpConfig);
-
+const transporter = createTransport(smtpConfig);
 transporter.verify(err => {
     if (err) {
         throw new Error(err);

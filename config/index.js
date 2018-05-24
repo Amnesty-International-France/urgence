@@ -96,7 +96,7 @@ const config = convict({
     mailer: {
         emitter: {
             format: String,
-            default: '',
+            default: 'webmestre@amnesty.fr',
             env: 'MAIL_EMITTER',
         },
         smtp: {
