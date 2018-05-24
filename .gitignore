@@ -9,5 +9,6 @@ yarn-debug.log*
 yarn-error.log*
 /front/.expo
 var/deploy.key
+var/deploy-prod.key
 /admin/build
 var/uploads

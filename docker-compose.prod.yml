@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+    api:
+        command: "npm run start"
+        environment:
+            - NODE_ENV=staging
+            - POSTGRES_PASSWORD
+            - CORS_ALLOWED_ORIGIN="https://rapide.amnesty.fr"
+            - UPLOAD_DIR=/app/uploads
+
+    nginx:
+        image: nginx
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - .:/app
+            - ./var/nginx/staging.conf:/etc/nginx/conf.d/default.conf
+            - /home/ubuntu/amnesty/uploads:/app/uploads
+            - /etc/letsencrypt/live/rapide.amnesty.fr/fullchain.pem:/etc/nginx/conf.d/selfsigned.crt
+            - /etc/letsencrypt/live/rapide.amnesty.fr/privkey.pem:/etc/nginx/conf.d/selfsigned.key
+        command: [sh, -c, "chmod -R o+X /app; chmod -R o+r /app/admin/build/; nginx -g 'daemon off;'"]
+        depends_on:
+            - api
+
+    db:
+        environment:
+            - POSTGRES_USER=amnesty
+            - POSTGRES_PASSWORD
+            - POSTGRES_DB=reaction-rapide
+        volumes:
+            - "~/data:/var/lib/postgresql/data/"

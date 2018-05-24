@@ -15,15 +15,21 @@ module.exports = shipit => {
             deployTo: BASE_FOLDER,
             servers: 'ubuntu@52.17.15.141',
         },
+        production: {
+            branch: 'master',
+            key: path.join(__dirname, 'var/deploy-prod.key'),
+            deployTo: '/home/amnesty',
+            servers: 'amnesty@rapide.amnesty.fr',
+        }
     });
 
     shipit.blTask('buildAdmin', async () => {
-        await shipit.local('make build-admin-staging');
+        await shipit.local(`NODE_ENV=${process.env.NODE_ENV} make build-admin`);
         await shipit.local(`cp -R ./admin/build ${shipit.workspace}/admin/`);
     });
 
     shipit.blTask('buildFront', async () => {
-        await shipit.local('make build-front-staging');
+        await shipit.local(`NODE_ENV=${process.env.NODE_ENV} make build-front`);
         await shipit.local(`cp -R ./front/build ${shipit.workspace}/front/`);
     });
 
@@ -48,7 +54,15 @@ module.exports = shipit => {
 
     shipit.on('published', async () => {
         await shipit.remote('make install-staging', { cwd: shipit.releasePath });
-        await shipit.remote('make stop-staging start-staging', { cwd: shipit.releasePath });
+        switch (process.env.NODE_ENV) {
+            case 'staging':
+                return shipit.remote('make stop-staging start-staging', { cwd: shipit.releasePath });
+            case 'production':
+                return shipit.remote('make stop-prod start-prod', { cwd: shipit.releasePath });
+            default:
+                return;
+        }
+
     });
 }
 
