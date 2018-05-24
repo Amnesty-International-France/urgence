@@ -14,11 +14,12 @@ transporter.verify(err => {
     }
 });
 
-export const sendMail = async (to, subject, text, attachment) =>
+export const sendMail = async (to, subject, { html, text }, attachment) =>
     transporter.sendMail({
         from: mailerConfig.emitter,
         to,
         subject,
         text,
+        html,
         attachments: [attachment],
     });

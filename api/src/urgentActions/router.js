@@ -5,6 +5,7 @@ import nunjucks from 'nunjucks';
 import { getUrgentAction } from './repository';
 import { getPdfMessageBuffer } from './getPdfMessageBuffer';
 import { sendMail } from '../mailer';
+import { getLetterMailBody } from './letterMailBody';
 
 export const urgentActionsRouter = new Router();
 
@@ -22,10 +23,15 @@ urgentActionsRouter.post('/:id/send', async (req, res) => {
     }
 
     const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, signature);
-    await sendMail('jonathan@marmelab.com', 'Test', 'It works!', {
-        filename: 'letter.pdf',
-        content: pdfBuffer,
-    });
+    await sendMail(
+        'jonathan@marmelab.com',
+        'On y est presque !',
+        getLetterMailBody({ signature, urgentAction }),
+        {
+            filename: 'letter.pdf',
+            content: pdfBuffer,
+        },
+    );
 
     return res.end();
 });

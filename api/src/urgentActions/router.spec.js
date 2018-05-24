@@ -58,8 +58,10 @@ describe('Urgent Actions Router', () => {
 
             await request(app).post(`/urgent-actions/${urgentAction.id}/send`);
 
-            const [recipient, , , attachment] = sendMail.mock.calls[0];
+            const [recipient, subject, body, attachment] = sendMail.mock.calls[0];
             expect(recipient).toBe('jonathan@marmelab.com');
+            expect(subject).toBe('On y est presque !');
+            expect(body).toMatchSnapshot();
             expect(attachment).toEqual({
                 filename: 'letter.pdf',
                 content: 'PDF Buffer',
