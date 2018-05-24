@@ -8,6 +8,7 @@ export const createUrgentAction = async ({ story, message_template, ...urgentAct
     const defaultUrgentAction = {
         title: "Commutation of William Montgomery's sentence",
         recipient: {},
+        letter_thank: {},
     };
 
     return insertUrgentAction({

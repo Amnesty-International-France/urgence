@@ -100,6 +100,7 @@ export const urgentActionsTypeDefs = gql`
         last_edition_date: DATE!
         recipient: Recipient
         email_thank: Thanks
+        letter_thank: Thanks
     }
 
     extend type Query {
@@ -127,6 +128,7 @@ export const urgentActionsTypeDefs = gql`
             message_template: [MessageTemplateInput]!
             recipient: RecipientInput!
             email_thank: ThankInput!
+            letter_thank: ThankInput!
         ): UrgentAction
         updateUrgentAction(
             id: ID!
@@ -137,6 +139,7 @@ export const urgentActionsTypeDefs = gql`
             message_template: [MessageTemplateInput]!
             recipient: RecipientInput!
             email_thank: ThankInput!
+            letter_thank: ThankInput!
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
     }
