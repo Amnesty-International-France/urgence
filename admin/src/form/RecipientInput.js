@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Card, CardHeader, CardContent } from 'material-ui';
 import ContactEmail from '@material-ui/icons/ContactMail';
+import isEmail from 'validator/lib/isEmail';
 
-import { LongTextInput, TextInput } from 'react-admin';
+import { email, required, LongTextInput, TextInput } from 'react-admin';
 import { pink } from '../../../front/src/themes/colors';
 
 const styles = {
@@ -27,13 +28,14 @@ const styles = {
     },
 };
 
-// export const validateEmailsList = text =>
-//     text && text.split(',').find(email => !isEmail(email))
-//         ? 'Must contain only mail separated by ","'
-//         : null;
-//     text && text.split(',').find(email => !isEmail(email))
-//         ? 'Must contain only mail separated by ","'
-//         : null;
+export const validateRecipientEmail = [required(), email()];
+
+export const validateEmailsList = text =>
+    text && !!text.split(',').find(t => !isEmail(t))
+        ? 'Must contain only emails separated by a comma.'
+        : null;
+
+export const validatePostalAddress = required();
 
 export const RecipientInput = ({ classes, label, ...rest }) => (
     <Card className={classes.root}>
@@ -46,26 +48,26 @@ export const RecipientInput = ({ classes, label, ...rest }) => (
                         type="email"
                         label="Mail"
                         source="recipient.mail"
-                        // validate={[required, email]}
+                        validate={validateRecipientEmail}
                     />
                     <TextInput
                         fullWidth
                         label="Copies to"
                         source="recipient.copies_to"
-                        // validate={validateEmailsList}
+                        validate={validateEmailsList}
                     />
                     <TextInput
                         fullWidth
                         label="CCI"
                         source="recipient.cci"
-                        // validate={validateEmailsList}
+                        validate={validateEmailsList}
                     />
                 </div>
                 <div className={classes.postalAddress}>
                     <LongTextInput
                         label="Postal Address"
                         source="recipient.postal_address"
-                        // validate={required()}
+                        validate={validatePostalAddress}
                     />
                 </div>
             </div>
