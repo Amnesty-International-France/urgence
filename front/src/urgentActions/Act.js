@@ -27,7 +27,13 @@ export default glamorous(Act)({
     justifyContent: 'space-between',
     backgroundColor: pink,
     color: white,
-    height: '100vh',
+    height: '100%',
+    '@media (min-width: 1024px)': {
+        padding: '10vh 10vw',
+        '& a': {
+            alignSelf: 'flex-end',
+        },
+    },
     '& h1': {
         marginTop: '122px',
         fontFamily: 'Amnesty Trade Gothic Condensed',
@@ -46,5 +52,6 @@ export default glamorous(Act)({
     '& a': {
         margin: '0 1em',
         marginBottom: '53px',
+
     },
 });

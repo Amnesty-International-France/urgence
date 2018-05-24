@@ -16,6 +16,16 @@ const styles = {
     height: '100%',
     '& .action': {
         margin: '62px 1em 53px',
+        '@media (min-aspect-ratio: 1/1)': {
+            alignSelf: 'flex-end',
+        },
+    },
+    '@media (min-width: 1024px)': {
+        padding: '10vh 10vw',
+
+        '& a': {
+            alignSelf: 'flex-end',
+        },
     },
 };
 

@@ -15,7 +15,7 @@ export class SignatureStep extends Component {
                 <div>
                     <p>
                         Parce que les actions uniques sont un message personnel, nous vous invitons
-                        à renseigner vos noms et prénoms.
+                        à renseigner vos nom et prénom.
                     </p>
                     <textarea rows="3" value={signature} onChange={this.setSignature} />
                 </div>
@@ -64,6 +64,12 @@ export default glamorous(withBlackLogo(SignatureStepWithSessionData))({
     height: '100%',
     padding: '105px 2rem 53px',
     justifyContent: 'space-between',
+    '@media (min-width: 1024px)': {
+        padding: '30vh 30vw',
+        '& .action': {
+            alignSelf: 'flex-end',
+        },
+    },
     '& textarea': {
         width: '100%',
         fontSize: 14,
@@ -73,5 +79,10 @@ export default glamorous(withBlackLogo(SignatureStepWithSessionData))({
     },
     '& .action': {
         marginTop: '53px',
+    },
+    '& p': {
+        fontFamily: 'Amnesty Trade Gothic',
+        fontWeight: 'bold',
+        fontSize: 18,
     },
 });
