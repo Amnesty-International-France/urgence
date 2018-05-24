@@ -5,10 +5,10 @@ import { SignatureStep } from './SignatureStep';
 
 describe('<SignatureStep />', () => {
     const defaultProps = {
-        signature: 'signature value',
-        changeSignature: jest.fn(),
         messageTemplate: [],
-        action: <p className="action">action</p>,
+        action: <p>action</p>,
+        signature: 'signature value',
+        setSignature: jest.fn(),
     };
 
     it('should display a textarea with value = props.object', () => {
@@ -17,14 +17,12 @@ describe('<SignatureStep />', () => {
         expect(textarea.prop('value')).toBe('signature value');
     });
 
-    it('should call changeSignature with event value when triggering textarea onChange', () => {
+    it('should call setSignature with event value when triggering textarea onChange', () => {
         const wrapper = shallow(<SignatureStep {...defaultProps} />);
         const textarea = wrapper.find('textarea');
 
         textarea.simulate('change', { target: { value: 'new value' } });
-        expect(defaultProps.changeSignature).toHaveBeenCalledWith({
-            target: { value: 'new value' },
-        });
+        expect(defaultProps.setSignature).toHaveBeenCalledWith('new value');
     });
 
     it('should render action', () => {

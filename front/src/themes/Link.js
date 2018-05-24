@@ -2,23 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import glamorous from 'glamorous';
+import classnames from 'classnames';
 
 import { black, yellow } from './colors';
 
-export const Link = ({ to, label, disabled, className }) => (
-    <RouterLink to={to} disabled={disabled} className={className}>
-        {label}
-    </RouterLink>
-);
-
-Link.propTypes = {
-    to: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
-    className: PropTypes.string,
-};
-
-export default glamorous(Link)({
+export const styles = {
     display: 'block',
     backgroundColor: yellow,
     color: black,
@@ -31,10 +19,23 @@ export default glamorous(Link)({
     textDecoration: 'none',
     textTransform: 'uppercase',
     textAlign: 'center',
-    '&:active': {
-        backgroundColor: yellow,
-    },
-    '&:disabled': {
+    '&.disabled': {
         backgroundColor: 'grey',
+        pointerEvents: 'none',
     },
-});
+};
+
+export const Link = ({ to, label, disabled, className }) => (
+    <RouterLink to={to} className={classnames(className, { disabled: disabled })}>
+        {label}
+    </RouterLink>
+);
+
+Link.propTypes = {
+    to: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    className: PropTypes.string,
+};
+
+export default glamorous(Link)(styles);

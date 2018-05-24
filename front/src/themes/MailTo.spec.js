@@ -22,11 +22,7 @@ describe('MailTo', () => {
     });
 
     it('should render a mailto link with cc too if copies_to is set', () => {
-        const props = assocPath(
-            ['recipient', 'copies_to'],
-            'copy@gmail.com',
-            defaultProps,
-        );
+        const props = assocPath(['recipient', 'copies_to'], 'copy@gmail.com', defaultProps);
 
         const wrapper = shallow(<MailTo {...props} />);
 
@@ -36,11 +32,7 @@ describe('MailTo', () => {
     });
 
     it('should render a mailto link with bcc too if cci is set', () => {
-        const props = assocPath(
-            ['recipient', 'cci'],
-            'invisiblecopy@gmail.com',
-            defaultProps,
-        );
+        const props = assocPath(['recipient', 'cci'], 'invisiblecopy@gmail.com', defaultProps);
 
         const wrapper = shallow(<MailTo {...props} />);
 
@@ -49,7 +41,7 @@ describe('MailTo', () => {
         );
     });
 
-    it('should disabled link and Button if disabeld is true', () => {
+    it('should add disabled class to link if disabeld is true', () => {
         const props = {
             ...defaultProps,
             disabled: true,
@@ -57,7 +49,6 @@ describe('MailTo', () => {
 
         const wrapper = shallow(<MailTo {...props} />);
 
-        expect(wrapper.find('a').prop('disabled')).toBe(true);
-        expect(wrapper.find('Button').prop('disabled')).toBe(true);
+        expect(wrapper.find('a').prop('className')).toBe('disabled');
     });
 });

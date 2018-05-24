@@ -5,11 +5,15 @@ import driver from './driver';
 import storyPageFactory from './pages/story';
 import actPageFactory from './pages/act';
 import messagePageFactory from './pages/message';
+import objectPageFactory from './pages/object';
+import signaturePageFactory from './pages/signature';
 import thanksPageFactory from './pages/thanks';
 
 const storyPage = storyPageFactory(driver);
 const actPage = actPageFactory(driver);
 const messagePage = messagePageFactory(driver);
+const objectPage = objectPageFactory(driver);
+const signaturePage = signaturePageFactory(driver);
 const thanksPage = thanksPageFactory(driver);
 
 describe('app', () => {
@@ -19,29 +23,31 @@ describe('app', () => {
         urgentAction = await fetch('http://api:4000/test/createUrgentAction').then(r => r.json());
     });
 
-    it(
-        'should display story',
-        async () => {
-            await storyPage.navigate(urgentAction.id, 0);
-            const title = await driver.getTitle();
-            expect(title).toBe('React App');
-            const text = await storyPage.getActiveText();
-            expect(text).toBe(urgentAction.story[0].content);
+    it('should display story', async () => {
+        await storyPage.navigate(urgentAction.id, 0);
+        const title = await driver.getTitle();
+        expect(title).toBe('React App');
+        const text = await storyPage.getActiveText();
+        expect(text).toBe(
+            'Ho Duy Hai a été condamné à mort en 2008 après avoir été déclaré coupable de pillage de biens et de meurtre.',
+        );
 
-            await storyPage.nextStep();
-            const text2 = await storyPage.getActiveText();
-            expect(text2).toBe(urgentAction.story[1].content);
+        await storyPage.nextStep();
+        const text2 = await storyPage.getActiveText();
+        expect(text2).toBe(
+            "En 2015, la Commission des Affaires judiciaires de l'Assemblée nationale a demandé le réexamen de son cas après avoir découvert de graves erreurs de procédure.",
+        );
 
-            await storyPage.nextStep();
-            const text3 = await storyPage.getActiveText();
-            expect(text3).toBe(urgentAction.story[2].content);
+        await storyPage.nextStep();
+        const text3 = await storyPage.getActiveText();
+        expect(text3).toBe(
+            "Le 7 décembre, le responsable du parquet de Long An a insisté, lors d'un discours à la télévision, pour que son exécution soit accélérée.",
+        );
 
-            await storyPage.act();
+        await storyPage.act();
 
-            await driver.wait(until.urlIs(`http://front:3000/#/ua/${urgentAction.id}/act`));
-        },
-        20000,
-    );
+        await driver.wait(until.urlIs(`http://front:3000/#/ua/${urgentAction.id}/act`));
+    });
 
     it('should display act step', async () => {
         await actPage.navigate(urgentAction.id);
@@ -56,42 +62,48 @@ describe('app', () => {
 
         await actPage.displayMessage();
 
-        await driver.wait(until.urlIs(`http://front:3000/#/ua/${urgentAction.id}/message/0`));
+        await driver.wait(until.urlIs(`http://front:3000/#/ua/${urgentAction.id}/message`));
     });
 
-    it(
-        'should display message steps',
-        async () => {
-            await messagePage.navigate(urgentAction.id, 0);
-            const text1 = await messagePage.getActiveText();
-            expect(text1).toBe(urgentAction.message_template[0].value);
+    it('should display message steps', async () => {
+        await messagePage.navigate(urgentAction.id, 0);
+        const messages = await messagePage.getMessages();
+        expect(messages[0]).toBe(
+            'Dear Minister,\nI am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.',
+        );
 
-            await messagePage.nextStep();
-            const text2 = await messagePage.getActiveText();
-            expect(text2).toBe(urgentAction.message_template[1].value);
+        expect(messages[1]).toBe(
+            'On 5 July, police arrested Idil Eser along with seven other human rights defenders and two trainers, who were simply attending a workshop in Istanbul.',
+        );
 
-            await messagePage.nextStep();
-            const text3 = await messagePage.getActiveText();
-            expect(text3).toBe(urgentAction.message_template[2].value);
+        expect(messages[2]).toBe(
+            'They were doing nothing wrong. They are being investigated on suspicion of "membership of an armed terrorist organization", a baseless and ridiculous accusation.',
+        );
 
-            await messagePage.nextStep();
-            const text4 = await messagePage.getActiveText();
-            expect(text4).toBe(
-                'Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.',
-            );
+        await messagePage.next();
+    });
 
-            await messagePage.enterText('My subject');
+    it('should display subject steps', async () => {
+        await objectPage.navigate(urgentAction.id);
+        const indication = await objectPage.getIndication();
+        expect(indication).toBe(
+            'Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.',
+        );
 
-            await messagePage.nextStep();
+        await objectPage.enterText('My subject');
 
-            await messagePage.enterText('My name');
+        await objectPage.validate();
+    });
 
-            const mailTo = await messagePage.getMailTo();
-            expect(mailTo).toContain('subject=My%20subject');
-            expect(mailTo).toContain('My%20name');
-        },
-        20000,
-    );
+    it('should display signature steps', async () => {
+        await signaturePage.navigate(urgentAction.id);
+
+        await signaturePage.enterText('My name');
+
+        const mailTo = await signaturePage.getMailTo();
+        expect(mailTo).toContain('subject=My%20subject');
+        expect(mailTo).toContain('My%20name');
+    });
 
     it('should display thanks step', async () => {
         await thanksPage.navigate(urgentAction.id);

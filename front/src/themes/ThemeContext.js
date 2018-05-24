@@ -1,5 +1,6 @@
 import React, { createContext, Component } from 'react';
 import PropTypes from 'prop-types';
+import { lifecycle, compose } from 'recompose';
 
 import { white } from './colors';
 
@@ -26,4 +27,13 @@ export const ThemeConsumer = Consumer;
 
 export const withThemeContext = BaseComponent => props => (
     <ThemeConsumer>{context => <BaseComponent context={context} {...props} />}</ThemeConsumer>
+);
+
+export const withBlackLogo = compose(
+    withThemeContext,
+    lifecycle({
+        componentDidMount() {
+            this.props.context.changeLogoColor('#000');
+        },
+    }),
 );

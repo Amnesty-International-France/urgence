@@ -1,10 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import glamorous from 'glamorous';
+import classnames from 'classnames';
 
-import { Button } from '../themes/Button';
+import { styles } from './Link';
 
-export const MailTo = ({ recipient = {}, subject, body, label, disabled, afterMail }) => (
+export const MailTo = ({
+    recipient = {},
+    subject,
+    body,
+    label,
+    disabled,
+    afterMail,
+    className,
+}) => (
     <a
+        className={classnames(className, { disabled })}
+        onClick={afterMail}
         href={`mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
             subject,
         )}&body=${encodeURIComponent(body)}`
@@ -13,11 +25,12 @@ export const MailTo = ({ recipient = {}, subject, body, label, disabled, afterMa
         target="_blank"
         disabled={disabled}
     >
-        <Button label={label} disabled={disabled} onClick={afterMail} />
+        {label}
     </a>
 );
 
 MailTo.propTypes = {
+    className: PropTypes.string.isRequired,
     afterMail: PropTypes.func.isRequired,
     mail: PropTypes.string.isRequired,
     subject: PropTypes.string.isRequired,
@@ -30,3 +43,5 @@ MailTo.propTypes = {
         cci: PropTypes.string,
     }).isRequired,
 };
+
+export default glamorous(MailTo)(styles);

@@ -1,130 +1,49 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
+import glamorous from 'glamorous';
 
-import Carousel from '../../themes/Carousel';
+import { white, black } from '../../themes/colors';
 import MessageStep from './MessageStep';
-import ObjectStep from './ObjectStep';
-import SignatureStep from './SignatureStep';
-import { routeMatch } from '../../propTypes';
-import generateUrl from '../../services/generateUrl';
-import sessionData from '../../sessionData';
-import SendMail from './SendMail';
+import { withBlackLogo } from '../../themes/ThemeContext';
 
-export class Message extends Component {
-    state = {
-        object: sessionData.getMailObject(),
-        signature: sessionData.getSignature(),
-    };
+const styles = {
+    padding: '105px 0 53px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    backgroundColor: white,
+    color: black,
+    height: '100%',
+    '& .action': {
+        margin: '62px 1em 53px',
+    },
+};
 
-    afterChange = page => {
-        const {
-            match: {
-                params: { id, page: currentPage },
-            },
-            history,
-        } = this.props;
+export const Message = ({ messageTemplate, action, className }) => (
+    <Fragment>
+        {(!messageTemplate || !messageTemplate.length) && (
+            <p className="error">Cette action urgente n&#39;existe plus.</p>
+        )}
 
-        if (page.toString() === currentPage) {
-            return;
-        }
-        history.push(generateUrl('message', { id, page }));
-    };
-
-    afterMail = () => {
-        const {
-            history,
-            match: { params },
-        } = this.props;
-
-        history.push(generateUrl('thanks', params));
-    };
-
-    changeObject = e => {
-        const object = e.target.value;
-        this.setState({ object });
-        sessionData.setMailObject(object);
-    };
-
-    changeSignature = e => {
-        const signature = e.target.value;
-        this.setState({ signature });
-        sessionData.setSignature(signature);
-    };
-
-    render() {
-        const {
-            objectIndication,
-            messageTemplate,
-            className,
-            loading,
-            recipient,
-            match: {
-                params: { page },
-            },
-        } = this.props;
-
-        const { signature, object } = this.state;
-
-        return loading ? (
-            <p className="loading">Loading...</p>
-        ) : (
-            <Fragment>
-                {(!messageTemplate || !messageTemplate.length) && (
-                    <p className="error">Cette action urgent n&#39;existe plus.</p>
-                )}
-
-                {messageTemplate &&
-                    messageTemplate.length > 0 && (
-                        <Carousel
-                            initialSlide={page}
-                            className={className}
-                            afterChange={this.afterChange}
-                            vertical={true}
-                        >
-                            {messageTemplate.map(({ value }) => (
-                                <MessageStep key={value} content={value} />
-                            ))}
-                            <ObjectStep
-                                object={object}
-                                changeObject={this.changeObject}
-                                objectIndication={objectIndication}
-                                messageTemplate={messageTemplate}
-                            />
-                            <SignatureStep
-                                signature={signature}
-                                changeSignature={this.changeSignature}
-                                action={
-                                    <SendMail
-                                        recipient={recipient}
-                                        messageTemplate={messageTemplate}
-                                        signature={signature}
-                                        object={object}
-                                        afterMail={this.afterMail}
-                                    />
-                                }
-                            />
-                        </Carousel>
-                    )}
-            </Fragment>
-        );
-    }
-}
+        {messageTemplate &&
+            messageTemplate.length > 0 && (
+                <div className={className}>
+                    <div>
+                        {messageTemplate.map(({ value }, index) => (
+                            <MessageStep key={value} content={value} darken={!!(index % 2)} />
+                        ))}
+                    </div>
+                    <div className="action">{action}</div>
+                </div>
+            )}
+    </Fragment>
+);
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
-    match: routeMatch,
-    loading: PropTypes.bool.isRequired,
-    history: PropTypes.shape({
-        push: PropTypes.func.isRequired,
-    }).isRequired,
-    recipient: PropTypes.shape({
-        mail: PropTypes.string.isRequired,
-        copies_to: PropTypes.string,
-        cci: PropTypes.string,
-    }).isRequired,
+    action: PropTypes.node.isRequired,
 };
 
-export default withRouter(Message);
+export default glamorous(withBlackLogo(Message))(styles);

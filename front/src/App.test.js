@@ -1,6 +1,6 @@
 import React from 'react';
 import App from './App';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 
 import getApolloClientMock from '../testUtils/getApolloClientMock';
 
@@ -12,7 +12,7 @@ describe('App', () => {
     });
 
     it('renders without crashing', () => {
-        const rendered = renderer.create(<App client={client} />).toJSON();
+        const rendered = shallow(<App client={client} />);
         expect(rendered).toBeTruthy();
     });
 });
