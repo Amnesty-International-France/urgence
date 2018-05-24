@@ -5,7 +5,6 @@ import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
-import sessionData from '../sessionData';
 import { Email } from '../icons';
 import Story from './Story';
 import Act from './Act';
@@ -14,9 +13,7 @@ import Message from './message/Message';
 import ObjectStep from './ObjectStep';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
-import ToObjectButton from './ToObjectButton';
-import ToSignatureButton from './ToSignatureButton';
-import ToAddressButton from './ToAddressButton';
+import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import SignatureStep from './SignatureStep';
 import Address from './Address';
 import SendMail from './message/SendMail';
@@ -79,7 +76,12 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 
     if (step === 'act') {
-        return <Act callToAction={get(data, 'UrgentAction.call_to_action')} />;
+        return (
+            <Act
+                callToAction={get(data, 'UrgentAction.call_to_action')}
+                action={<ToUrgentActionPageLink label="Voir le message" pageName="message" />}
+            />
+        );
     }
 
     if (step === 'message') {
@@ -87,7 +89,9 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
                 loading={loading}
-                action={<ToObjectButton />}
+                action={
+                    <ToUrgentActionPageLink label="OK, J'envoie le message" pageName="object" />
+                }
             />
         );
     }
@@ -97,7 +101,13 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
             <ObjectStep
                 objectIndication={get(data, 'UrgentAction.object_indication')}
                 loading={loading}
-                action={disabled => <ToSignatureButton disabled={disabled} />}
+                action={disabled => (
+                    <ToUrgentActionPageLink
+                        label="Valider"
+                        pageName="signature"
+                        disabled={disabled}
+                    />
+                )}
             />
         );
     }
@@ -119,7 +129,11 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
         return (
             <Thanks
                 {...get(data, 'UrgentAction.email_thank')}
-                actions={() => <ToAddressButton />}
+                actions={() => (
+                    <a href={generateUrl('address', { id })}>
+                        <Email />
+                    </a>
+                )}
             />
         );
     }
