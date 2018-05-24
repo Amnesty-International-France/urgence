@@ -1,12 +1,9 @@
-import { format } from 'date-fns';
-import frLocale from 'date-fns/locale/fr';
-import path from 'path';
-import pdf from 'html-pdf';
 import { Router } from 'express';
 import isUUID from 'validator/lib/isUUID';
 
 import nunjucks from 'nunjucks';
 import { getUrgentAction } from './repository';
+import { getPdfMessageStream } from './getPdfMessageStream';
 
 export const urgentActionsRouter = new Router();
 
@@ -23,19 +20,8 @@ urgentActionsRouter.get('/:id.pdf', async (req, res) => {
         return res.status(404).send('Not Found');
     }
 
-    const urgentActionLetter = nunjucks.render(path.join(__dirname, './letter.html'), {
-        date: format(new Date(), 'DD MMMM YYYY', { locale: frLocale }),
-        signature,
-        subject,
-        urgentAction,
-    });
-
-    return pdf.create(urgentActionLetter, {
-        format: 'A4',
-        border: '1.5cm',
-    }).toStream((err, stream) => {
-        stream.pipe(res);
-    });
+    const pdfStream = await getPdfMessageStream(urgentAction);
+    pdfStream.pipe(res);
 });
 
 export default urgentActionsRouter;

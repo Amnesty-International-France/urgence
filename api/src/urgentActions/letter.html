@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="robots" content="noindex, follow" />
     <style>
         body {
-            font-size: 12px;
-            line-height: 1.5;
+            font-size: 10px;
+            line-height: 15px;
         }
 
         .date {
             margin-left: 60%;
         }
 
-        .message {
-            margin-top: 6cm;
+        .recipient {
+            margin-top: 1.19cm;
+            margin-left: 7cm;
         }
 
         .subject {
             margin-top: 1cm;
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .subject strong {
@@ -27,22 +29,28 @@
         }
 
         .signature {
-            font-size: 14px;
+            font-size: 12px;
             margin-top: 3cm;
             text-align: right;
         }
     </style>
 </head>
+
 <body>
+    <p class="recipient">
+        {{ recipientAddress|escape|nl2br }}
+        <br />
+        <br /> Le {{ date }}
+    </p>
     <div class="message">
-        <p class="date">Le {{ date }}</p>
         <h3 class="subject">
             <strong>Objet :</strong> {{ subject }}
         </h3>
         {% for message in urgentAction.message_template %}
-            <p>{{ message.value }}</p>
+        <p>{{ message.value }}</p>
         {% endfor %}
         <p class="signature">{{ signature }}</p>
     </div>
 </body>
+
 </html>
