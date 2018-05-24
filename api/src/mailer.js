@@ -15,11 +15,11 @@ transporter.verify(err => {
     }
 });
 
-export const sendMail = async (to, subject, text, attachment) => {
-    return transporter.sendMail({
+export const sendMail = async (to, subject, text, attachment) =>
+    transporter.sendMail({
         from: mailerConfig.emitter,
         to,
         subject,
         text,
+        attachments: [attachment],
     });
-};
