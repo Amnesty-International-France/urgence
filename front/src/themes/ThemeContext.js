@@ -37,3 +37,12 @@ export const withBlackLogo = compose(
         },
     }),
 );
+
+export const withWhiteLogo = compose(
+    withThemeContext,
+    lifecycle({
+        componentDidMount() {
+            this.props.context.changeLogoColor('#fff');
+        },
+    }),
+);

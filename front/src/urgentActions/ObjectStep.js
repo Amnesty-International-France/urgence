@@ -12,6 +12,12 @@ const styles = {
     fontSize: 24,
     display: 'flex',
     flexDirection: 'column',
+    '@media (min-width: 1024px)': {
+        padding: '30vh 30vw',
+        '& .action': {
+            alignSelf: 'flex-end',
+        },
+    },
     '& p': {
         fontFamily: 'Amnesty Trade Gothic',
         fontWeight: 'bold',

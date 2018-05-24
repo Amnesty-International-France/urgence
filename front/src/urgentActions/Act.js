@@ -5,6 +5,7 @@ import glamorous from 'glamorous';
 import RichText from '../themes/RichText';
 import ToMessageButton from './ToMessageButton';
 import { pink, white } from '../themes/colors';
+import { withWhiteLogo } from '../themes/ThemeContext';
 
 export const Act = ({ callToAction, className }) => (
     <div className={className}>
@@ -21,13 +22,19 @@ Act.propTypes = {
     className: PropTypes.string.isRequired,
 };
 
-export default glamorous(Act)({
+export default glamorous(withWhiteLogo(Act))({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     backgroundColor: pink,
     color: white,
-    height: '100vh',
+    height: '100%',
+    '@media (min-width: 1024px)': {
+        padding: '10vh 10vw',
+        '& a': {
+            alignSelf: 'flex-end',
+        },
+    },
     '& h1': {
         marginTop: '122px',
         fontFamily: 'Amnesty Trade Gothic Condensed',
