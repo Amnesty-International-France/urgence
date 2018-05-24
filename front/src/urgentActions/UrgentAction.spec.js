@@ -153,7 +153,7 @@ describe('<UrgentAction />', () => {
             ]);
         });
 
-        describe('Thanks Step', () => {
+        describe('Email Thanks Step', () => {
             it('should display thanks if step is Thanks', () => {
                 const params = {
                     step: 'thanks',
@@ -161,7 +161,11 @@ describe('<UrgentAction />', () => {
                 const props = {
                     loading: false,
                     data: {
-                        UrgentAction: {},
+                        UrgentAction: {
+                            email_thank: {
+                                title: '',
+                            },
+                        },
                     },
                 };
                 const renderedComponent = shallow(renderUrgentAction(params)(props));
@@ -187,6 +191,31 @@ describe('<UrgentAction />', () => {
                 expect(link.prop('href')).toBe(
                     'http://localhost:4000/urgent-actions/123456.pdf?subject=Hello%20World%21&signature=John%20Doe',
                 );
+            });
+        });
+
+        describe('Letter Thanks Step', () => {
+            it('should display thanks if step is "thanks-letter"', () => {
+                const params = {
+                    step: 'thanks-letter',
+                };
+                const props = {
+                    loading: false,
+                    data: {
+                        UrgentAction: {
+                            letter_thank: {
+                                title: 'Merci de votre engagement !',
+                                text: "N'oubliez pas d'envoyer la lettre !",
+                            },
+                        },
+                    },
+                };
+
+                const renderedComponent = shallow(renderUrgentAction(params)(props));
+
+                const thanks = renderedComponent.find('Thanks');
+                expect(thanks.prop('title')).toBe('Merci de votre engagement !');
+                expect(thanks.prop('text')).toBe("N'oubliez pas d'envoyer la lettre !");
             });
         });
     });
