@@ -1,37 +1,67 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 import { SessionDataConsumer } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
 
-export const renderSignatureStep = ({ action, className }) => ({ signature, changeSignature }) => (
-    <div className={className}>
-        <div>
-            <p>
-                Parce que les actions uniques sont un message personnel, nous vous invitons à renseigner
-                vos noms et prénoms.
-            </p>
-            <textarea rows="3" value={signature} onChange={changeSignature} />
-        </div>
-        <div className="action">{action}</div>
-    </div>
-);
+export class SignatureStep extends Component {
+    setSignature = event => this.props.setSignature(event.target.value);
 
-export const SignatureStep = ({ action, className }) => (
-    <SessionDataConsumer>{renderSignatureStep({ action, className })}</SessionDataConsumer>
-);
+    render() {
+        const { action, className, signature } = this.props;
+        return (
+            <div className={className}>
+                <div>
+                    <p>
+                        Parce que les actions uniques sont un message personnel, nous vous invitons
+                        à renseigner vos noms et prénoms.
+                    </p>
+                    <textarea rows="3" value={signature} onChange={this.setSignature} />
+                </div>
+                <div className="action">{action}</div>
+            </div>
+        );
+    }
+}
 
 SignatureStep.propTypes = {
+    signature: PropTypes.string.isRequired,
+    setSignature: PropTypes.func.isRequired,
     className: PropTypes.string,
     action: PropTypes.node,
 };
 
-export default glamorous(withBlackLogo(SignatureStep))({
+export class SignatureStepWithSessionData extends Component {
+    setSignature = event => this.props.setSignature(event.target.value);
+    render() {
+        const { action, className } = this.props;
+        return (
+            <SessionDataConsumer>
+                {({ signature, setSignature }) => (
+                    <SignatureStep
+                        action={action}
+                        className={className}
+                        signature={signature}
+                        setSignature={setSignature}
+                    />
+                )}
+            </SessionDataConsumer>
+        );
+    }
+}
+
+SignatureStepWithSessionData.propTypes = {
+    setSignature: PropTypes.func.isRequired,
+    className: PropTypes.string,
+    action: PropTypes.node,
+};
+
+export default glamorous(withBlackLogo(SignatureStepWithSessionData))({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
-    height: '100vh',
+    height: '100%',
     padding: '105px 2rem 53px',
     justifyContent: 'space-between',
     '& textarea': {
@@ -39,7 +69,6 @@ export default glamorous(withBlackLogo(SignatureStep))({
         fontSize: 14,
         fontFamily: 'Amnesty Trade Gothic',
         margin: '2em 0',
-        lineHeight: 1.5,
         padding: '0 15px',
     },
     '& .action': {

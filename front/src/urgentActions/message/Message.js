@@ -13,40 +13,36 @@ const styles = {
     justifyContent: 'space-between',
     backgroundColor: white,
     color: black,
-    height: '100vh',
+    height: '100%',
     '& .action': {
         margin: '62px 1em 53px',
     },
 };
 
-export const Message = ({ messageTemplate, loading, action, className }) =>
-    loading ? (
-        <p className="loading">Loading...</p>
-    ) : (
-        <Fragment>
-            {(!messageTemplate || !messageTemplate.length) && (
-                <p className="error">Cette action urgente n&#39;existe plus.</p>
-            )}
+export const Message = ({ messageTemplate, action, className }) => (
+    <Fragment>
+        {(!messageTemplate || !messageTemplate.length) && (
+            <p className="error">Cette action urgente n&#39;existe plus.</p>
+        )}
 
-            {messageTemplate &&
-                messageTemplate.length > 0 && (
-                    <div className={className}>
-                        <div>
-                            {messageTemplate.map(({ value }, index) => (
-                                <MessageStep key={value} content={value} darken={!!(index % 2)} />
-                            ))}
-                        </div>
-                        <div className="action">{action}</div>
+        {messageTemplate &&
+            messageTemplate.length > 0 && (
+                <div className={className}>
+                    <div>
+                        {messageTemplate.map(({ value }, index) => (
+                            <MessageStep key={value} content={value} darken={!!(index % 2)} />
+                        ))}
                     </div>
-                )}
-        </Fragment>
-    );
+                    <div className="action">{action}</div>
+                </div>
+            )}
+    </Fragment>
+);
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
-    loading: PropTypes.bool.isRequired,
     action: PropTypes.node.isRequired,
 };
 

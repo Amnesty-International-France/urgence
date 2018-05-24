@@ -1,6 +1,7 @@
+import React from 'react';
 import { shallow } from 'enzyme';
 
-import { renderObjectStep } from './ObjectStep';
+import { ObjectStep } from './ObjectStep';
 
 describe('<ObjectStep />', () => {
     const defaultProps = {
@@ -8,10 +9,8 @@ describe('<ObjectStep />', () => {
             'Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.',
         action: jest.fn().mockReturnValue('action'),
         className: 'class',
-    };
-    const defaultContext = {
         object: 'object value',
-        changeObject: 'changeObject',
+        setObject: jest.fn(),
     };
 
     describe('renderOnjectStep', () => {
@@ -21,36 +20,39 @@ describe('<ObjectStep />', () => {
                 objectIndication: '<p>hello world</p>',
             };
 
-            const wrapper = shallow(renderObjectStep(props)(defaultContext));
+            const wrapper = shallow(<ObjectStep{...props} />);
             const richText = wrapper.find('RichText');
             expect(richText.prop('html')).toBe('<p>hello world</p>');
         });
 
         it('should put action result inside .action div', () => {
-            const wrapper = shallow(renderObjectStep(defaultProps)(defaultContext));
+            const wrapper = shallow(<ObjectStep {...defaultProps} />);
             const action = wrapper.find('.action');
             expect(action.html()).toBe('<div class="action">action</div>');
         });
 
         it('should call action props with true if object is set', () => {
-            shallow(renderObjectStep(defaultProps)(defaultContext));
+            shallow(<ObjectStep {...defaultProps} />);
             expect(defaultProps.action).toHaveBeenCalledWith(false);
         });
 
         it('should call action props with false if object is not set', () => {
-            const context = {
-                ...defaultContext,
+            const props = {
+                ...defaultProps,
                 object: null,
             };
-            shallow(renderObjectStep(defaultProps)(context));
+            shallow(<ObjectStep {...props} />);
             expect(defaultProps.action).toHaveBeenCalledWith(false);
         });
 
-        it('should render input with value = context.object and onChange = context.changeObject', () => {
-            const wrapper = shallow(renderObjectStep(defaultProps)(defaultContext));
+        it('should render Input with value = context.object and onChange = context.setObject', () => {
+            const wrapper = shallow(<ObjectStep {...defaultProps} />);
             const input = wrapper.find('input');
             expect(input.prop('value')).toBe('object value');
-            expect(input.prop('onChange')).toBe('changeObject');
+            expect(input.prop('onChange')).toBe(wrapper.instance().setObject);
+
+            wrapper.instance().setObject({ target: { value: 'new value' } });
+            expect(defaultProps.setObject).toBeCalledWith('new value');
         });
     });
 });

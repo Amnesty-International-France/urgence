@@ -6,8 +6,8 @@ import sessionData from './sessionData';
 const { Provider, Consumer } = createContext({
     object: null,
     signature: null,
-    changeObject: () => null,
-    changeSignature: () => null,
+    setObject: () => null,
+    setSignature: () => null,
 });
 
 export const SessionDataConsumer = Consumer;
@@ -18,14 +18,12 @@ export class SessionDataProvider extends Component {
         signature: sessionData.getSignature(),
     };
 
-    changeObject = event => {
-        const object = event.target.value;
+    setObject = object => {
         this.setState({ object });
         sessionData.setMailObject(object);
     };
 
-    changeSignature = event => {
-        const signature = event.target.value;
+    setSignature = signature => {
         this.setState({ signature });
         sessionData.setSignature(signature);
     };
@@ -35,8 +33,8 @@ export class SessionDataProvider extends Component {
             <Provider
                 value={{
                     ...this.state,
-                    changeObject: this.changeObject,
-                    changeSignature: this.changeSignature,
+                    setObject: this.setObject,
+                    setSignature: this.setSignature,
                 }}
             >
                 {this.props.children}

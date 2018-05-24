@@ -19,6 +19,7 @@ import ToSignatureButton from './ToSignatureButton';
 import SignatureStep from './SignatureStep';
 import SendMail from './message/SendMail';
 import { SessionDataProvider } from '../SessionDataContext';
+import LoadingScreen from '../themes/LoadingScreen';
 
 const query = gql`
     query urgentAction($id: ID!) {
@@ -60,7 +61,7 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <LoadingScreen />;
     }
 
     if (!step) {

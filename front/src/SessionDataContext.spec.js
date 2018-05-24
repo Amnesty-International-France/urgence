@@ -6,7 +6,7 @@ import sessionData from './sessionData';
 
 jest.mock('./sessionData.js');
 
-describe('SessionDatazContext', () => {
+describe('SessionDataContext', () => {
     sessionData.getMailObject.mockImplementation(() => 'object value');
     sessionData.getSignature.mockImplementation(() => 'signature value');
 
@@ -17,14 +17,14 @@ describe('SessionDatazContext', () => {
 
     it('should have have method to change state.object', () => {
         const wrapper = shallow(<SessionDataProvider>OK</SessionDataProvider>);
-        wrapper.instance().changeObject({ target: { value: 'new object' } });
+        wrapper.instance().setObject('new object');
         expect(wrapper.state()).toEqual({ object: 'new object', signature: 'signature value' });
         expect(sessionData.setMailObject).toBeCalledWith('new object');
     });
 
     it('should have have method to change the state object', () => {
         const wrapper = shallow(<SessionDataProvider>OK</SessionDataProvider>);
-        wrapper.instance().changeSignature({ target: { value: 'new signature' } });
+        wrapper.instance().setSignature('new signature');
         expect(wrapper.state()).toEqual({ object: 'object value', signature: 'new signature' });
         expect(sessionData.setSignature).toBeCalledWith('new signature');
     });

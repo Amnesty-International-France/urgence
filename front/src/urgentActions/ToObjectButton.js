@@ -9,7 +9,7 @@ const ToObjectButton = ({
     match: {
         params: { id },
     },
-}) => <Link to={generateUrl('object', { id })} label="OK, J'envois le message" />;
+}) => <Link to={generateUrl('object', { id })} label="OK, J'envoie le message" />;
 
 ToObjectButton.propTypes = {
     match: routeMatch,

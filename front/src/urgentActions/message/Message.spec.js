@@ -2,10 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Message } from './Message';
-import sessionData from '../../sessionData';
 import MessageStep from './MessageStep';
-
-jest.mock('../../sessionData.js');
 
 describe('Message', () => {
     const defaultStep = [{ value: 'one' }, { value: 'two' }, { value: 'three' }];
@@ -19,14 +16,6 @@ describe('Message', () => {
             mail: 'mail',
         },
     };
-
-    it('should display a loading message while loading', () => {
-        const props = { ...defaultProps, loading: true };
-        const wrapper = shallow(<Message {...props} />);
-
-        const loading = wrapper.find('.loading');
-        expect(loading.length).toBe(1);
-    });
 
     it('should display a 404 message if story has no message step', () => {
         const test = (messageTemplate, shouldBeErred) => {

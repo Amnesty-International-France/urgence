@@ -116,6 +116,7 @@
         "collectCoverageFrom": [
             "src/**/*.{js,jsx,mjs}"
         ],
+        "setupTestFrameworkScriptFile": "<rootDir>/config/setupTest.js",
         "setupFiles": [
             "babel-polyfill",
             "<rootDir>/config/polyfills.js"
