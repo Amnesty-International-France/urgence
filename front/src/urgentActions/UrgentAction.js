@@ -16,6 +16,7 @@ import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import SignatureStep from './SignatureStep';
 import Address from './Address';
+import EmailStep from './EmailStep';
 import SendMail from './message/SendMail';
 import { SessionDataProvider } from '../SessionDataContext';
 import LoadingScreen from '../themes/LoadingScreen';
@@ -144,6 +145,10 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
 
     if (step === 'address') {
         return <Address />;
+    }
+
+    if (step === 'email') {
+        return <EmailStep />;
     }
 };
 

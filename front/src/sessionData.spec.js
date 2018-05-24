@@ -72,4 +72,17 @@ describe('sessionData', () => {
             expect(storage.setItem).toHaveBeenCalledWith('amnesty_address', 'value');
         });
     });
+
+    describe('.setEmail', () => {
+        it('calls storage.setItem(amnesty_email, value) and returns itself', () => {
+            const storage = {
+                setItem: jest.fn(),
+            };
+
+            const mySessionData = sessionData(storage);
+
+            expect(mySessionData.setEmail('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_email', 'value');
+        });
+    });
 });
