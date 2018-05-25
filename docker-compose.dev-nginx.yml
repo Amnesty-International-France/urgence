@@ -9,6 +9,17 @@ services:
             - NODE_ENV=development
             - CORS_ALLOWED_ORIGIN="http://localhost"
             - JWT_SECRET_KEY="dev"
+            - SMTP_HOST=maildev
+            - SMTP_PORT=25
+            - SMTP_USER
+            - SMTP_IGNORE_TLS=true
+
+    maildev:
+        image: djfarrelly/maildev
+        expose:
+            - "25"
+        ports:
+            - "1080:80"
 
     nginx:
         image: nginx

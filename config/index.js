@@ -18,6 +18,13 @@ const config = convict({
             env: 'ADMIN_URL',
         },
     },
+    api: {
+        prefixUrl: {
+            format: String,
+            default: '/api',
+            env: 'API_PREFIX_URL',
+        },
+    },
     port: {
         format: 'port',
         default: 4000,
