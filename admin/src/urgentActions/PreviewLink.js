@@ -11,6 +11,7 @@ export const PreviewLink = ({ record }) => !record ? null : (
     <Button
         color="primary"
         href={generateAppUrl('urgentAction', { id: record.id })}
+        target="_blank"
         disabled={!hasStory(record)}
     >
         <Visibility />&nbsp;

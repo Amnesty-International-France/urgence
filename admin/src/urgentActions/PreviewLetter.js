@@ -7,16 +7,17 @@ import { generateAppUrl } from '../generateUrl';
 
 const hasMessageTemplate = record => record.message_template && record.message_template.length > 0;
 
-export const PreviewLetter = ({ record }) => !record ? null : (
-    <Button
-        color="primary"
-        href={generateAppUrl('urgentActionLetter', { id: record.id })}
-        disabled={!hasMessageTemplate(record)}
-    >
-        <Email />&nbsp;
-        Letter
-    </Button>
-);
+export const PreviewLetter = ({ record }) =>
+    !record ? null : (
+        <Button
+            color="primary"
+            href={generateAppUrl('urgentActionLetter', { id: record.id })}
+            target="_blank"
+            disabled={!hasMessageTemplate(record)}
+        >
+            <Email />&nbsp; Letter
+        </Button>
+    );
 
 PreviewLetter.propTypes = {
     record: PropTypes.shape({
