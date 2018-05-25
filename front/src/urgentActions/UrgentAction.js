@@ -2,10 +2,9 @@ import get from 'lodash.get';
 import React from 'react';
 import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
-import { Email } from '../icons';
 import Story from './Story';
 import Act from './Act';
 import Thanks from './Thanks';
@@ -15,7 +14,7 @@ import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import SignatureStep from './SignatureStep';
-import Address from './Address';
+import AddressStep from './AddressStep';
 import EmailStep from './EmailStep';
 import SendMail from './message/SendMail';
 import { SessionDataProvider } from '../SessionDataContext';
@@ -138,7 +137,7 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
 
     if (step === 'address') {
         return (
-            <Address
+            <AddressStep
                 action={disabled => (
                     <ToUrgentActionPageLink label="Valider" pageName="email" disabled={disabled} />
                 )}
