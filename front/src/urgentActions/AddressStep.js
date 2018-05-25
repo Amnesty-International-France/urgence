@@ -6,7 +6,7 @@ import { compose } from 'recompose';
 import { withSessionData } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
 
-export class Address extends Component {
+export class AddressStep extends Component {
     setAddress = event => this.props.setAddress(event.target.value);
 
     render() {
@@ -32,14 +32,14 @@ export class Address extends Component {
     }
 }
 
-Address.propTypes = {
+AddressStep.propTypes = {
     address: PropTypes.string.isRequired,
     setAddress: PropTypes.func.isRequired,
     className: PropTypes.string,
     action: PropTypes.func,
 };
 
-export default glamorous(compose(withBlackLogo, withSessionData)(Address))({
+export default glamorous(compose(withBlackLogo, withSessionData)(AddressStep))({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
