@@ -170,6 +170,9 @@ build-dev: build-front-dev build-admin-dev
 run-nginx-dev:
 	${DOCKER_COMPOSE_DEV_NGINX} up --force-recreate
 
+stop-nginx-dev:
+	${DOCKER_COMPOSE_DEV_NGINX} down
+
 log-nginx-dev:
 	${DOCKER_COMPOSE_DEV_NGINX} logs -f
 

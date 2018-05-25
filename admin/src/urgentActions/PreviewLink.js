@@ -7,16 +7,18 @@ import { generateAppUrl } from '../generateUrl';
 
 const hasStory = record => record.story && record.story.length > 0;
 
-export const PreviewLink = ({ record }) => !record ? null : (
-    <Button
-        color="primary"
-        href={generateAppUrl('urgentAction', { id: record.id })}
-        disabled={!hasStory(record)}
-    >
-        <Visibility />&nbsp;
-        View
-    </Button>
-);
+export const PreviewLink = ({ record }) =>
+    !record ? null : (
+        <Button
+            color="primary"
+            href={generateAppUrl('urgentAction', { id: record.id })}
+            target="_blank"
+            rel="noopener noreferrer"
+            disabled={!hasStory(record)}
+        >
+            <Visibility />&nbsp; View
+        </Button>
+    );
 
 PreviewLink.propTypes = {
     record: PropTypes.shape({

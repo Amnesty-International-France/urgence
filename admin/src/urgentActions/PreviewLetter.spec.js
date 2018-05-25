@@ -7,7 +7,7 @@ describe('<PreviewLetter />', () => {
     const defaultProps = {
         record: {
             id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
-        }
+        },
     };
 
     it('should render as a link to front app urgent action letter page with pre-filled subject and emitter signature', () => {
@@ -15,7 +15,9 @@ describe('<PreviewLetter />', () => {
         const wrapper = shallow(<PreviewLetter {...props} />);
 
         const button = wrapper.find(Button);
-        expect(button.prop('href')).toBe('http://localhost:4000/urgent-actions/3b6e1a3e-2547-4d77-a310-1b39d15fa03a.pdf?subject=Custom%20subject&signature=John%20Doe');
+        expect(button.prop('href')).toBe(
+            'http://localhost:4000/urgent-actions/3b6e1a3e-2547-4d77-a310-1b39d15fa03a.pdf?subject=Custom%20subject&signature=John%20Doe',
+        );
     });
 
     it('should be disabled if there is no message template currently configured', () => {
@@ -39,9 +41,18 @@ describe('<PreviewLetter />', () => {
         test([{}], false);
     });
 
+    it('should open preview in a new tab', () => {
+        const props = { ...defaultProps };
+        const wrapper = shallow(<PreviewLetter {...props} />);
+
+        const button = wrapper.find(Button);
+        expect(button.prop('target')).toBe('_blank');
+        expect(button.prop('rel')).toBe('noopener noreferrer');
+    });
+
     it('should return null if no record is given', () => {
         const props = { ...defaultProps, record: null };
         const wrapper = shallow(<PreviewLetter {...props} />);
         expect(wrapper.instance()).toBe(null);
-    })
+    });
 });
