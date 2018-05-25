@@ -10,15 +10,19 @@ const ToUrgentActionPageLink = ({
     label,
     pageName,
     disabled,
+    onClick,
     match: {
         params: { id },
     },
-}) => <Link to={generateUrl(pageName, { id })} label={label} disabled={disabled} />;
+}) => (
+    <Link onClick={onClick} to={generateUrl(pageName, { id })} label={label} disabled={disabled} />
+);
 
 ToUrgentActionPageLink.propTypes = {
     label: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
-    disabled: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool,
+    onClick: PropTypes.func,
     match: routeMatch,
 };
 

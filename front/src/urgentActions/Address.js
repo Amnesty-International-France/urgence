@@ -19,7 +19,12 @@ export class Address extends Component {
                         lettre que vous envoyez.
                     </p>
                     <p>Pouvez vous renseigner votre adresse ?</p>
-                    <textarea rows="3" value={address} onChange={this.setAddress} />
+                    <textarea
+                        rows="3"
+                        value={address}
+                        onChange={this.setAddress}
+                        placeholder="Votre adresse postale"
+                    />
                 </div>
                 <div className="action">{action(!address)}</div>
             </div>
@@ -31,7 +36,7 @@ Address.propTypes = {
     address: PropTypes.string.isRequired,
     setAddress: PropTypes.func.isRequired,
     className: PropTypes.string,
-    action: PropTypes.node,
+    action: PropTypes.func,
 };
 
 export default glamorous(compose(withBlackLogo, withSessionData)(Address))({
@@ -43,10 +48,10 @@ export default glamorous(compose(withBlackLogo, withSessionData)(Address))({
     justifyContent: 'space-between',
     '& textarea': {
         width: '100%',
-        fontSize: 14,
+        fontSize: 17,
         fontFamily: 'Amnesty Trade Gothic',
         margin: '2em 0',
-        padding: '0 15px',
+        padding: '15px',
     },
     '& .action': {
         marginTop: '53px',

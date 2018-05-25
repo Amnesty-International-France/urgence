@@ -19,7 +19,11 @@ export class EmailStep extends Component {
                         Indiquez-nous votre email pour vous faire parvenir votre lettre à envoyer
                         par courrier.
                     </p>
-                    <textarea rows="3" value={email} onChange={this.setEmail} />
+                    <input
+                        value={email}
+                        onChange={this.setEmail}
+                        placeholder="Votre adresse email"
+                    />
                 </div>
                 <div className="action">{action(!email)}</div>
             </div>
@@ -41,10 +45,11 @@ export default glamorous(compose(withBlackLogo, withSessionData)(EmailStep))({
     height: '100%',
     padding: '105px 2rem 53px',
     justifyContent: 'space-between',
-    '& textarea': {
+    '& input': {
         width: '100%',
-        fontSize: 14,
         fontFamily: 'Amnesty Trade Gothic',
+        fontSize: 17,
+        height: 40,
         margin: '2em 0',
         padding: '0 15px',
     },

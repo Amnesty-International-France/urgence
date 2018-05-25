@@ -37,9 +37,9 @@ export class SessionDataProvider extends Component {
         sessionData.setAddress(address);
     };
 
-    setEmail = mail => {
-        this.setState({ mail });
-        sessionData.setEmail(mail);
+    setEmail = email => {
+        this.setState({ email });
+        sessionData.setEmail(email);
     };
 
     render() {

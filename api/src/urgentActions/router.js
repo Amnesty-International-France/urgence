@@ -14,8 +14,7 @@ urgentActionsRouter.post('/:id/send', async (req, res) => {
     if (!isUUID(id)) {
         return res.status(400).send(`Invalid UUID format: ${id}`);
     }
-
-    const { signature, subject } = req.body;
+    const { signature, subject, email } = req.body;
 
     const urgentAction = await getUrgentAction(id);
     if (!urgentAction) {
@@ -24,7 +23,7 @@ urgentActionsRouter.post('/:id/send', async (req, res) => {
 
     const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, signature);
     await sendMail(
-        'jonathan@marmelab.com',
+        email,
         'On y est presque !',
         getLetterMailBody({ signature, urgentAction }),
         {

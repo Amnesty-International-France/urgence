@@ -20,6 +20,7 @@ import EmailStep from './EmailStep';
 import SendMail from './message/SendMail';
 import { SessionDataProvider } from '../SessionDataContext';
 import LoadingScreen from '../themes/LoadingScreen';
+import MailPdfButton from './MailPdfButton';
 
 const query = gql`
     query urgentAction($id: ID!) {
@@ -130,17 +131,9 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
         return (
             <Thanks
                 {...get(data, 'UrgentAction.email_thank')}
-                actions={() => (
-                    <Link to={generateUrl('address', { id })}>
-                        <Email fill="white" />
-                    </Link>
-                )}
+                actions={() => <ToUrgentActionPageLink label="Continuer" pageName="address" />}
             />
         );
-    }
-
-    if (step === 'thanks-letter') {
-        return <Thanks {...get(data, 'UrgentAction.letter_thank')} />;
     }
 
     if (step === 'address') {
@@ -154,13 +147,11 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 
     if (step === 'email') {
-        return (
-            <EmailStep
-                action={disabled => (
-                    <ToUrgentActionPageLink label="Valider" pageName="email" disabled={disabled} />
-                )}
-            />
-        );
+        return <EmailStep action={disabled => <MailPdfButton disabled={disabled} />} />;
+    }
+
+    if (step === 'thanks-letter') {
+        return <Thanks {...get(data, 'UrgentAction.letter_thank')} />;
     }
 };
 
