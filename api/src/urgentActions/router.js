@@ -14,14 +14,14 @@ urgentActionsRouter.post('/:id/send', async (req, res) => {
     if (!isUUID(id)) {
         return res.status(400).send(`Invalid UUID format: ${id}`);
     }
-    const { signature, subject, email } = req.body;
+    const { signature, subject, email, address } = req.body;
 
     const urgentAction = await getUrgentAction(id);
     if (!urgentAction) {
         return res.status(404).send('Not Found');
     }
 
-    const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, signature);
+    const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, signature, address);
     await sendMail(
         email,
         'On y est presque !',

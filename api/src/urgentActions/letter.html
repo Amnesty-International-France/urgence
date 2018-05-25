@@ -14,6 +14,10 @@
             margin-left: 60%;
         }
 
+        .address {
+            margin-right: 7cm;
+        }
+
         .recipient {
             margin-top: 1.19cm;
             margin-left: 7cm;
@@ -37,6 +41,7 @@
 </head>
 
 <body>
+    <p class="address">{{address}}</p>
     <p class="recipient">
         {{ recipientAddress|escape|nl2br }}
         <br />
