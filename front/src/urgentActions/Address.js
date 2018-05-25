@@ -21,7 +21,7 @@ export class Address extends Component {
                     <p>Pouvez vous renseigner votre adresse ?</p>
                     <textarea rows="3" value={address} onChange={this.setAddress} />
                 </div>
-                <div className="action">{action}</div>
+                <div className="action">{action(!address)}</div>
             </div>
         );
     }

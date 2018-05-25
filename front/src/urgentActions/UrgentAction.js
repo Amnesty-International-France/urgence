@@ -2,7 +2,7 @@ import get from 'lodash.get';
 import React from 'react';
 import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
 import { Email } from '../icons';
@@ -131,9 +131,9 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
             <Thanks
                 {...get(data, 'UrgentAction.email_thank')}
                 actions={() => (
-                    <a href={generateUrl('address', { id })}>
-                        <Email />
-                    </a>
+                    <Link to={generateUrl('address', { id })}>
+                        <Email fill="white" />
+                    </Link>
                 )}
             />
         );
@@ -144,11 +144,23 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 
     if (step === 'address') {
-        return <Address />;
+        return (
+            <Address
+                action={disabled => (
+                    <ToUrgentActionPageLink label="Valider" pageName="email" disabled={disabled} />
+                )}
+            />
+        );
     }
 
     if (step === 'email') {
-        return <EmailStep />;
+        return (
+            <EmailStep
+                action={disabled => (
+                    <ToUrgentActionPageLink label="Valider" pageName="email" disabled={disabled} />
+                )}
+            />
+        );
     }
 };
 

@@ -21,7 +21,7 @@ export class EmailStep extends Component {
                     </p>
                     <textarea rows="3" value={email} onChange={this.setEmail} />
                 </div>
-                <div className="action">{action}</div>
+                <div className="action">{action(!email)}</div>
             </div>
         );
     }
