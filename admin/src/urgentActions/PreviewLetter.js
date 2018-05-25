@@ -13,6 +13,7 @@ export const PreviewLetter = ({ record }) =>
             color="primary"
             href={generateAppUrl('urgentActionLetter', { id: record.id })}
             target="_blank"
+            rel="noopener noreferrer"
             disabled={!hasMessageTemplate(record)}
         >
             <Email />&nbsp; Letter

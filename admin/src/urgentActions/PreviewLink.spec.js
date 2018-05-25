@@ -47,6 +47,7 @@ describe('<PreviewLink />', () => {
 
         const button = wrapper.find(Button);
         expect(button.prop('target')).toBe('_blank');
+        expect(button.prop('rel')).toBe('noopener noreferrer');
     });
 
     it('should return null if no record is given', () => {
