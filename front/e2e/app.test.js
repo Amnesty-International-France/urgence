@@ -25,8 +25,7 @@ describe('app', () => {
 
     it('should display story', async () => {
         await storyPage.navigate(urgentAction.id, 0);
-        const title = await driver.getTitle();
-        expect(title).toBe('React App');
+
         const text = await storyPage.getActiveText();
         expect(text).toBe(
             'Ho Duy Hai a été condamné à mort en 2008 après avoir été déclaré coupable de pillage de biens et de meurtre.',
