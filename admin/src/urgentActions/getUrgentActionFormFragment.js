@@ -6,7 +6,6 @@ import {
     required,
     SimpleFormIterator,
     TabbedForm,
-    TextInput,
 } from 'react-admin';
 
 import RecipientInput from '../form/RecipientInput';
@@ -15,6 +14,7 @@ import RichTextInput from '../form/RichTextInput';
 import ParagraphTemplateInput from './ParagraphTemplateInput';
 import MediumInput from './MediumInput';
 import DisplayOptionsInput from './DisplayOptionsInput';
+import ThanksTab from './ThanksTab';
 
 export default ({ edit }) => (
     <TabbedForm>
@@ -41,8 +41,7 @@ export default ({ edit }) => (
             </ArrayInput>
         </FormTab>
         <FormTab label="Thanks Screen">
-            <TextInput label="Title" source="email_thank.title" validate={[required()]} />
-            <LongTextInput label="Text" source="email_thank.text" />
+            <ThanksTab />
         </FormTab>
     </TabbedForm>
 );

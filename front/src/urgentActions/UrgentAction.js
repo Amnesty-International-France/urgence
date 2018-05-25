@@ -50,6 +50,10 @@ const query = gql`
                 title
                 text
             }
+            letter_thank {
+                title
+                text
+            }
         }
     }
 `;
@@ -123,6 +127,10 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
                 )}
             />
         );
+    }
+
+    if (step === 'thanks-letter') {
+        return <Thanks {...get(data, 'UrgentAction.letter_thank')} />;
     }
 };
 
