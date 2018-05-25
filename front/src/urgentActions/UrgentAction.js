@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
+import PropTypes from 'prop-types';
 
 import Story from './Story';
 import Act from './Act';
@@ -58,7 +59,7 @@ const query = gql`
     }
 `;
 
-export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) => {
+export const UrgentAction = ({ step, id, data, error, loading }) => {
     if (error) {
         console.error(error);
         return null;
@@ -154,20 +155,30 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 };
 
-export const UrgentAction = ({
+UrgentAction.propTypes = {
+    step: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    data: PropTypes.object,
+    error: PropTypes.object,
+    loading: PropTypes.bool,
+};
+
+export const UrgentActionWithData = ({
     match: {
-        params: { id, step, page },
+        params: { id, step },
     },
 }) => (
     <SessionDataProvider>
         <Query query={query} variables={{ id }}>
-            {renderUrgentAction({ step, page, id })}
+            {({ data, error, loading }) => (
+                <UrgentAction step={step} id={id} data={data} error={error} loading={loading} />
+            )}
         </Query>
     </SessionDataProvider>
 );
 
-UrgentAction.propTypes = {
+UrgentActionWithData.propTypes = {
     match: routeMatch,
 };
 
-export default withRouter(UrgentAction);
+export default withRouter(UrgentActionWithData);

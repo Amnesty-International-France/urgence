@@ -56,10 +56,10 @@ describe('Urgent Actions Router', () => {
 
             const urgentAction = await createUrgentAction();
 
-            await request(app).post(`/urgent-actions/${urgentAction.id}/send`);
+            await request(app).post(`/urgent-actions/${urgentAction.id}/send`).send({ email: 'thiery@marmelab.com' });
 
             const [recipient, subject, body, attachment] = sendMail.mock.calls[0];
-            expect(recipient).toBe('jonathan@marmelab.com');
+            expect(recipient).toBe('thiery@marmelab.com');
             expect(subject).toBe('On y est presque !');
             expect(body).toMatchSnapshot();
             expect(attachment).toEqual({
