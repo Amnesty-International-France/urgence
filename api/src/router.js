@@ -17,7 +17,7 @@ if (config.env !== 'production') {
 }
 
 if (process.env.NODE_ENV === 'test') {
-    app.use('/test', require('./tests/router').default);
+    router.use('/test', require('./tests/router').default);
 }
 
 export const apiRouter = router;

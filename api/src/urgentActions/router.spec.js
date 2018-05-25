@@ -14,7 +14,7 @@ jest.mock('../../../front/src/sessionData');
 describe('Urgent Actions Router', () => {
     describe('POST /urgent-actions/${id}/send', () => {
         it('should return a 404 if no id is passed', async () => {
-            const response = await request(app).post('/urgent-actions//send');
+            const response = await request(app).post('/urgent-actions/send');
             expect(response.status).toBe(404);
         });
 
