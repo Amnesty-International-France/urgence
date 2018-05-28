@@ -9032,6 +9032,10 @@ react-devtools-core@3.0.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-div-100vh@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/react-div-100vh/-/react-div-100vh-0.1.8.tgz#9be83167ed41ac8bc5055d43079cff12894b2a56"
+
 react-docgen@^3.0.0-beta11:
   version "3.0.0-beta9"
   resolved "https://registry.yarnpkg.com/react-docgen/-/react-docgen-3.0.0-beta9.tgz#6be987e640786ecb10ce2dd22157a022c8285e95"

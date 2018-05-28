@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { ApolloProvider } from 'react-apollo';
 import { Switch } from 'react-router-dom';
 import glamorous from 'glamorous';
+import Div100Vh from 'react-div-100vh';
 
 import { Router, Route } from './gateway/ReactRouter';
 import generateUrl from './services/generateUrl';
@@ -13,7 +14,6 @@ import { ThemeProvider } from './themes/ThemeContext';
 
 export const styles = {
     '&': {
-        height: '100vh',
         width: '100vw',
     },
 };
@@ -21,7 +21,7 @@ export const styles = {
 const App = ({ className, client }) => (
     <ApolloProvider client={client}>
         <ThemeProvider>
-            <div className={className}>
+            <Div100Vh className={className}>
                 <AppLogo />
                 <Router>
                     <Switch>
@@ -29,7 +29,7 @@ const App = ({ className, client }) => (
                         <Route path={'/ua/:id/:step?/:page?'} component={UrgentAction} />
                     </Switch>
                 </Router>
-            </div>
+            </Div100Vh>
         </ThemeProvider>
     </ApolloProvider>
 );
