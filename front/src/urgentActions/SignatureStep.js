@@ -12,6 +12,7 @@ export class SignatureStep extends Component {
 
     render() {
         const { action, className, signature } = this.props;
+
         return (
             <div className={classnames('signature', className)}>
                 <div>

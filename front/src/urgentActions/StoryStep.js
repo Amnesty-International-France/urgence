@@ -10,20 +10,20 @@ import { StoryStepPropType } from '../propTypes';
 import { textColorForBackgroundColor, colors, black, white, yellow } from '../themes/colors';
 
 const styles = {
-    '&': {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+
+    '@media (min-width: 1024px)': {
+        padding: '10vh 10vw',
+    },
+
+    '& .step': {
+        flex: '1 0 0',
         display: 'flex',
         flexDirection: 'column',
-        height: '100%',
         '@media (min-aspect-ratio: 1/1)': {
             flexDirection: 'row',
-        },
-
-        '@media (min-width: 1024px)': {
-            padding: '10vh 10vw',
-
-            '& a': {
-                alignSelf: 'flex-end',
-            },
         },
     },
 
@@ -40,6 +40,14 @@ const styles = {
         flex: '1 0 0',
         padding: '21px 38px 21px 24px',
         overflow: 'auto',
+    },
+
+    '& .act': {
+        flex: '0 0 4rem',
+        margin: '0 1rem',
+        '@media (min-width: 1024px)': {
+            textAlign: 'right',
+        },
     },
 };
 
@@ -67,31 +75,37 @@ export const StoryStep = ({ className, medium, displayOptions, content, hasActBu
             color: textColorForBackgroundColor(displayOptions.backgroundColor),
         }}
     >
-        {medium &&
-            displayOptions.mediumPosition === 'top' && (
-                <div className="image">
-                    <Image {...medium} />
-                </div>
-            )}
+        <div className="step">
+            {medium &&
+                displayOptions.mediumPosition === 'top' && (
+                    <div className="image">
+                        <Image {...medium} />
+                    </div>
+                )}
 
-        <div
-            className="content"
-            style={{
-                alignItems: contentAlignment(medium, displayOptions),
-                paddingBottom: displayOptions.mediumPosition === 'bottom' ? 21 : 0,
-            }}
-        >
-            <RichText html={content} />
+            <div
+                className="content"
+                style={{
+                    alignItems: contentAlignment(medium, displayOptions),
+                    paddingBottom: displayOptions.mediumPosition === 'bottom' ? 21 : 0,
+                }}
+            >
+                <RichText html={content} />
+            </div>
+
+            {medium &&
+                displayOptions.mediumPosition === 'bottom' && (
+                    <div className="image">
+                        <Image {...medium} />
+                    </div>
+                )}
         </div>
 
-        {hasActButton && <ActButton />}
-
-        {medium &&
-            displayOptions.mediumPosition === 'bottom' && (
-                <div className="image">
-                    <Image {...medium} />
-                </div>
-            )}
+        {hasActButton && (
+            <div className="act">
+                <ActButton />
+            </div>
+        )}
     </div>
 );
 
