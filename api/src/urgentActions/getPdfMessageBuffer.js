@@ -4,7 +4,7 @@ import frLocale from 'date-fns/locale/fr';
 import pdf from 'html-pdf';
 import nunjucks from 'nunjucks';
 
-export const getPdfMessageBuffer = async (urgentAction, subject, signature) =>
+export const getPdfMessageBuffer = async (urgentAction, subject, signature, address) =>
     new Promise((resolve, reject) => {
         const urgentActionLetter = nunjucks.render(path.join(__dirname, './letter.html'), {
             date: format(new Date(), 'DD MMMM YYYY', { locale: frLocale }),
@@ -12,13 +12,14 @@ export const getPdfMessageBuffer = async (urgentAction, subject, signature) =>
             signature,
             subject,
             urgentAction,
+            address,
         });
 
         return pdf
             .create(urgentActionLetter, {
                 format: 'A4',
                 border: {
-                    top: '3.81cm',
+                    top: '3cm',
                     left: '2cm',
                     bottom: '2cm',
                     right: '2cm',

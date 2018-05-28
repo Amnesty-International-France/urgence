@@ -1,7 +1,10 @@
+import React from 'react';
 import { shallow } from 'enzyme';
 
-import { renderUrgentAction } from './UrgentAction';
+import { UrgentAction } from './UrgentAction';
 import sessionData from '../sessionData';
+import Thanks from './Thanks';
+import Story from './Story';
 
 jest.mock('../sessionData.js');
 
@@ -14,209 +17,190 @@ const defaultStep = {
 };
 
 describe('<UrgentAction />', () => {
-    describe('renderUrgentAction', () => {
-        const defaultParams = {
-            id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
-            step: 'story',
-            page: '1',
-        };
+    const defaultProps = {
+        id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
+        step: 'story',
+        page: '1',
+        loading: false,
+        data: {
+            UrgentAction: {
+                email_thank: {
+                    title: 'Thanks!',
+                },
+            },
+        },
+    };
 
-        const defaultProps = {
+    it('should return null if there is a GraphQL error', () => {
+        const props = {
+            ...defaultProps,
+            error: new Error('An error occured'),
+        };
+        const wrapper = shallow(<UrgentAction foo="bar" {...props} />);
+
+        expect(wrapper.type()).toBe(null);
+    });
+
+    it('should display story with retrieved GraphQL data if step is story', () => {
+        const props = {
+            ...defaultProps,
             loading: false,
             data: {
                 UrgentAction: {
-                    email_thank: {
-                        title: 'Thanks!',
+                    story: [
+                        {
+                            ...defaultStep,
+                            id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
+                        },
+                    ],
+                },
+            },
+        };
+        const wrapper = shallow(<UrgentAction {...props} />);
+        const story = wrapper.find(Story);
+
+        expect(story.prop('story')).toEqual([
+            {
+                ...defaultStep,
+                id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
+            },
+        ]);
+    });
+
+    it('should display act with call_to_action from graphql data if step is act', () => {
+        const props = {
+            step: 'act',
+            loading: false,
+            data: {
+                UrgentAction: {
+                    call_to_action: 'call to action',
+                },
+            },
+        };
+        const renderedComponent = shallow(<UrgentAction {...props} />);
+
+        expect(renderedComponent.prop('callToAction')).toBe('call to action');
+    });
+
+    it('should display message with retrieved GraphQL data if step is message', () => {
+        const props = {
+            ...defaultProps,
+            step: 'message',
+            data: {
+                ...defaultProps.data,
+                UrgentAction: {
+                    message_template: [{ value: 'first message' }, { value: 'second message' }],
+                    object_indication: 'object indication',
+                    recipient: {
+                        mail: 'mail',
                     },
                 },
             },
         };
+        const wrapper = shallow(<UrgentAction {...props} />);
 
-        it('should return null if there is a GraphQL error', () => {
-            const renderedComponent = renderUrgentAction(defaultParams)({
-                data: {},
-                error: 'An error occured',
-            });
+        expect(wrapper.prop('messageTemplate')).toBe(props.data.UrgentAction.message_template);
+    });
 
-            expect(renderedComponent).toBe(null);
-        });
-
-        it('should display story with retrieved GraphQL data if step is story', () => {
-            const renderedComponent = shallow(
-                renderUrgentAction(defaultParams)({
-                    loading: false,
-                    data: {
-                        UrgentAction: {
-                            story: [
-                                {
-                                    ...defaultStep,
-                                    id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
-                                },
-                            ],
-                        },
+    it('should display subject with retrieved GraphQL data if step is object', () => {
+        const props = {
+            loading: false,
+            step: 'object',
+            data: {
+                UrgentAction: {
+                    message_template: [{ value: 'first message' }, { value: 'second message' }],
+                    object_indication: 'object indication',
+                    recipient: {
+                        mail: 'mail',
                     },
-                }),
-            );
-
-            expect(renderedComponent.props().render().props.story).toEqual([
-                {
-                    ...defaultStep,
-                    id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
                 },
-            ]);
-        });
+            },
+        };
+        const wrapper = shallow(<UrgentAction {...props} />);
 
-        it('should display act with call_to_action from graphql data if step is act', () => {
-            const params = {
-                step: 'act',
-            };
+        expect(wrapper.prop('objectIndication')).toBe('object indication');
+    });
+
+    it('should display signatureStep with retrieved GraphQL data if step is signature', () => {
+        const props = {
+            loading: false,
+            step: 'signature',
+            data: {
+                UrgentAction: {
+                    message_template: [{ value: 'first message' }, { value: 'second message' }],
+                    object_indication: 'object indication',
+                    recipient: {
+                        mail: 'mail',
+                    },
+                },
+            },
+        };
+        const wrapper = shallow(<UrgentAction {...props} />);
+
+        const sendMail = wrapper.prop('action');
+        expect(sendMail.props.recipient).toEqual({ mail: 'mail' });
+        expect(sendMail.props.messageTemplate).toEqual([
+            { value: 'first message' },
+            { value: 'second message' },
+        ]);
+    });
+
+    describe('Email Thanks Step', () => {
+        it('should display Thanks if step is thanks', () => {
             const props = {
                 loading: false,
+                step: 'thanks',
                 data: {
                     UrgentAction: {
-                        call_to_action: 'call to action',
+                        email_thank: {
+                            title: '',
+                        },
                     },
                 },
             };
-            const renderedComponent = shallow(renderUrgentAction(params)(props));
-
-            expect(renderedComponent.prop('callToAction')).toBe('call to action');
+            const wrapper = shallow(<UrgentAction {...props} />);
+            expect(wrapper.find(Thanks).length).toBe(1);
         });
 
-        it('should display message with retrieved GraphQL data if step is message', () => {
-            const params = {
-                step: 'message',
-            };
+        it('should add a link to address step as action', () => {
+            sessionData.getMailObject.mockImplementation(() => 'Hello World!');
+            sessionData.getSignature.mockImplementation(() => 'John Doe');
 
             const props = {
                 ...defaultProps,
-                data: {
-                    ...defaultProps.data,
-                    UrgentAction: {
-                        message_template: [{ value: 'first message' }, { value: 'second message' }],
-                        object_indication: 'object indication',
-                        recipient: {
-                            mail: 'mail',
-                        },
-                    },
-                },
+                step: 'thanks',
+                id: '123456',
             };
-            const wrapper = shallow(renderUrgentAction(params)(props));
 
-            expect(wrapper.prop('messageTemplate')).toBe(props.data.UrgentAction.message_template);
+            const wrapper = shallow(<UrgentAction {...props} />);
+            const thanks = wrapper.find(Thanks);
+            const action = thanks.prop('actions')();
+
+            expect(action.props.pageName).toBe('address');
+            expect(action.props.label).toBe('Continuer');
         });
+    });
 
-        it('should display subject with retrieved GraphQL data if step is object', () => {
-            const params = {
-                step: 'object',
-            };
+    describe('Letter Thanks Step', () => {
+        it('should display thanks if step is "thanks-letter"', () => {
             const props = {
+                step: 'thanks-letter',
                 loading: false,
                 data: {
                     UrgentAction: {
-                        message_template: [{ value: 'first message' }, { value: 'second message' }],
-                        object_indication: 'object indication',
-                        recipient: {
-                            mail: 'mail',
+                        letter_thank: {
+                            title: 'Merci de votre engagement !',
+                            text: "N'oubliez pas d'envoyer la lettre !",
                         },
                     },
                 },
             };
-            const wrapper = shallow(renderUrgentAction(params)(props));
 
-            expect(wrapper.prop('objectIndication')).toBe('object indication');
-        });
+            const renderedComponent = shallow(<UrgentAction {...props} />);
 
-        it('should display signatureStep with retrieved GraphQL data if step is signature', () => {
-            const params = {
-                step: 'signature',
-            };
-            const props = {
-                loading: false,
-                data: {
-                    UrgentAction: {
-                        message_template: [{ value: 'first message' }, { value: 'second message' }],
-                        object_indication: 'object indication',
-                        recipient: {
-                            mail: 'mail',
-                        },
-                    },
-                },
-            };
-            const wrapper = shallow(renderUrgentAction(params)(props));
-
-            const sendMail = wrapper.prop('action');
-            expect(sendMail.props.recipient).toEqual({ mail: 'mail' });
-            expect(sendMail.props.messageTemplate).toEqual([
-                { value: 'first message' },
-                { value: 'second message' },
-            ]);
-        });
-
-        describe('Email Thanks Step', () => {
-            it('should display thanks if step is Thanks', () => {
-                const params = {
-                    step: 'thanks',
-                };
-                const props = {
-                    loading: false,
-                    data: {
-                        UrgentAction: {
-                            email_thank: {
-                                title: '',
-                            },
-                        },
-                    },
-                };
-                const renderedComponent = shallow(renderUrgentAction(params)(props));
-                expect(renderedComponent.type().name).toBe('Thanks');
-            });
-
-            it('should add a link to download PDF letter as action', () => {
-                const params = {
-                    id: '123456',
-                    step: 'thanks',
-                };
-
-                sessionData.getMailObject.mockImplementation(() => 'Hello World!');
-                sessionData.getSignature.mockImplementation(() => 'John Doe');
-
-                const props = { ...defaultProps };
-
-                const renderedComponent = shallow(renderUrgentAction(params)(props));
-                const actions = shallow(renderedComponent.prop('actions')());
-                const link = actions.find('a');
-
-                expect(link.prop('download')).toBeTruthy();
-                expect(link.prop('href')).toBe(
-                    'http://localhost:4000/urgent-actions/123456.pdf?subject=Hello%20World%21&signature=John%20Doe',
-                );
-            });
-        });
-
-        describe('Letter Thanks Step', () => {
-            it('should display thanks if step is "thanks-letter"', () => {
-                const params = {
-                    step: 'thanks-letter',
-                };
-                const props = {
-                    loading: false,
-                    data: {
-                        UrgentAction: {
-                            letter_thank: {
-                                title: 'Merci de votre engagement !',
-                                text: "N'oubliez pas d'envoyer la lettre !",
-                            },
-                        },
-                    },
-                };
-
-                const renderedComponent = shallow(renderUrgentAction(params)(props));
-
-                const thanks = renderedComponent.find('Thanks');
-                expect(thanks.prop('title')).toBe('Merci de votre engagement !');
-                expect(thanks.prop('text')).toBe("N'oubliez pas d'envoyer la lettre !");
-            });
+            const thanks = renderedComponent.find(Thanks);
+            expect(thanks.prop('title')).toBe('Merci de votre engagement !');
+            expect(thanks.prop('text')).toBe("N'oubliez pas d'envoyer la lettre !");
         });
     });
 });

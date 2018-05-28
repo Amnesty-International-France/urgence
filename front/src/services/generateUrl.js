@@ -1,5 +1,3 @@
-import { stringify } from 'qs';
-
 export default (name, params = {}) => {
     switch (name) {
         case 'ua':
@@ -16,16 +14,17 @@ export default (name, params = {}) => {
             return `/ua/${params.id}/signature`;
         case 'thanks':
             return `/ua/${params.id}/thanks`;
+        case 'address':
+            return `/ua/${params.id}/address`;
+        case 'email':
+            return `/ua/${params.id}/email`;
+        case 'thanks-letter':
+            return `/ua/${params.id}/thanks-letter`;
         case 'home':
             return '/';
 
         case 'letter': {
-            const { subject, signature } = params;
-
-            return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}.pdf?${stringify({
-                subject,
-                signature,
-            })}`;
+            return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}/send`;
         }
 
         default:
