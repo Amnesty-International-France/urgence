@@ -6,7 +6,7 @@ import Link from '../themes/Link';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 
-const ToUrgentActionPageLink = ({
+export const ToUrgentActionPageLink = ({
     label,
     pageName,
     disabled,

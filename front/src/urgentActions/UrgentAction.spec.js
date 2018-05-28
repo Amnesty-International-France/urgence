@@ -5,6 +5,8 @@ import { UrgentAction } from './UrgentAction';
 import sessionData from '../sessionData';
 import Thanks from './Thanks';
 import Story from './Story';
+import AddressStep from './AddressStep';
+import EmailStep from './EmailStep';
 
 jest.mock('../sessionData.js');
 
@@ -178,6 +180,57 @@ describe('<UrgentAction />', () => {
 
             expect(action.props.pageName).toBe('address');
             expect(action.props.label).toBe('Continuer');
+        });
+    });
+
+    describe('Address Step', () => {
+        it('should display AddressStep if step is addres', () => {
+            const props = {
+                loading: false,
+                step: 'address',
+                data: {
+                    UrgentAction: {
+                        email_thank: {
+                            title: '',
+                        },
+                    },
+                },
+            };
+            const wrapper = shallow(<UrgentAction {...props} />);
+            expect(wrapper.find(AddressStep).length).toBe(1);
+        });
+
+        it('should add a link to address step as action', () => {
+            const props = {
+                ...defaultProps,
+                step: 'address',
+                id: '123456',
+            };
+
+            const wrapper = shallow(<UrgentAction {...props} />);
+            const thanks = wrapper.find(AddressStep);
+            const action = thanks.prop('action')();
+
+            expect(action.props.pageName).toBe('email');
+            expect(action.props.label).toBe('Valider');
+        });
+    });
+
+    describe('Email Step', () => {
+        it('should display EmailStep if step is addres', () => {
+            const props = {
+                loading: false,
+                step: 'email',
+                data: {
+                    UrgentAction: {
+                        email_thank: {
+                            title: '',
+                        },
+                    },
+                },
+            };
+            const wrapper = shallow(<UrgentAction {...props} />);
+            expect(wrapper.find(EmailStep).length).toBe(1);
         });
     });
 
