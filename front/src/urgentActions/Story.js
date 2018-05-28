@@ -17,55 +17,11 @@ import { RightArrow } from '../icons';
 import { withThemeContext } from '../themes/ThemeContext';
 import LoadingScreen from '../themes/LoadingScreen';
 import Carousel from '../themes/Carousel';
+import StorySlide from './StorySlide';
 
 const styles = {
     height: '100%',
-
-    '& .story-step': {
-        flex: '1 0 0',
-    },
-
-    '& .bottom': {
-        flex: '0 0 50px',
-        alignItems: 'center',
-        padding: '17px 24px',
-        display: 'flex',
-    },
-
-    '& .slide.with-bottom-media .bottom': {
-        position: 'absolute',
-        bottom: 0,
-        height: 50,
-        width: '100vw',
-        '@media (max-aspect-ratio: 1/1)': {
-            color: '#fff !important',
-            backgroundColor: 'transparent !important',
-            background: 'linear-gradient(#0000, #000f)',
-            '& svg': {
-                fill: '#fff !important',
-            },
-        },
-    },
-
-    '& .bottom > *': {
-        flex: '1 0 0',
-    },
-
-    '& .next-arrow': {
-        position: 'relative',
-        top: 4,
-        textAlign: 'right',
-        fontSize: 28,
-    },
-
-    '& .counter': {
-        fontFamily: 'Amnesty Trade Gothic Condensed',
-        fontSize: 18,
-        lineHeight: '22px',
-    },
 };
-
-const rightArrowColor = step => textColorForBackgroundColor(step.displayOptions.backgroundColor);
 
 export class Story extends Component {
     afterChange = page => {
@@ -121,47 +77,13 @@ export class Story extends Component {
                         <Carousel initialSlide={parseInt(page, 10)} afterChange={this.afterChange}>
                             {({ nextSlide }) =>
                                 story.map((step, index) => (
-                                    <div
-                                        className={classnames({
-                                            'swiper-slide': true,
-                                            'with-bottom-media':
-                                                get(step, 'displayOptions.mediumPosition') ===
-                                                'bottom',
-                                        })}
-                                        style={{ height: '100%' }}
+                                    <StorySlide
                                         key={step.content}
-                                    >
-                                        <div className="story-step">
-                                            <StoryStep
-                                                {...step}
-                                                hasActButton={index === story.length - 1}
-                                            />
-                                        </div>
-
-                                        <div
-                                            className="bottom"
-                                            style={{
-                                                backgroundColor:
-                                                    colors[step.displayOptions.backgroundColor],
-                                                color: textColorForBackgroundColor(
-                                                    step.displayOptions.backgroundColor,
-                                                ),
-                                            }}
-                                        >
-                                            <div className="counter">
-                                                {index + 1}/{story.length}
-                                            </div>
-
-                                            {index + 1 < story.length && (
-                                                <div className="next-arrow">
-                                                    <RightArrow
-                                                        onClick={nextSlide}
-                                                        fill={rightArrowColor(step)}
-                                                    />
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
+                                        step={step}
+                                        total={story.length}
+                                        index={index + 1}
+                                        nextSlide={nextSlide}
+                                    />
                                 ))
                             }
                         </Carousel>
