@@ -1,21 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import Swiper from 'react-id-swiper';
+import 'swiper/dist/css/swiper.css';
 
 export const Carousel = ({ children, className, initialSlide, afterChange, vertical }) => (
-    <Slider
-        className={className}
-        infinite={false}
-        vertical={vertical}
-        verticalSwiping={vertical}
-        afterChange={afterChange}
-        initialSlide={initialSlide}
-    >
+    <Swiper className={className} direction="horizontal">
         {children}
-    </Slider>
+    </Swiper>
 );
 
 Carousel.propTypes = {
@@ -27,11 +19,10 @@ Carousel.propTypes = {
 };
 
 export default glamorous(Carousel)({
-    height: '100%',
-    '.slick-slide > div': {
+    '& .swiper-container': {
         height: '100%',
     },
-    '.slick-slider': {
+    '& .swiper-wrapper': {
         height: '100%',
     },
 });

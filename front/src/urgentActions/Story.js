@@ -1,10 +1,9 @@
 import classnames from 'classnames';
 import get from 'lodash.get';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { withRouter } from 'react-router';
-import Slider from 'react-slick';
 import { compose } from 'recompose';
 
 import 'slick-carousel/slick/slick.css';
@@ -17,16 +16,10 @@ import { textColorForBackgroundColor, colors } from '../themes/colors';
 import { RightArrow } from '../icons';
 import { withThemeContext } from '../themes/ThemeContext';
 import LoadingScreen from '../themes/LoadingScreen';
+import Carousel from '../themes/Carousel';
 
 const styles = {
-    '&': {
-        height: '100vh',
-    },
-
-    '& .slick-slide > div': {
-        display: 'flex',
-        flexDirection: 'column',
-    },
+    height: '100%',
 
     '& .story-step': {
         flex: '1 0 0',
@@ -52,12 +45,6 @@ const styles = {
                 fill: '#fff !important',
             },
         },
-    },
-
-    '& .slide': {
-        height: '100%',
-        flexDirection: 'column',
-        display: 'flex !important',
     },
 
     '& .bottom > *': {
@@ -132,20 +119,14 @@ export class Story extends Component {
         return loading ? (
             <LoadingScreen />
         ) : (
-            <Fragment>
+            <div className={className}>
                 {(!story || !story.length) && (
                     <p className="error">Cette action urgente n&#39;existe plus.</p>
                 )}
 
                 {story &&
                     story.length > 0 && (
-                        <Slider
-                            className={className}
-                            infinite={false}
-                            afterChange={this.afterChange}
-                            initialSlide={parseInt(page, 10)}
-                            ref={this.initSlider}
-                        >
+                        <Carousel>
                             {story.map((step, index) => (
                                 <div
                                     className={classnames({
@@ -153,6 +134,7 @@ export class Story extends Component {
                                         'with-bottom-media':
                                             get(step, 'displayOptions.mediumPosition') === 'bottom',
                                     })}
+                                    style={{ height: '100%' }}
                                     key={step.content}
                                 >
                                     <div className="story-step">
@@ -187,9 +169,9 @@ export class Story extends Component {
                                     </div>
                                 </div>
                             ))}
-                        </Slider>
+                        </Carousel>
                     )}
-            </Fragment>
+            </div>
         );
     }
 }
