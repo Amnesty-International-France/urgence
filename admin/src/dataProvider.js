@@ -4,7 +4,7 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 export const graphqlClientOptions = {
-    uri: process.env.REACT_APP_API_URL + '/',
+    uri: process.env.REACT_APP_API_URL,
 };
 
 const client = new ApolloClient({
@@ -12,9 +12,10 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
-export const getApolloClient = () => buildApolloClient({
-    client,
-});
+export const getApolloClient = () =>
+    buildApolloClient({
+        client,
+    });
 
 export default () => {
     const getGqlResource = resource => {
@@ -28,6 +29,6 @@ export default () => {
     };
 
     return getApolloClient().then(dataProvider => (type, resource, params) =>
-        dataProvider(type, getGqlResource(resource), params)
+        dataProvider(type, getGqlResource(resource), params),
     );
 };
