@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import { withSessionData } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
-import TextArea from '../themes/TextArea';
+import Input from '../themes/Input';
 
 const styles = {
     display: 'flex',
@@ -44,7 +44,7 @@ export class SignatureStep extends Component {
                         Parce que les actions uniques sont un message personnel, nous vous invitons
                         à renseigner vos nom et prénom.
                     </p>
-                    <TextArea rows="3" value={signature} onChange={this.setSignature} />
+                    <Input value={signature} onChange={this.setSignature} />
                 </div>
                 <div className="action">{action}</div>
             </div>

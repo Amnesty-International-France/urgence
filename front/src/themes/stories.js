@@ -6,6 +6,7 @@ import Image from './Image';
 import { Button } from './Button';
 import LoadingScreen from './LoadingScreen';
 
+import Input from './Input';
 import TextArea from './TextArea';
 
 storiesOf('Screens', module).add('Loading Screen', () => <LoadingScreen />);
@@ -13,14 +14,22 @@ storiesOf('Screens', module).add('Loading Screen', () => <LoadingScreen />);
 storiesOf('User Interface', module)
     .add('Textarea', () => (
         <div>
-            <p>Empty field:</p>
+            <p>Empty textarea:</p>
             <TextArea />
-            <p>Pre-filled field:</p>
+            <p>Pre-filled textarea:</p>
             <TextArea>
                 Le 26 mars, une cour d'appel militaire a confirmé la condamnation à mort des deux
                 hommes, à l'issue d'un procès manifestement inique fondé sur des « aveux » extorqués
                 sous la torture durant leur disparition forcée.
             </TextArea>
+        </div>
+    ))
+    .add('Input', () => (
+        <div>
+            <p>Empty input:</p>
+            <Input />
+            <p>Pre-filled textarea:</p>
+            <Input value="Hello world!" />
         </div>
     ))
     .add('Image', () => (

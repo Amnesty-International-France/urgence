@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import RichText from '../themes/RichText';
 import { withSessionData } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
+import Input from '../themes/Input';
 
 const styles = {
     backgroundColor: 'white',
@@ -32,14 +33,6 @@ const styles = {
         color: '#C1C1C1',
         flex: 1,
     },
-    '& input': {
-        margin: '2em 0',
-        width: '100%',
-        fontSize: 14,
-        lineHeight: '40px',
-        height: 40,
-        padding: '0 15px',
-    },
     padding: '105px 2rem 53px',
 };
 
@@ -53,7 +46,7 @@ export class ObjectStep extends Component {
                     Parce que les messages uniques ont plus d&#39;impact, nous vous invitons à
                     personnaliser son sujet.
                 </p>
-                <input
+                <Input
                     value={object}
                     onChange={this.setObject}
                     placeholder="Objet de votre message"
