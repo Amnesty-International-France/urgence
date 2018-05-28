@@ -1,23 +1,40 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import Swiper from 'react-id-swiper';
+import Swiper from 'swiper';
+import classnames from 'classnames';
 import 'swiper/dist/css/swiper.css';
 
 export class Carousel extends Component {
     initSlider = slider => {
-        this.slider = slider.swiper;
+        const { initialSlide, afterChange } = this.props;
+        const swiper = new Swiper(slider, {
+            initialSlide,
+            direction: 'horizontal',
+            on: {
+                slideChange: function() {
+                    if (!swiper) {
+                        return;
+                    }
+                    afterChange(swiper.activeIndex);
+                },
+            },
+        });
+        this.swiper = swiper;
     };
     nextSlide = () => {
-        this.slider.slideNext();
+        this.swiper.slideNext();
     };
+    componentWillUnmount() {
+        this.swiper.destroy();
+    }
 
     render() {
-        const { children, initialSlide, afterChange } = this.props;
+        const { children, className } = this.props;
         return (
-            <Swiper direction="horizontal" initialSlide={initialSlide} ref={this.initSlider}>
-                {children({ nextSlide: this.nextSlide })}
-            </Swiper>
+            <div className={classnames(className, 'swiper-container')} ref={this.initSlider}>
+                <div className={'swiper-wrapper'}>{children({ nextSlide: this.nextSlide })}</div>
+            </div>
         );
     }
 }
@@ -25,6 +42,7 @@ export class Carousel extends Component {
 Carousel.propTypes = {
     initialSlide: PropTypes.number,
     children: PropTypes.func.isRequired,
+    className: PropTypes.string.isRequired,
     afterChange: PropTypes.func,
     vertical: PropTypes.bool,
 };

@@ -118,12 +118,12 @@ export class Story extends Component {
 
                 {story &&
                     story.length > 0 && (
-                        <Carousel initialSlide={parseInt(page, 10)}>
+                        <Carousel initialSlide={parseInt(page, 10)} afterChange={this.afterChange}>
                             {({ nextSlide }) =>
                                 story.map((step, index) => (
                                     <div
                                         className={classnames({
-                                            slide: true,
+                                            'swiper-slide': true,
                                             'with-bottom-media':
                                                 get(step, 'displayOptions.mediumPosition') ===
                                                 'bottom',
