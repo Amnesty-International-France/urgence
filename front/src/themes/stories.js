@@ -6,9 +6,23 @@ import Image from './Image';
 import { Button } from './Button';
 import LoadingScreen from './LoadingScreen';
 
+import TextArea from './TextArea';
+
 storiesOf('Screens', module).add('Loading Screen', () => <LoadingScreen />);
 
 storiesOf('User Interface', module)
+    .add('Textarea', () => (
+        <div>
+            <p>Empty field:</p>
+            <TextArea />
+            <p>Pre-filled field:</p>
+            <TextArea>
+                Le 26 mars, une cour d'appel militaire a confirmé la condamnation à mort des deux
+                hommes, à l'issue d'un procès manifestement inique fondé sur des « aveux » extorqués
+                sous la torture durant leur disparition forcée.
+            </TextArea>
+        </div>
+    ))
     .add('Image', () => (
         <div
             style={{

@@ -6,6 +6,7 @@ import classnames from 'classnames';
 
 import { withSessionData } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
+import TextArea from '../themes/TextArea';
 
 export class AddressStep extends Component {
     setAddress = event => this.props.setAddress(event.target.value);
@@ -20,8 +21,8 @@ export class AddressStep extends Component {
                         lettre que vous envoyez.
                     </p>
                     <p>Pouvez vous renseigner votre adresse ?</p>
-                    <textarea
-                        rows="3"
+                    <TextArea
+                        rows="6"
                         value={address}
                         onChange={this.setAddress}
                         placeholder="Votre adresse postale"
