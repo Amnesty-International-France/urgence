@@ -22,6 +22,7 @@ export class EmailStep extends Component {
                         par courrier.
                     </p>
                     <Input
+                        type="email"
                         value={email}
                         onChange={this.setEmail}
                         placeholder="Votre adresse email"
