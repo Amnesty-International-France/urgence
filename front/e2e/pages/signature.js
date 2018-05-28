@@ -10,11 +10,17 @@ export default driver => {
     return {
         isLoaded: async () => driver.wait(until.elementLocated(elements.container)),
         async navigate(id) {
-            this.id = id;
             await driver.navigate().to(`http://front:3000/#/ua/${id}/signature`);
             await this.isLoaded();
         },
         enterText: async value => driver.findElement(elements.textarea).sendKeys(value),
         getMailTo: async () => driver.findElement(elements.sendMailButton).getAttribute('href'),
+        isButtonDisabled: async () => {
+            const className = await driver
+                .findElement(elements.sendMailButton)
+                .getAttribute('class');
+
+            return className.includes('disabled');
+        },
     };
 };

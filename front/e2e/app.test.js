@@ -105,7 +105,9 @@ describe('app', () => {
     it('should display signature steps', async () => {
         await signaturePage.navigate(urgentAction.id);
 
+        expect(await signaturePage.isButtonDisabled()).toBe(true);
         await signaturePage.enterText('My name');
+        expect(await signaturePage.isButtonDisabled()).toBe(false);
 
         const mailTo = await signaturePage.getMailTo();
         expect(mailTo).toContain('subject=My%20subject');
@@ -128,10 +130,11 @@ describe('app', () => {
 
     it('should display address step', async () => {
         await addressPage.navigate(urgentAction.id);
-
+        expect(await addressPage.isActionDisabled()).toBe(true);
         await addressPage.typeAddress(
             'M. Dupond\n4, rue du coin qui tourne en rond\n00 000 Perpéte La Galette',
         );
+        expect(await addressPage.isActionDisabled()).toBe(false);
 
         await addressPage.validate();
         await emailPage.isLoaded();
@@ -140,7 +143,9 @@ describe('app', () => {
     it('should display email step', async () => {
         await emailPage.navigate(urgentAction.id);
 
+        expect(await emailPage.isActionDisabled()).toBe(true);
         await emailPage.typeEmail('dupond@perpéte.com');
+        expect(await emailPage.isActionDisabled()).toBe(false);
 
         await emailPage.validate();
         await thanksLetterPage.isLoaded();
