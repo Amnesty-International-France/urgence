@@ -85,14 +85,6 @@ export class Story extends Component {
         history.push(generateUrl('story', { id, page }));
     };
 
-    initSlider = slider => {
-        this.slider = slider;
-    };
-
-    nextSlide = () => {
-        this.slider.slickNext();
-    };
-
     componentDidUpdate(prevProps) {
         const {
             story,
@@ -126,49 +118,52 @@ export class Story extends Component {
 
                 {story &&
                     story.length > 0 && (
-                        <Carousel>
-                            {story.map((step, index) => (
-                                <div
-                                    className={classnames({
-                                        slide: true,
-                                        'with-bottom-media':
-                                            get(step, 'displayOptions.mediumPosition') === 'bottom',
-                                    })}
-                                    style={{ height: '100%' }}
-                                    key={step.content}
-                                >
-                                    <div className="story-step">
-                                        <StoryStep
-                                            {...step}
-                                            hasActButton={index === story.length - 1}
-                                        />
-                                    </div>
-
+                        <Carousel initialSlide={parseInt(page, 10)}>
+                            {({ nextSlide }) =>
+                                story.map((step, index) => (
                                     <div
-                                        className="bottom"
-                                        style={{
-                                            backgroundColor:
-                                                colors[step.displayOptions.backgroundColor],
-                                            color: textColorForBackgroundColor(
-                                                step.displayOptions.backgroundColor,
-                                            ),
-                                        }}
+                                        className={classnames({
+                                            slide: true,
+                                            'with-bottom-media':
+                                                get(step, 'displayOptions.mediumPosition') ===
+                                                'bottom',
+                                        })}
+                                        style={{ height: '100%' }}
+                                        key={step.content}
                                     >
-                                        <div className="counter">
-                                            {index + 1}/{story.length}
+                                        <div className="story-step">
+                                            <StoryStep
+                                                {...step}
+                                                hasActButton={index === story.length - 1}
+                                            />
                                         </div>
 
-                                        {index + 1 < story.length && (
-                                            <div className="next-arrow">
-                                                <RightArrow
-                                                    onClick={this.nextSlide}
-                                                    fill={rightArrowColor(step)}
-                                                />
+                                        <div
+                                            className="bottom"
+                                            style={{
+                                                backgroundColor:
+                                                    colors[step.displayOptions.backgroundColor],
+                                                color: textColorForBackgroundColor(
+                                                    step.displayOptions.backgroundColor,
+                                                ),
+                                            }}
+                                        >
+                                            <div className="counter">
+                                                {index + 1}/{story.length}
                                             </div>
-                                        )}
+
+                                            {index + 1 < story.length && (
+                                                <div className="next-arrow">
+                                                    <RightArrow
+                                                        onClick={nextSlide}
+                                                        fill={rightArrowColor(step)}
+                                                    />
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))
+                            }
                         </Carousel>
                     )}
             </div>
