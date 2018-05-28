@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { ObjectStep } from './ObjectStep';
+import Input from '../themes/Input';
 
 describe('<ObjectStep />', () => {
     const defaultProps = {
@@ -59,7 +60,7 @@ describe('<ObjectStep />', () => {
             };
 
             const wrapper = shallow(<ObjectStep {...props} />);
-            const input = wrapper.find('input');
+            const input = wrapper.find(Input);
 
             expect(input.prop('value')).toBe('object value');
             expect(input.prop('onChange')).toBe(wrapper.instance().setObject);
