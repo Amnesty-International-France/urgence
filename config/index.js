@@ -130,7 +130,7 @@ const config = convict({
                     default: 'postmaster',
                     env: 'SMTP_USER',
                 },
-                password: {
+                pass: {
                     format: String,
                     default: '',
                     env: 'SMTP_PASSWORD',
