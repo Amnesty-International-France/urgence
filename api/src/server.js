@@ -1,12 +1,9 @@
 import cors from 'cors';
 import express from 'express';
-import bodyParser from 'body-parser';
-import { apolloUploadExpress } from 'apollo-upload-server';
 
-import { graphqlRouter, graphiqlRouter } from './graphql/router';
-import { urgentActionsRouter } from './urgentActions/router';
 import config from '../../config';
 import errorHandler from './errorHandler';
+import { apiRouter } from './router';
 
 const app = express();
 
@@ -18,17 +15,7 @@ app.use(
     }),
 );
 
-if (process.env.NODE_ENV === 'test') {
-    app.use('/test', require('./tests/router').default);
-}
-
-if (config.env !== 'production') {
-    app.get('/graphiql', graphiqlRouter);
-}
-
-app.use(bodyParser.json());
-app.use('/urgent-actions', urgentActionsRouter);
-app.post('/', apolloUploadExpress(), graphqlRouter);
+app.use(config.api.prefixUrl, apiRouter);
 app.use(errorHandler);
 
 export default app;
