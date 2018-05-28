@@ -8,6 +8,9 @@ import messagePageFactory from './pages/message';
 import objectPageFactory from './pages/object';
 import signaturePageFactory from './pages/signature';
 import thanksPageFactory from './pages/thanks';
+import addressPageFactory from './pages/address';
+import emailPageFactory from './pages/email';
+import thanksLetterPageFactory from './pages/thanksLetter';
 
 const storyPage = storyPageFactory(driver);
 const actPage = actPageFactory(driver);
@@ -15,6 +18,9 @@ const messagePage = messagePageFactory(driver);
 const objectPage = objectPageFactory(driver);
 const signaturePage = signaturePageFactory(driver);
 const thanksPage = thanksPageFactory(driver);
+const addressPage = addressPageFactory(driver);
+const emailPage = emailPageFactory(driver);
+const thanksLetterPage = thanksLetterPageFactory(driver);
 
 describe('app', () => {
     let urgentAction;
@@ -111,6 +117,36 @@ describe('app', () => {
         expect(title).toBe('Merci de votre soutien !');
 
         const text = await thanksPage.getText();
+        expect(text).toBe(
+            "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
+        );
+    });
+
+    it('should display address step', async () => {
+        await addressPage.navigate(urgentAction.id);
+
+        await addressPage.typeAddress(
+            'M. Dupond\n4, rue du coin qui tourne en rond\n00 000 Perpéte La Galette',
+        );
+
+        await addressPage.validate();
+    });
+
+    it('should display email step', async () => {
+        await emailPage.navigate(urgentAction.id);
+
+        await emailPage.typeEmail('dupond@perpéte.com');
+
+        await emailPage.validate();
+    });
+
+    it('should display thanks-letter step', async () => {
+        await thanksLetterPage.navigate(urgentAction.id);
+
+        const title = await thanksLetterPage.getTitle();
+        expect(title).toBe('Merci de votre soutien !');
+
+        const text = await thanksLetterPage.getText();
         expect(text).toBe(
             "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
         );
