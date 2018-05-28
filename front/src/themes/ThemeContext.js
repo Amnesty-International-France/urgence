@@ -1,6 +1,6 @@
 import React, { createContext, Component } from 'react';
 import PropTypes from 'prop-types';
-import { lifecycle, compose, setDisplayName } from 'recompose';
+import { lifecycle, compose } from 'recompose';
 
 import { white } from './colors';
 
