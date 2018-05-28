@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "exec_mode": "fork",
+            "name": "reaction-rapide",
+            "script": "./dist/index.js"
+        }
+    ]
+}

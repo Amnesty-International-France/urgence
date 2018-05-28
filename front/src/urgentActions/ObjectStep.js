@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { compose } from 'recompose';
 
 import RichText from '../themes/RichText';
-import { SessionDataConsumer } from '../SessionDataContext';
+import { withSessionData } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
 
 const styles = {
@@ -71,24 +72,4 @@ ObjectStep.propTypes = {
     setObject: PropTypes.func.isRequired,
 };
 
-export const ObjectStepWithSessionData = ({ objectIndication, className, action }) => (
-    <SessionDataConsumer>
-        {({ object, setObject }) => (
-            <ObjectStep
-                objectIndication={objectIndication}
-                className={className}
-                action={action}
-                object={object}
-                setObject={setObject}
-            />
-        )}
-    </SessionDataConsumer>
-);
-
-ObjectStepWithSessionData.propTypes = {
-    className: PropTypes.string,
-    objectIndication: PropTypes.string.isRequired,
-    action: PropTypes.func.isRequired,
-};
-
-export default glamorous(withBlackLogo(ObjectStepWithSessionData))(styles);
+export default glamorous(compose(withBlackLogo, withSessionData)(ObjectStep))(styles);

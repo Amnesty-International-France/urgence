@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { setDisplayName } from 'recompose';
+
 import { pink, white } from '../themes/colors';
+import Email from '../icons/Email';
+import { withWhiteLogo } from '../themes/ThemeContext';
 
 const styles = {
     display: 'flex',
@@ -13,6 +17,11 @@ const styles = {
     width: '100%',
     textAlign: 'center',
     padding: '0 31px 50px',
+    '& svg': {
+        fill: 'white',
+        fontSize: '3em',
+        alignSelf: 'center',
+    },
     '&': {
         '@media (min-aspect-ratio: 1/1)': {
             padding: '15vw 25vh',
@@ -51,6 +60,7 @@ const styles = {
 export const Thanks = ({ className, title, text, actions }) => (
     <div className={className}>
         <div className="content">
+            <Email />
             <h1>{title}</h1>
             {text && <p className="text">{text}</p>}
         </div>
@@ -69,4 +79,4 @@ Thanks.defaultProps = {
     actions: () => {},
 };
 
-export default glamorous(Thanks)(styles);
+export default withWhiteLogo(Thanks)// )(styles);

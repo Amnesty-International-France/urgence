@@ -4,9 +4,8 @@ import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
+import PropTypes from 'prop-types';
 
-import sessionData from '../sessionData';
-import { Email } from '../icons';
 import Story from './Story';
 import Act from './Act';
 import Thanks from './Thanks';
@@ -14,12 +13,14 @@ import Message from './message/Message';
 import ObjectStep from './ObjectStep';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
-import ToObjectButton from './ToObjectButton';
-import ToSignatureButton from './ToSignatureButton';
+import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import SignatureStep from './SignatureStep';
+import AddressStep from './AddressStep';
+import EmailStep from './EmailStep';
 import SendMail from './message/SendMail';
 import { SessionDataProvider } from '../SessionDataContext';
 import LoadingScreen from '../themes/LoadingScreen';
+import MailPdfButton from './MailPdfButton';
 
 const query = gql`
     query urgentAction($id: ID!) {
@@ -58,7 +59,7 @@ const query = gql`
     }
 `;
 
-export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) => {
+export const UrgentAction = ({ step, id, data, error, loading }) => {
     if (error) {
         console.error(error);
         return null;
@@ -77,7 +78,12 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 
     if (step === 'act') {
-        return <Act callToAction={get(data, 'UrgentAction.call_to_action')} />;
+        return (
+            <Act
+                callToAction={get(data, 'UrgentAction.call_to_action')}
+                action={<ToUrgentActionPageLink label="Voir le message" pageName="message" />}
+            />
+        );
     }
 
     if (step === 'message') {
@@ -85,7 +91,9 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
                 loading={loading}
-                action={<ToObjectButton />}
+                action={
+                    <ToUrgentActionPageLink label="OK, J'envoie le message" pageName="object" />
+                }
             />
         );
     }
@@ -95,7 +103,13 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
             <ObjectStep
                 objectIndication={get(data, 'UrgentAction.object_indication')}
                 loading={loading}
-                action={disabled => <ToSignatureButton disabled={disabled} />}
+                action={disabled => (
+                    <ToUrgentActionPageLink
+                        label="Valider"
+                        pageName="signature"
+                        disabled={disabled}
+                    />
+                )}
             />
         );
     }
@@ -114,19 +128,26 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 
     if (step === 'thanks') {
-        const subject = sessionData.getMailObject();
-        const signature = sessionData.getSignature();
-
         return (
             <Thanks
                 {...get(data, 'UrgentAction.email_thank')}
-                actions={() => (
-                    <a href={generateUrl('letter', { id, signature, subject })} download>
-                        <Email />
-                    </a>
+                actions={() => <ToUrgentActionPageLink label="Continuer" pageName="address" />}
+            />
+        );
+    }
+
+    if (step === 'address') {
+        return (
+            <AddressStep
+                action={disabled => (
+                    <ToUrgentActionPageLink label="Valider" pageName="email" disabled={disabled} />
                 )}
             />
         );
+    }
+
+    if (step === 'email') {
+        return <EmailStep action={disabled => <MailPdfButton disabled={disabled} />} />;
     }
 
     if (step === 'thanks-letter') {
@@ -134,20 +155,30 @@ export const renderUrgentAction = ({ step, id }) => ({ data, error, loading }) =
     }
 };
 
-export const UrgentAction = ({
+UrgentAction.propTypes = {
+    step: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    data: PropTypes.object,
+    error: PropTypes.object,
+    loading: PropTypes.bool,
+};
+
+export const UrgentActionWithData = ({
     match: {
-        params: { id, step, page },
+        params: { id, step },
     },
 }) => (
     <SessionDataProvider>
         <Query query={query} variables={{ id }}>
-            {renderUrgentAction({ step, page, id })}
+            {({ data, error, loading }) => (
+                <UrgentAction step={step} id={id} data={data} error={error} loading={loading} />
+            )}
         </Query>
     </SessionDataProvider>
 );
 
-UrgentAction.propTypes = {
+UrgentActionWithData.propTypes = {
     match: routeMatch,
 };
 
-export default withRouter(UrgentAction);
+export default withRouter(UrgentActionWithData);

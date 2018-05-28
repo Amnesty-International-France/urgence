@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 import RichText from '../themes/RichText';
-import ToMessageButton from './ToMessageButton';
 import { pink, white } from '../themes/colors';
 import { withWhiteLogo } from '../themes/ThemeContext';
 
-export const Act = ({ callToAction, className }) => (
+export const Act = ({ callToAction, className, action }) => (
     <div className={className}>
         <div>
             <h1>Génial !</h1>
             <RichText html={callToAction} />
         </div>
-        <ToMessageButton />
+        {action}
     </div>
 );
 

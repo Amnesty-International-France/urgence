@@ -25,8 +25,8 @@ export const styles = {
     },
 };
 
-export const Link = ({ to, label, disabled, className }) => (
-    <RouterLink to={to} className={classnames(className, { disabled: disabled })}>
+export const Link = ({ to, label, disabled, className, onClick }) => (
+    <RouterLink to={to} className={classnames(className, { disabled: disabled })} onClick={onClick}>
         {label}
     </RouterLink>
 );
@@ -36,6 +36,7 @@ Link.propTypes = {
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     className: PropTypes.string,
+    onClick: PropTypes.func,
 };
 
 export default glamorous(Link)(styles);

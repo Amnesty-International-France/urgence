@@ -1,0 +1,11 @@
+{
+    "apps": [
+        {
+            "exec_interpreter": "./node_modules/.bin/babel-node",
+            "exec_mode": "fork",
+            "name": "reaction-rapide",
+            "script": "src/index.js",
+            "watch": ["src"]
+        }
+    ]
+}
