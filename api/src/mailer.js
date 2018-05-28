@@ -3,7 +3,7 @@ import { createTransport } from 'nodemailer';
 import { mailer as mailerConfig } from '../../config';
 
 const smtpConfig = { ...mailerConfig.smtp };
-if (!mailerConfig.smtp.user) {
+if (!mailerConfig.smtp.auth.user) {
     delete smtpConfig.auth;
 }
 
