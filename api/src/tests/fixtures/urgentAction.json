@@ -55,5 +55,10 @@
         "title": "Merci de votre soutien !",
         "text":
             "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis."
+    },
+    "letter_thank": {
+        "title": "Merci de votre aide !",
+        "text":
+            "Il ne vous reste plus qu'as poster la lettre qui vous à été envoyé par courriel."
     }
 }

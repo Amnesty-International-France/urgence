@@ -5,12 +5,14 @@ export default driver => {
         indication: By.css('.rich-text'),
         validateButton: By.css('.action a'),
         input: By.css('input'),
+        container: By.className('object'),
     };
     return {
-        navigate: async id => {
+        isLoaded: async () => driver.wait(until.elementLocated(elements.container)),
+        async navigate(id) {
             this.id = id;
             await driver.navigate().to(`http://front:3000/#/ua/${id}/object`);
-            await driver.wait(until.elementLocated(elements.indication));
+            await this.isLoaded();
         },
         getIndication: async () => driver.findElement(elements.indication).getText(),
         enterText: async value => driver.findElement(elements.input).sendKeys(value),

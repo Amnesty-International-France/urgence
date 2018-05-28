@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import classnames from 'classnames';
 
 import { white, black } from '../../themes/colors';
 import MessageStep from './MessageStep';
@@ -37,7 +38,7 @@ export const Message = ({ messageTemplate, action, className }) => (
 
         {messageTemplate &&
             messageTemplate.length > 0 && (
-                <div className={className}>
+                <div className={classnames('message', className)}>
                     <div>
                         {messageTemplate.map(({ value }, index) => (
                             <MessageStep key={value} content={value} darken={!!(index % 2)} />

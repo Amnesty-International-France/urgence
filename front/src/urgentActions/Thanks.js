@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import classnames from 'classnames';
 
 import { pink, white } from '../themes/colors';
 import Email from '../icons/Email';
@@ -57,7 +58,7 @@ const styles = {
 };
 
 export const Thanks = ({ className, title, text, actions }) => (
-    <div className={className}>
+    <div className={classnames('thanks', className)}>
         <div className="content">
             <Email />
             <h1>{title}</h1>
