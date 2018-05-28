@@ -39,6 +39,7 @@ const styles = {
         display: 'flex',
         flex: '1 0 0',
         padding: '21px 38px 21px 24px',
+        overflow: 'auto',
     },
 };
 
