@@ -19,8 +19,9 @@ export const styles = {
     textDecoration: 'none',
     textTransform: 'uppercase',
     textAlign: 'center',
+    transition: 'opacity 0.25s ease',
     '&.disabled': {
-        backgroundColor: 'grey',
+        opacity: 0.25,
         pointerEvents: 'none',
     },
 };
