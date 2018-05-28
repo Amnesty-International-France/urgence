@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { compose } from 'recompose';
+import classnames from 'classnames';
 
 import { withSessionData } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
@@ -12,7 +13,7 @@ export class AddressStep extends Component {
     render() {
         const { action, className, address } = this.props;
         return (
-            <div className={className}>
+            <div className={classnames('address', className)}>
                 <div>
                     <p>
                         Pour être plus efficace, vous devez être identifié personnellement dans la

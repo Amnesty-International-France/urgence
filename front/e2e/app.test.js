@@ -67,7 +67,7 @@ describe('app', () => {
 
         await actPage.displayMessage();
 
-        await driver.wait(until.urlIs(`http://front:3000/#/ua/${urgentAction.id}/message`));
+        await messagePage.isLoaded();
     });
 
     it('should display message steps', async () => {
@@ -86,6 +86,7 @@ describe('app', () => {
         );
 
         await messagePage.next();
+        await objectPage.isLoaded();
     });
 
     it('should display subject steps', async () => {
@@ -98,6 +99,7 @@ describe('app', () => {
         await objectPage.enterText('My subject');
 
         await objectPage.validate();
+        await signaturePage.isLoaded();
     });
 
     it('should display signature steps', async () => {
@@ -120,6 +122,8 @@ describe('app', () => {
         expect(text).toBe(
             "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
         );
+        await thanksPage.next();
+        await addressPage.isLoaded();
     });
 
     it('should display address step', async () => {
@@ -130,6 +134,7 @@ describe('app', () => {
         );
 
         await addressPage.validate();
+        await emailPage.isLoaded();
     });
 
     it('should display email step', async () => {
@@ -138,17 +143,18 @@ describe('app', () => {
         await emailPage.typeEmail('dupond@perpéte.com');
 
         await emailPage.validate();
+        await thanksLetterPage.isLoaded();
     });
 
     it('should display thanks-letter step', async () => {
         await thanksLetterPage.navigate(urgentAction.id);
 
         const title = await thanksLetterPage.getTitle();
-        expect(title).toBe('Merci de votre soutien !');
+        expect(title).toBe('Merci de votre aide !');
 
         const text = await thanksLetterPage.getText();
         expect(text).toBe(
-            "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
+            "Il ne vous reste plus qu'as poster la lettre qui vous à été envoyé par courriel.",
         );
     });
 });

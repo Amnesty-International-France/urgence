@@ -2,13 +2,15 @@ import { By, until } from 'selenium-webdriver';
 
 export default driver => {
     const elements = {
-        addressInput: By.className('textarea'),
+        container: By.className('address'),
+        addressInput: By.css('textarea'),
         action: By.css('.action'),
     };
     return {
-        navigate: async id => {
+        isLoaded: () => driver.wait(until.elementLocated(elements.container)),
+        async navigate(id) {
             await driver.navigate().to(`http://front:3000/#/ua/${id}/address`);
-            await driver.wait(until.elementLocated(elements.action));
+            await this.isLoaded();
         },
         typeAddress: async value => driver.findElement(elements.addressInput).sendKeys(value),
         validate: async () => driver.findElement(elements.action).click(),

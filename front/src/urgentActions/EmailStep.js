@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { compose } from 'recompose';
+import classnames from 'classnames';
 
 import { withSessionData } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
@@ -12,7 +13,7 @@ export class EmailStep extends Component {
     render() {
         const { action, className, email } = this.props;
         return (
-            <div className={className}>
+            <div className={classnames(className, 'email-step')}>
                 <div>
                     <p>Nous y sommes presque !</p>
                     <p>

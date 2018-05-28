@@ -4,6 +4,7 @@ export default driver => {
     const elements = {
         title: By.tagName('h1'),
         text: By.css('.text'),
+        action: By.css('a'),
     };
 
     return {
@@ -13,5 +14,6 @@ export default driver => {
         },
         getTitle: async () => driver.findElement(elements.title).getText(),
         getText: async () => driver.findElement(elements.text).getText(),
+        next: async () => driver.findElement(elements.action).click(),
     };
 };

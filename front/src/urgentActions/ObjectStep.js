@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { compose } from 'recompose';
+import classnames from 'classnames';
 
 import RichText from '../themes/RichText';
 import { withSessionData } from '../SessionDataContext';
@@ -47,7 +48,7 @@ export class ObjectStep extends Component {
     render() {
         const { objectIndication, className, action, object } = this.props;
         return (
-            <div className={className}>
+            <div className={classnames('object', className)}>
                 <p>
                     Parce que les messages uniques ont plus d&#39;impact, nous vous invitons à
                     personnaliser son sujet.

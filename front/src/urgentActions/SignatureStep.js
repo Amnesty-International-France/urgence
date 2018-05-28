@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { compose } from 'recompose';
+import classnames from 'classnames';
 
 import { withSessionData } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
@@ -12,7 +13,7 @@ export class SignatureStep extends Component {
     render() {
         const { action, className, signature } = this.props;
         return (
-            <div className={className}>
+            <div className={classnames('signature', className)}>
                 <div>
                     <p>
                         Parce que les actions uniques sont un message personnel, nous vous invitons
