@@ -9,7 +9,7 @@ import { getLetterMailBody } from './letterMailBody';
 
 export const urgentActionsRouter = new Router();
 
-urgentActionsRouter.post('/:id/send', async (req, res) => {
+urgentActionsRouter.post('/:id/send', async (req, res, next) => {
     const { id } = req.params;
     if (!isUUID(id)) {
         return res.status(400).send(`Invalid UUID format: ${id}`);
@@ -22,15 +22,20 @@ urgentActionsRouter.post('/:id/send', async (req, res) => {
     }
 
     const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, signature, address);
-    await sendMail(
-        email,
-        'On y est presque !',
-        getLetterMailBody({ signature, urgentAction }),
-        {
-            filename: 'letter.pdf',
-            content: pdfBuffer,
-        },
-    );
+
+    try {
+        await sendMail(
+            email,
+            'On y est presque !',
+            getLetterMailBody({ signature, urgentAction }),
+            {
+                filename: 'letter.pdf',
+                content: pdfBuffer,
+            },
+        );
+    } catch (err) {
+        return next(err);
+    }
 
     return res.end();
 });
