@@ -55,6 +55,29 @@ describe('getPdfMessageBuffer', () => {
         expect(renderedLetter).toContain('<p class="signature">John Doe</p>');
     });
 
+    it('should display emitter postal address', async () => {
+        const pdfSpy = jest.spyOn(pdf, 'create');
+
+        const urgentAction = {
+            ...defaultUrgentAction,
+            recipient: {
+                postal_address: 'Aryeh Deri\n2 Kaplan Street',
+            },
+        };
+
+        const emitterAddress = `
+            marmelab
+            4, rue Girardet
+            54000 Nancy
+        `;
+
+        await getPdfMessageBuffer(urgentAction, 'subject', 'signature', emitterAddress);
+        const renderedLetter = pdfSpy.mock.calls[0][0];
+        expect(renderedLetter).toContain('marmelab');
+        expect(renderedLetter).toContain('4, rue Girardet');
+        expect(renderedLetter).toContain('54000 Nancy');
+    });
+
     it('should display recipient postal address', async () => {
         const pdfSpy = jest.spyOn(pdf, 'create');
 

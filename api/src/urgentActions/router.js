@@ -22,17 +22,11 @@ urgentActionsRouter.post('/:id/send', async (req, res, next) => {
     }
 
     const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, signature, address);
-
     try {
-        await sendMail(
-            email,
-            'On y est presque !',
-            getLetterMailBody({ signature, urgentAction }),
-            {
-                filename: 'letter.pdf',
-                content: pdfBuffer,
-            },
-        );
+        await sendMail(email, 'On y est presque !', getLetterMailBody({ urgentAction }), {
+            filename: 'letter.pdf',
+            content: pdfBuffer,
+        });
     } catch (err) {
         return next(err);
     }

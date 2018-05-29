@@ -1,7 +1,7 @@
 import path from 'path';
 import nunjucks from 'nunjucks';
 
-export const letterMailBodyAsText = ({ urgentAction, signature }) => `Bonjour ${signature},
+export const letterMailBodyAsText = ({ urgentAction }) => `Bonjour,
 
 Voici votre lettre pour l'Action Urgente "${urgentAction.title}".
 
