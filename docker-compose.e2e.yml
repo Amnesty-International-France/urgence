@@ -59,7 +59,6 @@ services:
         command: npm run start-dev
         depends_on:
             - db-e2e
-        depends_on:
             - maildev
         environment:
             - NODE_ENV=test
