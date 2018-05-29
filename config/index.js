@@ -109,6 +109,11 @@ const config = convict({
             env: 'MAIL_EMITTER',
         },
         smtp: {
+            service: {
+                format: String,
+                default: 'smtp',
+                env: 'SMTP_SERVICE',
+            },
             host: {
                 format: String,
                 default: 'smtp.mailgun.org',

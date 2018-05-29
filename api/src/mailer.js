@@ -1,13 +1,18 @@
+import pick from 'lodash.pick';
+import omit from 'lodash.omit';
 import { createTransport } from 'nodemailer';
 
 import { mailer as mailerConfig } from '../../config';
 
-const smtpConfig = { ...mailerConfig.smtp };
-if (!mailerConfig.smtp.auth.user) {
-    delete smtpConfig.auth;
+let config = {};
+if (mailerConfig.smtp.service === 'gmail') {
+    config = pick(mailerConfig.smtp, ['service', 'auth']);
+} else {
+    // config = omit(mailerConfig.smtp, ['service']);
 }
 
-const transporter = createTransport(smtpConfig);
+console.log(config);
+const transporter = createTransport(config);
 transporter.verify(err => {
     if (err) {
         throw new Error(err);
