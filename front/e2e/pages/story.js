@@ -1,10 +1,11 @@
-import { By, until, Key } from 'selenium-webdriver';
+import { By, until } from 'selenium-webdriver';
 
 export default driver => {
     const elements = {
-        activeSlide: By.className('slick-active'),
-        activeSlideText: By.css('.slick-active .rich-text'),
-        actButton: By.css('.slick-active a'),
+        activeSlide: By.className('swiper-slide-active'),
+        activeSlideText: By.css('.swiper-slide-active .rich-text'),
+        actButton: By.css('.swiper-slide-active a'),
+        nextButton: By.css('.swiper-slide-active .next-arrow'),
     };
     return {
         navigate: async (id, step) => {
@@ -15,9 +16,13 @@ export default driver => {
         },
         getActiveText: async () => driver.findElement(elements.activeSlideText).getText(),
         nextStep: async () => {
-            driver.findElement(elements.activeSlide).sendKeys(Key.RIGHT);
+            const nextButton = await driver.findElement(elements.nextButton);
+            await driver.wait(until.elementIsVisible(nextButton));
+            await nextButton.click();
+            await driver.sleep(220); // wait for transition to end
             this.step++;
             await driver.wait(until.urlIs(`http://front:3000/#/ua/${this.id}/story/${this.step}`));
+            await driver.wait(until.elementLocated(elements.activeSlide));
         },
         act: async () => driver.findElement(elements.actButton).click(),
     };

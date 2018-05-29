@@ -20,7 +20,7 @@ describe('<StoryStep />', () => {
         content: 'Abdolfatah Soltani is a Human Rights Iranian lawyer.',
     };
 
-    it('should displayCarouselSlide with correct backgroundColor (and then color)', () => {
+    it('should display slide with correct backgroundColor (and then color)', () => {
         const wrapper = shallow(<StoryStep {...defaultProps} />);
 
         const storyStep = wrapper.find('.story-step');

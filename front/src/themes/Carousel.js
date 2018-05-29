@@ -1,37 +1,60 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import Swiper from 'swiper';
+import classnames from 'classnames';
+import 'swiper/dist/css/swiper.css';
 
-export const Carousel = ({ children, className, initialSlide, afterChange, vertical }) => (
-    <Slider
-        className={className}
-        infinite={false}
-        vertical={vertical}
-        verticalSwiping={vertical}
-        afterChange={afterChange}
-        initialSlide={initialSlide}
-    >
-        {children}
-    </Slider>
-);
+export class Carousel extends Component {
+    componentDidMount() {
+        const { initialSlide, afterChange } = this.props;
+        const swiper = new Swiper(this.container, {
+            initialSlide,
+            direction: 'horizontal',
+            on: {
+                slideChange: function() {
+                    if (!swiper) {
+                        return;
+                    }
+                    afterChange(swiper.activeIndex);
+                },
+            },
+        });
+        this.swiper = swiper;
+    }
+    initContainer = container => {
+        this.container = container;
+    };
+    nextSlide = () => {
+        this.swiper.slideNext();
+    };
+    componentWillUnmount() {
+        this.swiper.destroy();
+    }
+
+    render() {
+        const { children, className } = this.props;
+        return (
+            <div className={classnames(className, 'swiper-container')} ref={this.initContainer}>
+                <div className={'swiper-wrapper'}>{children({ nextSlide: this.nextSlide })}</div>
+            </div>
+        );
+    }
+}
 
 Carousel.propTypes = {
-    className: PropTypes.string,
-    initialSlide: PropTypes.string,
-    children: PropTypes.node.isRequired,
+    initialSlide: PropTypes.number,
+    children: PropTypes.func.isRequired,
+    className: PropTypes.string.isRequired,
     afterChange: PropTypes.func,
     vertical: PropTypes.bool,
 };
 
 export default glamorous(Carousel)({
-    height: '100%',
-    '.slick-slide > div': {
+    '& .swiper-container': {
         height: '100%',
     },
-    '.slick-slider': {
+    '& .swiper-wrapper': {
         height: '100%',
     },
 });

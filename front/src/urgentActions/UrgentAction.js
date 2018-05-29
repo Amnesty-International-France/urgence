@@ -74,7 +74,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (step === 'story') {
-        return <Story loading={loading} story={get(data, 'UrgentAction.story')} />;
+        return <Story story={get(data, 'UrgentAction.story')} />;
     }
 
     if (step === 'act') {

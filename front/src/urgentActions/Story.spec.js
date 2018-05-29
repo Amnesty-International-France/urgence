@@ -2,7 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Story } from './Story';
-import LoadingScreen from '../themes/LoadingScreen';
+import Carousel from '../themes/Carousel';
+import StorySlide from './StorySlide';
 
 const defaultStep = {
     id: '1',
@@ -24,14 +25,6 @@ describe('<Story />', () => {
         history: { push: () => null },
     };
 
-    it('should display loading screen while loading', () => {
-        const props = { ...defaultProps, loading: true };
-        const wrapper = shallow(<Story {...props} />);
-
-        const loading = wrapper.find(LoadingScreen);
-        expect(loading.length).toBe(1);
-    });
-
     it('should display a 404 message if story has no configured step', () => {
         const test = (story, shouldBeErred) => {
             const props = { ...defaultProps, story };
@@ -47,7 +40,7 @@ describe('<Story />', () => {
         test([defaultStep], false);
     });
 
-    it('display a carousel with all story steps', () => {
+    it('display a carousel with all story steps as children render props', () => {
         const props = {
             ...defaultProps,
             story: [
@@ -57,39 +50,28 @@ describe('<Story />', () => {
         };
 
         const wrapper = shallow(<Story {...props} />);
-        const storySteps = wrapper.find('glamorous(StoryStep)');
-        expect(storySteps.map(s => s.prop('content'))).toEqual(['Hello', 'World']);
+        const carousel = wrapper.find(Carousel);
+        const children = carousel.prop('children')({});
+        expect(children[0].props.step).toEqual(props.story[0]);
+        expect(children[1].props.step).toEqual(props.story[1]);
     });
 
-    it('past last property to last item in story', () => {
+    it('pass index and total props to carousel children', () => {
         const props = {
             ...defaultProps,
             story: [
-                { ...defaultStep, id: 1, content: 'Hello' },
-                { ...defaultStep, id: 2, content: 'World' },
+                { ...defaultStep, id: '1', content: 'Hello' },
+                { ...defaultStep, id: '2', content: 'World' },
             ],
         };
 
         const wrapper = shallow(<Story {...props} />);
-        const storySteps = wrapper.find('glamorous(StoryStep)');
-
-        expect(storySteps.at(0).prop('hasActButton')).toBe(false);
-        expect(storySteps.at(1).prop('hasActButton')).toBe(true);
-    });
-
-    it('should display a slide counter for each slide', () => {
-        const props = {
-            ...defaultProps,
-            story: [
-                { ...defaultStep, id: 1, content: 'Foo' },
-                { ...defaultStep, id: 2, content: 'Bar' },
-                { ...defaultStep, id: 3, content: 'Quz' },
-            ],
-        };
-
-        const wrapper = shallow(<Story {...props} />);
-        const counters = wrapper.find('.counter');
-        expect(counters.map(c => c.text())).toEqual(['1/3', '2/3', '3/3']);
+        const carousel = wrapper.find(Carousel);
+        const children = carousel.prop('children')({});
+        expect(children[0].props.index).toBe(1);
+        expect(children[0].props.total).toBe(2);
+        expect(children[1].props.index).toBe(2);
+        expect(children[1].props.total).toBe(2);
     });
 
     describe('After Switching Slide', () => {
@@ -107,8 +89,8 @@ describe('<Story />', () => {
             };
 
             const wrapper = shallow(<Story {...props} />);
-            const slider = wrapper.find('Slider');
-            const afterChange = slider.prop('afterChange');
+            const carousel = wrapper.find(Carousel);
+            const afterChange = carousel.prop('afterChange');
 
             afterChange(1);
 
