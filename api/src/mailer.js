@@ -8,10 +8,13 @@ let config = {};
 if (mailerConfig.smtp.service === 'gmail') {
     config = pick(mailerConfig.smtp, ['service', 'auth']);
 } else {
-    // config = omit(mailerConfig.smtp, ['service']);
+    config = omit(mailerConfig.smtp, ['service']);
 }
 
-console.log(config);
+if (!config.auth.user) {
+    delete config.auth;
+}
+
 const transporter = createTransport(config);
 transporter.verify(err => {
     if (err) {
