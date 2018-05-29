@@ -50,7 +50,6 @@ export default glamorous(withWhiteLogo(Act))({
         fontWeight: 'bold',
     },
     '& a': {
-        margin: '0 1em',
-        marginBottom: '53px',
+        margin: '0 1rem 2rem 1rem',
     },
 });

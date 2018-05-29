@@ -8,6 +8,9 @@ import { black, yellow } from './colors';
 
 export const styles = {
     display: 'block',
+    '@media (min-width: 1024px)': {
+        display: 'inline-block',
+    },
     backgroundColor: yellow,
     color: black,
     padding: '0 0.5em',
@@ -19,8 +22,9 @@ export const styles = {
     textDecoration: 'none',
     textTransform: 'uppercase',
     textAlign: 'center',
+    transition: 'opacity 0.25s ease',
     '&.disabled': {
-        backgroundColor: 'grey',
+        opacity: 0.25,
         pointerEvents: 'none',
     },
 };

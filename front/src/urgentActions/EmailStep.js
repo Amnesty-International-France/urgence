@@ -6,6 +6,7 @@ import classnames from 'classnames';
 
 import { withSessionData } from '../SessionDataContext';
 import { withBlackLogo } from '../themes/ThemeContext';
+import Input from '../themes/Input';
 
 export class EmailStep extends Component {
     setEmail = event => this.props.setEmail(event.target.value);
@@ -20,7 +21,8 @@ export class EmailStep extends Component {
                         Indiquez-nous votre email pour vous faire parvenir votre lettre à envoyer
                         par courrier.
                     </p>
-                    <input
+                    <Input
+                        type="email"
                         value={email}
                         onChange={this.setEmail}
                         placeholder="Votre adresse email"
@@ -46,14 +48,6 @@ export default glamorous(compose(withBlackLogo, withSessionData)(EmailStep))({
     height: '100%',
     padding: '105px 2rem 53px',
     justifyContent: 'space-between',
-    '& input': {
-        width: '100%',
-        fontFamily: 'Amnesty Trade Gothic',
-        fontSize: 17,
-        height: 40,
-        margin: '2em 0',
-        padding: '0 15px',
-    },
     '& .action': {
         marginTop: '53px',
     },
