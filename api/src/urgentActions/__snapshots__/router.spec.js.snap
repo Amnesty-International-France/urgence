@@ -2,7 +2,7 @@
 
 exports[`Urgent Actions Router POST /urgent-actions/\${id}/send should send email to correct recipient with attached PDF 1`] = `
 Object {
-  "html": "<p>Bonjour ,</p>
+  "html": "<p>Bonjour,</p>
 
 <p>Voici votre lettre pour l'Action Urgente
     <em>Commutation of William Montgomery&#39;s sentence</em>.</p>
@@ -28,19 +28,20 @@ Object {
     
 </p>
 
-<p><strong><sup>*</sup>Astuce :</strong> saviez-vous que vous pouvez acheter et imprimer vos timbres en ligne ?</p>
+<p>
+    <strong>
+        <sup>*</sup>Astuce :</strong> saviez-vous que vous pouvez acheter et imprimer vos timbres en ligne ?</p>
 
 <p>Votre action est importante. Votre lettre ajoutée avec celles de milliers de personnes peut faire changer les choses !</p>
-<p>Sur le terrain, les chercheurs d'Amnesty International suivent la situation, nous vous informerons
-de toute évolution constatée.</p>
+<p>Sur le terrain, les chercheurs d'Amnesty International suivent la situation, nous vous informerons de toute évolution constatée.</p>
 <p>Merci pour votre soutien et votre engagement !</p>
 <p>Solidairement,</p>
 <p>
-    L'équipe Réaction Rapide<br />
-    Amnesty International France
+    L'équipe Réaction Rapide
+    <br /> Amnesty International France
 </p>
 ",
-  "text": "Bonjour undefined,
+  "text": "Bonjour,
 
 Voici votre lettre pour l'Action Urgente \\"Commutation of William Montgomery's sentence\\".
 
