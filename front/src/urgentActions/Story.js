@@ -11,7 +11,6 @@ import { getLogoColorForStep } from '../urgentActions/StoryStep';
 import { StoryStepPropType, routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import { withThemeContext } from '../themes/ThemeContext';
-import LoadingScreen from '../themes/LoadingScreen';
 import Carousel from '../themes/Carousel';
 import StorySlide from './StorySlide';
 
