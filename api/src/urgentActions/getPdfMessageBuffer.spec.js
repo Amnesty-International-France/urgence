@@ -102,6 +102,19 @@ describe('getPdfMessageBuffer', () => {
         expect(renderedLetter).toContain('Le 14 mai 2018');
     });
 
+    it('should respect line breaks in message template texts', async () => {
+        const pdfSpy = jest.spyOn(pdf, 'create');
+
+        const urgentAction = {
+            ...defaultUrgentAction,
+            message_template: [{ value: 'Dear Minister,\n\nBla bla bla' }],
+        };
+
+        await getPdfMessageBuffer(urgentAction);
+        const renderedLetter = pdfSpy.mock.calls[0][0];
+        expect(renderedLetter).toContain('Dear Minister,<br />');
+    });
+
     afterEach(() => {
         if (clock) {
             clock.uninstall();

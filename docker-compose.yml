@@ -17,9 +17,6 @@ services:
         working_dir: /app/api
         depends_on:
             - db
-        deploy:
-            restart_policy:
-                condition: on-failure
 
     db:
         image: postgres:10
