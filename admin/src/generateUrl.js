@@ -9,8 +9,7 @@ export const generateAppUrl = (route, params) => {
             return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}.pdf?${stringify({
                 subject: 'Custom Subject',
                 signature: 'John Doe',
-                address: `
-                    Amnesty International
+                address: `Amnesty International
                     Le Chaumontois
                     72-76, boulevard de la Villette
                     75019 Paris
