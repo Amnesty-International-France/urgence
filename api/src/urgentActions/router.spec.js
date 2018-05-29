@@ -56,7 +56,9 @@ describe('Urgent Actions Router', () => {
 
             const urgentAction = await createUrgentAction();
 
-            await request(app).post(`/urgent-actions/${urgentAction.id}/send`).send({ email: 'thiery@marmelab.com' });
+            await request(app)
+                .post(`/urgent-actions/${urgentAction.id}/send`)
+                .send({ email: 'thiery@marmelab.com' });
 
             const [recipient, subject, body, attachment] = sendMail.mock.calls[0];
             expect(recipient).toBe('thiery@marmelab.com');
@@ -66,6 +68,20 @@ describe('Urgent Actions Router', () => {
                 filename: 'letter.pdf',
                 content: 'PDF Buffer',
             });
+        });
+
+        it('should handle email sending errors', async () => {
+            sendMail.mockImplementation(() => {
+                throw new Error('Unable to send email.');
+            });
+
+            const urgentAction = await createUrgentAction();
+
+            const response = await request(app)
+                .post(`/urgent-actions/${urgentAction.id}/send`)
+                .send({ email: 'thiery@marmelab.com' });
+
+            expect(response.status).toBe(500);
         });
     });
 
