@@ -53,16 +53,13 @@ export class Story extends Component {
     render() {
         const {
             className,
-            loading,
             story,
             match: {
                 params: { page },
             },
         } = this.props;
 
-        return loading ? (
-            <LoadingScreen />
-        ) : (
+        return (
             <div className={className}>
                 {(!story || !story.length) && (
                     <p className="error">Cette action urgente n&#39;existe plus.</p>
@@ -94,7 +91,6 @@ Story.propTypes = {
     context: PropTypes.shape({
         changeLogoColor: PropTypes.func.isRequired,
     }).isRequired,
-    loading: PropTypes.bool.isRequired,
     story: PropTypes.arrayOf(PropTypes.shape(StoryStepPropType)),
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
