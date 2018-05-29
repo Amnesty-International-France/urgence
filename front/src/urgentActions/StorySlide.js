@@ -61,7 +61,6 @@ const rightArrowColor = step => textColorForBackgroundColor(step.displayOptions.
 export class StorySlide extends Component {
     render() {
         const { className, step, index, total, nextSlide } = this.props;
-
         return (
             <div
                 className={classnames(className, {
