@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { AddressStep } from './AddressStep';
+import TextArea from '../themes/TextArea';
 
 describe('<AddressStep />', () => {
     const defaultProps = {
@@ -45,7 +46,7 @@ describe('<AddressStep />', () => {
         };
 
         const wrapper = shallow(<AddressStep {...props} />);
-        const textarea = wrapper.find('textarea');
+        const textarea = wrapper.find(TextArea);
 
         expect(textarea.prop('value')).toBe('address value');
         expect(textarea.prop('onChange')).toBe(wrapper.instance().setAddress);

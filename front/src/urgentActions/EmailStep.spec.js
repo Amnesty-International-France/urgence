@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { EmailStep } from './EmailStep';
+import Input from '../themes/Input';
 
 describe('<EmailStep />', () => {
     const defaultProps = {
@@ -45,7 +46,7 @@ describe('<EmailStep />', () => {
         };
 
         const wrapper = shallow(<EmailStep {...props} />);
-        const input = wrapper.find('input');
+        const input = wrapper.find(Input);
 
         expect(input.prop('value')).toBe('email value');
         expect(input.prop('onChange')).toBe(wrapper.instance().setEmail);
