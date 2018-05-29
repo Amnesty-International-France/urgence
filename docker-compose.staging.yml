@@ -9,6 +9,11 @@ services:
             - CORS_ALLOWED_ORIGIN="https://amnesty.marmelab.com"
             - UPLOAD_DIR=/app/uploads
             - UPLOAD_URL=https://amnesty.marmelab.com/api/static
+            - SMTP_HOST
+            - SMTP_USER
+            - SMTP_PASSWORD
+            - SMTP_PORT
+            - SMTP_SERVICE
 
     nginx:
         image: nginx

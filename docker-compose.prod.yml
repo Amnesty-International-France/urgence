@@ -8,6 +8,11 @@ services:
             - POSTGRES_PASSWORD
             - CORS_ALLOWED_ORIGIN="https://rapide.amnesty.fr"
             - UPLOAD_DIR=/app/uploads
+            - SMTP_HOST
+            - SMTP_USER
+            - SMTP_PASSWORD
+            - SMTP_PORT
+            - SMTP_SERVICE
 
     nginx:
         image: nginx
