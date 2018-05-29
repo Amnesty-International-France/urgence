@@ -8,6 +8,7 @@ services:
             - POSTGRES_PASSWORD
             - CORS_ALLOWED_ORIGIN="https://rapide.amnesty.fr"
             - UPLOAD_DIR=/app/uploads
+            - UPLOAD_URL=https://rapide.amnesty.fr/api/static
             - SMTP_HOST
             - SMTP_USER
             - SMTP_PASSWORD
