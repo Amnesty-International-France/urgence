@@ -14,6 +14,8 @@ services:
             - SMTP_PASSWORD
             - SMTP_PORT
             - SMTP_SERVICE
+        volumes:
+            - /home/ubuntu/amnesty/uploads:/app/uploads
 
     nginx:
         image: nginx
