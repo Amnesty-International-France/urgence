@@ -86,8 +86,8 @@ export class StorySlide extends Component {
                     </div>
 
                     {index < total && (
-                        <div className="next-arrow">
-                            <RightArrow onClick={nextSlide} fill={rightArrowColor(step)} />
+                        <div className="next-arrow" onClick={nextSlide}>
+                            <RightArrow fill={rightArrowColor(step)} />
                         </div>
                     )}
                 </div>
