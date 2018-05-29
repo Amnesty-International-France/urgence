@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import Swiper from 'swiper';
+import Swiper from 'swiper/dist/js/swiper';
 import classnames from 'classnames';
 import 'swiper/dist/css/swiper.css';
 
