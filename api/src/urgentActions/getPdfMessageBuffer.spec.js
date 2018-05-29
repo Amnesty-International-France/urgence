@@ -78,6 +78,16 @@ describe('getPdfMessageBuffer', () => {
         expect(renderedLetter).toContain('54000 Nancy');
     });
 
+    it('should prefix address with signature', async () => {
+        const pdfSpy = jest.spyOn(pdf, 'create');
+
+        const urgentAction = { ...defaultUrgentAction };
+        await getPdfMessageBuffer(urgentAction, 'subject', 'signature', 'address');
+
+        const renderedLetter = pdfSpy.mock.calls[0][0];
+        expect(renderedLetter).toMatchSnapshot();
+    });
+
     it('should display recipient postal address', async () => {
         const pdfSpy = jest.spyOn(pdf, 'create');
 
