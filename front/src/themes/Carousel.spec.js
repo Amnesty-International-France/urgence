@@ -25,11 +25,10 @@ describe('<Carousel />', () => {
     it('should instanciate and bind swiper to component', () => {
         const props = { ...defaultProps };
         const wrapper = shallow(<Carousel {...props} />);
-        wrapper.instance().initSlider('carouselEl');
+        wrapper.instance().componentDidMount();
         expect(Swiper).toHaveBeenCalled();
         wrapper.instance().nextSlide();
         expect(swiperInstance.slideNext).toHaveBeenCalled();
-        expect(Swiper.mock.calls[0][0]).toBe('carouselEl');
         expect(Swiper.mock.calls[0][1].initialSlide).toBe(3);
         wrapper.instance().componentWillUnmount();
         expect(swiperInstance.destroy).toHaveBeenCalled();

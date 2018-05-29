@@ -59,7 +59,7 @@ services:
         command: npm run start-dev
         depends_on:
             - db-e2e
-        links:
+        depends_on:
             - maildev
         environment:
             - NODE_ENV=test
@@ -84,7 +84,3 @@ services:
 
     maildev:
         image: djfarrelly/maildev
-        expose:
-            - "25"
-        ports:
-            - "1080:80"

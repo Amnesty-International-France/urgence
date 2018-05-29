@@ -6,9 +6,9 @@ import classnames from 'classnames';
 import 'swiper/dist/css/swiper.css';
 
 export class Carousel extends Component {
-    initSlider = slider => {
+    componentDidMount() {
         const { initialSlide, afterChange } = this.props;
-        const swiper = new Swiper(slider, {
+        const swiper = new Swiper(this.container, {
             initialSlide,
             direction: 'horizontal',
             on: {
@@ -21,6 +21,9 @@ export class Carousel extends Component {
             },
         });
         this.swiper = swiper;
+    }
+    initContainer = container => {
+        this.container = container;
     };
     nextSlide = () => {
         this.swiper.slideNext();
@@ -32,7 +35,7 @@ export class Carousel extends Component {
     render() {
         const { children, className } = this.props;
         return (
-            <div className={classnames(className, 'swiper-container')} ref={this.initSlider}>
+            <div className={classnames(className, 'swiper-container')} ref={this.initContainer}>
                 <div className={'swiper-wrapper'}>{children({ nextSlide: this.nextSlide })}</div>
             </div>
         );
