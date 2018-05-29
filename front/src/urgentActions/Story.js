@@ -1,5 +1,3 @@
-import classnames from 'classnames';
-import get from 'lodash.get';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
@@ -9,11 +7,9 @@ import { compose } from 'recompose';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import StoryStep, { getLogoColorForStep } from '../urgentActions/StoryStep';
+import { getLogoColorForStep } from '../urgentActions/StoryStep';
 import { StoryStepPropType, routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
-import { textColorForBackgroundColor, colors } from '../themes/colors';
-import { RightArrow } from '../icons';
 import { withThemeContext } from '../themes/ThemeContext';
 import LoadingScreen from '../themes/LoadingScreen';
 import Carousel from '../themes/Carousel';
