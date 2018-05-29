@@ -1,3 +1,4 @@
+import { stringify } from 'qs';
 import request from 'supertest';
 import pdf from 'html-pdf';
 
@@ -12,6 +13,54 @@ jest.mock('./getPdfMessageBuffer');
 jest.mock('../../../front/src/sessionData');
 
 describe('Urgent Actions Router', () => {
+    describe('GET /urgent-actions/${id}.pdf', () => {
+        beforeEach(() => {
+            getPdfMessageBuffer.mockImplementation(() => 'PDF');
+        });
+
+        it('should return a 400 if an invalid UUID is passed as id', async () => {
+            const response = await request(app).get('/urgent-actions/foo.pdf');
+            expect(response.status).toBe(400);
+            expect(response.text).toBe('Invalid UUID format: foo');
+        });
+
+        it('should return a 404 if no urgent action matches given UUID', async () => {
+            const response = await request(app).get(
+                '/urgent-actions/bcd97ef6-fccc-46f5-8266-d10e768b6603.pdf',
+            );
+            expect(response.status).toBe(404);
+        });
+
+        it('should return a 200 response if urgent action exists', async () => {
+            const urgentAction = await createUrgentAction();
+            const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
+            expect(response.status).toBe(200);
+        });
+
+        it('should return a PDF with correct subject and signature', async () => {
+            const urgentAction = await createUrgentAction();
+
+            const address = `
+                Amnesty International
+                Le Chaumontois
+                72-76, boulevard de la Villette
+                75019 Paris
+            `;
+
+            await request(app).get(
+                `/urgent-actions/${urgentAction.id}.pdf?${stringify({
+                    address,
+                    subject: 'Custom Subject',
+                    signature: 'Signature',
+                })}`,
+            );
+
+            expect(getPdfMessageBuffer.mock.calls[0][1]).toBe('Custom Subject');
+            expect(getPdfMessageBuffer.mock.calls[0][2]).toBe('Signature');
+            expect(getPdfMessageBuffer.mock.calls[0][3]).toBe(address);
+        });
+    });
+
     describe('POST /urgent-actions/${id}/send', () => {
         it('should return a 404 if no id is passed', async () => {
             const response = await request(app).post('/urgent-actions/send');

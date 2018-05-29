@@ -15,9 +15,7 @@ describe('<PreviewLetter />', () => {
         const wrapper = shallow(<PreviewLetter {...props} />);
 
         const button = wrapper.find(Button);
-        expect(button.prop('href')).toBe(
-            'http://localhost:4000/urgent-actions/3b6e1a3e-2547-4d77-a310-1b39d15fa03a.pdf?subject=Custom%20subject&signature=John%20Doe',
-        );
+        expect(button.prop('href')).toMatchSnapshot();
     });
 
     it('should be disabled if there is no message template currently configured', () => {
