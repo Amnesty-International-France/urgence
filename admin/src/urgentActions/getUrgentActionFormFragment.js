@@ -12,22 +12,22 @@ import RecipientInput from '../form/RecipientInput';
 import RichTextInput from '../form/RichTextInput';
 
 import ParagraphTemplateInput from './ParagraphTemplateInput';
-import MediumInput from './MediumInput';
-import DisplayOptionsInput from './DisplayOptionsInput';
+import StoryTemplateInput from './StoryTemplateInput';
 import ThanksTab from './ThanksTab';
 
-export default ({ edit }) => (
+import StoryStepFormIterator from './StoryStepFormIterator';
+
+
+export default () => (
     <TabbedForm>
         <FormTab label="General">
             <LongTextInput source="title" validate={required()} />
         </FormTab>
         <FormTab label="Story">
-            <ArrayInput source="story">
-                <SimpleFormIterator>
-                    <RichTextInput label="content" source="content" isRequired />
-                    <MediumInput source="medium" />
-                    <DisplayOptionsInput source="displayOptions" />
-                </SimpleFormIterator>
+            <ArrayInput source="story" label="">
+                <StoryStepFormIterator>
+                    <StoryTemplateInput source=""/>
+                </StoryStepFormIterator>
             </ArrayInput>
         </FormTab>
         <FormTab label="Message">
