@@ -15,4 +15,21 @@ describe('<Image />', () => {
         );
         expect(image.prop('title')).toBe('Hello!');
     });
+
+    it('should render a div with correct background image and title if src is a just uploaded File image', () => {
+        const src = {
+            rawFile: {
+                preview :"http://localhost:4000/static/foo.jpg",
+            },
+        };
+        const wrapper = shallow(
+            <Image src={src} title="Hello!" />,
+        );
+        const image = wrapper.find('div');
+
+        expect(image.prop('style').backgroundImage).toBe(
+            'url(http://localhost:4000/static/foo.jpg)',
+        );
+        expect(image.prop('title')).toBe('Hello!');
+    });
 });

@@ -23,14 +23,14 @@ const Color = ({ record }) => (
   <div style={{ background: record.name, width: "100%", height: "2rem" }} />
 );
 
-export const DisplayOptionsInput = ({ classes, source }) => (
-  <Labeled label="Display Options">
+export const DisplayOptionsInput = ({ classes, source, label }) => (
+  <Labeled label={label || "Display Options"}>
     <div className={classes.root}>
       <div className={classes.mediumPositionWrapper}>
         <SelectInput
           validate={required()}
           source={`${source}.mediumPosition`}
-          label="Medium position"
+          label="Illustration position"
           choices={positionChoices}
         />
       </div>

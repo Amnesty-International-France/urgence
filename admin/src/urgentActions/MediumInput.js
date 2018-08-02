@@ -11,14 +11,30 @@ import get from 'lodash.get';
 import { ImagePreview } from '../form/ImagePreview';
 
 const styles = {
-    root: {
-        display: 'flex',
-    },
-    titleWrapper: {
-        flex: '1 0 0',
-    },
     imageWrapper: {
-        flex: '1 0 0',
+        position: 'relative',
+        '& > div': {
+            margin: 0,
+            '& > label': {
+                display: 'none',
+            },
+        },
+        '& .previews' : {
+            position: 'absolute',
+            top: 74,
+            textAlign: 'center',
+            left: 15,
+            right: 15,
+            '& > div': {
+                float: 'none',
+            },
+            '& img': {
+                maxHeight: '9rem',
+            },
+        }
+    },
+    dropZone: {
+        height: 200,
     },
 };
 
@@ -34,17 +50,24 @@ export const validateMedium = (value, record, _, key) => {
     return 'You need to specify both src and title for medium or none of them';
 };
 
-export const MediumInput = ({ classes, source, record }) => (
-    <Labeled label="medium">
+export const MediumInput = ({ label, classes, source, record }) => (
+    <Labeled label={label || "Medium"}>
         <div className={classes.root}>
-                <div className={classes.titleWrapper}>
-                    <TextInput validate={validateMedium} source={`${source}.title`} label="Medium title" /><br />
-                </div>
-                <div className={classes.imageWrapper}>
-                    <ImageInput validate={validateMedium} record={record} source={`${source}.src`} label="File">
-                        <ImagePreview />
-                    </ImageInput>
-                </div>
+            <div className={classes.imageWrapper}>
+                <ImageInput
+                    source={`${source}.src`} 
+                    record={record}
+                    label=""
+                    validate={validateMedium}  
+                    classes={{
+                        dropZone: classes.dropZone,
+                    }}>
+                    <ImagePreview/>
+                </ImageInput>
+            </div>
+            <div className={classes.titleWrapper}>
+                <TextInput validate={validateMedium} fullWidth source={`${source}.title`} label="Alternate text" /><br/>
+            </div>
         </div>
     </Labeled>
 );
