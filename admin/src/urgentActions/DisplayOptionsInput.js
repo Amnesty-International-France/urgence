@@ -2,9 +2,9 @@ import React from "react";
 import { compose } from "recompose";
 import PropTypes from "prop-types";
 import { addField, SelectInput, Labeled, required } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
 
 import { positionChoices, colorChoices } from "./choices";
-import { withStyles } from "material-ui";
 
 const styles = {
   root: {

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 
 import { TextInput, LongTextInput, required } from 'react-admin';
-import { CardContent, Card, CardHeader } from 'material-ui';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
 
 const styles = {
     root: {

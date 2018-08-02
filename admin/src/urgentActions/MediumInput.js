@@ -5,7 +5,7 @@ import {
     ImageInput,
     Labeled,
 } from 'react-admin';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import get from 'lodash.get';
 
 import { ImagePreview } from '../form/ImagePreview';

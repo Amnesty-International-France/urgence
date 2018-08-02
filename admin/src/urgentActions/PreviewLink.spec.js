@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { PreviewLink } from './PreviewLink';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 
 describe('<PreviewLink />', () => {
     const defaultProps = {

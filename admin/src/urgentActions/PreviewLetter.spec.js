@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { PreviewLetter } from './PreviewLetter';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
+
 
 describe('<PreviewLetter />', () => {
     const defaultProps = {
