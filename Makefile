@@ -12,7 +12,7 @@ DOCKER_COMPOSE_DEV_NGINX = docker-compose -p reaction-rapide-dev-nginx -f docker
 install: install-admin
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api yarn install
 	$(DOCKER_COMPOSE) run --rm --no-deps api yarn install
-	$(DOCKER_COMPOSE) run --rm --no-deps front yarn install --verbose
+	$(DOCKER_COMPOSE) run --rm --no-deps front yarn install
 
 install-staging:
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api yarn install --production
