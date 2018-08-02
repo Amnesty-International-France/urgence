@@ -15,12 +15,12 @@ services:
             - REACT_APP_FRONT_BASE_URL=http://localhost:3000
             - REACT_APP_API_URL=http://localhost:4000
             - API_PREFIX_URL=
-        command: npm run test
+        command: yarn run test
         depends_on:
             - db
 
     api:
-        command: "npm run start-dev"
+        command: "yarn run start-dev"
         environment:
             NODE_ENV: test
             POSTGRES_DATABASE: reaction-rapide-test

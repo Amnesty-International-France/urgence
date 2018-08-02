@@ -10,13 +10,13 @@ DOCKER_COMPOSE_PROD = docker-compose -p reaction-rapide-prod -f docker-compose.y
 DOCKER_COMPOSE_DEV_NGINX = docker-compose -p reaction-rapide-dev-nginx -f docker-compose.yml -f docker-compose.dev-nginx.yml
 
 install: install-admin
-	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api npm install
-	$(DOCKER_COMPOSE) run --rm --no-deps api npm install
-	$(DOCKER_COMPOSE) run --rm --no-deps front npm install
+	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api yarn install
+	$(DOCKER_COMPOSE) run --rm --no-deps api yarn install
+	$(DOCKER_COMPOSE) run --rm --no-deps front yarn install --verbose
 
 install-staging:
-	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api npm install --production
-	$(DOCKER_COMPOSE) run --rm --no-deps api npm install --production
+	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api yarn install --production
+	$(DOCKER_COMPOSE) run --rm --no-deps api yarn install --production
 
 start:
 	$(DOCKER_COMPOSE) up --force-recreate -d
@@ -54,10 +54,10 @@ update-icons-components:
 test: migration-test test-unit test-e2e
 
 test-unit:
-	$(DOCKER_COMPOSE_TEST) run --rm test npm run test
+	$(DOCKER_COMPOSE_TEST) run --rm test yarn run test
 
 test-watch:
-	$(DOCKER_COMPOSE_TEST) run --rm test npm run test-watch
+	$(DOCKER_COMPOSE_TEST) run --rm test yarn run test-watch
 
 test-stop-dockers:
 	$(DOCKER_COMPOSE_TEST) down
@@ -135,7 +135,7 @@ deploy-prod:
 	NODE_ENV=production npx shipit production deploy
 
 install-admin:
-	$(DOCKER_COMPOSE) run --rm --no-deps admin npm install
+	$(DOCKER_COMPOSE) run --rm --no-deps admin yarn install
 
 build-storybook:
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps storybook
@@ -163,7 +163,7 @@ else
 endif
 
 build-api:
-	$(DOCKER_COMPOSE) run --rm --no-deps api npm run build
+	$(DOCKER_COMPOSE) run --rm --no-deps api yarn run build
 
 build-dev: build-front-dev build-admin-dev
 
