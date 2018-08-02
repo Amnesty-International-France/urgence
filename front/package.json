@@ -13,7 +13,7 @@
         "android": "react-native-scripts android",
         "ios": "react-native-scripts ios",
         "test-native": "node node_modules/jest/bin/jest.js --watch",
-        "test": "npm run test-web && npm run test-native",
+        "test": "yarn run test-web && yarn run test-native",
         "test-e2e": "jest ./e2e",
         "storybook": "start-storybook -p 9009 -s public",
         "build-storybook": "build-storybook -s public"

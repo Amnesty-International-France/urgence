@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import Email from '@material-ui/icons/Email';
 import { generateAppUrl } from '../generateUrl';
 

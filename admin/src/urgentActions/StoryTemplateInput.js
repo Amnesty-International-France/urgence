@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 import { addField, FormDataConsumer } from 'react-admin';
 import injectSheet from 'react-jss';
-import { CardContent, Card, Avatar } from 'material-ui';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Avatar from '@material-ui/core/Avatar';
 
 import MediumInput from './MediumInput';
 import DisplayOptionsInput from './DisplayOptionsInput';

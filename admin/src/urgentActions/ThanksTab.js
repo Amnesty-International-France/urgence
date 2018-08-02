@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 
 import ThankInput from './ThankInput';
 import { pink } from '../../../front/src/themes/colors';
-import { Avatar } from 'material-ui';
+import Avatar from '@material-ui/core/Avatar';
 import Email from '@material-ui/icons/Email';
 
 const styles = {

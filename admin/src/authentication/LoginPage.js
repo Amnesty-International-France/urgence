@@ -1,6 +1,6 @@
 import React from 'react';
 import { Login, LoginForm } from 'react-admin';
-import { withStyles } from 'material-ui';
+import { withStyles } from '@material-ui/core/styles';
 
 const CustomLoginForm = withStyles({
     button: { background: '#F15922' },
