@@ -1,0 +1,27 @@
+import {
+    get,
+    STORY,
+    CALL_TO_ACTION,
+    MESSAGE,
+    OBJECT,
+    FULLNAME,
+} from './screenIndex';
+
+describe('screenIndex.get', () => {
+    it('should return the story step index if it\'s the STORY', () => {
+        const index = get(STORY, null, 2);
+        expect(index).toEqual(2);
+    });
+
+    it('should return the amount of story steps + the step index if it\'s other steps', () => {
+        const index = get(CALL_TO_ACTION, { story: [1, 2 ]});
+        expect(index).toEqual(3);
+        const index = get(MESSAGE, { story: [1, 2 ]});
+        expect(index).toEqual(4);
+        const index = get(OBJECT, { story: [1, 2 ]});
+        expect(index).toEqual(5);
+        const index = get(FULLNAME, { story: [1, 2 ]});
+        expect(index).toEqual(6);
+    });
+
+});
