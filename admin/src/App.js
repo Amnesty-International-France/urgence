@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Admin, Resource } from 'react-admin';
-import JssProvider from 'react-jss/lib/JssProvider';
 
 import urgentAction from './urgentActions';
 import dataProviderFactory from './dataProvider';
 import { authProvider } from './authentication/authProvider';
-import { generateClassName } from './generateClassName';
 
 import { theme } from './theme';
 import { Title } from './Title';
@@ -27,17 +25,15 @@ class App extends Component {
         }
 
         return (
-            <JssProvider generateClassName={generateClassName}>
-                <Admin
-                    locale="en"
-                    theme={theme}
-                    title={<Title />}
-                    authProvider={authProvider}
-                    dataProvider={dataProvider}
-                >
-                    <Resource {...urgentAction} />
-                </Admin>
-            </JssProvider>
+            <Admin
+                locale="en"
+                theme={theme}
+                title={<Title />}
+                authProvider={authProvider}
+                dataProvider={dataProvider}
+            >
+                <Resource {...urgentAction} />
+            </Admin>
         );
     }
 }

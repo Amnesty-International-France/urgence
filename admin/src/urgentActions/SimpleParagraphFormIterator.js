@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/RemoveCircleOutline';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
-import { translate } from 'ra-core';
 import classNames from 'classnames';
 
 import FormInput from 'ra-ui-materialui/lib/form/FormInput';
@@ -22,6 +21,7 @@ const styles = theme => ({
     },
     line: {
         display: 'flex',
+        alignItems: 'baseline',
         listStyleType: 'none',
         borderBottom: `solid 1px ${theme.palette.divider}`,
         [theme.breakpoints.down('xs')]: { display: 'block' },
@@ -58,14 +58,23 @@ const styles = theme => ({
     },
 });
 
-export class StoryStepFormIterator extends Component {
+export class SimpleFormIterator extends Component {
     constructor(props) {
         super(props);
         // we need a unique id for each field for a proper enter/exit animation
         // but redux-form doesn't provide one (cf https://github.com/erikras/redux-form/issues/2735)
         // so we keep an internal map between the field position and an autoincrement id
-        this.nextId = 0;
-        this.ids = props.fields ? props.fields.map(() => this.nextId++) : [];
+        this.nextId = props.fields.length
+            ? props.fields.length
+            : props.defaultValue
+                ? props.defaultValue.length
+                : 0;
+
+        // We check whether we have a defaultValue (which must be an array) before checking
+        // the fields prop which will always be empty for a new record.
+        // Without it, our ids wouldn't match the default value and we would get key warnings
+        // on the CssTransition element inside our render method
+        this.ids = this.nextId > 0 ? Array.from(Array(this.nextId).keys()) : [];
     }
 
     removeField = index => () => {
@@ -90,7 +99,6 @@ export class StoryStepFormIterator extends Component {
             record,
             resource,
             source,
-            translate,
             disableAdd,
             disableRemove,
         } = this.props;
@@ -121,8 +129,6 @@ export class StoryStepFormIterator extends Component {
                                                     input.props.source,
                                             })}
                                             record={records && records[index]}
-                                            index={index}
-                                            total={records && records.length}
                                             resource={resource}
                                         />
                                     ))}
@@ -140,7 +146,6 @@ export class StoryStepFormIterator extends Component {
                                             <CloseIcon
                                                 className={classes.leftIcon}
                                             />
-                                            {translate('ra.action.remove')}
                                         </Button>
                                     </span>
                                 )}
@@ -160,7 +165,7 @@ export class StoryStepFormIterator extends Component {
                                 onClick={this.addField}
                             >
                                 <AddIcon className={classes.leftIcon} />
-                                Add a new story step
+                                Add a paragraph
                             </Button>
                         </span>
                     </li>
@@ -170,12 +175,13 @@ export class StoryStepFormIterator extends Component {
     }
 }
 
-StoryStepFormIterator.defaultProps = {
+SimpleFormIterator.defaultProps = {
     disableAdd: false,
     disableRemove: false,
 };
 
-StoryStepFormIterator.propTypes = {
+SimpleFormIterator.propTypes = {
+    defaultValue: PropTypes.any,
     basePath: PropTypes.string,
     children: PropTypes.node,
     classes: PropTypes.object,
@@ -185,12 +191,10 @@ StoryStepFormIterator.propTypes = {
     record: PropTypes.object,
     source: PropTypes.string,
     resource: PropTypes.string,
-    translate: PropTypes.func,
     disableAdd: PropTypes.bool,
     disableRemove: PropTypes.bool,
 };
 
 export default compose(
-    translate,
     withStyles(styles)
-)(StoryStepFormIterator);
+)(SimpleFormIterator);

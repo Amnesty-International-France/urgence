@@ -2,46 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { addField, FormDataConsumer } from 'react-admin';
-import injectSheet from 'react-jss';
+import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 
+import { root, preview } from './styles';
 import MediumInput from './MediumInput';
+import FrontPreview, { noop } from './FrontPreview';
 import DisplayOptionsInput from './DisplayOptionsInput';
 import RichTextInput from '../form/RichTextInput';
+import { get as getScreenIndex, STORY} from './screenIndex';
 
-import { pink } from '../../../front/src/themes/colors';
 import StorySlide from '../../../front/src/urgentActions/StorySlide';
-import { Router } from '../../../front/src/gateway/ReactRouter';
 
 const styles = {
-    root: {
-        margin: '1rem 1rem 2rem',
-        maxWidth: 500,
-    },
-    avatar: {
-        color: '#fff',
-        backgroundColor: pink,
-        float: 'left',
-    },
-    formContainer:{
-        marginLeft: 60,
-        '& > div': {
-            width: '100%',
-            margin: 0,
-            marginBottom: 25,
-            '& > label': {
-                fontSize: '1.5em',
-                fontWeight: 'bold',
-            },
-        },
-    },
+    ...root,
     preview: {
-        height: 600,
-        width: 375,
-        margin: 16,
-        fontFamily: "'Amnesty Trade Gothic', 'Arial', sans-serif",
+        ...preview,
         // the rules below override desktop media queries so that the preview is forced to appear like on mobile
         '& .story-step > div': {
             padding: '0 !important',
@@ -64,13 +42,11 @@ const defaultFormData = {
     medium: null,
 };
 
-const noop = () => { };
-
 export const StoryTemplateInput = ({ classes, source, index }) => (
-    <div style={{display:'flex'}}>
-        <Card className={classes.root}>
+    <div className={classes.root}>
+        <Avatar className={classes.avatar}>{getScreenIndex(STORY, null, index + 1)}</Avatar>
+        <Card className={classes.card}>
             <CardContent className={classes.content}>
-                <Avatar className={classes.avatar}>{index + 1}</Avatar>
                 <div className={classes.formContainer}>
                     <RichTextInput
                         source={`${source}content`}
@@ -89,25 +65,28 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
             </CardContent>
         </Card>
         <FormDataConsumer>
-            {({ formData }) =>
-                <div className={`${classes.preview} preview`}>
-                    {/* Router is necessary cause ActButton needs match params passed in its props */}
-                    <Router>
-                        <StorySlide
-                            step={{...defaultFormData, ...formData.story[index]}}
-                            index={index + 1}
-                            total={formData.story.length}
-                            nextSlide={noop}
-                        />
-                    </Router>
-                </div>
+            {({ formData }) => 
+                <FrontPreview className={classes.preview}>
+                    <StorySlide
+                        step={{...defaultFormData, ...formData.story[index]}}
+                        index={index + 1}
+                        total={formData.story.length}
+                        nextSlide={noop}
+                    />
+                </FrontPreview>
             }
         </FormDataConsumer>
     </div>
 );
 
 StoryTemplateInput.propTypes = {
-    source: PropTypes.string.isRequired,
+    classes: PropTypes.object,
+    source: PropTypes.string,
+    index: PropTypes.number.isRequired,
 };
 
-export default addField(injectSheet(styles)(StoryTemplateInput));
+StoryTemplateInput.defaultProps = {
+    source: "",
+};
+
+export default addField(withStyles(styles)(StoryTemplateInput));

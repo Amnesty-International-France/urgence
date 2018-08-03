@@ -6,7 +6,7 @@ import RichText from '../../themes/RichText';
 
 export const MessageStep = ({ className, content }) => (
     <div className={className}>
-        <RichText html={content.trim().replace(/\n/g, '<br>')} />
+        <RichText html={(content || "").trim().replace(/\n/g, '<br>')} />
     </div>
 );
 

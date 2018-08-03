@@ -11,7 +11,8 @@ const styles = {
     display: "flex"
   },
   mediumPositionWrapper: {
-    flex: "1 0 0",
+    display: 'flex',
+    alignItems: 'flex-end',
     marginRight: "2rem"
   },
   colorWrapper: {
@@ -20,7 +21,7 @@ const styles = {
 };
 
 const Color = ({ record }) => (
-  <div style={{ background: record.name, width: "100%", height: "2rem" }} />
+  <div style={{ background: record.name, width: "100%", height: "19px" }} />
 );
 
 export const DisplayOptionsInput = ({ classes, source, label }) => (

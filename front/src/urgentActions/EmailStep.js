@@ -38,7 +38,7 @@ EmailStep.propTypes = {
     email: PropTypes.string.isRequired,
     setEmail: PropTypes.func.isRequired,
     className: PropTypes.string,
-    action: PropTypes.node,
+    action: PropTypes.func,
 };
 
 export default glamorous(compose(withBlackLogo, withSessionData)(EmailStep))({
