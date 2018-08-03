@@ -3,7 +3,7 @@ version: '3'
 services:
     admin_staging:
         image: node:9
-        command: [sh, -c, "yarn install --save query-string@5.1.1 && cd node_modules/ra-core && yarn install --save query-string@5.1.1 && cd /app/admin && yarn run build"]
+        command: [sh, -c, "yarn add query-string@5.1.1 && cd node_modules/ra-core && yarn add query-string@5.1.1 && cd /app/admin && yarn run build"]
         volumes:
             - .:/app
         environment:
@@ -16,7 +16,7 @@ services:
 
     admin_prod:
         image: node:9
-        command: [sh, -c, "yarn install --save query-string@5.1.1 && cd node_modules/ra-core && yarn install --save query-string@5.1.1 && cd /app/admin && yarn run build"]
+        command: [sh, -c, "yarn add query-string@5.1.1 && cd node_modules/ra-core && yarn add query-string@5.1.1 && cd /app/admin && yarn run build"]
         volumes:
             - .:/app
         environment:
@@ -30,7 +30,7 @@ services:
 
     admin_dev:
         image: node:9
-        command: [sh, -c, "yarn install --save query-string@5.1.1 && cd node_modules/ra-core && yarn install --save query-string@5.1.1 && cd /app/admin && yarn run build"]
+        command: [sh, -c, "yarn add query-string@5.1.1 && cd node_modules/ra-core && yarn add query-string@5.1.1 && cd /app/admin && yarn run build"]
         volumes:
             - .:/app
         environment:
