@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { addField, LongTextInput } from 'react-admin';
 
 export const ParagraphTemplateInput = ({ source }) => (
-    <LongTextInput source={`${source}value`} label={""} />
+    <LongTextInput source={`${source}value`} label="" />
 );
 
 ParagraphTemplateInput.propTypes = {

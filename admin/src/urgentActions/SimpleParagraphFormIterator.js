@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/RemoveCircleOutline';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
-import { translate } from 'ra-core';
 import classNames from 'classnames';
 
 import FormInput from 'ra-ui-materialui/lib/form/FormInput';
@@ -100,7 +99,6 @@ export class SimpleFormIterator extends Component {
             record,
             resource,
             source,
-            translate,
             disableAdd,
             disableRemove,
         } = this.props;
@@ -193,12 +191,10 @@ SimpleFormIterator.propTypes = {
     record: PropTypes.object,
     source: PropTypes.string,
     resource: PropTypes.string,
-    translate: PropTypes.func,
     disableAdd: PropTypes.bool,
     disableRemove: PropTypes.bool,
 };
 
 export default compose(
-    translate,
     withStyles(styles)
 )(SimpleFormIterator);
