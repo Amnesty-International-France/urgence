@@ -65,7 +65,7 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
             </CardContent>
         </Card>
         <FormDataConsumer>
-            {({ formData }) => console.log(formData) ||
+            {({ formData }) => 
                 <FrontPreview className={classes.preview}>
                     <StorySlide
                         step={{...defaultFormData, ...formData.story[index]}}

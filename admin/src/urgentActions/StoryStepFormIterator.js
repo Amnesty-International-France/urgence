@@ -112,7 +112,7 @@ export class StoryStepFormIterator extends Component {
                                             basePath={
                                                 input.props.basePath || basePath
                                             }
-                                            input={console.log('member',input) || cloneElement(input, {
+                                            input={cloneElement(input, {
                                                 source: `${member}.${
                                                     input.props.source
                                                 }`,
