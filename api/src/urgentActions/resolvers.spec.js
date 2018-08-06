@@ -20,7 +20,9 @@ describe('Urgent Actions Resolvers', () => {
                 const params = { id: '16fe5e43-df12-4104-b1fe-77f8b3653802' };
                 await UrgentActionsResolver.Query.UrgentAction(null, params);
 
-                expect(getUrgentAction).toHaveBeenCalledWith('16fe5e43-df12-4104-b1fe-77f8b3653802');
+                expect(getUrgentAction).toHaveBeenCalledWith(
+                    '16fe5e43-df12-4104-b1fe-77f8b3653802',
+                );
             });
         });
 
@@ -46,7 +48,23 @@ describe('Urgent Actions Resolvers', () => {
                 uploadImageFromStory.mockImplementation(() => 'uploadedStory');
                 await UrgentActionsResolver.Mutation.createUrgentAction(null, {
                     title: 'test',
-                    story: [{
+                    story: [
+                        {
+                            content: 'this is a test',
+                            displayOptions: {
+                                position: 'top',
+                                backgroundColor: 'FFFF00',
+                            },
+                            medium: {
+                                src: 'picture.gif',
+                                title: 'a picture',
+                            },
+                        },
+                    ],
+                });
+
+                expect(uploadImageFromStory).toHaveBeenCalledWith([
+                    {
                         content: 'this is a test',
                         displayOptions: {
                             position: 'top',
@@ -55,21 +73,9 @@ describe('Urgent Actions Resolvers', () => {
                         medium: {
                             src: 'picture.gif',
                             title: 'a picture',
-                        }
-                    }]
-                });
-
-                expect(uploadImageFromStory).toHaveBeenCalledWith([{
-                    content: 'this is a test',
-                    displayOptions: {
-                        position: 'top',
-                        backgroundColor: 'FFFF00',
+                        },
                     },
-                    medium: {
-                        src: 'picture.gif',
-                        title: 'a picture',
-                    }
-                }]);
+                ]);
 
                 expect(createUrgentAction).toHaveBeenCalledWith({
                     title: 'test',
@@ -84,7 +90,28 @@ describe('Urgent Actions Resolvers', () => {
                 await UrgentActionsResolver.Mutation.updateUrgentAction(null, {
                     id: 'id',
                     title: 'test',
-                    story: [{
+                    story: [
+                        {
+                            content: 'this is a test',
+                            displayOptions: {
+                                position: 'top',
+                                backgroundColor: 'FFFF00',
+                            },
+                            medium: {
+                                src: 'picture.gif',
+                                title: 'a picture',
+                            },
+                        },
+                    ],
+                    call_to_action: 'call_to_action',
+                    email_thank: 'email_thank',
+                    letter_thank: 'letter_thank',
+                    end_of_story_link: 'end_of_story_link',
+                    message_template: 'message_template',
+                });
+
+                expect(uploadImageFromStory).toHaveBeenCalledWith([
+                    {
                         content: 'this is a test',
                         displayOptions: {
                             position: 'top',
@@ -93,25 +120,19 @@ describe('Urgent Actions Resolvers', () => {
                         medium: {
                             src: 'picture.gif',
                             title: 'a picture',
-                        }
-                    }]
-                });
-
-                expect(uploadImageFromStory).toHaveBeenCalledWith([{
-                    content: 'this is a test',
-                    displayOptions: {
-                        position: 'top',
-                        backgroundColor: 'FFFF00',
+                        },
                     },
-                    medium: {
-                        src: 'picture.gif',
-                        title: 'a picture',
-                    }
-                }]);
+                ]);
 
                 expect(updateUrgentAction).toHaveBeenCalledWith('id', {
+                    id: 'id',
                     title: 'test',
                     story: '"uploadedStory"',
+                    call_to_action: '"call_to_action"',
+                    email_thank: '"email_thank"',
+                    letter_thank: '"letter_thank"',
+                    end_of_story_link: '"end_of_story_link"',
+                    message_template: '"message_template"',
                 });
             });
         });
