@@ -21,7 +21,7 @@ export const UrgentActionsResolver = {
     Mutation: {
         createUrgentAction: async (
             _,
-            { story, message_template, email_thank, letter_thank, ...data },
+            { story, call_to_action, message_template, email_thank, letter_thank, ...data },
         ) => {
             const uploadedStory = await uploadImageFromStory(story);
 
@@ -31,11 +31,12 @@ export const UrgentActionsResolver = {
                 message_template: JSON.stringify(message_template),
                 email_thank: JSON.stringify(email_thank),
                 letter_thank: JSON.stringify(letter_thank),
+                call_to_action: JSON.stringify(call_to_action),
             });
         },
         updateUrgentAction: async (
             _,
-            { id, story, message_template, email_thank, letter_thank, ...data },
+            { id, story, call_to_action, message_template, email_thank, letter_thank, ...data },
         ) => {
             const uploadedStory = await uploadImageFromStory(story);
 
@@ -45,6 +46,7 @@ export const UrgentActionsResolver = {
                 message_template: JSON.stringify(message_template),
                 email_thank: JSON.stringify(email_thank),
                 letter_thank: JSON.stringify(letter_thank),
+                call_to_action: JSON.stringify(call_to_action),
             });
         },
         deleteUrgentAction: (_, id) => removeUrgentAction(id),

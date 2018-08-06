@@ -67,6 +67,16 @@ export const urgentActionsTypeDefs = gql`
         color: Color
     }
 
+    type CallToAction {
+        title: String
+        message: String
+    }
+
+    input CallToActionInput {
+        title: String
+        message: String
+    }
+
     type StoryStep {
         content: String!
         medium: Medium
@@ -93,7 +103,7 @@ export const urgentActionsTypeDefs = gql`
         id: ID!
         title: String!
         story: [StoryStep]!
-        call_to_action: String!
+        call_to_action: CallToAction!
         object_indication: String!
         message_template: [ParagraphTemplate]!
         creation_date: DATE!
@@ -123,7 +133,7 @@ export const urgentActionsTypeDefs = gql`
         createUrgentAction(
             title: String!
             story: [StoryStepInput]!
-            call_to_action: String!
+            call_to_action: CallToActionInput!
             object_indication: String!
             message_template: [MessageTemplateInput]!
             recipient: RecipientInput!
@@ -134,7 +144,7 @@ export const urgentActionsTypeDefs = gql`
             id: ID!
             title: String!
             story: [StoryStepInput]!
-            call_to_action: String!
+            call_to_action: CallToActionInput!
             object_indication: String!
             message_template: [MessageTemplateInput]!
             recipient: RecipientInput!

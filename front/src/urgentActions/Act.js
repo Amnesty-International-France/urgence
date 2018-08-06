@@ -1,3 +1,4 @@
+import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
@@ -9,15 +10,18 @@ import { withWhiteLogo } from '../themes/ThemeContext';
 export const Act = ({ callToAction, className, action }) => (
     <div className={className}>
         <div>
-            <h1>Génial !</h1>
-            <RichText html={callToAction} />
+            <h1>{get(callToAction, 'title')}</h1>
+            <RichText html={get(callToAction, 'message')} />
         </div>
         {action}
     </div>
 );
 
 Act.propTypes = {
-    callToAction: PropTypes.string.isRequired,
+    callToAction: {
+        title: PropTypes.string.isRequired,
+        message: PropTypes.string.isRequired,
+    },
     className: PropTypes.string.isRequired,
 };
 

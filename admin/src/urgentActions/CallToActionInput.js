@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer } from 'react-admin';
+import { addField, FormDataConsumer, TextInput } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,7 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { root, preview } from './styles';
 import FrontPreview, { noop } from './FrontPreview';
 import RichTextInput from '../form/RichTextInput';
-import { get as getScreenIndex, CALL_TO_ACTION} from './screenIndex';
+import { get as getScreenIndex, CALL_TO_ACTION } from './screenIndex';
 
 import Act from '../../../front/src/urgentActions/Act';
 import Link from '../../../front/src/themes/Link';
@@ -24,22 +24,25 @@ const styles = {
             padding: '0 !important',
             '& a': {
                 alignSelf: 'auto',
-            }
-        }
-    }
+            },
+        },
+    },
 };
 
 export const CallToActionInput = ({ classes, source }) => (
     <div className={classes.root}>
         <FormDataConsumer>
-            {({ formData }) =>
+            {({ formData }) => (
                 <Fragment>
-                    <Avatar className={classes.avatar}>{getScreenIndex(CALL_TO_ACTION, formData)}</Avatar>
+                    <Avatar className={classes.avatar}>
+                        {getScreenIndex(CALL_TO_ACTION, formData)}
+                    </Avatar>
                     <Card className={classes.card}>
                         <CardContent className={classes.content}>
                             <div className={classes.formContainer}>
+                                <TextInput source={`${source}.title`} label="Title" isRequired />
                                 <RichTextInput
-                                    source={`${source}call_to_action`}
+                                    source={`${source}.message`}
                                     label="Text"
                                     isRequired
                                 />
@@ -49,11 +52,11 @@ export const CallToActionInput = ({ classes, source }) => (
                     <FrontPreview className={classes.preview}>
                         <Act
                             callToAction={formData.call_to_action}
-                            action={<Link to={"#"} label="Voir le message" onClick={noop} />}
+                            action={<Link to={'#'} label="Voir le message" onClick={noop} />}
                         />
                     </FrontPreview>
                 </Fragment>
-            }
+            )}
         </FormDataConsumer>
     </div>
 );
@@ -64,7 +67,7 @@ CallToActionInput.propTypes = {
 };
 
 CallToActionInput.defaultProps = {
-    source: "",
+    source: '',
 };
 
 export default addField(withStyles(styles)(CallToActionInput));

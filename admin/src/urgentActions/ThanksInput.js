@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 import { root, preview } from './styles';
 import { merge } from './defaultFormData';
-import { get as getScreenIndex, CONTINUE, THANKS} from './screenIndex';
+import { get as getScreenIndex, CONTINUE, THANKS } from './screenIndex';
 import FrontPreview from './FrontPreview';
 
 import Thanks from '../../../front/src/urgentActions/Thanks';
@@ -24,9 +24,9 @@ const styles = {
             padding: '0 !important',
             '& a': {
                 alignSelf: 'auto',
-            }
-        }
-    }
+            },
+        },
+    },
 };
 
 const validateTitle = required();
@@ -34,9 +34,11 @@ const validateTitle = required();
 export const StoryTemplateInput = ({ classes, source, final }) => (
     <div className={classes.root}>
         <FormDataConsumer>
-            {({ formData }) =>
+            {({ formData }) => (
                 <Fragment>
-                    <Avatar className={classes.avatar}>{getScreenIndex(final ? THANKS : CONTINUE, formData)}</Avatar>
+                    <Avatar className={classes.avatar}>
+                        {getScreenIndex(final ? THANKS : CONTINUE, formData)}
+                    </Avatar>
                     <Card className={classes.card}>
                         <CardContent className={classes.content}>
                             <div className={classes.formContainer}>
@@ -45,6 +47,7 @@ export const StoryTemplateInput = ({ classes, source, final }) => (
                                         source={`${source}.title`}
                                         label="Title"
                                         validate={validateTitle}
+                                        defaultValue="Merci de votre soutien !"
                                     />
                                     <LongTextInput
                                         source={`${source}.text`}
@@ -59,11 +62,11 @@ export const StoryTemplateInput = ({ classes, source, final }) => (
                         <Thanks
                             title={merge(formData)[source].title}
                             text={merge(formData)[source].text}
-                            actions={() => final ? null : <Link to={"#"} label="Continuer" />}
+                            actions={() => (final ? null : <Link to={'#'} label="Continuer" />)}
                         />
                     </FrontPreview>
                 </Fragment>
-            }
+            )}
         </FormDataConsumer>
     </div>
 );
@@ -75,7 +78,7 @@ StoryTemplateInput.propTypes = {
 };
 
 StoryTemplateInput.defaultProps = {
-    source: "",
+    source: '',
     final: false,
 };
 
