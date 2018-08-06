@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { addField, FormDataConsumer } from 'react-admin';
@@ -6,15 +6,17 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
+import LinkIcon from '@material-ui/icons/Link';
 
 import { root, preview } from './styles';
 import MediumInput from './MediumInput';
 import FrontPreview, { noop } from './FrontPreview';
 import DisplayOptionsInput from './DisplayOptionsInput';
 import RichTextInput from '../form/RichTextInput';
-import { get as getScreenIndex, STORY} from './screenIndex';
+import { get as getScreenIndex, STORY } from './screenIndex';
 
 import StorySlide from '../../../front/src/urgentActions/StorySlide';
+import LinkInput from './LinkInput';
 
 const styles = {
     ...root,
@@ -28,9 +30,12 @@ const styles = {
             },
             '& .act a': {
                 display: 'block !important',
-            }
-        }
-    }
+            },
+            '& .link': {
+                textAlign: 'center',
+            },
+        },
+    },
 };
 
 const defaultFormData = {
@@ -44,37 +49,46 @@ const defaultFormData = {
 
 export const StoryTemplateInput = ({ classes, source, index }) => (
     <div className={classes.root}>
-        <Avatar className={classes.avatar}>{getScreenIndex(STORY, null, index + 1)}</Avatar>
-        <Card className={classes.card}>
-            <CardContent className={classes.content}>
-                <div className={classes.formContainer}>
-                    <RichTextInput
-                        source={`${source}content`}
-                        label="Text"
-                        isRequired
-                    />
-                    <MediumInput
-                        source={`${source}medium`}
-                        label="Illustration"
-                    />
-                    <DisplayOptionsInput
-                        source={`${source}displayOptions`}
-                        label="Display Options"
-                    />
-                </div>
-            </CardContent>
-        </Card>
         <FormDataConsumer>
-            {({ formData }) => 
-                <FrontPreview className={classes.preview}>
-                    <StorySlide
-                        step={{...defaultFormData, ...formData.story[index]}}
-                        index={index + 1}
-                        total={formData.story.length}
-                        nextSlide={noop}
-                    />
-                </FrontPreview>
-            }
+            {({ formData }) => (
+                <Fragment>
+                    <Avatar className={classes.avatar}>
+                        {getScreenIndex(STORY, null, index + 1)}
+                    </Avatar>
+                    <Card className={classes.card}>
+                        <CardContent className={classes.content}>
+                            <div className={classes.formContainer}>
+                                <RichTextInput
+                                    source={`${source}content`}
+                                    label="Text"
+                                    isRequired
+                                />
+                                <MediumInput source={`${source}medium`} label="Illustration" />
+                                <DisplayOptionsInput
+                                    source={`${source}displayOptions`}
+                                    label="Display Options"
+                                />
+                                {formData.story.length === index + 1 && (
+                                    <LinkInput source="end_of_story_link" />
+                                )}
+                            </div>
+                        </CardContent>
+                    </Card>
+                    <FrontPreview className={classes.preview}>
+                        <StorySlide
+                            step={{ ...defaultFormData, ...formData.story[index] }}
+                            index={index + 1}
+                            total={formData.story.length}
+                            nextSlide={noop}
+                            link={
+                                formData.story.length === index + 1
+                                    ? formData.end_of_story_link
+                                    : null
+                            }
+                        />
+                    </FrontPreview>
+                </Fragment>
+            )}
         </FormDataConsumer>
     </div>
 );
@@ -86,7 +100,7 @@ StoryTemplateInput.propTypes = {
 };
 
 StoryTemplateInput.defaultProps = {
-    source: "",
+    source: '',
 };
 
 export default addField(withStyles(styles)(StoryTemplateInput));

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag';
 
 import { userTypeDefs } from '../users/typeDefs';
 import { urgentActionsTypeDefs } from '../urgentActions/typeDefs';
@@ -14,8 +14,4 @@ const baseTypeDefs = gql`
     }
 `;
 
-export const typeDefs = [
-    baseTypeDefs,
-    urgentActionsTypeDefs,
-    userTypeDefs,
-];
+export const typeDefs = [baseTypeDefs, urgentActionsTypeDefs, userTypeDefs];

@@ -6,8 +6,9 @@ import glamorous from 'glamorous';
 import RichText from '../themes/RichText';
 import Image from '../themes/Image';
 import ActButton from './ActButton';
-import { StoryStepPropType } from '../propTypes';
+import { StoryStepPropType, LinkType } from '../propTypes';
 import { textColorForBackgroundColor, colors, black, white, yellow } from '../themes/colors';
+import Link from './Link';
 
 const styles = {
     height: '100%',
@@ -43,8 +44,8 @@ const styles = {
     },
 
     '& .act': {
-        flex: '0 0 4rem',
-        margin: '0 1rem',
+        flex: '0 0 3rem',
+        margin: '1rem 1rem 0 1rem',
         '@media (min-width: 1024px)': {
             textAlign: 'right',
         },
@@ -67,7 +68,7 @@ export const getLogoColorForStep = step => {
     return white;
 };
 
-export const StoryStep = ({ className, medium, displayOptions, content, hasActButton }) => (
+export const StoryStep = ({ className, medium, displayOptions, content, link, hasActButton }) => (
     <div
         className={className}
         style={{
@@ -106,12 +107,21 @@ export const StoryStep = ({ className, medium, displayOptions, content, hasActBu
                 <ActButton />
             </div>
         )}
+
+        {link &&
+            link.url && (
+                <Link
+                    {...link}
+                    color={textColorForBackgroundColor(displayOptions.backgroundColor)}
+                />
+            )}
     </div>
 );
 
 StoryStep.propTypes = {
     className: PropTypes.string,
     hasActButton: PropTypes.bool,
+    link: LinkType,
     ...StoryStepPropType,
 };
 

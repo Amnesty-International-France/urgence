@@ -10,6 +10,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import StoryStep from '../urgentActions/StoryStep';
 import { textColorForBackgroundColor, colors } from '../themes/colors';
 import { RightArrow } from '../icons';
+import { LinkType } from '../propTypes';
 
 const styles = {
     '& .story-step': {
@@ -60,7 +61,7 @@ const rightArrowColor = step => textColorForBackgroundColor(step.displayOptions.
 
 export class StorySlide extends Component {
     render() {
-        const { className, step, index, total, nextSlide } = this.props;
+        const { className, step, index, total, nextSlide, link } = this.props;
         return (
             <div
                 className={classnames(className, {
@@ -71,7 +72,7 @@ export class StorySlide extends Component {
                 key={step.content}
             >
                 <div className="story-step">
-                    <StoryStep {...step} hasActButton={index === total} />
+                    <StoryStep link={link} {...step} hasActButton={index === total} />
                 </div>
 
                 <div
@@ -102,6 +103,7 @@ StorySlide.propTypes = {
     index: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     nextSlide: PropTypes.func.isRequired,
+    link: LinkType,
 };
 
 export default glamorous(StorySlide)(styles);

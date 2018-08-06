@@ -5,44 +5,6 @@ export const urgentActionsTypeDefs = gql`
 
     scalar Upload
 
-    input MediumInput {
-        title: String!
-        src: Upload!
-    }
-
-    input DisplayOptionsInput {
-        mediumPosition: Position!
-        backgroundColor: Color!
-        color: Color
-    }
-
-    input StoryStepInput {
-        content: String!
-        medium: MediumInput
-        displayOptions: DisplayOptionsInput!
-    }
-
-    input MessageTemplateInput {
-        value: String!
-    }
-
-    input RecipientInput {
-        mail: String!
-        copies_to: String
-        cci: String
-        postal_address: String
-    }
-
-    input ThankInput {
-        title: String
-        text: String
-    }
-
-    type Medium {
-        title: String!
-        src: Upload!
-    }
-
     enum Position {
         top
         bottom
@@ -61,7 +23,45 @@ export const urgentActionsTypeDefs = gql`
         fixed
     }
 
+    type Link {
+        label: String
+        url: String
+    }
+
+    input LinkInput {
+        label: String
+        url: String
+    }
+
+    type StoryStep {
+        content: String!
+        medium: Medium
+        displayOptions: DisplayOptions!
+    }
+
+    input StoryStepInput {
+        content: String!
+        medium: MediumInput
+        displayOptions: DisplayOptionsInput!
+    }
+
+    type Medium {
+        title: String!
+        src: Upload!
+    }
+
+    input MediumInput {
+        title: String!
+        src: Upload!
+    }
+
     type DisplayOptions {
+        mediumPosition: Position!
+        backgroundColor: Color!
+        color: Color
+    }
+
+    input DisplayOptionsInput {
         mediumPosition: Position!
         backgroundColor: Color!
         color: Color
@@ -70,17 +70,13 @@ export const urgentActionsTypeDefs = gql`
     type CallToAction {
         title: String
         message: String
+        link: Link
     }
 
     input CallToActionInput {
         title: String
         message: String
-    }
-
-    type StoryStep {
-        content: String!
-        medium: Medium
-        displayOptions: DisplayOptions!
+        link: LinkInput
     }
 
     type ParagraphTemplate {
@@ -94,15 +90,34 @@ export const urgentActionsTypeDefs = gql`
         postal_address: String
     }
 
+    input RecipientInput {
+        mail: String!
+        copies_to: String
+        cci: String
+        postal_address: String
+    }
+
     type Thanks {
         title: String
         text: String
+        link: Link
+    }
+
+    input ThankInput {
+        title: String
+        text: String
+        link: LinkInput
+    }
+
+    input MessageTemplateInput {
+        value: String!
     }
 
     type UrgentAction {
         id: ID!
         title: String!
         story: [StoryStep]!
+        end_of_story_link: Link
         call_to_action: CallToAction!
         object_indication: String!
         message_template: [ParagraphTemplate]!
@@ -111,6 +126,10 @@ export const urgentActionsTypeDefs = gql`
         recipient: Recipient
         email_thank: Thanks
         letter_thank: Thanks
+    }
+
+    type ListMetadata {
+        count: Int!
     }
 
     extend type Query {
@@ -133,6 +152,7 @@ export const urgentActionsTypeDefs = gql`
         createUrgentAction(
             title: String!
             story: [StoryStepInput]!
+            end_of_story_link: LinkInput
             call_to_action: CallToActionInput!
             object_indication: String!
             message_template: [MessageTemplateInput]!
@@ -144,6 +164,7 @@ export const urgentActionsTypeDefs = gql`
             id: ID!
             title: String!
             story: [StoryStepInput]!
+            end_of_story_link: LinkInput
             call_to_action: CallToActionInput!
             object_indication: String!
             message_template: [MessageTemplateInput]!
@@ -152,9 +173,5 @@ export const urgentActionsTypeDefs = gql`
             letter_thank: ThankInput!
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
-    }
-
-    type ListMetadata {
-        count: Int!
     }
 `;

@@ -37,9 +37,17 @@ const query = gql`
                 }
                 content
             }
+            end_of_story_link {
+                label
+                url
+            }
             call_to_action {
                 title
                 message
+                link {
+                    label
+                    url
+                }
             }
             object_indication
             message_template {
@@ -53,10 +61,18 @@ const query = gql`
             email_thank {
                 title
                 text
+                link {
+                    label
+                    url
+                }
             }
             letter_thank {
                 title
                 text
+                link {
+                    label
+                    url
+                }
             }
         }
     }
@@ -77,7 +93,12 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (step === 'story') {
-        return <Story story={get(data, 'UrgentAction.story')} />;
+        return (
+            <Story
+                story={get(data, 'UrgentAction.story')}
+                endStoryLink={get(data, 'UrgentAction.end_of_story_link')}
+            />
+        );
     }
 
     if (step === 'act') {
