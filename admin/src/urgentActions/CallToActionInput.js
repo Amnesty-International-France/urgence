@@ -14,6 +14,7 @@ import { get as getScreenIndex, CALL_TO_ACTION } from './screenIndex';
 
 import Act from '../../../front/src/urgentActions/Act';
 import Link from '../../../front/src/themes/Link';
+import LinkInput from './LinkInput';
 
 const styles = {
     ...root,
@@ -46,6 +47,7 @@ export const CallToActionInput = ({ classes, source }) => (
                                     label="Text"
                                     isRequired
                                 />
+                                <LinkInput source={`${source}.link`} />
                             </div>
                         </CardContent>
                     </Card>

@@ -11,6 +11,20 @@ import {
 
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
 
+const prepareUrgentActionForDatabase = async urgentAction => {
+    const uploadedStory = await uploadImageFromStory(urgentAction.story);
+
+    return {
+        ...urgentAction,
+        story: JSON.stringify(uploadedStory),
+        end_of_story_link: JSON.stringify(urgentAction.end_of_story_link),
+        message_template: JSON.stringify(urgentAction.message_template),
+        email_thank: JSON.stringify(urgentAction.email_thank),
+        letter_thank: JSON.stringify(urgentAction.letter_thank),
+        call_to_action: JSON.stringify(urgentAction.call_to_action),
+    };
+};
+
 export const UrgentActionsResolver = {
     Query: {
         allUrgentActions: (_, { perPage, page, sortField, sortOrder }) =>
@@ -19,35 +33,13 @@ export const UrgentActionsResolver = {
         _allUrgentActionsMeta: () => countUrgentActions(),
     },
     Mutation: {
-        createUrgentAction: async (
-            _,
-            { story, call_to_action, message_template, email_thank, letter_thank, ...data },
-        ) => {
-            const uploadedStory = await uploadImageFromStory(story);
-
-            return createUrgentAction({
-                ...data,
-                story: JSON.stringify(uploadedStory),
-                message_template: JSON.stringify(message_template),
-                email_thank: JSON.stringify(email_thank),
-                letter_thank: JSON.stringify(letter_thank),
-                call_to_action: JSON.stringify(call_to_action),
-            });
+        createUrgentAction: async (_, urgentAction) => {
+            const preparedStory = await prepareUrgentActionForDatabase(urgentAction);
+            return createUrgentAction(preparedStory);
         },
-        updateUrgentAction: async (
-            _,
-            { id, story, call_to_action, message_template, email_thank, letter_thank, ...data },
-        ) => {
-            const uploadedStory = await uploadImageFromStory(story);
-
-            return updateUrgentAction(id, {
-                ...data,
-                story: JSON.stringify(uploadedStory),
-                message_template: JSON.stringify(message_template),
-                email_thank: JSON.stringify(email_thank),
-                letter_thank: JSON.stringify(letter_thank),
-                call_to_action: JSON.stringify(call_to_action),
-            });
+        updateUrgentAction: async (_, urgentAction) => {
+            const preparedStory = await prepareUrgentActionForDatabase(urgentAction);
+            return updateUrgentAction(urgentAction.id, preparedStory);
         },
         deleteUrgentAction: (_, id) => removeUrgentAction(id),
     },

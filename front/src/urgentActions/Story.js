@@ -8,7 +8,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { getLogoColorForStep } from '../urgentActions/StoryStep';
-import { StoryStepPropType, routeMatch } from '../propTypes';
+import { StoryStepPropType, routeMatch, LinkType } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import { withThemeContext } from '../themes/ThemeContext';
 import Carousel from '../themes/Carousel';
@@ -53,6 +53,7 @@ export class Story extends Component {
         const {
             className,
             story,
+            endStoryLink,
             match: {
                 params: { page },
             },
@@ -75,6 +76,7 @@ export class Story extends Component {
                                         total={story.length}
                                         index={index + 1}
                                         nextSlide={nextSlide}
+                                        link={story.length === index + 1 ? endStoryLink : null}
                                     />
                                 ))
                             }
@@ -90,6 +92,7 @@ Story.propTypes = {
     context: PropTypes.shape({
         changeLogoColor: PropTypes.func.isRequired,
     }).isRequired,
+    endStoryLink: LinkType,
     story: PropTypes.arrayOf(PropTypes.shape(StoryStepPropType)),
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
@@ -99,4 +102,7 @@ Story.propTypes = {
 
 export const WithStylesStory = glamorous(Story)(styles);
 
-export default compose(withRouter, withThemeContext)(WithStylesStory);
+export default compose(
+    withRouter,
+    withThemeContext,
+)(WithStylesStory);

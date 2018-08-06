@@ -6,6 +6,8 @@ import glamorous from 'glamorous';
 import RichText from '../themes/RichText';
 import { pink, white } from '../themes/colors';
 import { withWhiteLogo } from '../themes/ThemeContext';
+import { LinkType } from '../propTypes';
+import Link from './Link';
 
 export const Act = ({ callToAction, className, action }) => (
     <div className={className}>
@@ -13,33 +15,37 @@ export const Act = ({ callToAction, className, action }) => (
             <h1>{get(callToAction, 'title')}</h1>
             <RichText html={get(callToAction, 'message')} />
         </div>
-        {action}
+        <div className="actions">
+            {action}
+            {get(callToAction, 'link.url') && <Link {...callToAction.link} color={white} />}
+        </div>
     </div>
 );
 
 Act.propTypes = {
-    callToAction: {
+    action: PropTypes.element,
+    callToAction: PropTypes.shape({
         title: PropTypes.string.isRequired,
         message: PropTypes.string.isRequired,
-    },
+        link: LinkType,
+    }),
     className: PropTypes.string.isRequired,
 };
 
 export default glamorous(withWhiteLogo(Act))({
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     backgroundColor: pink,
     color: white,
     height: '100%',
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
-        '& a': {
-            alignSelf: 'flex-end',
+        '& .link': {
+            textAlign: 'center',
         },
     },
     '& h1': {
-        marginTop: '122px',
         fontFamily: 'Amnesty Trade Gothic Condensed',
         padding: '2rem 3rem',
         textAlign: 'center',
@@ -53,7 +59,10 @@ export default glamorous(withWhiteLogo(Act))({
         lineHeight: '33px',
         fontWeight: 'bold',
     },
+    '& .actions': {
+        textAlign: 'center',
+    },
     '& a': {
-        margin: '0 1rem 2rem 1rem',
+        margin: '0 1rem 1rem 1rem',
     },
 });

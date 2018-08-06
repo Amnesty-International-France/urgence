@@ -60,10 +60,15 @@ export class ObjectStep extends Component {
 
 ObjectStep.propTypes = {
     className: PropTypes.string,
-    objectIndication: PropTypes.string.isRequired,
+    objectIndication: PropTypes.string,
     action: PropTypes.func.isRequired,
     object: PropTypes.string,
     setObject: PropTypes.func.isRequired,
 };
 
-export default glamorous(compose(withBlackLogo, withSessionData)(ObjectStep))(styles);
+export default glamorous(
+    compose(
+        withBlackLogo,
+        withSessionData,
+    )(ObjectStep),
+)(styles);

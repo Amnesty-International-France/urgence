@@ -14,6 +14,7 @@ import FrontPreview from './FrontPreview';
 
 import Thanks from '../../../front/src/urgentActions/Thanks';
 import Link from '../../../front/src/themes/Link';
+import LinkInput from './LinkInput';
 
 const styles = {
     ...root,
@@ -54,6 +55,7 @@ export const ThanksInput = ({ classes, source, final }) => (
                                         label="Text"
                                         multiline
                                     />
+                                    <LinkInput source={`${source}.link`} />
                                 </div>
                             </div>
                         </CardContent>

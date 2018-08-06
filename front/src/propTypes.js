@@ -19,3 +19,8 @@ export const StoryStepPropType = {
 export const routeMatch = PropTypes.shape({
     params: PropTypes.object.isRequired,
 });
+
+export const LinkType = PropTypes.shape({
+    label: PropTypes.string,
+    url: PropTypes.string,
+});

@@ -6,6 +6,7 @@ const columns = [
     'id',
     'title',
     'story',
+    'end_of_story_link',
     'call_to_action',
     'object_indication',
     'message_template',

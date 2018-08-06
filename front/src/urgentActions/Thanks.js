@@ -1,3 +1,4 @@
+import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
@@ -6,6 +7,7 @@ import classnames from 'classnames';
 import { pink, white } from '../themes/colors';
 import Email from '../icons/Email';
 import { withWhiteLogo } from '../themes/ThemeContext';
+import Link from './Link';
 
 const styles = {
     display: 'flex',
@@ -17,26 +19,25 @@ const styles = {
     width: '100%',
     textAlign: 'center',
     padding: '0 31px 50px',
+    '@media (min-width: 1024px)': {
+        padding: '10vh 10vw',
+    },
     '& svg': {
         fill: 'white',
         fontSize: '3em',
         alignSelf: 'center',
     },
-    '&': {
-        '@media (min-aspect-ratio: 1/1)': {
-            padding: '15vw 25vh',
-        },
-    },
     '& h1': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
         marginBottom: 29,
+        padding: '0 3rem',
     },
 
     '& .content': {
         display: 'flex',
         flexDirection: 'column',
-        flex: '1 0 0',
         justifyContent: 'center',
+        paddingTop: '2rem',
     },
 
     '& .text': {
@@ -46,25 +47,27 @@ const styles = {
     },
 
     '& .actions': {
-        flex: '0 0 64px',
-        display: 'flex',
-        justifyContent: 'center',
         fill: white,
-        fontSize: 64,
-        '& > *:not(:last-child)': {
-            marginRight: 92,
+        '& a': {
+            marginBottom: '1rem',
+        },
+        '& .link': {
+            textAlign: 'center',
         },
     },
 };
 
-export const Thanks = ({ className, title, text, actions }) => (
+export const Thanks = ({ className, title, text, link, actions }) => (
     <div className={classnames('thanks', className)}>
         <div className="content">
             <Email />
             <h1>{title}</h1>
             {text && <p className="text">{text}</p>}
         </div>
-        <div className="actions">{actions()}</div>
+        <div className="actions">
+            {actions()}
+            {get(link, 'url') && <Link {...link} color={white} />}
+        </div>
     </div>
 );
 
