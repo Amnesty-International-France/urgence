@@ -1,12 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-    ArrayInput,
-    LongTextInput,
-    required,
-    SimpleForm,
-} from 'react-admin';
+import { ArrayInput, LongTextInput, required, SimpleForm } from 'react-admin';
 
 import { withStyles } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
@@ -62,42 +57,42 @@ export const Form = ({ classes }) => (
         <div className={classes.form}>
             <LongTextInput source="title" validate={required()} />
         </div>
-        
+
         <div className={`${classes.form} story`}>
             <h2>Story</h2>
             <ArrayInput source="story" label="">
                 <StoryStepFormIterator>
-                    <StoryTemplateInput source=""/>
+                    <StoryTemplateInput source="" />
                 </StoryStepFormIterator>
             </ArrayInput>
         </div>
 
         <div className={`${classes.form} call-to-action`}>
             <h2>Call to Action</h2>
-            <CallToActionInput source=""/>
+            <CallToActionInput source="call_to_action" />
         </div>
 
         <div className={`${classes.form} message`}>
             <h2>Message</h2>
-            <MessageInput source=""/>
-            <ObjectInput source=""/>
-            <FullNameInput source=""/>
+            <MessageInput source="" />
+            <ObjectInput source="" />
+            <FullNameInput source="" />
         </div>
 
         <div className={`${classes.form} continue`}>
             <h2>Continue</h2>
-            <ThanksInput source="email_thank"/>
+            <ThanksInput source="email_thank" />
         </div>
 
         <div className={`${classes.form} letter`}>
             <h2>Letter</h2>
-            <AddressInput source=""/>
-            <EmailInput source=""/>
+            <AddressInput source="" />
+            <EmailInput source="" />
         </div>
 
         <div className={`${classes.form} thank-you`}>
             <h2>Thank You</h2>
-            <ThanksInput source="letter_thank" final/>
+            <ThanksInput source="letter_thank" final />
         </div>
     </Fragment>
 );
@@ -110,6 +105,6 @@ const StyledForm = withStyles(styles)(Form);
 
 export default () => (
     <SimpleForm className="urgent-action-form">
-        <StyledForm/>   
+        <StyledForm />
     </SimpleForm>
 );

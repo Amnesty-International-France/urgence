@@ -37,7 +37,10 @@ const query = gql`
                 }
                 content
             }
-            call_to_action
+            call_to_action {
+                title
+                message
+            }
             object_indication
             message_template {
                 value
