@@ -30,8 +30,11 @@
             }
         }
     ],
-    "call_to_action":
-        "<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>",
+    "call_to_action": {
+        "title": "Génial !",
+        "message":
+            "<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>"
+    },
     "message_template": [
         {
             "value":
@@ -58,7 +61,6 @@
     },
     "letter_thank": {
         "title": "Merci de votre aide !",
-        "text":
-            "Il ne vous reste plus qu'as poster la lettre qui vous à été envoyé par courriel."
+        "text": "Il ne vous reste plus qu'as poster la lettre qui vous à été envoyé par courriel."
     }
 }

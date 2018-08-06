@@ -31,7 +31,7 @@ const styles = {
 
 const validateTitle = required();
 
-export const StoryTemplateInput = ({ classes, source, final }) => (
+export const ThanksInput = ({ classes, source, final }) => (
     <div className={classes.root}>
         <FormDataConsumer>
             {({ formData }) => (
@@ -71,15 +71,15 @@ export const StoryTemplateInput = ({ classes, source, final }) => (
     </div>
 );
 
-StoryTemplateInput.propTypes = {
+ThanksInput.propTypes = {
     source: PropTypes.string,
     classes: PropTypes.object,
     final: PropTypes.bool,
 };
 
-StoryTemplateInput.defaultProps = {
+ThanksInput.defaultProps = {
     source: '',
     final: false,
 };
 
-export default addField(withStyles(styles)(StoryTemplateInput));
+export default addField(withStyles(styles)(ThanksInput));
