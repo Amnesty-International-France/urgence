@@ -4,8 +4,8 @@ import glamorous from 'glamorous';
 
 export const Image = ({ className, src, title }) => {
     let actualSource = src;
-    if(src && src.rawFile) {
-        actualSource= src.rawFile.preview;
+    if (src && src.rawFile) {
+        actualSource = src.rawFile.preview;
     }
     return (
         <div

@@ -8,7 +8,12 @@ import generateUrl from '../../services/generateUrl';
 import { routeMatch } from '../../propTypes';
 import { SessionDataConsumer } from '../../SessionDataContext';
 
-export const renderSendMail = ({ messageTemplate, recipient, afterMail }) => ({ object, signature }) => (
+export const renderSendMail = ({ messageTemplate, recipient, afterMail }) => ({
+    /* eslint-disable react/prop-types */
+    object,
+    signature,
+    /* eslint-enable react/prop-types */
+}) => (
     <MailTo
         disabled={!object || !signature}
         label="Envoyer"

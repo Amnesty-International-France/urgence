@@ -41,7 +41,12 @@ AddressStep.propTypes = {
     action: PropTypes.func,
 };
 
-export default glamorous(compose(withBlackLogo, withSessionData)(AddressStep))({
+export default glamorous(
+    compose(
+        withBlackLogo,
+        withSessionData,
+    )(AddressStep),
+)({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',

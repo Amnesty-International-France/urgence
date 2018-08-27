@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
-import LinkIcon from '@material-ui/icons/Link';
 
 import { root, preview } from './styles';
 import MediumInput from './MediumInput';

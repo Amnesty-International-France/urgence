@@ -113,7 +113,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
             />
         );
     }
-    console.log(data);
+
     if (step === 'message') {
         return (
             <Message
