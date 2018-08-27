@@ -53,6 +53,10 @@ const query = gql`
             message_template {
                 value
             }
+            message_link {
+                label
+                url
+            }
             recipient {
                 mail
                 copies_to
@@ -109,11 +113,12 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
             />
         );
     }
-
+    console.log(data);
     if (step === 'message') {
         return (
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
+                link={get(data, 'UrgentAction.message_link')}
                 loading={loading}
                 action={
                     <ToUrgentActionPageLink label="OK, J'envoie le message" pageName="object" />

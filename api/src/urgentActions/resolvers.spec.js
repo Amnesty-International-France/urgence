@@ -107,6 +107,7 @@ describe('Urgent Actions Resolvers', () => {
                     email_thank: 'email_thank',
                     letter_thank: 'letter_thank',
                     end_of_story_link: 'end_of_story_link',
+                    message_link: 'message_link',
                     message_template: 'message_template',
                 });
 
@@ -132,6 +133,7 @@ describe('Urgent Actions Resolvers', () => {
                     email_thank: '"email_thank"',
                     letter_thank: '"letter_thank"',
                     end_of_story_link: '"end_of_story_link"',
+                    message_link: '"message_link"',
                     message_template: '"message_template"',
                 });
             });
