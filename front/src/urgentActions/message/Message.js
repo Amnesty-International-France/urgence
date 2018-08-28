@@ -6,6 +6,8 @@ import classnames from 'classnames';
 import { white, black } from '../../themes/colors';
 import MessageStep from './MessageStep';
 import { withBlackLogo } from '../../themes/ThemeContext';
+import Link from '../Link';
+import { LinkType } from '../../propTypes';
 
 const styles = {
     padding: '105px 0 53px',
@@ -30,7 +32,7 @@ const styles = {
     },
 };
 
-export const Message = ({ messageTemplate, action, className }) => (
+export const Message = ({ messageTemplate, action, className, link }) => (
     <Fragment>
         {(!messageTemplate || !messageTemplate.length) && (
             <p className="error">Cette action urgente n&#39;existe plus.</p>
@@ -44,7 +46,10 @@ export const Message = ({ messageTemplate, action, className }) => (
                             <MessageStep key={value} content={value} darken={!!(index % 2)} />
                         ))}
                     </div>
-                    <div className="action">{action}</div>
+                    <div className="action">
+                        {action}
+                        {link && link.url && <Link {...link} />}
+                    </div>
                 </div>
             )}
     </Fragment>
@@ -52,6 +57,7 @@ export const Message = ({ messageTemplate, action, className }) => (
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
+    link: LinkType,
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
     action: PropTypes.node.isRequired,

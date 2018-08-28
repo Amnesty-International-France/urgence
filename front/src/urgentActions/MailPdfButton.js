@@ -56,4 +56,7 @@ MailPdfButton.propTypes = {
     disabled: PropTypes.bool,
 };
 
-export default compose(withSessionData, withRouter)(MailPdfButton);
+export default compose(
+    withSessionData,
+    withRouter,
+)(MailPdfButton);

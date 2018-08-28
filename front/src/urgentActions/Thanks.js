@@ -8,6 +8,7 @@ import { pink, white } from '../themes/colors';
 import Email from '../icons/Email';
 import { withWhiteLogo } from '../themes/ThemeContext';
 import Link from './Link';
+import { LinkType } from '../propTypes';
 
 const styles = {
     display: 'flex',
@@ -76,6 +77,7 @@ Thanks.propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string,
     actions: PropTypes.func,
+    link: LinkType,
 };
 
 Thanks.defaultProps = {

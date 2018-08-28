@@ -41,7 +41,12 @@ EmailStep.propTypes = {
     action: PropTypes.func,
 };
 
-export default glamorous(compose(withBlackLogo, withSessionData)(EmailStep))({
+export default glamorous(
+    compose(
+        withBlackLogo,
+        withSessionData,
+    )(EmailStep),
+)({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',

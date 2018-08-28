@@ -17,6 +17,7 @@ import FrontPreview from './FrontPreview';
 import Message from '../../../front/src/urgentActions/message/Message';
 import Link from '../../../front/src/themes/Link';
 import SimpleParagraphFormIterator from './SimpleParagraphFormIterator';
+import LinkInput from './LinkInput';
 
 const styles = theme => ({
     ...root,
@@ -93,6 +94,7 @@ export const MessageInput = ({ classes, source }) => (
                                         <ParagraphTemplateInput source="" />
                                     </SimpleParagraphFormIterator>
                                 </ArrayInput>
+                                <LinkInput source={`${source}message_link`} />
                             </div>
                         </CardContent>
                     </Card>
@@ -101,6 +103,7 @@ export const MessageInput = ({ classes, source }) => (
                                 <Message
                                     messageTemplate={formData.message_template}
                                     objectIndication=""
+                                    link={formData.message_link}
                                     action={<Link to={"#"} label="Ok, j'envoie le message" />}
                                 />
                         </FrontPreview>

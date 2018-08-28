@@ -121,6 +121,7 @@ export const urgentActionsTypeDefs = gql`
         call_to_action: CallToAction!
         object_indication: String!
         message_template: [ParagraphTemplate]!
+        message_link: Link
         creation_date: DATE!
         last_edition_date: DATE!
         recipient: Recipient
@@ -156,6 +157,7 @@ export const urgentActionsTypeDefs = gql`
             call_to_action: CallToActionInput!
             object_indication: String!
             message_template: [MessageTemplateInput]!
+            message_link: LinkInput
             recipient: RecipientInput!
             email_thank: ThankInput!
             letter_thank: ThankInput!
@@ -168,6 +170,7 @@ export const urgentActionsTypeDefs = gql`
             call_to_action: CallToActionInput!
             object_indication: String!
             message_template: [MessageTemplateInput]!
+            message_link: LinkInput
             recipient: RecipientInput!
             email_thank: ThankInput!
             letter_thank: ThankInput!

@@ -59,4 +59,9 @@ SignatureStep.propTypes = {
     action: PropTypes.node,
 };
 
-export default glamorous(compose(withBlackLogo, withSessionData)(SignatureStep))(styles);
+export default glamorous(
+    compose(
+        withBlackLogo,
+        withSessionData,
+    )(SignatureStep),
+)(styles);

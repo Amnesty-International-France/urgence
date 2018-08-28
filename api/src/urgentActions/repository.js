@@ -10,6 +10,7 @@ const columns = [
     'call_to_action',
     'object_indication',
     'message_template',
+    'message_link',
     'recipient',
     'email_thank',
     'letter_thank',
