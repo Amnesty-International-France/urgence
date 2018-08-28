@@ -44,7 +44,7 @@ export const AddressInput = ({ classes, source }) => (
         classes.bordered
     )}>
         <FormDataConsumer>
-            {({ formData }) => console.log(formData) || 
+            {({ formData }) =>
                 <Fragment>
                     <Avatar className={classes.avatar}>{getScreenIndex(ADDRESS, formData)}</Avatar>
                     <Card className={classes.card}>
@@ -53,7 +53,7 @@ export const AddressInput = ({ classes, source }) => (
                                 <Labeled label="Recipient">
                                     <LongTextInput
                                         label="Postal Address"
-                                        source={`${source}recipient.postal_address`}
+                                        source={source}
                                         validate={validatePostalAddress}
                                     />
                                 </Labeled>
