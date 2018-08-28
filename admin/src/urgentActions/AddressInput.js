@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer } from 'react-admin';
+import { addField, FormDataConsumer, Labeled, LongTextInput, required } from 'react-admin';
 import Avatar from '@material-ui/core/Avatar';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 import { root, preview } from './styles';
 import { get as getScreenIndex, ADDRESS} from './screenIndex';
@@ -20,7 +22,6 @@ const styles = theme => ({
     },
     preview: {
         ...preview,
-        marginLeft: 500,
         // the rules below override desktop media queries so that the preview is forced to appear like on mobile
         '& > div': {
             height: preview.height,
@@ -35,8 +36,9 @@ const styles = theme => ({
     }
 });
 
+export const validatePostalAddress = required();
 
-export const AddressInput = ({ classes }) => (
+export const AddressInput = ({ classes, source }) => (
     <div className={classNames(
         classes.root,
         classes.bordered
@@ -45,6 +47,19 @@ export const AddressInput = ({ classes }) => (
             {({ formData }) =>
                 <Fragment>
                     <Avatar className={classes.avatar}>{getScreenIndex(ADDRESS, formData)}</Avatar>
+                    <Card className={classes.card}>
+                        <CardContent className={classes.content}>
+                            <div className={classes.formContainer}>
+                                <Labeled label="Recipient">
+                                    <LongTextInput
+                                        label="Postal Address"
+                                        source={source}
+                                        validate={validatePostalAddress}
+                                    />
+                                </Labeled>
+                            </div>
+                        </CardContent>
+                    </Card>
                     <FrontPreview className={classes.preview}>
                         <AddressStep
                             setAddress={noop}
