@@ -10,7 +10,7 @@ import classNames from 'classnames';
 
 import { root, preview } from './styles';
 import RichTextInput from '../form/RichTextInput';
-import { get as getScreenIndex, OBJECT} from './screenIndex';
+import { get as getScreenIndex, OBJECT } from './screenIndex';
 import FrontPreview, { noop } from './FrontPreview';
 
 import { ObjectStep } from '../../../front/src/urgentActions/ObjectStep';
@@ -37,18 +37,15 @@ const styles = theme => ({
             },
             '& input': {
                 boxSizing: 'border-box',
-            }
-        }
-    }
+            },
+        },
+    },
 });
 
 export const ObjectInput = ({ classes, source }) => (
-    <div className={classNames(
-        classes.root,
-        classes.bordered
-    )}>
+    <div className={classNames(classes.root, classes.bordered)}>
         <FormDataConsumer>
-            {({ formData }) =>
+            {({ formData }) => (
                 <Fragment>
                     <Avatar className={classes.avatar}>{getScreenIndex(OBJECT, formData)}</Avatar>
                     <Card className={classes.card}>
@@ -57,7 +54,6 @@ export const ObjectInput = ({ classes, source }) => (
                                 <RichTextInput
                                     label="Object tip"
                                     source={`${source}object_indication`}
-                                    isRequired
                                 />
                             </div>
                         </CardContent>
@@ -67,11 +63,13 @@ export const ObjectInput = ({ classes, source }) => (
                             objectIndication={formData.object_indication}
                             setObject={noop}
                             object=""
-                            action={(disabled) => <Link to={"#"} label="Valider" disabled={disabled} />}
+                            action={disabled => (
+                                <Link to={'#'} label="Valider" disabled={disabled} />
+                            )}
                         />
                     </FrontPreview>
                 </Fragment>
-            }
+            )}
         </FormDataConsumer>
     </div>
 );
@@ -82,7 +80,7 @@ ObjectInput.propTypes = {
 };
 
 ObjectInput.defaultProps = {
-    source: "",
+    source: '',
 };
 
 export default addField(withStyles(styles)(ObjectInput));

@@ -57,11 +57,7 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
                     <Card className={classes.card}>
                         <CardContent className={classes.content}>
                             <div className={classes.formContainer}>
-                                <RichTextInput
-                                    source={`${source}content`}
-                                    label="Text"
-                                    isRequired
-                                />
+                                <RichTextInput source={`${source}content`} label="Text" />
                                 <MediumInput source={`${source}medium`} label="Illustration" />
                                 <DisplayOptionsInput
                                     source={`${source}displayOptions`}

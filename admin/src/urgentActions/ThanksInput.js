@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, required, TextInput, LongTextInput } from 'react-admin';
+import { addField, FormDataConsumer, TextInput, LongTextInput } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -30,8 +30,6 @@ const styles = {
     },
 };
 
-const validateTitle = required();
-
 export const ThanksInput = ({ classes, source, final }) => (
     <div className={classes.root}>
         <FormDataConsumer>
@@ -47,7 +45,6 @@ export const ThanksInput = ({ classes, source, final }) => (
                                     <TextInput
                                         source={`${source}.title`}
                                         label="Title"
-                                        validate={validateTitle}
                                         defaultValue="Merci de votre soutien !"
                                     />
                                     <LongTextInput

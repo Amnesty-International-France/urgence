@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, Labeled, LongTextInput, required } from 'react-admin';
+import { addField, FormDataConsumer, Labeled, LongTextInput } from 'react-admin';
 import Avatar from '@material-ui/core/Avatar';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
 import { root, preview } from './styles';
-import { get as getScreenIndex, ADDRESS} from './screenIndex';
+import { get as getScreenIndex, ADDRESS } from './screenIndex';
 import FrontPreview, { noop } from './FrontPreview';
 
 import AddressStep from '../../../front/src/urgentActions/AddressStep';
@@ -31,31 +31,22 @@ const styles = theme => ({
             },
             '& textarea': {
                 boxSizing: 'border-box',
-            }
-        }
-    }
+            },
+        },
+    },
 });
 
-export const validatePostalAddress = required();
-
 export const AddressInput = ({ classes, source }) => (
-    <div className={classNames(
-        classes.root,
-        classes.bordered
-    )}>
+    <div className={classNames(classes.root, classes.bordered)}>
         <FormDataConsumer>
-            {({ formData }) =>
+            {({ formData }) => (
                 <Fragment>
                     <Avatar className={classes.avatar}>{getScreenIndex(ADDRESS, formData)}</Avatar>
                     <Card className={classes.card}>
                         <CardContent className={classes.content}>
                             <div className={classes.formContainer}>
                                 <Labeled label="Recipient">
-                                    <LongTextInput
-                                        label="Postal Address"
-                                        source={source}
-                                        validate={validatePostalAddress}
-                                    />
+                                    <LongTextInput label="Postal Address" source={source} />
                                 </Labeled>
                             </div>
                         </CardContent>
@@ -64,11 +55,13 @@ export const AddressInput = ({ classes, source }) => (
                         <AddressStep
                             setAddress={noop}
                             address=""
-                            action={(disabled) => <Link to={"#"} label="Valider" disabled={disabled} />}
+                            action={disabled => (
+                                <Link to={'#'} label="Valider" disabled={disabled} />
+                            )}
                         />
                     </FrontPreview>
                 </Fragment>
-            }
+            )}
         </FormDataConsumer>
     </div>
 );
