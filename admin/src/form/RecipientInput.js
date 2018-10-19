@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import ContactEmail from '@material-ui/icons/ContactMail';
 import isEmail from 'validator/lib/isEmail';
 
-import { email, required, LongTextInput, TextInput } from 'react-admin';
+import { email, LongTextInput, TextInput } from 'react-admin';
 import { pink } from '../../../front/src/themes/colors';
 
 const styles = {
@@ -31,14 +31,12 @@ const styles = {
     },
 };
 
-export const validateRecipientEmail = [required(), email()];
+export const validateRecipientEmail = [email()];
 
 export const validateEmailsList = text =>
     text && !!text.split(',').find(t => !isEmail(t))
         ? 'Must contain only emails separated by a comma.'
         : null;
-
-export const validatePostalAddress = required();
 
 export const RecipientInput = ({ classes, label, ...rest }) => (
     <Card className={classes.root}>
@@ -67,11 +65,7 @@ export const RecipientInput = ({ classes, label, ...rest }) => (
                     />
                 </div>
                 <div className={classes.postalAddress}>
-                    <LongTextInput
-                        label="Postal Address"
-                        source="recipient.postal_address"
-                        validate={validatePostalAddress}
-                    />
+                    <LongTextInput label="Postal Address" source="recipient.postal_address" />
                 </div>
             </div>
         </CardContent>

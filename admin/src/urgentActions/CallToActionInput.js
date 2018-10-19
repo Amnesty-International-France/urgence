@@ -41,12 +41,8 @@ export const CallToActionInput = ({ classes, source }) => (
                     <Card className={classes.card}>
                         <CardContent className={classes.content}>
                             <div className={classes.formContainer}>
-                                <TextInput source={`${source}.title`} label="Title" isRequired />
-                                <RichTextInput
-                                    source={`${source}.message`}
-                                    label="Text"
-                                    isRequired
-                                />
+                                <TextInput source={`${source}.title`} label="Title" />
+                                <RichTextInput source={`${source}.message`} label="Text" />
                                 <LinkInput source={`${source}.link`} />
                             </div>
                         </CardContent>

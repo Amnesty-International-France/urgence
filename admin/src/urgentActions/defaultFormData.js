@@ -28,4 +28,14 @@ export const defaultStory = {
     medium: null,
 };
 
-export const merge = (formData) => ({...defaultData, ...formData});
+const removeUndefinedProperties = object => {
+    const cleanedObject = { ...object };
+    Object.keys(cleanedObject).forEach(key => {
+        if (cleanedObject[key] === undefined) {
+            delete cleanedObject[key];
+        }
+    });
+    return cleanedObject;
+};
+
+export const merge = formData => ({ ...defaultData, ...removeUndefinedProperties(formData) });

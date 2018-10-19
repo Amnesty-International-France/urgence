@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, required, email, TextInput, ArrayInput, Labeled } from 'react-admin';
+import { addField, FormDataConsumer, email, TextInput, ArrayInput, Labeled } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import isEmail from 'validator/lib/isEmail';
 
 import { root, preview } from './styles';
-import { get as getScreenIndex, MESSAGE} from './screenIndex';
+import { get as getScreenIndex, MESSAGE } from './screenIndex';
 import ParagraphTemplateInput from './ParagraphTemplateInput';
 import FrontPreview from './FrontPreview';
 
@@ -42,12 +42,12 @@ const styles = theme => ({
             },
             '& input': {
                 boxSizing: 'border-box',
-            }
-        }
-    }
+            },
+        },
+    },
 });
 
-export const validateRecipientEmail = [required(), email()];
+export const validateRecipientEmail = [email()];
 
 export const validateEmailsList = text =>
     text && !!text.split(',').find(t => !isEmail(t))
@@ -55,12 +55,9 @@ export const validateEmailsList = text =>
         : null;
 
 export const MessageInput = ({ classes, source }) => (
-    <div className={classNames(
-        classes.root,
-        classes.bordered
-    )}>
+    <div className={classNames(classes.root, classes.bordered)}>
         <FormDataConsumer>
-            {({ formData }) =>
+            {({ formData }) => (
                 <Fragment>
                     <Avatar className={classes.avatar}>{getScreenIndex(MESSAGE, formData)}</Avatar>
                     <Card className={classes.card}>
@@ -98,18 +95,18 @@ export const MessageInput = ({ classes, source }) => (
                             </div>
                         </CardContent>
                     </Card>
-                    {formData.message_template &&
+                    {formData.message_template && (
                         <FrontPreview className={classes.preview}>
-                                <Message
-                                    messageTemplate={formData.message_template}
-                                    objectIndication=""
-                                    link={formData.message_link}
-                                    action={<Link to={"#"} label="Ok, j'envoie le message" />}
-                                />
+                            <Message
+                                messageTemplate={formData.message_template}
+                                objectIndication=""
+                                link={formData.message_link}
+                                action={<Link to={'#'} label="Ok, j'envoie le message" />}
+                            />
                         </FrontPreview>
-                    }
+                    )}
                 </Fragment>
-            }
+            )}
         </FormDataConsumer>
     </div>
 );
@@ -120,7 +117,7 @@ MessageInput.propTypes = {
 };
 
 MessageInput.defaultProps = {
-    source: "",
+    source: '',
 };
 
 export default addField(withStyles(styles)(MessageInput));

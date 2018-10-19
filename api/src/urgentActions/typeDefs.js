@@ -42,7 +42,7 @@ export const urgentActionsTypeDefs = gql`
     input StoryStepInput {
         content: String!
         medium: MediumInput
-        displayOptions: DisplayOptionsInput!
+        displayOptions: DisplayOptionsInput
     }
 
     type Medium {
@@ -116,14 +116,14 @@ export const urgentActionsTypeDefs = gql`
     type UrgentAction {
         id: ID!
         title: String!
-        story: [StoryStep]!
+        story: [StoryStep]
         end_of_story_link: Link
-        call_to_action: CallToAction!
-        object_indication: String!
-        message_template: [ParagraphTemplate]!
+        call_to_action: CallToAction
+        object_indication: String
+        message_template: [ParagraphTemplate]
         message_link: Link
-        creation_date: DATE!
-        last_edition_date: DATE!
+        creation_date: DATE
+        last_edition_date: DATE
         recipient: Recipient
         email_thank: Thanks
         letter_thank: Thanks
@@ -152,28 +152,28 @@ export const urgentActionsTypeDefs = gql`
     extend type Mutation {
         createUrgentAction(
             title: String!
-            story: [StoryStepInput]!
+            story: [StoryStepInput]
             end_of_story_link: LinkInput
-            call_to_action: CallToActionInput!
-            object_indication: String!
-            message_template: [MessageTemplateInput]!
+            call_to_action: CallToActionInput
+            object_indication: String
+            message_template: [MessageTemplateInput]
             message_link: LinkInput
-            recipient: RecipientInput!
-            email_thank: ThankInput!
-            letter_thank: ThankInput!
+            recipient: RecipientInput
+            email_thank: ThankInput
+            letter_thank: ThankInput
         ): UrgentAction
         updateUrgentAction(
             id: ID!
             title: String!
-            story: [StoryStepInput]!
+            story: [StoryStepInput]
             end_of_story_link: LinkInput
-            call_to_action: CallToActionInput!
-            object_indication: String!
-            message_template: [MessageTemplateInput]!
+            call_to_action: CallToActionInput
+            object_indication: String
+            message_template: [MessageTemplateInput]
             message_link: LinkInput
-            recipient: RecipientInput!
-            email_thank: ThankInput!
-            letter_thank: ThankInput!
+            recipient: RecipientInput
+            email_thank: ThankInput
+            letter_thank: ThankInput
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
     }
