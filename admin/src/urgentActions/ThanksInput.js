@@ -30,7 +30,7 @@ const styles = {
     },
 };
 
-export const ThanksInput = ({ classes, source, final }) => (
+export const ThanksInput = ({ classes, source, withLink, final }) => (
     <div className={classes.root}>
         <FormDataConsumer>
             {({ formData }) => (
@@ -52,7 +52,7 @@ export const ThanksInput = ({ classes, source, final }) => (
                                         label="Text"
                                         multiline
                                     />
-                                    <LinkInput source={`${source}.link`} />
+                                    {withLink && <LinkInput source={`${source}.link`} />}
                                 </div>
                             </div>
                         </CardContent>
@@ -73,12 +73,14 @@ export const ThanksInput = ({ classes, source, final }) => (
 ThanksInput.propTypes = {
     source: PropTypes.string,
     classes: PropTypes.object,
+    withLink: PropTypes.bool,
     final: PropTypes.bool,
 };
 
 ThanksInput.defaultProps = {
     source: '',
     final: false,
+    withLink: false,
 };
 
 export default addField(withStyles(styles)(ThanksInput));

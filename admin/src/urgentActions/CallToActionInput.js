@@ -30,7 +30,7 @@ const styles = {
     },
 };
 
-export const CallToActionInput = ({ classes, source }) => (
+export const CallToActionInput = ({ classes, source, withLink }) => (
     <div className={classes.root}>
         <FormDataConsumer>
             {({ formData }) => (
@@ -43,7 +43,7 @@ export const CallToActionInput = ({ classes, source }) => (
                             <div className={classes.formContainer}>
                                 <TextInput source={`${source}.title`} label="Title" />
                                 <RichTextInput source={`${source}.message`} label="Text" />
-                                <LinkInput source={`${source}.link`} />
+                                {withLink && <LinkInput source={`${source}.link`} />}
                             </div>
                         </CardContent>
                     </Card>
@@ -62,10 +62,12 @@ export const CallToActionInput = ({ classes, source }) => (
 CallToActionInput.propTypes = {
     classes: PropTypes.object,
     source: PropTypes.string,
+    withLink: PropTypes.bool,
 };
 
 CallToActionInput.defaultProps = {
     source: '',
+    withLink: false,
 };
 
 export default addField(withStyles(styles)(CallToActionInput));

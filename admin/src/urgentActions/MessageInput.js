@@ -14,6 +14,8 @@ import { get as getScreenIndex, MESSAGE } from './screenIndex';
 import ParagraphTemplateInput from './ParagraphTemplateInput';
 import FrontPreview from './FrontPreview';
 
+import { USE_CALL_TO_ACTION_LINK } from '../flags';
+
 import Message from '../../../front/src/urgentActions/message/Message';
 import Link from '../../../front/src/themes/Link';
 import SimpleParagraphFormIterator from './SimpleParagraphFormIterator';
@@ -54,7 +56,7 @@ export const validateEmailsList = text =>
         ? 'Must contain only emails separated by a comma.'
         : null;
 
-export const MessageInput = ({ classes, source }) => (
+export const MessageInput = ({ classes, source, withLink }) => (
     <div className={classNames(classes.root, classes.bordered)}>
         <FormDataConsumer>
             {({ formData }) => (
@@ -91,7 +93,7 @@ export const MessageInput = ({ classes, source }) => (
                                         <ParagraphTemplateInput source="" />
                                     </SimpleParagraphFormIterator>
                                 </ArrayInput>
-                                <LinkInput source={`${source}message_link`} />
+                                {withLink && <LinkInput source={`${source}message_link`} />}
                             </div>
                         </CardContent>
                     </Card>
@@ -114,10 +116,12 @@ export const MessageInput = ({ classes, source }) => (
 MessageInput.propTypes = {
     classes: PropTypes.object,
     source: PropTypes.string,
+    withLink: PropTypes.bool,
 };
 
 MessageInput.defaultProps = {
     source: '',
+    withLink: false,
 };
 
 export default addField(withStyles(styles)(MessageInput));
