@@ -3,10 +3,10 @@ version: '3'
 services:
     admin:
         image: node:9
-        command: "yarn run start"
+        command: 'yarn run start'
         volumes:
-            - ".:/app"
-            - "/tmp:/tmp"
+            - '.:/app'
+            - '/tmp:/tmp'
         environment:
             - PORT=5000
             - NODE_ENV=development
@@ -14,19 +14,19 @@ services:
             - REACT_APP_API_URL=http://localhost:4000
             - REACT_APP_FRONT_BASE_URL=http://localhost:3000
         ports:
-            - "5000:5000"
+            - '5000:5000'
         working_dir: /app/admin
-        user: "${UID}:${GID}"
+        user: '${UID}:${GID}'
 
     maildev:
         image: djfarrelly/maildev
         expose:
-            - "25"
+            - '25'
         ports:
-            - "1080:80"
+            - '1080:80'
 
     api:
-        command: "yarn run start-dev"
+        command: 'yarn run start-dev'
         environment:
             - ADMIN_USERNAME=admin
             - ADMIN_PASSWORD=password
@@ -37,51 +37,54 @@ services:
             - SMTP_USER=
             - API_PREFIX_URL=
         ports:
-            - "4000:4000"
+            - '4000:4000'
 
     db:
         volumes:
-            - "./var/data:/var/lib/postgresql/data/"
+            - amnesty-postgres-data:/var/lib/postgresql/data/
         environment:
             - POSTGRES_USER=amnesty
             - POSTGRES_PASSWORD=amnesty
             - POSTGRES_DB=reaction-rapide
         ports:
-            - "5432:5432"
+            - '5432:5432'
 
     storybook:
         image: node:9
-        command: "yarn run storybook"
+        command: 'yarn run storybook'
         volumes:
-            - "./front:/app"
-            - "/tmp:/tmp"
+            - './front:/app'
+            - '/tmp:/tmp'
         environment:
             - NODE_ENV=development
         ports:
-            - "9009:9009"
+            - '9009:9009'
         working_dir: /app
-        user: "${UID}:${GID}"
+        user: '${UID}:${GID}'
 
     front:
         image: node:9
-        command: "yarn run start-web"
+        command: 'yarn run start-web'
         volumes:
-            - ".:/app"
-            - "/tmp:/tmp"
+            - '.:/app'
+            - '/tmp:/tmp'
         environment:
             - HOME=/tmp
             - REACT_APP_API_URL=http://localhost:4000
             - NODE_ENV=development
         working_dir: /app/front
-        user: "${UID}:${GID}"
+        user: '${UID}:${GID}'
         ports:
-            - "3000:3000"
+            - '3000:3000'
 
     nginx:
         image: nginx
         ports:
-            - "80:80"
+            - '80:80'
         volumes:
             - ./var/uploads:/app/uploads
             - ./var/nginx/image.conf:/etc/nginx/conf.d/default.conf
         command: [sh, -c, "chmod -R o+X /app; nginx -g 'daemon off;'"]
+
+volumes:
+    amnesty-postgres-data: {}
