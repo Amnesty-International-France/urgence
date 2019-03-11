@@ -30,6 +30,12 @@ const styles = {
             alignSelf: 'flex-end',
         },
     },
+    '& .letter': {
+        border: 'solid 1px',
+    },
+    '& .importantText': {
+        fontWeight: 'bold',
+    },
 };
 
 export const Message = ({ messageTemplate, action, className, link }) => (
@@ -41,9 +47,13 @@ export const Message = ({ messageTemplate, action, className, link }) => (
         {messageTemplate &&
             messageTemplate.length > 0 && (
                 <div className={classnames('message', className)}>
-                    <div>
+                    <span>
+                        Pour agir plus vite,{' '}
+                        <b className="importantText"> nous vous proposons ce message :</b>
+                    </span>
+                    <div className="letter">
                         {messageTemplate.map(({ value }, index) => (
-                            <MessageStep key={value} content={value} darken={!!(index % 2)} />
+                            <MessageStep key={value} content={value} opacity={index} />
                         ))}
                     </div>
                     <div className="action">

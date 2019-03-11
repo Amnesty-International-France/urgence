@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { white, black } from '../../themes/colors';
 
 import RichText from '../../themes/RichText';
 
@@ -20,10 +21,11 @@ export default glamorous(MessageStep)(
         '& .rich-text, & > p': {
             fontFamily: 'Amnesty Trade Gothic',
             lineHeight: '1.5em',
-            padding: '0.5em 3em',
+            padding: '0.5em 1em',
         },
+        backgroundColor: white,
     },
-    ({ darken }) => ({
-        backgroundColor: darken ? '#FFF3F3F3' : '#FFFFFF',
+    ({ opacity }) => ({
+        color: `rgba(0, 0, 0, ${1 / (opacity * 2)})`,
     }),
 );
