@@ -77,12 +77,11 @@ export const StoryStep = ({ className, medium, displayOptions, content, link, ha
         }}
     >
         <div className="step">
-            {medium &&
-                displayOptions.mediumPosition === 'top' && (
-                    <div className="image">
-                        <Image {...medium} />
-                    </div>
-                )}
+            {medium && displayOptions.mediumPosition === 'top' && (
+                <div className="image">
+                    <Image {...medium} />
+                </div>
+            )}
 
             <div
                 className="content"
@@ -94,12 +93,11 @@ export const StoryStep = ({ className, medium, displayOptions, content, link, ha
                 <RichText html={content} />
             </div>
 
-            {medium &&
-                displayOptions.mediumPosition === 'bottom' && (
-                    <div className="image">
-                        <Image {...medium} />
-                    </div>
-                )}
+            {medium && displayOptions.mediumPosition === 'bottom' && (
+                <div className="image">
+                    <Image {...medium} />
+                </div>
+            )}
         </div>
 
         {hasActButton && (
@@ -108,13 +106,9 @@ export const StoryStep = ({ className, medium, displayOptions, content, link, ha
             </div>
         )}
 
-        {link &&
-            link.url && (
-                <Link
-                    {...link}
-                    color={textColorForBackgroundColor(displayOptions.backgroundColor)}
-                />
-            )}
+        {link && link.url && (
+            <Link {...link} color={textColorForBackgroundColor(displayOptions.backgroundColor)} />
+        )}
     </div>
 );
 
