@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 import RichText from '../themes/RichText';
-import { pink, white } from '../themes/colors';
-import { withWhiteLogo } from '../themes/ThemeContext';
+import { yellow, white } from '../themes/colors';
+import { withBlackLogo } from '../themes/ThemeContext';
 import { LinkType } from '../propTypes';
 import Link from './Link';
 
@@ -32,11 +32,11 @@ Act.propTypes = {
     className: PropTypes.string.isRequired,
 };
 
-export default glamorous(withWhiteLogo(Act))({
+export default glamorous(withBlackLogo(Act))({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    backgroundColor: pink,
+    backgroundColor: yellow,
     color: white,
     height: '100%',
     '@media (min-width: 1024px)': {

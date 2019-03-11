@@ -44,6 +44,7 @@ const query = gql`
             call_to_action {
                 title
                 message
+                button
                 link {
                     label
                     url
@@ -109,7 +110,12 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
         return (
             <Act
                 callToAction={get(data, 'UrgentAction.call_to_action')}
-                action={<ToUrgentActionPageLink label="Voir le message" pageName="message" />}
+                action={
+                    <ToUrgentActionPageLink
+                        label={get(data, 'UrgentAction.call_to_action.button')}
+                        pageName="message"
+                    />
+                }
             />
         );
     }
