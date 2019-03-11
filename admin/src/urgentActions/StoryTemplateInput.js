@@ -92,7 +92,7 @@ StoryTemplateInput.propTypes = {
     classes: PropTypes.object,
     source: PropTypes.string,
     index: PropTypes.number.isRequired,
-    withLink: PropTypes.string,
+    withLink: PropTypes.bool,
 };
 
 StoryTemplateInput.defaultProps = {

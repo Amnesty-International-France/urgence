@@ -14,8 +14,6 @@ import { get as getScreenIndex, MESSAGE } from './screenIndex';
 import ParagraphTemplateInput from './ParagraphTemplateInput';
 import FrontPreview from './FrontPreview';
 
-import { USE_CALL_TO_ACTION_LINK } from '../flags';
-
 import Message from '../../../front/src/urgentActions/message/Message';
 import Link from '../../../front/src/themes/Link';
 import SimpleParagraphFormIterator from './SimpleParagraphFormIterator';
