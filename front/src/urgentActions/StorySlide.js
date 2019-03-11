@@ -72,7 +72,7 @@ export class StorySlide extends Component {
                 key={step.content}
             >
                 <div className="story-step">
-                    <StoryStep link={link} {...step} hasActButton={index === total} />
+                    <StoryStep link={link} {...step} />
                 </div>
 
                 <div

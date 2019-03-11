@@ -6,11 +6,8 @@ import { Router } from '../../../front/src/gateway/ReactRouter';
 
 export const FrontPreview = ({ className, children }) => (
     <div className={`${className} preview`}>
-        {/* Router is necessary cause ActButton needs match params passed in its props */}
         <Router>
-            <ThemeProvider>
-                {children}
-            </ThemeProvider>
+            <ThemeProvider>{children}</ThemeProvider>
         </Router>
     </div>
 );
@@ -20,6 +17,6 @@ FrontPreview.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-export const noop = () => { };
+export const noop = () => {};
 
 export default FrontPreview;

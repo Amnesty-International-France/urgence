@@ -5,7 +5,6 @@ import glamorous from 'glamorous';
 
 import RichText from '../themes/RichText';
 import Image from '../themes/Image';
-import ActButton from './ActButton';
 import { StoryStepPropType, LinkType } from '../propTypes';
 import { textColorForBackgroundColor, colors, black, white, yellow } from '../themes/colors';
 import Link from './Link';
@@ -68,7 +67,7 @@ export const getLogoColorForStep = step => {
     return white;
 };
 
-export const StoryStep = ({ className, medium, displayOptions, content, link, hasActButton }) => (
+export const StoryStep = ({ className, medium, displayOptions, content, link }) => (
     <div
         className={className}
         style={{
@@ -100,12 +99,6 @@ export const StoryStep = ({ className, medium, displayOptions, content, link, ha
             )}
         </div>
 
-        {hasActButton && (
-            <div className="act">
-                <ActButton />
-            </div>
-        )}
-
         {link && link.url && (
             <Link {...link} color={textColorForBackgroundColor(displayOptions.backgroundColor)} />
         )}
@@ -114,7 +107,6 @@ export const StoryStep = ({ className, medium, displayOptions, content, link, ha
 
 StoryStep.propTypes = {
     className: PropTypes.string,
-    hasActButton: PropTypes.bool,
     link: LinkType,
     ...StoryStepPropType,
 };

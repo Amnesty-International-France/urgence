@@ -4,7 +4,6 @@ export default driver => {
     const elements = {
         activeSlide: By.className('swiper-slide-active'),
         activeSlideText: By.css('.swiper-slide-active .rich-text'),
-        actButton: By.css('.swiper-slide-active a'),
         nextButton: By.css('.swiper-slide-active .next-arrow'),
     };
     return {
@@ -24,6 +23,5 @@ export default driver => {
             await driver.wait(until.urlIs(`http://front:3000/#/ua/${this.id}/story/${this.step}`));
             await driver.wait(until.elementLocated(elements.activeSlide));
         },
-        act: async () => driver.findElement(elements.actButton).click(),
     };
 };
