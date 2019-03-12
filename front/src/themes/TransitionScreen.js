@@ -61,7 +61,7 @@ export const TransitionScreen = ({ className, action, title, message, link }) =>
         </div>
         <div className="actions">
             {action}
-            {link.url && <Link {...link} color={black} />}
+            {link && link.url && <Link {...link} color={black} />}
         </div>
     </div>
 );
