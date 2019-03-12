@@ -1,14 +1,19 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { compose } from 'recompose';
 import classnames from 'classnames';
 
 import { white, black } from '../../themes/colors';
 import MessageStep from './MessageStep';
 import ShowButton from './ShowButton';
 import { withYellowLogo } from '../../themes/ThemeContext';
+import { withSessionData } from '../../SessionDataContext';
 import Link from '../Link';
 import { LinkType } from '../../propTypes';
+import Input from '../../themes/Input';
+import RichText from '../../themes/RichText';
+import RadioButton from '../../themes/RadioButton';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -130,40 +135,106 @@ LetterView.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
 };
 
-export const Message = ({ messageTemplate, action, className, link }) => (
-    <Fragment>
-        {(!messageTemplate || !messageTemplate.length) && (
-            <p className="error">Cette action urgente n&#39;existe plus.</p>
-        )}
+export class FormStep extends Component {
+    setObject = event => this.props.setObject(event.target.value);
+    setCivility = event => this.props.setCivility(event.target.value);
+    setSurname = event => this.props.setSurname(event.target.value);
+    setName = event => this.props.setName(event.target.value);
+    render() {
+        const { objectIndication, object, civility, surname, name } = this.props;
+        return (
+            <Fragment>
+                <Input value={object} onChange={this.setObject} placeholder="Objet de l'e-mail" />
+                <RichText html={objectIndication} />
+                <RadioButton
+                    value={civility}
+                    name="civility"
+                    onChange={this.setCivility}
+                    label="Civilité"
+                    choices={['M.', 'Mme.', 'Autre']}
+                />
+                <Input value={surname} onChange={this.setSurname} placeholder="Votre prénom" />
+                <Input value={name} onChange={this.setName} placeholder="Votre nom" />
+            </Fragment>
+        );
+    }
+}
 
-        {messageTemplate && messageTemplate.length > 0 && (
-            <div className={classnames('message', className)}>
-                <span>
-                    Pour agir plus vite,
-                    <strong className="importantText"> nous vous proposons ce message :</strong>
-                </span>
-                <LetterView messageTemplate={messageTemplate} />
-                <span>
-                    Parce que les messages uniques ont plus d&apos;impact,
-                    <strong className="importantText">
-                        &nbsp;nous vous invitons à le personnaliser.
-                    </strong>
-                </span>
-                <div className="action">
-                    {action}
-                    {link && link.url && <Link {...link} />}
-                </div>
-            </div>
-        )}
-    </Fragment>
-);
+FormStep.propTypes = {
+    className: PropTypes.string,
+    objectIndication: PropTypes.string,
+    object: PropTypes.string,
+    civility: PropTypes.string,
+    surname: PropTypes.string,
+    name: PropTypes.string,
+    setObject: PropTypes.func.isRequired,
+    setCivility: PropTypes.func.isRequired,
+    setSurname: PropTypes.func.isRequired,
+    setName: PropTypes.func.isRequired,
+};
+
+export const Message = ({
+    messageTemplate,
+    objectIndication,
+    action,
+    className,
+    link,
+    setObject,
+    setCivility,
+    setSurname,
+    setName,
+}) => (
+        <Fragment>
+            {(!messageTemplate || !messageTemplate.length) && (
+                <p className="error">Cette action urgente n&#39;existe plus.</p>
+            )}
+
+            {messageTemplate &&
+                messageTemplate.length > 0 && (
+                    <div className={classnames('message', className)}>
+                        <p>
+                            Pour agir plus vite,&nbsp;
+                        <strong className="importantText"> nous vous proposons ce message :</strong>
+                        </p>
+                        <LetterView messageTemplate={messageTemplate} />
+                        <p>
+                            Parce que les messages uniques ont plus d&#39;impact,&nbsp;
+                        <strong className="importantText">
+                                {' '}
+                                nous vous invitons à le personnaliser.
+                        </strong>
+                        </p>
+                        <FormStep
+                            objectIndication={objectIndication}
+                            setObject={setObject}
+                            setCivility={setCivility}
+                            setSurname={setSurname}
+                            setName={setName}
+                        />
+                        <div className="action">
+                            {action}
+                            {link && link.url && <Link {...link} />}
+                        </div>
+                    </div>
+                )}
+        </Fragment>
+    );
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
     link: LinkType,
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
+    setObject: PropTypes.func.isRequired,
+    setCivility: PropTypes.func.isRequired,
+    setSurname: PropTypes.func.isRequired,
+    setName: PropTypes.func.isRequired,
     action: PropTypes.node.isRequired,
 };
 
-export default glamorous(withYellowLogo(Message))(styles);
+export default glamorous(
+    compose(
+        withBlackLogo,
+        withSessionData,
+    )(Message),
+)(styles);

@@ -16,7 +16,7 @@ export const renderSendMail = ({ messageTemplate, recipient, afterMail }) => ({
 }) => (
     <MailTo
         disabled={!object || !signature}
-        label="Envoyer"
+        label="J'envoie"
         recipient={recipient}
         subject={object}
         body={templateToBodyText(messageTemplate, signature)}

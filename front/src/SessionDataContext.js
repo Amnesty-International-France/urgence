@@ -5,9 +5,13 @@ import sessionData from './sessionData';
 
 const { Provider, Consumer } = createContext({
     object: null,
-    signature: null,
+    civility: null,
+    surname: null,
+    name: null,
     setObject: () => null,
-    setSignature: () => null,
+    setCivility: () => null,
+    setSurname: () => null,
+    setName: () => null,
     setAddress: () => null,
     setMail: () => null,
 });
@@ -17,7 +21,9 @@ export const SessionDataConsumer = Consumer;
 export class SessionDataProvider extends Component {
     state = {
         object: sessionData.getMailObject(),
-        signature: sessionData.getSignature(),
+        civility: sessionData.getCivility(),
+        surname: sessionData.getSurname(),
+        name: sessionData.getName(),
         address: sessionData.getAddress(),
         email: sessionData.getEmail(),
     };
@@ -27,9 +33,19 @@ export class SessionDataProvider extends Component {
         sessionData.setMailObject(object);
     };
 
-    setSignature = signature => {
-        this.setState({ signature });
-        sessionData.setSignature(signature);
+    setCivility = civility => {
+        this.setState({ civility });
+        sessionData.setCivility(civility);
+    };
+
+    setSurname = surname => {
+        this.setState({ surname });
+        sessionData.setSurname(surname);
+    };
+
+    setName = name => {
+        this.setState({ name });
+        sessionData.setName(name);
     };
 
     setAddress = address => {
@@ -48,7 +64,9 @@ export class SessionDataProvider extends Component {
                 value={{
                     ...this.state,
                     setObject: this.setObject,
-                    setSignature: this.setSignature,
+                    setCivility: this.setCivility,
+                    setSurname: this.setSurname,
+                    setName: this.setName,
                     setAddress: this.setAddress,
                     setEmail: this.setEmail,
                 }}
