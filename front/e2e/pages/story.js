@@ -5,6 +5,7 @@ export default driver => {
         activeSlide: By.className('swiper-slide-active'),
         activeSlideText: By.css('.swiper-slide-active .rich-text'),
         nextButton: By.css('.swiper-slide-active .next-arrow'),
+        lastButton: By.css('.swiper-slide-active .last-arrow'),
     };
     return {
         navigate: async (id, step) => {
@@ -22,6 +23,12 @@ export default driver => {
             this.step++;
             await driver.wait(until.urlIs(`http://front:3000/#/ua/${this.id}/story/${this.step}`));
             await driver.wait(until.elementLocated(elements.activeSlide));
+        },
+        lastStep: async () => {
+            const lastButton = await driver.findElement(elements.lastButton);
+            await driver.wait(until.elementIsVisible(lastButton));
+            await lastButton.click();
+            await driver.wait(until.urlIs(`http://front:3000/#/ua/${this.id}/act`));
         },
     };
 };

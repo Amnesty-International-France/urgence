@@ -43,7 +43,7 @@ const styles = {
         flex: '1 0 0',
     },
 
-    '& .next-arrow': {
+    '& .next-arrow, & last-arrow': {
         position: 'relative',
         top: 4,
         textAlign: 'right',
@@ -91,7 +91,7 @@ export class StorySlide extends Component {
                             <RightArrow fill={rightArrowColor(step)} />
                         </div>
                     ) : (
-                        <div className="next-arrow" onClick={lastSlide}>
+                        <div className="last-arrow" onClick={lastSlide}>
                             <RightArrow fill={rightArrowColor(step)} />
                         </div>
                     )}

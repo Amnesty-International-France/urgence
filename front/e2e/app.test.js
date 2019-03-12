@@ -49,15 +49,13 @@ describe('app', () => {
             "Le 7 décembre, le responsable du parquet de Long An a insisté, lors d'un discours à la télévision, pour que son exécution soit accélérée.",
         );
 
-        await storyPage.act();
-
-        await driver.wait(until.urlIs(`http://front:3000/#/ua/${urgentAction.id}/act`));
+        await storyPage.lastStep();
     });
 
     it('should display act step', async () => {
         await actPage.navigate(urgentAction.id);
         const title = await actPage.getTitle();
-        expect(title).toBe('Génial !');
+        expect(title).toBe('GÉNIAL !');
 
         const text = await actPage.getText();
 
