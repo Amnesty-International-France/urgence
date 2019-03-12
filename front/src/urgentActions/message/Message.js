@@ -60,7 +60,6 @@ const styles = {
         left: 0,
         width: '100%',
         margin: 0,
-        paddingBottom: '10px',
         backgroundImage: 'linear-gradient(to bottom, transparent, white)',
         transition: 'all 1s',
     },
@@ -75,6 +74,7 @@ const styles = {
         fontWeight: 'bold',
         display: 'flex',
         justifyContent: 'center',
+        paddingBottom: '10px',
         '&:active': {
             color: 'rgba(0, 0, 0, 0.5)',
         },
@@ -98,11 +98,11 @@ const ShowButton = ({ showAllText, action }) => (
                 <b className="upText">︿</b>
             </span>
         ) : (
-                <span>
-                    Voir plus&nbsp;&nbsp;
+            <span>
+                Voir plus&nbsp;&nbsp;
                 <b className="downText">﹀</b>
-                </span>
-            )}
+            </span>
+        )}
     </span>
 );
 
