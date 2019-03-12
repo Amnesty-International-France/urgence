@@ -65,23 +65,22 @@ export class Story extends Component {
                     <p className="error">Cette action urgente n&#39;existe plus.</p>
                 )}
 
-                {story &&
-                    story.length > 0 && (
-                        <Carousel initialSlide={parseInt(page, 10)} afterChange={this.afterChange}>
-                            {({ nextSlide }) =>
-                                story.map((step, index) => (
-                                    <StorySlide
-                                        key={step.content}
-                                        step={step}
-                                        total={story.length}
-                                        index={index + 1}
-                                        nextSlide={nextSlide}
-                                        link={story.length === index + 1 ? endStoryLink : null}
-                                    />
-                                ))
-                            }
-                        </Carousel>
-                    )}
+                {story && story.length > 0 && (
+                    <Carousel initialSlide={parseInt(page, 10)} afterChange={this.afterChange}>
+                        {({ nextSlide }) =>
+                            story.map((step, index) => (
+                                <StorySlide
+                                    key={step.content}
+                                    step={step}
+                                    total={story.length}
+                                    index={index + 1}
+                                    nextSlide={nextSlide}
+                                    link={story.length === index + 1 ? endStoryLink : null}
+                                />
+                            ))
+                        }
+                    </Carousel>
+                )}
             </div>
         );
     }
