@@ -36,7 +36,7 @@ const styles = {
     '& .importantText': {
         fontWeight: 'bold',
     },
-    '& .letter': {
+    '& #letter': {
         border: 'solid 1px',
         color: black,
         padding: '1em 0',
@@ -45,18 +45,17 @@ const styles = {
     '& .showOnlyBegin': {
         WebkitMaskImage:
             '-webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)))',
-        maxHeight: '280px',
+        maxHeight: '48vh',
         overflow: 'hidden',
     },
     '& .showButton': {
         cursor: 'pointer',
+        fontWeight: 'bold',
+        display: 'flex',
+        justifyContent: 'center',
         '&:active': {
             color: 'rgba(0, 0, 0, 0.5)',
         },
-    },
-    '& .middleText': {
-        display: 'flex',
-        justifyContent: 'center',
     },
     '& .downText': {
         top: 8,
@@ -94,15 +93,20 @@ ShowButton.defaultProps = {
 };
 
 export class Message extends Component {
-    state = { showAllText: false };
+    state = { showAllText: false, letterOverflow: true };
 
     setShowMode = () => {
         this.setState({ showAllText: !this.state.showAllText });
     };
 
+    componentDidMount() {
+        const height = document.getElementById('letter').clientHeight;
+        this.setState({ letterOverflow: height > 310 });
+    }
+
     render() {
         const { messageTemplate, action, className, link } = this.props;
-        const { showAllText } = this.state;
+        const { showAllText, letterOverflow } = this.state;
         return (
             <Fragment>
                 {(!messageTemplate || !messageTemplate.length) && (
@@ -116,18 +120,22 @@ export class Message extends Component {
                                 Pour agir plus vite,{' '}
                                 <b className="importantText"> nous vous proposons ce message :</b>
                             </span>
-                            <div className="letter">
-                                <div className={classnames(showAllText ? '' : 'showOnlyBegin')}>
+                            <div id="letter">
+                                <div
+                                    className={classnames(
+                                        showAllText || !letterOverflow ? '' : 'showOnlyBegin',
+                                    )}
+                                >
                                     {messageTemplate.map(({ value }) => (
                                         <MessageStep key={value} content={value} />
                                     ))}
                                 </div>
-                                <span className={classnames('importantText', 'middleText')}>
+                                {letterOverflow && (
                                     <ShowButton
                                         showAllText={showAllText}
                                         action={this.setShowMode}
                                     />
-                                </span>
+                                )}
                             </div>
                             <span>
                                 Parce que les messages uniques ont plus d&apos;impact,{' '}

@@ -118,6 +118,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
         return (
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
+                objectIndication=""
                 link={get(data, 'UrgentAction.message_link')}
                 loading={loading}
                 action={
