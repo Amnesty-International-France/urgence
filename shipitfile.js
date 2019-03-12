@@ -14,13 +14,15 @@ module.exports = shipit => {
             key: path.join(__dirname, 'var/deploy.key'),
             deployTo: BASE_FOLDER,
             servers: 'ubuntu@52.17.15.141',
+            strict: false,
         },
         production: {
             branch: 'master',
             key: path.join(__dirname, 'var/deploy-prod.key'),
             deployTo: '/home/amnesty',
             servers: 'amnesty@rapide.amnesty.fr',
-        }
+            strict: false,
+        },
     });
 
     shipit.blTask('buildAdmin', async () => {
@@ -56,13 +58,13 @@ module.exports = shipit => {
         await shipit.remote('make install-staging', { cwd: shipit.releasePath });
         switch (process.env.NODE_ENV) {
             case 'staging':
-                return shipit.remote('make stop-staging start-staging', { cwd: shipit.releasePath });
+                return shipit.remote('make stop-staging start-staging', {
+                    cwd: shipit.releasePath,
+                });
             case 'production':
                 return shipit.remote('make stop-prod start-prod', { cwd: shipit.releasePath });
             default:
                 return;
         }
-
     });
-}
-
+};
