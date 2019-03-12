@@ -10,6 +10,7 @@ import Link from '../Link';
 import { LinkType } from '../../propTypes';
 
 const styles = {
+    fontSize: '16pt',
     padding: '4em 1em 1em 1em',
     display: 'flex',
     flexDirection: 'column',
@@ -24,7 +25,7 @@ const styles = {
         },
     },
     '@media (max-width: 350px)': {
-        fontSize: '0.7em',
+        fontSize: '0.8em',
     },
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
@@ -38,20 +39,21 @@ const styles = {
     },
     '& .letter': {
         border: 'solid 1px',
+        borderColor: 'rgb(0, 0, 0, 0.20)',
         color: black,
         padding: '1em 0 0 0',
         margin: '1em 0',
     },
     '& .content': {
+        fontSize: '14pt',
         position: 'relative',
         transition: 'all cubic-bezier(0.25, 0.1, 0.25, 1) 1s',
-        paddingBottom: '50px',
     },
     '& .showFullTextContent': {
         maxHeight: '548vh',
     },
     '& .showOnlyBeginContent': {
-        maxHeight: '48vh',
+        maxHeight: '42vh',
         overflow: 'hidden',
     },
     '& .end': {
@@ -70,11 +72,12 @@ const styles = {
         paddingTop: '10px',
     },
     '& .showButton': {
+        fontSize: '16pt',
         cursor: 'pointer',
         fontWeight: 'bold',
         display: 'flex',
         justifyContent: 'center',
-        paddingBottom: '10px',
+        padding: '20px 0',
         '&:active': {
             color: 'rgba(0, 0, 0, 0.5)',
         },
@@ -157,11 +160,10 @@ export class LetterView extends Component {
                                 'end',
                                 showAllText || !letterOverflow ? 'pleinEnd' : 'opacifyEnd',
                             )}
-                        >
-                            <ShowButton showAllText={showAllText} action={this.setShowMode} />
-                        </span>
+                        />
                     )}
                 </div>
+                <ShowButton showAllText={showAllText} action={this.setShowMode} />
             </div>
         );
     }
