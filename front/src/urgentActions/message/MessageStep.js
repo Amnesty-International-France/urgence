@@ -20,5 +20,6 @@ export default glamorous(MessageStep)({
         fontFamily: 'Amnesty Trade Gothic',
         lineHeight: '1.5em',
         padding: '0.5em 1em',
+        fontStyle: 'italic',
     },
 });
