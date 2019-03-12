@@ -11,7 +11,6 @@ module.exports = shipit => {
         },
         staging: {
             branch: process.env.BRANCH || 'master',
-            key: path.join(__dirname, 'var/deploy.key'),
             deployTo: BASE_FOLDER,
             servers: 'ubuntu@52.17.15.141',
             strict: false,
