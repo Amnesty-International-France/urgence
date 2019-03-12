@@ -13,6 +13,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     height: '100%',
+    width: '100%',
     padding: '1rem',
     color: white,
     backgroundColor: yellow,
@@ -29,12 +30,12 @@ const styles = {
         fontWeight: 'bold',
         margin: '2rem 0.5rem',
         width: 'calc(100% - 0.5rem)',
-    },
-    '& span': {
-        color: white,
-        backgroundColor: black,
-        padding: '0.7rem 0',
-        boxShadow: `0.5rem 0 0 ${black}, -0.5rem 0 0 ${black}`,
+        '> span': {
+            color: white,
+            backgroundColor: black,
+            padding: '5px 0',
+            boxShadow: `10px 0 0 ${black}, -10px 0 0 ${black}`,
+        },
     },
     '& .rich-text': {
         color: black,

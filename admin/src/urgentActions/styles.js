@@ -34,3 +34,12 @@ export const preview = {
     overflow: 'auto',
     fontFamily: "'Amnesty Trade Gothic', 'Arial', sans-serif",
 };
+
+export const transitionScreenPreview = {
+    ...preview,
+    '& > div': {
+        height: 'calc(100% - 2rem)',
+        width: 'calc(100% - 2rem)',
+        padding: '1rem',
+    },
+};

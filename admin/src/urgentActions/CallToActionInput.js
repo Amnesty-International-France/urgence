@@ -7,7 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 
-import { root, preview } from './styles';
+import { root, transitionScreenPreview } from './styles';
 import FrontPreview, { noop } from './FrontPreview';
 import RichTextInput from '../form/RichTextInput';
 import { get as getScreenIndex, CALL_TO_ACTION } from './screenIndex';
@@ -19,14 +19,7 @@ import LinkInput from './LinkInput';
 const styles = {
     ...root,
     preview: {
-        ...preview,
-        // the rules below override desktop media queries so that the preview is forced to appear like on mobile
-        '& > div': {
-            padding: '0 !important',
-            '& a': {
-                alignSelf: 'auto',
-            },
-        },
+        ...transitionScreenPreview,
     },
 };
 
