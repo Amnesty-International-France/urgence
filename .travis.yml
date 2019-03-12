@@ -21,18 +21,8 @@ script:
 
 stages:
     - name: test
-    - name: deploy
 
 jobs:
     include:
         - stage: test
           env: NODE_ENV=test
-        - stage: deploy
-          env: NODE_ENV=staging
-          script: skip
-          deploy:
-              skip_cleanup: true
-              provider: script
-              script: make deploy-staging
-              on:
-                  branch: master
