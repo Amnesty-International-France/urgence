@@ -116,15 +116,19 @@ ShowButton.defaultProps = {
 };
 
 export class LetterView extends Component {
-    state = { showAllText: false, letterOverflow: true };
+    constructor(props) {
+        super(props);
+        this.state = { showAllText: false, letterOverflow: true };
+        this.contentText = React.createRef();
+    }
 
     setShowMode = () => {
         this.setState({ showAllText: !this.state.showAllText });
     };
 
     componentDidMount() {
-        const totalHeight = document.getElementById('contentText').scrollHeight;
-        const clippedHeight = document.getElementById('contentText').clientHeight;
+        const totalHeight = this.contentText.current.scrollHeight;
+        const clippedHeight = this.contentText.current.clientHeight;
         this.setState({
             letterOverflow: totalHeight > clippedHeight,
         });
@@ -136,7 +140,7 @@ export class LetterView extends Component {
         return (
             <div className="letter">
                 <div
-                    id="contentText"
+                    ref={this.contentText}
                     className={classnames(
                         'content',
                         showAllText || !letterOverflow
