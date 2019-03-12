@@ -115,8 +115,8 @@ ShowButton.defaultProps = {
     extended: false,
 };
 
-export class Message extends Component {
-    state = { showAllText: false, letterOverflow: true, totalHeight: 300 };
+class LetterView extends Component {
+    state = { showAllText: false, letterOverflow: true };
 
     setShowMode = () => {
         this.setState({ showAllText: !this.state.showAllText });
@@ -127,73 +127,72 @@ export class Message extends Component {
         const clippedHeight = document.getElementById('contentText').clientHeight;
         this.setState({
             letterOverflow: totalHeight > clippedHeight,
-            totalHeight: totalHeight,
         });
     }
 
     render() {
-        const { messageTemplate, action, className, link } = this.props;
+        const { messageTemplate } = this.props;
         const { showAllText, letterOverflow } = this.state;
         return (
-            <Fragment>
-                {(!messageTemplate || !messageTemplate.length) && (
-                    <p className="error">Cette action urgente n&#39;existe plus.</p>
-                )}
-
-                {messageTemplate &&
-                    messageTemplate.length > 0 && (
-                        <div className={classnames('message', className)}>
-                            <span>
-                                Pour agir plus vite,{' '}
-                                <b className="importantText"> nous vous proposons ce message :</b>
-                            </span>
-                            <div className="letter">
-                                <div
-                                    id="contentText"
-                                    className={classnames(
-                                        'content',
-                                        showAllText || !letterOverflow
-                                            ? 'showFullTextContent'
-                                            : 'showOnlyBeginContent',
-                                    )}
-                                >
-                                    {messageTemplate.map(({ value }) => (
-                                        <MessageStep key={value} content={value} />
-                                    ))}
-                                    {letterOverflow && (
-                                        <span
-                                            className={classnames(
-                                                'end',
-                                                showAllText || !letterOverflow
-                                                    ? 'pleinEnd'
-                                                    : 'opacifyEnd',
-                                            )}
-                                        >
-                                            <ShowButton
-                                                showAllText={showAllText}
-                                                action={this.setShowMode}
-                                            />
-                                        </span>
-                                    )}
-                                </div>
-                            </div>
-                            <span>
-                                Parce que les messages uniques ont plus d&apos;impact,{' '}
-                                <b className="importantText">
-                                    {' '}
-                                    nous vous invitons à le personnaliser.
-                                </b>
-                            </span>
-                            <div className="action">
-                                {action}
-                                {link && link.url && <Link {...link} />}
-                            </div>
-                        </div>
+            <div className="letter">
+                <div
+                    id="contentText"
+                    className={classnames(
+                        'content',
+                        showAllText || !letterOverflow
+                            ? 'showFullTextContent'
+                            : 'showOnlyBeginContent',
                     )}
-            </Fragment>
+                >
+                    {messageTemplate.map(({ value }) => (
+                        <MessageStep key={value} content={value} />
+                    ))}
+                    {letterOverflow && (
+                        <span
+                            className={classnames(
+                                'end',
+                                showAllText || !letterOverflow ? 'pleinEnd' : 'opacifyEnd',
+                            )}
+                        >
+                            <ShowButton showAllText={showAllText} action={this.setShowMode} />
+                        </span>
+                    )}
+                </div>
+            </div>
         );
     }
 }
+
+LetterView.propTypes = {
+    messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
+};
+
+export const Message = ({ messageTemplate, action, className, link }) => (
+    <Fragment>
+        {(!messageTemplate || !messageTemplate.length) && (
+            <p className="error">Cette action urgente n&#39;existe plus.</p>
+        )}
+
+        {messageTemplate &&
+            messageTemplate.length > 0 && (
+                <div className={classnames('message', className)}>
+                    <span>
+                        Pour agir plus vite,{' '}
+                        <b className="importantText"> nous vous proposons ce message :</b>
+                    </span>
+                    <LetterView messageTemplate={messageTemplate} />
+                    <span>
+                        Parce que les messages uniques ont plus d&apos;impact,{' '}
+                        <b className="importantText"> nous vous invitons à le personnaliser.</b>
+                    </span>
+                    <div className="action">
+                        {action}
+                        {link && link.url && <Link {...link} />}
+                    </div>
+                </div>
+            )}
+    </Fragment>
+);
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
