@@ -10,9 +10,13 @@ make install start
 
 You can now access different applications:
 
-*   API: https://localhost:4000/
-*   Admin: https://localhost:5000/
-*   Front app: https://localhost:3000/
+* API: http://localhost:4000
+* Admin: http://localhost:5000
+* Front app: http://localhost:3000
+
+If you run the project in development, you can use:
+
+* Storybook: http://localhost:9009
 
 ## Deployment
 
