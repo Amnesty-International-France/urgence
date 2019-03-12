@@ -98,11 +98,11 @@ const ShowButton = ({ showAllText, action }) => (
                 <b className="upText">︿</b>
             </span>
         ) : (
-            <span>
-                Voir plus&nbsp;&nbsp;
+                <span>
+                    Voir plus&nbsp;&nbsp;
                 <b className="downText">﹀</b>
-            </span>
-        )}
+                </span>
+            )}
     </span>
 );
 
@@ -115,7 +115,7 @@ ShowButton.defaultProps = {
     extended: false,
 };
 
-class LetterView extends Component {
+export class LetterView extends Component {
     state = { showAllText: false, letterOverflow: true };
 
     setShowMode = () => {
