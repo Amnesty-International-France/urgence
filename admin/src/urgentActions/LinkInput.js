@@ -20,7 +20,7 @@ const styles = {
     },
 };
 
-export const LinkInput = ({ classes, label, source, final }) => (
+export const LinkInput = ({ classes, label, source }) => (
     <Labeled
         label={
             label || (
@@ -49,12 +49,10 @@ LinkInput.propTypes = {
     source: PropTypes.string,
     classes: PropTypes.object,
     label: PropTypes.element,
-    final: PropTypes.bool,
 };
 
 LinkInput.defaultProps = {
     source: '',
-    final: false,
     label: null,
 };
 

@@ -54,7 +54,7 @@ export const validateEmailsList = text =>
         ? 'Must contain only emails separated by a comma.'
         : null;
 
-export const MessageInput = ({ classes, source }) => (
+export const MessageInput = ({ classes, source, withLink }) => (
     <div className={classNames(classes.root, classes.bordered)}>
         <FormDataConsumer>
             {({ formData }) => (
@@ -91,7 +91,7 @@ export const MessageInput = ({ classes, source }) => (
                                         <ParagraphTemplateInput source="" />
                                     </SimpleParagraphFormIterator>
                                 </ArrayInput>
-                                <LinkInput source={`${source}message_link`} />
+                                {withLink && <LinkInput source={`${source}message_link`} />}
                             </div>
                         </CardContent>
                     </Card>
@@ -114,10 +114,12 @@ export const MessageInput = ({ classes, source }) => (
 MessageInput.propTypes = {
     classes: PropTypes.object,
     source: PropTypes.string,
+    withLink: PropTypes.bool,
 };
 
 MessageInput.defaultProps = {
     source: '',
+    withLink: false,
 };
 
 export default addField(withStyles(styles)(MessageInput));

@@ -46,7 +46,7 @@ const defaultFormData = {
     medium: null,
 };
 
-export const StoryTemplateInput = ({ classes, source, index }) => (
+export const StoryTemplateInput = ({ classes, source, index, withLink }) => (
     <div className={classes.root}>
         <FormDataConsumer>
             {({ formData }) => (
@@ -63,7 +63,7 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
                                     source={`${source}displayOptions`}
                                     label="Display Options"
                                 />
-                                {formData.story.length === index + 1 && (
+                                {formData.story.length === index + 1 && withLink && (
                                     <LinkInput source="end_of_story_link" />
                                 )}
                             </div>
@@ -92,10 +92,12 @@ StoryTemplateInput.propTypes = {
     classes: PropTypes.object,
     source: PropTypes.string,
     index: PropTypes.number.isRequired,
+    withLink: PropTypes.bool,
 };
 
 StoryTemplateInput.defaultProps = {
     source: '',
+    withLink: false,
 };
 
 export default addField(withStyles(styles)(StoryTemplateInput));
