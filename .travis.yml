@@ -2,22 +2,37 @@ language: node_js
 sudo: required
 
 services:
-  - docker
+    - docker
 
 node_js:
-  - '9.11.1'
-
-env:
-  global:
-    - NODE_ENV=test
+    - '9.11.1'
 
 install:
-  - make install
-
-script:
-  - make test
+    - make install
 
 cache:
-  directories:
-    - node_modules
-    - /tmp/amnesty
+    yarn: true
+    directories:
+        - node_modules
+        - /tmp/amnesty
+
+script:
+    - make test
+
+stages:
+    - name: test
+    - name: deploy
+
+jobs:
+    include:
+        - stage: test
+          env: NODE_ENV=test
+        - stage: deploy
+          env: NODE_ENV=staging
+          script: skip
+          deploy:
+              skip_cleanup: true
+              provider: script
+              script: make deploy-staging
+              on:
+                  branch: master
