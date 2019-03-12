@@ -36,17 +36,39 @@ const styles = {
     '& .importantText': {
         fontWeight: 'bold',
     },
-    '& #letter': {
+    '& .letter': {
         border: 'solid 1px',
         color: black,
-        padding: '1em 0',
+        padding: '1em 0 0 0',
         margin: '1em 0',
     },
-    '& .showOnlyBegin': {
-        WebkitMaskImage:
-            '-webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)))',
+    '& .content': {
+        position: 'relative',
+        transition: 'all cubic-bezier(0.25, 0.1, 0.25, 1) 1s',
+        paddingBottom: '50px',
+    },
+    '& .showFullTextContent': {
+        maxHeight: '548vh',
+    },
+    '& .showOnlyBeginContent': {
         maxHeight: '48vh',
         overflow: 'hidden',
+    },
+    '& .end': {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        width: '100%',
+        margin: 0,
+        paddingBottom: '10px',
+        backgroundImage: 'linear-gradient(to bottom, transparent, white)',
+        transition: 'all 1s',
+    },
+    '& .opacifyEnd': {
+        paddingTop: '30vh',
+    },
+    '& .pleinEnd': {
+        paddingTop: '10px',
     },
     '& .showButton': {
         cursor: 'pointer',
@@ -56,6 +78,7 @@ const styles = {
         '&:active': {
             color: 'rgba(0, 0, 0, 0.5)',
         },
+        background: white,
     },
     '& .downText': {
         top: 8,
@@ -93,15 +116,19 @@ ShowButton.defaultProps = {
 };
 
 export class Message extends Component {
-    state = { showAllText: false, letterOverflow: true };
+    state = { showAllText: false, letterOverflow: true, totalHeight: 300 };
 
     setShowMode = () => {
         this.setState({ showAllText: !this.state.showAllText });
     };
 
     componentDidMount() {
-        const height = document.getElementById('letter').clientHeight;
-        this.setState({ letterOverflow: height > 310 });
+        const totalHeight = document.getElementById('contentText').scrollHeight;
+        const clippedHeight = document.getElementById('contentText').clientHeight;
+        this.setState({
+            letterOverflow: totalHeight > clippedHeight,
+            totalHeight: totalHeight,
+        });
     }
 
     render() {
@@ -120,22 +147,35 @@ export class Message extends Component {
                                 Pour agir plus vite,{' '}
                                 <b className="importantText"> nous vous proposons ce message :</b>
                             </span>
-                            <div id="letter">
+                            <div className="letter">
                                 <div
+                                    id="contentText"
                                     className={classnames(
-                                        showAllText || !letterOverflow ? '' : 'showOnlyBegin',
+                                        'content',
+                                        showAllText || !letterOverflow
+                                            ? 'showFullTextContent'
+                                            : 'showOnlyBeginContent',
                                     )}
                                 >
                                     {messageTemplate.map(({ value }) => (
                                         <MessageStep key={value} content={value} />
                                     ))}
+                                    {letterOverflow && (
+                                        <span
+                                            className={classnames(
+                                                'end',
+                                                showAllText || !letterOverflow
+                                                    ? 'pleinEnd'
+                                                    : 'opacifyEnd',
+                                            )}
+                                        >
+                                            <ShowButton
+                                                showAllText={showAllText}
+                                                action={this.setShowMode}
+                                            />
+                                        </span>
+                                    )}
                                 </div>
-                                {letterOverflow && (
-                                    <ShowButton
-                                        showAllText={showAllText}
-                                        action={this.setShowMode}
-                                    />
-                                )}
                             </div>
                             <span>
                                 Parce que les messages uniques ont plus d&apos;impact,{' '}
