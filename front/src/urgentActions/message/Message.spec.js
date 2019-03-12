@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import { Message, LetterView } from './Message';
 import MessageStep from './MessageStep';
@@ -33,7 +33,7 @@ describe('Message', () => {
     });
 
     it('display all messageTemplate steps', () => {
-        const wrapper = shallow(<LetterView {...defaultProps} />);
+        const wrapper = mount(<LetterView {...defaultProps} />);
 
         const messages = wrapper.find(MessageStep);
 
