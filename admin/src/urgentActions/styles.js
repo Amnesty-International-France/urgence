@@ -14,7 +14,7 @@ export const root = {
         backgroundColor: pink,
         marginTop: 16,
     },
-    formContainer:{
+    formContainer: {
         '& > div': {
             width: '100%',
             margin: 0,
