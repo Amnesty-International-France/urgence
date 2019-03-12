@@ -4,6 +4,11 @@ import { shallow, mount } from 'enzyme';
 import { Message, LetterView } from './Message';
 import MessageStep from './MessageStep';
 
+import { JSDOM } from 'jsdom';
+const dom = new JSDOM();
+global.document = dom.window.document;
+global.window = dom.window;
+
 describe('Message', () => {
     const defaultStep = [{ value: 'one' }, { value: 'two' }, { value: 'three' }];
     const defaultProps = {
