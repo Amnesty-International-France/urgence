@@ -14,10 +14,9 @@ const styles = {
     justifyContent: 'center',
     height: '100%',
     width: '100%',
-    padding: '1rem',
+    padding: '20px',
     color: white,
     backgroundColor: yellow,
-    fontFamily: 'Amnesty Trade Gothic',
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
         '& .link': {
@@ -26,23 +25,28 @@ const styles = {
     },
     '& h1': {
         textTransform: 'uppercase',
-        fontSize: '2rem',
+        fontFamily: 'Amnesty Trade Gothic Condensed',
+        fontSize: '36px',
         fontWeight: 'bold',
-        margin: '2rem 0.5rem',
-        width: 'calc(100% - 0.5rem)',
+        margin: '1.5rem 12px',
+        width: 'calc(100% - 12px)',
         '> span': {
             color: white,
             backgroundColor: black,
-            padding: '5px 0',
+            padding: '6px 0',
             boxShadow: `10px 0 0 ${black}, -10px 0 0 ${black}`,
         },
     },
     '& .rich-text': {
         color: black,
-        fontSize: '1rem',
+        fontFamily: 'Amnesty Trade Gothic LT',
+        fontSize: '16px',
     },
     '& .actions': {
-        margin: '2rem 0',
+        fontFamily: 'Amnesty Trade Gothic Condensed',
+        fontWeight: 'bold',
+        fontSize: '26px',
+        margin: '1.5rem 0',
         '& a': {
             display: 'inline-block',
             color: yellow,
