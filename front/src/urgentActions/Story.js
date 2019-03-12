@@ -36,6 +36,15 @@ export class Story extends Component {
         history.push(generateUrl('story', { id, page }));
     };
 
+    lastSlide = () => {
+        const {
+            match: { params },
+            history,
+        } = this.props;
+
+        history.push(generateUrl('act', params));
+    };
+
     componentDidUpdate(prevProps) {
         const {
             story,
@@ -75,6 +84,7 @@ export class Story extends Component {
                                     total={story.length}
                                     index={index + 1}
                                     nextSlide={nextSlide}
+                                    lastSlide={this.lastSlide}
                                     link={story.length === index + 1 ? endStoryLink : null}
                                 />
                             ))
