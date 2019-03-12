@@ -10,7 +10,8 @@ import Link from '../Link';
 import { LinkType } from '../../propTypes';
 
 const styles = {
-    fontSize: '16pt',
+    fontFamily: 'Amnesty Trade Gothic LT',
+    fontSize: '16px',
     padding: '4em 1em 1em 1em',
     display: 'flex',
     flexDirection: 'column',
@@ -45,7 +46,7 @@ const styles = {
         margin: '1em 0',
     },
     '& .content': {
-        fontSize: '14pt',
+        fontSize: '14px',
         position: 'relative',
         transition: 'all cubic-bezier(0.25, 0.1, 0.25, 1) 1s',
     },
@@ -72,7 +73,7 @@ const styles = {
         paddingTop: '10px',
     },
     '& .showButton': {
-        fontSize: '16pt',
+        fontSize: '16px',
         cursor: 'pointer',
         fontWeight: 'bold',
         display: 'flex',
@@ -101,11 +102,11 @@ const ShowButton = ({ showAllText, action }) => (
                 <b className="upText">︿</b>
             </span>
         ) : (
-            <span>
-                Voir plus&nbsp;&nbsp;
+                <span>
+                    Voir plus&nbsp;&nbsp;
                 <b className="downText">﹀</b>
-            </span>
-        )}
+                </span>
+            )}
     </span>
 );
 
