@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
@@ -10,7 +10,7 @@ import Link from '../Link';
 import { LinkType } from '../../propTypes';
 
 const styles = {
-    padding: '105px 0 53px',
+    padding: '4em 1em 1em 1em',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -18,10 +18,13 @@ const styles = {
     color: black,
     height: '100%',
     '& .action': {
-        margin: '62px 1em 53px',
+        margin: '1em 0',
         '@media (min-aspect-ratio: 1/1)': {
             alignSelf: 'flex-end',
         },
+    },
+    '@media (max-width: 350px)': {
+        fontSize: '0.7em',
     },
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
@@ -30,40 +33,119 @@ const styles = {
             alignSelf: 'flex-end',
         },
     },
-    '& .letter': {
-        border: 'solid 1px',
-    },
     '& .importantText': {
         fontWeight: 'bold',
     },
+    '& .letter': {
+        border: 'solid 1px',
+        color: black,
+        padding: '1em 0',
+        margin: '1em 0',
+    },
+    '& .showOnlyBegin': {
+        WebkitMaskImage:
+            '-webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)))',
+        maxHeight: '280px',
+        overflow: 'hidden',
+    },
+    '& .showButton': {
+        cursor: 'pointer',
+        '&:active': {
+            color: 'rgba(0, 0, 0, 0.5)',
+        },
+    },
+    '& .middleText': {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    '& .downText': {
+        top: 8,
+        position: 'relative',
+    },
+    '& .upText': {
+        top: -4,
+        position: 'relative',
+    },
 };
 
-export const Message = ({ messageTemplate, action, className, link }) => (
-    <Fragment>
-        {(!messageTemplate || !messageTemplate.length) && (
-            <p className="error">Cette action urgente n&#39;existe plus.</p>
+const ShowButton = ({ showAllText, action }) => (
+    <span className="showButton" onClick={action}>
+        {showAllText ? (
+            <span>
+                Voir moins&nbsp;&nbsp;
+                <b className="upText">︿</b>
+            </span>
+        ) : (
+            <span>
+                Voir plus&nbsp;&nbsp;
+                <b className="downText">﹀</b>
+            </span>
         )}
-
-        {messageTemplate &&
-            messageTemplate.length > 0 && (
-                <div className={classnames('message', className)}>
-                    <span>
-                        Pour agir plus vite,{' '}
-                        <b className="importantText"> nous vous proposons ce message :</b>
-                    </span>
-                    <div className="letter">
-                        {messageTemplate.map(({ value }, index) => (
-                            <MessageStep key={value} content={value} opacity={index} />
-                        ))}
-                    </div>
-                    <div className="action">
-                        {action}
-                        {link && link.url && <Link {...link} />}
-                    </div>
-                </div>
-            )}
-    </Fragment>
+    </span>
 );
+
+ShowButton.propTypes = {
+    showAllText: PropTypes.bool,
+    action: PropTypes.func.isRequired,
+};
+
+ShowButton.defaultProps = {
+    extended: false,
+};
+
+export class Message extends Component {
+    state = { showAllText: false };
+
+    setShowMode = () => {
+        this.setState({ showAllText: !this.state.showAllText });
+    };
+
+    render() {
+        const { messageTemplate, action, className, link } = this.props;
+        const { showAllText } = this.state;
+        return (
+            <Fragment>
+                {(!messageTemplate || !messageTemplate.length) && (
+                    <p className="error">Cette action urgente n&#39;existe plus.</p>
+                )}
+
+                {messageTemplate &&
+                    messageTemplate.length > 0 && (
+                        <div className={classnames('message', className)}>
+                            <span>
+                                Pour agir plus vite,{' '}
+                                <b className="importantText"> nous vous proposons ce message :</b>
+                            </span>
+                            <div className="letter">
+                                <div className={classnames(showAllText ? '' : 'showOnlyBegin')}>
+                                    {messageTemplate.map(({ value }) => (
+                                        <MessageStep key={value} content={value} />
+                                    ))}
+                                </div>
+                                <span className={classnames('importantText', 'middleText')}>
+                                    <ShowButton
+                                        showAllText={showAllText}
+                                        action={this.setShowMode}
+                                    />
+                                </span>
+                            </div>
+                            <span>
+                                Parce que les messages uniques ont plus d&apos;impact,{' '}
+                                <b className="importantText">
+                                    {' '}
+                                    nous vous invitons à le personnaliser.
+                                </b>
+                            </span>
+                            <div className="action">
+                                {action}
+                                {link && link.url && <Link {...link} />}
+                            </div>
+                        </div>
+                    )}
+            </Fragment>
+        );
+    }
+}
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
