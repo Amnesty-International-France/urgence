@@ -56,7 +56,7 @@ const styles = {
     },
 };
 
-export const TransitionScreen = ({ className, action, title, message, link }) => (
+export const TransitionScreen = ({ className, actions, title, message, link }) => (
     <div className={className}>
         <div>
             <h1>
@@ -65,7 +65,7 @@ export const TransitionScreen = ({ className, action, title, message, link }) =>
             <RichText html={message} />
         </div>
         <div className="actions">
-            {action}
+            {actions()}
             {link && link.url && <Link {...link} color={black} />}
         </div>
     </div>
@@ -73,10 +73,14 @@ export const TransitionScreen = ({ className, action, title, message, link }) =>
 
 TransitionScreen.propTypes = {
     className: PropTypes.string.isRequired,
-    action: PropTypes.element,
+    actions: PropTypes.func,
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     link: LinkType,
+};
+
+TransitionScreen.defaultProps = {
+    actions: () => {},
 };
 
 export default glamorous(withBlackLogo(TransitionScreen))(styles);
