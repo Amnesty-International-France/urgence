@@ -15,15 +15,11 @@ MessageStep.propTypes = {
     content: PropTypes.string,
 };
 
-export default glamorous(MessageStep)(
-    {
-        '& .rich-text, & > p': {
-            fontFamily: 'Amnesty Trade Gothic',
-            lineHeight: '1.5em',
-            padding: '0.5em 3em',
-        },
+export default glamorous(MessageStep)({
+    '& .rich-text, & > p': {
+        fontFamily: 'Amnesty Trade Gothic',
+        lineHeight: '1.5em',
+        padding: '0.5em 1em',
+        fontStyle: 'italic',
     },
-    ({ darken }) => ({
-        backgroundColor: darken ? '#FFF3F3F3' : '#FFFFFF',
-    }),
-);
+});
