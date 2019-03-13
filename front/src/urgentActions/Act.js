@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { LinkType } from '../propTypes';
 import TransitionScreen from '../themes/TransitionScreen';
 
-const Act = ({ data, action }) => (
+const Act = ({ data, actions }) => (
     <TransitionScreen
-        action={action}
+        actions={actions}
         title={get(data, 'title')}
         message={get(data, 'message')}
         link={get(data, 'link.url')}
@@ -15,7 +15,7 @@ const Act = ({ data, action }) => (
 );
 
 Act.propTypes = {
-    action: PropTypes.element,
+    actions: PropTypes.element,
     data: PropTypes.shape({
         title: PropTypes.string.isRequired,
         message: PropTypes.string.isRequired,
