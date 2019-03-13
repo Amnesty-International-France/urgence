@@ -30,12 +30,12 @@ const styles = {
         fontSize: '36px',
         fontWeight: 'bold',
         margin: '1.5rem 12px',
-        width: 'calc(100% - 12px)',
+        width: 'calc(100% - 24px)',
         '> span': {
             color: white,
             backgroundColor: black,
             padding: '6px 0',
-            boxShadow: `10px 0 0 ${black}, -10px 0 0 ${black}`,
+            boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
         },
     },
     '& .rich-text': {
