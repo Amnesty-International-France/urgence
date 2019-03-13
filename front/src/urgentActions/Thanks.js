@@ -15,7 +15,7 @@ export const Thanks = ({ data, actions }) => (
 );
 
 Thanks.propTypes = {
-    actions: PropTypes.element,
+    actions: PropTypes.func,
     data: PropTypes.shape({
         title: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
