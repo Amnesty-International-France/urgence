@@ -109,7 +109,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     if (step === 'act') {
         return (
             <Act
-                callToAction={get(data, 'UrgentAction.call_to_action')}
+                data={get(data, 'UrgentAction.call_to_action')}
                 action={
                     <ToUrgentActionPageLink
                         label={get(data, 'UrgentAction.call_to_action.button')}

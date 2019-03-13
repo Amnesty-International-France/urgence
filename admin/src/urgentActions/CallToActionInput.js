@@ -8,9 +8,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 
 import { root, transitionScreenPreview } from './styles';
-import FrontPreview, { noop } from './FrontPreview';
-import RichTextInput from '../form/RichTextInput';
 import { get as getScreenIndex, CALL_TO_ACTION } from './screenIndex';
+import RichTextInput from '../form/RichTextInput';
+import FrontPreview, { noop } from './FrontPreview';
 
 import Act from '../../../front/src/urgentActions/Act';
 import Link from '../../../front/src/themes/Link';
@@ -43,7 +43,7 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                     </Card>
                     <FrontPreview className={classes.preview}>
                         <Act
-                            callToAction={formData.call_to_action}
+                            data={formData.call_to_action}
                             action={
                                 <Link
                                     to="#"
@@ -66,7 +66,6 @@ CallToActionInput.propTypes = {
 };
 
 CallToActionInput.defaultProps = {
-    source: '',
     withLink: false,
 };
 
