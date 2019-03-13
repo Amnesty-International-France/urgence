@@ -82,6 +82,8 @@ TransitionScreen.propTypes = {
 
 TransitionScreen.defaultProps = {
     actions: () => {},
+    title: '',
+    message: '',
 };
 
 export default glamorous(withBlackLogo(TransitionScreen))(styles);

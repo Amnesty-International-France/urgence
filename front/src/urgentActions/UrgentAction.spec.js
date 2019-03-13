@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import { UrgentAction } from './UrgentAction';
 import sessionData from '../sessionData';
+import Act from './Act';
 import Thanks from './Thanks';
 import Story from './Story';
 import AddressStep from './AddressStep';
@@ -25,11 +26,7 @@ describe('<UrgentAction />', () => {
         page: '1',
         loading: false,
         data: {
-            UrgentAction: {
-                email_thank: {
-                    title: 'Thanks!',
-                },
-            },
+            UrgentAction: {},
         },
     };
 
@@ -69,19 +66,27 @@ describe('<UrgentAction />', () => {
         ]);
     });
 
-    it('should display act with call_to_action from graphql data if step is act', () => {
-        const props = {
-            step: 'act',
-            loading: false,
-            data: {
-                UrgentAction: {
-                    call_to_action: 'call to action',
+    describe('Act Step', () => {
+        it('should display act with call_to_action from graphql data if step is act', () => {
+            const props = {
+                step: 'act',
+                loading: false,
+                data: {
+                    UrgentAction: {
+                        call_to_action: {
+                            title: 'Call To Action',
+                            message: 'My Message',
+                        },
+                    },
                 },
-            },
-        };
-        const renderedComponent = shallow(<UrgentAction {...props} />);
+            };
+            const renderedComponent = shallow(<UrgentAction {...props} />);
+            expect(renderedComponent.find(Act).length).toBe(1);
 
-        expect(renderedComponent.prop('callToAction')).toBe('call to action');
+            const data = renderedComponent.prop('data');
+            expect(data.title).toBe('Call To Action');
+            expect(data.message).toBe('My Message');
+        });
     });
 
     it('should display message with retrieved GraphQL data if step is message', () => {
@@ -150,18 +155,28 @@ describe('<UrgentAction />', () => {
     describe('Email Thanks Step', () => {
         it('should display Thanks if step is thanks', () => {
             const props = {
+                ...defaultProps,
                 loading: false,
                 step: 'thanks',
                 data: {
                     UrgentAction: {
                         email_thank: {
-                            title: '',
+                            title: 'Thanks!',
+                            text: 'My Message',
+                            button: 'Continuer',
                         },
                     },
                 },
             };
-            const wrapper = shallow(<UrgentAction {...props} />);
-            expect(wrapper.find(Thanks).length).toBe(1);
+
+            const renderedComponent = shallow(<UrgentAction {...props} />);
+
+            const thanks = renderedComponent.find(Thanks);
+            expect(thanks.length).toBe(1);
+
+            const data = thanks.prop('data');
+            expect(data.title).toBe('Thanks!');
+            expect(data.text).toBe('My Message');
         });
 
         it('should add a link to address step as action', () => {
@@ -172,6 +187,15 @@ describe('<UrgentAction />', () => {
                 ...defaultProps,
                 step: 'thanks',
                 id: '123456',
+                data: {
+                    UrgentAction: {
+                        email_thank: {
+                            title: 'Thanks!',
+                            text: 'My Message',
+                            button: 'Continuer',
+                        },
+                    },
+                },
             };
 
             const wrapper = shallow(<UrgentAction {...props} />);
@@ -208,8 +232,8 @@ describe('<UrgentAction />', () => {
             };
 
             const wrapper = shallow(<UrgentAction {...props} />);
-            const thanks = wrapper.find(AddressStep);
-            const action = thanks.prop('action')();
+            const address = wrapper.find(AddressStep);
+            const action = address.prop('action')();
 
             expect(action.props.pageName).toBe('email');
             expect(action.props.label).toBe('Valider');
@@ -217,7 +241,7 @@ describe('<UrgentAction />', () => {
     });
 
     describe('Email Step', () => {
-        it('should display EmailStep if step is addres', () => {
+        it('should display EmailStep if step is email', () => {
             const props = {
                 loading: false,
                 step: 'email',
@@ -252,8 +276,11 @@ describe('<UrgentAction />', () => {
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
             const thanks = renderedComponent.find(Thanks);
-            expect(thanks.prop('title')).toBe('Merci de votre engagement !');
-            expect(thanks.prop('text')).toBe("N'oubliez pas d'envoyer la lettre !");
+            expect(thanks.length).toBe(1);
+
+            const data = thanks.prop('data');
+            expect(data.title).toBe('Merci de votre engagement !');
+            expect(data.text).toBe("N'oubliez pas d'envoyer la lettre !");
         });
     });
 });

@@ -75,13 +75,13 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                             <Thanks
                                 data={formData[source]}
                                 actions={() =>
-                                    final ? null : (
+                                    !final && formData[source] && formData[source].button ? (
                                         <Link
                                             to="#"
                                             label={formData[source].button}
                                             onClick={noop}
                                         />
-                                    )
+                                    ) : null
                                 }
                             />
                         </FrontPreview>
