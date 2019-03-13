@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, TextInput } from 'react-admin';
+import { addField, FormDataConsumer, LongTextInput, TextInput } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -34,10 +34,11 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                     <Card className={classes.card}>
                         <CardContent className={classes.content}>
                             <div className={classes.formContainer}>
-                                <TextInput
+                                <LongTextInput
                                     source={`${source}.title`}
                                     label="Title"
                                     defaultValue="Vous avez plus de pouvoir que vous ne le pensez !"
+                                    multiline
                                 />
                                 <RichTextInput
                                     source={`${source}.message`}

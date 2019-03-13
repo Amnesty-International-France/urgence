@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 import RichText from '../themes/RichText';
+import LongText from '../themes/LongText';
 import { yellow, white, black } from '../themes/colors';
 import { withBlackLogo } from '../themes/ThemeContext';
 import { LinkType } from '../propTypes';
@@ -60,7 +61,7 @@ export const TransitionScreen = ({ className, actions, title, message, link }) =
     <div className={className}>
         <div>
             <h1>
-                <span>{title}</span>
+                <LongText text={title} />
             </h1>
             <RichText html={message} />
         </div>
