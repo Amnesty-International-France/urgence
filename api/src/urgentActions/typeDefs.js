@@ -70,12 +70,14 @@ export const urgentActionsTypeDefs = gql`
     type CallToAction {
         title: String
         message: String
+        button: String
         link: Link
     }
 
     input CallToActionInput {
         title: String
         message: String
+        button: String
         link: LinkInput
     }
 

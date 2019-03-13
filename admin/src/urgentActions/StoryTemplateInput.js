@@ -15,7 +15,6 @@ import RichTextInput from '../form/RichTextInput';
 import { get as getScreenIndex, STORY } from './screenIndex';
 
 import StorySlide from '../../../front/src/urgentActions/StorySlide';
-import LinkInput from './LinkInput';
 
 const styles = {
     ...root,
@@ -63,9 +62,6 @@ export const StoryTemplateInput = ({ classes, source, index, withLink }) => (
                                     source={`${source}displayOptions`}
                                     label="Display Options"
                                 />
-                                {formData.story.length === index + 1 && withLink && (
-                                    <LinkInput source="end_of_story_link" />
-                                )}
                             </div>
                         </CardContent>
                     </Card>

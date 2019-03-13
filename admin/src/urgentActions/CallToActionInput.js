@@ -7,7 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 
-import { root, preview } from './styles';
+import { root, transitionScreenPreview } from './styles';
 import FrontPreview, { noop } from './FrontPreview';
 import RichTextInput from '../form/RichTextInput';
 import { get as getScreenIndex, CALL_TO_ACTION } from './screenIndex';
@@ -19,14 +19,7 @@ import LinkInput from './LinkInput';
 const styles = {
     ...root,
     preview: {
-        ...preview,
-        // the rules below override desktop media queries so that the preview is forced to appear like on mobile
-        '& > div': {
-            padding: '0 !important',
-            '& a': {
-                alignSelf: 'auto',
-            },
-        },
+        ...transitionScreenPreview,
     },
 };
 
@@ -42,7 +35,8 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                         <CardContent className={classes.content}>
                             <div className={classes.formContainer}>
                                 <TextInput source={`${source}.title`} label="Title" />
-                                <RichTextInput source={`${source}.message`} label="Text" />
+                                <RichTextInput source={`${source}.message`} label="Message" />
+                                <TextInput source={`${source}.button`} label="Button" />
                                 {withLink && <LinkInput source={`${source}.link`} />}
                             </div>
                         </CardContent>
@@ -50,7 +44,13 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                     <FrontPreview className={classes.preview}>
                         <Act
                             callToAction={formData.call_to_action}
-                            action={<Link to={'#'} label="Voir le message" onClick={noop} />}
+                            action={
+                                <Link
+                                    to="#"
+                                    label={formData.call_to_action.button}
+                                    onClick={noop}
+                                />
+                            }
                         />
                     </FrontPreview>
                 </Fragment>

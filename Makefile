@@ -62,6 +62,18 @@ test-watch:
 test-stop-dockers:
 	$(DOCKER_COMPOSE_TEST) down
 
+test-e2e:
+	$(MAKE) migration-e2e
+	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
+	sleep 10
+	$(DOCKER_COMPOSE_E2E) run test-e2e
+
+debug-e2e:
+	$(DOCKER_COMPOSE_E2E) run test-e2e
+
+test-e2e-stop-dockers:
+	$(DOCKER_COMPOSE_E2E) down
+
 DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && ./node_modules/.bin/db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
@@ -118,15 +130,6 @@ selenium:
 
 selenium-debug:
 	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chromedebug
-
-test-e2e:
-	$(MAKE) migration-e2e
-	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
-	sleep 10
-	$(DOCKER_COMPOSE_E2E) run test-e2e
-
-debug-e2e:
-	$(DOCKER_COMPOSE_E2E) run test-e2e
 
 deploy-staging:
 	NODE_ENV=staging npx shipit staging deploy

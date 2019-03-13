@@ -2,8 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { StoryStep, getLogoColorForStep } from './StoryStep';
-import ActButton from './ActButton';
-import { white, black, pink, yellow, orange } from '../themes/colors';
+import { white, black } from '../themes/colors';
 
 describe('<StoryStep />', () => {
     const defaultProps = {
@@ -99,17 +98,6 @@ describe('<StoryStep />', () => {
         const wrapper = shallow(<StoryStep {...props} />);
         const richText = wrapper.find('RichText');
         expect(richText.prop('html')).toBe('<p>Hello world!</p>');
-    });
-
-    it('should display ActButton if hasActButton is true', () => {
-        const props = {
-            ...defaultProps,
-            hasActButton: true,
-        };
-
-        const wrapper = shallow(<StoryStep {...props} />);
-        const actButton = wrapper.find(ActButton);
-        expect(actButton).toHaveLength(1);
     });
 
     describe('getLogoColorForStep', () => {

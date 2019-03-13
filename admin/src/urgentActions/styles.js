@@ -14,7 +14,7 @@ export const root = {
         backgroundColor: pink,
         marginTop: 16,
     },
-    formContainer:{
+    formContainer: {
         '& > div': {
             width: '100%',
             margin: 0,
@@ -33,4 +33,13 @@ export const preview = {
     margin: 16,
     overflow: 'auto',
     fontFamily: "'Amnesty Trade Gothic', 'Arial', sans-serif",
+};
+
+export const transitionScreenPreview = {
+    ...preview,
+    '& > div': {
+        height: 'calc(100% - 2rem)',
+        width: 'calc(100% - 2rem)',
+        padding: '1rem',
+    },
 };

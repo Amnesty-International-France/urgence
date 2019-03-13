@@ -22,12 +22,15 @@ export class Carousel extends Component {
         });
         this.swiper = swiper;
     }
+
     initContainer = container => {
         this.container = container;
     };
+
     nextSlide = () => {
         this.swiper.slideNext();
     };
+
     componentWillUnmount() {
         this.swiper.destroy();
     }
