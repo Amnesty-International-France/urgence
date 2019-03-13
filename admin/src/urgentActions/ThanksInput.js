@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, TextInput } from 'react-admin';
+import { addField, FormDataConsumer, LongTextInput, TextInput } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -23,43 +23,74 @@ const styles = {
     },
 };
 
-export const ThanksInput = ({ classes, source, withLink, final }) => (
-    <div className={classes.root}>
-        <FormDataConsumer>
-            {({ formData }) => (
-                <Fragment>
-                    <Avatar className={classes.avatar}>
-                        {getScreenIndex(final ? THANKS : CONTINUE, formData)}
-                    </Avatar>
-                    <Card className={classes.card}>
-                        <CardContent className={classes.content}>
-                            <div className={classes.formContainer}>
-                                <TextInput
-                                    source={`${source}.title`}
-                                    label="Title"
-                                    defaultValue="Merci de votre soutien !"
-                                />
-                                <RichTextInput source={`${source}.text`} label="Text" />
-                                <TextInput source={`${source}.button`} label="Button" />
-                                {!final && withLink && <LinkInput source={`${source}.link`} />}
-                            </div>
-                        </CardContent>
-                    </Card>
-                    <FrontPreview className={classes.preview}>
-                        <Thanks
-                            data={formData[source]}
-                            actions={() =>
-                                final ? null : (
-                                    <Link to="#" label={formData[source].button} onClick={noop} />
-                                )
-                            }
-                        />
-                    </FrontPreview>
-                </Fragment>
-            )}
-        </FormDataConsumer>
-    </div>
-);
+export const ThanksInput = ({ classes, source, withLink, final }) => {
+    const defaultValues = final
+        ? {
+              title: 'Merci pour votre action.',
+              text:
+                  "La lettre vous a été envoyée sur votre boîte e-mail. Poursuivez votre action en l'envoyant par La Poste.",
+          }
+        : {
+              title: 'Se battre. Encore. Et Encore.',
+              text:
+                  "Continuons d'agir pour augmenter les chances de victoire ! Allez plus loin dans ce combat en envoyant ce message par courrier.",
+              button: "Je continue d'agir",
+          };
+
+    return (
+        <div className={classes.root}>
+            <FormDataConsumer>
+                {({ formData }) => (
+                    <Fragment>
+                        <Avatar className={classes.avatar}>
+                            {getScreenIndex(final ? THANKS : CONTINUE, formData)}
+                        </Avatar>
+                        <Card className={classes.card}>
+                            <CardContent className={classes.content}>
+                                <div className={classes.formContainer}>
+                                    <LongTextInput
+                                        source={`${source}.title`}
+                                        label="Title"
+                                        defaultValue={defaultValues.title}
+                                    />
+                                    <RichTextInput
+                                        source={`${source}.text`}
+                                        label="Text"
+                                        defaultValue={defaultValues.text}
+                                    />
+                                    {!final && (
+                                        <Fragment>
+                                            <TextInput
+                                                source={`${source}.button`}
+                                                label="Button"
+                                                defaultValue={defaultValues.button}
+                                            />
+                                            {withLink && <LinkInput source={`${source}.link`} />}
+                                        </Fragment>
+                                    )}
+                                </div>
+                            </CardContent>
+                        </Card>
+                        <FrontPreview className={classes.preview}>
+                            <Thanks
+                                data={formData[source]}
+                                actions={() =>
+                                    final ? null : (
+                                        <Link
+                                            to="#"
+                                            label={formData[source].button}
+                                            onClick={noop}
+                                        />
+                                    )
+                                }
+                            />
+                        </FrontPreview>
+                    </Fragment>
+                )}
+            </FormDataConsumer>
+        </div>
+    );
+};
 
 ThanksInput.propTypes = {
     classes: PropTypes.object,

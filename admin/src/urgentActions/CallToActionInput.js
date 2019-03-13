@@ -34,9 +34,21 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                     <Card className={classes.card}>
                         <CardContent className={classes.content}>
                             <div className={classes.formContainer}>
-                                <TextInput source={`${source}.title`} label="Title" />
-                                <RichTextInput source={`${source}.message`} label="Message" />
-                                <TextInput source={`${source}.button`} label="Button" />
+                                <TextInput
+                                    source={`${source}.title`}
+                                    label="Title"
+                                    defaultValue="Vous avez plus de pouvoir que vous ne le pensez !"
+                                />
+                                <RichTextInput
+                                    source={`${source}.message`}
+                                    label="Message"
+                                    defaultValue="Envoyez dès maintenant un e-mail pour interpeller le Responsable du pouvoir judiciaire."
+                                />
+                                <TextInput
+                                    source={`${source}.button`}
+                                    label="Button"
+                                    defaultValue="Voir l'email"
+                                />
                                 {withLink && <LinkInput source={`${source}.link`} />}
                             </div>
                         </CardContent>
