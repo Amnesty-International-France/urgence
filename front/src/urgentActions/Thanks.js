@@ -18,7 +18,7 @@ Thanks.propTypes = {
     actions: PropTypes.element,
     data: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        message: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired,
         link: LinkType,
     }),
 };

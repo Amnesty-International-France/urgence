@@ -111,12 +111,12 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
         return (
             <Act
                 data={get(data, 'UrgentAction.call_to_action')}
-                action={
+                actions={() => (
                     <ToUrgentActionPageLink
                         label={get(data, 'UrgentAction.call_to_action.button')}
                         pageName="message"
                     />
-                }
+                )}
             />
         );
     }
@@ -167,7 +167,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     if (step === 'thanks') {
         return (
             <Thanks
-                {...get(data, 'UrgentAction.email_thank')}
+                data={get(data, 'UrgentAction.email_thank')}
                 actions={() => <ToUrgentActionPageLink label="Continuer" pageName="address" />}
             />
         );
@@ -188,7 +188,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (step === 'thanks-letter') {
-        return <Thanks {...get(data, 'UrgentAction.letter_thank')} />;
+        return <Thanks data={get(data, 'UrgentAction.letter_thank')} />;
     }
 };
 

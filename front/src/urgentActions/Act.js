@@ -15,12 +15,16 @@ const Act = ({ data, actions }) => (
 );
 
 Act.propTypes = {
-    actions: PropTypes.element,
+    actions: PropTypes.func,
     data: PropTypes.shape({
         title: PropTypes.string.isRequired,
         message: PropTypes.string.isRequired,
         link: LinkType,
     }),
+};
+
+Act.defaultProps = {
+    actions: () => {},
 };
 
 export default Act;
