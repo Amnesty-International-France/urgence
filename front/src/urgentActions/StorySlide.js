@@ -43,7 +43,7 @@ const styles = {
         flex: '1 0 0',
     },
 
-    '& .next-arrow, & last-arrow': {
+    '& .next-arrow, & .last-arrow': {
         position: 'relative',
         top: 4,
         textAlign: 'right',
