@@ -99,14 +99,14 @@ const ShowButton = ({ showAllText, action }) => (
         {showAllText ? (
             <span>
                 Voir moins&nbsp;&nbsp;
-                <b className="upText">︿</b>
+                <strong className="upText">︿</strong>
             </span>
         ) : (
-                <span>
-                    Voir plus&nbsp;&nbsp;
-                <b className="downText">﹀</b>
-                </span>
-            )}
+            <span>
+                Voir plus&nbsp;&nbsp;
+                <strong className="downText">﹀</strong>
+            </span>
+        )}
     </span>
 );
 
@@ -116,7 +116,7 @@ ShowButton.propTypes = {
 };
 
 ShowButton.defaultProps = {
-    extended: false,
+    showAllText: false,
 };
 
 export class LetterView extends Component {
@@ -184,13 +184,16 @@ export const Message = ({ messageTemplate, action, className, link }) => (
             messageTemplate.length > 0 && (
                 <div className={classnames('message', className)}>
                     <span>
-                        Pour agir plus vite,{' '}
-                        <b className="importantText"> nous vous proposons ce message :</b>
+                        Pour agir plus vite,
+                        <strong className="importantText"> nous vous proposons ce message :</strong>
                     </span>
                     <LetterView messageTemplate={messageTemplate} />
                     <span>
-                        Parce que les messages uniques ont plus d&apos;impact,{' '}
-                        <b className="importantText"> nous vous invitons à le personnaliser.</b>
+                        Parce que les messages uniques ont plus d&apos;impact,
+                        <strong className="importantText">
+                            {' '}
+                            nous vous invitons à le personnaliser.
+                        </strong>
                     </span>
                     <div className="action">
                         {action}
