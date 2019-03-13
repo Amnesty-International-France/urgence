@@ -180,27 +180,25 @@ export const Message = ({ messageTemplate, action, className, link }) => (
             <p className="error">Cette action urgente n&#39;existe plus.</p>
         )}
 
-        {messageTemplate &&
-            messageTemplate.length > 0 && (
-                <div className={classnames('message', className)}>
-                    <span>
-                        Pour agir plus vite,
-                        <strong className="importantText"> nous vous proposons ce message :</strong>
-                    </span>
-                    <LetterView messageTemplate={messageTemplate} />
-                    <span>
-                        Parce que les messages uniques ont plus d&apos;impact,
-                        <strong className="importantText">
-                            {' '}
-                            nous vous invitons à le personnaliser.
-                        </strong>
-                    </span>
-                    <div className="action">
-                        {action}
-                        {link && link.url && <Link {...link} />}
-                    </div>
+        {messageTemplate && messageTemplate.length > 0 && (
+            <div className={classnames('message', className)}>
+                <span>
+                    Pour agir plus vite,
+                    <strong className="importantText"> nous vous proposons ce message :</strong>
+                </span>
+                <LetterView messageTemplate={messageTemplate} />
+                <span>
+                    Parce que les messages uniques ont plus d&apos;impact,
+                    <strong className="importantText">
+                        &nbsp;nous vous invitons à le personnaliser.
+                    </strong>
+                </span>
+                <div className="action">
+                    {action}
+                    {link && link.url && <Link {...link} />}
                 </div>
-            )}
+            </div>
+        )}
     </Fragment>
 );
 
