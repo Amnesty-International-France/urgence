@@ -57,17 +57,15 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                     <FrontPreview className={classes.preview}>
                         <Act
                             data={formData.call_to_action}
-                            actions={() => (
-                                <Link
-                                    to="#"
-                                    label={
-                                        formData.call_to_action
-                                            ? formData.call_to_action.button
-                                            : ''
-                                    }
-                                    onClick={noop}
-                                />
-                            )}
+                            actions={() =>
+                                formData.call_to_action && formData.call_to_action.button ? (
+                                    <Link
+                                        to="#"
+                                        label={formData.call_to_action.button}
+                                        onClick={noop}
+                                    />
+                                ) : null
+                            }
                         />
                     </FrontPreview>
                 </Fragment>
