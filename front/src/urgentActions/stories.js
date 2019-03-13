@@ -6,6 +6,7 @@ import StoryStep from './StoryStep';
 import { WithStylesStory as Story } from './Story';
 import Act from './Act';
 import Thanks from './Thanks';
+import Link from '../themes/Link';
 import { Email, Share } from '../icons';
 import { routerDecorator, history } from '../../.storybook/decorators';
 
@@ -173,21 +174,34 @@ storiesOf('Story', module)
 
 storiesOf('Act', module)
     .addDecorator(routerDecorator)
-    .add('Act', () => (
-        <Act callToAction="<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>" />
-    ));
+    .add('Act', () => {
+        const data = {
+            title: 'Vous avez plus de pouvoir que vous ne le pensez !',
+            message: `<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>`,
+            button: `Voir l'email`,
+        };
+
+        return <Act data={data} actions={() => <Link to="#" label={data.button} />} />;
+    });
 
 storiesOf('Screens', module)
     .addDecorator(story => <div style={{ height: '100vh', width: '100vw' }}>{story()}</div>)
-    .add('Thanks Screen', () => (
-        <Thanks
-            title="Merci de votre soutien !"
-            text="Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis."
-            actions={() => (
-                <Fragment>
-                    <Email onClick={action('send-letter')} />
-                    <Share onClick={action('share')} />
-                </Fragment>
-            )}
-        />
-    ));
+    .add('Thanks Screen', () => {
+        const data = {
+            title: 'Merci de votre soutien !',
+            text:
+                "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
+        };
+
+        return (
+            <Thanks
+                data={data}
+                actions={() => (
+                    <Fragment>
+                        <Email onClick={action('send-letter')} />
+                        <Share onClick={action('share')} />
+                    </Fragment>
+                )}
+            />
+        );
+    });
