@@ -66,6 +66,7 @@ const query = gql`
             email_thank {
                 title
                 text
+                button
                 link {
                     label
                     url
