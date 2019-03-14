@@ -8,7 +8,7 @@ const { Consumer, Provider } = createContext();
 
 export class ThemeProvider extends Component {
     state = {
-        logoColor: black,
+        color: black,
         backgroundColor: yellow,
         changeLogoColor: ({ color, backgroundColor }) => {
             this.setState({

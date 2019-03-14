@@ -16,8 +16,8 @@ const styles = {
 export const AppLogo = ({ className, context }) => (
     <div className={className}>
         <AmnestyLogo
-            fill0={context.color}
-            fill1={context.backgroundColor}
+            fill0={context.backgroundColor}
+            fill1={context.color}
             width="122"
             height="49"
         />
