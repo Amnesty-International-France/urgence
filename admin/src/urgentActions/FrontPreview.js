@@ -1,13 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
 import { ThemeProvider } from '../../../front/src/themes/ThemeContext';
+import AppLogo from '../../../front/src/themes/AppLogo';
 import { Router } from '../../../front/src/gateway/ReactRouter';
 
-export const FrontPreview = ({ className, children }) => (
+const styles = {
+    logo: {
+        position: 'relative',
+        width: 'fit-content !important',
+        height: 'fit-content !important',
+        padding: '0px !important',
+    },
+};
+
+export const FrontPreview = ({ classes, className, children }) => (
     <div className={`${className} preview`}>
         <Router>
-            <ThemeProvider>{children}</ThemeProvider>
+            <ThemeProvider>
+                <div className={classes.logo}>
+                    <AppLogo />
+                </div>
+                {children}
+            </ThemeProvider>
         </Router>
     </div>
 );
@@ -19,4 +35,4 @@ FrontPreview.propTypes = {
 
 export const noop = () => {};
 
-export default FrontPreview;
+export default withStyles(styles)(FrontPreview);
