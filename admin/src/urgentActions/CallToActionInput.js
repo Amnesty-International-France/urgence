@@ -47,7 +47,7 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                             action={
                                 <Link
                                     to="#"
-                                    label={formData.call_to_action.button}
+                                    label={formData.call_to_action ? formData.call_to_action.button : ''}
                                     onClick={noop}
                                 />
                             }
