@@ -79,7 +79,8 @@ export const MessageInput = ({ classes, source, withLink }) => (
                                         <ParagraphTemplateInput source="" />
                                     </SimpleParagraphFormIterator>
                                 </ArrayInput>
-                                <RichTextInput
+                                <TextInput
+                                    fullWidth
                                     label="Object tip"
                                     source={`${source}object_indication`}
                                 />

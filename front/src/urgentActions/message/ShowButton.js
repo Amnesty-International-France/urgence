@@ -5,26 +5,28 @@ import glamorous from 'glamorous';
 import { white } from '../../themes/colors';
 
 const styles = {
-    fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '16px',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    display: 'flex',
-    justifyContent: 'center',
-    padding: '20px 0',
-    background: white,
-    '&:active': {
-        color: 'rgba(0, 0, 0, 0.5)',
+    '& .showButton': {
+        fontFamily: 'Amnesty Trade Gothic LT',
+        fontSize: '16px',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '20px 0',
+        background: white,
+        '&:active': {
+            color: 'rgba(0, 0, 0, 0.5)',
+        },
     },
     '& .text': {
         position: 'relative',
         '& > .downText': {
-            position: 'absolute',
-            top: 3,
+            position: 'relative',
+            top: 8,
         },
         '& > .upText': {
-            position: 'absolute',
-            top: -3,
+            position: 'relative',
+            top: -4,
         },
     },
 };
@@ -39,11 +41,11 @@ const ShowButton = ({ showAllText, action }) => (
                 <strong className="upText">︿</strong>
             </span>
         ) : (
-            <span className="text">
-                Voir plus&nbsp;&nbsp;
+                <span className="text">
+                    Voir plus&nbsp;&nbsp;
                 <strong className="downText">﹀</strong>
-            </span>
-        )}
+                </span>
+            )}
     </StyledSpan>
 );
 

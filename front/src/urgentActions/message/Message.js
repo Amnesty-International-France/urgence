@@ -4,7 +4,7 @@ import glamorous from 'glamorous';
 import { compose } from 'recompose';
 import classnames from 'classnames';
 
-import { white, black } from '../../themes/colors';
+import { white, black, grey } from '../../themes/colors';
 import MessageStep from './MessageStep';
 import ShowButton from './ShowButton';
 import { withYellowLogo } from '../../themes/ThemeContext';
@@ -14,6 +14,7 @@ import { LinkType } from '../../propTypes';
 import Input from '../../themes/Input';
 import RichText from '../../themes/RichText';
 import RadioButton from '../../themes/RadioButton';
+import { generateKeyPair } from 'crypto';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -77,6 +78,13 @@ const styles = {
     },
     '& .pleinEnd': {
         paddingTop: '10px',
+    },
+    '& .noBottomMargin': {
+        marginBottom: 0,
+    },
+    '& .objectIndication': {
+        fontStyle: 'italic',
+        opacity: '0.5',
     },
 };
 
@@ -144,8 +152,13 @@ export class FormStep extends Component {
         const { objectIndication, object, civility, surname, name } = this.props;
         return (
             <Fragment>
-                <Input value={object} onChange={this.setObject} placeholder="Objet de l'e-mail" />
-                <RichText html={objectIndication} />
+                <Input
+                    className="noBottomMargin"
+                    value={object}
+                    onChange={this.setObject}
+                    placeholder="Objet de l'e-mail"
+                />
+                <p className="objectIndication">{objectIndication}</p>
                 <RadioButton
                     value={civility}
                     name="civility"
@@ -153,8 +166,18 @@ export class FormStep extends Component {
                     label="Civilité"
                     choices={['M.', 'Mme.', 'Autre']}
                 />
-                <Input value={surname} onChange={this.setSurname} placeholder="Votre prénom" />
-                <Input value={name} onChange={this.setName} placeholder="Votre nom" />
+                <Input
+                    className="noBottomMargin"
+                    value={surname}
+                    onChange={this.setSurname}
+                    placeholder="Votre prénom"
+                />
+                <Input
+                    className="noBottomMargin"
+                    value={name}
+                    onChange={this.setName}
+                    placeholder="Votre nom"
+                />
             </Fragment>
         );
     }
