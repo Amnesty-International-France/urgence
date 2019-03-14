@@ -5,6 +5,7 @@ import classnames from 'classnames';
 
 import { white, black } from '../../themes/colors';
 import MessageStep from './MessageStep';
+import ShowButton from './ShowButton';
 import { withYellowLogo } from '../../themes/ThemeContext';
 import Link from '../Link';
 import { LinkType } from '../../propTypes';
@@ -72,51 +73,6 @@ const styles = {
     '& .pleinEnd': {
         paddingTop: '10px',
     },
-    '& .showButton': {
-        fontSize: '16px',
-        cursor: 'pointer',
-        fontWeight: 'bold',
-        display: 'flex',
-        justifyContent: 'center',
-        padding: '20px 0',
-        '&:active': {
-            color: 'rgba(0, 0, 0, 0.5)',
-        },
-        background: white,
-    },
-    '& .downText': {
-        top: 8,
-        position: 'relative',
-    },
-    '& .upText': {
-        top: -4,
-        position: 'relative',
-    },
-};
-
-const ShowButton = ({ showAllText, action }) => (
-    <span className="showButton" onClick={action}>
-        {showAllText ? (
-            <span>
-                Voir moins&nbsp;&nbsp;
-                <strong className="upText">︿</strong>
-            </span>
-        ) : (
-            <span>
-                Voir plus&nbsp;&nbsp;
-                <strong className="downText">﹀</strong>
-            </span>
-        )}
-    </span>
-);
-
-ShowButton.propTypes = {
-    showAllText: PropTypes.bool,
-    action: PropTypes.func.isRequired,
-};
-
-ShowButton.defaultProps = {
-    showAllText: false,
 };
 
 export class LetterView extends Component {
