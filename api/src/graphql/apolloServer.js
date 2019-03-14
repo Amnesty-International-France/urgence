@@ -1,8 +1,8 @@
 import { ApolloServer } from 'apollo-server-express';
 
 import config from '../../../config';
-import { typeDefs } from '../graphql/typeDefs';
-import { resolvers } from '../graphql/resolvers';
+import { typeDefs } from './typeDefs';
+import { resolvers } from './resolvers';
 import omitDeep from '../utils/omitDeep';
 
 const omitTypeName = omitDeep(['__typename']);
