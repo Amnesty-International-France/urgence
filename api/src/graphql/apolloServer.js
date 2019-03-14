@@ -1,18 +1,15 @@
-import { makeExecutableSchema } from 'graphql-tools';
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import { assoc, prop } from 'ramda';
+import { ApolloServer } from 'apollo-server-express';
 
 import config from '../../../config';
 import { typeDefs } from '../graphql/typeDefs';
 import { resolvers } from '../graphql/resolvers';
 import omitDeep from '../utils/omitDeep';
 
-const schema = makeExecutableSchema({ typeDefs, resolvers });
-
 const omitTypeName = omitDeep(['__typename']);
 
-export const graphqlRouter = graphqlExpress({
-    schema,
+const options = {
+    typeDefs,
+    resolvers,
     formatParams: ({ variables, ...rest }) => {
         if (!variables) {
             return rest;
@@ -22,10 +19,18 @@ export const graphqlRouter = graphqlExpress({
             variables: omitTypeName(variables),
             ...rest
         };
-    }
-});
+    },
+};
 
-export const graphiqlRouter = graphiqlExpress({
-    endpointURL: '/',
-});
+if (config.env !== 'production') {
+    options.playground = {
+        endpoint: `${process.env.REACT_APP_API_URL}/graphql`,
+        settings: {
+            'editor.theme': 'dark'
+        }
+    };
+}
 
+const server = new ApolloServer(options);
+
+export default server;

@@ -1,9 +1,9 @@
-import gql from 'graphql-tag';
+import { gql } from 'apollo-server-express';
 
 export const urgentActionsTypeDefs = gql`
     scalar DATE
 
-    scalar Upload
+    scalar Uploadable
 
     enum Position {
         top
@@ -47,12 +47,12 @@ export const urgentActionsTypeDefs = gql`
 
     type Medium {
         title: String!
-        src: Upload!
+        src: Uploadable!
     }
 
     input MediumInput {
         title: String!
-        src: Upload!
+        src: Uploadable!
     }
 
     type DisplayOptions {

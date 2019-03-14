@@ -19,8 +19,8 @@
         "build-storybook": "build-storybook -s public"
     },
     "dependencies": {
-        "apollo-boost": "~0.1.4",
-        "apollo-link-schema": "~1.1.0",
+        "apollo-boost": "~0.3.1",
+        "apollo-link-schema": "~1.2.1",
         "autoprefixer": "~7.1.6",
         "babel-polyfill": "~6.26.0",
         "case-sensitive-paths-webpack-plugin": "~2.1.1",

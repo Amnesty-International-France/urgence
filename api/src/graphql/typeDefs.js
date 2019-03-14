@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import { gql } from 'apollo-server-express';
 
 import { userTypeDefs } from '../users/typeDefs';
 import { urgentActionsTypeDefs } from '../urgentActions/typeDefs';

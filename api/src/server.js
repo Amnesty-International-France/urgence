@@ -4,6 +4,7 @@ import express from 'express';
 import config from '../../config';
 import errorHandler from './errorHandler';
 import { apiRouter } from './router';
+import apolloServer from './graphql/apolloServer';
 
 const app = express();
 
@@ -16,6 +17,11 @@ app.use(
 );
 
 app.use(config.api.prefixUrl, apiRouter);
+
+apolloServer.applyMiddleware({
+    app
+});
+
 app.use(errorHandler);
 
 export default app;
