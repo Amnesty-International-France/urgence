@@ -63,7 +63,7 @@ export const TransitionScreen = ({ className, actions, title, message, link }) =
             <h1>
                 <LongText text={title} />
             </h1>
-            <RichText html={message} />
+            {message && <RichText html={message} />}
         </div>
         <div className="actions">
             {actions()}
