@@ -107,32 +107,15 @@ describe('<UrgentAction />', () => {
         const wrapper = shallow(<UrgentAction {...props} />);
 
         expect(wrapper.prop('messageTemplate')).toBe(props.data.UrgentAction.message_template);
-    });
-
-    it('should display subject with retrieved GraphQL data if step is object', () => {
-        const props = {
-            loading: false,
-            step: 'object',
-            data: {
-                UrgentAction: {
-                    message_template: [{ value: 'first message' }, { value: 'second message' }],
-                    object_indication: 'object indication',
-                    recipient: {
-                        mail: 'mail',
-                    },
-                },
-            },
-        };
-        const wrapper = shallow(<UrgentAction {...props} />);
-
         expect(wrapper.prop('objectIndication')).toBe('object indication');
     });
 
-    it('should display signatureStep with retrieved GraphQL data if step is signature', () => {
+    it('should display sendMail with retrieved GraphQL data if step is message', () => {
         const props = {
-            loading: false,
-            step: 'signature',
+            ...defaultProps,
+            step: 'message',
             data: {
+                ...defaultProps.data,
                 UrgentAction: {
                     message_template: [{ value: 'first message' }, { value: 'second message' }],
                     object_indication: 'object indication',

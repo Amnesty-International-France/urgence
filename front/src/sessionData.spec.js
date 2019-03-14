@@ -25,27 +25,75 @@ describe('sessionData', () => {
         });
     });
 
-    describe('.getSignature', () => {
-        it('calls storage.getItem(amnesty_signature) and returns its result', () => {
+    describe('.getCivility', () => {
+        it('calls storage.getItem(amnesty_civility) and returns its result', () => {
             const storage = {
-                getItem: jest.fn(() => 'signature value'),
+                getItem: jest.fn(() => 'civility value'),
             };
 
-            expect(sessionData(storage).getSignature()).toBe('signature value');
-            expect(storage.getItem).toHaveBeenCalledWith('amnesty_signature');
+            expect(sessionData(storage).getCivility()).toBe('civility value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_civility');
         });
     });
 
-    describe('.setSignature', () => {
-        it('calls storage.setItem(amnesty_signature, value) and returns itself', () => {
+    describe('.setCivility', () => {
+        it('calls storage.setItem(amnesty_civility, value) and returns itself', () => {
             const storage = {
                 setItem: jest.fn(),
             };
 
             const mySessionData = sessionData(storage);
 
-            expect(mySessionData.setSignature('value')).toEqual(mySessionData);
-            expect(storage.setItem).toHaveBeenCalledWith('amnesty_signature', 'value');
+            expect(mySessionData.setCivility('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_civility', 'value');
+        });
+    });
+
+    describe('.getSurname', () => {
+        it('calls storage.getItem(amnesty_surname) and returns its result', () => {
+            const storage = {
+                getItem: jest.fn(() => 'surname value'),
+            };
+
+            expect(sessionData(storage).getSurname()).toBe('surname value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_surname');
+        });
+    });
+
+    describe('.setSurname', () => {
+        it('calls storage.setItem(amnesty_surname, value) and returns itself', () => {
+            const storage = {
+                setItem: jest.fn(),
+            };
+
+            const mySessionData = sessionData(storage);
+
+            expect(mySessionData.setSurname('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_surname', 'value');
+        });
+    });
+
+    describe('.getName', () => {
+        it('calls storage.getItem(amnesty_name) and returns its result', () => {
+            const storage = {
+                getItem: jest.fn(() => 'name value'),
+            };
+
+            expect(sessionData(storage).getName()).toBe('name value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_name');
+        });
+    });
+
+    describe('.setName', () => {
+        it('calls storage.setItem(amnesty_name, value) and returns itself', () => {
+            const storage = {
+                setItem: jest.fn(),
+            };
+
+            const mySessionData = sessionData(storage);
+
+            expect(mySessionData.setName('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_name', 'value');
         });
     });
 
