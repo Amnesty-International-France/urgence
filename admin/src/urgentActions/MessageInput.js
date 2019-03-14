@@ -17,6 +17,7 @@ import FrontPreview from './FrontPreview';
 import Message from '../../../front/src/urgentActions/message/Message';
 import Link from '../../../front/src/themes/Link';
 import SimpleParagraphFormIterator from './SimpleParagraphFormIterator';
+import RichTextInput from '../form/RichTextInput';
 import LinkInput from './LinkInput';
 
 const styles = theme => ({
@@ -78,6 +79,10 @@ export const MessageInput = ({ classes, source, withLink }) => (
                                         <ParagraphTemplateInput source="" />
                                     </SimpleParagraphFormIterator>
                                 </ArrayInput>
+                                <RichTextInput
+                                    label="Object tip"
+                                    source={`${source}object_indication`}
+                                />
                                 {withLink && <LinkInput source={`${source}message_link`} />}
                             </div>
                         </CardContent>
