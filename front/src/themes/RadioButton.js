@@ -8,10 +8,13 @@ const styles = {
     lineHeight: 2,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     width: '100%',
     padding: '20px 0',
     maxWidth: '400px',
+    '& .label': {
+        width: '20%',
+    },
     '& .item': {
         display: 'flex',
         flexDirection: 'row',
@@ -27,7 +30,7 @@ const styles = {
 
 export const RadioButton = ({ className, choices, label, name, onChange }) => (
     <div className={className}>
-        {label && <p>{label}</p>}
+        {label && <p className="label">{label}</p>}
         {choices.map((item, index) => {
             return (
                 <Fragment key={index}>
