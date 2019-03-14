@@ -31,6 +31,9 @@ const styles = {
         '@media (min-aspect-ratio: 1/1)': {
             alignSelf: 'flex-end',
         },
+        '& > a': {
+            marginBottom: 20,
+        },
     },
     '@media (max-width: 350px)': {
         fontSize: '0.8em',
