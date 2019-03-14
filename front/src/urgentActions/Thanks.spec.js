@@ -45,8 +45,7 @@ describe('<Thanks />', () => {
             'Envoyez une lettre ou partagez cette histoire.',
         );
         expect(transitionScreen.prop('actions')()).toEqual(
-            //eslint-disable-next-line no-useless-escape
-            `<p className=\"customAction\">Some actions...</p>`,
+            `<p className="customAction">Some actions...</p>`,
         );
     });
 });
