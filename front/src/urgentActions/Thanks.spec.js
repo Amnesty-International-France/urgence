@@ -34,7 +34,7 @@ describe('<Thanks />', () => {
                 title: 'Merci !',
                 text: 'Envoyez une lettre ou partagez cette histoire.',
             },
-            actions: () => <p className="customAction">Some actions...</p>,
+            actions: () => 'Some actions...',
         };
 
         const wrapper = shallow(<Thanks {...props} />);
@@ -44,8 +44,6 @@ describe('<Thanks />', () => {
         expect(transitionScreen.prop('message')).toEqual(
             'Envoyez une lettre ou partagez cette histoire.',
         );
-        expect(transitionScreen.prop('actions')()).toEqual(
-            `<p className="customAction">Some actions...</p>`,
-        );
+        expect(transitionScreen.prop('actions')()).toEqual('Some actions...');
     });
 });
