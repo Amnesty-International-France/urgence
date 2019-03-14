@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
@@ -33,19 +33,17 @@ export const RadioButton = ({ className, choices, label, name, onChange }) => (
         {label && <p className="label">{label}</p>}
         {choices.map((item, index) => {
             return (
-                <Fragment key={index}>
-                    <div className="item">
-                        <input
-                            type="radio"
-                            name={name}
-                            value={item}
-                            id={index}
-                            className="circle"
-                            onClick={onChange}
-                        />
-                        <label htmlFor={item}>{item}</label>
-                    </div>
-                </Fragment>
+                <div className="item" key={index}>
+                    <input
+                        type="radio"
+                        name={name}
+                        value={item}
+                        id={index}
+                        className="circle"
+                        onClick={onChange}
+                    />
+                    <label htmlFor={item}>{item}</label>
+                </div>
             );
         })}
     </div>
