@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
-import { AmnestyCandle } from '../icons';
+import AmnestyLogo from '../icons/AmnestyLogo';
 import { withThemeContext } from './ThemeContext';
 
 const styles = {
@@ -18,7 +18,7 @@ const styles = {
 
 export const AppLogo = ({ className, context }) => (
     <div className={className}>
-        <AmnestyCandle fill={context.logoColor} />
+        <AmnestyLogo fill0={context.logoColor} fill1={context.backgroundColor} />
     </div>
 );
 

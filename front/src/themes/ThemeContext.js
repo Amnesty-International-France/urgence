@@ -2,15 +2,19 @@ import React, { createContext, Component } from 'react';
 import PropTypes from 'prop-types';
 import { lifecycle, compose } from 'recompose';
 
-import { white } from './colors';
+import { black, yellow } from './colors';
 
 const { Consumer, Provider } = createContext();
 
 export class ThemeProvider extends Component {
     state = {
-        logoColor: white,
-        changeLogoColor: color => {
-            this.setState({ logoColor: color });
+        logoColor: black,
+        backgroundColor: yellow,
+        changeLogoColor: ({ color, backgroundColor }) => {
+            this.setState({
+                color,
+                backgroundColor,
+            });
         },
     };
 
@@ -33,7 +37,7 @@ export const withBlackLogo = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
-            this.props.context.changeLogoColor('#000');
+            this.props.context.changeLogoColor({ color: yellow, backgroundColor: black });
         },
     }),
 );
@@ -42,7 +46,7 @@ export const withWhiteLogo = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
-            this.props.context.changeLogoColor('#fff');
+            this.props.context.changeLogoColor({ color: black, backgroundColor: yellow });
         },
     }),
 );
