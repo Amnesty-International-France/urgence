@@ -11,9 +11,6 @@ const styles = {
     top: 14,
     left: 14,
     zIndex: 100,
-    '& svg': {
-        filter: 'drop-shadow(0 0 2px #0004)',
-    },
 };
 
 export const AppLogo = ({ className, context }) => (
