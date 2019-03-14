@@ -42,7 +42,7 @@ export const withBlackLogo = compose(
     }),
 );
 
-export const withWhiteLogo = compose(
+export const withYellowLogo = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {

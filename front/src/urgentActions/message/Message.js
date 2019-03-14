@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import { white, black } from '../../themes/colors';
 import MessageStep from './MessageStep';
-import { withBlackLogo } from '../../themes/ThemeContext';
+import { withYellowLogo } from '../../themes/ThemeContext';
 import Link from '../Link';
 import { LinkType } from '../../propTypes';
 
@@ -210,4 +210,4 @@ Message.propTypes = {
     action: PropTypes.node.isRequired,
 };
 
-export default glamorous(withBlackLogo(Message))(styles);
+export default glamorous(withYellowLogo(Message))(styles);

@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import RichText from '../themes/RichText';
 import { withSessionData } from '../SessionDataContext';
-import { withBlackLogo } from '../themes/ThemeContext';
+import { withYellowLogo } from '../themes/ThemeContext';
 import Input from '../themes/Input';
 
 const styles = {
@@ -68,7 +68,7 @@ ObjectStep.propTypes = {
 
 export default glamorous(
     compose(
-        withBlackLogo,
+        withYellowLogo,
         withSessionData,
     )(ObjectStep),
 )(styles);
