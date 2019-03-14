@@ -4,7 +4,7 @@ import glamorous from 'glamorous';
 import { compose } from 'recompose';
 import classnames from 'classnames';
 
-import { white, black, grey } from '../../themes/colors';
+import { white, black } from '../../themes/colors';
 import MessageStep from './MessageStep';
 import ShowButton from './ShowButton';
 import { withYellowLogo } from '../../themes/ThemeContext';
@@ -12,9 +12,7 @@ import { withSessionData } from '../../SessionDataContext';
 import Link from '../Link';
 import { LinkType } from '../../propTypes';
 import Input from '../../themes/Input';
-import RichText from '../../themes/RichText';
 import RadioButton from '../../themes/RadioButton';
-import { generateKeyPair } from 'crypto';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -28,6 +26,7 @@ const styles = {
     color: black,
     backgroundColor: white,
     '& .action': {
+        display: 'flex',
         margin: '1em 0',
         '@media (min-aspect-ratio: 1/1)': {
             alignSelf: 'flex-end',

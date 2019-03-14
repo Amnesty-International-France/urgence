@@ -17,7 +17,6 @@ import FrontPreview from './FrontPreview';
 import Message from '../../../front/src/urgentActions/message/Message';
 import Link from '../../../front/src/themes/Link';
 import SimpleParagraphFormIterator from './SimpleParagraphFormIterator';
-import RichTextInput from '../form/RichTextInput';
 import LinkInput from './LinkInput';
 
 const styles = theme => ({
