@@ -1,3 +1,4 @@
+import bodyParser from 'body-parser';
 import { Router } from 'express';
 //import { apolloUploadExpress } from 'apollo-upload-server';
 
@@ -6,7 +7,7 @@ import { urgentActionsRouter } from './urgentActions/router';
 
 const router = new Router();
 
-//router.use(bodyParser.json());
+router.use(bodyParser.json());
 router.use('/urgent-actions', urgentActionsRouter);
 //router.post('/', apolloUploadExpress(), graphqlRouter);
 
