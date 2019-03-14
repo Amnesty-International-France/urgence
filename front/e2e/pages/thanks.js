@@ -2,8 +2,8 @@ import { By, until } from 'selenium-webdriver';
 
 export default driver => {
     const elements = {
-        title: By.tagName('h1'),
-        text: By.css('.text'),
+        title: By.className('long-text'),
+        text: By.className('rich-text'),
         action: By.css('a'),
     };
 
