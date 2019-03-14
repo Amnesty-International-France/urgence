@@ -1,10 +1,8 @@
 {
-    "title":
-        "Vietnam: le parquet insiste pour que soit executé un prisonnier condamné à mort depuis 10 ans",
+    "title": "Vietnam: le parquet insiste pour que soit executé un prisonnier condamné à mort depuis 10 ans",
     "story": [
         {
-            "content":
-                "Ho Duy Hai a été condamné à mort en 2008 après avoir été déclaré coupable de pillage de biens et de meurtre.",
+            "content": "Ho Duy Hai a été condamné à mort en 2008 après avoir été déclaré coupable de pillage de biens et de meurtre.",
             "displayOptions": {
                 "mediumPosition": "top",
                 "backgroundColor": "yellow",
@@ -12,8 +10,7 @@
             }
         },
         {
-            "content":
-                "En 2015, la Commission des Affaires judiciaires de l'Assemblée nationale a demandé le réexamen de son cas après avoir découvert de graves erreurs de procédure.",
+            "content": "En 2015, la Commission des Affaires judiciaires de l'Assemblée nationale a demandé le réexamen de son cas après avoir découvert de graves erreurs de procédure.",
             "displayOptions": {
                 "mediumPosition": "bottom",
                 "backgroundColor": "pink",
@@ -21,8 +18,7 @@
             }
         },
         {
-            "content":
-                "Le 7 décembre, le responsable du parquet de Long An a insisté, lors d'un discours à la télévision, pour que son exécution soit accélérée.",
+            "content": "Le 7 décembre, le responsable du parquet de Long An a insisté, lors d'un discours à la télévision, pour que son exécution soit accélérée.",
             "displayOptions": {
                 "mediumPosition": "top",
                 "backgroundColor": "orange",
@@ -32,21 +28,17 @@
     ],
     "call_to_action": {
         "title": "Génial !",
-        "message":
-            "<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>"
+        "message": "<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>"
     },
     "message_template": [
         {
-            "value":
-                "Dear Minister,\nI am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month."
+            "value": "Dear Minister,\nI am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month."
         },
         {
-            "value":
-                "On 5 July, police arrested Idil Eser along with seven other human rights defenders and two trainers, who were simply attending a workshop in Istanbul."
+            "value": "On 5 July, police arrested Idil Eser along with seven other human rights defenders and two trainers, who were simply attending a workshop in Istanbul."
         },
         {
-            "value":
-                "They were doing nothing wrong. They are being investigated on suspicion of \"membership of an armed terrorist organization\", a baseless and ridiculous accusation."
+            "value": "They were doing nothing wrong. They are being investigated on suspicion of \"membership of an armed terrorist organization\", a baseless and ridiculous accusation."
         }
     ],
     "recipient": {
@@ -56,8 +48,7 @@
     },
     "email_thank": {
         "title": "Merci de votre soutien !",
-        "text":
-            "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis."
+        "text": "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis."
     },
     "letter_thank": {
         "title": "Merci de votre aide !",
