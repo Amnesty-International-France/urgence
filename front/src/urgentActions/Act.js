@@ -5,22 +5,26 @@ import PropTypes from 'prop-types';
 import { LinkType } from '../propTypes';
 import TransitionScreen from '../themes/TransitionScreen';
 
-const Act = ({ callToAction, action }) => (
+const Act = ({ data, actions }) => (
     <TransitionScreen
-        action={action}
-        title={get(callToAction, 'title')}
-        message={get(callToAction, 'message')}
-        link={get(callToAction, 'link.url')}
+        actions={actions}
+        title={get(data, 'title')}
+        message={get(data, 'message')}
+        link={get(data, 'link.url')}
     />
 );
 
 Act.propTypes = {
-    action: PropTypes.element,
-    callToAction: PropTypes.shape({
+    actions: PropTypes.func,
+    data: PropTypes.shape({
         title: PropTypes.string.isRequired,
         message: PropTypes.string.isRequired,
         link: LinkType,
     }),
+};
+
+Act.defaultProps = {
+    actions: () => {},
 };
 
 export default Act;

@@ -2,34 +2,48 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Thanks } from './Thanks';
+import TransitionScreen from '../themes/TransitionScreen';
 
 describe('<Thanks />', () => {
     const defaultProps = {
         className: '',
-        title: 'Thank you!',
+        data: {
+            title: 'Thank you!',
+        },
     };
 
-    it('should display given title, text and actions', () => {
+    it('should render a <TransitionScreen />', () => {
         const props = {
             ...defaultProps,
-            title: 'Merci !',
-            text: 'Envoyez une lettre ou partagez cette histoire.',
+            data: {
+                title: 'Merci !',
+                text: 'Envoyez une lettre ou partagez cette histoire.',
+            },
             actions: () => <p className="customAction">Some actions...</p>,
         };
 
         const wrapper = shallow(<Thanks {...props} />);
-        expect(wrapper.find('h1').text()).toBe('Merci !');
-        expect(wrapper.find('.text').text()).toBe('Envoyez une lettre ou partagez cette histoire.');
-        expect(wrapper.find('.customAction').text()).toBe('Some actions...');
+        const transitionScreen = wrapper.find(TransitionScreen);
+        expect(transitionScreen.length).toEqual(1);
     });
 
-    it('should not display text if none is provided', () => {
+    it('should pass props to <TransitionScreen />', () => {
         const props = {
             ...defaultProps,
-            text: null,
+            data: {
+                title: 'Merci !',
+                text: 'Envoyez une lettre ou partagez cette histoire.',
+            },
+            actions: () => 'Some actions...',
         };
 
         const wrapper = shallow(<Thanks {...props} />);
-        expect(wrapper.find('.text').length).toBe(0);
+        const transitionScreen = wrapper.find(TransitionScreen);
+
+        expect(transitionScreen.prop('title')).toEqual('Merci !');
+        expect(transitionScreen.prop('message')).toEqual(
+            'Envoyez une lettre ou partagez cette histoire.',
+        );
+        expect(transitionScreen.prop('actions')()).toEqual('Some actions...');
     });
 });

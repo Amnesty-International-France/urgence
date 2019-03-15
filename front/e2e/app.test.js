@@ -54,16 +54,16 @@ describe('app', () => {
 
     it('should display act step', async () => {
         await actPage.navigate(urgentAction.id);
+
         const title = await actPage.getTitle();
         expect(title).toBe('GÉNIAL !');
 
         const text = await actPage.getText();
-
         expect(text).toBe(
             "Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.",
         );
 
-        await actPage.displayMessage();
+        await actPage.next();
 
         await messagePage.isLoaded();
     });
@@ -116,7 +116,7 @@ describe('app', () => {
         await thanksPage.navigate(urgentAction.id);
 
         const title = await thanksPage.getTitle();
-        expect(title).toBe('Merci de votre soutien !');
+        expect(title).toBe('MERCI DE VOTRE SOUTIEN !');
 
         const text = await thanksPage.getText();
         expect(text).toBe(
@@ -146,14 +146,13 @@ describe('app', () => {
         expect(await emailPage.isActionDisabled()).toBe(false);
 
         await emailPage.validate();
-        await thanksLetterPage.isLoaded();
     });
 
     it('should display thanks-letter step', async () => {
         await thanksLetterPage.navigate(urgentAction.id);
 
         const title = await thanksLetterPage.getTitle();
-        expect(title).toBe('Merci de votre aide !');
+        expect(title).toBe('MERCI DE VOTRE AIDE !');
 
         const text = await thanksLetterPage.getText();
         expect(text).toBe(

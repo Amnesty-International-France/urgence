@@ -7,16 +7,18 @@ import { ThanksInput } from './ThanksInput';
 describe('<ThanksInput />', () => {
     const defaultProps = {
         classes: {},
-        source: 'call_to_action',
+        source: 'letter_thank',
     };
 
     const defaultRenderPropArgs = {
-        call_to_action: {},
+        formData: {
+            letter_thank: {},
+        },
     };
 
-    it('should set title by default to "Merci de votre soutien !"', () => {
+    it('should set title by default to "Merci pour votre action."', () => {
         const props = { ...defaultProps };
-        const renderProp = shallow(<ThanksInput {...props} />)
+        const renderProp = shallow(<ThanksInput {...props} final />)
             .find(FormDataConsumer)
             .prop('children');
 
@@ -24,7 +26,7 @@ describe('<ThanksInput />', () => {
         const wrapper = shallow(<symbol {...symbol.props} />);
 
         expect(wrapper.find('[label="Title"]').prop('defaultValue')).toBe(
-            'Merci de votre soutien !',
+            'Merci pour votre action.',
         );
     });
 });

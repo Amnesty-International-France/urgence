@@ -102,12 +102,14 @@ export const urgentActionsTypeDefs = gql`
     type Thanks {
         title: String
         text: String
+        button: String
         link: Link
     }
 
     input ThankInput {
         title: String
         text: String
+        button: String
         link: LinkInput
     }
 

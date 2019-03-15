@@ -1,16 +1,16 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, TextInput } from 'react-admin';
+import { addField, FormDataConsumer, LongTextInput, TextInput } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 
 import { root, transitionScreenPreview } from './styles';
-import FrontPreview, { noop } from './FrontPreview';
-import RichTextInput from '../form/RichTextInput';
 import { get as getScreenIndex, CALL_TO_ACTION } from './screenIndex';
+import RichTextInput from '../form/RichTextInput';
+import FrontPreview, { noop } from './FrontPreview';
 
 import Act from '../../../front/src/urgentActions/Act';
 import Link from '../../../front/src/themes/Link';
@@ -34,23 +34,40 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                     <Card className={classes.card}>
                         <CardContent className={classes.content}>
                             <div className={classes.formContainer}>
-                                <TextInput source={`${source}.title`} label="Title" />
-                                <RichTextInput source={`${source}.message`} label="Message" />
-                                <TextInput source={`${source}.button`} label="Button" />
+                                <LongTextInput
+                                    source={`${source}.title`}
+                                    label="Title"
+                                    defaultValue="Vous avez plus de pouvoir que vous ne le pensez !"
+                                    multiline
+                                />
+                                <RichTextInput
+                                    source={`${source}.message`}
+                                    label="Message"
+                                    defaultValue="Envoyez dès maintenant un e-mail pour interpeller le Responsable du pouvoir judiciaire."
+                                />
+                                <TextInput
+                                    source={`${source}.button`}
+                                    label="Button"
+                                    defaultValue="Voir l'email"
+                                />
                                 {withLink && <LinkInput source={`${source}.link`} />}
                             </div>
                         </CardContent>
                     </Card>
                     <FrontPreview className={classes.preview}>
                         <Act
-                            callToAction={formData.call_to_action}
-                            action={
+                            data={formData.call_to_action}
+                            actions={() => (
                                 <Link
                                     to="#"
-                                    label={formData.call_to_action ? formData.call_to_action.button : ''}
+                                    label={
+                                        formData.call_to_action
+                                            ? formData.call_to_action.button
+                                            : ''
+                                    }
                                     onClick={noop}
                                 />
-                            }
+                            )}
                         />
                     </FrontPreview>
                 </Fragment>
@@ -66,7 +83,6 @@ CallToActionInput.propTypes = {
 };
 
 CallToActionInput.defaultProps = {
-    source: '',
     withLink: false,
 };
 

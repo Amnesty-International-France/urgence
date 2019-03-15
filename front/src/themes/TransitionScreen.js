@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 import RichText from '../themes/RichText';
+import LongText from '../themes/LongText';
 import { yellow, white, black } from '../themes/colors';
 import { withBlackLogo } from '../themes/ThemeContext';
 import { LinkType } from '../propTypes';
@@ -29,12 +30,12 @@ const styles = {
         fontSize: '36px',
         fontWeight: 'bold',
         margin: '1.5rem 12px',
-        width: 'calc(100% - 12px)',
+        width: 'calc(100% - 24px)',
         '> span': {
             color: white,
             backgroundColor: black,
             padding: '6px 0',
-            boxShadow: `10px 0 0 ${black}, -10px 0 0 ${black}`,
+            boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
         },
     },
     '& .rich-text': {
@@ -56,16 +57,16 @@ const styles = {
     },
 };
 
-export const TransitionScreen = ({ className, action, title, message, link }) => (
+export const TransitionScreen = ({ className, actions, title, message, link }) => (
     <div className={className}>
         <div>
             <h1>
-                <span>{title}</span>
+                <LongText text={title} />
             </h1>
-            <RichText html={message} />
+            {message && <RichText html={message} />}
         </div>
         <div className="actions">
-            {action}
+            {actions()}
             {link && link.url && <Link {...link} color={black} />}
         </div>
     </div>
@@ -73,10 +74,16 @@ export const TransitionScreen = ({ className, action, title, message, link }) =>
 
 TransitionScreen.propTypes = {
     className: PropTypes.string.isRequired,
-    action: PropTypes.element,
+    actions: PropTypes.func,
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     link: LinkType,
+};
+
+TransitionScreen.defaultProps = {
+    actions: () => {},
+    title: '',
+    message: '',
 };
 
 export default glamorous(withBlackLogo(TransitionScreen))(styles);

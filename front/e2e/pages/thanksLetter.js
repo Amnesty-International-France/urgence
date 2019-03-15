@@ -2,16 +2,15 @@ import { By, until } from 'selenium-webdriver';
 
 export default driver => {
     const elements = {
-        container: By.className('thanks'),
-        title: By.tagName('h1'),
-        text: By.css('.content .text'),
+        title: By.className('long-text'),
+        text: By.className('rich-text'),
+        action: By.css('a'),
     };
 
     return {
-        isLoaded: async () => await driver.wait(until.elementLocated(elements.container)),
-        async navigate(id) {
+        navigate: async id => {
             await driver.navigate().to(`http://front:3000/#/ua/${id}/thanks-letter`);
-            await this.isLoaded();
+            await driver.wait(until.elementLocated(elements.title));
         },
         getTitle: async () => driver.findElement(elements.title).getText(),
         getText: async () => driver.findElement(elements.text).getText(),
