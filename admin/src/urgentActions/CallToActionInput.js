@@ -1,7 +1,15 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, required, FormDataConsumer, LongTextInput, TextInput } from 'react-admin';
+import {
+    addField,
+    required,
+    minLength,
+    maxLength,
+    FormDataConsumer,
+    LongTextInput,
+    TextInput,
+} from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -51,7 +59,7 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                                     source={`${source}.button`}
                                     label="Button"
                                     defaultValue="Voir l'email"
-                                    validate={required()}
+                                    validate={(required(), minLength(3), maxLength(25))}
                                 />
                                 {withLink && <LinkInput source={`${source}.link`} />}
                             </div>
