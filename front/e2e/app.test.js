@@ -79,7 +79,6 @@ describe('app', () => {
             'They were doing nothing wrong. They are being investigated on suspicion of "membership of an armed terrorist organization", a baseless and ridiculous accusation.',
         );
 
-        await messagePage.next();
         await messagePage.isLoaded();
 
         const indication = await messagePage.getIndication();
