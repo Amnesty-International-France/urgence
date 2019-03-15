@@ -18,11 +18,7 @@ const ChildContainer = glamorous.view({
 
 const Carousel = ({ children }) => (
     <ScrollContainer>
-        <ScrollView
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-        >
+        <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
             {children.map((child, index) => (
                 <ChildContainer key={index}>{child}</ChildContainer>
             ))}
