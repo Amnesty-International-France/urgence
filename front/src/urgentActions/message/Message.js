@@ -209,41 +209,41 @@ export const Message = ({
     setSurname,
     setName,
 }) => (
-        <Fragment>
-            {(!messageTemplate || !messageTemplate.length) && (
-                <p className="error">Cette action urgente n&#39;existe plus.</p>
-            )}
+    <Fragment>
+        {(!messageTemplate || !messageTemplate.length) && (
+            <p className="error">Cette action urgente n&#39;existe plus.</p>
+        )}
 
-            {messageTemplate &&
-                messageTemplate.length > 0 && (
-                    <div className={classnames('message', className)}>
-                        <p>
-                            Pour agir plus vite,&nbsp;
+        {messageTemplate &&
+            messageTemplate.length > 0 && (
+                <div className={classnames('message', className)}>
+                    <p>
+                        Pour agir plus vite,&nbsp;
                         <strong className="importantText"> nous vous proposons ce message :</strong>
-                        </p>
-                        <LetterView messageTemplate={messageTemplate} />
-                        <p>
-                            Parce que les messages uniques ont plus d&#39;impact,&nbsp;
+                    </p>
+                    <LetterView messageTemplate={messageTemplate} />
+                    <p>
+                        Parce que les messages uniques ont plus d&#39;impact,&nbsp;
                         <strong className="importantText">
-                                {' '}
-                                nous vous invitons à le personnaliser.
+                            {' '}
+                            nous vous invitons à le personnaliser.
                         </strong>
-                        </p>
-                        <FormStep
-                            objectIndication={objectIndication}
-                            setObject={setObject}
-                            setCivility={setCivility}
-                            setSurname={setSurname}
-                            setName={setName}
-                        />
-                        <div className="action">
-                            {action}
-                            {link && link.url && <Link {...link} />}
-                        </div>
+                    </p>
+                    <FormStep
+                        objectIndication={objectIndication}
+                        setObject={setObject}
+                        setCivility={setCivility}
+                        setSurname={setSurname}
+                        setName={setName}
+                    />
+                    <div className="action">
+                        {action}
+                        {link && link.url && <Link {...link} />}
                     </div>
-                )}
-        </Fragment>
-    );
+                </div>
+            )}
+    </Fragment>
+);
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
@@ -257,4 +257,4 @@ Message.propTypes = {
     action: PropTypes.node.isRequired,
 };
 
-export default glamorous(compose(withBlackLogo, withSessionData)(Message))(styles);
+export default glamorous(compose(withYellowLogo, withSessionData)(Message))(styles);
