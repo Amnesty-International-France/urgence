@@ -2,23 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
-import { white, yellow } from './colors';
+import { black, white, yellow } from './colors';
+
+const style = {
+    height: '12px',
+    width: '100%',
+};
 
 const Container = glamorous.div({
+    ...style,
     display: 'inline-flex',
-    height: '12px',
-    width: '100%',
+    '& :first-child': {
+        borderLeft: '0px',
+    },
+    '& :last-child': {
+        borderRight: '0px',
+    },
 });
 
+const stepStyle = {
+    border: '1px solid',
+    borderColor: black,
+    borderTop: '0',
+    borderBottom: '0',
+};
+
 const FilledStep = glamorous.div({
-    height: '12px',
-    width: '100%',
+    ...style,
+    ...stepStyle,
     backgroundColor: yellow,
 });
 
 const EmptyStep = glamorous.div({
-    height: '12px',
-    width: '100%',
+    ...style,
+    ...stepStyle,
     backgroundColor: white,
 });
 
