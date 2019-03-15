@@ -6,7 +6,7 @@ export default driver => {
         container: By.className('message'),
         inputObject: By.css('.object input'),
         indication: By.css('.objectIndication'),
-        inputCivility: By.css('input[type=radio]')[0],
+        inputCivility: By.css('input[type=radio]'),
         inputSurname: By.css('.surname input'),
         inputName: By.css('.name input'),
         sendMailButton: By.css('.action a'),
