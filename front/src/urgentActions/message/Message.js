@@ -138,7 +138,9 @@ export class LetterView extends Component {
                         />
                     )}
                 </div>
-                <ShowButton showAllText={showAllText} action={this.setShowMode} />
+                {letterOverflow && (
+                    <ShowButton showAllText={showAllText} action={this.setShowMode} />
+                )}
             </div>
         );
     }
