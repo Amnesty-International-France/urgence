@@ -6228,7 +6228,7 @@ ra-core@^2.0.4, ra-core@^2.8.0:
     redux-saga "~0.16.0"
     reselect "~3.0.0"
 
-ra-data-graphql-simple@~2.0.0-RC1:
+ra-data-graphql-simple@~2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.0.4.tgz#32de3a244447537d1121711343f063b0b83a415d"
   dependencies:
@@ -6247,7 +6247,7 @@ ra-data-graphql@^2.0.4:
     lodash "~4.17.5"
     pluralize "~7.0.0"
 
-ra-input-rich-text@~2.0.0-RC2:
+ra-input-rich-text@~2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/ra-input-rich-text/-/ra-input-rich-text-2.0.2.tgz#d2453c8e54385ceb98147f143e1f66384f2aebf4"
   dependencies:
@@ -6331,7 +6331,7 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-admin@~2.0.0-RC3:
+react-admin@~2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.0.4.tgz#bddd29f411d250cee0728ced7a75663907fd86ea"
   dependencies:

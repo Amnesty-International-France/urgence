@@ -1,7 +1,15 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, LongTextInput, TextInput } from 'react-admin';
+import {
+    addField,
+    required,
+    minLength,
+    maxLength,
+    FormDataConsumer,
+    LongTextInput,
+    TextInput,
+} from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -52,11 +60,13 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                                         source={`${source}.title`}
                                         label="Title"
                                         defaultValue={defaultValues.title}
+                                        validate={[required()]}
                                     />
                                     <RichTextInput
                                         source={`${source}.text`}
                                         label="Text"
                                         defaultValue={defaultValues.text}
+                                        validate={[required()]}
                                     />
                                     {!final && (
                                         <Fragment>
@@ -64,6 +74,7 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                                                 source={`${source}.button`}
                                                 label="Button"
                                                 defaultValue={defaultValues.button}
+                                                validate={[required(), minLength(3), maxLength(25)]}
                                             />
                                             {withLink && <LinkInput source={`${source}.link`} />}
                                         </Fragment>
