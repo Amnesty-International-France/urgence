@@ -52,7 +52,7 @@ describe('getPdfMessageBuffer', () => {
 
         await getPdfMessageBuffer(defaultUrgentAction, '', 'M.', 'John', 'Doe');
         const renderedLetter = pdfSpy.mock.calls[0][0];
-        expect(renderedLetter).toContain('<p class="name">M. John Doe</p>');
+        expect(renderedLetter).toContain('<p class="name">John Doe</p>');
     });
 
     it('should display emitter postal address', async () => {
