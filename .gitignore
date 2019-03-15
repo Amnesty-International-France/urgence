@@ -10,5 +10,8 @@ yarn-error.log*
 /front/.expo
 var/deploy.key
 var/deploy-prod.key
+var/amnesty-staging-deploy
+var/amnesty-staging-deploy.pub
+var/amnestystaging.pem
 /admin/build
 var/uploads
