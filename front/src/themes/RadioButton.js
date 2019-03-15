@@ -41,7 +41,7 @@ export const RadioButton = ({ className, choices, label, name, value, onChange }
                         checked={value === item}
                         id={index}
                         className="circle"
-                        onClick={onChange}
+                        onChange={onChange}
                     />
                     <label htmlFor={item}>{item}</label>
                 </div>
