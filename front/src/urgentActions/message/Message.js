@@ -81,6 +81,9 @@ const styles = {
     '& .pleinEnd': {
         paddingTop: '10px',
     },
+    '& .noTopMargin': {
+        marginTop: 0,
+    },
     '& .noBottomMargin': {
         marginBottom: 0,
     },
@@ -169,7 +172,7 @@ export class FormStep extends Component {
                     choices={['M.', 'Mme.', 'Autre']}
                 />
                 <Input
-                    className={classnames('surname', 'noBottomMargin')}
+                    className={classnames('surname', 'noTopMargin', 'noBottomMargin')}
                     value={surname}
                     onChange={this.setSurname}
                     placeholder="Votre prénom"
@@ -208,6 +211,10 @@ export const Message = ({
     setCivility,
     setSurname,
     setName,
+    object,
+    civility,
+    surname,
+    name,
 }) => (
     <Fragment>
         {(!messageTemplate || !messageTemplate.length) && (
@@ -231,6 +238,10 @@ export const Message = ({
                     </p>
                     <FormStep
                         objectIndication={objectIndication}
+                        object={object}
+                        civility={civility}
+                        surname={surname}
+                        name={name}
                         setObject={setObject}
                         setCivility={setCivility}
                         setSurname={setSurname}
@@ -254,6 +265,10 @@ Message.propTypes = {
     setCivility: PropTypes.func.isRequired,
     setSurname: PropTypes.func.isRequired,
     setName: PropTypes.func.isRequired,
+    object: PropTypes.string,
+    civility: PropTypes.string,
+    surname: PropTypes.string,
+    name: PropTypes.string,
     action: PropTypes.node.isRequired,
 };
 

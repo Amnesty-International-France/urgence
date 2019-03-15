@@ -28,7 +28,7 @@ const styles = {
     },
 };
 
-export const RadioButton = ({ className, choices, label, name, onChange }) => (
+export const RadioButton = ({ className, choices, label, name, value, onChange }) => (
     <div className={className}>
         {label && <p className="label">{label}</p>}
         {choices.map((item, index) => {
@@ -38,6 +38,7 @@ export const RadioButton = ({ className, choices, label, name, onChange }) => (
                         type="radio"
                         name={name}
                         value={item}
+                        checked={value === item}
                         id={index}
                         className="circle"
                         onClick={onChange}
@@ -52,6 +53,7 @@ export const RadioButton = ({ className, choices, label, name, onChange }) => (
 RadioButton.propTypes = {
     className: PropTypes.string,
     label: PropTypes.string,
+    value: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
     choices: PropTypes.array.isRequired,

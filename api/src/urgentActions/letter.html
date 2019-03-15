@@ -38,7 +38,7 @@
 
 <body>
     <p class="address">
-        {{ civility }} {{ surname }} {{ name }}
+        {{ surname }} {{ name }}
         <br />{{emitterAddress|escape|nl2br}}
     </p>
     <p class="recipient">
@@ -53,7 +53,7 @@
         {% for message in urgentAction.message_template %}
         <p>{{ message.value|escape|nl2br }}</p>
         {% endfor %}
-        <p class="name">{{ civility }} {{ surname }} {{ name }}</p>
+        <p class="name">{{ surname }} {{ name }}</p>
     </div>
 </body>
 
