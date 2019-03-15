@@ -1,11 +1,11 @@
 import React from 'react';
-
 import { storiesOf } from '@storybook/react';
+
 import RichText from './RichText';
 import Image from './Image';
 import { Button } from './Button';
 import LoadingScreen from './LoadingScreen';
-
+import Steps from './Steps';
 import Input from './Input';
 import TextArea from './TextArea';
 
@@ -56,4 +56,14 @@ storiesOf('User Interface', module)
             `}
         />
     ))
-    .add('Button', () => <Button label="click me" onClick={() => alert('clicked')} />);
+    .add('Button', () => <Button label="click me" onClick={() => alert('clicked')} />)
+    .add('Steps', () => {
+        return (
+            <div>
+                <p>Step 3/5</p>
+                <Steps current={3} total={5} />
+                <p>Step 5/5</p>
+                <Steps current={5} total={5} />
+            </div>
+        );
+    });
