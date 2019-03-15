@@ -3,23 +3,10 @@ import { ApolloServer } from 'apollo-server-express';
 import config from '../../../config';
 import { typeDefs } from './typeDefs';
 import { resolvers } from './resolvers';
-import omitDeep from '../utils/omitDeep';
-
-const omitTypeName = omitDeep(['__typename']);
 
 const options = {
     typeDefs,
     resolvers,
-    formatParams: ({ variables, ...rest }) => {
-        if (!variables) {
-            return rest;
-        }
-
-        return {
-            variables: omitTypeName(variables),
-            ...rest
-        };
-    },
 };
 
 if (config.env !== 'production') {

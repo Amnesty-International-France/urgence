@@ -9,7 +9,7 @@ export const graphqlClientOptions = {
 
 const client = new ApolloClient({
     link: createUploadLink(graphqlClientOptions),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({ addTypename: false }),
 });
 
 export const getApolloClient = () =>
