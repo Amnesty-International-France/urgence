@@ -27,7 +27,6 @@ const styles = theme => ({
     preview: {
         ...preview,
         '& > div': {
-            //height: 'calc(100% - 120px)',
             width: 'calc(100% - 40px)',
             padding: '100px 20px 20px 20px',
         },
