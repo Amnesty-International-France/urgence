@@ -9,6 +9,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import StoryStep from '../urgentActions/StoryStep';
 import { textColorForBackgroundColor, colors } from '../themes/colors';
+import Steps from '../themes/Steps';
 import { RightArrow } from '../icons';
 import { LinkType } from '../propTypes';
 
@@ -16,14 +17,6 @@ const styles = {
     '& .story-step': {
         flex: '1 0 0',
     },
-
-    '& .bottom': {
-        flex: '0 0 50px',
-        alignItems: 'center',
-        padding: '17px 24px',
-        display: 'flex',
-    },
-
     '& .slide.with-bottom-media .bottom': {
         position: 'absolute',
         bottom: 0,
@@ -38,22 +31,20 @@ const styles = {
             },
         },
     },
-
-    '& .bottom > *': {
-        flex: '1 0 0',
-    },
-
     '& .next-arrow, & .last-arrow': {
-        position: 'relative',
-        top: 4,
-        textAlign: 'right',
+        display: 'flex',
+        justifyContent: 'flex-end',
         fontSize: 28,
+        margin: '17px 24px',
     },
-
     '& .counter': {
-        fontFamily: 'Amnesty Trade Gothic Condensed',
-        fontSize: 18,
-        lineHeight: '22px',
+        margin: '0px',
+        padding: '0px',
+        height: '17px',
+        width: '100%',
+        '@media (min-width: 1024px)': {
+            height: '25px',
+        },
     },
 };
 
@@ -82,10 +73,6 @@ export class StorySlide extends Component {
                         color: textColorForBackgroundColor(step.displayOptions.backgroundColor),
                     }}
                 >
-                    <div className="counter">
-                        {index}/{total}
-                    </div>
-
                     {index < total ? (
                         <div className="next-arrow" onClick={nextSlide}>
                             <RightArrow fill={rightArrowColor(step)} />
@@ -93,6 +80,11 @@ export class StorySlide extends Component {
                     ) : (
                         <div className="last-arrow" onClick={lastSlide}>
                             <RightArrow fill={rightArrowColor(step)} />
+                        </div>
+                    )}
+                    {total > 1 && (
+                        <div className="counter">
+                            <Steps current={index} total={total} />
                         </div>
                     )}
                 </div>

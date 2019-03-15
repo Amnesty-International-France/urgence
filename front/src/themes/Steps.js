@@ -5,7 +5,7 @@ import glamorous from 'glamorous';
 import { black, white, yellow } from './colors';
 
 const style = {
-    height: '12px',
+    height: '100%',
     width: '100%',
 };
 
