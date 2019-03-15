@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, LongTextInput, TextInput } from 'react-admin';
+import { addField, required, FormDataConsumer, LongTextInput, TextInput } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -38,17 +38,20 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                                     source={`${source}.title`}
                                     label="Title"
                                     defaultValue="Vous avez plus de pouvoir que vous ne le pensez !"
+                                    validate={required()}
                                     multiline
                                 />
                                 <RichTextInput
                                     source={`${source}.message`}
                                     label="Message"
                                     defaultValue="Envoyez dès maintenant un e-mail pour interpeller le Responsable du pouvoir judiciaire."
+                                    validate={required()}
                                 />
                                 <TextInput
                                     source={`${source}.button`}
                                     label="Button"
                                     defaultValue="Voir l'email"
+                                    validate={required()}
                                 />
                                 {withLink && <LinkInput source={`${source}.link`} />}
                             </div>
