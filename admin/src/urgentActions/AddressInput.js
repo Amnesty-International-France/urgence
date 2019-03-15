@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, Labeled, LongTextInput } from 'react-admin';
+import { addField, required, FormDataConsumer, Labeled, LongTextInput } from 'react-admin';
 import Avatar from '@material-ui/core/Avatar';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -45,8 +45,12 @@ export const AddressInput = ({ classes, source }) => (
                     <Card className={classes.card}>
                         <CardContent className={classes.content}>
                             <div className={classes.formContainer}>
-                                <Labeled label="Recipient">
-                                    <LongTextInput label="Postal Address" source={source} />
+                                <Labeled label="Generate Letter">
+                                    <LongTextInput
+                                        label="Recipient Postal Address"
+                                        source={source}
+                                        validate={[required()]}
+                                    />
                                 </Labeled>
                             </div>
                         </CardContent>
@@ -55,9 +59,7 @@ export const AddressInput = ({ classes, source }) => (
                         <AddressStep
                             setAddress={noop}
                             address=""
-                            action={disabled => (
-                                <Link to={'#'} label="Valider" disabled={disabled} />
-                            )}
+                            action={disabled => <Link to="#" label="Valider" disabled={disabled} />}
                         />
                     </FrontPreview>
                 </Fragment>
