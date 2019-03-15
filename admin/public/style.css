@@ -31,6 +31,11 @@ body {
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Amnesty Trade Gothic LT';
+    src: url('fonts/AmnestyTradeGothic-Light.woff2') format('woff2');
+}
+
 .swiper-container {
     height: 100%;
 }

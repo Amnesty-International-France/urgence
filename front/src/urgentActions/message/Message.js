@@ -20,7 +20,6 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: '100%',
     width: '100%',
     padding: '100px 20px 20px 20px',
     color: black,
