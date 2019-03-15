@@ -81,12 +81,6 @@ const styles = {
     '& .pleinEnd': {
         paddingTop: '10px',
     },
-    '& .noTopMargin': {
-        marginTop: 0,
-    },
-    '& .noBottomMargin': {
-        marginBottom: 0,
-    },
     '& .objectIndication': {
         fontStyle: 'italic',
         opacity: '0.5',
@@ -160,10 +154,10 @@ export class FormStep extends Component {
         return (
             <Fragment>
                 <Input
-                    className={classnames('object', 'noBottomMargin')}
+                    className="object"
                     value={object}
                     onChange={this.setObject}
-                    placeholder="Objet de l'e-mail"
+                    label="Objet de l'e-mail"
                 />
                 <p className="objectIndication">{objectIndication}</p>
                 <RadioButton
@@ -174,17 +168,12 @@ export class FormStep extends Component {
                     choices={['M.', 'Mme.', 'Autre']}
                 />
                 <Input
-                    className={classnames('surname', 'noTopMargin', 'noBottomMargin')}
+                    className="surname"
                     value={surname}
                     onChange={this.setSurname}
-                    placeholder="Votre prénom"
+                    label="Votre prénom"
                 />
-                <Input
-                    className={classnames('name', 'noBottomMargin')}
-                    value={name}
-                    onChange={this.setName}
-                    placeholder="Votre nom"
-                />
+                <Input className="name" value={name} onChange={this.setName} label="Votre nom" />
             </Fragment>
         );
     }

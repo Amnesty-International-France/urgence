@@ -5,13 +5,13 @@ import glamorous from 'glamorous';
 const styles = {
     fontFamily: 'Amnesty Trade Gothic',
     fontSize: 14,
-    lineHeight: 2,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
     padding: '20px 0',
     maxWidth: '400px',
+    alignItems: 'center',
     '& .label': {
         width: '20%',
     },
