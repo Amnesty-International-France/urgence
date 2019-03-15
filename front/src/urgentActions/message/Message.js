@@ -13,13 +13,14 @@ import { LinkType } from '../../propTypes';
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '16px',
-    padding: '4em 1em 1em 1em',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    backgroundColor: white,
-    color: black,
     height: '100%',
+    width: '100%',
+    padding: '100px 20px 20px 20px',
+    color: black,
+    backgroundColor: white,
     '& .action': {
         margin: '1em 0',
         '@media (min-aspect-ratio: 1/1)': {
@@ -31,7 +32,6 @@ const styles = {
     },
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
-
         '& a': {
             alignSelf: 'flex-end',
         },
