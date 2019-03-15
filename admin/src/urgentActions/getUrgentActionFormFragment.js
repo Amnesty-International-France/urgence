@@ -15,7 +15,6 @@ import { USE_CALL_TO_ACTION_LINK } from '../flags';
 import StoryTemplateInput from './StoryTemplateInput';
 import CallToActionInput from './CallToActionInput';
 import MessageInput from './MessageInput';
-import FullNameInput from './FullNameInput';
 import ThanksInput from './ThanksInput';
 import AddressInput from './AddressInput';
 import EmailInput from './EmailInput';
@@ -76,7 +75,6 @@ export const Form = ({ classes }) => (
         <div className={`${classes.form} message`}>
             <h2>Message</h2>
             <MessageInput source="" withLink={USE_CALL_TO_ACTION_LINK} />
-            <FullNameInput source="" />
         </div>
 
         <div className={`${classes.form} continue`}>

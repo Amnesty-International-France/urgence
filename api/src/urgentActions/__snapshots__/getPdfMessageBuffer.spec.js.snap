@@ -41,7 +41,7 @@ exports[`getPdfMessageBuffer should prefix address with name 1`] = `
 
 <body>
     <p class=\\"address\\">
-        name
+        civility surname name
         <br />address
     </p>
     <p class=\\"recipient\\">
