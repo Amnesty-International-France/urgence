@@ -60,13 +60,13 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                                         source={`${source}.title`}
                                         label="Title"
                                         defaultValue={defaultValues.title}
-                                        validate={required()}
+                                        validate={[required()]}
                                     />
                                     <RichTextInput
                                         source={`${source}.text`}
                                         label="Text"
                                         defaultValue={defaultValues.text}
-                                        validate={required()}
+                                        validate={[required()]}
                                     />
                                     {!final && (
                                         <Fragment>
@@ -74,7 +74,7 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                                                 source={`${source}.button`}
                                                 label="Button"
                                                 defaultValue={defaultValues.button}
-                                                validate={(required(), minLength(3), maxLength(25))}
+                                                validate={[required(), minLength(3), maxLength(25)]}
                                             />
                                             {withLink && <LinkInput source={`${source}.link`} />}
                                         </Fragment>

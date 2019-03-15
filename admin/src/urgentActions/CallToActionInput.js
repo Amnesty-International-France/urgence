@@ -46,20 +46,20 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                                     source={`${source}.title`}
                                     label="Title"
                                     defaultValue="Vous avez plus de pouvoir que vous ne le pensez !"
-                                    validate={required()}
+                                    validate={[required()]}
                                     multiline
                                 />
                                 <RichTextInput
                                     source={`${source}.message`}
                                     label="Message"
                                     defaultValue="Envoyez dès maintenant un e-mail pour interpeller le Responsable du pouvoir judiciaire."
-                                    validate={required()}
+                                    validate={[required()]}
                                 />
                                 <TextInput
                                     source={`${source}.button`}
-                                    label="Button"
+                                    label="Button*"
                                     defaultValue="Voir l'email"
-                                    validate={(required(), minLength(3), maxLength(25))}
+                                    validate={[required(), minLength(3), maxLength(25)]}
                                 />
                                 {withLink && <LinkInput source={`${source}.link`} />}
                             </div>
