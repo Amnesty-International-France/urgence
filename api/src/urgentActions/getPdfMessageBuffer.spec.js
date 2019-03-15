@@ -47,12 +47,12 @@ describe('getPdfMessageBuffer', () => {
         expect(renderedLetter).toContain('Asking for a fair trial');
     });
 
-    it('should display passed signature', async () => {
+    it('should display passed name', async () => {
         const pdfSpy = jest.spyOn(pdf, 'create');
 
-        await getPdfMessageBuffer(defaultUrgentAction, '', 'John Doe');
+        await getPdfMessageBuffer(defaultUrgentAction, '', 'M.', 'John', 'Doe');
         const renderedLetter = pdfSpy.mock.calls[0][0];
-        expect(renderedLetter).toContain('<p class="signature">John Doe</p>');
+        expect(renderedLetter).toContain('<p class="name">M. John Doe</p>');
     });
 
     it('should display emitter postal address', async () => {
@@ -71,18 +71,18 @@ describe('getPdfMessageBuffer', () => {
             54000 Nancy
         `;
 
-        await getPdfMessageBuffer(urgentAction, 'subject', 'signature', emitterAddress);
+        await getPdfMessageBuffer(urgentAction, 'subject', 'civility', 'surname', 'name', emitterAddress);
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('marmelab');
         expect(renderedLetter).toContain('4, rue Girardet');
         expect(renderedLetter).toContain('54000 Nancy');
     });
 
-    it('should prefix address with signature', async () => {
+    it('should prefix address with name', async () => {
         const pdfSpy = jest.spyOn(pdf, 'create');
 
         const urgentAction = { ...defaultUrgentAction };
-        await getPdfMessageBuffer(urgentAction, 'subject', 'signature', 'address');
+        await getPdfMessageBuffer(urgentAction, 'subject', 'civility', 'surname', 'name', 'address');
 
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toMatchSnapshot();

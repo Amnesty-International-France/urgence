@@ -10,8 +10,12 @@ export default (name, params = {}) => {
             return `/ua/${params.id}/message`;
         case 'object':
             return `/ua/${params.id}/object`;
-        case 'signature':
-            return `/ua/${params.id}/signature`;
+        case 'civility':
+            return `/ua/${params.id}/civility`;
+        case 'surname':
+            return `/ua/${params.id}/surname`;
+        case 'name':
+            return `/ua/${params.id}/name`;
         case 'thanks':
             return `/ua/${params.id}/thanks`;
         case 'address':

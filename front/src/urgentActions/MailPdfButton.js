@@ -12,7 +12,9 @@ export class MailPdfButton extends Component {
     sendMail = () => {
         const {
             object: subject,
-            signature,
+            civility,
+            surname,
+            name,
             address,
             email,
             match: {
@@ -24,7 +26,9 @@ export class MailPdfButton extends Component {
             method: 'POST',
             body: JSON.stringify({
                 subject,
-                signature,
+                civility,
+                surname,
+                name,
                 address,
                 email,
             }),
@@ -49,14 +53,13 @@ export class MailPdfButton extends Component {
 
 MailPdfButton.propTypes = {
     object: PropTypes.string.isRequired,
-    signature: PropTypes.string.isRequired,
+    civility: PropTypes.string.isRequired,
+    surname: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     match: routeMatch,
     disabled: PropTypes.bool,
 };
 
-export default compose(
-    withSessionData,
-    withRouter,
-)(MailPdfButton);
+export default compose(withSessionData, withRouter)(MailPdfButton);

@@ -1,5 +1,5 @@
-export const templateToBodyText = (template, signature) =>
+export const templateToBodyText = (template, civility, surname, name) =>
     template
         .map(({ value }) => value.trim())
         .join('\n\n')
-        .concat(signature ? `\n\n${signature}` : '');
+        .concat(civility && surname && name ? `\n\n${civility}${surname}${name}` : '');

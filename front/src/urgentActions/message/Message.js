@@ -155,7 +155,7 @@ export class FormStep extends Component {
         return (
             <Fragment>
                 <Input
-                    className="noBottomMargin"
+                    className={classnames('object', 'noBottomMargin')}
                     value={object}
                     onChange={this.setObject}
                     placeholder="Objet de l'e-mail"
@@ -169,13 +169,13 @@ export class FormStep extends Component {
                     choices={['M.', 'Mme.', 'Autre']}
                 />
                 <Input
-                    className="noBottomMargin"
+                    className={classnames('surname', 'noBottomMargin')}
                     value={surname}
                     onChange={this.setSurname}
                     placeholder="Votre prénom"
                 />
                 <Input
-                    className="noBottomMargin"
+                    className={classnames('name', 'noBottomMargin')}
                     value={name}
                     onChange={this.setName}
                     placeholder="Votre nom"
@@ -257,9 +257,4 @@ Message.propTypes = {
     action: PropTypes.node.isRequired,
 };
 
-export default glamorous(
-    compose(
-        withBlackLogo,
-        withSessionData,
-    )(Message),
-)(styles);
+export default glamorous(compose(withBlackLogo, withSessionData)(Message))(styles);

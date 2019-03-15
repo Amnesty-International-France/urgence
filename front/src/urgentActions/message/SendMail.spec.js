@@ -11,14 +11,16 @@ describe('renderSendMail', () => {
         afterMail: jest.fn(),
     };
     const defaultContext = {
-        signature: 'signature',
+        civility: 'civility',
+        surname: 'surname',
+        name: 'name',
         object: 'object',
     };
 
-    it('should render MailTo with body computed from messageTemplate and signature', () => {
+    it('should render MailTo with body computed from messageTemplate and name', () => {
         const wrapper = shallow(renderSendMail(defaultProps)(defaultContext));
 
-        expect(wrapper.find('MailTo').prop('body')).toBe('hello\n\nworld\n\nsignature');
+        expect(wrapper.find('MailTo').prop('body')).toBe('hello\n\nworld\ncivility surname name');
     });
 
     it('should render MailTo with recipient props', () => {
