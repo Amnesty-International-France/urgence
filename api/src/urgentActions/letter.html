@@ -28,7 +28,7 @@
             text-decoration: underline;
         }
 
-        .signature {
+        .name {
             font-size: 12px;
             margin-top: 3cm;
             text-align: right;
@@ -38,7 +38,7 @@
 
 <body>
     <p class="address">
-        {{ signature }}
+        {{ surname }} {{ name }}
         <br />{{emitterAddress|escape|nl2br}}
     </p>
     <p class="recipient">
@@ -53,7 +53,7 @@
         {% for message in urgentAction.message_template %}
         <p>{{ message.value|escape|nl2br }}</p>
         {% endfor %}
-        <p class="signature">{{ signature }}</p>
+        <p class="name">{{ surname }} {{ name }}</p>
     </div>
 </body>
 

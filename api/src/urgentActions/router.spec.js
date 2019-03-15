@@ -37,7 +37,7 @@ describe('Urgent Actions Router', () => {
             expect(response.status).toBe(200);
         });
 
-        it('should return a PDF with correct subject and signature', async () => {
+        it('should return a PDF with correct subject and name', async () => {
             const urgentAction = await createUrgentAction();
 
             const address = `
@@ -51,13 +51,17 @@ describe('Urgent Actions Router', () => {
                 `/urgent-actions/${urgentAction.id}.pdf?${stringify({
                     address,
                     subject: 'Custom Subject',
-                    signature: 'Signature',
+                    civility: 'M',
+                    surname: 'Surname',
+                    name: 'Name',
                 })}`,
             );
 
             expect(getPdfMessageBuffer.mock.calls[0][1]).toBe('Custom Subject');
-            expect(getPdfMessageBuffer.mock.calls[0][2]).toBe('Signature');
-            expect(getPdfMessageBuffer.mock.calls[0][3]).toBe(address);
+            expect(getPdfMessageBuffer.mock.calls[0][2]).toBe('M');
+            expect(getPdfMessageBuffer.mock.calls[0][3]).toBe('Surname');
+            expect(getPdfMessageBuffer.mock.calls[0][4]).toBe('Name');
+            expect(getPdfMessageBuffer.mock.calls[0][5]).toBe(address);
         });
     });
 
@@ -86,18 +90,22 @@ describe('Urgent Actions Router', () => {
             expect(response.status).toBe(200);
         });
 
-        it('should generate PDF with correct subject and signature', async () => {
+        it('should generate PDF with correct subject and name', async () => {
             const urgentAction = await createUrgentAction();
 
             await request(app)
                 .post(`/urgent-actions/${urgentAction.id}/send`)
                 .send({
                     subject: 'Custom Subject',
-                    signature: 'Signature',
+                    civility: 'Civility',
+                    surname: 'Surname',
+                    name: 'Name',
                 });
 
             expect(getPdfMessageBuffer.mock.calls[0][1]).toBe('Custom Subject');
-            expect(getPdfMessageBuffer.mock.calls[0][2]).toBe('Signature');
+            expect(getPdfMessageBuffer.mock.calls[0][2]).toBe('Civility');
+            expect(getPdfMessageBuffer.mock.calls[0][3]).toBe('Surname');
+            expect(getPdfMessageBuffer.mock.calls[0][4]).toBe('Name');
         });
 
         it('should send email to correct recipient with attached PDF', async () => {

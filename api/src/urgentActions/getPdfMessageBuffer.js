@@ -4,12 +4,14 @@ import frLocale from 'date-fns/locale/fr';
 import pdf from 'html-pdf';
 import nunjucks from 'nunjucks';
 
-export const getPdfMessageBuffer = async (urgentAction, subject, signature, emitterAddress) =>
+export const getPdfMessageBuffer = async (urgentAction, subject, civility, surname, name, emitterAddress) =>
     new Promise((resolve, reject) => {
         const urgentActionLetter = nunjucks.render(path.join(__dirname, './letter.html'), {
             date: format(new Date(), 'DD MMMM YYYY', { locale: frLocale }),
             recipientAddress: urgentAction.recipient.postal_address,
-            signature,
+            civility,
+            surname,
+            name,
             subject,
             urgentAction,
             emitterAddress,

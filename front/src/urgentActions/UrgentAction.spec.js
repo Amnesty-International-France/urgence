@@ -107,32 +107,15 @@ describe('<UrgentAction />', () => {
         const wrapper = shallow(<UrgentAction {...props} />);
 
         expect(wrapper.prop('messageTemplate')).toBe(props.data.UrgentAction.message_template);
-    });
-
-    it('should display subject with retrieved GraphQL data if step is object', () => {
-        const props = {
-            loading: false,
-            step: 'object',
-            data: {
-                UrgentAction: {
-                    message_template: [{ value: 'first message' }, { value: 'second message' }],
-                    object_indication: 'object indication',
-                    recipient: {
-                        mail: 'mail',
-                    },
-                },
-            },
-        };
-        const wrapper = shallow(<UrgentAction {...props} />);
-
         expect(wrapper.prop('objectIndication')).toBe('object indication');
     });
 
-    it('should display signatureStep with retrieved GraphQL data if step is signature', () => {
+    it('should display sendMail with retrieved GraphQL data if step is message', () => {
         const props = {
-            loading: false,
-            step: 'signature',
+            ...defaultProps,
+            step: 'message',
             data: {
+                ...defaultProps.data,
                 UrgentAction: {
                     message_template: [{ value: 'first message' }, { value: 'second message' }],
                     object_indication: 'object indication',
@@ -181,7 +164,9 @@ describe('<UrgentAction />', () => {
 
         it('should add a link to address step as action', () => {
             sessionData.getMailObject.mockImplementation(() => 'Hello World!');
-            sessionData.getSignature.mockImplementation(() => 'John Doe');
+            sessionData.getCivility.mockImplementation(() => 'M');
+            sessionData.getSurname.mockImplementation(() => 'John');
+            sessionData.getName.mockImplementation(() => 'Doe');
 
             const props = {
                 ...defaultProps,

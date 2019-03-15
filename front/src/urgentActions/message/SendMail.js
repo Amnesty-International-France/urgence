@@ -11,15 +11,17 @@ import { SessionDataConsumer } from '../../SessionDataContext';
 export const renderSendMail = ({ messageTemplate, recipient, afterMail }) => ({
     /* eslint-disable react/prop-types */
     object,
-    signature,
+    civility,
+    surname,
+    name,
     /* eslint-enable react/prop-types */
 }) => (
     <MailTo
-        disabled={!object || !signature}
-        label="Envoyer"
+        disabled={!object || !civility || !surname || !name}
+        label="J'envoie"
         recipient={recipient}
         subject={object}
-        body={templateToBodyText(messageTemplate, signature)}
+        body={templateToBodyText(messageTemplate, civility, surname, name)}
         afterMail={afterMail}
     />
 );

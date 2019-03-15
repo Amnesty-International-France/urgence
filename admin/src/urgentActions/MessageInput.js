@@ -27,7 +27,6 @@ const styles = theme => ({
     preview: {
         ...preview,
         '& > div': {
-            height: 'calc(100% - 120px)',
             width: 'calc(100% - 40px)',
             padding: '100px 20px 20px 20px',
         },
@@ -78,6 +77,11 @@ export const MessageInput = ({ classes, source, withLink }) => (
                                         <ParagraphTemplateInput source="" />
                                     </SimpleParagraphFormIterator>
                                 </ArrayInput>
+                                <TextInput
+                                    fullWidth
+                                    label="Object tip"
+                                    source={`${source}object_indication`}
+                                />
                                 {withLink && <LinkInput source={`${source}message_link`} />}
                             </div>
                         </CardContent>
@@ -86,7 +90,7 @@ export const MessageInput = ({ classes, source, withLink }) => (
                         <FrontPreview className={classes.preview}>
                             <Message
                                 messageTemplate={formData.message_template}
-                                objectIndication=""
+                                objectIndication={formData.object_indication}
                                 link={formData.message_link}
                                 action={<Link to={'#'} label="Ok, j'envoie le message" />}
                             />

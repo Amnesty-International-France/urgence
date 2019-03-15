@@ -5,8 +5,6 @@ import driver from './driver';
 import storyPageFactory from './pages/story';
 import actPageFactory from './pages/act';
 import messagePageFactory from './pages/message';
-import objectPageFactory from './pages/object';
-import signaturePageFactory from './pages/signature';
 import thanksPageFactory from './pages/thanks';
 import addressPageFactory from './pages/address';
 import emailPageFactory from './pages/email';
@@ -15,8 +13,6 @@ import thanksLetterPageFactory from './pages/thanksLetter';
 const storyPage = storyPageFactory(driver);
 const actPage = actPageFactory(driver);
 const messagePage = messagePageFactory(driver);
-const objectPage = objectPageFactory(driver);
-const signaturePage = signaturePageFactory(driver);
 const thanksPage = thanksPageFactory(driver);
 const addressPage = addressPageFactory(driver);
 const emailPage = emailPageFactory(driver);
@@ -83,31 +79,22 @@ describe('app', () => {
             'They were doing nothing wrong. They are being investigated on suspicion of "membership of an armed terrorist organization", a baseless and ridiculous accusation.',
         );
 
-        await messagePage.next();
-        await objectPage.isLoaded();
-    });
+        await messagePage.isLoaded();
 
-    it('should display subject steps', async () => {
-        await objectPage.navigate(urgentAction.id);
-        const indication = await objectPage.getIndication();
+        const indication = await messagePage.getIndication();
         expect(indication).toBe(
             'Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.',
         );
 
-        await objectPage.enterText('My subject');
+        await messagePage.enterObjectText('My subject');
 
-        await objectPage.validate();
-        await signaturePage.isLoaded();
-    });
+        expect(await messagePage.isButtonDisabled()).toBe(true);
+        await messagePage.chooseCivility();
+        await messagePage.enterSurnameText('My');
+        await messagePage.enterNameText('name');
+        expect(await messagePage.isButtonDisabled()).toBe(false);
 
-    it('should display signature steps', async () => {
-        await signaturePage.navigate(urgentAction.id);
-
-        expect(await signaturePage.isButtonDisabled()).toBe(true);
-        await signaturePage.enterText('My name');
-        expect(await signaturePage.isButtonDisabled()).toBe(false);
-
-        const mailTo = await signaturePage.getMailTo();
+        const mailTo = await messagePage.getMailTo();
         expect(mailTo).toContain('subject=My%20subject');
         expect(mailTo).toContain('My%20name');
     });

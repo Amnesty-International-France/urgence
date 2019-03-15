@@ -7,7 +7,9 @@ import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 describe('MailPdfButton', () => {
     const defaultProps = {
         object: 'object',
-        signature: 'signature',
+        civility: 'civility',
+        surname: 'surname',
+        name: 'name',
         address: 'address',
         email: 'email',
         match: { params: { id: 'id' } },
@@ -28,7 +30,7 @@ describe('MailPdfButton', () => {
         sendMail();
         expect(global.fetch).toHaveBeenCalledWith('http://localhost:4000/urgent-actions/id/send', {
             body:
-                '{"subject":"object","signature":"signature","address":"address","email":"email"}',
+                '{"subject":"object","civility":"civility","surname":"surname","name":"name","address":"address","email":"email"}',
             headers: {
                 'content-type': 'application/json',
             },

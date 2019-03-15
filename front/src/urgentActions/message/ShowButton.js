@@ -6,7 +6,7 @@ import { white } from '../../themes/colors';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '16px',
+    fontSize: '14px',
     cursor: 'pointer',
     fontWeight: 'bold',
     display: 'flex',
@@ -19,11 +19,11 @@ const styles = {
     '& .text': {
         position: 'relative',
         '& > .downText': {
-            position: 'absolute',
-            top: 3,
+            position: 'relative',
+            top: 5,
         },
         '& > .upText': {
-            position: 'absolute',
+            position: 'relative',
             top: -3,
         },
     },
@@ -32,7 +32,7 @@ const styles = {
 const StyledSpan = glamorous.span(styles);
 
 const ShowButton = ({ showAllText, action }) => (
-    <StyledSpan className="showButton" onClick={action}>
+    <StyledSpan onClick={action}>
         {showAllText ? (
             <span className="text">
                 Voir moins&nbsp;&nbsp;

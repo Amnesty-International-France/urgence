@@ -1,14 +1,18 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { compose } from 'recompose';
 import classnames from 'classnames';
 
 import { white, black } from '../../themes/colors';
 import MessageStep from './MessageStep';
 import ShowButton from './ShowButton';
 import { withYellowLogo } from '../../themes/ThemeContext';
+import { withSessionData } from '../../SessionDataContext';
 import Link from '../Link';
 import { LinkType } from '../../propTypes';
+import Input from '../../themes/Input';
+import RadioButton from '../../themes/RadioButton';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -16,15 +20,18 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: '100%',
     width: '100%',
     padding: '100px 20px 20px 20px',
     color: black,
     backgroundColor: white,
     '& .action': {
+        display: 'flex',
         margin: '1em 0',
         '@media (min-aspect-ratio: 1/1)': {
             alignSelf: 'flex-end',
+        },
+        '& > a': {
+            marginBottom: 20,
         },
     },
     '@media (max-width: 350px)': {
@@ -73,6 +80,10 @@ const styles = {
     '& .pleinEnd': {
         paddingTop: '10px',
     },
+    '& .objectIndication': {
+        fontStyle: 'italic',
+        opacity: '0.5',
+    },
 };
 
 export class LetterView extends Component {
@@ -120,7 +131,9 @@ export class LetterView extends Component {
                         />
                     )}
                 </div>
-                <ShowButton showAllText={showAllText} action={this.setShowMode} />
+                {letterOverflow && (
+                    <ShowButton showAllText={showAllText} action={this.setShowMode} />
+                )}
             </div>
         );
     }
@@ -130,31 +143,106 @@ LetterView.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
 };
 
-export const Message = ({ messageTemplate, action, className, link }) => (
+export class FormStep extends Component {
+    setObject = event => this.props.setObject(event.target.value);
+    setCivility = event => this.props.setCivility(event.target.value);
+    setSurname = event => this.props.setSurname(event.target.value);
+    setName = event => this.props.setName(event.target.value);
+    render() {
+        const { objectIndication, object, civility, surname, name } = this.props;
+        return (
+            <Fragment>
+                <Input
+                    className="object"
+                    value={object}
+                    onChange={this.setObject}
+                    label="Objet de l'e-mail"
+                />
+                <p className="objectIndication">{objectIndication}</p>
+                <RadioButton
+                    value={civility}
+                    name="civility"
+                    onChange={this.setCivility}
+                    label="Civilité"
+                    choices={['M.', 'Mme.', 'Autre']}
+                />
+                <Input
+                    className="surname"
+                    value={surname}
+                    onChange={this.setSurname}
+                    label="Votre prénom"
+                />
+                <Input className="name" value={name} onChange={this.setName} label="Votre nom" />
+            </Fragment>
+        );
+    }
+}
+
+FormStep.propTypes = {
+    className: PropTypes.string,
+    objectIndication: PropTypes.string,
+    object: PropTypes.string,
+    civility: PropTypes.string,
+    surname: PropTypes.string,
+    name: PropTypes.string,
+    setObject: PropTypes.func.isRequired,
+    setCivility: PropTypes.func.isRequired,
+    setSurname: PropTypes.func.isRequired,
+    setName: PropTypes.func.isRequired,
+};
+
+export const Message = ({
+    messageTemplate,
+    objectIndication,
+    action,
+    className,
+    link,
+    setObject,
+    setCivility,
+    setSurname,
+    setName,
+    object,
+    civility,
+    surname,
+    name,
+}) => (
     <Fragment>
         {(!messageTemplate || !messageTemplate.length) && (
             <p className="error">Cette action urgente n&#39;existe plus.</p>
         )}
 
-        {messageTemplate && messageTemplate.length > 0 && (
-            <div className={classnames('message', className)}>
-                <span>
-                    Pour agir plus vite,
-                    <strong className="importantText"> nous vous proposons ce message :</strong>
-                </span>
-                <LetterView messageTemplate={messageTemplate} />
-                <span>
-                    Parce que les messages uniques ont plus d&apos;impact,
-                    <strong className="importantText">
-                        &nbsp;nous vous invitons à le personnaliser.
-                    </strong>
-                </span>
-                <div className="action">
-                    {action}
-                    {link && link.url && <Link {...link} />}
+        {messageTemplate &&
+            messageTemplate.length > 0 && (
+                <div className={classnames('message', className)}>
+                    <p>
+                        Pour agir plus vite,&nbsp;
+                        <strong className="importantText"> nous vous proposons ce message :</strong>
+                    </p>
+                    <LetterView messageTemplate={messageTemplate} />
+                    <p>
+                        Parce que les messages uniques ont plus d&#39;impact,&nbsp;
+                        <strong className="importantText">
+                            {' '}
+                            nous vous invitons à le personnaliser.
+                        </strong>
+                    </p>
+                    <FormStep
+                        objectIndication={objectIndication}
+                        object={object}
+                        civility={civility}
+                        surname={surname}
+                        name={name}
+                        setObject={setObject}
+                        setCivility={setCivility}
+                        setSurname={setSurname}
+                        setName={setName}
+                    />
+                    <div className="action">
+                        {action}
+                        {link && link.url && <Link {...link} />}
+                    </div>
                 </div>
-            </div>
-        )}
+            )}
     </Fragment>
 );
 
@@ -163,7 +251,15 @@ Message.propTypes = {
     link: LinkType,
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
+    setObject: PropTypes.func.isRequired,
+    setCivility: PropTypes.func.isRequired,
+    setSurname: PropTypes.func.isRequired,
+    setName: PropTypes.func.isRequired,
+    object: PropTypes.string,
+    civility: PropTypes.string,
+    surname: PropTypes.string,
+    name: PropTypes.string,
     action: PropTypes.node.isRequired,
 };
 
-export default glamorous(withYellowLogo(Message))(styles);
+export default glamorous(compose(withYellowLogo, withSessionData)(Message))(styles);

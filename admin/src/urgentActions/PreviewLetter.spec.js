@@ -11,7 +11,7 @@ describe('<PreviewLetter />', () => {
         },
     };
 
-    it('should render as a link to front app urgent action letter page with pre-filled subject and emitter signature', () => {
+    it('should render as a link to front app urgent action letter page with pre-filled subject and emitter name', () => {
         const props = { ...defaultProps };
         const wrapper = shallow(<PreviewLetter {...props} />);
 

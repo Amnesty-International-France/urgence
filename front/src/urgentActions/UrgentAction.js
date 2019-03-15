@@ -10,11 +10,9 @@ import Story from './Story';
 import Act from './Act';
 import Thanks from './Thanks';
 import Message from './message/Message';
-import ObjectStep from './ObjectStep';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
-import SignatureStep from './SignatureStep';
 import AddressStep from './AddressStep';
 import EmailStep from './EmailStep';
 import SendMail from './message/SendMail';
@@ -125,35 +123,9 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
         return (
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
-                objectIndication=""
+                objectIndication={get(data, 'UrgentAction.object_indication')}
                 link={get(data, 'UrgentAction.message_link')}
                 loading={loading}
-                action={
-                    <ToUrgentActionPageLink label="OK, J'envoie le message" pageName="object" />
-                }
-            />
-        );
-    }
-
-    if (step === 'object') {
-        return (
-            <ObjectStep
-                objectIndication={get(data, 'UrgentAction.object_indication')}
-                loading={loading}
-                action={disabled => (
-                    <ToUrgentActionPageLink
-                        label="Valider"
-                        pageName="signature"
-                        disabled={disabled}
-                    />
-                )}
-            />
-        );
-    }
-
-    if (step === 'signature') {
-        return (
-            <SignatureStep
                 action={
                     <SendMail
                         recipient={get(data, 'UrgentAction.recipient')}

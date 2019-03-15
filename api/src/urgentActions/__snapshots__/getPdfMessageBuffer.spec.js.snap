@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getPdfMessageBuffer should prefix address with signature 1`] = `
+exports[`getPdfMessageBuffer should prefix address with name 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
 
@@ -31,7 +31,7 @@ exports[`getPdfMessageBuffer should prefix address with signature 1`] = `
             text-decoration: underline;
         }
 
-        .signature {
+        .name {
             font-size: 12px;
             margin-top: 3cm;
             text-align: right;
@@ -41,11 +41,11 @@ exports[`getPdfMessageBuffer should prefix address with signature 1`] = `
 
 <body>
     <p class=\\"address\\">
-        signature
+        surname name
         <br />address
     </p>
     <p class=\\"recipient\\">
-        
+${'        '}
         <br />
         <br /> Le 14 mai 2018
     </p>
@@ -53,8 +53,8 @@ exports[`getPdfMessageBuffer should prefix address with signature 1`] = `
         <h3 class=\\"subject\\">
             <strong>Objet :</strong> subject
         </h3>
-        
-        <p class=\\"signature\\">signature</p>
+${'        '}
+        <p class=\\"name\\">surname name</p>
     </div>
 </body>
 

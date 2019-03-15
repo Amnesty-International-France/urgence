@@ -32,7 +32,6 @@ export const MailTo = ({
 MailTo.propTypes = {
     className: PropTypes.string.isRequired,
     afterMail: PropTypes.func.isRequired,
-    mail: PropTypes.string.isRequired,
     subject: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
