@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import classnames from 'classnames';
 
 import { withSessionData } from '../SessionDataContext';
-import { withBlackLogo } from '../themes/ThemeContext';
+import { withYellowLogo } from '../themes/ThemeContext';
 import Input from '../themes/Input';
 
 const styles = {
@@ -61,7 +61,7 @@ SignatureStep.propTypes = {
 
 export default glamorous(
     compose(
-        withBlackLogo,
+        withYellowLogo,
         withSessionData,
     )(SignatureStep),
 )(styles);

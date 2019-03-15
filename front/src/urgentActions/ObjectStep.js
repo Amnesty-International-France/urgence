@@ -4,17 +4,21 @@ import glamorous from 'glamorous';
 import { compose } from 'recompose';
 import classnames from 'classnames';
 
+import { white, black } from '../themes/colors';
 import RichText from '../themes/RichText';
 import { withSessionData } from '../SessionDataContext';
-import { withBlackLogo } from '../themes/ThemeContext';
+import { withYellowLogo } from '../themes/ThemeContext';
 import Input from '../themes/Input';
 
 const styles = {
-    backgroundColor: 'white',
-    height: '100%',
-    fontSize: 24,
     display: 'flex',
     flexDirection: 'column',
+    height: '100%',
+    width: '100%',
+    fontSize: '24px',
+    padding: '100px 20px 20px 20px',
+    color: black,
+    backgroundColor: white,
     '@media (min-width: 1024px)': {
         padding: '30vh 30vw',
         '& .action': {
@@ -33,7 +37,6 @@ const styles = {
         color: '#C1C1C1',
         flex: 1,
     },
-    padding: '105px 2rem 53px',
 };
 
 export class ObjectStep extends Component {
@@ -68,7 +71,7 @@ ObjectStep.propTypes = {
 
 export default glamorous(
     compose(
-        withBlackLogo,
+        withYellowLogo,
         withSessionData,
     )(ObjectStep),
 )(styles);

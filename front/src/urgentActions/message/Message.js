@@ -5,20 +5,22 @@ import classnames from 'classnames';
 
 import { white, black } from '../../themes/colors';
 import MessageStep from './MessageStep';
-import { withBlackLogo } from '../../themes/ThemeContext';
+import ShowButton from './ShowButton';
+import { withYellowLogo } from '../../themes/ThemeContext';
 import Link from '../Link';
 import { LinkType } from '../../propTypes';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '16px',
-    padding: '4em 1em 1em 1em',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    backgroundColor: white,
-    color: black,
     height: '100%',
+    width: '100%',
+    padding: '100px 20px 20px 20px',
+    color: black,
+    backgroundColor: white,
     '& .action': {
         margin: '1em 0',
         '@media (min-aspect-ratio: 1/1)': {
@@ -30,7 +32,6 @@ const styles = {
     },
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
-
         '& a': {
             alignSelf: 'flex-end',
         },
@@ -72,51 +73,6 @@ const styles = {
     '& .pleinEnd': {
         paddingTop: '10px',
     },
-    '& .showButton': {
-        fontSize: '16px',
-        cursor: 'pointer',
-        fontWeight: 'bold',
-        display: 'flex',
-        justifyContent: 'center',
-        padding: '20px 0',
-        '&:active': {
-            color: 'rgba(0, 0, 0, 0.5)',
-        },
-        background: white,
-    },
-    '& .downText': {
-        top: 8,
-        position: 'relative',
-    },
-    '& .upText': {
-        top: -4,
-        position: 'relative',
-    },
-};
-
-const ShowButton = ({ showAllText, action }) => (
-    <span className="showButton" onClick={action}>
-        {showAllText ? (
-            <span>
-                Voir moins&nbsp;&nbsp;
-                <strong className="upText">︿</strong>
-            </span>
-        ) : (
-            <span>
-                Voir plus&nbsp;&nbsp;
-                <strong className="downText">﹀</strong>
-            </span>
-        )}
-    </span>
-);
-
-ShowButton.propTypes = {
-    showAllText: PropTypes.bool,
-    action: PropTypes.func.isRequired,
-};
-
-ShowButton.defaultProps = {
-    showAllText: false,
 };
 
 export class LetterView extends Component {
@@ -210,4 +166,4 @@ Message.propTypes = {
     action: PropTypes.node.isRequired,
 };
 
-export default glamorous(withBlackLogo(Message))(styles);
+export default glamorous(withYellowLogo(Message))(styles);

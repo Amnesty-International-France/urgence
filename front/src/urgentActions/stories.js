@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import Div100Vh from 'react-div-100vh';
 
 import StoryStep from './StoryStep';
 import { WithStylesStory as Story } from './Story';
@@ -9,6 +10,8 @@ import Thanks from './Thanks';
 import Link from '../themes/Link';
 import { Email, Share } from '../icons';
 import { routerDecorator, history } from '../../.storybook/decorators';
+import { ThemeProvider } from '../themes/ThemeContext';
+import AppLogo from '../themes/AppLogo';
 
 const defaultStoryProps = {
     medium: {
@@ -174,34 +177,65 @@ storiesOf('Story', module)
 
 storiesOf('Act', module)
     .addDecorator(routerDecorator)
-    .add('Act', () => {
+    .add('Act Screen', () => {
         const data = {
             title: 'Vous avez plus de pouvoir que vous ne le pensez !',
             message: `<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>`,
             button: `Voir l'email`,
         };
 
-        return <Act data={data} actions={() => <Link to="#" label={data.button} />} />;
+        return (
+            <ThemeProvider>
+                <Div100Vh>
+                    <AppLogo />
+                    <Act
+                        data={data}
+                        actions={() => (
+                            <Link to="#" label={data.button} onClick={action('Link clicked')} />
+                        )}
+                    />
+                </Div100Vh>
+            </ThemeProvider>
+        );
     });
 
-storiesOf('Screens', module)
-    .addDecorator(story => <div style={{ height: '100vh', width: '100vw' }}>{story()}</div>)
+storiesOf('Thanks', module)
+    .addDecorator(routerDecorator)
     .add('Thanks Screen', () => {
         const data = {
-            title: 'Merci de votre soutien !',
+            title: 'Se battre.\nEncore.\nEt Encore.',
             text:
                 "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
+            button: "Je continue d'agir",
         };
 
         return (
-            <Thanks
-                data={data}
-                actions={() => (
-                    <Fragment>
-                        <Email onClick={action('send-letter')} />
-                        <Share onClick={action('share')} />
-                    </Fragment>
-                )}
-            />
+            <ThemeProvider>
+                <Div100Vh>
+                    <AppLogo />
+                    <Thanks
+                        data={data}
+                        actions={() => (
+                            <Link to="#" label={data.button} onClick={action('Link clicked')} />
+                        )}
+                    />
+                </Div100Vh>
+            </ThemeProvider>
+        );
+    })
+    .add('Thanks Screen Final', () => {
+        const data = {
+            title: 'Merci\npour votre\naction.',
+            text:
+                "La lettre vous a été envoyée sur votre boîte e-mail. Poursuivez votre action en l'envoyant par La Poste.",
+        };
+
+        return (
+            <ThemeProvider>
+                <Div100Vh>
+                    <AppLogo />
+                    <Thanks data={data} />
+                </Div100Vh>
+            </ThemeProvider>
         );
     });

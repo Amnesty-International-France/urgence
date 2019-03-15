@@ -23,21 +23,10 @@ const styles = theme => ({
     },
     preview: {
         ...preview,
-        // the rules below override desktop media queries so that the preview is forced to appear like on mobile
         '& > div': {
-            backgroundColor: '#fff',
-            padding: '105px 2rem 53px !important',
-            height: preview.height,
-            boxSizing: 'border-box',
-            '& .action': {
-                alignSelf: 'auto',
-                '& a': {
-                    display: 'block',
-                },
-            },
-            '& input': {
-                boxSizing: 'border-box',
-            },
+            height: 'calc(100% - 120px)',
+            width: 'calc(100% - 40px)',
+            padding: '100px 20px 20px 20px',
         },
     },
 });

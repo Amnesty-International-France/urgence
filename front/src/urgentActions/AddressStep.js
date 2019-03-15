@@ -5,8 +5,26 @@ import { compose } from 'recompose';
 import classnames from 'classnames';
 
 import { withSessionData } from '../SessionDataContext';
-import { withBlackLogo } from '../themes/ThemeContext';
+import { withYellowLogo } from '../themes/ThemeContext';
 import TextArea from '../themes/TextArea';
+const styles = {
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: 'white',
+    height: '100%',
+    padding: '105px 2rem 53px',
+    justifyContent: 'space-between',
+    '& textarea': {
+        width: '100%',
+        fontSize: 17,
+        fontFamily: 'Amnesty Trade Gothic',
+        margin: '2em 0',
+        padding: '15px',
+    },
+    '& .action': {
+        marginTop: '53px',
+    },
+};
 
 export class AddressStep extends Component {
     setAddress = event => this.props.setAddress(event.target.value);
@@ -43,24 +61,7 @@ AddressStep.propTypes = {
 
 export default glamorous(
     compose(
-        withBlackLogo,
+        withYellowLogo,
         withSessionData,
     )(AddressStep),
-)({
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: 'white',
-    height: '100%',
-    padding: '105px 2rem 53px',
-    justifyContent: 'space-between',
-    '& textarea': {
-        width: '100%',
-        fontSize: 17,
-        fontFamily: 'Amnesty Trade Gothic',
-        margin: '2em 0',
-        padding: '15px',
-    },
-    '& .action': {
-        marginTop: '53px',
-    },
-});
+)(styles);

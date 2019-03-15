@@ -38,8 +38,8 @@ export const preview = {
 export const transitionScreenPreview = {
     ...preview,
     '& > div': {
-        height: 'calc(100% - 2rem)',
-        width: 'calc(100% - 2rem)',
-        padding: '1rem',
+        height: 'calc(100% - 120px)',
+        width: 'calc(100% - 40px)',
+        padding: '100px 20px 20px 20px',
     },
 };
