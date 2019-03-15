@@ -89,7 +89,7 @@ describe('app', () => {
         await messagePage.enterObjectText('My subject');
 
         expect(await messagePage.isButtonDisabled()).toBe(true);
-        await messagePage.enterCivilityText('M');
+        await messagePage.chooseCivility();
         await messagePage.enterSurnameText('My');
         await messagePage.enterNameText('name');
         expect(await messagePage.isButtonDisabled()).toBe(false);

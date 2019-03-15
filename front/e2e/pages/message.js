@@ -6,7 +6,7 @@ export default driver => {
         container: By.className('message'),
         inputObject: By.css('.object input'),
         indication: By.css('.objectIndication'),
-        inputCivility: By.css('input[type=radio]'),
+        inputCivility: By.css('input[type=radio]')[0],
         inputSurname: By.css('.surname input'),
         inputName: By.css('.name input'),
         sendMailButton: By.css('.action a'),
@@ -24,8 +24,7 @@ export default driver => {
         },
         getIndication: async () => driver.findElement(elements.indication).getText(),
         enterObjectText: async value => driver.findElement(elements.inputObject).sendKeys(value),
-        enterCivilityText: async value =>
-            driver.findElement(elements.inputCivility).sendKeys(value),
+        chooseCivility: async () => driver.findElement(elements.inputCivility).click(),
         enterSurnameText: async value => driver.findElement(elements.inputSurname).sendKeys(value),
         enterNameText: async value => driver.findElement(elements.inputName).sendKeys(value),
         getMailTo: async () => driver.findElement(elements.sendMailButton).getAttribute('href'),
