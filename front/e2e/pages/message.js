@@ -4,11 +4,11 @@ export default driver => {
     const elements = {
         richText: By.css('.rich-text'),
         container: By.className('message'),
-        inputObject: By.css('.object > input'),
+        inputObject: By.css('.object input'),
         indication: By.css('.objectIndication'),
         inputCivility: By.css('input[type=radio]'),
-        inputSurname: By.css('.surname > input'),
-        inputName: By.css('.name > input'),
+        inputSurname: By.css('.surname input'),
+        inputName: By.css('.name input'),
         sendMailButton: By.css('.action a'),
     };
     return {
