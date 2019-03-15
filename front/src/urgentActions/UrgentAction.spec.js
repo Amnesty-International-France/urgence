@@ -164,7 +164,7 @@ describe('<UrgentAction />', () => {
 
         it('should add a link to address step as action', () => {
             sessionData.getMailObject.mockImplementation(() => 'Hello World!');
-            sessionData.getCivility.mockImplementation(() => 'M.');
+            sessionData.getCivility.mockImplementation(() => 'M');
             sessionData.getSurname.mockImplementation(() => 'John');
             sessionData.getName.mockImplementation(() => 'Doe');
 

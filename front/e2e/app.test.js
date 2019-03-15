@@ -90,14 +90,14 @@ describe('app', () => {
         await messagePage.enterObjectText('My subject');
 
         expect(await messagePage.isButtonDisabled()).toBe(true);
-        await messagePage.enterCivilityText('M.');
+        await messagePage.enterCivilityText('M');
         await messagePage.enterSurnameText('My');
         await messagePage.enterNameText('name');
         expect(await messagePage.isButtonDisabled()).toBe(false);
 
         const mailTo = await messagePage.getMailTo();
         expect(mailTo).toContain('subject=My%20subject');
-        expect(mailTo).toContain('M.%20My%20name');
+        expect(mailTo).toContain('My%20name');
     });
 
     it('should display thanks step', async () => {

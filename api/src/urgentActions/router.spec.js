@@ -51,14 +51,14 @@ describe('Urgent Actions Router', () => {
                 `/urgent-actions/${urgentAction.id}.pdf?${stringify({
                     address,
                     subject: 'Custom Subject',
-                    civility: 'M.',
+                    civility: 'M',
                     surname: 'Surname',
                     name: 'Name',
                 })}`,
             );
 
             expect(getPdfMessageBuffer.mock.calls[0][1]).toBe('Custom Subject');
-            expect(getPdfMessageBuffer.mock.calls[0][2]).toBe('M.');
+            expect(getPdfMessageBuffer.mock.calls[0][2]).toBe('M');
             expect(getPdfMessageBuffer.mock.calls[0][3]).toBe('Surname');
             expect(getPdfMessageBuffer.mock.calls[0][4]).toBe('Name');
             expect(getPdfMessageBuffer.mock.calls[0][5]).toBe(address);
