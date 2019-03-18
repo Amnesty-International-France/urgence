@@ -45,14 +45,14 @@ describe('<Carousel />', () => {
     it('should include next-arrow if current + 1 < total', () => {
         const props = { ...defaultProps };
         const wrapper = shallow(<Carousel current={1} total={3} {...props} />);
-        expect(wrapper.find('.next-arrow')).toEqual(1);
-        expect(wrapper.find('.last-arrow')).toEqual(0);
+        expect(wrapper.find('.next-arrow').length).toEqual(1);
+        expect(wrapper.find('.last-arrow').length).toEqual(0);
     });
 
     it('should include last-arrow if current + 1 === total', () => {
         const props = { ...defaultProps };
         const wrapper = shallow(<Carousel current={2} total={3} {...props} />);
-        expect(wrapper.find('.next-arrow')).toEqual(1);
-        expect(wrapper.find('.last-arrow')).toEqual(0);
+        expect(wrapper.find('.next-arrow').length).toEqual(0);
+        expect(wrapper.find('.last-arrow').length).toEqual(1);
     });
 });
