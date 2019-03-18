@@ -59,6 +59,7 @@ const query = gql`
                 mail
                 copies_to
                 cci
+                button
             }
             email_thank {
                 title
@@ -150,7 +151,14 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (step === 'address') {
-        return <AddressStep action={disabled => <MailPdfButton disabled={disabled} />} />;
+        const recipient = get(data, 'UrgentAction.recipient');
+        return (
+            <AddressStep
+                action={disabled => (
+                    <MailPdfButton disabled={disabled} buttonText={recipient.button} />
+                )}
+            />
+        );
     }
 
     if (step === 'thanks-letter') {

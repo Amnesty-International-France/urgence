@@ -46,13 +46,13 @@ export class MailPdfButton extends Component {
         });
     };
     render() {
-        const { disabled } = this.props;
+        const { disabled, buttonText } = this.props;
 
         return (
             <ToUrgentActionPageLink
                 onClick={this.sendMail}
                 pageName="thanks-letter"
-                label="RECEVOIR MA LETTRE"
+                label={buttonText}
                 disabled={disabled}
             />
         );
@@ -72,6 +72,7 @@ MailPdfButton.propTypes = {
     email: PropTypes.string.isRequired,
     match: routeMatch,
     disabled: PropTypes.bool,
+    buttonText: PropTypes.string.isRequired,
 };
 
 export default compose(withSessionData, withRouter)(MailPdfButton);

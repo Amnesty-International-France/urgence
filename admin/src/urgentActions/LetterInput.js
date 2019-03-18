@@ -1,7 +1,16 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, required, FormDataConsumer, Labeled, LongTextInput } from 'react-admin';
+import {
+    addField,
+    required,
+    minLength,
+    maxLength,
+    FormDataConsumer,
+    Labeled,
+    LongTextInput,
+    TextInput,
+} from 'react-admin';
 import Avatar from '@material-ui/core/Avatar';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -47,23 +56,25 @@ export const LetterInput = ({ classes, source }) => (
                                 <Labeled label="Generate Letter">
                                     <LongTextInput
                                         label="Recipient Postal Address"
-                                        source={source}
+                                        rows="6"
+                                        source={`${source}.postal_address`}
                                         validate={[required()]}
                                     />
                                 </Labeled>
+                                <TextInput
+                                    source={`${source}.button`}
+                                    label="Button"
+                                    defaultValue="Recevoir ma lettre"
+                                    validate={[required(), minLength(3), maxLength(25)]}
+                                />
                             </div>
                         </CardContent>
                     </Card>
                     <FrontPreview className={classes.preview}>
                         <AddressStep
-                            setAddress={noop}
-                            addressMain=""
-                            addressMore=""
-                            postalCode=""
-                            city=""
-                            country=""
-                            email=""
-                            action={disabled => <Link to="#" label="Valider" disabled={disabled} />}
+                            action={disabled => formData.recipient && formData.recipient.button ? (
+                                <Link to="#" label={formData.recipient.button} disabled={disabled} />
+                            ) : null}
                         />
                     </FrontPreview>
                 </Fragment>

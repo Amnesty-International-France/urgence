@@ -57,7 +57,7 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                                 />
                                 <TextInput
                                     source={`${source}.button`}
-                                    label="Button*"
+                                    label="Button"
                                     defaultValue="Voir l'email"
                                     validate={[required(), minLength(3), maxLength(25)]}
                                 />

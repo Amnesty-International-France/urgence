@@ -90,6 +90,7 @@ export const urgentActionsTypeDefs = gql`
         copies_to: String
         cci: String
         postal_address: String
+        button: String
     }
 
     input RecipientInput {
@@ -97,6 +98,7 @@ export const urgentActionsTypeDefs = gql`
         copies_to: String
         cci: String
         postal_address: String
+        button: String
     }
 
     type Thanks {

@@ -23,6 +23,7 @@ const styles = {
         padding: '15px',
     },
     '& .action': {
+        display: 'flex',
         marginTop: '53px',
         '& > a': {
             marginBottom: 20,
@@ -153,6 +154,7 @@ export class AddressStep extends Component {
                     </p>
                     <Input
                         className="email"
+                        type="email"
                         value={email}
                         onChange={this.setEmail}
                         label="E-mail"

@@ -83,7 +83,7 @@ export const Form = ({ classes }) => (
 
         <div className={`${classes.form} letter`}>
             <h2>Letter</h2>
-            <LetterInput source="recipient.postal_address" />
+            <LetterInput source="recipient" />
 
         </div>
 
