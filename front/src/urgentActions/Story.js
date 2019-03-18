@@ -7,20 +7,24 @@ import { compose } from 'recompose';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { black, white } from '../themes/colors';
 import { withThemeContext } from '../themes/ThemeContext';
 import Carousel from '../themes/Carousel';
 import { StoryStepPropType, routeMatch, LinkType } from '../propTypes';
 import { getLogoColorForStep } from '../urgentActions/StoryStep';
 import generateUrl from '../services/generateUrl';
 import StorySlide from './StorySlide';
+import { RightArrow } from '../icons';
 
 const styles = {
+    backgroundColor: white,
     height: '100%',
 };
 
 export class Story extends Component {
     afterChange = page => {
         const {
+            context,
             match: {
                 params: { id, page: currentPage },
             },
@@ -32,14 +36,13 @@ export class Story extends Component {
             return;
         }
 
-        this.props.context.changeLogoColor(getLogoColorForStep(story[page]));
+        context.changeLogoColor(getLogoColorForStep(story[page]));
         history.push(generateUrl('story', { id, page }));
     };
 
-    lastSlide = () => {
+    afterLastChange = () => {
         const {
             match: { params },
-            history,
         } = this.props;
 
         history.push(generateUrl('act', params));
@@ -83,16 +86,16 @@ export class Story extends Component {
                         current={current + 1}
                         total={total + 1}
                         afterChange={this.afterChange}
+                        afterLastChange={this.afterChange}
+                        icon={<RightArrow fill={black} />}
                     >
-                        {({ nextSlide }) =>
+                        {() =>
                             story.map((step, index) => (
                                 <StorySlide
                                     key={step.content}
                                     step={step}
                                     total={total}
                                     index={index + 1}
-                                    nextSlide={nextSlide}
-                                    lastSlide={this.lastSlide}
                                     link={total === index + 1 ? endStoryLink : null}
                                 />
                             ))

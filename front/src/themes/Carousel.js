@@ -33,16 +33,31 @@ export class Carousel extends Component {
         this.swiper.slideNext();
     };
 
+    lastSlide = () => {
+        this.props.afterLastChange();
+    };
+
     componentWillUnmount() {
         this.swiper.destroy();
     }
 
     render() {
-        const { children, className, current, total } = this.props;
+        const { children, icon, className, current, total } = this.props;
 
         return (
             <div className={classnames(className, 'swiper-container')} ref={this.initContainer}>
                 <div className="swiper-wrapper">{children({ nextSlide: this.nextSlide })}</div>
+                <div className="swiper-controls">
+                    {current < total ? (
+                        <span className="next-arrow" onClick={this.nextSlide}>
+                            {icon}
+                        </span>
+                    ) : (
+                        <span className="last-arrow" onClick={this.lastSlide}>
+                            {icon}
+                        </span>
+                    )}
+                </div>
                 <div className="swiper-pagination">
                     <Steps current={current} total={total} />
                 </div>
@@ -56,9 +71,10 @@ Carousel.propTypes = {
     current: PropTypes.number,
     total: PropTypes.number,
     children: PropTypes.func.isRequired,
+    icon: PropTypes.element.isRequired,
     className: PropTypes.string.isRequired,
     afterChange: PropTypes.func,
-    vertical: PropTypes.bool,
+    afterLastChange: PropTypes.func,
 };
 
 export default glamorous(Carousel)({
@@ -66,9 +82,22 @@ export default glamorous(Carousel)({
         height: '100%',
     },
     '& .swiper-wrapper': {
-        height: 'calc(100% - 17px)',
+        height: 'calc(100% - 38px - 17px)',
         '@media (min-width: 1024px)': {
-            height: 'calc(100% - 25px)',
+            height: 'calc(100% - 38px - 25px)',
+        },
+    },
+    '& .swiper-controls': {
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: '5px 24px',
+        height: '38px',
+        width: '100%',
+        '& .next-arrow, & .last-arrow': {
+            display: 'flex',
+            alignSelf: 'flex-end',
+            fontSize: 28,
         },
     },
     '& .swiper-pagination': {

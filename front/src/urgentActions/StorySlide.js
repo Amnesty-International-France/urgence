@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import get from 'lodash.get';
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
@@ -8,8 +8,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import StoryStep from '../urgentActions/StoryStep';
-import { textColorForBackgroundColor, colors } from '../themes/colors';
-import { RightArrow } from '../icons';
+
 import { LinkType } from '../propTypes';
 
 const styles = {
@@ -31,61 +30,29 @@ const styles = {
             },
         },
     },
-    '& .next-arrow, & .last-arrow': {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        cursor: 'pointer',
-        fontSize: 28,
-        margin: '17px 24px',
-    },
 };
 
-const rightArrowColor = step => textColorForBackgroundColor(step.displayOptions.backgroundColor);
-
-export class StorySlide extends Component {
-    render() {
-        const { className, step, index, total, nextSlide, lastSlide, link } = this.props;
-        return (
-            <div
-                key={step.content}
-                className={classnames(className, {
-                    'swiper-slide': true,
-                    'with-bottom-media': get(step, 'displayOptions.mediumPosition') === 'bottom',
-                })}
-            >
-                <div className="story-step">
-                    <StoryStep link={link} {...step} />
-                </div>
-
-                <div
-                    className="bottom"
-                    style={{
-                        backgroundColor: colors[step.displayOptions.backgroundColor],
-                        color: textColorForBackgroundColor(step.displayOptions.backgroundColor),
-                    }}
-                >
-                    {index < total ? (
-                        <div className="next-arrow" onClick={nextSlide}>
-                            <RightArrow fill={rightArrowColor(step)} />
-                        </div>
-                    ) : (
-                        <div className="last-arrow" onClick={lastSlide}>
-                            <RightArrow fill={rightArrowColor(step)} />
-                        </div>
-                    )}
-                </div>
+export const StorySlide = ({ className, step, link }) => {
+    return (
+        <div
+            key={step.content}
+            className={classnames(className, {
+                'swiper-slide': true,
+                'with-bottom-media': get(step, 'displayOptions.mediumPosition') === 'bottom',
+            })}
+        >
+            <div className="story-step">
+                <StoryStep link={link} {...step} />
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 StorySlide.propTypes = {
     className: PropTypes.string,
     step: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
-    nextSlide: PropTypes.func.isRequired,
-    lastSlide: PropTypes.func.isRequired,
     link: LinkType,
 };
 
