@@ -34,7 +34,7 @@ describe('generateUrl', () => {
     });
 
     it('should generate url for ua/id/address', () => {
-        expect(generateUrl('addressMain', { id: 'id_value' })).toBe('/ua/id_value/address');
+        expect(generateUrl('address', { id: 'id_value' })).toBe('/ua/id_value/address');
     });
 
     it('should throw error if receiving unknow route', () => {
