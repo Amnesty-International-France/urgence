@@ -45,26 +45,4 @@ describe('<StorySlide />', () => {
         const swiperSlide = wrapper.find('.swiper-slide');
         expect(swiperSlide.prop('className')).toBe('swiper-slide');
     });
-
-    it('should render nextArrow if if index < total', () => {
-        const props = {
-            ...defaultProps,
-            index: 3,
-            total: 6,
-        };
-        const wrapper = shallow(<StorySlide {...props} />);
-        const nextArrow = wrapper.find('.next-arrow');
-        expect(nextArrow.length).toBe(1);
-    });
-
-    it('should not render nextArrow if if index >= total', () => {
-        const props = {
-            ...defaultProps,
-            index: 6,
-            total: 6,
-        };
-        const wrapper = shallow(<StorySlide {...props} />);
-        const nextArrow = wrapper.find('.next-arrow');
-        expect(nextArrow.length).toBe(0);
-    });
 });

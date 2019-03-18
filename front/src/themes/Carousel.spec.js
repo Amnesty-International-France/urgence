@@ -27,7 +27,7 @@ describe('<Carousel />', () => {
         const wrapper = shallow(<Carousel {...props} />);
         wrapper.instance().componentDidMount();
         expect(Swiper).toHaveBeenCalled();
-        wrapper.instance().nextSlide();
+        wrapper.instance().slide();
         expect(swiperInstance.slideNext).toHaveBeenCalled();
         expect(Swiper.mock.calls[0][1].initialSlide).toBe(3);
         wrapper.instance().componentWillUnmount();
@@ -40,5 +40,19 @@ describe('<Carousel />', () => {
         expect(defaultProps.children).toHaveBeenCalledWith({
             nextSlide: wrapper.instance().nextSlide,
         });
+    });
+
+    it('should include next-arrow if current + 1 < total', () => {
+        const props = { ...defaultProps };
+        const wrapper = shallow(<Carousel current={1} total={3} {...props} />);
+        expect(wrapper.find('.next-arrow')).toEqual(1);
+        expect(wrapper.find('.last-arrow')).toEqual(0);
+    });
+
+    it('should include last-arrow if current + 1 === total', () => {
+        const props = { ...defaultProps };
+        const wrapper = shallow(<Carousel current={2} total={3} {...props} />);
+        expect(wrapper.find('.next-arrow')).toEqual(1);
+        expect(wrapper.find('.last-arrow')).toEqual(0);
     });
 });
