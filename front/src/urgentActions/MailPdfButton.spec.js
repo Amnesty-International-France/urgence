@@ -10,7 +10,11 @@ describe('MailPdfButton', () => {
         civility: 'civility',
         surname: 'surname',
         name: 'name',
-        address: 'address',
+        addressMain: 'addressMain',
+        addressMore: 'addressMore',
+        postalCode: 'postalCode',
+        city: 'city',
+        country: 'country',
         email: 'email',
         match: { params: { id: 'id' } },
     };
@@ -30,7 +34,7 @@ describe('MailPdfButton', () => {
         sendMail();
         expect(global.fetch).toHaveBeenCalledWith('http://localhost:4000/urgent-actions/id/send', {
             body:
-                '{"subject":"object","civility":"civility","surname":"surname","name":"name","address":"address","email":"email"}',
+                '{"subject":"object","civility":"civility","surname":"surname","name":"name","addressMain":"addressMain","addressMore":"addressMore","postalCode":"postalCode","city":"city","country":"country","email":"email"}',
             headers: {
                 'content-type': 'application/json',
             },

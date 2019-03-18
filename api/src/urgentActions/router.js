@@ -15,14 +15,14 @@ urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
         return res.status(400).send(`Invalid UUID format: ${id}`);
     }
 
-    const { civility, surname, name, subject, email, address } = req.query;
+    const { civility, surname, name, subject, email, addressMain, addressMore, postalCode, city, country } = req.query;
 
     const urgentAction = await getUrgentAction(id);
     if (!urgentAction) {
         return res.status(404).send('Not Found');
     }
 
-    const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, civility, surname, name, address);
+    const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, civility, surname, name, addressMain, addressMore, postalCode, city, country);
     res.write(pdfBuffer, 'binary');
     return res.end();
 });
@@ -33,14 +33,14 @@ urgentActionsRouter.post('/:id/send', async (req, res, next) => {
         return res.status(400).send(`Invalid UUID format: ${id}`);
     }
 
-    const { civility, surname, name, subject, email, address } = req.body;
+    const { civility, surname, name, subject, email, addressMain, addressMore, postalCode, city, country } = req.body;
 
     const urgentAction = await getUrgentAction(id);
     if (!urgentAction) {
         return res.status(404).send('Not Found');
     }
 
-    const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, civility, surname, name, address);
+    const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, civility, surname, name, addressMain, addressMore, postalCode, city, country);
     try {
         await sendMail(email, 'On y est presque !', getLetterMailBody({ urgentAction }), {
             filename: 'letter.pdf',

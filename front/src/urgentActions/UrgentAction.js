@@ -14,7 +14,6 @@ import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import AddressStep from './AddressStep';
-import EmailStep from './EmailStep';
 import SendMail from './message/SendMail';
 import { SessionDataProvider } from '../SessionDataContext';
 import LoadingScreen from '../themes/LoadingScreen';
@@ -151,17 +150,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (step === 'address') {
-        return (
-            <AddressStep
-                action={disabled => (
-                    <ToUrgentActionPageLink label="Valider" pageName="email" disabled={disabled} />
-                )}
-            />
-        );
-    }
-
-    if (step === 'email') {
-        return <EmailStep action={disabled => <MailPdfButton disabled={disabled} />} />;
+        return <AddressStep action={disabled => <MailPdfButton disabled={disabled} />} />;
     }
 
     if (step === 'thanks-letter') {

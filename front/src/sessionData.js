@@ -19,9 +19,29 @@ export const sessionData = storage => ({
         storage && storage.setItem('amnesty_name', value);
         return this;
     },
-    getAddress: () => storage.getItem('amnesty_address'),
-    setAddress(value) {
-        storage && storage.setItem('amnesty_address', value);
+    getAddressMain: () => storage.getItem('amnesty_address_main'),
+    setAddressMain(value) {
+        storage && storage.setItem('amnesty_address_main', value);
+        return this;
+    },
+    getAddressMore: () => storage.getItem('amnesty_address_more'),
+    setAddressMore(value) {
+        storage && storage.setItem('amnesty_address_more', value);
+        return this;
+    },
+    getPostalCode: () => storage.getItem('amnesty_postal_code'),
+    setPostalCode(value) {
+        storage && storage.setItem('amnesty_postal_code', value);
+        return this;
+    },
+    getCity: () => storage.getItem('amnesty_city'),
+    setCity(value) {
+        storage && storage.setItem('amnesty_city', value);
+        return this;
+    },
+    getCountry: () => storage.getItem('amnesty_country'),
+    setCountry(value) {
+        storage && storage.setItem('amnesty_country', value);
         return this;
     },
     getEmail: () => storage.getItem('amnesty_email'),

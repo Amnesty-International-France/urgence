@@ -97,27 +97,123 @@ describe('sessionData', () => {
         });
     });
 
-    describe('.getAddress', () => {
-        it('calls storage.getItem(amnesty_address) and returns its result', () => {
+    describe('.getAddressMain', () => {
+        it('calls storage.getItem(amnesty_address_main) and returns its result', () => {
             const storage = {
-                getItem: jest.fn(() => 'Address value'),
+                getItem: jest.fn(() => 'AddressMain value'),
             };
 
-            expect(sessionData(storage).getAddress()).toBe('Address value');
-            expect(storage.getItem).toHaveBeenCalledWith('amnesty_address');
+            expect(sessionData(storage).getAddressMain()).toBe('AddressMain value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_address_main');
         });
     });
 
-    describe('.setAddress', () => {
-        it('calls storage.setItem(amnesty_address, value) and returns itself', () => {
+    describe('.setAddressMain', () => {
+        it('calls storage.setItem(amnesty_address_main, value) and returns itself', () => {
             const storage = {
                 setItem: jest.fn(),
             };
 
             const mySessionData = sessionData(storage);
 
-            expect(mySessionData.setAddress('value')).toEqual(mySessionData);
-            expect(storage.setItem).toHaveBeenCalledWith('amnesty_address', 'value');
+            expect(mySessionData.setAddressMain('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_address_main', 'value');
+        });
+    });
+
+    describe('.getAddressMore', () => {
+        it('calls storage.getItem(amnesty_address_more) and returns its result', () => {
+            const storage = {
+                getItem: jest.fn(() => 'AddressMore value'),
+            };
+
+            expect(sessionData(storage).getAddressMore()).toBe('AddressMore value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_address_more');
+        });
+    });
+
+    describe('.setAddressMore', () => {
+        it('calls storage.setItem(amnesty_address_more, value) and returns itself', () => {
+            const storage = {
+                setItem: jest.fn(),
+            };
+
+            const mySessionData = sessionData(storage);
+
+            expect(mySessionData.setAddressMore('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_address_more', 'value');
+        });
+    });
+
+    describe('.getPostalCode', () => {
+        it('calls storage.getItem(amnesty_postal_code) and returns its result', () => {
+            const storage = {
+                getItem: jest.fn(() => 'Postal Code value'),
+            };
+
+            expect(sessionData(storage).getPostalCode()).toBe('Postal Code value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_postal_code');
+        });
+    });
+
+    describe('.setPostalCode', () => {
+        it('calls storage.setItem(amnesty_postal_code, value) and returns itself', () => {
+            const storage = {
+                setItem: jest.fn(),
+            };
+
+            const mySessionData = sessionData(storage);
+
+            expect(mySessionData.setPostalCode('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_postal_code', 'value');
+        });
+    });
+
+    describe('.getCity', () => {
+        it('calls storage.getItem(amnesty_city) and returns its result', () => {
+            const storage = {
+                getItem: jest.fn(() => 'City value'),
+            };
+
+            expect(sessionData(storage).getCity()).toBe('City value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_city');
+        });
+    });
+
+    describe('.setCity', () => {
+        it('calls storage.setItem(amnesty_city, value) and returns itself', () => {
+            const storage = {
+                setItem: jest.fn(),
+            };
+
+            const mySessionData = sessionData(storage);
+
+            expect(mySessionData.setCity('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_city', 'value');
+        });
+    });
+
+    describe('.getCountry', () => {
+        it('calls storage.getItem(amnesty_country) and returns its result', () => {
+            const storage = {
+                getItem: jest.fn(() => 'Country value'),
+            };
+
+            expect(sessionData(storage).getCountry()).toBe('Country value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_country');
+        });
+    });
+
+    describe('.setCountry', () => {
+        it('calls storage.setItem(amnesty_country, value) and returns itself', () => {
+            const storage = {
+                setItem: jest.fn(),
+            };
+
+            const mySessionData = sessionData(storage);
+
+            expect(mySessionData.setCountry('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_country', 'value');
         });
     });
 

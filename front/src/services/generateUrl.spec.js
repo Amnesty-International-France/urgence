@@ -49,8 +49,24 @@ describe('generateUrl', () => {
         expect(generateUrl('thanks', { id: 'id_value' })).toBe('/ua/id_value/thanks');
     });
 
-    it('should generate url for ua/id/address', () => {
-        expect(generateUrl('address', { id: 'id_value' })).toBe('/ua/id_value/address');
+    it('should generate url for ua/id/addressMain', () => {
+        expect(generateUrl('addressMain', { id: 'id_value' })).toBe('/ua/id_value/addressMain');
+    });
+
+    it('should generate url for ua/id/addressMore', () => {
+        expect(generateUrl('addressMore', { id: 'id_value' })).toBe('/ua/id_value/addressMore');
+    });
+
+    it('should generate url for ua/id/postalCode', () => {
+        expect(generateUrl('postalCode', { id: 'id_value' })).toBe('/ua/id_value/postalCode');
+    });
+
+    it('should generate url for ua/id/city', () => {
+        expect(generateUrl('city', { id: 'id_value' })).toBe('/ua/id_value/city');
+    });
+
+    it('should generate url for ua/id/country', () => {
+        expect(generateUrl('country', { id: 'id_value' })).toBe('/ua/id_value/country');
     });
 
     it('should throw error if receiving unknow route', () => {

@@ -2,14 +2,24 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { AddressStep } from './AddressStep';
-import TextArea from '../themes/TextArea';
+import Input from '../themes/Input';
 
 describe('<AddressStep />', () => {
     const defaultProps = {
         action: () => 'action',
         className: 'class',
-        address: 'address value',
-        setAddress: () => {},
+        addressMain: 'addressMain value',
+        addressMore: 'addressMore value',
+        postalCode: 'postalCode value',
+        city: 'city value',
+        country: 'country value',
+        email: 'email value',
+        setAddressMain: () => { },
+        setAddressMore: () => { },
+        setPostalCode: () => { },
+        setCity: () => { },
+        setCountry: () => { },
+        setEmail: () => { },
     };
 
     it('should put action result inside .action div', () => {
@@ -28,30 +38,131 @@ describe('<AddressStep />', () => {
         expect(props.action).toHaveBeenCalledWith(false);
     });
 
-    it('should call action props with true if object is not set', () => {
+    it('should call action props with true if full adresse is not set', () => {
         const props = {
             ...defaultProps,
             action: jest.fn(),
-            address: null,
+            addressMain: null,
+            addressMore: null,
+            postalCode: null,
+            city: null,
+            country: null,
+            email: null,
         };
 
         shallow(<AddressStep {...props} />);
         expect(props.action).toHaveBeenCalledWith(true);
     });
 
-    it('should render textarea with value = context.address and onChange = context.setAddress', () => {
+    it('should call action props with false if adresse is set accept adressMore field', () => {
         const props = {
             ...defaultProps,
-            setAddress: jest.fn(),
+            action: jest.fn(),
+            addressMain: 'my street',
+            addressMore: null,
+            postalCode: '75001',
+            city: 'Paris',
+            country: 'France',
+            email: 'myemail',
+        };
+
+        shallow(<AddressStep {...props} />);
+        expect(props.action).toHaveBeenCalledWith(false);
+    });
+
+    it('should render input with value = context.addressMain and onChange = context.setAddressMain', () => {
+        const props = {
+            ...defaultProps,
+            setAddressMain: jest.fn(),
         };
 
         const wrapper = shallow(<AddressStep {...props} />);
-        const textarea = wrapper.find(TextArea);
+        const input = wrapper.find(Input);
 
-        expect(textarea.prop('value')).toBe('address value');
-        expect(textarea.prop('onChange')).toBe(wrapper.instance().setAddress);
+        expect(input.prop('value')).toBe('addressMain value');
+        expect(input.prop('onChange')).toBe(wrapper.instance().setAddressMain);
 
-        wrapper.instance().setAddress({ target: { value: 'new value' } });
-        expect(props.setAddress).toBeCalledWith('new value');
+        wrapper.instance().setAddressMain({ target: { value: 'new value' } });
+        expect(props.setAddressMain).toBeCalledWith('new value');
+    });
+
+    it('should render input with value = context.addressMore and onChange = context.setAddressMore', () => {
+        const props = {
+            ...defaultProps,
+            setAddressMore: jest.fn(),
+        };
+
+        const wrapper = shallow(<AddressStep {...props} />);
+        const input = wrapper.find(Input);
+
+        expect(input.prop('value')).toBe('addressMore value');
+        expect(input.prop('onChange')).toBe(wrapper.instance().setAddressMore);
+
+        wrapper.instance().setAddressMore({ target: { value: 'new value' } });
+        expect(props.setAddressMore).toBeCalledWith('new value');
+    });
+
+    it('should render input with value = context.postalCode and onChange = context.setPostalCode', () => {
+        const props = {
+            ...defaultProps,
+            setPostalCode: jest.fn(),
+        };
+
+        const wrapper = shallow(<AddressStep {...props} />);
+        const input = wrapper.find(Input);
+
+        expect(input.prop('value')).toBe('postalCode value');
+        expect(input.prop('onChange')).toBe(wrapper.instance().setPostalCode);
+
+        wrapper.instance().setPostalCode({ target: { value: 'new value' } });
+        expect(props.setPostalCode).toBeCalledWith('new value');
+    });
+
+    it('should render input with value = context.city and onChange = context.setCity', () => {
+        const props = {
+            ...defaultProps,
+            setCity: jest.fn(),
+        };
+
+        const wrapper = shallow(<AddressStep {...props} />);
+        const input = wrapper.find(Input);
+
+        expect(input.prop('value')).toBe('city value');
+        expect(input.prop('onChange')).toBe(wrapper.instance().setCity);
+
+        wrapper.instance().setCity({ target: { value: 'new value' } });
+        expect(props.setCity).toBeCalledWith('new value');
+    });
+
+    it('should render input with value = context.country and onChange = context.setCountry', () => {
+        const props = {
+            ...defaultProps,
+            setCountry: jest.fn(),
+        };
+
+        const wrapper = shallow(<AddressStep {...props} />);
+        const input = wrapper.find(Input);
+
+        expect(input.prop('value')).toBe('country value');
+        expect(input.prop('onChange')).toBe(wrapper.instance().setCountry);
+
+        wrapper.instance().setCountry({ target: { value: 'new value' } });
+        expect(props.setCountry).toBeCalledWith('new value');
+    });
+
+    it('should render input with value = context.email and onChange = context.setEmail', () => {
+        const props = {
+            ...defaultProps,
+            setEmail: jest.fn(),
+        };
+
+        const wrapper = shallow(<AddressStep {...props} />);
+        const input = wrapper.find(Input);
+
+        expect(input.prop('value')).toBe('email value');
+        expect(input.prop('onChange')).toBe(wrapper.instance().setEmail);
+
+        wrapper.instance().setEmail({ target: { value: 'new value' } });
+        expect(props.setEmail).toBeCalledWith('new value');
     });
 });

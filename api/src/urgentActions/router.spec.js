@@ -6,7 +6,6 @@ import { sendMail } from '../mailer';
 import app from '../server';
 import { createUrgentAction, truncateAll } from '../tests/fixtureLoader';
 import { getPdfMessageBuffer } from './getPdfMessageBuffer';
-import sessionData from '../../../front/src/sessionData';
 
 jest.mock('../mailer');
 jest.mock('./getPdfMessageBuffer');
@@ -40,16 +39,13 @@ describe('Urgent Actions Router', () => {
         it('should return a PDF with correct subject and name', async () => {
             const urgentAction = await createUrgentAction();
 
-            const address = `
-                Amnesty International
-                Le Chaumontois
-                72-76, boulevard de la Villette
-                75019 Paris
-            `;
-
             await request(app).get(
                 `/urgent-actions/${urgentAction.id}.pdf?${stringify({
-                    address,
+                    addressMain: '72-76, boulevard de la Villette',
+                    addressMore: 'Le Chaumontois',
+                    postalCode: '75019',
+                    city: 'Paris',
+                    country: 'France',
                     subject: 'Custom Subject',
                     civility: 'M',
                     surname: 'Surname',
@@ -61,7 +57,11 @@ describe('Urgent Actions Router', () => {
             expect(getPdfMessageBuffer.mock.calls[0][2]).toBe('M');
             expect(getPdfMessageBuffer.mock.calls[0][3]).toBe('Surname');
             expect(getPdfMessageBuffer.mock.calls[0][4]).toBe('Name');
-            expect(getPdfMessageBuffer.mock.calls[0][5]).toBe(address);
+            expect(getPdfMessageBuffer.mock.calls[0][5]).toBe('72-76, boulevard de la Villette');
+            expect(getPdfMessageBuffer.mock.calls[0][6]).toBe('Le Chaumontois');
+            expect(getPdfMessageBuffer.mock.calls[0][7]).toBe('75019');
+            expect(getPdfMessageBuffer.mock.calls[0][8]).toBe('Paris');
+            expect(getPdfMessageBuffer.mock.calls[0][9]).toBe('France');
         });
     });
 

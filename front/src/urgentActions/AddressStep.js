@@ -47,6 +47,7 @@ const styles = {
     '& .stepList': {
         fontSize: '14px',
         marginLeft: 20,
+        marginBottom: 20,
         paddingLeft: 35,
         borderLeft: 'solid black 2px',
     },
@@ -71,9 +72,9 @@ export class AddressStep extends Component {
     setCountry = event => this.props.setCountry(event.target.value);
     setEmail = event => this.props.setEmail(event.target.value);
 
-    isEnabled = () => {
+    isDisabled = () => {
         const { addressMain, postalCode, city, country, email } = this.props;
-        return !!addressMain && !!postalCode && !!city && !!country && !!email;
+        return !addressMain || !postalCode || !city || !country || !email;
     };
 
     render() {
@@ -96,7 +97,7 @@ export class AddressStep extends Component {
                         <strong className="importantText">en faisant le choix du courrier.</strong>
                     </p>
                     <p className="importantText">Comment faire ?</p>
-                    <p>
+                    <span>
                         <ol className={classnames('importantText', 'stepList')}>
                             <li>
                                 <span className="normalText">
@@ -107,7 +108,7 @@ export class AddressStep extends Component {
                             <li>Imprimez la lettre.</li>
                             <li>Postez la lettre.</li>
                         </ol>
-                    </p>
+                    </span>
                     <p>
                         Afin de personnaliser votre courrier, merci de renseigner votre adresse
                         postale.
@@ -157,7 +158,7 @@ export class AddressStep extends Component {
                         label="E-mail"
                     />
                 </div>
-                <div className="action">{action(this.isEnabled())}</div>
+                <div className="action">{action(this.isDisabled())}</div>
             </div>
         );
     }
