@@ -25,6 +25,8 @@ const stepStyle = {
     borderColor: black,
     borderTop: '0',
     borderBottom: '0',
+    backgroundColor: white,
+    transition: 'all ease-in 0.2s',
 };
 
 const FilledStep = glamorous.div({
@@ -33,19 +35,15 @@ const FilledStep = glamorous.div({
     backgroundColor: yellow,
 });
 
-const EmptyStep = glamorous.div({
-    ...style,
-    ...stepStyle,
-    backgroundColor: white,
-});
-
 const Steps = ({ current, total }) => {
     return (
         <Container title={`Step ${current}/${total}`}>
-            {[...Array(total)].map(
-                (element, index) =>
-                    index < current ? <FilledStep key={index} /> : <EmptyStep key={index} />,
-            )}
+            {[...Array(total)].map((element, index) => (
+                <FilledStep
+                    key={index}
+                    style={{ backgroundColor: index < current ? yellow : white }}
+                />
+            ))}
         </Container>
     );
 };
