@@ -5,6 +5,7 @@ import Swiper from 'swiper/dist/js/swiper';
 import classnames from 'classnames';
 import 'swiper/dist/css/swiper.css';
 
+import IconButton from './IconButton';
 import Steps from './Steps';
 
 export class Carousel extends Component {
@@ -44,15 +45,16 @@ export class Carousel extends Component {
     }
 
     render() {
+        icon;
         const { children, icon, className, current, total } = this.props;
 
         return (
             <div className={classnames(className, 'swiper-container')} ref={this.initContainer}>
                 <div className="swiper-wrapper">{children({ nextSlide: this.nextSlide })}</div>
                 <div className="swiper-controls">
-                    <span className="next-arrow" onClick={this.slide}>
+                    <IconButton className="next-arrow" onClick={this.slide}>
                         {icon}
-                    </span>
+                    </IconButton>
                 </div>
                 <div className="swiper-pagination">
                     <Steps current={current} total={total} />
@@ -78,9 +80,9 @@ export default glamorous(Carousel)({
         height: '100%',
     },
     '& .swiper-wrapper': {
-        height: 'calc(100% - 38px - 17px)',
+        height: 'calc(100% - 60px - 17px)',
         '@media (min-width: 1024px)': {
-            height: 'calc(100% - 38px - 25px)',
+            height: 'calc(100% - 60px - 25px)',
         },
     },
     '& .swiper-controls': {
@@ -88,7 +90,7 @@ export default glamorous(Carousel)({
         alignItems: 'center',
         justifyContent: 'flex-end',
         padding: '5px 24px',
-        height: '38px',
+        height: '60px',
         width: '100%',
         '& .next-arrow, & .last-arrow': {
             display: 'flex',
