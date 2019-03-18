@@ -8,6 +8,8 @@ import { withSessionData } from '../SessionDataContext';
 import { withYellowLogo } from '../themes/ThemeContext';
 import TextArea from '../themes/TextArea';
 const styles = {
+    fontFamily: 'Amnesty Trade Gothic LT',
+    fontSize: '16px',
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
@@ -24,6 +26,24 @@ const styles = {
     '& .action': {
         marginTop: '53px',
     },
+    '& p': {
+        margin: '20px 0px',
+    },
+    '& li': {
+        margin: '16px 0px',
+    },
+    '& .importantText': {
+        fontWeight: 'bold',
+    },
+    '& .normalText': {
+        fontWeight: 'normal',
+    },
+    '& .stepList': {
+        fontSize: '14px',
+        marginLeft: 20,
+        paddingLeft: 35,
+        borderLeft: 'solid black 2px',
+    },
 };
 
 export class AddressStep extends Component {
@@ -35,16 +55,38 @@ export class AddressStep extends Component {
             <div className={classnames('address', className)}>
                 <div>
                     <p>
-                        Pour être plus efficace, vous devez être identifié personnellement dans la
-                        lettre que vous envoyez.
+                        Aujourd’hui, votre combat est encore plus grand et impactant{' '}
+                        <strong className="importantText">en faisant le choix du courrier.</strong>
                     </p>
-                    <p>Pouvez vous renseigner votre adresse ?</p>
+                    <p className="importantText">Comment faire ?</p>
+                    <p>
+                        <ol className={classnames('importantText', 'stepList')}>
+                            <li>
+                                <span className="normalText">
+                                    <strong className="importantText">Recevez la lettre</strong> au
+                                    format PDF directement dans votre boite e-mail.
+                                </span>
+                            </li>
+                            <li>Imprimez la lettre.</li>
+                            <li>Postez la lettre.</li>
+                        </ol>
+                    </p>
+                    <p>
+                        Afin de personnaliser votre courrier, merci de renseigner votre adresse
+                        postale.
+                    </p>
                     <TextArea
                         rows="6"
                         value={address}
                         onChange={this.setAddress}
                         placeholder="Votre adresse postale"
                     />
+                    <p>
+                        Pour recevoir le courrier finalisé,{' '}
+                        <strong className="importantText">
+                            veuillez renseigner votre adresse e-mail.
+                        </strong>
+                    </p>
                 </div>
                 <div className="action">{action(!address)}</div>
             </div>
@@ -59,9 +101,4 @@ AddressStep.propTypes = {
     action: PropTypes.func,
 };
 
-export default glamorous(
-    compose(
-        withYellowLogo,
-        withSessionData,
-    )(AddressStep),
-)(styles);
+export default glamorous(compose(withYellowLogo, withSessionData)(AddressStep))(styles);
