@@ -32,16 +32,16 @@ urgentActionsRouter.post('/:id/send', async (req, res, next) => {
     if (!isUUID(id)) {
         return res.status(400).send(`Invalid UUID format: ${id}`);
     }
-
-    const { civility, surname, name, subject, email, addressMain, addressMore, postalCode, city, country } = req.body;
-
-    const urgentAction = await getUrgentAction(id);
-    if (!urgentAction) {
-        return res.status(404).send('Not Found');
-    }
-
-    const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, civility, surname, name, addressMain, addressMore, postalCode, city, country);
     try {
+        const { civility, surname, name, subject, email, addressMain, addressMore, postalCode, city, country } = req.body;
+        console.log(addressMain);
+        const urgentAction = await getUrgentAction(id);
+        if (!urgentAction) {
+            return res.status(404).send('Not Found');
+        }
+
+        const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, civility, surname, name, addressMain, addressMore, postalCode, city, country);
+
         await sendMail(email, 'On y est presque !', getLetterMailBody({ urgentAction }), {
             filename: 'letter.pdf',
             content: pdfBuffer,

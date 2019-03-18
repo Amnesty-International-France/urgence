@@ -24,7 +24,6 @@ const styles = theme => ({
         ...preview,
         // the rules below override desktop media queries so that the preview is forced to appear like on mobile
         '& > div': {
-            height: preview.height,
             boxSizing: 'border-box',
             '& a': {
                 display: 'block',
@@ -36,7 +35,7 @@ const styles = theme => ({
     },
 });
 
-export const AddressInput = ({ classes, source }) => (
+export const LetterInput = ({ classes, source }) => (
     <div className={classNames(classes.root, classes.bordered)}>
         <FormDataConsumer>
             {({ formData }) => (
@@ -73,8 +72,8 @@ export const AddressInput = ({ classes, source }) => (
     </div>
 );
 
-AddressInput.propTypes = {
+LetterInput.propTypes = {
     classes: PropTypes.object,
 };
 
-export default addField(withStyles(styles)(AddressInput));
+export default addField(withStyles(styles)(LetterInput));

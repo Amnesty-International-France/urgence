@@ -16,8 +16,7 @@ import StoryTemplateInput from './StoryTemplateInput';
 import CallToActionInput from './CallToActionInput';
 import MessageInput from './MessageInput';
 import ThanksInput from './ThanksInput';
-import AddressInput from './AddressInput';
-import EmailInput from './EmailInput';
+import LetterInput from './LetterInput';
 
 import StoryStepFormIterator from './StoryStepFormIterator';
 
@@ -84,8 +83,8 @@ export const Form = ({ classes }) => (
 
         <div className={`${classes.form} letter`}>
             <h2>Letter</h2>
-            <AddressInput source="recipient.postal_address" />
-            <EmailInput source="" />
+            <LetterInput source="recipient.postal_address" />
+
         </div>
 
         <div className={`${classes.form} thank-you`}>
