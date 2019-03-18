@@ -77,7 +77,7 @@ describe('<AddressStep />', () => {
         };
 
         const wrapper = shallow(<AddressStep {...props} />);
-        const input = wrapper.find(Input);
+        const input = wrapper.find('.addressMain');
 
         expect(input.prop('value')).toBe('addressMain value');
         expect(input.prop('onChange')).toBe(wrapper.instance().setAddressMain);
@@ -93,7 +93,7 @@ describe('<AddressStep />', () => {
         };
 
         const wrapper = shallow(<AddressStep {...props} />);
-        const input = wrapper.find(Input);
+        const input = wrapper.find('.addressMore');
 
         expect(input.prop('value')).toBe('addressMore value');
         expect(input.prop('onChange')).toBe(wrapper.instance().setAddressMore);
@@ -109,7 +109,7 @@ describe('<AddressStep />', () => {
         };
 
         const wrapper = shallow(<AddressStep {...props} />);
-        const input = wrapper.find(Input);
+        const input = wrapper.find('.postalCode');
 
         expect(input.prop('value')).toBe('postalCode value');
         expect(input.prop('onChange')).toBe(wrapper.instance().setPostalCode);
@@ -125,7 +125,7 @@ describe('<AddressStep />', () => {
         };
 
         const wrapper = shallow(<AddressStep {...props} />);
-        const input = wrapper.find(Input);
+        const input = wrapper.find('.city');
 
         expect(input.prop('value')).toBe('city value');
         expect(input.prop('onChange')).toBe(wrapper.instance().setCity);
@@ -141,7 +141,7 @@ describe('<AddressStep />', () => {
         };
 
         const wrapper = shallow(<AddressStep {...props} />);
-        const input = wrapper.find(Input);
+        const input = wrapper.find('.country');
 
         expect(input.prop('value')).toBe('country value');
         expect(input.prop('onChange')).toBe(wrapper.instance().setCountry);
@@ -157,7 +157,7 @@ describe('<AddressStep />', () => {
         };
 
         const wrapper = shallow(<AddressStep {...props} />);
-        const input = wrapper.find(Input);
+        const input = wrapper.find('.email');
 
         expect(input.prop('value')).toBe('email value');
         expect(input.prop('onChange')).toBe(wrapper.instance().setEmail);
