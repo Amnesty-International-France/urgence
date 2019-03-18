@@ -8,28 +8,10 @@ export default (name, params = {}) => {
             return `/ua/${params.id}/act`;
         case 'message':
             return `/ua/${params.id}/message`;
-        case 'object':
-            return `/ua/${params.id}/object`;
-        case 'civility':
-            return `/ua/${params.id}/civility`;
-        case 'surname':
-            return `/ua/${params.id}/surname`;
-        case 'name':
-            return `/ua/${params.id}/name`;
         case 'thanks':
             return `/ua/${params.id}/thanks`;
-        case 'addressMain':
-            return `/ua/${params.id}/addressMain`;
-        case 'addressMore':
-            return `/ua/${params.id}/addressMore`;
-        case 'postalCode':
-            return `/ua/${params.id}/postalCode`;
-        case 'city':
-            return `/ua/${params.id}/city`;
-        case 'country':
-            return `/ua/${params.id}/country`;
-        case 'email':
-            return `/ua/${params.id}/email`;
+        case 'address':
+            return `/ua/${params.id}/address`;
         case 'thanks-letter':
             return `/ua/${params.id}/thanks-letter`;
         case 'home':

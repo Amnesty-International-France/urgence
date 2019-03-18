@@ -11,12 +11,11 @@ export const generateAppUrl = (route, params) => {
                 civility: 'M',
                 surname: 'John',
                 name: 'Doe',
-                address: `Amnesty International
-                    Le Chaumontois
-                    72-76, boulevard de la Villette
-                    75019 Paris
-                    France
-                `,
+                addressMain: 'Amnesty International',
+                addressMore: 'Le Chaumontois',
+                postalCode: '75019',
+                city: 'Paris',
+                country: 'France',
             })}`;
 
         default:

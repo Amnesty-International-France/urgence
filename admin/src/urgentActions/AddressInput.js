@@ -58,7 +58,12 @@ export const AddressInput = ({ classes, source }) => (
                     <FrontPreview className={classes.preview}>
                         <AddressStep
                             setAddress={noop}
-                            address=""
+                            addressMain=""
+                            addressMore=""
+                            postalCode=""
+                            city=""
+                            country=""
+                            email=""
                             action={disabled => <Link to="#" label="Valider" disabled={disabled} />}
                         />
                     </FrontPreview>
