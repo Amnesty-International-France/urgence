@@ -7,7 +7,6 @@ import Act from './Act';
 import Thanks from './Thanks';
 import Story from './Story';
 import AddressStep from './AddressStep';
-import EmailStep from './EmailStep';
 
 jest.mock('../sessionData.js');
 
@@ -222,24 +221,6 @@ describe('<UrgentAction />', () => {
 
             expect(action.props.pageName).toBe('email');
             expect(action.props.label).toBe('Valider');
-        });
-    });
-
-    describe('Email Step', () => {
-        it('should display EmailStep if step is email', () => {
-            const props = {
-                loading: false,
-                step: 'email',
-                data: {
-                    UrgentAction: {
-                        email_thank: {
-                            title: '',
-                        },
-                    },
-                },
-            };
-            const wrapper = shallow(<UrgentAction {...props} />);
-            expect(wrapper.find(EmailStep).length).toBe(1);
         });
     });
 
