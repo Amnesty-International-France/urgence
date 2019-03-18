@@ -208,19 +208,25 @@ describe('<UrgentAction />', () => {
             expect(wrapper.find(AddressStep).length).toBe(1);
         });
 
-        it('should add a link to address step as action', () => {
+        it('should add a link to thanks-letter step as action', () => {
             const props = {
                 ...defaultProps,
                 step: 'address',
                 id: '123456',
+                data: {
+                    UrgentAction: {
+                        recipient: {
+                            button: 'Fin',
+                        },
+                    },
+                },
             };
 
             const wrapper = shallow(<UrgentAction {...props} />);
             const address = wrapper.find(AddressStep);
             const action = address.prop('action')();
 
-            expect(action.props.pageName).toBe('email');
-            expect(action.props.label).toBe('Valider');
+            expect(action.props.buttonText).toBe('Fin');
         });
     });
 
