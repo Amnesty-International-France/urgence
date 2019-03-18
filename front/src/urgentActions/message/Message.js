@@ -50,6 +50,8 @@ const styles = {
     '& .letter': {
         border: 'solid 1px',
         borderColor: 'rgb(0, 0, 0, 0.20)',
+        boxShadow:
+            '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
         color: black,
         padding: '1em 0 0 0',
         margin: '1em 0',
@@ -207,45 +209,45 @@ export const Message = ({
     surname,
     name,
 }) => (
-        <Fragment>
-            {(!messageTemplate || !messageTemplate.length) && (
-                <p className="error">Cette action urgente n&#39;existe plus.</p>
-            )}
+    <Fragment>
+        {(!messageTemplate || !messageTemplate.length) && (
+            <p className="error">Cette action urgente n&#39;existe plus.</p>
+        )}
 
-            {messageTemplate &&
-                messageTemplate.length > 0 && (
-                    <div className={classnames('message', className)}>
-                        <p>
-                            Pour agir plus vite,&nbsp;
+        {messageTemplate &&
+            messageTemplate.length > 0 && (
+                <div className={classnames('message', className)}>
+                    <p>
+                        Pour agir plus vite,&nbsp;
                         <strong className="importantText"> nous vous proposons ce message :</strong>
-                        </p>
-                        <LetterView messageTemplate={messageTemplate} />
-                        <p>
-                            Parce que les messages uniques ont plus d&#39;impact,&nbsp;
+                    </p>
+                    <LetterView messageTemplate={messageTemplate} />
+                    <p>
+                        Parce que les messages uniques ont plus d&#39;impact,&nbsp;
                         <strong className="importantText">
-                                {' '}
-                                nous vous invitons à le personnaliser.
+                            {' '}
+                            nous vous invitons à le personnaliser.
                         </strong>
-                        </p>
-                        <FormStep
-                            objectIndication={objectIndication}
-                            object={object}
-                            civility={civility}
-                            surname={surname}
-                            name={name}
-                            setObject={setObject}
-                            setCivility={setCivility}
-                            setSurname={setSurname}
-                            setName={setName}
-                        />
-                        <div className="action">
-                            {action}
-                            {link && link.url && <Link {...link} />}
-                        </div>
+                    </p>
+                    <FormStep
+                        objectIndication={objectIndication}
+                        object={object}
+                        civility={civility}
+                        surname={surname}
+                        name={name}
+                        setObject={setObject}
+                        setCivility={setCivility}
+                        setSurname={setSurname}
+                        setName={setName}
+                    />
+                    <div className="action">
+                        {action}
+                        {link && link.url && <Link {...link} />}
                     </div>
-                )}
-        </Fragment>
-    );
+                </div>
+            )}
+    </Fragment>
+);
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
