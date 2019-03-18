@@ -4,8 +4,8 @@ export default driver => {
     const elements = {
         activeSlide: By.className('swiper-slide-active'),
         activeSlideText: By.css('.swiper-slide-active .rich-text'),
-        nextButton: By.css('.swiper-slide-active .next-arrow'),
-        lastButton: By.css('.swiper-slide-active .last-arrow'),
+        nextButton: By.css('.swiper-controls .next-arrow'),
+        lastButton: By.css('.swiper-controls .last-arrow'),
     };
     return {
         navigate: async (id, step) => {
