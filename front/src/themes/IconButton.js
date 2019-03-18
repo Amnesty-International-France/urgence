@@ -14,7 +14,7 @@ const IconButtonContainer = glamorous.div({
     borderRadius: '20px',
     width: '40px',
     height: '40px',
-    '-webkit-tap-highlight-color': 'transparent',
+    WebkitTapHighlightColor: 'transparent',
     ':active': {
         backgroundColor: 'rgb(255, 255, 0, 0.6)',
     },
