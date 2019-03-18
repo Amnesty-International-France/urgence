@@ -42,8 +42,9 @@ const EmptyStep = glamorous.div({
 const Steps = ({ current, total }) => {
     return (
         <Container title={`Step ${current}/${total}`}>
-            {[...Array(total)].map((element, index) =>
-                index < current ? <FilledStep key={index} /> : <EmptyStep key={index} />,
+            {[...Array(total)].map(
+                (element, index) =>
+                    index < current ? <FilledStep key={index} /> : <EmptyStep key={index} />,
             )}
         </Container>
     );
