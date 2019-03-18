@@ -7,11 +7,11 @@ import { compose } from 'recompose';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { getLogoColorForStep } from '../urgentActions/StoryStep';
-import { StoryStepPropType, routeMatch, LinkType } from '../propTypes';
-import generateUrl from '../services/generateUrl';
 import { withThemeContext } from '../themes/ThemeContext';
 import Carousel from '../themes/Carousel';
+import { StoryStepPropType, routeMatch, LinkType } from '../propTypes';
+import { getLogoColorForStep } from '../urgentActions/StoryStep';
+import generateUrl from '../services/generateUrl';
 import StorySlide from './StorySlide';
 
 const styles = {
@@ -68,24 +68,32 @@ export class Story extends Component {
             },
         } = this.props;
 
+        const total = story ? story.length : 0;
+        const current = parseInt(page, 10);
+
         return (
             <div className={className}>
                 {(!story || !story.length) && (
                     <p className="error">Cette action urgente n&#39;existe plus.</p>
                 )}
 
-                {story && story.length > 0 && (
-                    <Carousel initialSlide={parseInt(page, 10)} afterChange={this.afterChange}>
+                {total > 0 && (
+                    <Carousel
+                        initialSlide={current}
+                        current={current + 1}
+                        total={total + 1}
+                        afterChange={this.afterChange}
+                    >
                         {({ nextSlide }) =>
                             story.map((step, index) => (
                                 <StorySlide
                                     key={step.content}
                                     step={step}
-                                    total={story.length}
+                                    total={total}
                                     index={index + 1}
                                     nextSlide={nextSlide}
                                     lastSlide={this.lastSlide}
-                                    link={story.length === index + 1 ? endStoryLink : null}
+                                    link={total === index + 1 ? endStoryLink : null}
                                 />
                             ))
                         }
@@ -111,7 +119,4 @@ Story.propTypes = {
 
 export const WithStylesStory = glamorous(Story)(styles);
 
-export default compose(
-    withRouter,
-    withThemeContext,
-)(WithStylesStory);
+export default compose(withRouter, withThemeContext)(WithStylesStory);

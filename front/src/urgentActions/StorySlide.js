@@ -9,11 +9,11 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import StoryStep from '../urgentActions/StoryStep';
 import { textColorForBackgroundColor, colors } from '../themes/colors';
-import Steps from '../themes/Steps';
 import { RightArrow } from '../icons';
 import { LinkType } from '../propTypes';
 
 const styles = {
+    height: 'calc(100% - 17px)',
     '& .story-step': {
         flex: '1 0 0',
     },
@@ -34,17 +34,9 @@ const styles = {
     '& .next-arrow, & .last-arrow': {
         display: 'flex',
         justifyContent: 'flex-end',
+        cursor: 'pointer',
         fontSize: 28,
         margin: '17px 24px',
-    },
-    '& .counter': {
-        margin: '0px',
-        padding: '0px',
-        height: '17px',
-        width: '100%',
-        '@media (min-width: 1024px)': {
-            height: '25px',
-        },
     },
 };
 
@@ -55,12 +47,11 @@ export class StorySlide extends Component {
         const { className, step, index, total, nextSlide, lastSlide, link } = this.props;
         return (
             <div
+                key={step.content}
                 className={classnames(className, {
                     'swiper-slide': true,
                     'with-bottom-media': get(step, 'displayOptions.mediumPosition') === 'bottom',
                 })}
-                style={{ height: '100%' }}
-                key={step.content}
             >
                 <div className="story-step">
                     <StoryStep link={link} {...step} />
@@ -80,11 +71,6 @@ export class StorySlide extends Component {
                     ) : (
                         <div className="last-arrow" onClick={lastSlide}>
                             <RightArrow fill={rightArrowColor(step)} />
-                        </div>
-                    )}
-                    {total > 1 && (
-                        <div className="counter">
-                            <Steps current={index} total={total} />
                         </div>
                     )}
                 </div>
