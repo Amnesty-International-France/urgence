@@ -36,6 +36,7 @@ export class Story extends Component {
         } = this.props;
 
         if (page === +currentPage) {
+            this.afterLastChange();
             return;
         }
 
@@ -46,6 +47,7 @@ export class Story extends Component {
     afterLastChange = () => {
         const {
             match: { params },
+            history,
         } = this.props;
 
         history.push(generateUrl('act', params));
@@ -89,8 +91,8 @@ export class Story extends Component {
                         current={current + 1}
                         total={total + 1}
                         afterChange={this.afterChange}
-                        afterLastChange={this.afterChange}
-                        icon={<RightArrow fill={black} />}
+                        afterLastChange={this.afterLastChange}
+                        icon={<RightArrow fill={black} className="icon" />}
                     >
                         {() =>
                             story.map((step, index) => (

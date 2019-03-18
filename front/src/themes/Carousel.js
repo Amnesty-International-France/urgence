@@ -29,12 +29,14 @@ export class Carousel extends Component {
         this.container = element;
     };
 
-    nextSlide = () => {
-        this.swiper.slideNext();
-    };
+    slide = () => {
+        const { current, total } = this.props;
 
-    lastSlide = () => {
-        this.props.afterLastChange();
+        if (current + 1 === total) {
+            this.props.afterLastChange();
+            return;
+        }
+        this.swiper.slideNext();
     };
 
     componentWillUnmount() {
@@ -48,15 +50,9 @@ export class Carousel extends Component {
             <div className={classnames(className, 'swiper-container')} ref={this.initContainer}>
                 <div className="swiper-wrapper">{children({ nextSlide: this.nextSlide })}</div>
                 <div className="swiper-controls">
-                    {current < total ? (
-                        <span className="next-arrow" onClick={this.nextSlide}>
-                            {icon}
-                        </span>
-                    ) : (
-                        <span className="last-arrow" onClick={this.lastSlide}>
-                            {icon}
-                        </span>
-                    )}
+                    <span className="next-arrow" onClick={this.slide}>
+                        {icon}
+                    </span>
                 </div>
                 <div className="swiper-pagination">
                     <Steps current={current} total={total} />
