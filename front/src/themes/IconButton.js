@@ -10,12 +10,22 @@ const IconButtonContainer = glamorous.div({
     cursor: 'pointer',
     background: 'none',
     transition: 'all ease-in 0.2s',
+    fontSize: '28px',
     borderRadius: '20px',
     width: '40px',
     height: '40px',
     '-webkit-tap-highlight-color': 'transparent',
     ':active': {
         backgroundColor: 'rgb(255, 255, 0, 0.6)',
+    },
+    '@media (min-width: 1024px)': {
+        fontSize: '38px',
+        borderRadius: '30px',
+        width: '60px',
+        height: '60px',
+        '&:hover': {
+            backgroundColor: 'rgb(255, 255, 0, 0.6)',
+        },
     },
 });
 

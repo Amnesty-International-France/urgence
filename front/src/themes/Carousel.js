@@ -8,6 +8,35 @@ import 'swiper/dist/css/swiper.css';
 import IconButton from './IconButton';
 import Steps from './Steps';
 
+const styles = {
+    '& .swiper-container': {
+        height: '100%',
+    },
+    '& .swiper-wrapper': {
+        height: 'calc(100% - 60px - 17px)',
+        '@media (min-width: 1024px)': {
+            height: 'calc(100% - 60px - 25px)',
+        },
+    },
+    '& .swiper-controls': {
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: '5px 24px',
+        height: '60px',
+        width: '100%',
+    },
+    '& .swiper-pagination': {
+        margin: '0px',
+        padding: '0px',
+        height: '17px',
+        width: '100%',
+        '@media (min-width: 1024px)': {
+            height: '25px',
+        },
+    },
+};
+
 export class Carousel extends Component {
     componentDidMount() {
         const { initialSlide, afterChange } = this.props;
@@ -52,7 +81,13 @@ export class Carousel extends Component {
             <div className={classnames(className, 'swiper-container')} ref={this.initContainer}>
                 <div className="swiper-wrapper">{children({ nextSlide: this.nextSlide })}</div>
                 <div className="swiper-controls">
-                    <IconButton className="next-arrow" onClick={this.slide}>
+                    <IconButton
+                        className={classnames({
+                            'next-arrow': current + 1 !== total,
+                            'last-arrow': current + 1 === total,
+                        })}
+                        onClick={this.slide}
+                    >
                         {icon}
                     </IconButton>
                 </div>
@@ -75,36 +110,4 @@ Carousel.propTypes = {
     afterLastChange: PropTypes.func,
 };
 
-export default glamorous(Carousel)({
-    '& .swiper-container': {
-        height: '100%',
-    },
-    '& .swiper-wrapper': {
-        height: 'calc(100% - 60px - 17px)',
-        '@media (min-width: 1024px)': {
-            height: 'calc(100% - 60px - 25px)',
-        },
-    },
-    '& .swiper-controls': {
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '5px 24px',
-        height: '60px',
-        width: '100%',
-        '& .next-arrow, & .last-arrow': {
-            display: 'flex',
-            alignSelf: 'flex-end',
-            fontSize: 28,
-        },
-    },
-    '& .swiper-pagination': {
-        margin: '0px',
-        padding: '0px',
-        height: '17px',
-        width: '100%',
-        '@media (min-width: 1024px)': {
-            height: '25px',
-        },
-    },
-});
+export default glamorous(Carousel)(styles);
