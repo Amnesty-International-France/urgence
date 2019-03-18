@@ -19,6 +19,9 @@ import { RightArrow } from '../icons';
 const styles = {
     backgroundColor: white,
     height: '100%',
+    '& .icon': {
+        cursor: 'pointer',
+    },
 };
 
 export class Story extends Component {
