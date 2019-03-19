@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
+import GoogleAnalytics from 'react-ga';
 
 import { black, yellow } from './colors';
 
@@ -29,8 +30,23 @@ export const styles = {
     },
 };
 
-export const Link = ({ to, label, disabled, className, onClick }) => (
-    <RouterLink to={to} className={classnames(className, { disabled: disabled })} onClick={onClick}>
+export const Link = ({ to, label, disabled, className, onClick, analyticsCategory }) => (
+    <RouterLink
+        to={to}
+        className={classnames(className, { disabled: disabled })}
+        onClick={event => {
+            if (onClick) onClick(event);
+            if (analyticsCategory) {
+                GoogleAnalytics.event({
+                    category: analyticsCategory,
+                    action: `Click on ${disabled ? 'disabled' : 'active'} button to: ${to}`,
+                    label: `User clicked on ${
+                        disabled ? 'disabled' : 'active'
+                    } button to: ${to} (label: ${label})`,
+                });
+            }
+        }}
+    >
         {label}
     </RouterLink>
 );
@@ -41,6 +57,7 @@ Link.propTypes = {
     disabled: PropTypes.bool,
     className: PropTypes.string,
     onClick: PropTypes.func,
+    analyticsCategory: PropTypes.string,
 };
 
 export default glamorous(Link)(styles);

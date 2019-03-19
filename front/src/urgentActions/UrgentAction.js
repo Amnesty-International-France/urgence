@@ -112,7 +112,11 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                 data={callToAction}
                 actions={() =>
                     callToAction && callToAction.button ? (
-                        <ToUrgentActionPageLink label={callToAction.button} pageName="message" />
+                        <ToUrgentActionPageLink
+                            label={callToAction.button}
+                            pageName="message"
+                            analyticsCategory={'CallToACtionPage'}
+                        />
                     ) : null
                 }
             />
@@ -120,16 +124,19 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (step === 'message') {
+        const messageAnalyticsCategory = 'MessageForm';
         return (
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
                 objectIndication={get(data, 'UrgentAction.object_indication')}
                 link={get(data, 'UrgentAction.message_link')}
                 loading={loading}
+                analyticsCategory={messageAnalyticsCategory}
                 action={
                     <SendMail
                         recipient={get(data, 'UrgentAction.recipient')}
                         messageTemplate={get(data, 'UrgentAction.message_template')}
+                        analyticsCategory={messageAnalyticsCategory}
                     />
                 }
             />
@@ -143,7 +150,11 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                 data={emailThank}
                 actions={() =>
                     emailThank && emailThank.button ? (
-                        <ToUrgentActionPageLink label={emailThank.button} pageName="address" />
+                        <ToUrgentActionPageLink
+                            label={emailThank.button}
+                            pageName="address"
+                            analyticsCategory={'EmailThankPage'}
+                        />
                     ) : null
                 }
             />
@@ -151,11 +162,17 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (step === 'address') {
+        const addressAnalyticsCategory = 'AddressForm';
         const recipient = get(data, 'UrgentAction.recipient');
         return (
             <AddressStep
+                analyticsCategory={addressAnalyticsCategory}
                 action={disabled => (
-                    <MailPdfButton disabled={disabled} buttonText={recipient.button} />
+                    <MailPdfButton
+                        disabled={disabled}
+                        buttonText={recipient.button}
+                        analyticsCategory={addressAnalyticsCategory}
+                    />
                 )}
             />
         );

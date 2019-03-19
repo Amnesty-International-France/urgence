@@ -77,7 +77,7 @@ export class Input extends Component {
                                     this.props.label
                                 } with state: ${
                                     showValid ? 'valid' : error ? 'invalid' : 'null'
-                                } containing value: "${event.target.value}"`,
+                                }, containing value: "${event.target.value}"`,
                             });
                         }
                     }}
@@ -88,7 +88,7 @@ export class Input extends Component {
                                 action: `Enter field: ${this.props.label}`,
                                 label: `User set focus on field: ${this.props.label} with state: ${
                                     showValid ? 'valid' : error ? 'invalid' : 'null'
-                                } containing value: "${event.target.value}"`,
+                                }, containing value: "${event.target.value}"`,
                             });
                         }
                     }}

@@ -98,7 +98,7 @@ export class RadioButton extends Component {
                                                 this.props.label
                                             } with state: ${
                                                 error ? 'invalid' : 'valid'
-                                            } containing value: "${event.target.value}"`,
+                                            }, containing value: "${event.target.value}"`,
                                         });
                                     }
                                 }}

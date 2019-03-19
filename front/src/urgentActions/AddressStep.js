@@ -8,8 +8,6 @@ import { withSessionData } from '../SessionDataContext';
 import { withYellowLogo } from '../themes/ThemeContext';
 import Input from '../themes/Input';
 
-const analyticsCategory = 'AddressForm';
-
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '16px',
@@ -95,6 +93,7 @@ export class AddressStep extends Component {
             city,
             country,
             email,
+            analyticsCategory,
         } = this.props;
 
         return (
@@ -206,6 +205,7 @@ AddressStep.propTypes = {
     setEmail: PropTypes.func.isRequired,
     className: PropTypes.string,
     action: PropTypes.func,
+    analyticsCategory: PropTypes.string,
 };
 
 export default glamorous(

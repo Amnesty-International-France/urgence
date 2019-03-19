@@ -14,8 +14,6 @@ import { LinkType } from '../../propTypes';
 import Input from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';
 
-const analyticsCategory = 'MessageForm';
-
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '16px',
@@ -156,7 +154,7 @@ export class FormStep extends Component {
         if (!this.state[field]) this.setState({ [field]: true });
     };
     render() {
-        const { objectIndication, object, civility, surname, name } = this.props;
+        const { objectIndication, object, civility, surname, name, analyticsCategory } = this.props;
         return (
             <Fragment>
                 <Input
@@ -212,6 +210,7 @@ FormStep.propTypes = {
     setCivility: PropTypes.func.isRequired,
     setSurname: PropTypes.func.isRequired,
     setName: PropTypes.func.isRequired,
+    analyticsCategory: PropTypes.string,
 };
 
 export const Message = ({
@@ -228,6 +227,7 @@ export const Message = ({
     civility,
     surname,
     name,
+    analyticsCategory,
 }) => (
     <Fragment>
         {(!messageTemplate || !messageTemplate.length) && (
@@ -258,6 +258,7 @@ export const Message = ({
                     setCivility={setCivility}
                     setSurname={setSurname}
                     setName={setName}
+                    analyticsCategory={analyticsCategory}
                 />
                 <div className="action">
                     {action}
@@ -282,6 +283,7 @@ Message.propTypes = {
     surname: PropTypes.string,
     name: PropTypes.string,
     action: PropTypes.node.isRequired,
+    analyticsCategory: PropTypes.string,
 };
 
 export default glamorous(

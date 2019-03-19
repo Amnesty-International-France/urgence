@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
+import GoogleAnalytics from 'react-ga';
 
 import { styles } from './Link';
 
@@ -13,10 +14,23 @@ export const MailTo = ({
     disabled,
     afterMail,
     className,
+    analyticsCategory,
 }) => (
     <a
         className={classnames(className, { disabled })}
-        onClick={afterMail}
+        onClick={event => {
+            afterMail(event);
+
+            if (analyticsCategory) {
+                GoogleAnalytics.event({
+                    category: analyticsCategory,
+                    action: `Click on ${disabled ? 'disabled' : 'active'} button: MailTo`,
+                    label: `User clicked on ${
+                        disabled ? 'disabled' : 'active'
+                    } button: MailTo (label: ${label})`,
+                });
+            }
+        }}
         href={`mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
             subject,
         )}&body=${encodeURIComponent(body)}`
@@ -41,6 +55,7 @@ MailTo.propTypes = {
         copies_to: PropTypes.string,
         cci: PropTypes.string,
     }).isRequired,
+    analyticsCategory: PropTypes.string,
 };
 
 export default glamorous(MailTo)(styles);
