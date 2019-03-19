@@ -15,7 +15,7 @@ const styles = {
         },
     },
     '& .valid div:after': {
-        content: '✔',
+        content: '✓',
         color: 'green',
         paddingRight: 5,
     },

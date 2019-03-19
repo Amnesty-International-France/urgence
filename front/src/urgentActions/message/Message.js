@@ -180,6 +180,7 @@ export class FormStep extends Component {
                     onChange={this.setCivility}
                     error={!civility}
                     label="Civilité *"
+                    autoComplete="civility"
                     choices={['M.', 'Mme.', 'Autre']}
                 />
                 <Input
@@ -187,6 +188,7 @@ export class FormStep extends Component {
                     value={surname}
                     onChange={this.setSurname}
                     error={!surname}
+                    autoComplete="firstname"
                     label="Votre prénom *"
                 />
                 <Input
@@ -194,6 +196,7 @@ export class FormStep extends Component {
                     value={name}
                     onChange={this.setName}
                     error={!name}
+                    autoComplete="name"
                     label="Votre nom *"
                 />
             </Fragment>

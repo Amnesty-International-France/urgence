@@ -119,6 +119,7 @@ export class AddressStep extends Component {
                         value={addressMain}
                         onChange={this.setAddressMain}
                         error={!addressMain}
+                        autoComplete="address-line1"
                         label="Adresse"
                     />
                     <Input
@@ -126,6 +127,7 @@ export class AddressStep extends Component {
                         value={addressMore}
                         onChange={this.setAddressMore}
                         noValidate
+                        autoComplete="address-line2"
                         label="Complément d'adresse"
                     />
                     <div className="cityZone">
@@ -134,6 +136,7 @@ export class AddressStep extends Component {
                             value={postalCode}
                             onChange={this.setPostalCode}
                             error={!postalCode}
+                            autoComplete="postal-code"
                             label="Code postal"
                         />
                         <Input
@@ -141,6 +144,7 @@ export class AddressStep extends Component {
                             value={city}
                             onChange={this.setCity}
                             error={!city}
+                            autoComplete="city"
                             label="Ville"
                         />
                     </div>
@@ -149,6 +153,7 @@ export class AddressStep extends Component {
                         value={country}
                         onChange={this.setCountry}
                         error={!country}
+                        autoComplete="country"
                         label="Pays"
                     />
                     <p className="lastParagraph">
@@ -163,6 +168,7 @@ export class AddressStep extends Component {
                         value={email}
                         onChange={this.setEmail}
                         error={!email}
+                        autoComplete="email"
                         label="E-mail"
                     />
                 </div>
