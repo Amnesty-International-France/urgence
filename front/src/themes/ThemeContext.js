@@ -1,5 +1,6 @@
 import React, { createContext, Component } from 'react';
 import PropTypes from 'prop-types';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { lifecycle, compose } from 'recompose';
 
 import { black, yellow } from './colors';
@@ -18,8 +19,18 @@ export class ThemeProvider extends Component {
         },
     };
 
+    theme = createMuiTheme({
+        palette: {
+            primary: { 500: black },
+        },
+    });
+
     render() {
-        return <Provider value={this.state}>{this.props.children}</Provider>;
+        return (
+            <MuiThemeProvider theme={this.theme}>
+                <Provider value={this.state}>{this.props.children}</Provider>
+            </MuiThemeProvider>
+        );
     }
 }
 
