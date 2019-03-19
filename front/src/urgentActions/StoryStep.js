@@ -13,11 +13,9 @@ const styles = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
     },
-
     '& .step': {
         flex: '1 0 0',
         display: 'flex',
@@ -26,22 +24,18 @@ const styles = {
             flexDirection: 'row',
         },
     },
-
     '& .image': {
         flex: '1 0 0',
     },
-
     '& .image > div': {
         height: '100%',
     },
-
     '& .content': {
         display: 'flex',
         flex: '1 0 0',
         padding: '21px 38px 21px 24px',
         overflow: 'auto',
     },
-
     '& .act': {
         flex: '0 0 3rem',
         margin: '1rem 1rem 0 1rem',
@@ -76,11 +70,12 @@ export const StoryStep = ({ className, medium, displayOptions, content, link }) 
         }}
     >
         <div className="step">
-            {medium && displayOptions.mediumPosition === 'top' && (
-                <div className="image">
-                    <Image {...medium} />
-                </div>
-            )}
+            {medium &&
+                displayOptions.mediumPosition === 'top' && (
+                    <div className="image">
+                        <Image {...medium} />
+                    </div>
+                )}
 
             <div
                 className="content"
@@ -92,16 +87,21 @@ export const StoryStep = ({ className, medium, displayOptions, content, link }) 
                 <RichText html={content} />
             </div>
 
-            {medium && displayOptions.mediumPosition === 'bottom' && (
-                <div className="image">
-                    <Image {...medium} />
-                </div>
-            )}
+            {medium &&
+                displayOptions.mediumPosition === 'bottom' && (
+                    <div className="image">
+                        <Image {...medium} />
+                    </div>
+                )}
         </div>
 
-        {link && link.url && (
-            <Link {...link} color={textColorForBackgroundColor(displayOptions.backgroundColor)} />
-        )}
+        {link &&
+            link.url && (
+                <Link
+                    {...link}
+                    color={textColorForBackgroundColor(displayOptions.backgroundColor)}
+                />
+            )}
     </div>
 );
 

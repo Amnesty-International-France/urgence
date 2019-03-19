@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch';
-import { until } from 'selenium-webdriver';
 
 import driver from './driver';
 import storyPageFactory from './pages/story';
