@@ -28,21 +28,12 @@ const styles = {
     '& .action': {
         display: 'flex',
         margin: '1em 0',
-        '@media (min-aspect-ratio: 1/1)': {
-            alignSelf: 'flex-end',
-        },
-        '& > a': {
-            marginBottom: 20,
-        },
     },
     '@media (max-width: 350px)': {
         fontSize: '0.8em',
     },
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
-        '& a': {
-            alignSelf: 'flex-end',
-        },
     },
     '& .importantText': {
         fontWeight: 'bold',

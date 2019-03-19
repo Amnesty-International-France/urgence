@@ -11,6 +11,7 @@ const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '16px',
     display: 'flex',
+    minHeight: '100%',
     flexDirection: 'column',
     backgroundColor: 'white',
     padding: '100px 20px 20px 20px',
@@ -24,10 +25,13 @@ const styles = {
     },
     '& .action': {
         display: 'flex',
-        marginTop: '53px',
-        '& > a': {
-            marginBottom: 20,
-        },
+        margin: '1em 0',
+    },
+    '@media (max-width: 350px)': {
+        fontSize: '0.8em',
+    },
+    '@media (min-width: 1024px)': {
+        padding: '10vh 10vw',
     },
     '& p': {
         marginBottom: 20,
