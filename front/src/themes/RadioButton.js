@@ -37,7 +37,7 @@ export class RadioButton extends Component {
         showError: false,
     };
 
-    setShowErrorState = () => {
+    showErrorState = () => {
         if (!this.state.showError) this.setState({ showError: true });
     };
 
@@ -62,10 +62,10 @@ export class RadioButton extends Component {
                                 id={index}
                                 className="circle"
                                 onChange={event => {
-                                    this.setShowErrorState();
+                                    this.showErrorState();
                                     if (onChange) onChange(event);
                                 }}
-                                onBlur={() => this.setShowErrorState()}
+                                onBlur={() => this.showErrorState()}
                             />
                             <label htmlFor={item}>{item}</label>
                         </div>
