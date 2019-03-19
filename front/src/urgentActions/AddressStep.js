@@ -144,7 +144,7 @@ export class AddressStep extends Component {
                             value={city}
                             onChange={this.setCity}
                             error={!city}
-                            autoComplete="city"
+                            autoComplete="address-level2"
                             label="Ville"
                         />
                     </div>
