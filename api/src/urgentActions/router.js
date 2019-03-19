@@ -34,7 +34,6 @@ urgentActionsRouter.post('/:id/send', async (req, res, next) => {
     }
     try {
         const { civility, surname, name, subject, email, addressMain, addressMore, postalCode, city, country } = req.body;
-        console.log(addressMain);
         const urgentAction = await getUrgentAction(id);
         if (!urgentAction) {
             return res.status(404).send('Not Found');
