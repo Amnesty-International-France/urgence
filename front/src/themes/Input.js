@@ -71,7 +71,7 @@ export class Input extends Component {
                     onFocus={() =>
                         GoogleAnalytics.event({
                             category: formName,
-                            action: `Entrer "${this.props.label}" field`,
+                            action: `Enter "${this.props.label}" field`,
                         })
                     }
                     value={value}
