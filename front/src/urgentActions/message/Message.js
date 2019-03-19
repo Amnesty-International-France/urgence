@@ -74,7 +74,7 @@ const styles = {
         left: 0,
         width: '100%',
         margin: 0,
-        backgroundImage: 'linear-gradient(to bottom, transparent, white)',
+        backgroundImage: 'linear-gradient(to bottom, rgba(255,255,255,0), white)',
         transition: 'all 1s',
     },
     '& .opacifyEnd': {
