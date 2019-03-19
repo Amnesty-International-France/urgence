@@ -7,14 +7,14 @@ import { compose } from 'recompose';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { black, white } from '../themes/colors';
-import { withThemeContext } from '../themes/ThemeContext';
-import Carousel from '../themes/Carousel';
-import { StoryStepPropType, routeMatch, LinkType } from '../propTypes';
-import { getLogoColorForStep } from '../urgentActions/StoryStep';
-import generateUrl from '../services/generateUrl';
+import { black, white } from '../../themes/colors';
+import { withThemeContext } from '../../themes/ThemeContext';
+import Carousel from '../../themes/Carousel';
+import { StoryStepPropType, routeMatch, LinkType } from '../../propTypes';
+import { getLogoColorForStep } from './StoryStep';
+import generateUrl from '../../services/generateUrl';
 import StorySlide from './StorySlide';
-import { RightArrow } from '../icons';
+import { RightArrow } from '../../icons';
 
 const styles = {
     backgroundColor: white,

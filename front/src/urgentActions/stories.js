@@ -1,14 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Div100Vh from 'react-div-100vh';
 
-import StoryStep from './StoryStep';
-import { WithStylesStory as Story } from './Story';
+import StoryStep from './story/StoryStep';
+import { WithStylesStory as Story } from './story/Story';
 import Act from './Act';
 import Thanks from './Thanks';
 import Link from '../themes/Link';
-import { Email, Share } from '../icons';
 import { routerDecorator, history } from '../../.storybook/decorators';
 import { ThemeProvider } from '../themes/ThemeContext';
 import AppLogo from '../themes/AppLogo';

@@ -3,11 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
-import RichText from '../themes/RichText';
-import Image from '../themes/Image';
-import { StoryStepPropType, LinkType } from '../propTypes';
-import { textColorForBackgroundColor, colors, black, white, yellow } from '../themes/colors';
-import Link from './Link';
+import RichText from '../../themes/RichText';
+import Image from '../../themes/Image';
+import { StoryStepPropType, LinkType } from '../../propTypes';
+import { textColorForBackgroundColor, colors, black, white, yellow } from '../../themes/colors';
+import Link from '../Link';
 
 const styles = {
     height: '100%',

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Story } from './Story';
-import Carousel from '../themes/Carousel';
+import Carousel from '../../themes/Carousel';
 import StorySlide from './StorySlide';
 
 const defaultStep = {

@@ -7,9 +7,9 @@ import glamorous from 'glamorous';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import StoryStep from '../urgentActions/StoryStep';
+import StoryStep from './StoryStep';
 
-import { LinkType } from '../propTypes';
+import { LinkType } from '../../propTypes';
 
 const styles = {
     height: 'calc(100% - 17px)',
