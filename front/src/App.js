@@ -5,6 +5,7 @@ import { Switch } from 'react-router-dom';
 import glamorous from 'glamorous';
 import Div100Vh from 'react-div-100vh';
 
+import withTracker from './analytics/withTracker';
 import { Router, Route } from './gateway/ReactRouter';
 import generateUrl from './services/generateUrl';
 import UrgentAction from './urgentActions/UrgentAction';
@@ -25,8 +26,11 @@ const App = ({ className, client }) => (
                 <AppLogo />
                 <Router>
                     <Switch>
-                        <Route exact path={generateUrl('home')} component={Home} />
-                        <Route path={'/ua/:id/:step?/:page?'} component={UrgentAction} />
+                        <Route exact path={generateUrl('home')} component={withTracker(Home)} />
+                        <Route
+                            path={'/ua/:id/:step?/:page?'}
+                            component={withTracker(UrgentAction)}
+                        />
                     </Switch>
                 </Router>
             </Div100Vh>

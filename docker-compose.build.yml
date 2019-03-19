@@ -3,7 +3,12 @@ version: '3'
 services:
     admin_staging:
         image: node:9
-        command: [sh, -c, "yarn add query-string@5.1.1 && cd node_modules/ra-core && yarn add query-string@5.1.1 && cd /app/admin && yarn run build"]
+        command:
+            [
+                sh,
+                -c,
+                'yarn add query-string@5.1.1 && cd node_modules/ra-core && yarn add query-string@5.1.1 && cd /app/admin && yarn run build',
+            ]
         volumes:
             - .:/app
         environment:
@@ -11,12 +16,17 @@ services:
             PUBLIC_URL: https://amnesty.marmelab.com/admin
             REACT_APP_API_URL: https://amnesty.marmelab.com/api
             REACT_APP_FRONT_BASE_URL: https://amnesty.marmelab.com
-        user: "${UID}:${GID}"
+        user: '${UID}:${GID}'
         working_dir: /app/admin
 
     admin_prod:
         image: node:9
-        command: [sh, -c, "yarn add query-string@5.1.1 && cd node_modules/ra-core && yarn add query-string@5.1.1 && cd /app/admin && yarn run build"]
+        command:
+            [
+                sh,
+                -c,
+                'yarn add query-string@5.1.1 && cd node_modules/ra-core && yarn add query-string@5.1.1 && cd /app/admin && yarn run build',
+            ]
         volumes:
             - .:/app
         environment:
@@ -24,13 +34,17 @@ services:
             PUBLIC_URL: https://rapide.amnesty.fr/admin
             REACT_APP_API_URL: https://rapide.amnesty.fr/api
             REACT_APP_FRONT_BASE_URL: https://rapide.amnesty.fr
-        user: "${UID}:${GID}"
+        user: '${UID}:${GID}'
         working_dir: /app/admin
-
 
     admin_dev:
         image: node:9
-        command: [sh, -c, "yarn add query-string@5.1.1 && cd node_modules/ra-core && yarn add query-string@5.1.1 && cd /app/admin && yarn run build"]
+        command:
+            [
+                sh,
+                -c,
+                'yarn add query-string@5.1.1 && cd node_modules/ra-core && yarn add query-string@5.1.1 && cd /app/admin && yarn run build',
+            ]
         volumes:
             - .:/app
         environment:
@@ -38,49 +52,52 @@ services:
             PUBLIC_URL: http://localhost/admin
             REACT_APP_API_URL: http://localhost/api
             REACT_APP_FRONT_BASE_URL: http://localhost
-        user: "${UID}:${GID}"
+        user: '${UID}:${GID}'
         working_dir: /app/admin
 
     front_staging:
         image: node:9
-        command: "yarn run build-web"
+        command: 'yarn run build-web'
         volumes:
             - ./front:/app
         environment:
             NODE_ENV: production
             REACT_APP_API_URL: https://amnesty.marmelab.com/api
-        user: "${UID}:${GID}"
+            REACT_APP_GA: UA-136476291-1
+        user: '${UID}:${GID}'
         working_dir: /app
 
     front_prod:
         image: node:9
-        command: "yarn run build-web"
+        command: 'yarn run build-web'
         volumes:
             - ./front:/app
         environment:
             NODE_ENV: production
             REACT_APP_API_URL: https://rapide.amnesty.fr/api
-        user: "${UID}:${GID}"
+            REACT_APP_GA: UA-136476291-3
+        user: '${UID}:${GID}'
         working_dir: /app
 
     front_dev:
         image: node:9
-        command: "yarn run build-web"
+        command: 'yarn run build-web'
         volumes:
             - ./front:/app
         environment:
             NODE_ENV: production
             REACT_APP_API_URL: http://localhost/api
-        user: "${UID}:${GID}"
+            REACT_APP_GA: UA-136476291-2
+        user: '${UID}:${GID}'
         working_dir: /app
 
     storybook:
         image: node:9
-        command: "yarn run build-storybook"
+        command: 'yarn run build-storybook'
         volumes:
             - ./front:/app
         environment:
             NODE_ENV: production
             PUBLIC_URL: https://amnesty.marmelab.com/storybook
-        user: "${UID}:${GID}"
+        user: '${UID}:${GID}'
         working_dir: /app

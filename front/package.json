@@ -19,6 +19,7 @@
         "build-storybook": "build-storybook -s public"
     },
     "dependencies": {
+        "@material-ui/core": "~3.9.2",
         "apollo-boost": "~0.3.1",
         "apollo-link-schema": "~1.2.1",
         "autoprefixer": "~7.1.6",
@@ -58,6 +59,7 @@
         "react-dev-utils": "~5.0.1",
         "react-div-100vh": "~0.1.8",
         "react-dom": "~16.3.2",
+        "react-ga": "~2.5.7",
         "react-native": "~0.52.0",
         "react-native-web": "~0.5.4",
         "react-primitives": "~0.5.0",
@@ -72,6 +74,7 @@
         "style-loader": "~0.19.0",
         "sw-precache-webpack-plugin": "~0.11.4",
         "swiper": "~4.3.0",
+        "unfetch": "~3.0.0",
         "url-loader": "~0.6.2",
         "webpack": "~3.8.1",
         "webpack-dev-server": "~2.9.4",
@@ -111,19 +114,12 @@
         "react-native-scripts": "~1.12.1",
         "react-test-renderer": "~16.2.0",
         "selenium-webdriver": "~3.6.0",
-        "storybook-react-router": "~1.0.1",
-        "unfetch": "~3.0.0",
-        "@material-ui/core": "~3.9.2"
+        "storybook-react-router": "~1.0.1"
     },
     "jest": {
-        "collectCoverageFrom": [
-            "src/**/*.{js,jsx,mjs}"
-        ],
+        "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
         "setupTestFrameworkScriptFile": "<rootDir>/config/setupTest.js",
-        "setupFiles": [
-            "babel-polyfill",
-            "<rootDir>/config/polyfills.js"
-        ],
+        "setupFiles": ["babel-polyfill", "<rootDir>/config/polyfills.js"],
         "testMatch": [
             "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
             "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}",
@@ -136,26 +132,14 @@
             "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
             "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
         },
-        "transformIgnorePatterns": [
-            "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-        ],
+        "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
         "moduleNameMapper": {
             "^react-native$": "react-native-web"
         },
-        "moduleFileExtensions": [
-            "web.js",
-            "js",
-            "json",
-            "web.jsx",
-            "jsx",
-            "node",
-            "mjs"
-        ]
+        "moduleFileExtensions": ["web.js", "js", "json", "web.jsx", "jsx", "node", "mjs"]
     },
     "babel": {
-        "presets": [
-            "react-app"
-        ]
+        "presets": ["react-app"]
     },
     "eslintConfig": {
         "extends": "react-app"
