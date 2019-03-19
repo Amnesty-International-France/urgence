@@ -29,8 +29,9 @@ const IconButtonContainer = glamorous.div({
     },
 });
 
-const IconButton = ({ children, onClick }) => (
+const IconButton = ({ className, children, onClick }) => (
     <IconButtonContainer
+        className={className}
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
         onClick={onClick}
@@ -40,6 +41,7 @@ const IconButton = ({ children, onClick }) => (
 );
 
 IconButton.propTypes = {
+    className: PropTypes.object,
     children: PropTypes.element.isRequired,
     onClick: PropTypes.func.isRequired,
 };
