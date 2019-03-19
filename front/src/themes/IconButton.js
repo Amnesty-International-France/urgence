@@ -41,7 +41,7 @@ const IconButton = ({ className, children, onClick }) => (
 );
 
 IconButton.propTypes = {
-    className: PropTypes.object,
+    className: PropTypes.string,
     children: PropTypes.element.isRequired,
     onClick: PropTypes.func.isRequired,
 };
