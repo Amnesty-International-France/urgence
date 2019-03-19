@@ -7,6 +7,9 @@ import classnames from 'classnames';
 import { withSessionData } from '../SessionDataContext';
 import { withYellowLogo } from '../themes/ThemeContext';
 import Input from '../themes/Input';
+
+const analyticsCategory = 'AddressForm';
+
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '16px',
@@ -124,6 +127,7 @@ export class AddressStep extends Component {
                         onChange={this.setAddressMain}
                         error={!addressMain}
                         autoComplete="address-line1"
+                        analyticsCategory={analyticsCategory}
                         label="Adresse"
                     />
                     <Input
@@ -132,6 +136,7 @@ export class AddressStep extends Component {
                         onChange={this.setAddressMore}
                         noValidate
                         autoComplete="address-line2"
+                        analyticsCategory={analyticsCategory}
                         label="Complément d'adresse"
                     />
                     <div className="cityZone">
@@ -141,6 +146,7 @@ export class AddressStep extends Component {
                             onChange={this.setPostalCode}
                             error={!postalCode}
                             autoComplete="postal-code"
+                            analyticsCategory={analyticsCategory}
                             label="Code postal"
                         />
                         <Input
@@ -149,6 +155,7 @@ export class AddressStep extends Component {
                             onChange={this.setCity}
                             error={!city}
                             autoComplete="address-level2"
+                            analyticsCategory={analyticsCategory}
                             label="Ville"
                         />
                     </div>
@@ -158,6 +165,7 @@ export class AddressStep extends Component {
                         onChange={this.setCountry}
                         error={!country}
                         autoComplete="country"
+                        analyticsCategory={analyticsCategory}
                         label="Pays"
                     />
                     <p className="lastParagraph">
@@ -173,6 +181,7 @@ export class AddressStep extends Component {
                         onChange={this.setEmail}
                         error={!email}
                         autoComplete="email"
+                        analyticsCategory={analyticsCategory}
                         label="E-mail"
                     />
                 </div>
@@ -199,4 +208,9 @@ AddressStep.propTypes = {
     action: PropTypes.func,
 };
 
-export default glamorous(compose(withYellowLogo, withSessionData)(AddressStep))(styles);
+export default glamorous(
+    compose(
+        withYellowLogo,
+        withSessionData,
+    )(AddressStep),
+)(styles);

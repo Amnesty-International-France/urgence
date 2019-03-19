@@ -49,7 +49,7 @@ export class Input extends Component {
             onChange,
             error,
             noValidate,
-            formName,
+            analyticsCategory,
             ...otherProps
         } = this.props;
         const { showError, showValid } = this.state;
@@ -67,13 +67,31 @@ export class Input extends Component {
                         if (onChange) onChange(event);
                         this.showErrorState();
                     }}
-                    onBlur={() => this.showErrorState()}
-                    onFocus={() =>
-                        GoogleAnalytics.event({
-                            category: formName,
-                            action: `Enter "${this.props.label}" field`,
-                        })
-                    }
+                    onBlur={event => {
+                        this.showErrorState();
+                        if (analyticsCategory) {
+                            GoogleAnalytics.event({
+                                category: analyticsCategory,
+                                action: `Exit field: ${this.props.label}`,
+                                label: `User remove focus on field: ${
+                                    this.props.label
+                                } with state: ${
+                                    showValid ? 'valid' : error ? 'invalid' : 'null'
+                                } containing value: "${event.target.value}"`,
+                            });
+                        }
+                    }}
+                    onFocus={event => {
+                        if (analyticsCategory) {
+                            GoogleAnalytics.event({
+                                category: analyticsCategory,
+                                action: `Enter field: ${this.props.label}`,
+                                label: `User set focus on field: ${this.props.label} with state: ${
+                                    showValid ? 'valid' : error ? 'invalid' : 'null'
+                                } containing value: "${event.target.value}"`,
+                            });
+                        }
+                    }}
                     value={value}
                     {...otherProps}
                 />
@@ -88,8 +106,8 @@ Input.propTypes = {
     error: PropTypes.bool,
     noValidate: PropTypes.bool,
     className: PropTypes.string,
-    formName: PropTypes.string,
-    label: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    analyticsCategory: PropTypes.string,
 };
 
 export default glamorous(Input)(styles);

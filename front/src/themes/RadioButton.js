@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
+import GoogleAnalytics from 'react-ga';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic',
@@ -42,7 +43,16 @@ export class RadioButton extends Component {
     };
 
     render() {
-        const { className, choices, label, name, value, onChange, error } = this.props;
+        const {
+            className,
+            choices,
+            label,
+            name,
+            value,
+            onChange,
+            error,
+            analyticsCategory,
+        } = this.props;
         const { showError } = this.state;
         return (
             <div className={className}>
@@ -65,7 +75,33 @@ export class RadioButton extends Component {
                                     this.showErrorState();
                                     if (onChange) onChange(event);
                                 }}
-                                onBlur={() => this.showErrorState()}
+                                onBlur={event => {
+                                    this.showErrorState();
+                                    if (analyticsCategory) {
+                                        GoogleAnalytics.event({
+                                            category: analyticsCategory,
+                                            action: `Exit field: ${this.props.label}`,
+                                            label: `User remove focus on field: ${
+                                                this.props.label
+                                            } with state: ${
+                                                error ? 'invalid' : 'valid'
+                                            } containing value: "${event.target.value}"`,
+                                        });
+                                    }
+                                }}
+                                onFocus={event => {
+                                    if (analyticsCategory) {
+                                        GoogleAnalytics.event({
+                                            category: analyticsCategory,
+                                            action: `Enter field: ${this.props.label}`,
+                                            label: `User set focus on field: ${
+                                                this.props.label
+                                            } with state: ${
+                                                error ? 'invalid' : 'valid'
+                                            } containing value: "${event.target.value}"`,
+                                        });
+                                    }
+                                }}
                             />
                             <label htmlFor={item}>{item}</label>
                         </div>
@@ -84,6 +120,7 @@ RadioButton.propTypes = {
     onChange: PropTypes.func,
     error: PropTypes.bool,
     choices: PropTypes.array.isRequired,
+    analyticsCategory: PropTypes.string,
 };
 
 export default glamorous(RadioButton)(styles);

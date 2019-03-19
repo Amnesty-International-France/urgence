@@ -14,6 +14,8 @@ import { LinkType } from '../../propTypes';
 import Input from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';
 
+const analyticsCategory = 'MessageForm';
+
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '16px',
@@ -162,7 +164,7 @@ export class FormStep extends Component {
                     value={object}
                     onChange={this.setObject}
                     error={!object}
-                    formName="MessageForm"
+                    analyticsCategory={analyticsCategory}
                     label="Objet de l'e-mail *"
                 />
                 <p className="objectIndication">{objectIndication}</p>
@@ -171,6 +173,7 @@ export class FormStep extends Component {
                     name="civility"
                     onChange={this.setCivility}
                     error={!civility}
+                    analyticsCategory={analyticsCategory}
                     label="Civilité *"
                     autoComplete="civility"
                     choices={['M.', 'Mme.', 'Autre']}
@@ -180,7 +183,7 @@ export class FormStep extends Component {
                     value={surname}
                     onChange={this.setSurname}
                     error={!surname}
-                    formName="MessageForm"
+                    analyticsCategory={analyticsCategory}
                     autoComplete="firstname"
                     label="Votre prénom *"
                 />
@@ -189,7 +192,7 @@ export class FormStep extends Component {
                     value={name}
                     onChange={this.setName}
                     error={!name}
-                    formName="MessageForm"
+                    analyticsCategory={analyticsCategory}
                     autoComplete="name"
                     label="Votre nom *"
                 />
