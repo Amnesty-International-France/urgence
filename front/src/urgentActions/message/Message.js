@@ -147,10 +147,21 @@ LetterView.propTypes = {
 };
 
 export class FormStep extends Component {
-    setObject = event => this.props.setObject(event.target.value);
-    setCivility = event => this.props.setCivility(event.target.value);
-    setSurname = event => this.props.setSurname(event.target.value);
-    setName = event => this.props.setName(event.target.value);
+    setObject = event => {
+        this.props.setObject(event.target.value);
+    };
+    setCivility = event => {
+        this.props.setCivility(event.target.value);
+    };
+    setSurname = event => {
+        this.props.setSurname(event.target.value);
+    };
+    setName = event => {
+        this.props.setName(event.target.value);
+    };
+    setShowErrorState = field => {
+        if (!this.state[field]) this.setState({ [field]: true });
+    };
     render() {
         const { objectIndication, object, civility, surname, name } = this.props;
         return (
@@ -159,23 +170,32 @@ export class FormStep extends Component {
                     className="object"
                     value={object}
                     onChange={this.setObject}
-                    label="Objet de l'e-mail"
+                    error={!object}
+                    label="Objet de l'e-mail *"
                 />
                 <p className="objectIndication">{objectIndication}</p>
                 <RadioButton
                     value={civility}
                     name="civility"
                     onChange={this.setCivility}
-                    label="Civilité"
+                    error={!civility}
+                    label="Civilité *"
                     choices={['M.', 'Mme.', 'Autre']}
                 />
                 <Input
                     className="surname"
                     value={surname}
                     onChange={this.setSurname}
-                    label="Votre prénom"
+                    error={!surname}
+                    label="Votre prénom *"
                 />
-                <Input className="name" value={name} onChange={this.setName} label="Votre nom" />
+                <Input
+                    className="name"
+                    value={name}
+                    onChange={this.setName}
+                    error={!name}
+                    label="Votre nom *"
+                />
             </Fragment>
         );
     }
