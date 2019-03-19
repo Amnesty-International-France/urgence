@@ -1,17 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-    addField,
-    required,
-    minLength,
-    maxLength,
-    FormDataConsumer,
-    email,
-    TextInput,
-    ArrayInput,
-    Labeled,
-} from 'react-admin';
+import { addField, FormDataConsumer, email, TextInput, ArrayInput, Labeled } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -19,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import classNames from 'classnames';
 import isEmail from 'validator/lib/isEmail';
 
-import { root, preview } from './styles';
+import { root, preview, formScreenPreview } from './styles';
 import { get as getScreenIndex, MESSAGE } from './screenIndex';
 import ParagraphTemplateInput from './ParagraphTemplateInput';
 import FrontPreview from './FrontPreview';
@@ -36,10 +26,7 @@ const styles = theme => ({
     },
     preview: {
         ...preview,
-        '& > div': {
-            width: 'calc(100% - 40px)',
-            padding: '100px 20px 20px 20px',
-        },
+        ...formScreenPreview,
     },
 });
 
@@ -102,7 +89,7 @@ export const MessageInput = ({ classes, source, withLink }) => (
                                 messageTemplate={formData.message_template}
                                 objectIndication={formData.object_indication}
                                 link={formData.message_link}
-                                action={<Link to={'#'} label="J'envoie" />}
+                                action={<Link to="#" label="J'envoie" />}
                             />
                         </FrontPreview>
                     )}

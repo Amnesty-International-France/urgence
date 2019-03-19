@@ -43,3 +43,11 @@ export const transitionScreenPreview = {
         padding: '100px 20px 20px 20px',
     },
 };
+
+export const formScreenPreview = {
+    ...preview,
+    '& > div': {
+        width: 'calc(100% - 40px)',
+        padding: '100px 20px 20px 20px',
+    },
+};
