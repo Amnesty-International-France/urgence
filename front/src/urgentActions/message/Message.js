@@ -162,6 +162,7 @@ export class FormStep extends Component {
                     value={object}
                     onChange={this.setObject}
                     error={!object}
+                    formName="MessageForm"
                     label="Objet de l'e-mail *"
                 />
                 <p className="objectIndication">{objectIndication}</p>
@@ -179,6 +180,7 @@ export class FormStep extends Component {
                     value={surname}
                     onChange={this.setSurname}
                     error={!surname}
+                    formName="MessageForm"
                     autoComplete="firstname"
                     label="Votre prénom *"
                 />
@@ -187,6 +189,7 @@ export class FormStep extends Component {
                     value={name}
                     onChange={this.setName}
                     error={!name}
+                    formName="MessageForm"
                     autoComplete="name"
                     label="Votre nom *"
                 />
@@ -228,38 +231,37 @@ export const Message = ({
             <p className="error">Cette action urgente n&#39;existe plus.</p>
         )}
 
-        {messageTemplate &&
-            messageTemplate.length > 0 && (
-                <div className={classnames('message', className)}>
-                    <p>
-                        Pour agir plus vite,&nbsp;
-                        <strong className="importantText"> nous vous proposons ce message :</strong>
-                    </p>
-                    <LetterView messageTemplate={messageTemplate} />
-                    <p>
-                        Parce que les messages uniques ont plus d&#39;impact,&nbsp;
-                        <strong className="importantText">
-                            {' '}
-                            nous vous invitons à le personnaliser.
-                        </strong>
-                    </p>
-                    <FormStep
-                        objectIndication={objectIndication}
-                        object={object}
-                        civility={civility}
-                        surname={surname}
-                        name={name}
-                        setObject={setObject}
-                        setCivility={setCivility}
-                        setSurname={setSurname}
-                        setName={setName}
-                    />
-                    <div className="action">
-                        {action}
-                        {link && link.url && <Link {...link} />}
-                    </div>
+        {messageTemplate && messageTemplate.length > 0 && (
+            <div className={classnames('message', className)}>
+                <p>
+                    Pour agir plus vite,&nbsp;
+                    <strong className="importantText"> nous vous proposons ce message :</strong>
+                </p>
+                <LetterView messageTemplate={messageTemplate} />
+                <p>
+                    Parce que les messages uniques ont plus d&#39;impact,&nbsp;
+                    <strong className="importantText">
+                        {' '}
+                        nous vous invitons à le personnaliser.
+                    </strong>
+                </p>
+                <FormStep
+                    objectIndication={objectIndication}
+                    object={object}
+                    civility={civility}
+                    surname={surname}
+                    name={name}
+                    setObject={setObject}
+                    setCivility={setCivility}
+                    setSurname={setSurname}
+                    setName={setName}
+                />
+                <div className="action">
+                    {action}
+                    {link && link.url && <Link {...link} />}
                 </div>
-            )}
+            </div>
+        )}
     </Fragment>
 );
 
@@ -279,4 +281,9 @@ Message.propTypes = {
     action: PropTypes.node.isRequired,
 };
 
-export default glamorous(compose(withYellowLogo, withSessionData)(Message))(styles);
+export default glamorous(
+    compose(
+        withYellowLogo,
+        withSessionData,
+    )(Message),
+)(styles);

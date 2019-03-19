@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import TextField from '@material-ui/core/TextField';
 import classnames from 'classnames';
+import GoogleAnalytics from 'react-ga';
 
 const styles = {
     '& .textfield': {
@@ -42,7 +43,15 @@ export class Input extends Component {
     };
 
     render() {
-        const { className, value, onChange, error, noValidate, ...otherProps } = this.props;
+        const {
+            className,
+            value,
+            onChange,
+            error,
+            noValidate,
+            formName,
+            ...otherProps
+        } = this.props;
         const { showError, showValid } = this.state;
 
         if (!noValidate) this.showValidState(!error);
@@ -59,6 +68,12 @@ export class Input extends Component {
                         this.showErrorState();
                     }}
                     onBlur={() => this.showErrorState()}
+                    onFocus={() =>
+                        GoogleAnalytics.event({
+                            category: formName,
+                            action: `Entrer "${this.props.label}" field`,
+                        })
+                    }
                     value={value}
                     {...otherProps}
                 />
@@ -73,6 +88,8 @@ Input.propTypes = {
     error: PropTypes.bool,
     noValidate: PropTypes.bool,
     className: PropTypes.string,
+    formName: PropTypes.string,
+    label: PropTypes.string,
 };
 
 export default glamorous(Input)(styles);
