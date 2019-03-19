@@ -17,9 +17,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-import { root, preview } from './styles';
+import { root, preview, formScreenPreview } from './styles';
 import { get as getScreenIndex, ADDRESS } from './screenIndex';
-import FrontPreview, { noop } from './FrontPreview';
+import FrontPreview from './FrontPreview';
 
 import AddressStep from '../../../front/src/urgentActions/AddressStep';
 import Link from '../../../front/src/themes/Link';
@@ -31,16 +31,7 @@ const styles = theme => ({
     },
     preview: {
         ...preview,
-        // the rules below override desktop media queries so that the preview is forced to appear like on mobile
-        '& > div': {
-            boxSizing: 'border-box',
-            '& a': {
-                display: 'block',
-            },
-            '& textarea': {
-                boxSizing: 'border-box',
-            },
-        },
+        ...formScreenPreview,
     },
 });
 
@@ -72,9 +63,15 @@ export const LetterInput = ({ classes, source }) => (
                     </Card>
                     <FrontPreview className={classes.preview}>
                         <AddressStep
-                            action={disabled => formData.recipient && formData.recipient.button ? (
-                                <Link to="#" label={formData.recipient.button} disabled={disabled} />
-                            ) : null}
+                            action={disabled =>
+                                formData.recipient && formData.recipient.button ? (
+                                    <Link
+                                        to="#"
+                                        label={formData.recipient.button}
+                                        disabled={disabled}
+                                    />
+                                ) : null
+                            }
                         />
                     </FrontPreview>
                 </Fragment>
