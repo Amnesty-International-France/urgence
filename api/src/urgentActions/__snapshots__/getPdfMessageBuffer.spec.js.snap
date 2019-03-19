@@ -44,8 +44,8 @@ exports[`getPdfMessageBuffer should prefix address with name 1`] = `
         surname name
         <br />4, rue Girardet
         <br />sous-sol
-        <br />54000 Nancy
-        <br />France
+        <br />54000 NANCY
+        <br />FRANCE
     </p>
     <p class=\\"recipient\\">
 ${'        '}

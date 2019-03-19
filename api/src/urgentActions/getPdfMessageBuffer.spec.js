@@ -69,8 +69,8 @@ describe('getPdfMessageBuffer', () => {
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('4, rue Girardet');
         expect(renderedLetter).toContain('sous-sol');
-        expect(renderedLetter).toContain('54000 Nancy');
-        expect(renderedLetter).toContain('France');
+        expect(renderedLetter).toContain('54000 NANCY');
+        expect(renderedLetter).toContain('FRANCE');
     });
 
     it('should prefix address with name', async () => {

@@ -28,28 +28,19 @@ const styles = {
     '& .action': {
         display: 'flex',
         margin: '1em 0',
-        '@media (min-aspect-ratio: 1/1)': {
-            alignSelf: 'flex-end',
-        },
-        '& > a': {
-            marginBottom: 20,
-        },
     },
     '@media (max-width: 350px)': {
         fontSize: '0.8em',
     },
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
-        '& a': {
-            alignSelf: 'flex-end',
-        },
     },
     '& .importantText': {
         fontWeight: 'bold',
     },
     '& .letter': {
         border: 'solid 1px',
-        borderColor: 'rgb(0, 0, 0, 0.20)',
+        borderColor: 'rgba(0, 0, 0, 0.20)',
         boxShadow:
             '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
         color: black,
@@ -74,7 +65,7 @@ const styles = {
         left: 0,
         width: '100%',
         margin: 0,
-        backgroundImage: 'linear-gradient(to bottom, transparent, white)',
+        backgroundImage: 'linear-gradient(to bottom, rgba(255,255,255,0), white)',
         transition: 'all 1s',
     },
     '& .opacifyEnd': {
@@ -122,8 +113,8 @@ export class LetterView extends Component {
                             : 'showOnlyBeginContent',
                     )}
                 >
-                    {messageTemplate.map(({ value }) => (
-                        <MessageStep key={value} content={value} />
+                    {messageTemplate.map(({ value }, key) => (
+                        <MessageStep key={key} content={value} />
                     ))}
                     {letterOverflow && (
                         <span
@@ -147,10 +138,21 @@ LetterView.propTypes = {
 };
 
 export class FormStep extends Component {
-    setObject = event => this.props.setObject(event.target.value);
-    setCivility = event => this.props.setCivility(event.target.value);
-    setSurname = event => this.props.setSurname(event.target.value);
-    setName = event => this.props.setName(event.target.value);
+    setObject = event => {
+        this.props.setObject(event.target.value);
+    };
+    setCivility = event => {
+        this.props.setCivility(event.target.value);
+    };
+    setSurname = event => {
+        this.props.setSurname(event.target.value);
+    };
+    setName = event => {
+        this.props.setName(event.target.value);
+    };
+    setShowErrorState = field => {
+        if (!this.state[field]) this.setState({ [field]: true });
+    };
     render() {
         const { objectIndication, object, civility, surname, name } = this.props;
         return (
@@ -159,23 +161,35 @@ export class FormStep extends Component {
                     className="object"
                     value={object}
                     onChange={this.setObject}
-                    label="Objet de l'e-mail"
+                    error={!object}
+                    label="Objet de l'e-mail *"
                 />
                 <p className="objectIndication">{objectIndication}</p>
                 <RadioButton
                     value={civility}
                     name="civility"
                     onChange={this.setCivility}
-                    label="Civilité"
+                    error={!civility}
+                    label="Civilité *"
+                    autoComplete="civility"
                     choices={['M.', 'Mme.', 'Autre']}
                 />
                 <Input
                     className="surname"
                     value={surname}
                     onChange={this.setSurname}
-                    label="Votre prénom"
+                    error={!surname}
+                    autoComplete="firstname"
+                    label="Votre prénom *"
                 />
-                <Input className="name" value={name} onChange={this.setName} label="Votre nom" />
+                <Input
+                    className="name"
+                    value={name}
+                    onChange={this.setName}
+                    error={!name}
+                    autoComplete="name"
+                    label="Votre nom *"
+                />
             </Fragment>
         );
     }

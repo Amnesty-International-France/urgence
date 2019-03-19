@@ -11,6 +11,7 @@ const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '16px',
     display: 'flex',
+    minHeight: '100%',
     flexDirection: 'column',
     backgroundColor: 'white',
     padding: '100px 20px 20px 20px',
@@ -24,10 +25,13 @@ const styles = {
     },
     '& .action': {
         display: 'flex',
-        marginTop: '53px',
-        '& > a': {
-            marginBottom: 20,
-        },
+        margin: '1em 0',
+    },
+    '@media (max-width: 350px)': {
+        fontSize: '0.8em',
+    },
+    '@media (min-width: 1024px)': {
+        padding: '10vh 10vw',
     },
     '& p': {
         marginBottom: 20,
@@ -118,12 +122,16 @@ export class AddressStep extends Component {
                         className="addressMain"
                         value={addressMain}
                         onChange={this.setAddressMain}
+                        error={!addressMain}
+                        autoComplete="address-line1"
                         label="Adresse"
                     />
                     <Input
                         className="addressMore"
                         value={addressMore}
                         onChange={this.setAddressMore}
+                        noValidate
+                        autoComplete="address-line2"
                         label="Complément d'adresse"
                     />
                     <div className="cityZone">
@@ -131,12 +139,16 @@ export class AddressStep extends Component {
                             className={classnames('oneTiers', 'postalCode')}
                             value={postalCode}
                             onChange={this.setPostalCode}
+                            error={!postalCode}
+                            autoComplete="postal-code"
                             label="Code postal"
                         />
                         <Input
                             className={classnames('twoTiers', 'city')}
                             value={city}
                             onChange={this.setCity}
+                            error={!city}
+                            autoComplete="address-level2"
                             label="Ville"
                         />
                     </div>
@@ -144,6 +156,8 @@ export class AddressStep extends Component {
                         className={classnames('twoTiers', 'country')}
                         value={country}
                         onChange={this.setCountry}
+                        error={!country}
+                        autoComplete="country"
                         label="Pays"
                     />
                     <p className="lastParagraph">
@@ -157,6 +171,8 @@ export class AddressStep extends Component {
                         type="email"
                         value={email}
                         onChange={this.setEmail}
+                        error={!email}
+                        autoComplete="email"
                         label="E-mail"
                     />
                 </div>

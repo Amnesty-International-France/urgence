@@ -40,9 +40,9 @@
     <p class="address">
         {{ surname }} {{ name }}
         <br />{{emitterAddressMain|escape|nl2br}}
-        <br />{{emitterAddressMore|escape|nl2br}}
-        <br />{{emitterPostalCode|escape|nl2br}} {{emitterCity|escape|nl2br}}
-        <br />{{emitterCountry|escape|nl2br}}
+        {% if emitterAddressMore %}<br />{{emitterAddressMore|escape|nl2br}}{% endif %}
+        <br />{{emitterPostalCode|escape|nl2br}} {{emitterCity|escape|nl2br|upper}}
+        <br />{{emitterCountry|escape|nl2br|upper}}
     </p>
     <p class="recipient">
         {{ recipientAddress|escape|nl2br }}
