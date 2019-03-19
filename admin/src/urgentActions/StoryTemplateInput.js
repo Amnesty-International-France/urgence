@@ -14,7 +14,7 @@ import DisplayOptionsInput from './DisplayOptionsInput';
 import RichTextInput from '../form/RichTextInput';
 import { get as getScreenIndex, STORY } from './screenIndex';
 
-import StorySlide from '../../../front/src/urgentActions/StorySlide';
+import StorySlide from '../../../front/src/urgentActions/story/StorySlide';
 
 const styles = {
     ...root,
