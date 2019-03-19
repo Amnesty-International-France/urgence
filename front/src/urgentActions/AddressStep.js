@@ -125,6 +125,7 @@ export class AddressStep extends Component {
                         className="addressMore"
                         value={addressMore}
                         onChange={this.setAddressMore}
+                        noValidate
                         label="Complément d'adresse"
                     />
                     <div className="cityZone">

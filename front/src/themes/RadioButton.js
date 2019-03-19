@@ -30,6 +30,19 @@ const styles = {
         height: '25px',
         width: '25px',
     },
+    '& .checked:after': {
+        content: 'o',
+        width: 12,
+        height: 12,
+        borderRadius: 12,
+        top: 6,
+        left: 6,
+        color: 'transparent',
+        position: 'relative',
+        backgroundColor: 'green',
+        display: 'inline-block',
+        visibility: 'visible',
+    },
 };
 
 export class RadioButton extends Component {
@@ -60,7 +73,7 @@ export class RadioButton extends Component {
                                 value={item}
                                 checked={value === item}
                                 id={index}
-                                className="circle"
+                                className={classnames('circle', { ['checked']: value === item })}
                                 onChange={event => {
                                     this.showErrorState();
                                     if (onChange) onChange(event);

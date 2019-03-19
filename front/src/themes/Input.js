@@ -27,6 +27,10 @@ export class Input extends Component {
         showValid: false,
     };
 
+    componentDidMount() {
+        if (!this.props.noValidate) this.showValidState(!this.props.error);
+    }
+
     showErrorState = () => {
         if (!this.state.showError) this.setState({ showError: true });
     };
@@ -36,10 +40,10 @@ export class Input extends Component {
     };
 
     render() {
-        const { className, value, onChange, error, ...otherProps } = this.props;
+        const { className, value, onChange, error, noValidate, ...otherProps } = this.props;
         const { showError, showValid } = this.state;
 
-        this.showValidState(!error);
+        if (!noValidate) this.showValidState(!error);
 
         return (
             <div className={className}>
@@ -65,6 +69,7 @@ Input.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     error: PropTypes.bool,
+    noValidate: PropTypes.bool,
     className: PropTypes.string,
 };
 
