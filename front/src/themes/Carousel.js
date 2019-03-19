@@ -99,6 +99,11 @@ export class Carousel extends Component {
     }
 }
 
+IconButton.propTypes = {
+    ...IconButton.propTypes,
+    className: PropTypes.string,
+};
+
 Carousel.propTypes = {
     initialSlide: PropTypes.number,
     current: PropTypes.number,
