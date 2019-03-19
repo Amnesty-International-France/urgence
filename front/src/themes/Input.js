@@ -16,6 +16,7 @@ export const Input = ({ className, ...otherProps }) => (
 );
 
 Input.propTypes = {
+    value: PropTypes.string.isRequired,
     className: PropTypes.string,
 };
 

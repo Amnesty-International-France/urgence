@@ -8,12 +8,22 @@ const { Provider, Consumer } = createContext({
     civility: null,
     surname: null,
     name: null,
+    addressMain: null,
+    addressMore: null,
+    postalCode: null,
+    city: null,
+    country: null,
+    email: null,
     setObject: () => null,
     setCivility: () => null,
     setSurname: () => null,
     setName: () => null,
-    setAddress: () => null,
-    setMail: () => null,
+    setAddressMain: () => null,
+    setAddressMore: () => null,
+    setPostalCode: () => null,
+    setCity: () => null,
+    setCountry: () => null,
+    setEmail: () => null,
 });
 
 export const SessionDataConsumer = Consumer;
@@ -24,7 +34,11 @@ export class SessionDataProvider extends Component {
         civility: sessionData.getCivility(),
         surname: sessionData.getSurname(),
         name: sessionData.getName(),
-        address: sessionData.getAddress(),
+        addressMain: sessionData.getAddressMain(),
+        addressMore: sessionData.getAddressMore(),
+        postalCode: sessionData.getPostalCode(),
+        city: sessionData.getCity(),
+        country: sessionData.getCountry(),
         email: sessionData.getEmail(),
     };
 
@@ -48,9 +62,29 @@ export class SessionDataProvider extends Component {
         sessionData.setName(name);
     };
 
-    setAddress = address => {
-        this.setState({ address });
-        sessionData.setAddress(address);
+    setAddressMain = addressMain => {
+        this.setState({ addressMain });
+        sessionData.setAddressMain(addressMain);
+    };
+
+    setAddressMore = addressMore => {
+        this.setState({ addressMore });
+        sessionData.setAddressMore(addressMore);
+    };
+
+    setPostalCode = postalCode => {
+        this.setState({ postalCode });
+        sessionData.setPostalCode(postalCode);
+    };
+
+    setCity = city => {
+        this.setState({ city });
+        sessionData.setCity(city);
+    };
+
+    setCountry = country => {
+        this.setState({ country });
+        sessionData.setCountry(country);
     };
 
     setEmail = email => {
@@ -67,7 +101,11 @@ export class SessionDataProvider extends Component {
                     setCivility: this.setCivility,
                     setSurname: this.setSurname,
                     setName: this.setName,
-                    setAddress: this.setAddress,
+                    setAddressMain: this.setAddressMain,
+                    setAddressMore: this.setAddressMore,
+                    setPostalCode: this.setPostalCode,
+                    setCity: this.setCity,
+                    setCountry: this.setCountry,
                     setEmail: this.setEmail,
                 }}
             >

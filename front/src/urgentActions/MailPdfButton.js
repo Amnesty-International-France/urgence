@@ -15,7 +15,11 @@ export class MailPdfButton extends Component {
             civility,
             surname,
             name,
-            address,
+            addressMain,
+            addressMore,
+            postalCode,
+            city,
+            country,
             email,
             match: {
                 params: { id },
@@ -29,7 +33,11 @@ export class MailPdfButton extends Component {
                 civility,
                 surname,
                 name,
-                address,
+                addressMain,
+                addressMore,
+                postalCode,
+                city,
+                country,
                 email,
             }),
             headers: {
@@ -38,13 +46,13 @@ export class MailPdfButton extends Component {
         });
     };
     render() {
-        const { disabled } = this.props;
+        const { disabled, buttonText } = this.props;
 
         return (
             <ToUrgentActionPageLink
                 onClick={this.sendMail}
                 pageName="thanks-letter"
-                label="Envoyer"
+                label={buttonText}
                 disabled={disabled}
             />
         );
@@ -56,10 +64,15 @@ MailPdfButton.propTypes = {
     civility: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
+    addressMain: PropTypes.string.isRequired,
+    addressMore: PropTypes.string,
+    postalCode: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     match: routeMatch,
     disabled: PropTypes.bool,
+    buttonText: PropTypes.string.isRequired,
 };
 
 export default compose(withSessionData, withRouter)(MailPdfButton);

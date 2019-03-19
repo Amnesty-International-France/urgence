@@ -29,22 +29,6 @@ describe('generateUrl', () => {
         expect(generateUrl('message', { id: 'id_value' })).toBe('/ua/id_value/message');
     });
 
-    it('should generate url for ua/id/object', () => {
-        expect(generateUrl('object', { id: 'id_value' })).toBe('/ua/id_value/object');
-    });
-
-    it('should generate url for ua/id/civility', () => {
-        expect(generateUrl('civility', { id: 'id_value' })).toBe('/ua/id_value/civility');
-    });
-
-    it('should generate url for ua/id/surname', () => {
-        expect(generateUrl('surname', { id: 'id_value' })).toBe('/ua/id_value/surname');
-    });
-
-    it('should generate url for ua/id/name', () => {
-        expect(generateUrl('name', { id: 'id_value' })).toBe('/ua/id_value/name');
-    });
-
     it('should generate url for ua/id/thanks', () => {
         expect(generateUrl('thanks', { id: 'id_value' })).toBe('/ua/id_value/thanks');
     });

@@ -18,6 +18,7 @@ const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '16px',
     display: 'flex',
+    minHeight: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
     width: '100%',
@@ -49,6 +50,8 @@ const styles = {
     '& .letter': {
         border: 'solid 1px',
         borderColor: 'rgb(0, 0, 0, 0.20)',
+        boxShadow:
+            '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
         color: black,
         padding: '1em 0 0 0',
         margin: '1em 0',

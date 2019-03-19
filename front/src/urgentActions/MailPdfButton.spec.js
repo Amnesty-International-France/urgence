@@ -10,9 +10,14 @@ describe('MailPdfButton', () => {
         civility: 'civility',
         surname: 'surname',
         name: 'name',
-        address: 'address',
+        addressMain: 'addressMain',
+        addressMore: 'addressMore',
+        postalCode: 'postalCode',
+        city: 'city',
+        country: 'country',
         email: 'email',
         match: { params: { id: 'id' } },
+        buttonText: "J'envoie",
     };
 
     it('should render ToUrgentActionPageLink', () => {
@@ -20,7 +25,7 @@ describe('MailPdfButton', () => {
         const link = wrapper.find(ToUrgentActionPageLink);
 
         expect(link.prop('pageName')).toBe('thanks-letter');
-        expect(link.prop('label')).toBe('Envoyer');
+        expect(link.prop('label')).toBe("J'envoie");
         expect(link.prop('onClick')).toBe(wrapper.instance().sendMail);
     });
 
@@ -30,7 +35,7 @@ describe('MailPdfButton', () => {
         sendMail();
         expect(global.fetch).toHaveBeenCalledWith('http://localhost:4000/urgent-actions/id/send', {
             body:
-                '{"subject":"object","civility":"civility","surname":"surname","name":"name","address":"address","email":"email"}',
+                '{"subject":"object","civility":"civility","surname":"surname","name":"name","addressMain":"addressMain","addressMore":"addressMore","postalCode":"postalCode","city":"city","country":"country","email":"email"}',
             headers: {
                 'content-type': 'application/json',
             },

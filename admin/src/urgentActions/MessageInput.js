@@ -1,7 +1,17 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, email, TextInput, ArrayInput, Labeled } from 'react-admin';
+import {
+    addField,
+    required,
+    minLength,
+    maxLength,
+    FormDataConsumer,
+    email,
+    TextInput,
+    ArrayInput,
+    Labeled,
+} from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -92,7 +102,7 @@ export const MessageInput = ({ classes, source, withLink }) => (
                                 messageTemplate={formData.message_template}
                                 objectIndication={formData.object_indication}
                                 link={formData.message_link}
-                                action={<Link to={'#'} label="Ok, j'envoie le message" />}
+                                action={<Link to={'#'} label="J'envoie" />}
                             />
                         </FrontPreview>
                     )}

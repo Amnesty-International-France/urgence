@@ -1,7 +1,16 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, required, FormDataConsumer, Labeled, LongTextInput } from 'react-admin';
+import {
+    addField,
+    required,
+    minLength,
+    maxLength,
+    FormDataConsumer,
+    Labeled,
+    LongTextInput,
+    TextInput,
+} from 'react-admin';
 import Avatar from '@material-ui/core/Avatar';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -24,7 +33,6 @@ const styles = theme => ({
         ...preview,
         // the rules below override desktop media queries so that the preview is forced to appear like on mobile
         '& > div': {
-            height: preview.height,
             boxSizing: 'border-box',
             '& a': {
                 display: 'block',
@@ -36,7 +44,7 @@ const styles = theme => ({
     },
 });
 
-export const AddressInput = ({ classes, source }) => (
+export const LetterInput = ({ classes, source }) => (
     <div className={classNames(classes.root, classes.bordered)}>
         <FormDataConsumer>
             {({ formData }) => (
@@ -48,18 +56,25 @@ export const AddressInput = ({ classes, source }) => (
                                 <Labeled label="Generate Letter">
                                     <LongTextInput
                                         label="Recipient Postal Address"
-                                        source={source}
+                                        rows="6"
+                                        source={`${source}.postal_address`}
                                         validate={[required()]}
                                     />
                                 </Labeled>
+                                <TextInput
+                                    source={`${source}.button`}
+                                    label="Button"
+                                    defaultValue="Recevoir ma lettre"
+                                    validate={[required(), minLength(3), maxLength(25)]}
+                                />
                             </div>
                         </CardContent>
                     </Card>
                     <FrontPreview className={classes.preview}>
                         <AddressStep
-                            setAddress={noop}
-                            address=""
-                            action={disabled => <Link to="#" label="Valider" disabled={disabled} />}
+                            action={disabled => formData.recipient && formData.recipient.button ? (
+                                <Link to="#" label={formData.recipient.button} disabled={disabled} />
+                            ) : null}
                         />
                     </FrontPreview>
                 </Fragment>
@@ -68,8 +83,8 @@ export const AddressInput = ({ classes, source }) => (
     </div>
 );
 
-AddressInput.propTypes = {
+LetterInput.propTypes = {
     classes: PropTypes.object,
 };
 
-export default addField(withStyles(styles)(AddressInput));
+export default addField(withStyles(styles)(LetterInput));

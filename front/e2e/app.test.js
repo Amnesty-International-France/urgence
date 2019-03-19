@@ -7,7 +7,6 @@ import actPageFactory from './pages/act';
 import messagePageFactory from './pages/message';
 import thanksPageFactory from './pages/thanks';
 import addressPageFactory from './pages/address';
-import emailPageFactory from './pages/email';
 import thanksLetterPageFactory from './pages/thanksLetter';
 
 const storyPage = storyPageFactory(driver);
@@ -15,7 +14,6 @@ const actPage = actPageFactory(driver);
 const messagePage = messagePageFactory(driver);
 const thanksPage = thanksPageFactory(driver);
 const addressPage = addressPageFactory(driver);
-const emailPage = emailPageFactory(driver);
 const thanksLetterPage = thanksLetterPageFactory(driver);
 
 describe('app', () => {
@@ -116,23 +114,19 @@ describe('app', () => {
     it('should display address step', async () => {
         await addressPage.navigate(urgentAction.id);
         expect(await addressPage.isActionDisabled()).toBe(true);
-        await addressPage.typeAddress(
-            'M. Dupond\n4, rue du coin qui tourne en rond\n00 000 Perpéte La Galette',
-        );
+        await addressPage.typeAddressMain('4, rue du coin qui tourne en rond');
+        expect(await addressPage.isActionDisabled()).toBe(true);
+        await addressPage.typePostalCode('00 000');
+        expect(await addressPage.isActionDisabled()).toBe(true);
+        await addressPage.typeCity('Perpéte La Galette');
+        expect(await addressPage.isActionDisabled()).toBe(true);
+        await addressPage.typeCountry('France');
+        expect(await addressPage.isActionDisabled()).toBe(true);
+        await addressPage.typeEmail('dupond@perpéte.com');
         expect(await addressPage.isActionDisabled()).toBe(false);
 
         await addressPage.validate();
-        await emailPage.isLoaded();
-    });
-
-    it('should display email step', async () => {
-        await emailPage.navigate(urgentAction.id);
-
-        expect(await emailPage.isActionDisabled()).toBe(true);
-        await emailPage.typeEmail('dupond@perpéte.com');
-        expect(await emailPage.isActionDisabled()).toBe(false);
-
-        await emailPage.validate();
+        await thanksLetterPage.isLoaded();
     });
 
     it('should display thanks-letter step', async () => {

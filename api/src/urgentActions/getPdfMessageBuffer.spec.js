@@ -65,24 +65,19 @@ describe('getPdfMessageBuffer', () => {
             },
         };
 
-        const emitterAddress = `
-            marmelab
-            4, rue Girardet
-            54000 Nancy
-        `;
-
-        await getPdfMessageBuffer(urgentAction, 'subject', 'civility', 'surname', 'name', emitterAddress);
+        await getPdfMessageBuffer(urgentAction, 'subject', 'civility', 'surname', 'name', '4, rue Girardet', 'sous-sol', '54000', 'Nancy', 'France');
         const renderedLetter = pdfSpy.mock.calls[0][0];
-        expect(renderedLetter).toContain('marmelab');
         expect(renderedLetter).toContain('4, rue Girardet');
+        expect(renderedLetter).toContain('sous-sol');
         expect(renderedLetter).toContain('54000 Nancy');
+        expect(renderedLetter).toContain('France');
     });
 
     it('should prefix address with name', async () => {
         const pdfSpy = jest.spyOn(pdf, 'create');
 
         const urgentAction = { ...defaultUrgentAction };
-        await getPdfMessageBuffer(urgentAction, 'subject', 'civility', 'surname', 'name', 'address');
+        await getPdfMessageBuffer(urgentAction, 'subject', 'civility', 'surname', 'name', '4, rue Girardet', 'sous-sol', '54000', 'Nancy', 'France');
 
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toMatchSnapshot();

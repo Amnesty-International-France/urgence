@@ -7,7 +7,6 @@ import Act from './Act';
 import Thanks from './Thanks';
 import Story from './Story';
 import AddressStep from './AddressStep';
-import EmailStep from './EmailStep';
 
 jest.mock('../sessionData.js');
 
@@ -209,37 +208,25 @@ describe('<UrgentAction />', () => {
             expect(wrapper.find(AddressStep).length).toBe(1);
         });
 
-        it('should add a link to address step as action', () => {
+        it('should add a link to thanks-letter step as action', () => {
             const props = {
                 ...defaultProps,
                 step: 'address',
                 id: '123456',
+                data: {
+                    UrgentAction: {
+                        recipient: {
+                            button: 'Fin',
+                        },
+                    },
+                },
             };
 
             const wrapper = shallow(<UrgentAction {...props} />);
             const address = wrapper.find(AddressStep);
             const action = address.prop('action')();
 
-            expect(action.props.pageName).toBe('email');
-            expect(action.props.label).toBe('Valider');
-        });
-    });
-
-    describe('Email Step', () => {
-        it('should display EmailStep if step is email', () => {
-            const props = {
-                loading: false,
-                step: 'email',
-                data: {
-                    UrgentAction: {
-                        email_thank: {
-                            title: '',
-                        },
-                    },
-                },
-            };
-            const wrapper = shallow(<UrgentAction {...props} />);
-            expect(wrapper.find(EmailStep).length).toBe(1);
+            expect(action.props.buttonText).toBe('Fin');
         });
     });
 
