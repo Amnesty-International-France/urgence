@@ -122,8 +122,8 @@ export class LetterView extends Component {
                             : 'showOnlyBeginContent',
                     )}
                 >
-                    {messageTemplate.map(({ value }) => (
-                        <MessageStep key={value} content={value} />
+                    {messageTemplate.map(({ value }, key) => (
+                        <MessageStep key={key} content={value} />
                     ))}
                     {letterOverflow && (
                         <span

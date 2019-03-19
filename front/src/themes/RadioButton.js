@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import classnames from 'classnames';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic',
@@ -15,6 +16,9 @@ const styles = {
     '& .label': {
         width: '20%',
     },
+    '& .warning': {
+        color: 'red',
+    },
     '& .item': {
         display: 'flex',
         flexDirection: 'row',
@@ -28,27 +32,49 @@ const styles = {
     },
 };
 
-export const RadioButton = ({ className, choices, label, name, value, onChange }) => (
-    <div className={className}>
-        {label && <p className="label">{label}</p>}
-        {choices.map((item, index) => {
-            return (
-                <div className="item" key={index}>
-                    <input
-                        type="radio"
-                        name={name}
-                        value={item}
-                        checked={value === item}
-                        id={index}
-                        className="circle"
-                        onChange={onChange}
-                    />
-                    <label htmlFor={item}>{item}</label>
-                </div>
-            );
-        })}
-    </div>
-);
+export class RadioButton extends Component {
+    state = {
+        showError: false,
+    };
+
+    setShowErrorState = () => {
+        if (!this.state.showError) this.setState({ showError: true });
+    };
+
+    render() {
+        const { className, choices, label, name, value, onChange, error } = this.props;
+        const { showError } = this.state;
+        return (
+            <div className={className}>
+                {label && (
+                    <p className={classnames('label', { ['warning']: showError && error })}>
+                        {label}
+                    </p>
+                )}
+                {choices.map((item, index) => {
+                    return (
+                        <div className="item" key={index}>
+                            <input
+                                type="radio"
+                                name={name}
+                                value={item}
+                                checked={value === item}
+                                id={index}
+                                className="circle"
+                                onChange={event => {
+                                    this.setShowErrorState();
+                                    if (onChange) onChange(event);
+                                }}
+                                onBlur={() => this.setShowErrorState()}
+                            />
+                            <label htmlFor={item}>{item}</label>
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
+}
 
 RadioButton.propTypes = {
     className: PropTypes.string,
@@ -56,6 +82,7 @@ RadioButton.propTypes = {
     value: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
+    error: PropTypes.bool,
     choices: PropTypes.array.isRequired,
 };
 

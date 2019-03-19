@@ -118,6 +118,7 @@ export class AddressStep extends Component {
                         className="addressMain"
                         value={addressMain}
                         onChange={this.setAddressMain}
+                        error={!addressMain}
                         label="Adresse"
                     />
                     <Input
@@ -131,12 +132,14 @@ export class AddressStep extends Component {
                             className={classnames('oneTiers', 'postalCode')}
                             value={postalCode}
                             onChange={this.setPostalCode}
+                            error={!postalCode}
                             label="Code postal"
                         />
                         <Input
                             className={classnames('twoTiers', 'city')}
                             value={city}
                             onChange={this.setCity}
+                            error={!city}
                             label="Ville"
                         />
                     </div>
@@ -144,6 +147,7 @@ export class AddressStep extends Component {
                         className={classnames('twoTiers', 'country')}
                         value={country}
                         onChange={this.setCountry}
+                        error={!country}
                         label="Pays"
                     />
                     <p className="lastParagraph">
@@ -157,6 +161,7 @@ export class AddressStep extends Component {
                         type="email"
                         value={email}
                         onChange={this.setEmail}
+                        error={!email}
                         label="E-mail"
                     />
                 </div>
