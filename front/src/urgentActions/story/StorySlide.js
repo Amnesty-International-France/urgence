@@ -30,10 +30,19 @@ const styles = {
     },
 };
 
-export const StorySlide = ({ children, className, step, style }) => {
+export const StorySlide = ({ children, className, index, step }) => {
     return (
         <div
-            style={style}
+            style={{
+                ...(index === 0 &&
+                    step.medium &&
+                    step.medium.src && {
+                        backgroundImage: `url(${step.medium.src})`,
+                        backgroundPosition: 'top',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                    }),
+            }}
             className={classnames(className, {
                 'swiper-slide': true,
                 'with-bottom-media': get(step, 'displayOptions.mediumPosition') === 'bottom',
@@ -50,7 +59,6 @@ StorySlide.propTypes = {
     step: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
-    link: LinkType,
 };
 
 export default glamorous(StorySlide)(styles);

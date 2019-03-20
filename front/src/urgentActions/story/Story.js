@@ -103,29 +103,15 @@ export class Story extends Component {
                     >
                         {() => (
                             <Fragment>
-                                <StorySlide
-                                    step={cover}
-                                    total={total}
-                                    index={0}
-                                    style={{
-                                        ...(current === 0 &&
-                                            cover.medium &&
-                                            cover.medium.src && {
-                                                backgroundImage: `url(${cover.medium.src})`,
-                                                backgroundPosition: 'top',
-                                                backgroundRepeat: 'no-repeat',
-                                                backgroundSize: 'cover',
-                                            }),
-                                    }}
-                                >
+                                <StorySlide index={0} step={cover} total={total}>
                                     {storyCoverProps => <StoryCover {...storyCoverProps} />}
                                 </StorySlide>
                                 {restStory.map((step, index) => (
                                     <StorySlide
                                         key={step.content}
+                                        index={index}
                                         step={step}
                                         total={total}
-                                        index={index + 1}
                                     >
                                         {storyStepProps => (
                                             <StoryStep

@@ -34,17 +34,6 @@ const styles = {
         margin: '0 12px',
         width: 'calc(100% - 24px)',
     },
-    '& .ql-size-huge': {
-        color: black,
-        backgroundColor: white,
-        fontSize: '36px',
-        padding: '6px 0',
-        boxShadow: `12px 0 0 ${white}, -12px 0 0 ${white}`,
-        '@media (min-width: 1024px)': {
-            fontSize: '72px',
-            padding: '12px 0',
-        },
-    },
     '& .ql-size-large': {
         color: white,
         backgroundColor: black,
@@ -54,6 +43,17 @@ const styles = {
         '@media (min-width: 1024px)': {
             fontSize: '52px',
             padding: '8px 0',
+        },
+    },
+    '& .ql-size-huge': {
+        color: black,
+        backgroundColor: white,
+        fontSize: '36px',
+        padding: '6px 0',
+        boxShadow: `12px 0 0 ${white}, -12px 0 0 ${white}`,
+        '@media (min-width: 1024px)': {
+            fontSize: '72px',
+            padding: '12px 0',
         },
     },
 };
