@@ -10,6 +10,7 @@ import { getLetterMailBody } from './letterMailBody';
 export const urgentActionsRouter = new Router();
 
 urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
+    console.log('enter urgentActionsRouter');
     const { id } = req.params;
     if (!isUUID(id)) {
         return res.status(400).send(`Invalid UUID format: ${id}`);
@@ -19,11 +20,13 @@ urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
 
     const urgentAction = await getUrgentAction(id);
     if (!urgentAction) {
+        console.log('error urgentActionsRouter');
         return res.status(404).send('Not Found');
     }
 
     const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, civility, surname, name, addressMain, addressMore, postalCode, city, country);
     res.write(pdfBuffer, 'binary');
+    console.log('end urgentActionsRouter');
     return res.end();
 });
 
