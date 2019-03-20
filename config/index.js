@@ -54,8 +54,8 @@ const config = convict({
             },
             jwtSecret: {
                 doc: 'Secret key used to generate the JSON Web tokens',
-                format: 'String',
-                default: 0,
+                format: String,
+                default: '0',
                 env: 'JWT_SECRET_KEY',
             },
             sessionDuration: {
