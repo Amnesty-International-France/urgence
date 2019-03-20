@@ -14,15 +14,16 @@ const IconButtonContainer = glamorous.div({
     borderRadius: '20px',
     width: '40px',
     height: '40px',
+    paddingTop: '4px',
     WebkitTapHighlightColor: 'transparent',
     ':active': {
         backgroundColor: 'rgb(255, 255, 0, 0.6)',
     },
     '@media (min-width: 1024px)': {
         fontSize: '38px',
-        borderRadius: '30px',
-        width: '60px',
-        height: '60px',
+        borderRadius: '25px',
+        width: '50px',
+        height: '50px',
         '&:hover': {
             backgroundColor: 'rgb(255, 255, 0, 0.6)',
         },
