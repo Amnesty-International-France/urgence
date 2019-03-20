@@ -7,8 +7,6 @@ import glamorous from 'glamorous';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import StoryStep from './StoryStep';
-
 import { LinkType } from '../../propTypes';
 
 const styles = {
@@ -32,23 +30,21 @@ const styles = {
     },
 };
 
-export const StorySlide = ({ className, step, link }) => {
+export const StorySlide = ({ children, className, step }) => {
     return (
         <div
-            key={step.content}
             className={classnames(className, {
                 'swiper-slide': true,
                 'with-bottom-media': get(step, 'displayOptions.mediumPosition') === 'bottom',
             })}
         >
-            <div className="story-step">
-                <StoryStep link={link} {...step} />
-            </div>
+            <div className="story-step">{children({ ...step })}</div>
         </div>
     );
 };
 
 StorySlide.propTypes = {
+    children: PropTypes.func.isRequired,
     className: PropTypes.string,
     step: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
