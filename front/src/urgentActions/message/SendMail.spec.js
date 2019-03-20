@@ -1,8 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import { renderSendMail, SendMail } from './SendMail';
-import MailTo from '../../themes/MailTo';
 
 describe('renderSendMail', () => {
     const defaultProps = {
@@ -18,7 +17,7 @@ describe('renderSendMail', () => {
     };
 
     it('should render MailTo with body computed from messageTemplate and name', () => {
-        const wrapper = shallow(renderSendMail(defaultProps)(defaultContext));
+        const wrapper = mount(renderSendMail(defaultProps)(defaultContext));
 
         expect(wrapper.find('MailTo').prop('body')).toBe('hello\n\nworld\n\nsurname name');
     });
@@ -31,7 +30,7 @@ describe('renderSendMail', () => {
     });
 
     it('should render MailTo with object props', () => {
-        const wrapper = shallow(renderSendMail(defaultProps)(defaultContext));
+        const wrapper = mount(renderSendMail(defaultProps)(defaultContext));
 
         expect(wrapper.find('MailTo').prop('subject')).toBe('object');
     });
