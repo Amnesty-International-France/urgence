@@ -35,4 +35,20 @@ const withTracker = (WrappedComponent, options = {}) => {
     return HOC;
 };
 
+export const trackEvent = (analyticsCategory, eventName, objectType, objectName, options = {}) => {
+    if (analyticsCategory) {
+        GoogleAnalytics.event({
+            category: analyticsCategory,
+            action: `${eventName} on ${
+                options.disabled ? options.disabled : ''
+            } ${objectType}: ${objectName}`,
+            label: `${eventName} on ${
+                options.disabled ? options.disabled : ''
+            } ${objectType}: ${objectName} (label: ${options.label ? options.label : '-'}, state: ${
+                options.state ? options.state : '-'
+            }, value: ${options.value ? options.value : '-'})`,
+        });
+    }
+};
+
 export default withTracker;

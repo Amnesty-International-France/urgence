@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
-import GoogleAnalytics from 'react-ga';
+import { trackEvent } from '../analytics/withTracker';
 
 import { styles } from './Link';
 
@@ -20,16 +20,10 @@ export const MailTo = ({
         className={classnames(className, { disabled })}
         onClick={event => {
             afterMail(event);
-
-            if (analyticsCategory) {
-                GoogleAnalytics.event({
-                    category: analyticsCategory,
-                    action: `Click on ${disabled ? 'disabled' : 'active'} button: MailTo`,
-                    label: `User clicked on ${
-                        disabled ? 'disabled' : 'active'
-                    } button: MailTo (label: ${label})`,
-                });
-            }
+            trackEvent(analyticsCategory, 'Click', 'button', 'MailTo', {
+                disabled: disabled ? 'disabled' : 'active',
+                label,
+            });
         }}
         href={`mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
             subject,

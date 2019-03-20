@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import TextField from '@material-ui/core/TextField';
 import classnames from 'classnames';
-import GoogleAnalytics from 'react-ga';
+import { trackEvent } from '../analytics/withTracker';
 
 const styles = {
     '& .textfield': {
@@ -69,28 +69,16 @@ export class Input extends Component {
                     }}
                     onBlur={event => {
                         this.showErrorState();
-                        if (analyticsCategory) {
-                            GoogleAnalytics.event({
-                                category: analyticsCategory,
-                                action: `Exit field: ${this.props.label}`,
-                                label: `User remove focus on field: ${
-                                    this.props.label
-                                } with state: ${
-                                    showValid ? 'valid' : error ? 'invalid' : 'null'
-                                }, containing value: "${event.target.value}"`,
-                            });
-                        }
+                        trackEvent(analyticsCategory, 'Exit', 'field', this.props.label, {
+                            state: showValid ? 'valid' : error ? 'invalid' : 'null',
+                            value: event.target.value,
+                        });
                     }}
                     onFocus={event => {
-                        if (analyticsCategory) {
-                            GoogleAnalytics.event({
-                                category: analyticsCategory,
-                                action: `Enter field: ${this.props.label}`,
-                                label: `User set focus on field: ${this.props.label} with state: ${
-                                    showValid ? 'valid' : error ? 'invalid' : 'null'
-                                }, containing value: "${event.target.value}"`,
-                            });
-                        }
+                        trackEvent(analyticsCategory, 'Enter', 'field', this.props.label, {
+                            state: showValid ? 'valid' : error ? 'invalid' : 'null',
+                            value: event.target.value,
+                        });
                     }}
                     value={value}
                     {...otherProps}

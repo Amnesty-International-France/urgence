@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
-import GoogleAnalytics from 'react-ga';
+import { trackEvent } from '../analytics/withTracker';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic',
@@ -77,30 +77,28 @@ export class RadioButton extends Component {
                                 }}
                                 onBlur={event => {
                                     this.showErrorState();
-                                    if (analyticsCategory) {
-                                        GoogleAnalytics.event({
-                                            category: analyticsCategory,
-                                            action: `Exit field: ${this.props.label}`,
-                                            label: `User remove focus on field: ${
-                                                this.props.label
-                                            } with state: ${
-                                                error ? 'invalid' : 'valid'
-                                            } containing value: "${event.target.value}"`,
-                                        });
-                                    }
+                                    trackEvent(
+                                        analyticsCategory,
+                                        'Exit',
+                                        'field',
+                                        this.props.label,
+                                        {
+                                            state: error ? 'invalid' : 'valid',
+                                            value: event.target.value,
+                                        },
+                                    );
                                 }}
                                 onFocus={event => {
-                                    if (analyticsCategory) {
-                                        GoogleAnalytics.event({
-                                            category: analyticsCategory,
-                                            action: `Enter field: ${this.props.label}`,
-                                            label: `User set focus on field: ${
-                                                this.props.label
-                                            } with state: ${
-                                                error ? 'invalid' : 'valid'
-                                            }, containing value: "${event.target.value}"`,
-                                        });
-                                    }
+                                    trackEvent(
+                                        analyticsCategory,
+                                        'Enter',
+                                        'field',
+                                        this.props.label,
+                                        {
+                                            state: error ? 'invalid' : 'valid',
+                                            value: event.target.value,
+                                        },
+                                    );
                                 }}
                             />
                             <label htmlFor={item}>{item}</label>

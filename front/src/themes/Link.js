@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
-import GoogleAnalytics from 'react-ga';
+import { trackEvent } from '../analytics/withTracker';
 
 import { black, yellow } from './colors';
 
@@ -36,15 +36,10 @@ export const Link = ({ to, label, disabled, className, onClick, analyticsCategor
         className={classnames(className, { disabled: disabled })}
         onClick={event => {
             if (onClick) onClick(event);
-            if (analyticsCategory) {
-                GoogleAnalytics.event({
-                    category: analyticsCategory,
-                    action: `Click on ${disabled ? 'disabled' : 'active'} button to: ${to}`,
-                    label: `User clicked on ${
-                        disabled ? 'disabled' : 'active'
-                    } button to: ${to} (label: ${label})`,
-                });
-            }
+            trackEvent(analyticsCategory, 'Click', 'button', `to ${to}`, {
+                disabled: disabled ? 'disabled' : 'active',
+                label,
+            });
         }}
     >
         {label}
