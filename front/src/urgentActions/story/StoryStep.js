@@ -10,9 +10,14 @@ import { textColorForBackgroundColor, colors, black, white, yellow } from '../..
 import Link from '../Link';
 
 const styles = {
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'center',
+    height: '100%',
+    width: '100%',
+    padding: '100px 20px 20px 20px',
+    color: black,
+    backgroundColor: white,
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
     },
@@ -33,7 +38,6 @@ const styles = {
     '& .content': {
         display: 'flex',
         flex: '1 0 0',
-        padding: '21px 38px 21px 24px',
         overflow: 'auto',
     },
     '& .act': {

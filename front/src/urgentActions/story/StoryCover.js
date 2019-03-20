@@ -9,6 +9,7 @@ const styles = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    padding: '100px 20px',
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
     },
@@ -24,12 +25,13 @@ const styles = {
         flex: '1 0 0',
         display: 'flex',
         alignItems: 'flex-end',
-        padding: '21px 38px 21px 24px',
         overflow: 'auto',
     },
     '& .rich-text > p': {
         textTransform: 'uppercase',
         fontFamily: 'Amnesty Trade Gothic Condensed',
+        margin: '0 12px',
+        width: 'calc(100% - 24px)',
     },
     '& .ql-size-huge': {
         color: black,
@@ -50,7 +52,7 @@ const styles = {
 export const StoryCover = ({ className, content }) => (
     <div className={className}>
         <div className="step">
-            <div className="content" style={{}}>
+            <div className="content">
                 <RichText html={content} />
             </div>
         </div>
