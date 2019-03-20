@@ -1,3 +1,4 @@
+export const transparent = 'transparent';
 export const black = '#000';
 export const white = '#fff';
 export const yellow = '#ff0';
@@ -8,6 +9,7 @@ export const textColorForBackgroundColor = bgColor =>
     [black, pink].includes(colors[bgColor]) ? white : black;
 
 export const colors = {
+    transparent,
     black,
     white,
     yellow,
