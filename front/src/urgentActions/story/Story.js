@@ -107,12 +107,7 @@ export class Story extends Component {
                                     {storyCoverProps => <StoryCover {...storyCoverProps} />}
                                 </StorySlide>
                                 {restStory.map((step, index) => (
-                                    <StorySlide
-                                        key={step.content}
-                                        index={index}
-                                        step={step}
-                                        total={total}
-                                    >
+                                    <StorySlide key={index} index={index} step={step}>
                                         {storyStepProps => (
                                             <StoryStep
                                                 {...storyStepProps}

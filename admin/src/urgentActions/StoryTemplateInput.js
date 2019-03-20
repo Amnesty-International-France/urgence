@@ -9,8 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 import { root, preview } from './styles';
 import MediumInput from './MediumInput';
-import FrontPreview, { noop } from './FrontPreview';
-import DisplayOptionsInput from './DisplayOptionsInput';
+import FrontPreview from './FrontPreview';
 import RichTextInput from '../form/RichTextInput';
 import { get as getScreenIndex, STORY } from './screenIndex';
 
@@ -22,17 +21,31 @@ const styles = {
     ...root,
     preview: {
         ...preview,
-        // the rules below override desktop media queries so that the preview is forced to appear like on mobile
+        '& .rich-text': {
+            '@media (min-width: 1024px)': {
+                fontSize: '16px !important',
+            },
+        },
         '& .story-step > div': {
-            padding: '0 !important',
-            '& .step': {
-                flexDirection: 'column !important',
+            padding: '0px !important',
+        },
+        '& .step': {
+            padding: '100px 20px !important',
+            '@media (min-aspect-ratio: 1/1)': {
+                padding: '100px 20px !important',
             },
-            '& .act a': {
-                display: 'block !important',
+        },
+        '@media (min-width: 1024px)': {
+            '& .rich-text > p': {
+                fontSize: '16px !important',
             },
-            '& .link': {
-                textAlign: 'center',
+            '& .ql-size-large': {
+                padding: '4px 0 !important',
+                fontSize: '26px !important',
+            },
+            '& .ql-size-huge': {
+                padding: '6px 0 !important',
+                fontSize: '36px !important',
             },
         },
     },
@@ -57,8 +70,6 @@ const StoryCoverInput = ({ source }) => (
 const StoryStepInput = ({ source }) => (
     <Fragment>
         <RichTextInput source={`${source}content`} label="Text" />
-        <MediumInput source={`${source}medium`} label="Illustration" />
-        <DisplayOptionsInput source={`${source}displayOptions`} label="Display Options" />
     </Fragment>
 );
 
@@ -83,15 +94,8 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
                     </Card>
                     <FrontPreview className={classes.preview}>
                         <StorySlide
+                            index={index}
                             step={{ ...defaultFormData, ...formData.story[index] }}
-                            index={index + 1}
-                            total={formData.story.length}
-                            nextSlide={noop}
-                            link={
-                                formData.story.length === index + 1
-                                    ? formData.end_of_story_link
-                                    : null
-                            }
                         >
                             {props =>
                                 index === 0 ? <StoryCover {...props} /> : <StoryStep {...props} />

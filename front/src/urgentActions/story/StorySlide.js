@@ -56,7 +56,6 @@ StorySlide.propTypes = {
     className: PropTypes.string,
     step: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
 };
 
 export default glamorous(StorySlide)(styles);

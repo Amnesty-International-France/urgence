@@ -15,18 +15,16 @@ const styles = {
     justifyContent: 'center',
     height: '100%',
     width: '100%',
-    padding: '100px 20px',
     color: black,
     backgroundColor: white,
-    '@media (min-width: 1024px)': {
-        padding: '10vh 10vw',
-    },
     '& .step': {
         flex: '1 0 0',
         display: 'flex',
         flexDirection: 'column',
+        padding: '100px 20px',
         '@media (min-aspect-ratio: 1/1)': {
             flexDirection: 'row',
+            padding: '10vh 10vw',
         },
     },
     '& .image': {
@@ -38,10 +36,11 @@ const styles = {
     '& .content': {
         display: 'flex',
         flex: '1 0 0',
-        overflow: 'auto',
     },
-    '& .rich-text': {
+    '& .rich-text > p': {
         fontFamily: 'Amnesty Trade Gothic',
+        margin: '0 12px',
+        width: 'calc(100% - 24px)',
         fontSize: '16px',
         '@media (min-width: 1024px)': {
             fontSize: '24px',
