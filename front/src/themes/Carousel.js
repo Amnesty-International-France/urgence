@@ -14,9 +14,6 @@ const styles = {
     },
     '& .swiper-wrapper': {
         height: 'calc(100% - 60px - 17px)',
-        '@media (min-width: 1024px)': {
-            height: 'calc(100% - 60px - 25px)',
-        },
     },
     '& .swiper-controls': {
         display: 'inline-flex',
@@ -31,9 +28,6 @@ const styles = {
         padding: '0px',
         height: '17px',
         width: '100%',
-        '@media (min-width: 1024px)': {
-            height: '25px',
-        },
     },
 };
 

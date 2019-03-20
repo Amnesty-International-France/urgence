@@ -21,7 +21,7 @@ const Container = glamorous.div({
 });
 
 const stepStyle = {
-    border: '1px solid',
+    border: '0.5px solid',
     borderColor: black,
     borderTop: '0',
     borderBottom: '0',
