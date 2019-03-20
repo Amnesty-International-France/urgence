@@ -12,7 +12,7 @@ export const StoryStepPropType = {
     displayOptions: PropTypes.shape({
         mediumPosition: PropTypes.oneOf(['top', 'bottom']),
         backgroundColor: PropTypes.string.isRequired,
-    }).isRequired,
+    }),
     content: PropTypes.string.isRequired,
 };
 

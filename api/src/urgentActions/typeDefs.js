@@ -37,7 +37,7 @@ export const urgentActionsTypeDefs = gql`
     type StoryStep {
         content: String!
         medium: Medium
-        displayOptions: DisplayOptions!
+        displayOptions: DisplayOptions
     }
 
     input StoryStepInput {
