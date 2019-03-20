@@ -5,8 +5,8 @@ const withTracker = (WrappedComponent, options = {}) => {
     const trackPage = (page, AURef, step) => {
         GoogleAnalytics.set({
             page,
-            AURef,
-            step,
+            dimension1: AURef,
+            dimension2: step,
             ...options,
         });
         GoogleAnalytics.pageview(page, [], step);
@@ -37,7 +37,15 @@ const withTracker = (WrappedComponent, options = {}) => {
     return HOC;
 };
 
-export const trackEvent = (analyticsCategory, eventName, objectType, objectName, options = {}) => {
+export const trackEvent = (
+    analyticsCategory,
+    eventName,
+    objectType,
+    objectName,
+    AUId,
+    step,
+    options = {},
+) => {
     if (analyticsCategory) {
         GoogleAnalytics.event({
             category: analyticsCategory,
@@ -49,6 +57,8 @@ export const trackEvent = (analyticsCategory, eventName, objectType, objectName,
             } ${objectType}: ${objectName} (label: ${options.label ? options.label : '-'}, state: ${
                 options.state ? options.state : '-'
             }, value: ${options.value ? options.value : '-'})`,
+            dimension1: AUId,
+            dimension2: step,
         });
     }
 };

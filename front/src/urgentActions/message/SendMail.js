@@ -8,7 +8,13 @@ import generateUrl from '../../services/generateUrl';
 import { routeMatch } from '../../propTypes';
 import { SessionDataConsumer } from '../../SessionDataContext';
 
-export const renderSendMail = ({ messageTemplate, recipient, afterMail, analyticsCategory }) => ({
+export const renderSendMail = ({
+    messageTemplate,
+    recipient,
+    afterMail,
+    analyticsCategory,
+    step,
+}) => ({
     /* eslint-disable react/prop-types */
     object,
     civility,
@@ -24,6 +30,7 @@ export const renderSendMail = ({ messageTemplate, recipient, afterMail, analytic
         body={templateToBodyText(messageTemplate, civility, surname, name)}
         afterMail={afterMail}
         analyticsCategory={analyticsCategory}
+        step={step}
     />
 );
 
@@ -37,7 +44,7 @@ export class SendMail extends Component {
         history.push(generateUrl('thanks', params));
     };
     render() {
-        const { messageTemplate, recipient, analyticsCategory } = this.props;
+        const { messageTemplate, recipient, analyticsCategory, step } = this.props;
 
         return (
             <SessionDataConsumer>
@@ -46,6 +53,7 @@ export class SendMail extends Component {
                     recipient,
                     afterMail: this.afterMail,
                     analyticsCategory,
+                    step,
                 })}
             </SessionDataConsumer>
         );
@@ -65,6 +73,7 @@ SendMail.propTypes = {
         push: PropTypes.func.isRequired,
     }).isRequired,
     analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
 };
 
 export default withRouter(SendMail);

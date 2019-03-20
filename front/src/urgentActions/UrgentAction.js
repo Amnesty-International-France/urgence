@@ -114,6 +114,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                     callToAction && callToAction.button ? (
                         <ToUrgentActionPageLink
                             label={callToAction.button}
+                            step={step}
                             pageName="message"
                             analyticsCategory={'AskForEmail'}
                             buttonName="ShowMail"
@@ -132,9 +133,11 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                 objectIndication={get(data, 'UrgentAction.object_indication')}
                 link={get(data, 'UrgentAction.message_link')}
                 loading={loading}
+                step={step}
                 analyticsCategory={messageAnalyticsCategory}
                 action={
                     <SendMail
+                        step={step}
                         recipient={get(data, 'UrgentAction.recipient')}
                         messageTemplate={get(data, 'UrgentAction.message_template')}
                         analyticsCategory={messageAnalyticsCategory}
@@ -153,6 +156,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                     emailThank && emailThank.button ? (
                         <ToUrgentActionPageLink
                             label={emailThank.button}
+                            step={step}
                             pageName="address"
                             analyticsCategory={'AskForLetter'}
                             buttonName="ActionLetter"
@@ -168,9 +172,11 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
         const recipient = get(data, 'UrgentAction.recipient');
         return (
             <AddressStep
+                step={step}
                 analyticsCategory={addressAnalyticsCategory}
                 action={disabled => (
                     <MailPdfButton
+                        step={step}
                         disabled={disabled}
                         buttonText={recipient.button}
                         analyticsCategory={addressAnalyticsCategory}

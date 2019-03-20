@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
+import { routeMatch } from '../propTypes';
+import { withRouter } from 'react-router';
 import { trackEvent } from '../analytics/withTracker';
 
 import { styles } from './Link';
@@ -15,12 +17,14 @@ export const MailTo = ({
     afterMail,
     className,
     analyticsCategory,
+    step,
+    match,
 }) => (
     <a
         className={classnames(className, { disabled })}
         onClick={event => {
             afterMail(event);
-            trackEvent(analyticsCategory, 'Click', 'button', 'SendMail', {
+            trackEvent(analyticsCategory, 'Click', 'button', 'SendMail', match.params.id, step, {
                 disabled: disabled ? 'disabled' : 'active',
                 label,
             });
@@ -50,6 +54,8 @@ MailTo.propTypes = {
         cci: PropTypes.string,
     }).isRequired,
     analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
+    match: routeMatch,
 };
 
-export default glamorous(MailTo)(styles);
+export default glamorous(withRouter(MailTo))(styles);

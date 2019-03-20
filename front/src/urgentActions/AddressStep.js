@@ -94,6 +94,7 @@ export class AddressStep extends Component {
             country,
             email,
             analyticsCategory,
+            step,
         } = this.props;
 
         return (
@@ -127,6 +128,7 @@ export class AddressStep extends Component {
                         error={!addressMain}
                         autoComplete="address-line1"
                         analyticsCategory={analyticsCategory}
+                        step={step}
                         label="Adresse"
                     />
                     <Input
@@ -136,6 +138,7 @@ export class AddressStep extends Component {
                         noValidate
                         autoComplete="address-line2"
                         analyticsCategory={analyticsCategory}
+                        step={step}
                         label="Complément d'adresse"
                     />
                     <div className="cityZone">
@@ -146,6 +149,7 @@ export class AddressStep extends Component {
                             error={!postalCode}
                             autoComplete="postal-code"
                             analyticsCategory={analyticsCategory}
+                            step={step}
                             label="Code postal"
                         />
                         <Input
@@ -155,6 +159,7 @@ export class AddressStep extends Component {
                             error={!city}
                             autoComplete="address-level2"
                             analyticsCategory={analyticsCategory}
+                            step={step}
                             label="Ville"
                         />
                     </div>
@@ -165,6 +170,7 @@ export class AddressStep extends Component {
                         error={!country}
                         autoComplete="country"
                         analyticsCategory={analyticsCategory}
+                        step={step}
                         label="Pays"
                     />
                     <p className="lastParagraph">
@@ -181,6 +187,7 @@ export class AddressStep extends Component {
                         error={!email}
                         autoComplete="email"
                         analyticsCategory={analyticsCategory}
+                        step={step}
                         label="E-mail"
                     />
                 </div>
@@ -206,6 +213,7 @@ AddressStep.propTypes = {
     className: PropTypes.string,
     action: PropTypes.func,
     analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
 };
 
 export default glamorous(

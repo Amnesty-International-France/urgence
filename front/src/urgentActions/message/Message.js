@@ -154,7 +154,15 @@ export class FormStep extends Component {
         if (!this.state[field]) this.setState({ [field]: true });
     };
     render() {
-        const { objectIndication, object, civility, surname, name, analyticsCategory } = this.props;
+        const {
+            objectIndication,
+            object,
+            civility,
+            surname,
+            name,
+            analyticsCategory,
+            step,
+        } = this.props;
         return (
             <Fragment>
                 <Input
@@ -163,6 +171,7 @@ export class FormStep extends Component {
                     onChange={this.setObject}
                     error={!object}
                     analyticsCategory={analyticsCategory}
+                    step={step}
                     label="Objet de l'e-mail *"
                 />
                 <p className="objectIndication">{objectIndication}</p>
@@ -172,6 +181,7 @@ export class FormStep extends Component {
                     onChange={this.setCivility}
                     error={!civility}
                     analyticsCategory={analyticsCategory}
+                    step={step}
                     label="Civilité *"
                     autoComplete="civility"
                     choices={['M.', 'Mme.', 'Autre']}
@@ -182,6 +192,7 @@ export class FormStep extends Component {
                     onChange={this.setSurname}
                     error={!surname}
                     analyticsCategory={analyticsCategory}
+                    step={step}
                     autoComplete="firstname"
                     label="Votre prénom *"
                 />
@@ -191,6 +202,7 @@ export class FormStep extends Component {
                     onChange={this.setName}
                     error={!name}
                     analyticsCategory={analyticsCategory}
+                    step={step}
                     autoComplete="name"
                     label="Votre nom *"
                 />
@@ -211,6 +223,7 @@ FormStep.propTypes = {
     setSurname: PropTypes.func.isRequired,
     setName: PropTypes.func.isRequired,
     analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
 };
 
 export const Message = ({
@@ -228,6 +241,7 @@ export const Message = ({
     surname,
     name,
     analyticsCategory,
+    step,
 }) => (
     <Fragment>
         {(!messageTemplate || !messageTemplate.length) && (
@@ -259,6 +273,7 @@ export const Message = ({
                     setSurname={setSurname}
                     setName={setName}
                     analyticsCategory={analyticsCategory}
+                    step={step}
                 />
                 <div className="action">
                     {action}
@@ -284,6 +299,7 @@ Message.propTypes = {
     name: PropTypes.string,
     action: PropTypes.node.isRequired,
     analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
 };
 
 export default glamorous(

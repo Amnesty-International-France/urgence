@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
+import { routeMatch } from '../propTypes';
+import { withRouter } from 'react-router';
 import { trackEvent } from '../analytics/withTracker';
 
 const styles = {
@@ -52,6 +54,8 @@ export class RadioButton extends Component {
             onChange,
             error,
             analyticsCategory,
+            match,
+            step,
         } = this.props;
         const { showError } = this.state;
         return (
@@ -82,6 +86,8 @@ export class RadioButton extends Component {
                                         'Exit',
                                         'field',
                                         this.props.label,
+                                        match.params.id,
+                                        step,
                                         {
                                             state: error ? 'invalid' : 'valid',
                                             value: event.target.value,
@@ -91,9 +97,11 @@ export class RadioButton extends Component {
                                 onFocus={event => {
                                     trackEvent(
                                         analyticsCategory,
-                                        'Enter',
+                                        'Click',
                                         'field',
                                         this.props.label,
+                                        match.params.id,
+                                        step,
                                         {
                                             state: error ? 'invalid' : 'valid',
                                             value: event.target.value,
@@ -119,6 +127,8 @@ RadioButton.propTypes = {
     error: PropTypes.bool,
     choices: PropTypes.array.isRequired,
     analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
+    match: routeMatch,
 };
 
-export default glamorous(RadioButton)(styles);
+export default glamorous(withRouter(RadioButton))(styles);

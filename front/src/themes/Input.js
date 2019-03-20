@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import TextField from '@material-ui/core/TextField';
 import classnames from 'classnames';
+import { routeMatch } from '../propTypes';
+import { withRouter } from 'react-router';
 import { trackEvent } from '../analytics/withTracker';
 
 const styles = {
@@ -50,12 +52,14 @@ export class Input extends Component {
             error,
             noValidate,
             analyticsCategory,
+            match,
+            step,
+            staticContext,
             ...otherProps
         } = this.props;
         const { showError, showValid } = this.state;
 
         if (!noValidate) this.showValidState(!error);
-
         return (
             <div className={className}>
                 <TextField
@@ -69,16 +73,32 @@ export class Input extends Component {
                     }}
                     onBlur={event => {
                         this.showErrorState();
-                        trackEvent(analyticsCategory, 'Exit', 'field', this.props.label, {
-                            state: showValid ? 'valid' : error ? 'invalid' : 'null',
-                            value: event.target.value,
-                        });
+                        trackEvent(
+                            analyticsCategory,
+                            'Exit',
+                            'field',
+                            this.props.label,
+                            match.params.id,
+                            step,
+                            {
+                                state: showValid ? 'valid' : error ? 'invalid' : 'null',
+                                value: event.target.value,
+                            },
+                        );
                     }}
                     onFocus={event => {
-                        trackEvent(analyticsCategory, 'Enter', 'field', this.props.label, {
-                            state: showValid ? 'valid' : error ? 'invalid' : 'null',
-                            value: event.target.value,
-                        });
+                        trackEvent(
+                            analyticsCategory,
+                            'Enter',
+                            'field',
+                            this.props.label,
+                            match.params.id,
+                            step,
+                            {
+                                state: showValid ? 'valid' : error ? 'invalid' : 'null',
+                                value: event.target.value,
+                            },
+                        );
                     }}
                     value={value}
                     {...otherProps}
@@ -96,6 +116,9 @@ Input.propTypes = {
     className: PropTypes.string,
     label: PropTypes.string.isRequired,
     analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
+    match: routeMatch,
+    staticContext: PropTypes.object,
 };
 
-export default glamorous(Input)(styles);
+export default glamorous(withRouter(Input))(styles);
