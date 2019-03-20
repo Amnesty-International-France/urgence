@@ -115,7 +115,8 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                         <ToUrgentActionPageLink
                             label={callToAction.button}
                             pageName="message"
-                            analyticsCategory={'CallToActionPage'}
+                            analyticsCategory={'AskForEmail'}
+                            buttonName="ShowMail"
                         />
                     ) : null
                 }
@@ -124,7 +125,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (step === 'message') {
-        const messageAnalyticsCategory = 'MessageForm';
+        const messageAnalyticsCategory = 'Email';
         return (
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
@@ -153,7 +154,8 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                         <ToUrgentActionPageLink
                             label={emailThank.button}
                             pageName="address"
-                            analyticsCategory={'EmailThankPage'}
+                            analyticsCategory={'AskForLetter'}
+                            buttonName="ActionLetter"
                         />
                     ) : null
                 }
@@ -162,7 +164,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (step === 'address') {
-        const addressAnalyticsCategory = 'AddressForm';
+        const addressAnalyticsCategory = 'LetterManually';
         const recipient = get(data, 'UrgentAction.recipient');
         return (
             <AddressStep

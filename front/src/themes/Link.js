@@ -30,13 +30,21 @@ export const styles = {
     },
 };
 
-export const Link = ({ to, label, disabled, className, onClick, analyticsCategory }) => (
+export const Link = ({
+    to,
+    label,
+    disabled,
+    className,
+    onClick,
+    analyticsCategory,
+    buttonName,
+}) => (
     <RouterLink
         to={to}
         className={classnames(className, { disabled: disabled })}
         onClick={event => {
             if (onClick) onClick(event);
-            trackEvent(analyticsCategory, 'Click', 'button', `to ${to}`, {
+            trackEvent(analyticsCategory, 'Click', 'button', buttonName, {
                 disabled: disabled ? 'disabled' : 'active',
                 label,
             });
@@ -53,6 +61,7 @@ Link.propTypes = {
     className: PropTypes.string,
     onClick: PropTypes.func,
     analyticsCategory: PropTypes.string,
+    buttonName: PropTypes.string,
 };
 
 export default glamorous(Link)(styles);

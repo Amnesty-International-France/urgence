@@ -55,6 +55,7 @@ export class MailPdfButton extends Component {
                 label={buttonText}
                 disabled={disabled}
                 analyticsCategory={analyticsCategory}
+                buttonName="SendLetterManually"
             />
         );
     }

@@ -20,7 +20,7 @@ export const MailTo = ({
         className={classnames(className, { disabled })}
         onClick={event => {
             afterMail(event);
-            trackEvent(analyticsCategory, 'Click', 'button', 'MailTo', {
+            trackEvent(analyticsCategory, 'Click', 'button', 'SendMail', {
                 disabled: disabled ? 'disabled' : 'active',
                 label,
             });
