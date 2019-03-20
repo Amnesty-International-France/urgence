@@ -15,6 +15,8 @@ import RichTextInput from '../form/RichTextInput';
 import { get as getScreenIndex, STORY } from './screenIndex';
 
 import StorySlide from '../../../front/src/urgentActions/story/StorySlide';
+import StoryStep from '../../../front/src/urgentActions/story/StoryStep';
+import StoryCover from '../../../front/src/urgentActions/story/StoryCover';
 
 const styles = {
     ...root,
@@ -45,7 +47,22 @@ const defaultFormData = {
     medium: null,
 };
 
-export const StoryTemplateInput = ({ classes, source, index, withLink }) => (
+const StoryCoverInput = ({ source }) => (
+    <Fragment>
+        <RichTextInput source={`${source}content`} label="Text" />
+        <MediumInput source={`${source}medium`} label="Cover" />
+    </Fragment>
+);
+
+const StoryStepInput = ({ source }) => (
+    <Fragment>
+        <RichTextInput source={`${source}content`} label="Text" />
+        <MediumInput source={`${source}medium`} label="Illustration" />
+        <DisplayOptionsInput source={`${source}displayOptions`} label="Display Options" />
+    </Fragment>
+);
+
+export const StoryTemplateInput = ({ classes, source, index }) => (
     <div className={classes.root}>
         <FormDataConsumer>
             {({ formData }) => (
@@ -56,12 +73,11 @@ export const StoryTemplateInput = ({ classes, source, index, withLink }) => (
                     <Card className={classes.card}>
                         <CardContent className={classes.content}>
                             <div className={classes.formContainer}>
-                                <RichTextInput source={`${source}content`} label="Text" />
-                                <MediumInput source={`${source}medium`} label="Illustration" />
-                                <DisplayOptionsInput
-                                    source={`${source}displayOptions`}
-                                    label="Display Options"
-                                />
+                                {index === 0 ? (
+                                    <StoryCoverInput source={source} />
+                                ) : (
+                                    <StoryStepInput source={source} />
+                                )}
                             </div>
                         </CardContent>
                     </Card>
@@ -76,7 +92,11 @@ export const StoryTemplateInput = ({ classes, source, index, withLink }) => (
                                     ? formData.end_of_story_link
                                     : null
                             }
-                        />
+                        >
+                            {props =>
+                                index === 0 ? <StoryCover {...props} /> : <StoryStep {...props} />
+                            }
+                        </StorySlide>
                     </FrontPreview>
                 </Fragment>
             )}
@@ -88,12 +108,10 @@ StoryTemplateInput.propTypes = {
     classes: PropTypes.object,
     source: PropTypes.string,
     index: PropTypes.number.isRequired,
-    withLink: PropTypes.bool,
 };
 
 StoryTemplateInput.defaultProps = {
     source: '',
-    withLink: false,
 };
 
 export default addField(withStyles(styles)(StoryTemplateInput));

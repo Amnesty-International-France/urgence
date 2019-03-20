@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import classnames from 'classnames';
 import { withRouter } from 'react-router';
 import { compose } from 'recompose';
 
@@ -11,10 +12,12 @@ import { black, white } from '../../themes/colors';
 import { withThemeContext } from '../../themes/ThemeContext';
 import Carousel from '../../themes/Carousel';
 import { StoryStepPropType, routeMatch, LinkType } from '../../propTypes';
-import { getLogoColorForStep } from './StoryStep';
 import generateUrl from '../../services/generateUrl';
+import RightArrow from '../../icons/RightArrow';
+
 import StorySlide from './StorySlide';
-import { RightArrow } from '../../icons';
+import StoryCover from './StoryCover';
+import StoryStep, { getLogoColorForStep } from './StoryStep';
 
 const styles = {
     backgroundColor: white,
@@ -78,9 +81,22 @@ export class Story extends Component {
 
         const total = story ? story.length : 0;
         const current = parseInt(page, 10);
+        const [cover, ...restStory] = story;
 
         return (
-            <div className={className}>
+            <div
+                className={classnames(className)}
+                style={{
+                    ...(current === 0 &&
+                        cover.medium &&
+                        cover.medium.src && {
+                            backgroundImage: `url(${cover.medium.src})`,
+                            backgroundPosition: 'top',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: 'cover',
+                        }),
+                }}
+            >
                 {(!story || !story.length) && (
                     <p className="error">Cette action urgente n&#39;existe plus.</p>
                 )}
@@ -92,19 +108,30 @@ export class Story extends Component {
                         total={total + 1}
                         afterChange={this.afterChange}
                         afterLastChange={this.afterLastChange}
-                        icon={<RightArrow fill={black} className="icon" />}
+                        icon={<RightArrow className="icon" fill={current === 0 ? white : black} />}
                     >
-                        {() =>
-                            story.map((step, index) => (
-                                <StorySlide
-                                    key={step.content}
-                                    step={step}
-                                    total={total}
-                                    index={index + 1}
-                                    link={total === index + 1 ? endStoryLink : null}
-                                />
-                            ))
-                        }
+                        {() => (
+                            <Fragment>
+                                <StorySlide step={cover} total={total} index={0}>
+                                    {storyCoverProps => <StoryCover {...storyCoverProps} />}
+                                </StorySlide>
+                                {restStory.map((step, index) => (
+                                    <StorySlide
+                                        key={step.content}
+                                        step={step}
+                                        total={total}
+                                        index={index + 1}
+                                    >
+                                        {storyStepProps => (
+                                            <StoryStep
+                                                {...storyStepProps}
+                                                link={total === index + 1 ? endStoryLink : null}
+                                            />
+                                        )}
+                                    </StorySlide>
+                                ))}
+                            </Fragment>
+                        )}
                     </Carousel>
                 )}
             </div>
@@ -127,4 +154,7 @@ Story.propTypes = {
 
 export const WithStylesStory = glamorous(Story)(styles);
 
-export default compose(withRouter, withThemeContext)(WithStylesStory);
+export default compose(
+    withRouter,
+    withThemeContext,
+)(WithStylesStory);
