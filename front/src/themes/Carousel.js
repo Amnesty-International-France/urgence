@@ -74,7 +74,6 @@ export class Carousel extends Component {
     }
 
     render() {
-        icon;
         const { children, icon, className, current, total } = this.props;
 
         return (
