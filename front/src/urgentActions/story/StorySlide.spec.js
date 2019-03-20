@@ -26,7 +26,11 @@ describe('<StorySlide />', () => {
                 },
             },
         };
-        const wrapper = shallow(<StorySlide {...props} />);
+        const wrapper = shallow(
+            <StorySlide {...props}>
+                <span />
+            </StorySlide>,
+        );
         const swiperSlide = wrapper.find('.swiper-slide');
         expect(swiperSlide.prop('className')).toContain('with-bottom-media');
     });
@@ -41,7 +45,11 @@ describe('<StorySlide />', () => {
                 },
             },
         };
-        const wrapper = shallow(<StorySlide {...props} />);
+        const wrapper = shallow(
+            <StorySlide {...props}>
+                <span />
+            </StorySlide>,
+        );
         const swiperSlide = wrapper.find('.swiper-slide');
         expect(swiperSlide.prop('className')).toBe('swiper-slide');
     });
