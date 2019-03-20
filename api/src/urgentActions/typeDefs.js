@@ -17,6 +17,7 @@ export const urgentActionsTypeDefs = gql`
         red
         orange
         pink
+        transparent
     }
 
     enum ParagraphTemplateType {
