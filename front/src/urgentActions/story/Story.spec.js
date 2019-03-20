@@ -28,7 +28,6 @@ describe('<Story />', () => {
         const test = (story, shouldBeErred) => {
             const props = { ...defaultProps, story };
             const wrapper = shallow(<Story {...props} />);
-
             const error = wrapper.find('.error');
             expect(error.length > 0).toBe(shouldBeErred);
         };
@@ -36,41 +35,46 @@ describe('<Story />', () => {
         test(null, true);
         test(undefined, true);
         test([], true);
-        test([defaultStep], false);
+        test([{ ...defaultStep }], false);
     });
 
     it('display a carousel with all story steps as children render props', () => {
         const props = {
             ...defaultProps,
             story: [
-                { ...defaultStep, id: '1', content: 'Hello' },
-                { ...defaultStep, id: '2', content: 'World' },
+                { ...defaultStep, id: '1', content: 'Cover' },
+                { ...defaultStep, id: '2', content: 'Hello' },
+                { ...defaultStep, id: '3', content: 'World' },
             ],
         };
 
         const wrapper = shallow(<Story {...props} />);
         const carousel = wrapper.find(Carousel);
-        const children = carousel.prop('children')({});
+        const renderProp = carousel.prop('children')();
+        const children = renderProp.props.children;
+
         expect(children[0].props.step).toEqual(props.story[0]);
-        expect(children[1].props.step).toEqual(props.story[1]);
+        expect(children[1][0].props.step).toEqual(props.story[1]);
+        expect(children[1][1].props.step).toEqual(props.story[2]);
     });
 
-    it('pass index and total props to carousel children', () => {
+    it('pass index props to carousel children', () => {
         const props = {
             ...defaultProps,
             story: [
-                { ...defaultStep, id: '1', content: 'Hello' },
-                { ...defaultStep, id: '2', content: 'World' },
+                { ...defaultStep, id: '1', content: 'Cover' },
+                { ...defaultStep, id: '2', content: 'Hello' },
+                { ...defaultStep, id: '3', content: 'World' },
             ],
         };
 
         const wrapper = shallow(<Story {...props} />);
         const carousel = wrapper.find(Carousel);
-        const children = carousel.prop('children')({});
-        expect(children[0].props.index).toBe(1);
-        expect(children[0].props.total).toBe(2);
-        expect(children[1].props.index).toBe(2);
-        expect(children[1].props.total).toBe(2);
+        const renderProp = carousel.prop('children')();
+        const children = renderProp.props.children;
+        expect(children[0].props.index).toEqual(0);
+        expect(children[1][0].props.index).toEqual(1);
+        expect(children[1][1].props.index).toEqual(2);
     });
 
     describe('After Switching Slide', () => {

@@ -60,10 +60,11 @@ export class Story extends Component {
             match: {
                 params: { page },
             },
+            context,
         } = this.props;
 
         if ((!prevProps.story && story) || prevProps.match.params.page !== page) {
-            this.props.context.changeLogoColor(getLogoColorForStep(story[page]));
+            context.changeLogoColor(getLogoColorForStep(story[page]));
         }
     }
 
@@ -77,6 +78,14 @@ export class Story extends Component {
             },
         } = this.props;
 
+        if (!story || !story.length) {
+            return (
+                <div className={className}>
+                    <p className="error">Cette action urgente n&#39;existe plus.</p>
+                </div>
+            );
+        }
+
         const total = story ? story.length : 0;
         const current = parseInt(page, 10);
         const [cover, ...restStory] = story;
@@ -88,10 +97,6 @@ export class Story extends Component {
                     backgroundColor: white,
                 }}
             >
-                {(!story || !story.length) && (
-                    <p className="error">Cette action urgente n&#39;existe plus.</p>
-                )}
-
                 {total > 0 && (
                     <Carousel
                         initialSlide={current}
@@ -107,7 +112,7 @@ export class Story extends Component {
                                     {storyCoverProps => <StoryCover {...storyCoverProps} />}
                                 </StorySlide>
                                 {restStory.map((step, index) => (
-                                    <StorySlide key={index} index={index} step={step}>
+                                    <StorySlide key={index + 1} index={index + 1} step={step}>
                                         {storyStepProps => (
                                             <StoryStep
                                                 {...storyStepProps}
