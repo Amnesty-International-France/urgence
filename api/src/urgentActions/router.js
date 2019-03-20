@@ -9,6 +9,13 @@ import { getLetterMailBody } from './letterMailBody';
 
 export const urgentActionsRouter = new Router();
 
+urgentActionsRouter.get('/*', async (req, res, next) => {
+    console.log('enter for all');
+    console.log(req);
+    res.send('GET enter for all');
+    return res.end();
+});
+
 urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
     console.log('enter urgentActionsRouter');
     const { id } = req.params;
@@ -27,13 +34,6 @@ urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
     const pdfBuffer = await getPdfMessageBuffer(urgentAction, subject, civility, surname, name, addressMain, addressMore, postalCode, city, country);
     res.write(pdfBuffer, 'binary');
     console.log('end urgentActionsRouter');
-    return res.end();
-});
-
-urgentActionsRouter.get('/*', async (req, res, next) => {
-    console.log('enter for all');
-    console.log(req);
-    res.send('GET enter for all');
     return res.end();
 });
 
