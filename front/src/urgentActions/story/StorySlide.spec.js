@@ -14,6 +14,7 @@ describe('<StorySlide />', () => {
         },
         index: 3,
         total: 6,
+        children: jest.fn().mockReturnValue([<div key="1">1</div>]),
     };
 
     it('should add class with-bottom-media to .swiper-slide if mediumPosition is bottom', () => {
@@ -26,11 +27,7 @@ describe('<StorySlide />', () => {
                 },
             },
         };
-        const wrapper = shallow(
-            <StorySlide {...props}>
-                <span />
-            </StorySlide>,
-        );
+        const wrapper = shallow(<StorySlide {...props} />);
         const swiperSlide = wrapper.find('.swiper-slide');
         expect(swiperSlide.prop('className')).toContain('with-bottom-media');
     });
@@ -45,11 +42,7 @@ describe('<StorySlide />', () => {
                 },
             },
         };
-        const wrapper = shallow(
-            <StorySlide {...props}>
-                <span />
-            </StorySlide>,
-        );
+        const wrapper = shallow(<StorySlide {...props} />);
         const swiperSlide = wrapper.find('.swiper-slide');
         expect(swiperSlide.prop('className')).toBe('swiper-slide');
     });

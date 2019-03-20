@@ -36,10 +36,8 @@ describe('<Carousel />', () => {
 
     it('should call children renderProps with instance nextSlide', () => {
         const props = { ...defaultProps };
-        const wrapper = shallow(<Carousel {...props} />);
-        expect(defaultProps.children).toHaveBeenCalledWith({
-            nextSlide: wrapper.instance().nextSlide,
-        });
+        shallow(<Carousel {...props} />);
+        expect(defaultProps.children).toHaveBeenCalled();
     });
 
     it('should include next-arrow if current + 1 < total', () => {
