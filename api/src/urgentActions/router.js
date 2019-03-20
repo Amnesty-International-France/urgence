@@ -30,6 +30,13 @@ urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
     return res.end();
 });
 
+urgentActionsRouter.get('/*', async (req, res, next) => {
+    console.log('enter for all');
+    console.log(req);
+    res.send('GET enter for all');
+    return res.end();
+});
+
 urgentActionsRouter.post('/:id/send', async (req, res, next) => {
     const { id } = req.params;
     if (!isUUID(id)) {
