@@ -115,7 +115,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                         <ToUrgentActionPageLink
                             label={callToAction.button}
                             pageName="message"
-                            analyticsCategory={'CallToACtionPage'}
+                            analyticsCategory={'CallToActionPage'}
                         />
                     ) : null
                 }
