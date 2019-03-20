@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { StorySlide } from './StorySlide';
+import StorySlide from './StorySlide';
 
 describe('<StorySlide />', () => {
     const defaultProps = {

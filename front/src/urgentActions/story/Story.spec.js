@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 
 import { Story } from './Story';
 import Carousel from '../../themes/Carousel';
-import StorySlide from './StorySlide';
 
 const defaultStep = {
     id: '1',
