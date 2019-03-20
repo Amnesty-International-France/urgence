@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
 import { routeMatch } from '../propTypes';
-import { withRouter } from 'react-router';
 import { trackEvent } from '../analytics/withTracker';
 
 import { styles } from './Link';
@@ -58,4 +57,4 @@ MailTo.propTypes = {
     match: routeMatch,
 };
 
-export default glamorous(withRouter(MailTo))(styles);
+export default glamorous(MailTo)(styles);

@@ -13,6 +13,7 @@ export const renderSendMail = ({
     recipient,
     afterMail,
     analyticsCategory,
+    match,
     step,
 }) => ({
     /* eslint-disable react/prop-types */
@@ -30,6 +31,7 @@ export const renderSendMail = ({
         body={templateToBodyText(messageTemplate, civility, surname, name)}
         afterMail={afterMail}
         analyticsCategory={analyticsCategory}
+        match={match}
         step={step}
     />
 );
@@ -44,7 +46,7 @@ export class SendMail extends Component {
         history.push(generateUrl('thanks', params));
     };
     render() {
-        const { messageTemplate, recipient, analyticsCategory, step } = this.props;
+        const { messageTemplate, recipient, analyticsCategory, step, match } = this.props;
 
         return (
             <SessionDataConsumer>
@@ -53,6 +55,7 @@ export class SendMail extends Component {
                     recipient,
                     afterMail: this.afterMail,
                     analyticsCategory,
+                    match,
                     step,
                 })}
             </SessionDataConsumer>
