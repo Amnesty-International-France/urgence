@@ -15,6 +15,8 @@ const styles = {
         },
     },
     '& .valid div:after': {
+        position: 'absolute',
+        right: 0,
         content: '✓',
         color: 'green',
         paddingRight: 5,
