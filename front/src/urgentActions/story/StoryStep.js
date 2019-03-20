@@ -40,6 +40,13 @@ const styles = {
         flex: '1 0 0',
         overflow: 'auto',
     },
+    '& .rich-text': {
+        fontFamily: 'Amnesty Trade Gothic',
+        fontSize: '16px',
+        '@media (min-width: 1024px)': {
+            fontSize: '24px',
+        },
+    },
 };
 
 const contentAlignment = (medium, displayOptions) =>
