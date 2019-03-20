@@ -30,9 +30,10 @@ const styles = {
     },
 };
 
-export const StorySlide = ({ children, className, step }) => {
+export const StorySlide = ({ children, className, step, style }) => {
     return (
         <div
+            style={style}
             className={classnames(className, {
                 'swiper-slide': true,
                 'with-bottom-media': get(step, 'displayOptions.mediumPosition') === 'bottom',

@@ -13,20 +13,24 @@ const styles = {
         height: '100%',
     },
     '& .swiper-wrapper': {
-        height: 'calc(100% - 60px - 17px)',
+        height: 'calc(100% - 15px)',
     },
     '& .swiper-controls': {
-        display: 'inline-flex',
+        position: 'relative',
+        display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
         padding: '5px 24px',
+        marginTop: '-60px',
         height: '60px',
         width: '100%',
+        zIndex: '100',
     },
-    '& .swiper-pagination': {
+    '& .swiper-progress-bar': {
+        position: 'relative',
         margin: '0px',
         padding: '0px',
-        height: '17px',
+        height: '100%',
         width: '100%',
     },
 };
@@ -72,7 +76,7 @@ export class Carousel extends Component {
 
         return (
             <div className={classnames(className, 'swiper-container')} ref={this.initContainer}>
-                <div className="swiper-wrapper">{children({ nextSlide: this.nextSlide })}</div>
+                <div className="swiper-wrapper">{children()}</div>
                 <div className="swiper-controls">
                     <IconButton
                         className={classnames({
@@ -84,7 +88,7 @@ export class Carousel extends Component {
                         {icon}
                     </IconButton>
                 </div>
-                <div className="swiper-pagination">
+                <div className="swiper-progress-bar">
                     <Steps current={current} total={total} />
                 </div>
             </div>

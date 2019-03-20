@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import classnames from 'classnames';
 import { withRouter } from 'react-router';
 import { compose } from 'recompose';
 
@@ -20,7 +19,6 @@ import StoryCover from './StoryCover';
 import StoryStep, { getLogoColorForStep } from './StoryStep';
 
 const styles = {
-    backgroundColor: white,
     height: '100%',
     '& .icon': {
         cursor: 'pointer',
@@ -85,16 +83,9 @@ export class Story extends Component {
 
         return (
             <div
-                className={classnames(className)}
+                className={className}
                 style={{
-                    ...(current === 0 &&
-                        cover.medium &&
-                        cover.medium.src && {
-                            backgroundImage: `url(${cover.medium.src})`,
-                            backgroundPosition: 'top',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundSize: 'cover',
-                        }),
+                    backgroundColor: white,
                 }}
             >
                 {(!story || !story.length) && (
@@ -112,7 +103,21 @@ export class Story extends Component {
                     >
                         {() => (
                             <Fragment>
-                                <StorySlide step={cover} total={total} index={0}>
+                                <StorySlide
+                                    step={cover}
+                                    total={total}
+                                    index={0}
+                                    style={{
+                                        ...(current === 0 &&
+                                            cover.medium &&
+                                            cover.medium.src && {
+                                                backgroundImage: `url(${cover.medium.src})`,
+                                                backgroundPosition: 'top',
+                                                backgroundRepeat: 'no-repeat',
+                                                backgroundSize: 'cover',
+                                            }),
+                                    }}
+                                >
                                     {storyCoverProps => <StoryCover {...storyCoverProps} />}
                                 </StorySlide>
                                 {restStory.map((step, index) => (
