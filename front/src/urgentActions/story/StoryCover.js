@@ -6,9 +6,10 @@ import { white, black } from '../../themes/colors';
 import RichText from '../../themes/RichText';
 
 const styles = {
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    height: '100%',
+    width: '100%',
     padding: '100px 20px',
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
@@ -39,6 +40,10 @@ const styles = {
         fontSize: '36px',
         padding: '6px 0',
         boxShadow: `12px 0 0 ${white}, -12px 0 0 ${white}`,
+        '@media (min-width: 1024px)': {
+            fontSize: '72px',
+            padding: '12px 0',
+        },
     },
     '& .ql-size-large': {
         color: white,
@@ -46,6 +51,10 @@ const styles = {
         fontSize: '26px',
         padding: '4px 0',
         boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
+        '@media (min-width: 1024px)': {
+            fontSize: '52px',
+            padding: '8px 0',
+        },
     },
 };
 

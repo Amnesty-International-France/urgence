@@ -15,7 +15,7 @@ const styles = {
     justifyContent: 'center',
     height: '100%',
     width: '100%',
-    padding: '100px 20px 20px 20px',
+    padding: '100px 20px',
     color: black,
     backgroundColor: white,
     '@media (min-width: 1024px)': {
@@ -39,13 +39,6 @@ const styles = {
         display: 'flex',
         flex: '1 0 0',
         overflow: 'auto',
-    },
-    '& .act': {
-        flex: '0 0 3rem',
-        margin: '1rem 1rem 0 1rem',
-        '@media (min-width: 1024px)': {
-            textAlign: 'right',
-        },
     },
 };
 
