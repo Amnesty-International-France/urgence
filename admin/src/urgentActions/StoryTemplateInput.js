@@ -42,10 +42,12 @@ const styles = {
             '& .ql-size-large': {
                 padding: '4px 0 !important',
                 fontSize: '26px !important',
+                lineHeight: '39px !important',
             },
             '& .ql-size-huge': {
                 padding: '6px 0 !important',
                 fontSize: '36px !important',
+                lineHeight: '55px !important',
             },
         },
     },
