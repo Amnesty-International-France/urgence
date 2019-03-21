@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
+import { routeMatch } from '../propTypes';
+import { withRouter } from 'react-router';
+import trackEvent from '../analytics/trackEvent';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic',
@@ -42,7 +45,18 @@ export class RadioButton extends Component {
     };
 
     render() {
-        const { className, choices, label, name, value, onChange, error } = this.props;
+        const {
+            className,
+            choices,
+            label,
+            name,
+            value,
+            onChange,
+            error,
+            analyticsCategory,
+            match,
+            step,
+        } = this.props;
         const { showError } = this.state;
         return (
             <div className={className}>
@@ -65,7 +79,35 @@ export class RadioButton extends Component {
                                     this.showErrorState();
                                     if (onChange) onChange(event);
                                 }}
-                                onBlur={() => this.showErrorState()}
+                                onBlur={event => {
+                                    this.showErrorState();
+                                    trackEvent(
+                                        analyticsCategory,
+                                        'Exit',
+                                        'field',
+                                        this.props.label,
+                                        match.params.id,
+                                        step,
+                                        {
+                                            state: error ? 'invalid' : 'valid',
+                                            value: event.target.value,
+                                        },
+                                    );
+                                }}
+                                onFocus={event => {
+                                    trackEvent(
+                                        analyticsCategory,
+                                        'Click',
+                                        'field',
+                                        this.props.label,
+                                        match.params.id,
+                                        step,
+                                        {
+                                            state: error ? 'invalid' : 'valid',
+                                            value: event.target.value,
+                                        },
+                                    );
+                                }}
                             />
                             <label htmlFor={item}>{item}</label>
                         </div>
@@ -84,6 +126,9 @@ RadioButton.propTypes = {
     onChange: PropTypes.func,
     error: PropTypes.bool,
     choices: PropTypes.array.isRequired,
+    analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
+    match: routeMatch,
 };
 
-export default glamorous(RadioButton)(styles);
+export default glamorous(withRouter(RadioButton))(styles);

@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
+import { routeMatch } from '../propTypes';
+import { withRouter } from 'react-router';
+import trackEvent from '../analytics/trackEvent';
 
 import { black, yellow } from './colors';
 
@@ -29,8 +32,28 @@ export const styles = {
     },
 };
 
-export const Link = ({ to, label, disabled, className, onClick }) => (
-    <RouterLink to={to} className={classnames(className, { disabled: disabled })} onClick={onClick}>
+export const Link = ({
+    to,
+    label,
+    disabled,
+    className,
+    onClick,
+    analyticsCategory,
+    buttonName,
+    step,
+    match,
+}) => (
+    <RouterLink
+        to={to}
+        className={classnames(className, { disabled: disabled })}
+        onClick={event => {
+            if (onClick) onClick(event);
+            trackEvent(analyticsCategory, 'Click', 'button', buttonName, match.params.id, step, {
+                disabled: disabled ? 'disabled' : 'active',
+                label,
+            });
+        }}
+    >
         {label}
     </RouterLink>
 );
@@ -41,6 +64,10 @@ Link.propTypes = {
     disabled: PropTypes.bool,
     className: PropTypes.string,
     onClick: PropTypes.func,
+    analyticsCategory: PropTypes.string,
+    buttonName: PropTypes.string,
+    step: PropTypes.string,
+    match: routeMatch,
 };
 
-export default glamorous(Link)(styles);
+export default glamorous(withRouter(Link))(styles);

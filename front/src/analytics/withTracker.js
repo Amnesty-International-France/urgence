@@ -1,29 +1,49 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
+import PropTypes from 'prop-types';
 
 const withTracker = (WrappedComponent, options = {}) => {
-    const trackPage = page => {
+    const trackPage = (page, AURef, step) => {
         GoogleAnalytics.set({
             page,
+            dimension1: AURef,
+            dimension2: step,
             ...options,
         });
-        GoogleAnalytics.pageview(page);
+        GoogleAnalytics.pageview(page, [], step);
     };
 
-    // eslint-disable-next-line
     const HOC = class extends Component {
+        static propTypes = {
+            location: PropTypes.object,
+            match: PropTypes.object,
+        };
+
         componentDidMount() {
-            // eslint-disable-next-line
-            const page = this.props.location.pathname + this.props.location.search;
-            trackPage(page);
+            const {
+                location: { pathname, search },
+                match: {
+                    params: { id, step },
+                },
+            } = this.props;
+
+            const page = pathname + search;
+            trackPage(page, id, step);
         }
 
         componentDidUpdate(prevProps) {
+            const {
+                location: { pathname, search },
+                match: {
+                    params: { id, step },
+                },
+            } = this.props;
+
             const currentPage = prevProps.location.pathname + prevProps.location.search;
-            const nextPage = this.props.location.pathname + this.props.location.search;
+            const nextPage = pathname + search;
 
             if (currentPage !== nextPage) {
-                trackPage(nextPage);
+                trackPage(nextPage, id, step);
             }
         }
 

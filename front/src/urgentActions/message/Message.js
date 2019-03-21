@@ -154,7 +154,15 @@ export class FormStep extends Component {
         if (!this.state[field]) this.setState({ [field]: true });
     };
     render() {
-        const { objectIndication, object, civility, surname, name } = this.props;
+        const {
+            objectIndication,
+            object,
+            civility,
+            surname,
+            name,
+            analyticsCategory,
+            step,
+        } = this.props;
         return (
             <Fragment>
                 <Input
@@ -162,6 +170,8 @@ export class FormStep extends Component {
                     value={object}
                     onChange={this.setObject}
                     error={!object}
+                    analyticsCategory={analyticsCategory}
+                    step={step}
                     label="Objet de l'e-mail *"
                 />
                 <p className="objectIndication">{objectIndication}</p>
@@ -170,6 +180,8 @@ export class FormStep extends Component {
                     name="civility"
                     onChange={this.setCivility}
                     error={!civility}
+                    analyticsCategory={analyticsCategory}
+                    step={step}
                     label="Civilité *"
                     autoComplete="civility"
                     choices={['M.', 'Mme.', 'Autre']}
@@ -179,6 +191,8 @@ export class FormStep extends Component {
                     value={surname}
                     onChange={this.setSurname}
                     error={!surname}
+                    analyticsCategory={analyticsCategory}
+                    step={step}
                     autoComplete="firstname"
                     label="Votre prénom *"
                 />
@@ -187,6 +201,8 @@ export class FormStep extends Component {
                     value={name}
                     onChange={this.setName}
                     error={!name}
+                    analyticsCategory={analyticsCategory}
+                    step={step}
                     autoComplete="name"
                     label="Votre nom *"
                 />
@@ -206,6 +222,8 @@ FormStep.propTypes = {
     setCivility: PropTypes.func.isRequired,
     setSurname: PropTypes.func.isRequired,
     setName: PropTypes.func.isRequired,
+    analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
 };
 
 export const Message = ({
@@ -222,44 +240,47 @@ export const Message = ({
     civility,
     surname,
     name,
+    analyticsCategory,
+    step,
 }) => (
     <Fragment>
         {(!messageTemplate || !messageTemplate.length) && (
             <p className="error">Cette action urgente n&#39;existe plus.</p>
         )}
 
-        {messageTemplate &&
-            messageTemplate.length > 0 && (
-                <div className={classnames('message', className)}>
-                    <p>
-                        Pour agir plus vite,&nbsp;
-                        <strong className="importantText"> nous vous proposons ce message :</strong>
-                    </p>
-                    <LetterView messageTemplate={messageTemplate} />
-                    <p>
-                        Parce que les messages uniques ont plus d&#39;impact,&nbsp;
-                        <strong className="importantText">
-                            {' '}
-                            nous vous invitons à le personnaliser.
-                        </strong>
-                    </p>
-                    <FormStep
-                        objectIndication={objectIndication}
-                        object={object}
-                        civility={civility}
-                        surname={surname}
-                        name={name}
-                        setObject={setObject}
-                        setCivility={setCivility}
-                        setSurname={setSurname}
-                        setName={setName}
-                    />
-                    <div className="action">
-                        {action}
-                        {link && link.url && <Link {...link} />}
-                    </div>
+        {messageTemplate && messageTemplate.length > 0 && (
+            <div className={classnames('message', className)}>
+                <p>
+                    Pour agir plus vite,&nbsp;
+                    <strong className="importantText"> nous vous proposons ce message :</strong>
+                </p>
+                <LetterView messageTemplate={messageTemplate} />
+                <p>
+                    Parce que les messages uniques ont plus d&#39;impact,&nbsp;
+                    <strong className="importantText">
+                        {' '}
+                        nous vous invitons à le personnaliser.
+                    </strong>
+                </p>
+                <FormStep
+                    objectIndication={objectIndication}
+                    object={object}
+                    civility={civility}
+                    surname={surname}
+                    name={name}
+                    setObject={setObject}
+                    setCivility={setCivility}
+                    setSurname={setSurname}
+                    setName={setName}
+                    analyticsCategory={analyticsCategory}
+                    step={step}
+                />
+                <div className="action">
+                    {action}
+                    {link && link.url && <Link {...link} />}
                 </div>
-            )}
+            </div>
+        )}
     </Fragment>
 );
 
@@ -277,6 +298,13 @@ Message.propTypes = {
     surname: PropTypes.string,
     name: PropTypes.string,
     action: PropTypes.node.isRequired,
+    analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
 };
 
-export default glamorous(compose(withYellowLogo, withSessionData)(Message))(styles);
+export default glamorous(
+    compose(
+        withYellowLogo,
+        withSessionData,
+    )(Message),
+)(styles);

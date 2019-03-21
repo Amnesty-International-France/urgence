@@ -75,7 +75,7 @@ services:
         environment:
             NODE_ENV: production
             REACT_APP_API_URL: https://rapide.amnesty.fr/api
-            REACT_APP_GA: UA-136476291-3
+            REACT_APP_GA: UA-5960278-37
         user: '${UID}:${GID}'
         working_dir: /app
 

@@ -14,8 +14,20 @@ export const ToUrgentActionPageLink = ({
     match: {
         params: { id },
     },
+    analyticsCategory,
+    buttonName,
+    step,
 }) => (
-    <Link onClick={onClick} to={generateUrl(pageName, { id })} label={label} disabled={disabled} />
+    <Link
+        onClick={onClick}
+        to={generateUrl(pageName, { id })}
+        label={label}
+        disabled={disabled}
+        analyticsCategory={analyticsCategory}
+        buttonName={buttonName}
+        step={step}
+        AURef={id}
+    />
 );
 
 ToUrgentActionPageLink.propTypes = {
@@ -24,6 +36,9 @@ ToUrgentActionPageLink.propTypes = {
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
     match: routeMatch,
+    analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
+    buttonName: PropTypes.string,
 };
 
 export default withRouter(ToUrgentActionPageLink);

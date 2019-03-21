@@ -82,6 +82,13 @@ const query = gql`
     }
 `;
 
+const ANALYTICS_CATEGORIES = {
+    ACT: 'AskForEmail',
+    MESSAGE: 'Email',
+    THANKS_EMAIL: 'AskForLetter',
+    ADDRESS: 'LetterManually',
+};
+
 export const UrgentAction = ({ step, id, data, error, loading }) => {
     if (error) {
         console.error(error);
@@ -112,7 +119,13 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                 data={callToAction}
                 actions={() =>
                     callToAction && callToAction.button ? (
-                        <ToUrgentActionPageLink label={callToAction.button} pageName="message" />
+                        <ToUrgentActionPageLink
+                            label={callToAction.button}
+                            step={step}
+                            pageName="message"
+                            analyticsCategory={ANALYTICS_CATEGORIES.ACT}
+                            buttonName="ShowMail"
+                        />
                     ) : null
                 }
             />
@@ -126,10 +139,14 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                 objectIndication={get(data, 'UrgentAction.object_indication')}
                 link={get(data, 'UrgentAction.message_link')}
                 loading={loading}
+                step={step}
+                analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
                     <SendMail
+                        step={step}
                         recipient={get(data, 'UrgentAction.recipient')}
                         messageTemplate={get(data, 'UrgentAction.message_template')}
+                        analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                     />
                 }
             />
@@ -143,7 +160,13 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                 data={emailThank}
                 actions={() =>
                     emailThank && emailThank.button ? (
-                        <ToUrgentActionPageLink label={emailThank.button} pageName="address" />
+                        <ToUrgentActionPageLink
+                            label={emailThank.button}
+                            step={step}
+                            pageName="address"
+                            analyticsCategory={ANALYTICS_CATEGORIES.THANKS}
+                            buttonName="ActionLetter"
+                        />
                     ) : null
                 }
             />
@@ -154,8 +177,15 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
         const recipient = get(data, 'UrgentAction.recipient');
         return (
             <AddressStep
+                step={step}
+                analyticsCategory={ANALYTICS_CATEGORIES.ADDRESS}
                 action={disabled => (
-                    <MailPdfButton disabled={disabled} buttonText={recipient.button} />
+                    <MailPdfButton
+                        step={step}
+                        disabled={disabled}
+                        buttonText={recipient.button}
+                        analyticsCategory={ANALYTICS_CATEGORIES.ADDRESS}
+                    />
                 )}
             />
         );

@@ -46,7 +46,7 @@ export class MailPdfButton extends Component {
         });
     };
     render() {
-        const { disabled, buttonText } = this.props;
+        const { disabled, buttonText, analyticsCategory, step } = this.props;
 
         return (
             <ToUrgentActionPageLink
@@ -54,6 +54,9 @@ export class MailPdfButton extends Component {
                 pageName="thanks-letter"
                 label={buttonText}
                 disabled={disabled}
+                analyticsCategory={analyticsCategory}
+                step={step}
+                buttonName="SendLetterManually"
             />
         );
     }
@@ -73,6 +76,11 @@ MailPdfButton.propTypes = {
     match: routeMatch,
     disabled: PropTypes.bool,
     buttonText: PropTypes.string.isRequired,
+    analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
 };
 
-export default compose(withSessionData, withRouter)(MailPdfButton);
+export default compose(
+    withSessionData,
+    withRouter,
+)(MailPdfButton);

@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { renderSendMail, SendMail } from './SendMail';
-import MailTo from '../../themes/MailTo';
 
 describe('renderSendMail', () => {
     const defaultProps = {
