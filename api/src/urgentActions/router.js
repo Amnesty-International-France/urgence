@@ -9,12 +9,12 @@ import { getLetterMailBody } from './letterMailBody';
 
 export const urgentActionsRouter = new Router();
 
-urgentActionsRouter.get('/*', async (req, res, next) => {
+/*urgentActionsRouter.get('/*', async (req, res, next) => {
     console.log('enter for all');
     console.log(req);
     res.send('GET enter for all');
     return res.end();
-});
+});*/
 
 urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
     console.log('enter urgentActionsRouter');
