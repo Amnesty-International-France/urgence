@@ -40,6 +40,7 @@ const styles = {
         backgroundColor: black,
         fontSize: '26px',
         padding: '4px 0',
+        lineHeight: '39px',
         boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
         '@media (min-width: 1024px)': {
             fontSize: '52px',
@@ -50,6 +51,7 @@ const styles = {
         color: black,
         backgroundColor: white,
         fontSize: '36px',
+        lineHeight: '55px',
         padding: '6px 0',
         boxShadow: `12px 0 0 ${white}, -12px 0 0 ${white}`,
         '@media (min-width: 1024px)': {
