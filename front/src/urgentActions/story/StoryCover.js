@@ -44,6 +44,7 @@ const styles = {
         boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
         '@media (min-width: 1024px)': {
             fontSize: '52px',
+            lineHeight: '78px',
             padding: '8px 0',
         },
     },
@@ -56,6 +57,7 @@ const styles = {
         boxShadow: `12px 0 0 ${white}, -12px 0 0 ${white}`,
         '@media (min-width: 1024px)': {
             fontSize: '72px',
+            lineHeight: '110px',
             padding: '12px 0',
         },
     },
