@@ -82,6 +82,13 @@ const query = gql`
     }
 `;
 
+const ANALYTICS_CATEGORIES = {
+    ACT: 'AskForEmail',
+    MESSAGE: 'Email',
+    THANKS_EMAIL: 'AskForLetter',
+    ADDRESS: 'LetterManually',
+};
+
 export const UrgentAction = ({ step, id, data, error, loading }) => {
     if (error) {
         console.error(error);
@@ -116,7 +123,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                             label={callToAction.button}
                             step={step}
                             pageName="message"
-                            analyticsCategory={'AskForEmail'}
+                            analyticsCategory={ANALYTICS_CATEGORIES.ACT}
                             buttonName="ShowMail"
                         />
                     ) : null
@@ -126,7 +133,6 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (step === 'message') {
-        const messageAnalyticsCategory = 'Email';
         return (
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
@@ -134,13 +140,13 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                 link={get(data, 'UrgentAction.message_link')}
                 loading={loading}
                 step={step}
-                analyticsCategory={messageAnalyticsCategory}
+                analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
                     <SendMail
                         step={step}
                         recipient={get(data, 'UrgentAction.recipient')}
                         messageTemplate={get(data, 'UrgentAction.message_template')}
-                        analyticsCategory={messageAnalyticsCategory}
+                        analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                     />
                 }
             />
@@ -158,7 +164,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                             label={emailThank.button}
                             step={step}
                             pageName="address"
-                            analyticsCategory={'AskForLetter'}
+                            analyticsCategory={ANALYTICS_CATEGORIES.THANKS}
                             buttonName="ActionLetter"
                         />
                     ) : null
@@ -168,18 +174,17 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (step === 'address') {
-        const addressAnalyticsCategory = 'LetterManually';
         const recipient = get(data, 'UrgentAction.recipient');
         return (
             <AddressStep
                 step={step}
-                analyticsCategory={addressAnalyticsCategory}
+                analyticsCategory={ANALYTICS_CATEGORIES.ADDRESS}
                 action={disabled => (
                     <MailPdfButton
                         step={step}
                         disabled={disabled}
                         buttonText={recipient.button}
-                        analyticsCategory={addressAnalyticsCategory}
+                        analyticsCategory={ANALYTICS_CATEGORIES.ADDRESS}
                     />
                 )}
             />
