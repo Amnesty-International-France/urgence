@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
+import PropTypes from 'prop-types';
 
 const withTracker = (WrappedComponent, options = {}) => {
     const trackPage = (page, AURef, step) => {
@@ -12,20 +13,37 @@ const withTracker = (WrappedComponent, options = {}) => {
         GoogleAnalytics.pageview(page, [], step);
     };
 
-    // eslint-disable-next-line
     const HOC = class extends Component {
+        static propTypes = {
+            location: PropTypes.object,
+            match: PropTypes.object,
+        };
+
         componentDidMount() {
-            // eslint-disable-next-line
-            const page = this.props.location.pathname + this.props.location.search;
-            trackPage(page, this.props.match.params.id, this.props.match.params.step);
+            const {
+                location: { pathname, search },
+                match: {
+                    params: { id, step },
+                },
+            } = this.props;
+
+            const page = pathname + search;
+            trackPage(page, id, step);
         }
 
         componentDidUpdate(prevProps) {
+            const {
+                location: { pathname, search },
+                match: {
+                    params: { id, step },
+                },
+            } = this.props;
+
             const currentPage = prevProps.location.pathname + prevProps.location.search;
-            const nextPage = this.props.location.pathname + this.props.location.search;
+            const nextPage = pathname + search;
 
             if (currentPage !== nextPage) {
-                trackPage(nextPage, this.props.match.params.id, this.props.match.params.step);
+                trackPage(nextPage, id, step);
             }
         }
 
@@ -35,32 +53,6 @@ const withTracker = (WrappedComponent, options = {}) => {
     };
 
     return HOC;
-};
-
-export const trackEvent = (
-    analyticsCategory,
-    eventName,
-    objectType,
-    objectName,
-    AUId,
-    step,
-    options = {},
-) => {
-    if (analyticsCategory) {
-        GoogleAnalytics.event({
-            category: analyticsCategory,
-            action: `${eventName} on ${
-                options.disabled ? options.disabled : ''
-            } ${objectType}: ${objectName}`,
-            label: `${eventName} on ${
-                options.disabled ? options.disabled : ''
-            } ${objectType}: ${objectName} (label: ${options.label ? options.label : '-'}, state: ${
-                options.state ? options.state : '-'
-            }, value: ${options.value ? options.value : '-'})`,
-            dimension1: AUId,
-            dimension2: step,
-        });
-    }
 };
 
 export default withTracker;
