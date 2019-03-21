@@ -4,7 +4,7 @@ import glamorous from 'glamorous';
 import classnames from 'classnames';
 import { routeMatch } from '../propTypes';
 import { withRouter } from 'react-router';
-import { trackEvent } from '../analytics/withTracker';
+import trackEvent from '../analytics/trackEvent';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic',

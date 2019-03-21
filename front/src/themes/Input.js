@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import classnames from 'classnames';
 import { routeMatch } from '../propTypes';
 import { withRouter } from 'react-router';
-import { trackEvent } from '../analytics/withTracker';
+import trackEvent from '../analytics/trackEvent';
 
 const styles = {
     '& .textfield': {

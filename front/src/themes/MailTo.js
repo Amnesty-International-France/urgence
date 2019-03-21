@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
 import { routeMatch } from '../propTypes';
-import { trackEvent } from '../analytics/withTracker';
+import trackEvent from '../analytics/trackEvent';
 
 import { styles } from './Link';
 
