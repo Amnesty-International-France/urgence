@@ -65,7 +65,7 @@ export class Input extends Component {
                 <TextField
                     className={classnames('textfield', { ['valid']: showValid })}
                     variant="outlined"
-                    margin="normal"
+                    margin="dense"
                     error={showError && error}
                     onChange={event => {
                         if (onChange) onChange(event);
