@@ -16,7 +16,7 @@ export const urgentActionsRouter = new Router();
     return res.end();
 });*/
 
-urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
+urgentActionsRouter.post('/:id.pdf', async (req, res, next) => {
     console.log('enter urgentActionsRouter');
     const { id } = req.params;
     if (!isUUID(id)) {

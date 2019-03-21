@@ -16,9 +16,9 @@ app.use(
     }),
 );
 
-/*apolloServer.applyMiddleware({
+apolloServer.applyMiddleware({
     app
-});*/
+});
 
 console.log('config.api.prefixUrl');
 console.log(config.api.prefixUrl);
