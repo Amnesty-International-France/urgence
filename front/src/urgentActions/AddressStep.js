@@ -61,6 +61,11 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        '& .postalCode': {
+            flex: '4',
+            minWidth: '115px',
+            marginRight: '8px',
+        },
     },
     '& .oneTiers': {
         width: '33%',
