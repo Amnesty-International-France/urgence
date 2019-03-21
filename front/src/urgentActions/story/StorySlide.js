@@ -3,12 +3,14 @@ import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { black } from '../../themes/colors';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const styles = {
     height: 'calc(100% - 17px)',
+    backgroundColor: black,
     '& .story-step': {
         flex: '1 0 0',
     },

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, email, TextInput, ArrayInput, Labeled } from 'react-admin';
+import { addField, required, FormDataConsumer, email, TextInput, ArrayInput, Labeled } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -30,7 +30,7 @@ const styles = theme => ({
     },
 });
 
-export const validateRecipientEmail = [email()];
+export const validateRecipientEmail = [required(), email()];
 
 export const validateEmailsList = text =>
     text && !!text.split(',').find(t => !isEmail(t))

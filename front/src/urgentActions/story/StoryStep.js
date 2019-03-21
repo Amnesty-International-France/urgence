@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 import RichText from '../../themes/RichText';
-import Image from '../../themes/Image';
 import { StoryStepPropType, LinkType } from '../../propTypes';
 import { textColorForBackgroundColor, colors, black, white, yellow } from '../../themes/colors';
 import Link from '../Link';
@@ -27,15 +26,11 @@ const styles = {
             padding: '10vh 10vw',
         },
     },
-    '& .image': {
-        flex: '1 0 0',
-    },
-    '& .image > div': {
-        height: '100%',
-    },
     '& .content': {
         display: 'flex',
         flex: '1 0 0',
+        alignItems: 'center',
+        paddingBottom: 0,
     },
     '& .rich-text > p': {
         fontFamily: 'Amnesty Trade Gothic',
@@ -47,9 +42,6 @@ const styles = {
         },
     },
 };
-
-const contentAlignment = (medium, displayOptions) =>
-    !medium ? 'center' : displayOptions.mediumPosition === 'bottom' ? 'flex-end' : null;
 
 export const getLogoColorForStep = step => {
     const backgroundColor = colors[get(step, 'displayOptions.backgroundColor')];
@@ -64,44 +56,17 @@ export const getLogoColorForStep = step => {
     return white;
 };
 
-export const StoryStep = ({ className, medium, displayOptions, content, link }) => (
-    <div
-        className={className}
-        style={{
-            backgroundColor: colors[displayOptions.backgroundColor],
-            color: textColorForBackgroundColor(displayOptions.backgroundColor),
-        }}
-    >
+export const StoryStep = ({ className, content, link }) => (
+    <div className={className}>
         <div className="step">
-            {medium && displayOptions.mediumPosition === 'top' && (
-                <div className="image">
-                    <Image {...medium} />
-                </div>
-            )}
-
-            <div
-                className="content"
-                style={{
-                    alignItems: contentAlignment(medium, displayOptions),
-                    paddingBottom: displayOptions.mediumPosition === 'bottom' ? 21 : 0,
-                }}
-            >
+            <div className="content">
                 <RichText html={content} />
             </div>
-
-            {medium && displayOptions.mediumPosition === 'bottom' && (
-                <div className="image">
-                    <Image {...medium} />
-                </div>
-            )}
         </div>
 
-        {link && link.url && (
-            <Link {...link} color={textColorForBackgroundColor(displayOptions.backgroundColor)} />
-        )}
+        {link && link.url && <Link {...link} color={textColorForBackgroundColor(white)} />}
     </div>
 );
-
 StoryStep.propTypes = {
     className: PropTypes.string,
     link: LinkType,

@@ -62,14 +62,14 @@ const defaultFormData = {
 
 const StoryCoverInput = ({ source }) => (
     <Fragment>
-        <RichTextInput source={`${source}content`} label="Text" />
+        <RichTextInput source={`${source}content`} label="Text *" isRequired />
         <MediumInput source={`${source}medium`} label="Cover" />
     </Fragment>
 );
 
 const StoryStepInput = ({ source }) => (
     <Fragment>
-        <RichTextInput source={`${source}content`} label="Text" />
+        <RichTextInput source={`${source}content`} label="Text *" isRequired />
     </Fragment>
 );
 
@@ -87,8 +87,8 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
                                 {index === 0 ? (
                                     <StoryCoverInput source={source} />
                                 ) : (
-                                    <StoryStepInput source={source} />
-                                )}
+                                        <StoryStepInput source={source} />
+                                    )}
                             </div>
                         </CardContent>
                     </Card>
