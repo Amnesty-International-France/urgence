@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import PropTypes from 'prop-types';
 
-import Story from './Story';
+import Story from './story/Story';
 import Act from './Act';
 import Thanks from './Thanks';
 import Message from './message/Message';

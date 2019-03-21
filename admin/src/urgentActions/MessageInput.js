@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, email, TextInput, ArrayInput, Labeled } from 'react-admin';
+import { addField, required, FormDataConsumer, email, TextInput, ArrayInput, Labeled } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -30,12 +30,14 @@ const styles = theme => ({
     },
 });
 
-export const validateRecipientEmail = [email()];
+export const validateRecipientEmail = [required(), email()];
 
 export const validateEmailsList = text =>
     text && !!text.split(',').find(t => !isEmail(t))
         ? 'Must contain only emails separated by a comma.'
         : null;
+
+const initMessageTemplate = [{ value: '' }];
 
 export const MessageInput = ({ classes, source, withLink }) => (
     <div className={classNames(classes.root, classes.bordered)}>
@@ -86,8 +88,11 @@ export const MessageInput = ({ classes, source, withLink }) => (
                     {formData.message_template && (
                         <FrontPreview className={classes.preview}>
                             <Message
-                                messageTemplate={formData.message_template}
-                                objectIndication={formData.object_indication}
+                                messageTemplate={
+                                    formData.message_template &&
+                                        formData.message_template[0] &&
+                                        formData.message_template[0].value ? formData.message_template : initMessageTemplate}
+                                objectIndication={formData.object_indication || ''}
                                 link={formData.message_link}
                                 action={<Link to="#" label="J'envoie" />}
                             />

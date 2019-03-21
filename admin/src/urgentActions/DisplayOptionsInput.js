@@ -1,56 +1,68 @@
-import React from "react";
-import { compose } from "recompose";
-import PropTypes from "prop-types";
-import { addField, SelectInput, Labeled, required } from "react-admin";
+import React from 'react';
+import { compose } from 'recompose';
+import PropTypes from 'prop-types';
+import { addField, SelectInput, Labeled, required } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 
-import { positionChoices, colorChoices } from "./choices";
+import { positionChoices, colorChoices } from './choices';
 
 const styles = {
-  root: {
-    display: "flex"
-  },
-  mediumPositionWrapper: {
-    display: 'flex',
-    alignItems: 'flex-end',
-    marginRight: "2rem"
-  },
-  colorWrapper: {
-    flex: "1 0 0"
-  }
+    root: {
+        display: 'flex',
+    },
+    mediumPositionWrapper: {
+        display: 'flex',
+        alignItems: 'flex-end',
+        marginRight: '2rem',
+    },
+    colorWrapper: {
+        flex: '1 0 0',
+    },
 };
 
-const Color = ({ record }) => (
-  <div style={{ background: record.name, width: "100%", height: "19px" }} />
-);
+const transparentStyle = {
+    border: '1px solid black',
+    backgroundImage:
+        'repeating-linear-gradient(45deg, lightgrey, lightgrey 10px, white 10px, white 20px )',
+};
+
+const Color = ({ record }) => {
+    const style = {
+        background: record.name,
+        width: '100%',
+        height: '19px',
+        ...(record.name === 'transparent' && transparentStyle),
+    };
+    return <div style={style} />;
+};
 
 export const DisplayOptionsInput = ({ classes, source, label }) => (
-  <Labeled label={label || "Display Options"}>
-    <div className={classes.root}>
-      <div className={classes.mediumPositionWrapper}>
-        <SelectInput
-          validate={required()}
-          source={`${source}.mediumPosition`}
-          label="Illustration position"
-          choices={positionChoices}
-        />
-      </div>
-      <div className={classes.colorWrapper}>
-        <SelectInput
-          validate={required()}
-          source={`${source}.backgroundColor`}
-          label="Background color"
-          choices={colorChoices}
-          optionText={<Color />}
-        />
-      </div>
-    </div>
-  </Labeled>
+    <Labeled label={label || 'Display Options'}>
+        <div className={classes.root}>
+            <div className={classes.mediumPositionWrapper}>
+                <SelectInput
+                    validate={required()}
+                    source={`${source}.mediumPosition`}
+                    label="Illustration position"
+                    choices={positionChoices}
+                />
+            </div>
+            <div className={classes.colorWrapper}>
+                <SelectInput
+                    validate={required()}
+                    source={`${source}.backgroundColor`}
+                    label="Background color"
+                    choices={colorChoices}
+                    optionText={<Color />}
+                />
+            </div>
+        </div>
+    </Labeled>
 );
 
 DisplayOptionsInput.propTypes = {
-  classes: PropTypes.object,
-  source: PropTypes.string.isRequired
+    classes: PropTypes.object,
+    source: PropTypes.string.isRequired,
 };
 
 export default compose(addField, withStyles(styles))(DisplayOptionsInput);

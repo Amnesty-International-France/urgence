@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { withRouter } from 'react-router';
@@ -7,17 +7,18 @@ import { compose } from 'recompose';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { black, white } from '../themes/colors';
-import { withThemeContext } from '../themes/ThemeContext';
-import Carousel from '../themes/Carousel';
-import { StoryStepPropType, routeMatch, LinkType } from '../propTypes';
-import { getLogoColorForStep } from '../urgentActions/StoryStep';
-import generateUrl from '../services/generateUrl';
+import { black, white } from '../../themes/colors';
+import { withThemeContext } from '../../themes/ThemeContext';
+import Carousel from '../../themes/Carousel';
+import { StoryStepPropType, routeMatch, LinkType } from '../../propTypes';
+import generateUrl from '../../services/generateUrl';
+import RightArrow from '../../icons/RightArrow';
+
 import StorySlide from './StorySlide';
-import { RightArrow } from '../icons';
+import StoryCover from './StoryCover';
+import StoryStep, { getLogoColorForStep } from './StoryStep';
 
 const styles = {
-    backgroundColor: white,
     height: '100%',
     '& .icon': {
         cursor: 'pointer',
@@ -59,10 +60,11 @@ export class Story extends Component {
             match: {
                 params: { page },
             },
+            context,
         } = this.props;
 
         if ((!prevProps.story && story) || prevProps.match.params.page !== page) {
-            this.props.context.changeLogoColor(getLogoColorForStep(story[page]));
+            context.changeLogoColor(getLogoColorForStep(story[page]));
         }
     }
 
@@ -76,15 +78,25 @@ export class Story extends Component {
             },
         } = this.props;
 
+        if (!story || !story.length) {
+            return (
+                <div className={className}>
+                    <p className="error">Cette action urgente n&#39;existe plus.</p>
+                </div>
+            );
+        }
+
         const total = story ? story.length : 0;
         const current = parseInt(page, 10);
+        const [cover, ...restStory] = story;
 
         return (
-            <div className={className}>
-                {(!story || !story.length) && (
-                    <p className="error">Cette action urgente n&#39;existe plus.</p>
-                )}
-
+            <div
+                className={className}
+                style={{
+                    backgroundColor: white,
+                }}
+            >
                 {total > 0 && (
                     <Carousel
                         initialSlide={current}
@@ -92,19 +104,25 @@ export class Story extends Component {
                         total={total + 1}
                         afterChange={this.afterChange}
                         afterLastChange={this.afterLastChange}
-                        icon={<RightArrow fill={black} className="icon" />}
+                        icon={<RightArrow className="icon" fill={current === 0 ? white : black} />}
                     >
-                        {() =>
-                            story.map((step, index) => (
-                                <StorySlide
-                                    key={step.content}
-                                    step={step}
-                                    total={total}
-                                    index={index + 1}
-                                    link={total === index + 1 ? endStoryLink : null}
-                                />
-                            ))
-                        }
+                        {() => (
+                            <Fragment>
+                                <StorySlide index={0} step={cover} total={total}>
+                                    {storyCoverProps => <StoryCover {...storyCoverProps} />}
+                                </StorySlide>
+                                {restStory.map((step, index) => (
+                                    <StorySlide key={index + 1} index={index + 1} step={step}>
+                                        {storyStepProps => (
+                                            <StoryStep
+                                                {...storyStepProps}
+                                                link={total === index + 1 ? endStoryLink : null}
+                                            />
+                                        )}
+                                    </StorySlide>
+                                ))}
+                            </Fragment>
+                        )}
                     </Carousel>
                 )}
             </div>
@@ -127,4 +145,7 @@ Story.propTypes = {
 
 export const WithStylesStory = glamorous(Story)(styles);
 
-export default compose(withRouter, withThemeContext)(WithStylesStory);
+export default compose(
+    withRouter,
+    withThemeContext,
+)(WithStylesStory);

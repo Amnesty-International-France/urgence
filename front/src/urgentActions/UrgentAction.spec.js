@@ -5,7 +5,7 @@ import { UrgentAction } from './UrgentAction';
 import sessionData from '../sessionData';
 import Act from './Act';
 import Thanks from './Thanks';
-import Story from './Story';
+import Story from './story/Story';
 import AddressStep from './AddressStep';
 
 jest.mock('../sessionData.js');

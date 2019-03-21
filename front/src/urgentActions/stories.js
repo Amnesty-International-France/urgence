@@ -1,27 +1,18 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Div100Vh from 'react-div-100vh';
 
-import StoryStep from './StoryStep';
-import { WithStylesStory as Story } from './Story';
+import StoryStep from './story/StoryStep';
+import { WithStylesStory as Story } from './story/Story';
 import Act from './Act';
 import Thanks from './Thanks';
 import Link from '../themes/Link';
-import { Email, Share } from '../icons';
 import { routerDecorator, history } from '../../.storybook/decorators';
 import { ThemeProvider } from '../themes/ThemeContext';
 import AppLogo from '../themes/AppLogo';
 
 const defaultStoryProps = {
-    medium: {
-        src: '/img/abdolfatah-soltani.jpg',
-        title: 'Abdolfatah Soltani',
-    },
-    displayOptions: {
-        mediumPosition: 'top',
-        backgroundColor: 'black',
-    },
     content: `
         <p>
             Le 26 mars, une cour d'appel militaire a confirmé <span class="ql-size-large">la condamnation à mort</span> des deux hommes,
@@ -33,7 +24,18 @@ const defaultStoryProps = {
 storiesOf('Story Step', module)
     .add('Top Picture, Black Background', () => (
         <div style={{ height: '100vh' }}>
-            <StoryStep {...defaultStoryProps} />
+            <StoryStep
+                medium={{
+                    src: '/img/abdolfatah-soltani.jpg',
+                    title: 'Abdolfatah Soltani',
+                }}
+                content={`
+        <p>
+                Le 26 mars, une cour d'appel militaire a confirmé <span class="ql-size-large">la condamnation à mort</span> des deux hommes,
+                à l'issue d'un procès manifestement inique fondé sur des « aveux » extorqués sous la torture durant leur disparition forcée.
+        </p>
+    `}
+            />
         </div>
     ))
     .add('Top Picture, All Text Sizes', () => (
@@ -52,47 +54,22 @@ storiesOf('Story Step', module)
     ))
     .add('Top Picture, Yellow Background', () => (
         <div style={{ height: '100vh' }}>
-            <StoryStep
-                {...defaultStoryProps}
-                displayOptions={{
-                    ...defaultStoryProps.displayOptions,
-                    backgroundColor: 'yellow',
-                }}
-            />
+            <StoryStep {...defaultStoryProps} />
         </div>
     ))
     .add('Top Picture, Pink Background', () => (
         <div style={{ height: '100vh' }}>
-            <StoryStep
-                {...defaultStoryProps}
-                displayOptions={{
-                    ...defaultStoryProps.displayOptions,
-                    backgroundColor: 'pink',
-                }}
-            />
+            <StoryStep {...defaultStoryProps} />
         </div>
     ))
     .add('No Picture, Yellow Background', () => (
         <div style={{ height: '100vh' }}>
-            <StoryStep
-                {...defaultStoryProps}
-                medium={null}
-                displayOptions={{
-                    ...defaultStoryProps.displayOptions,
-                    backgroundColor: 'yellow',
-                }}
-            />
+            <StoryStep {...defaultStoryProps} />
         </div>
     ))
     .add('Bottom Picture, Black Background', () => (
         <div style={{ height: '100vh' }}>
-            <StoryStep
-                {...defaultStoryProps}
-                displayOptions={{
-                    ...defaultStoryProps.displayOptions,
-                    mediumPosition: 'bottom',
-                }}
-            />
+            <StoryStep {...defaultStoryProps} />
         </div>
     ));
 
@@ -118,10 +95,6 @@ storiesOf('Story', module)
                             src: '/img/abdolfatah-soltani.jpg',
                             title: 'Abdolfatah Soltani',
                         },
-                        displayOptions: {
-                            mediumPosition: 'top',
-                            backgroundColor: 'black',
-                        },
                         content: `
                             <p>
                                 <span class="ql-size-large">Abdolfatah Soltani</span> est un avocat iranien
@@ -130,10 +103,6 @@ storiesOf('Story', module)
                         `,
                     },
                     {
-                        displayOptions: {
-                            mediumPosition: 'top',
-                            backgroundColor: 'yellow',
-                        },
                         content: `
                             <p>
                                 Il se bat contre les <span class="ql-size-large">discriminations</span>, la <span class="ql-size-large">torture</span>
@@ -143,14 +112,6 @@ storiesOf('Story', module)
                         `,
                     },
                     {
-                        medium: {
-                            src: '/img/old-jail.jpg',
-                            title: 'Jail',
-                        },
-                        displayOptions: {
-                            mediumPosition: 'bottom',
-                            backgroundColor: 'orange',
-                        },
                         content: `
                             <p>
                                 En septembre 2011, il est emprisonné sur la base de <span class="ql-size-large">
@@ -159,10 +120,6 @@ storiesOf('Story', module)
                         `,
                     },
                     {
-                        displayOptions: {
-                            mediumPosition: 'top',
-                            backgroundColor: 'pink',
-                        },
                         content: `
                             <p>
                                 Le 21 mars 2018, Abdolfattah Soltani entame une
