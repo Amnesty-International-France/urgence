@@ -13,6 +13,8 @@ const styles = {
     justifyContent: 'center',
     padding: '20px 0',
     background: white,
+    WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+    userSelect: 'none',
     '&:active': {
         color: 'rgba(0, 0, 0, 0.5)',
     },

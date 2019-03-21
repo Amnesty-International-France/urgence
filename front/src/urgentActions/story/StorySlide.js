@@ -9,7 +9,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const styles = {
-    height: 'calc(100% - 17px)',
     backgroundColor: black,
     '& .story-step': {
         flex: '1 0 0',
