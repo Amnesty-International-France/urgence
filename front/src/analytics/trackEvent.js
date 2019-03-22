@@ -8,7 +8,7 @@ const buildDetail = (label, state) => {
 };
 
 export default (category, eventName, objectType, objectName, UAId, step, options = {}) => {
-    if (category) {
+    if (!category) {
         return;
     }
     const action = `${eventName} on ${options.disabled || ''} ${objectType}: ${objectName}`;
