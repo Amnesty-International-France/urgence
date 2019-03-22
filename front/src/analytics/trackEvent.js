@@ -6,8 +6,7 @@ export default (category, eventName, objectType, objectName, UAId, step, options
     }
     const action = `${eventName} on ${options.disabled || ''} ${objectType}: ${objectName}`;
     const label = `${eventName} on ${options.disabled || ''} ${objectType}: ${objectName}`;
-    const details = `label: ${options.label || '-'}, state: ${options.state ||
-        '-'}, value: ${options.value || '-'}`;
+    const details = `label: ${options.label || '-'}, state: ${options.state || '-'}`;
 
     GoogleAnalytics.event({
         category,
