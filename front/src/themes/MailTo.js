@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
@@ -7,38 +7,61 @@ import trackEvent from '../analytics/trackEvent';
 
 import { styles } from './Link';
 
-export const MailTo = ({
-    recipient = {},
-    subject,
-    body,
-    label,
-    disabled,
-    afterMail,
-    className,
-    analyticsCategory,
-    step,
-    match,
-}) => (
-    <a
-        className={classnames(className, { disabled })}
-        onClick={event => {
-            afterMail(event);
-            trackEvent(analyticsCategory, 'Click', 'button', 'SendMail', match.params.id, step, {
-                disabled: disabled ? 'disabled' : 'active',
-                label,
-            });
-        }}
-        href={`mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
+export class MailTo extends Component {
+    componentDidMount() {
+        const { label, disabled, analyticsCategory, step, match } = this.props;
+        trackEvent(analyticsCategory, 'Display', 'button', 'SendMail', match.params.id, step, {
+            disabled: disabled ? 'disabled' : 'active',
+            label,
+        });
+    }
+
+    render() {
+        const {
+            recipient = {},
             subject,
-        )}&body=${encodeURIComponent(body)}`
-            .concat(recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '')
-            .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '')}
-        target="_blank"
-        disabled={disabled}
-    >
-        {label}
-    </a>
-);
+            body,
+            label,
+            disabled,
+            afterMail,
+            className,
+            analyticsCategory,
+            step,
+            match,
+        } = this.props;
+        return (
+            <a
+                className={classnames(className, { disabled })}
+                onClick={event => {
+                    afterMail(event);
+                    trackEvent(
+                        analyticsCategory,
+                        'Click',
+                        'button',
+                        'SendMail',
+                        match.params.id,
+                        step,
+                        {
+                            disabled: disabled ? 'disabled' : 'active',
+                            label,
+                        },
+                    );
+                }}
+                href={`mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
+                    subject,
+                )}&body=${encodeURIComponent(body)}`
+                    .concat(
+                        recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '',
+                    )
+                    .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '')}
+                target="_blank"
+                disabled={disabled}
+            >
+                {label}
+            </a>
+        );
+    }
+}
 
 MailTo.propTypes = {
     className: PropTypes.string.isRequired,

@@ -11,6 +11,9 @@ describe('MailTo', () => {
         },
         subject: 'the subject',
         body: 'the body',
+        match: {
+            params: { id: 'ttt' },
+        },
     };
 
     it('should render a mailto link with mail, subject and body', () => {
@@ -41,7 +44,7 @@ describe('MailTo', () => {
         );
     });
 
-    it('should add disabled class to link if disabeld is true', () => {
+    it('should add disabled class to link if disabled is true', () => {
         const props = {
             ...defaultProps,
             disabled: true,

@@ -12,6 +12,6 @@ const client = new ApolloClient({
     cache: new InMemoryCache({ addTypename: false }),
 });
 
-registerGA();
+registerGA(); // Should be loaded before React App
 ReactDOM.render(<App client={client} />, document.getElementById('root'));
 registerServiceWorker();

@@ -198,8 +198,8 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
 };
 
 UrgentAction.propTypes = {
-    step: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    step: PropTypes.string,
     data: PropTypes.object,
     error: PropTypes.object,
     loading: PropTypes.bool,

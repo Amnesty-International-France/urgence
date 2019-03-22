@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import glamorous from 'glamorous';
@@ -32,31 +32,52 @@ export const styles = {
     },
 };
 
-export const Link = ({
-    to,
-    label,
-    disabled,
-    className,
-    onClick,
-    analyticsCategory,
-    buttonName,
-    step,
-    match,
-}) => (
-    <RouterLink
-        to={to}
-        className={classnames(className, { disabled: disabled })}
-        onClick={event => {
-            if (onClick) onClick(event);
-            trackEvent(analyticsCategory, 'Click', 'button', buttonName, match.params.id, step, {
-                disabled: disabled ? 'disabled' : 'active',
-                label,
-            });
-        }}
-    >
-        {label}
-    </RouterLink>
-);
+export class Link extends Component {
+    componentDidMount() {
+        const { label, disabled, analyticsCategory, buttonName, step, match } = this.props;
+        trackEvent(analyticsCategory, 'Display', 'button', buttonName, match.params.id, step, {
+            disabled: disabled ? 'disabled' : 'active',
+            label,
+        });
+    }
+
+    render() {
+        const {
+            to,
+            label,
+            disabled,
+            className,
+            onClick,
+            analyticsCategory,
+            buttonName,
+            step,
+            match,
+        } = this.props;
+        return (
+            <RouterLink
+                to={to}
+                className={classnames(className, { disabled: disabled })}
+                onClick={event => {
+                    if (onClick) onClick(event);
+                    trackEvent(
+                        analyticsCategory,
+                        'Click',
+                        'button',
+                        buttonName,
+                        match.params.id,
+                        step,
+                        {
+                            disabled: disabled ? 'disabled' : 'active',
+                            label,
+                        },
+                    );
+                }}
+            >
+                {label}
+            </RouterLink>
+        );
+    }
+}
 
 Link.propTypes = {
     to: PropTypes.string.isRequired,

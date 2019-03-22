@@ -1,13 +1,19 @@
 import GoogleAnalytics from 'react-ga';
 
+const buildDetail = (label, state) => {
+    let details = [];
+    if (label) details.push(`label: ${label}`);
+    if (state) details.push(`state: ${state}`);
+    return details.join(', ');
+};
+
 export default (category, eventName, objectType, objectName, UAId, step, options = {}) => {
-    if (category) {
+    if (!category) {
         return;
     }
     const action = `${eventName} on ${options.disabled || ''} ${objectType}: ${objectName}`;
     const label = `${eventName} on ${options.disabled || ''} ${objectType}: ${objectName}`;
-    const details = `label: ${options.label || '-'}, state: ${options.state ||
-        '-'}, value: ${options.value || '-'}`;
+    const details = buildDetail(options.label, options.state);
 
     GoogleAnalytics.event({
         category,

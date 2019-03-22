@@ -26,7 +26,6 @@ export const ToUrgentActionPageLink = ({
         analyticsCategory={analyticsCategory}
         buttonName={buttonName}
         step={step}
-        AURef={id}
     />
 );
 
