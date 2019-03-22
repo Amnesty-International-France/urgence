@@ -1,13 +1,10 @@
 import GoogleAnalytics from 'react-ga';
 
 const buildDetail = (label, state) => {
-    let details = '';
-
-    if (label) details = details + `label: ${label}`;
-    if (label && state) details = details + ', ';
-    if (state) details = details + `state: ${state}`;
-
-    return details;
+    let details = [];
+    if (label) details.push(`label: ${label}`);
+    if (state) details.push(`state: ${state}`);
+    return details.concat(', ');
 };
 
 export default (category, eventName, objectType, objectName, UAId, step, options = {}) => {
