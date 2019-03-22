@@ -23,27 +23,27 @@ const withTracker = (WrappedComponent, options = {}) => {
             const {
                 location: { pathname, search },
                 match: {
-                    params: { id, step },
+                    params: { id, step, page },
                 },
             } = this.props;
 
-            const page = pathname + search;
-            trackPage(page, id, step);
+            const pageUrl = pathname + search;
+            trackPage(pageUrl, id, `${step}${page ? page : ''}`);
         }
 
         componentDidUpdate(prevProps) {
             const {
                 location: { pathname, search },
                 match: {
-                    params: { id, step },
+                    params: { id, step, page },
                 },
             } = this.props;
 
-            const currentPage = prevProps.location.pathname + prevProps.location.search;
-            const nextPage = pathname + search;
+            const currentPageUrl = prevProps.location.pathname + prevProps.location.search;
+            const nextPageUrl = pathname + search;
 
-            if (currentPage !== nextPage) {
-                trackPage(nextPage, id, step);
+            if (currentPageUrl !== nextPageUrl) {
+                trackPage(nextPageUrl, id, `${step}${page ? page : ''}`);
             }
         }
 
