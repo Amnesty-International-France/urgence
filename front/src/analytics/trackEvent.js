@@ -4,7 +4,7 @@ const buildDetail = (label, state) => {
     let details = [];
     if (label) details.push(`label: ${label}`);
     if (state) details.push(`state: ${state}`);
-    return details.concat(', ');
+    return details.join(', ');
 };
 
 export default (category, eventName, objectType, objectName, UAId, step, options = {}) => {
