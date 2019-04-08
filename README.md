@@ -32,6 +32,16 @@ By default, it deploys `master` branch. However, it is possible to deploy anothe
 BRANCH=feature deploy-staging
 ```
 
+## Certificates
+
+Certificates are managed on staging by [certbot](https://github.com/certbot/certbot). The `certbot-auto` script is at the root level of the staging server.
+
+To renew the certificate, you should:
+
+1. Stop the running server: `cd amnesty/current && make stop-staging`
+2. Run the renew command `./certbot-auto renew`
+3. Restart the server: `cd amnesty/current && make start-staging`
+
 ## Debugging E2E tests
 
 E2E tests output can be visible via VNC:
