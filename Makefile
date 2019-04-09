@@ -1,6 +1,11 @@
 export UID=$(shell id -u)
 export GID=$(shell id -g)
 
+default: help
+
+help: ## SOS? Usage make help (default).
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | gawk 'match($$0, /(makefile:)?(.*):.*?## (.*)/, a) {printf "\033[36m%-30s\033[0m %s\n", a[2], a[3]}'
+
 DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
 DOCKER_COMPOSE_BUILD = docker-compose -p reaction-rapide-build -f docker-compose.build.yml
 DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
@@ -9,7 +14,7 @@ DOCKER_COMPOSE_STAGING = docker-compose -p reaction-rapide-staging -f docker-com
 DOCKER_COMPOSE_PROD = docker-compose -p reaction-rapide-prod -f docker-compose.yml -f docker-compose.prod.yml
 DOCKER_COMPOSE_DEV_NGINX = docker-compose -p reaction-rapide-dev-nginx -f docker-compose.yml -f docker-compose.dev-nginx.yml
 
-install: install-admin
+install: install-admin ## Install all dependencies. Usage make install.
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api yarn install
 	$(DOCKER_COMPOSE) run --rm --no-deps api yarn install
 	$(DOCKER_COMPOSE) run --rm --no-deps front yarn install
@@ -18,10 +23,10 @@ install-staging:
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api yarn install --production
 	$(DOCKER_COMPOSE) run --rm --no-deps api yarn install --production
 
-start:
+start: ## Start the project with docker. Usage make start.
 	$(DOCKER_COMPOSE) up --force-recreate -d
 
-stop:
+stop: ## Stop the project with docker. Usage make stop.
 	$(DOCKER_COMPOSE) down
 
 start-staging:
@@ -51,12 +56,12 @@ update-icons-components:
 		./node_modules/.bin/prettier --write front/src/icons/*.js \
 	"
 
-test: migration-test test-unit test-e2e
+test: migration-test test-unit test-e2e ## Run the tests. Usage make test.
 
 test-unit:
 	$(DOCKER_COMPOSE_TEST) run --rm test yarn run test
 
-test-watch:
+test-watch: ## Run the tests in watch mode. Usage make test.
 	$(DOCKER_COMPOSE_TEST) run --rm test yarn run test-watch
 
 test-stop-dockers:
