@@ -6,14 +6,14 @@ import actPageFactory from './pages/act';
 import messagePageFactory from './pages/message';
 import thanksPageFactory from './pages/thanks';
 import addressPageFactory from './pages/address';
-import thanksLetterPageFactory from './pages/thanksLetter';
+import thanksEndPageFactory from './pages/thanksEnd';
 
 const storyPage = storyPageFactory(driver);
 const actPage = actPageFactory(driver);
 const messagePage = messagePageFactory(driver);
 const thanksPage = thanksPageFactory(driver);
 const addressPage = addressPageFactory(driver);
-const thanksLetterPage = thanksLetterPageFactory(driver);
+const thanksEndPage = thanksEndPageFactory(driver);
 
 describe('app', () => {
     let urgentAction;
@@ -106,8 +106,6 @@ describe('app', () => {
         expect(text).toBe(
             "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
         );
-        await thanksPage.next();
-        await addressPage.isLoaded();
     });
 
     it('should display address step', async () => {
@@ -125,16 +123,16 @@ describe('app', () => {
         expect(await addressPage.isActionDisabled()).toBe(false);
 
         await addressPage.validate();
-        await thanksLetterPage.isLoaded();
+        await thanksEndPage.isLoaded();
     });
 
-    it('should display thanks-letter step', async () => {
-        await thanksLetterPage.navigate(urgentAction.id);
+    it('should display thanks-end step', async () => {
+        await thanksEndPage.navigate(urgentAction.id);
 
-        const title = await thanksLetterPage.getTitle();
+        const title = await thanksEndPage.getTitle();
         expect(title).toBe('MERCI DE VOTRE AIDE !');
 
-        const text = await thanksLetterPage.getText();
+        const text = await thanksEndPage.getText();
         expect(text).toBe(
             "Il ne vous reste plus qu'as poster la lettre qui vous à été envoyé par courriel.",
         );

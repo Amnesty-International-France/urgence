@@ -17,3 +17,4 @@ var/amnesty-prod
 var/amnesty-prod.pub
 /admin/build
 var/uploads
+var/

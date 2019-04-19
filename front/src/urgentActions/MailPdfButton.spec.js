@@ -24,7 +24,7 @@ describe('MailPdfButton', () => {
         const wrapper = shallow(<MailPdfButton {...defaultProps} />);
         const link = wrapper.find(ToUrgentActionPageLink);
 
-        expect(link.prop('pageName')).toBe('thanks-letter');
+        expect(link.prop('pageName')).toBe('thanks-end');
         expect(link.prop('label')).toBe("J'envoie");
         expect(link.prop('onClick')).toBe(wrapper.instance().sendMail);
     });

@@ -10,7 +10,7 @@ import yellow from '@material-ui/core/colors/yellow';
 import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
 
-import { USE_CALL_TO_ACTION_LINK } from '../flags';
+import { USE_CALL_TO_ACTION_LINK, LETTER_ACTIVATED } from '../flags';
 
 import StoryTemplateInput from './StoryTemplateInput';
 import CallToActionInput from './CallToActionInput';
@@ -78,18 +78,18 @@ export const Form = ({ classes }) => (
 
         <div className={`${classes.form} continue`}>
             <h2>Continue</h2>
-            <ThanksInput source="email_thank" withLink={USE_CALL_TO_ACTION_LINK} />
+            <ThanksInput source="email_thank" withLink={USE_CALL_TO_ACTION_LINK} final={!LETTER_ACTIVATED} />
         </div>
 
-        <div className={`${classes.form} letter`}>
+        {LETTER_ACTIVATED && <div className={`${classes.form} letter`}>
             <h2>Letter</h2>
             <LetterInput source="recipient" />
-        </div>
+        </div>}
 
-        <div className={`${classes.form} thank-you`}>
+        {LETTER_ACTIVATED && <div className={`${classes.form} thank-you`}>
             <h2>Thank You</h2>
             <ThanksInput source="letter_thank" withLink={USE_CALL_TO_ACTION_LINK} final />
-        </div>
+        </div>}
     </Fragment>
 );
 
