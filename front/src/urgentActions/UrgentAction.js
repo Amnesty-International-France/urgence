@@ -165,11 +165,11 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
             <Thanks
                 data={emailThank}
                 actions={() =>
-                    emailThank && emailThank.button ? (
+                    emailThank && emailThank.button && isLetterStepPresent(recipient) ? (
                         <ToUrgentActionPageLink
                             label={emailThank.button}
                             step={step}
-                            pageName={isLetterStepPresent(recipient) ? 'address' : 'thanks-end'}
+                            pageName="address"
                             analyticsCategory={ANALYTICS_CATEGORIES.THANKS}
                             buttonName="ActionLetter"
                         />

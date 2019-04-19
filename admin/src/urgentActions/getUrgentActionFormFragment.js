@@ -86,10 +86,10 @@ export const Form = ({ classes }) => (
             <LetterInput source="recipient" />
         </div>}
 
-        <div className={`${classes.form} thank-you`}>
+        {LETTER_ACTIVATED && <div className={`${classes.form} thank-you`}>
             <h2>Thank You</h2>
             <ThanksInput source="letter_thank" withLink={USE_CALL_TO_ACTION_LINK} final />
-        </div>
+        </div>}
     </Fragment>
 );
 
