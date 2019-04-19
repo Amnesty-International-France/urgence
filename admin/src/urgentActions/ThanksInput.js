@@ -18,6 +18,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { root, transitionScreenPreview } from './styles';
 import { get as getScreenIndex, CONTINUE, THANKS } from './screenIndex';
 import RichTextInput from '../form/RichTextInput';
+import ShareInput from './ShareInput';
 import FrontPreview, { noop } from './FrontPreview';
 
 import Thanks from '../../../front/src/urgentActions/Thanks';
@@ -34,16 +35,16 @@ const styles = {
 export const ThanksInput = ({ classes, source, withLink, final }) => {
     const defaultValues = final
         ? {
-              title: 'Merci pour votre action.',
-              text:
-                  "La lettre vous a été envoyée sur votre boîte e-mail. Poursuivez votre action en l'envoyant par La Poste.",
-          }
+            title: 'Merci pour votre action.',
+            text:
+                "La lettre vous a été envoyée sur votre boîte e-mail. Poursuivez votre action en l'envoyant par La Poste.",
+        }
         : {
-              title: 'Se battre. Encore. Et Encore.',
-              text:
-                  "Continuons d'agir pour augmenter les chances de victoire ! Allez plus loin dans ce combat en envoyant ce message par courrier.",
-              button: "Je continue d'agir",
-          };
+            title: 'Se battre. Encore. Et Encore.',
+            text:
+                "Continuons d'agir pour augmenter les chances de victoire ! Allez plus loin dans ce combat en envoyant ce message par courrier.",
+            button: "Je continue d'agir",
+        };
 
     return (
         <div className={classes.root}>
@@ -67,6 +68,9 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                                         label="Text"
                                         defaultValue={defaultValues.text}
                                         validate={[required()]}
+                                    />
+                                    <ShareInput
+                                        source={source}
                                     />
                                     {!final && (
                                         <Fragment>
