@@ -137,7 +137,8 @@ LetterView.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
 };
 
-export const FormStep = (
+export const FormStep = ({
+    email,
     objectIndication,
     object,
     civility,
@@ -145,11 +146,16 @@ export const FormStep = (
     name,
     analyticsCategory,
     step,
+    setEmail,
     setObject,
     setCivility,
     setSurname,
     setName,
-) => {
+}) => {
+    const handleChangeEmail = event => {
+        setEmail(event.target.value);
+    };
+
     const handleChangeObject = event => {
         setObject(event.target.value);
     };
@@ -168,6 +174,17 @@ export const FormStep = (
 
     return (
         <Fragment>
+            <Input
+                className="email"
+                type="email"
+                value={email}
+                onChange={handleChangeEmail}
+                error={!email}
+                autoComplete="email"
+                analyticsCategory={analyticsCategory}
+                step={step}
+                label="Votre adresse e-mail *"
+            />
             <Input
                 className="object"
                 value={object}
@@ -215,11 +232,13 @@ export const FormStep = (
 
 FormStep.propTypes = {
     className: PropTypes.string,
+    email: PropTypes.string,
     objectIndication: PropTypes.string,
     object: PropTypes.string,
     civility: PropTypes.string,
     surname: PropTypes.string,
     name: PropTypes.string,
+    setEmail: PropTypes.func.isRequired,
     setObject: PropTypes.func.isRequired,
     setCivility: PropTypes.func.isRequired,
     setSurname: PropTypes.func.isRequired,
@@ -228,69 +247,45 @@ FormStep.propTypes = {
     step: PropTypes.string,
 };
 
-export const Message = ({
-    messageTemplate,
-    objectIndication,
-    action,
-    className,
-    link,
-    setObject,
-    setCivility,
-    setSurname,
-    setName,
-    object,
-    civility,
-    surname,
-    name,
-    analyticsCategory,
-    step,
-}) => (
-    <Fragment>
-        {(!messageTemplate || !messageTemplate.length) && (
-            <p className="error">Cette action urgente n&#39;existe plus.</p>
-        )}
+export const Message = ({ messageTemplate, action, className, link, ...props }) => {
+    return (
+        <Fragment>
+            {(!messageTemplate || !messageTemplate.length) && (
+                <p className="error">Cette action urgente n&#39;existe plus.</p>
+            )}
 
-        {messageTemplate && messageTemplate.length > 0 && (
-            <div className={classnames('message', className)}>
-                <p>
-                    Pour agir plus vite,&nbsp;
-                    <strong className="importantText"> nous vous proposons ce message :</strong>
-                </p>
-                <LetterView messageTemplate={messageTemplate} />
-                <p>
-                    Parce que les messages uniques ont plus d&#39;impact,&nbsp;
-                    <strong className="importantText">
-                        {' '}
-                        nous vous invitons à le personnaliser.
-                    </strong>
-                </p>
-                <FormStep
-                    objectIndication={objectIndication}
-                    object={object}
-                    civility={civility}
-                    surname={surname}
-                    name={name}
-                    setObject={setObject}
-                    setCivility={setCivility}
-                    setSurname={setSurname}
-                    setName={setName}
-                    analyticsCategory={analyticsCategory}
-                    step={step}
-                />
-                <div className="action">
-                    {action}
-                    {link && link.url && <Link {...link} />}
+            {messageTemplate && messageTemplate.length > 0 && (
+                <div className={classnames('message', className)}>
+                    <p>
+                        Pour agir plus vite,&nbsp;
+                        <strong className="importantText"> nous vous proposons ce message :</strong>
+                    </p>
+                    <LetterView messageTemplate={messageTemplate} />
+                    <p>
+                        Parce que les messages uniques ont plus d&#39;impact,&nbsp;
+                        <strong className="importantText">
+                            {' '}
+                            nous vous invitons à le personnaliser.
+                        </strong>
+                    </p>
+                    <FormStep {...props} />
+                    <div className="action">
+                        {action}
+                        {link && link.url && <Link {...link} />}
+                    </div>
                 </div>
-            </div>
-        )}
-    </Fragment>
-);
+            )}
+        </Fragment>
+    );
+};
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
     link: LinkType,
+    email: PropTypes.string,
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
+    setEmail: PropTypes.func.isRequired,
     setObject: PropTypes.func.isRequired,
     setCivility: PropTypes.func.isRequired,
     setSurname: PropTypes.func.isRequired,
