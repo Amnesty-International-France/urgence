@@ -1,4 +1,5 @@
-import { UrgentActionsResolver } from '../urgentActions/resolvers';
-import { UsersResolvers } from '../users/resolvers';
+import UsersResolvers from '../activists/resolvers';
+import UrgentActionsResolver from '../urgentActions/resolvers';
+import UsersResolvers from '../users/resolvers';
 
-export const resolvers = [UrgentActionsResolver, UsersResolvers];
+export default [UsersResolvers, UrgentActionsResolver, UsersResolvers];
