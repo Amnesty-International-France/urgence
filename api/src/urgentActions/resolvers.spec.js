@@ -1,4 +1,4 @@
-import { UrgentActionsResolver } from './resolvers';
+import UrgentActionsResolver from './resolvers';
 import {
     getUrgentAction,
     getUrgentActions,
@@ -7,8 +7,6 @@ import {
     removeUrgentAction,
 } from './repository';
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
-
-const resolvers = require('./resolvers');
 
 jest.mock('./repository');
 jest.mock('../services/uploadImageFromStory');

@@ -24,7 +24,7 @@ const prepareUrgentActionForDatabase = async urgentAction => {
     };
 };
 
-export const UrgentActionsResolver = {
+export default {
     Query: {
         allUrgentActions: (_, { perPage, page, sortField, sortOrder }) =>
             getUrgentActions({ perPage, page, sortField, sortOrder }),
