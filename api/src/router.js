@@ -8,7 +8,6 @@ const router = new Router();
 router.use(bodyParser.json());
 router.use('/urgent-actions', urgentActionsRouter);
 
-
 if (process.env.NODE_ENV === 'test') {
     router.use('/test', require('./tests/router').default);
 }
