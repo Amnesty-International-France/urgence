@@ -125,7 +125,7 @@ describe('app', () => {
         expect(await addressPage.isActionDisabled()).toBe(false);
 
         await addressPage.validate();
-        await thanksLetterPage.isLoaded();
+        await thanksEndPage.isLoaded();
     });
 
     it('should display thanks-end step', async () => {
