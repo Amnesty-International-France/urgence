@@ -106,8 +106,6 @@ describe('app', () => {
         expect(text).toBe(
             "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
         );
-        await thanksPage.next();
-        await addressPage.isLoaded();
     });
 
     it('should display address step', async () => {
