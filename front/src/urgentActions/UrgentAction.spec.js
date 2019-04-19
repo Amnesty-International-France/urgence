@@ -220,7 +220,7 @@ describe('<UrgentAction />', () => {
             const thanks = wrapper.find(Thanks);
             const action = thanks.prop('actions')();
 
-            expect(action).toBe(undefined);
+            expect(action).toBe(null);
         });
     });
 
