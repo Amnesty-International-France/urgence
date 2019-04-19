@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const userTypeDefs = gql`
+export default gql`
     scalar DATE
 
     type Activist {

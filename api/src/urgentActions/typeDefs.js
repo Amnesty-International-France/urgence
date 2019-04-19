@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const urgentActionsTypeDefs = gql`
+export default gql`
     scalar DATE
 
     scalar Uploadable
