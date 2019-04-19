@@ -161,7 +161,7 @@ describe('<UrgentAction />', () => {
             expect(data.text).toBe('My Message');
         });
 
-        it('should add a link to address step as action', () => {
+        it('should add a link to address step as action when there is an address', () => {
             sessionData.getMailObject.mockImplementation(() => 'Hello World!');
             sessionData.getCivility.mockImplementation(() => 'M');
             sessionData.getSurname.mockImplementation(() => 'John');
@@ -178,6 +178,10 @@ describe('<UrgentAction />', () => {
                             text: 'My Message',
                             button: 'Continuer',
                         },
+                        recipient: {
+                            postal_address: 'Ici',
+                            button: 'Fin',
+                        },
                     },
                 },
             };
@@ -188,6 +192,35 @@ describe('<UrgentAction />', () => {
 
             expect(action.props.pageName).toBe('address');
             expect(action.props.label).toBe('Continuer');
+        });
+
+        it('should not add a link to address step as when there isnt address', () => {
+            sessionData.getMailObject.mockImplementation(() => 'Hello World!');
+            sessionData.getCivility.mockImplementation(() => 'M');
+            sessionData.getSurname.mockImplementation(() => 'John');
+            sessionData.getName.mockImplementation(() => 'Doe');
+
+            const props = {
+                ...defaultProps,
+                step: 'thanks',
+                id: '123456',
+                data: {
+                    UrgentAction: {
+                        email_thank: {
+                            title: 'Thanks!',
+                            text: 'My Message',
+                            button: 'Continuer',
+                        },
+                        recipient: {},
+                    },
+                },
+            };
+
+            const wrapper = shallow(<UrgentAction {...props} />);
+            const thanks = wrapper.find(Thanks);
+            const action = thanks.prop('actions')();
+
+            expect(action).toBe(undefined);
         });
     });
 
