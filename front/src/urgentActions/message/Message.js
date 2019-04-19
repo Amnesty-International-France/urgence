@@ -196,7 +196,7 @@ export const FormStep = (
                 error={!surname}
                 analyticsCategory={analyticsCategory}
                 step={step}
-                autoComplete="firstname"
+                autoComplete="given-name"
                 label="Votre prénom *"
             />
             <Input
@@ -206,7 +206,7 @@ export const FormStep = (
                 error={!name}
                 analyticsCategory={analyticsCategory}
                 step={step}
-                autoComplete="name"
+                autoComplete="family-name"
                 label="Votre nom *"
             />
         </Fragment>
