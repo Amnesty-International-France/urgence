@@ -51,7 +51,7 @@ export class MailPdfButton extends Component {
         return (
             <ToUrgentActionPageLink
                 onClick={this.sendMail}
-                pageName="thanks-letter"
+                pageName="thanks-end"
                 label={buttonText}
                 disabled={disabled}
                 analyticsCategory={analyticsCategory}

@@ -208,7 +208,7 @@ describe('<UrgentAction />', () => {
             expect(wrapper.find(AddressStep).length).toBe(1);
         });
 
-        it('should add a link to thanks-letter step as action', () => {
+        it('should add a link to thanks-end step as action', () => {
             const props = {
                 ...defaultProps,
                 step: 'address',
@@ -230,10 +230,10 @@ describe('<UrgentAction />', () => {
         });
     });
 
-    describe('Letter Thanks Step', () => {
-        it('should display thanks if step is "thanks-letter"', () => {
+    describe('Thanks End Step', () => {
+        it('should display thanks if step is "thanks-end"', () => {
             const props = {
-                step: 'thanks-letter',
+                step: 'thanks-end',
                 loading: false,
                 data: {
                     UrgentAction: {

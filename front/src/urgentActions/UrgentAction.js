@@ -89,7 +89,13 @@ const ANALYTICS_CATEGORIES = {
     ADDRESS: 'LetterManually',
 };
 
+const isLetterStepPresent = recipient => {
+    return recipient.button && recipient.postal_address;
+};
+
 export const UrgentAction = ({ step, id, data, error, loading }) => {
+    const recipient = get(data, 'UrgentAction.recipient');
+
     if (error) {
         console.error(error);
         return null;
@@ -144,7 +150,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                 action={
                     <SendMail
                         step={step}
-                        recipient={get(data, 'UrgentAction.recipient')}
+                        recipient={recipient}
                         messageTemplate={get(data, 'UrgentAction.message_template')}
                         analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                     />
@@ -163,7 +169,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                         <ToUrgentActionPageLink
                             label={emailThank.button}
                             step={step}
-                            pageName="address"
+                            pageName={isLetterStepPresent(recipient) ? 'address' : 'thanks-end'}
                             analyticsCategory={ANALYTICS_CATEGORIES.THANKS}
                             buttonName="ActionLetter"
                         />
@@ -174,7 +180,6 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (step === 'address') {
-        const recipient = get(data, 'UrgentAction.recipient');
         return (
             <AddressStep
                 step={step}
@@ -191,9 +196,9 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
         );
     }
 
-    if (step === 'thanks-letter') {
-        const letterThank = get(data, 'UrgentAction.letter_thank');
-        return <Thanks data={letterThank} />;
+    if (step === 'thanks-end') {
+        const thankEnd = get(data, 'UrgentAction.letter_thank');
+        return <Thanks data={thankEnd} />;
     }
 };
 
