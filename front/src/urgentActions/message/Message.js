@@ -78,6 +78,9 @@ const styles = {
         fontStyle: 'italic',
         opacity: '0.5',
     },
+    '& .formStep': {
+        margin: '5px 0px',
+    },
 };
 
 export class LetterView extends Component {
@@ -268,7 +271,9 @@ export const Message = ({ messageTemplate, action, className, link, ...props }) 
                             nous vous invitons à le personnaliser.
                         </strong>
                     </p>
-                    <FormStep {...props} />
+                    <div className="formStep">
+                        <FormStep {...props} />
+                    </div>
                     <div className="action">
                         {action}
                         {link && link.url && <Link {...link} />}
