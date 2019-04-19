@@ -1,18 +1,25 @@
 import get from 'lodash.get';
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { LinkType } from '../propTypes';
 import TransitionScreen from '../themes/TransitionScreen';
+import Share from '../themes/Share';
 
-export const Thanks = ({ data, actions }) => (
-    <TransitionScreen
-        actions={actions}
-        title={get(data, 'title')}
-        message={get(data, 'text')}
-        link={get(data, 'link.url')}
-    />
-);
+export const Thanks = ({ data, actions }) => {
+    const share = get(data, 'share');
+    return (
+        <Fragment>
+            <TransitionScreen
+                actions={actions}
+                title={get(data, 'title')}
+                message={get(data, 'text')}
+                link={get(data, 'link.url')}
+            />
+            {share.active && <Share message={share.message} />}
+        </Fragment>
+    );
+};
 
 Thanks.propTypes = {
     actions: PropTypes.func,
