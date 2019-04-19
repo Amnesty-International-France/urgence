@@ -78,7 +78,7 @@ export const Form = ({ classes }) => (
 
         <div className={`${classes.form} continue`}>
             <h2>Continue</h2>
-            <ThanksInput source="email_thank" withLink={USE_CALL_TO_ACTION_LINK} />
+            <ThanksInput source="email_thank" withLink={USE_CALL_TO_ACTION_LINK} final={!LETTER_ACTIVATED} />
         </div>
 
         {LETTER_ACTIVATED && <div className={`${classes.form} letter`}>
