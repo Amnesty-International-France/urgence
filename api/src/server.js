@@ -19,7 +19,7 @@ app.use(
 app.use(config.api.prefixUrl, apiRouter);
 
 apolloServer.applyMiddleware({
-    app
+    app,
 });
 
 app.use(errorHandler);
