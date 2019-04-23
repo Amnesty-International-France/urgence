@@ -16,14 +16,11 @@ app.use(
     }),
 );
 
-apolloServer.applyMiddleware({
-    app
-});
-
-console.log('config.api.prefixUrl');
-console.log(config.api.prefixUrl);
-
 app.use(config.api.prefixUrl, apiRouter);
+
+apolloServer.applyMiddleware({
+    app,
+});
 
 app.use(errorHandler);
 
