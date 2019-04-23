@@ -10,8 +10,8 @@ import { getLetterMailBody } from './letterMailBody';
 export const urgentActionsRouter = new Router();
 
 urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
-    console.log('enter urgentActionsRouter');
     const { id } = req.params;
+
     if (!isUUID(id)) {
         return res.status(400).send(`Invalid UUID format: ${id}`);
     }
@@ -21,7 +21,6 @@ urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
         surname,
         name,
         subject,
-        email,
         addressMain,
         addressMore,
         postalCode,
@@ -30,8 +29,8 @@ urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
     } = req.query;
 
     const urgentAction = await getUrgentAction(id);
+
     if (!urgentAction) {
-        console.log('error urgentActionsRouter');
         return res.status(404).send('Not Found');
     }
 
@@ -47,16 +46,18 @@ urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
         city,
         country,
     );
+
     res.write(pdfBuffer, 'binary');
-    console.log('end urgentActionsRouter');
     return res.end();
 });
 
 urgentActionsRouter.post('/:id/send', async (req, res, next) => {
     const { id } = req.params;
+
     if (!isUUID(id)) {
         return res.status(400).send(`Invalid UUID format: ${id}`);
     }
+
     try {
         const {
             civility,
@@ -70,7 +71,9 @@ urgentActionsRouter.post('/:id/send', async (req, res, next) => {
             city,
             country,
         } = req.body;
+
         const urgentAction = await getUrgentAction(id);
+
         if (!urgentAction) {
             return res.status(404).send('Not Found');
         }
