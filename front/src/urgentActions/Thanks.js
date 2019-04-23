@@ -1,5 +1,5 @@
 import get from 'lodash.get';
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { LinkType } from '../propTypes';
@@ -7,16 +7,14 @@ import TransitionScreen from '../themes/TransitionScreen';
 
 export const Thanks = ({ data, actions, auId }) => {
     return (
-        <Fragment>
-            <TransitionScreen
-                actions={actions}
-                title={get(data, 'title')}
-                message={get(data, 'text')}
-                link={get(data, 'link.url')}
-                share={get(data, 'share')}
-                auId={auId}
-            />
-        </Fragment>
+        <TransitionScreen
+            actions={actions}
+            title={get(data, 'title')}
+            message={get(data, 'text')}
+            link={get(data, 'link.url')}
+            share={get(data, 'share')}
+            auId={auId}
+        />
     );
 };
 
