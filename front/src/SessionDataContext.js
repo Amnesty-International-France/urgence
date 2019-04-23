@@ -26,9 +26,9 @@ const { Provider, Consumer } = createContext({
     setEmail: () => null,
 });
 
-export const dataConsumer = Consumer;
+export const SessionDataConsumer = Consumer;
 
-export class dataProvider extends Component {
+export class SessionDataProvider extends Component {
     state = {
         object: data.getMailObject(),
         civility: data.getCivility(),
@@ -115,10 +115,10 @@ export class dataProvider extends Component {
     }
 }
 
-dataProvider.propTypes = {
+SessionDataProvider.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
 export const withdata = Component => props => (
-    <dataConsumer>{context => <Component {...props} {...context} />}</dataConsumer>
+    <SessionDataConsumer>{context => <Component {...props} {...context} />}</SessionDataConsumer>
 );
