@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { UrgentAction } from './UrgentAction';
-import sessionData from '../sessionData';
+import data from '../data';
 import Act from './Act';
 import Thanks from './Thanks';
 import Story from './story/Story';
@@ -162,10 +162,10 @@ describe('<UrgentAction />', () => {
         });
 
         it('should add a link to address step as action when there is an address', () => {
-            sessionData.getMailObject.mockImplementation(() => 'Hello World!');
-            sessionData.getCivility.mockImplementation(() => 'M');
-            sessionData.getSurname.mockImplementation(() => 'John');
-            sessionData.getName.mockImplementation(() => 'Doe');
+            data.getMailObject.mockImplementation(() => 'Hello World!');
+            data.getCivility.mockImplementation(() => 'M');
+            data.getSurname.mockImplementation(() => 'John');
+            data.getName.mockImplementation(() => 'Doe');
 
             const props = {
                 ...defaultProps,
@@ -195,10 +195,10 @@ describe('<UrgentAction />', () => {
         });
 
         it('should not add a link to address step as when there isnt address', () => {
-            sessionData.getMailObject.mockImplementation(() => 'Hello World!');
-            sessionData.getCivility.mockImplementation(() => 'M');
-            sessionData.getSurname.mockImplementation(() => 'John');
-            sessionData.getName.mockImplementation(() => 'Doe');
+            data.getMailObject.mockImplementation(() => 'Hello World!');
+            data.getCivility.mockImplementation(() => 'M');
+            data.getSurname.mockImplementation(() => 'John');
+            data.getName.mockImplementation(() => 'Doe');
 
             const props = {
                 ...defaultProps,
