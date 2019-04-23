@@ -78,6 +78,9 @@ const styles = {
         fontStyle: 'italic',
         opacity: '0.5',
     },
+    '& .formStep': {
+        margin: '5px 0px',
+    },
 };
 
 export class LetterView extends Component {
@@ -137,87 +140,108 @@ LetterView.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
 };
 
-export class FormStep extends Component {
-    setObject = event => {
-        this.props.setObject(event.target.value);
+export const FormStep = ({
+    email,
+    objectIndication,
+    object,
+    civility,
+    surname,
+    name,
+    analyticsCategory,
+    step,
+    setEmail,
+    setObject,
+    setCivility,
+    setSurname,
+    setName,
+}) => {
+    const handleChangeEmail = event => {
+        setEmail(event.target.value);
     };
-    setCivility = event => {
-        this.props.setCivility(event.target.value);
+
+    const handleChangeObject = event => {
+        setObject(event.target.value);
     };
-    setSurname = event => {
-        this.props.setSurname(event.target.value);
+
+    const handleChangeCivility = event => {
+        setCivility(event.target.value);
     };
-    setName = event => {
-        this.props.setName(event.target.value);
+
+    const handleChangeSurname = event => {
+        setSurname(event.target.value);
     };
-    setShowErrorState = field => {
-        if (!this.state[field]) this.setState({ [field]: true });
+
+    const handleChangeName = event => {
+        setName(event.target.value);
     };
-    render() {
-        const {
-            objectIndication,
-            object,
-            civility,
-            surname,
-            name,
-            analyticsCategory,
-            step,
-        } = this.props;
-        return (
-            <Fragment>
-                <Input
-                    className="object"
-                    value={object}
-                    onChange={this.setObject}
-                    error={!object}
-                    analyticsCategory={analyticsCategory}
-                    step={step}
-                    label="Objet de l'e-mail *"
-                />
-                <p className="objectIndication">{objectIndication}</p>
-                <RadioButton
-                    value={civility}
-                    name="civility"
-                    onChange={this.setCivility}
-                    error={!civility}
-                    analyticsCategory={analyticsCategory}
-                    step={step}
-                    label="Civilité *"
-                    autoComplete="civility"
-                    choices={['M.', 'Mme.', 'Autre']}
-                />
-                <Input
-                    className="surname"
-                    value={surname}
-                    onChange={this.setSurname}
-                    error={!surname}
-                    analyticsCategory={analyticsCategory}
-                    step={step}
-                    autoComplete="firstname"
-                    label="Votre prénom *"
-                />
-                <Input
-                    className="name"
-                    value={name}
-                    onChange={this.setName}
-                    error={!name}
-                    analyticsCategory={analyticsCategory}
-                    step={step}
-                    autoComplete="name"
-                    label="Votre nom *"
-                />
-            </Fragment>
-        );
-    }
-}
+
+    return (
+        <Fragment>
+            <Input
+                className="email"
+                type="email"
+                value={email}
+                onChange={handleChangeEmail}
+                error={!email}
+                autoComplete="email"
+                analyticsCategory={analyticsCategory}
+                step={step}
+                label="Votre adresse e-mail *"
+            />
+            <Input
+                className="object"
+                value={object}
+                onChange={handleChangeObject}
+                error={!object}
+                analyticsCategory={analyticsCategory}
+                step={step}
+                label="Objet de l'e-mail *"
+            />
+            <p className="objectIndication">{objectIndication}</p>
+            <RadioButton
+                value={civility}
+                name="civility"
+                onChange={handleChangeCivility}
+                error={!civility}
+                analyticsCategory={analyticsCategory}
+                step={step}
+                label="Civilité *"
+                autoComplete="civility"
+                choices={['M.', 'Mme.', 'Autre']}
+            />
+            <Input
+                className="surname"
+                value={surname}
+                onChange={handleChangeSurname}
+                error={!surname}
+                analyticsCategory={analyticsCategory}
+                step={step}
+                autoComplete="given-name"
+                label="Votre prénom *"
+            />
+            <Input
+                className="name"
+                value={name}
+                onChange={handleChangeName}
+                error={!name}
+                analyticsCategory={analyticsCategory}
+                step={step}
+                autoComplete="family-name"
+                label="Votre nom *"
+            />
+        </Fragment>
+    );
+};
 
 FormStep.propTypes = {
     className: PropTypes.string,
+    email: PropTypes.string,
     objectIndication: PropTypes.string,
     object: PropTypes.string,
     civility: PropTypes.string,
     surname: PropTypes.string,
     name: PropTypes.string,
+    setEmail: PropTypes.func.isRequired,
     setObject: PropTypes.func.isRequired,
     setCivility: PropTypes.func.isRequired,
     setSurname: PropTypes.func.isRequired,
@@ -226,69 +250,47 @@ FormStep.propTypes = {
     step: PropTypes.string,
 };
 
-export const Message = ({
-    messageTemplate,
-    objectIndication,
-    action,
-    className,
-    link,
-    setObject,
-    setCivility,
-    setSurname,
-    setName,
-    object,
-    civility,
-    surname,
-    name,
-    analyticsCategory,
-    step,
-}) => (
-    <Fragment>
-        {(!messageTemplate || !messageTemplate.length) && (
-            <p className="error">Cette action urgente n&#39;existe plus.</p>
-        )}
+export const Message = ({ messageTemplate, action, className, link, ...props }) => {
+    return (
+        <Fragment>
+            {(!messageTemplate || !messageTemplate.length) && (
+                <p className="error">Cette action urgente n&#39;existe plus.</p>
+            )}
 
-        {messageTemplate && messageTemplate.length > 0 && (
-            <div className={classnames('message', className)}>
-                <p>
-                    Pour agir plus vite,&nbsp;
-                    <strong className="importantText"> nous vous proposons ce message :</strong>
-                </p>
-                <LetterView messageTemplate={messageTemplate} />
-                <p>
-                    Parce que les messages uniques ont plus d&#39;impact,&nbsp;
-                    <strong className="importantText">
-                        {' '}
-                        nous vous invitons à le personnaliser.
-                    </strong>
-                </p>
-                <FormStep
-                    objectIndication={objectIndication}
-                    object={object}
-                    civility={civility}
-                    surname={surname}
-                    name={name}
-                    setObject={setObject}
-                    setCivility={setCivility}
-                    setSurname={setSurname}
-                    setName={setName}
-                    analyticsCategory={analyticsCategory}
-                    step={step}
-                />
-                <div className="action">
-                    {action}
-                    {link && link.url && <Link {...link} />}
+            {messageTemplate && messageTemplate.length > 0 && (
+                <div className={classnames('message', className)}>
+                    <p>
+                        Pour agir plus vite,&nbsp;
+                        <strong className="importantText"> nous vous proposons ce message :</strong>
+                    </p>
+                    <LetterView messageTemplate={messageTemplate} />
+                    <p>
+                        Parce que les messages uniques ont plus d&#39;impact,&nbsp;
+                        <strong className="importantText">
+                            {' '}
+                            nous vous invitons à le personnaliser.
+                        </strong>
+                    </p>
+                    <div className="formStep">
+                        <FormStep {...props} />
+                    </div>
+                    <div className="action">
+                        {action}
+                        {link && link.url && <Link {...link} />}
+                    </div>
                 </div>
-            </div>
-        )}
-    </Fragment>
-);
+            )}
+        </Fragment>
+    );
+};
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
     link: LinkType,
+    email: PropTypes.string,
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
+    setEmail: PropTypes.func.isRequired,
     setObject: PropTypes.func.isRequired,
     setCivility: PropTypes.func.isRequired,
     setSurname: PropTypes.func.isRequired,

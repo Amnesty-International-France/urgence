@@ -134,7 +134,7 @@ describe('app', () => {
 
         const text = await thanksEndPage.getText();
         expect(text).toBe(
-            "Il ne vous reste plus qu'as poster la lettre qui vous à été envoyé par courriel.",
+            "Il ne vous reste plus qu'à poster la lettre qui vous a été envoyée par courriel.",
         );
     });
 });
