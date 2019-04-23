@@ -19,20 +19,23 @@ const disableSharing = (record, source) => {
 }
 
 export const ShareInput = ({ classes, source }) => {
+    const defaultValue = `J'ai agi avec #AmnestyFrance
+https://www.amnesty.fr/agir-face-a-lurgence`;
+
     return (
         <div className={classes.root}>
             <FormDataConsumer>
                 {({ formData }) => {
-                    console.log(formData[source]);
                     return (<Fragment>
                         <BooleanInput
                             source={`${source}.share.active`}
+                            defaultValue={true}
                             label='Activate sharing'
                         />
                         {!disableSharing(formData, source) && <LongTextInput
                             source={`${source}.share.message`}
                             label="Tweet message"
-                            defaultValue="Sauvez nous"
+                            defaultValue={defaultValue}
                             rows="2"
                             rowsMax="10"
                             disabled={disableSharing(formData, source)}

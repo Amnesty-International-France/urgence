@@ -4,10 +4,8 @@ import PropTypes from 'prop-types';
 
 import { LinkType } from '../propTypes';
 import TransitionScreen from '../themes/TransitionScreen';
-import Share from '../themes/Share';
 
 export const Thanks = ({ data, actions }) => {
-    const share = get(data, 'share');
     return (
         <Fragment>
             <TransitionScreen
@@ -15,8 +13,8 @@ export const Thanks = ({ data, actions }) => {
                 title={get(data, 'title')}
                 message={get(data, 'text')}
                 link={get(data, 'link.url')}
+                share={get(data, 'share')}
             />
-            {share && share.active && <Share message={share.message} />}
         </Fragment>
     );
 };

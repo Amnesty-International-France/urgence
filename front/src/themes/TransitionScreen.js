@@ -8,6 +8,7 @@ import { yellow, white, black } from '../themes/colors';
 import { withBlackLogo } from '../themes/ThemeContext';
 import { LinkType } from '../propTypes';
 import Link from './Link';
+import Share from '../themes/Share';
 
 const styles = {
     display: 'flex',
@@ -58,7 +59,7 @@ const styles = {
     },
 };
 
-export const TransitionScreen = ({ className, actions, title, message, link }) => (
+export const TransitionScreen = ({ className, actions, title, message, link, share }) => (
     <div className={className}>
         <div>
             <h1>
@@ -70,6 +71,7 @@ export const TransitionScreen = ({ className, actions, title, message, link }) =
             {actions()}
             {link && link.url && <Link {...link} color={black} />}
         </div>
+        {share && share.active && <Share message={share.message} />}
     </div>
 );
 
@@ -79,6 +81,7 @@ TransitionScreen.propTypes = {
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     link: LinkType,
+    share: PropTypes.object,
 };
 
 TransitionScreen.defaultProps = {
