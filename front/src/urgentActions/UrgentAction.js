@@ -65,6 +65,10 @@ const query = gql`
                 title
                 text
                 button
+                share {
+                    active
+                    message
+                }
                 link {
                     label
                     url

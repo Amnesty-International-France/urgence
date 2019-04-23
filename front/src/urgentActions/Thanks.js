@@ -16,7 +16,7 @@ export const Thanks = ({ data, actions }) => {
                 message={get(data, 'text')}
                 link={get(data, 'link.url')}
             />
-            {share.active && <Share message={share.message} />}
+            {share && share.active && <Share message={share.message} />}
         </Fragment>
     );
 };
