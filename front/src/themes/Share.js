@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
-import RichText from './RichText';
-import { yellow, white, black } from './colors';
+import { white, black } from './colors';
 
 const styles = {
     display: 'flex',
@@ -38,17 +37,17 @@ const styles = {
     },
 };
 
-const parseTextForUrl = text => {
+const parseTextForUrl = (text, auId) => {
     const encodedText = encodeURI(text);
-    const hashTaggedText = encodedText.replace('#', '%23');
-    return hashTaggedText;
+    const hashTaggedText = encodedText.replace(/#/g, '%23');
+    return hashTaggedText.replace('$CURRENT_AU_ID', auId);
 };
 
-export const Share = ({ className, message }) => (
+export const Share = ({ className, message, auId }) => (
     <div className={className}>
         <a
             className="twitter-share-button"
-            href={`https://twitter.com/intent/tweet?text=${parseTextForUrl(message)}`}
+            href={`https://twitter.com/intent/tweet?text=${parseTextForUrl(message, auId)}`}
             target="twitter"
             title="Partage Twitter"
         >
@@ -70,6 +69,7 @@ export const Share = ({ className, message }) => (
 
 Share.propTypes = {
     message: PropTypes.string.isRequired,
+    auId: PropTypes.string.isRequired,
 };
 
 Share.defaultProps = {

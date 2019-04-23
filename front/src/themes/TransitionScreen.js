@@ -59,7 +59,7 @@ const styles = {
     },
 };
 
-export const TransitionScreen = ({ className, actions, title, message, link, share }) => (
+export const TransitionScreen = ({ className, actions, title, message, link, share, auId }) => (
     <div className={className}>
         <div>
             <h1>
@@ -71,7 +71,7 @@ export const TransitionScreen = ({ className, actions, title, message, link, sha
             {actions()}
             {link && link.url && <Link {...link} color={black} />}
         </div>
-        {share && share.active && <Share message={share.message} />}
+        {share && share.active && <Share message={share.message} auId={auId} />}
     </div>
 );
 
@@ -82,6 +82,7 @@ TransitionScreen.propTypes = {
     message: PropTypes.string.isRequired,
     link: LinkType,
     share: PropTypes.object,
+    auId: PropTypes.string,
 };
 
 TransitionScreen.defaultProps = {

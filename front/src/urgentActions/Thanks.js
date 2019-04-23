@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { LinkType } from '../propTypes';
 import TransitionScreen from '../themes/TransitionScreen';
 
-export const Thanks = ({ data, actions }) => {
+export const Thanks = ({ data, actions, auId }) => {
     return (
         <Fragment>
             <TransitionScreen
@@ -14,6 +14,7 @@ export const Thanks = ({ data, actions }) => {
                 message={get(data, 'text')}
                 link={get(data, 'link.url')}
                 share={get(data, 'share')}
+                auId={auId}
             />
         </Fragment>
     );
@@ -26,6 +27,7 @@ Thanks.propTypes = {
         text: PropTypes.string.isRequired,
         link: LinkType,
     }),
+    auId: PropTypes.string,
 };
 
 Thanks.defaultProps = {

@@ -20,7 +20,7 @@ const disableSharing = (record, source) => {
 
 export const ShareInput = ({ classes, source }) => {
     const defaultValue = `J'ai agi avec #AmnestyFrance
-https://www.amnesty.fr/agir-face-a-lurgence`;
+${process.env.REACT_APP_FRONT_BASE_URL}/#/ua/$CURRENT_AU_ID`;
 
     return (
         <div className={classes.root}>

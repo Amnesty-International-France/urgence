@@ -22,6 +22,7 @@ import MailPdfButton from './MailPdfButton';
 const query = gql`
     query urgentAction($id: ID!) {
         UrgentAction(id: $id) {
+            id
             story {
                 displayOptions {
                     mediumPosition
@@ -165,9 +166,12 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
 
     if (step === 'thanks') {
         const emailThank = get(data, 'UrgentAction.email_thank');
+        const auId = get(data, 'UrgentAction.id');
+        console.log(data);
         return (
             <Thanks
                 data={emailThank}
+                auId={auId}
                 actions={() =>
                     emailThank && emailThank.button && isLetterStepPresent(recipient) ? (
                         <ToUrgentActionPageLink
@@ -219,14 +223,14 @@ export const UrgentActionWithData = ({
         params: { id, step },
     },
 }) => (
-    <SessionDataProvider>
-        <Query query={query} variables={{ id }}>
-            {({ data, error, loading }) => (
-                <UrgentAction step={step} id={id} data={data} error={error} loading={loading} />
-            )}
-        </Query>
-    </SessionDataProvider>
-);
+        <SessionDataProvider>
+            <Query query={query} variables={{ id }}>
+                {({ data, error, loading }) => (
+                    <UrgentAction step={step} id={id} data={data} error={error} loading={loading} />
+                )}
+            </Query>
+        </SessionDataProvider>
+    );
 
 UrgentActionWithData.propTypes = {
     match: routeMatch,
