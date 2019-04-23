@@ -102,10 +102,21 @@ export const urgentActionsTypeDefs = gql`
         button: String
     }
 
+    type Share {
+        active: Boolean
+        message: String
+    }
+
+    input ShareInput{
+        active: Boolean
+        message: String
+    }
+
     type Thanks {
         title: String
         text: String
         button: String
+        share: Share
         link: Link
     }
 
@@ -113,6 +124,7 @@ export const urgentActionsTypeDefs = gql`
         title: String
         text: String
         button: String
+        share: ShareInput
         link: LinkInput
     }
 

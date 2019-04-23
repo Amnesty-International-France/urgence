@@ -22,6 +22,7 @@ import MailPdfButton from './MailPdfButton';
 const query = gql`
     query urgentAction($id: ID!) {
         UrgentAction(id: $id) {
+            id
             story {
                 displayOptions {
                     mediumPosition
@@ -65,6 +66,10 @@ const query = gql`
                 title
                 text
                 button
+                share {
+                    active
+                    message
+                }
                 link {
                     label
                     url
@@ -161,9 +166,11 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
 
     if (step === 'thanks') {
         const emailThank = get(data, 'UrgentAction.email_thank');
+        const auId = get(data, 'UrgentAction.id');
         return (
             <Thanks
                 data={emailThank}
+                auId={auId}
                 actions={() =>
                     emailThank && emailThank.button && isLetterStepPresent(recipient) ? (
                         <ToUrgentActionPageLink
