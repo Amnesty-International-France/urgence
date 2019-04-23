@@ -2,16 +2,16 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { SessionDataProvider } from './SessionDataContext';
-import sessionData from './sessionData';
+import data from './data';
 
-jest.mock('./sessionData.js');
+jest.mock('./data');
 
 describe('SessionDataContext', () => {
     beforeEach(() => {
-        sessionData.getMailObject.mockImplementation(() => 'object value');
-        sessionData.getCivility.mockImplementation(() => 'civility value');
-        sessionData.getSurname.mockImplementation(() => 'surname value');
-        sessionData.getName.mockImplementation(() => 'name value');
+        data.getMailObject.mockImplementation(() => 'object value');
+        data.getCivility.mockImplementation(() => 'civility value');
+        data.getSurname.mockImplementation(() => 'surname value');
+        data.getName.mockImplementation(() => 'name value');
     });
 
     it('should have state from sessionData', () => {
@@ -33,7 +33,7 @@ describe('SessionDataContext', () => {
             surname: 'surname value',
             name: 'name value',
         });
-        expect(sessionData.setMailObject).toBeCalledWith('new object');
+        expect(data.setMailObject).toBeCalledWith('new object');
     });
 
     it('should have setCivility method to change the state object', () => {
@@ -45,7 +45,7 @@ describe('SessionDataContext', () => {
             surname: 'surname value',
             name: 'name value',
         });
-        expect(sessionData.setCivility).toBeCalledWith('new civility');
+        expect(data.setCivility).toBeCalledWith('new civility');
     });
 
     it('should have setSurname method to change the state object', () => {
@@ -57,7 +57,7 @@ describe('SessionDataContext', () => {
             surname: 'new surname',
             name: 'name value',
         });
-        expect(sessionData.setSurname).toBeCalledWith('new surname');
+        expect(data.setSurname).toBeCalledWith('new surname');
     });
 
     it('should have setName method to change the state object', () => {
@@ -69,6 +69,6 @@ describe('SessionDataContext', () => {
             surname: 'surname value',
             name: 'new name',
         });
-        expect(sessionData.setName).toBeCalledWith('new name');
+        expect(data.setName).toBeCalledWith('new name');
     });
 });
