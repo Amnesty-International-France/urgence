@@ -119,6 +119,6 @@ SessionDataProvider.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-export const withdata = Component => props => (
+export const withSessionData = Component => props => (
     <SessionDataConsumer>{context => <Component {...props} {...context} />}</SessionDataConsumer>
 );
