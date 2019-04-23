@@ -8,7 +8,7 @@ import Thanks from './Thanks';
 import Story from './story/Story';
 import AddressStep from './AddressStep';
 
-jest.mock('../sessionData.js');
+jest.mock('../data');
 
 const defaultStep = {
     content: '',
