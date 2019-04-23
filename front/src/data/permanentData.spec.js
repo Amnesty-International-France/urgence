@@ -1,37 +1,13 @@
-import { sessionData } from './sessionData';
+import { permanentData } from './permanentData';
 
-describe('sessionData', () => {
-    describe('.getMailObject', () => {
-        it('calls storage.getItem(amnesty_opbject) and returns its result', () => {
-            const storage = {
-                getItem: jest.fn(() => 'object value'),
-            };
-
-            expect(sessionData(storage).getMailObject()).toBe('object value');
-            expect(storage.getItem).toHaveBeenCalledWith('amnesty_mail_object');
-        });
-    });
-
-    describe('.setMailObject', () => {
-        it('calls storage.setItem(amnesty_object, value) and returns itself', () => {
-            const storage = {
-                setItem: jest.fn(),
-            };
-
-            const mySessionData = sessionData(storage);
-
-            expect(mySessionData.setMailObject('value')).toEqual(mySessionData);
-            expect(storage.setItem).toHaveBeenCalledWith('amnesty_mail_object', 'value');
-        });
-    });
-
+describe('permanentData', () => {
     describe('.getCivility', () => {
         it('calls storage.getItem(amnesty_civility) and returns its result', () => {
             const storage = {
                 getItem: jest.fn(() => 'civility value'),
             };
 
-            expect(sessionData(storage).getCivility()).toBe('civility value');
+            expect(permanentData(storage).getCivility()).toBe('civility value');
             expect(storage.getItem).toHaveBeenCalledWith('amnesty_civility');
         });
     });
@@ -42,7 +18,7 @@ describe('sessionData', () => {
                 setItem: jest.fn(),
             };
 
-            const mySessionData = sessionData(storage);
+            const mySessionData = permanentData(storage);
 
             expect(mySessionData.setCivility('value')).toEqual(mySessionData);
             expect(storage.setItem).toHaveBeenCalledWith('amnesty_civility', 'value');
@@ -55,7 +31,7 @@ describe('sessionData', () => {
                 getItem: jest.fn(() => 'surname value'),
             };
 
-            expect(sessionData(storage).getSurname()).toBe('surname value');
+            expect(permanentData(storage).getSurname()).toBe('surname value');
             expect(storage.getItem).toHaveBeenCalledWith('amnesty_surname');
         });
     });
@@ -66,7 +42,7 @@ describe('sessionData', () => {
                 setItem: jest.fn(),
             };
 
-            const mySessionData = sessionData(storage);
+            const mySessionData = permanentData(storage);
 
             expect(mySessionData.setSurname('value')).toEqual(mySessionData);
             expect(storage.setItem).toHaveBeenCalledWith('amnesty_surname', 'value');
@@ -79,7 +55,7 @@ describe('sessionData', () => {
                 getItem: jest.fn(() => 'name value'),
             };
 
-            expect(sessionData(storage).getName()).toBe('name value');
+            expect(permanentData(storage).getName()).toBe('name value');
             expect(storage.getItem).toHaveBeenCalledWith('amnesty_name');
         });
     });
@@ -90,7 +66,7 @@ describe('sessionData', () => {
                 setItem: jest.fn(),
             };
 
-            const mySessionData = sessionData(storage);
+            const mySessionData = permanentData(storage);
 
             expect(mySessionData.setName('value')).toEqual(mySessionData);
             expect(storage.setItem).toHaveBeenCalledWith('amnesty_name', 'value');
@@ -103,7 +79,7 @@ describe('sessionData', () => {
                 getItem: jest.fn(() => 'AddressMain value'),
             };
 
-            expect(sessionData(storage).getAddressMain()).toBe('AddressMain value');
+            expect(permanentData(storage).getAddressMain()).toBe('AddressMain value');
             expect(storage.getItem).toHaveBeenCalledWith('amnesty_address_main');
         });
     });
@@ -114,7 +90,7 @@ describe('sessionData', () => {
                 setItem: jest.fn(),
             };
 
-            const mySessionData = sessionData(storage);
+            const mySessionData = permanentData(storage);
 
             expect(mySessionData.setAddressMain('value')).toEqual(mySessionData);
             expect(storage.setItem).toHaveBeenCalledWith('amnesty_address_main', 'value');
@@ -127,7 +103,7 @@ describe('sessionData', () => {
                 getItem: jest.fn(() => 'AddressMore value'),
             };
 
-            expect(sessionData(storage).getAddressMore()).toBe('AddressMore value');
+            expect(permanentData(storage).getAddressMore()).toBe('AddressMore value');
             expect(storage.getItem).toHaveBeenCalledWith('amnesty_address_more');
         });
     });
@@ -138,7 +114,7 @@ describe('sessionData', () => {
                 setItem: jest.fn(),
             };
 
-            const mySessionData = sessionData(storage);
+            const mySessionData = permanentData(storage);
 
             expect(mySessionData.setAddressMore('value')).toEqual(mySessionData);
             expect(storage.setItem).toHaveBeenCalledWith('amnesty_address_more', 'value');
@@ -151,7 +127,7 @@ describe('sessionData', () => {
                 getItem: jest.fn(() => 'Postal Code value'),
             };
 
-            expect(sessionData(storage).getPostalCode()).toBe('Postal Code value');
+            expect(permanentData(storage).getPostalCode()).toBe('Postal Code value');
             expect(storage.getItem).toHaveBeenCalledWith('amnesty_postal_code');
         });
     });
@@ -162,7 +138,7 @@ describe('sessionData', () => {
                 setItem: jest.fn(),
             };
 
-            const mySessionData = sessionData(storage);
+            const mySessionData = permanentData(storage);
 
             expect(mySessionData.setPostalCode('value')).toEqual(mySessionData);
             expect(storage.setItem).toHaveBeenCalledWith('amnesty_postal_code', 'value');
@@ -175,7 +151,7 @@ describe('sessionData', () => {
                 getItem: jest.fn(() => 'City value'),
             };
 
-            expect(sessionData(storage).getCity()).toBe('City value');
+            expect(permanentData(storage).getCity()).toBe('City value');
             expect(storage.getItem).toHaveBeenCalledWith('amnesty_city');
         });
     });
@@ -186,7 +162,7 @@ describe('sessionData', () => {
                 setItem: jest.fn(),
             };
 
-            const mySessionData = sessionData(storage);
+            const mySessionData = permanentData(storage);
 
             expect(mySessionData.setCity('value')).toEqual(mySessionData);
             expect(storage.setItem).toHaveBeenCalledWith('amnesty_city', 'value');
@@ -199,7 +175,7 @@ describe('sessionData', () => {
                 getItem: jest.fn(() => 'Country value'),
             };
 
-            expect(sessionData(storage).getCountry()).toBe('Country value');
+            expect(permanentData(storage).getCountry()).toBe('Country value');
             expect(storage.getItem).toHaveBeenCalledWith('amnesty_country');
         });
     });
@@ -210,7 +186,7 @@ describe('sessionData', () => {
                 setItem: jest.fn(),
             };
 
-            const mySessionData = sessionData(storage);
+            const mySessionData = permanentData(storage);
 
             expect(mySessionData.setCountry('value')).toEqual(mySessionData);
             expect(storage.setItem).toHaveBeenCalledWith('amnesty_country', 'value');
@@ -223,7 +199,7 @@ describe('sessionData', () => {
                 setItem: jest.fn(),
             };
 
-            const mySessionData = sessionData(storage);
+            const mySessionData = permanentData(storage);
 
             expect(mySessionData.setEmail('value')).toEqual(mySessionData);
             expect(storage.setItem).toHaveBeenCalledWith('amnesty_email', 'value');

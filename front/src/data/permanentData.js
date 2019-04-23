@@ -1,9 +1,4 @@
-export const sessionData = storage => ({
-    getMailObject: () => (storage && storage.getItem('amnesty_mail_object')) || '',
-    setMailObject(value) {
-        storage && storage.setItem('amnesty_mail_object', value);
-        return this;
-    },
+export const permanentData = storage => ({
     getCivility: () => (storage && storage.getItem('amnesty_civility')) || '',
     setCivility(value) {
         storage && storage.setItem('amnesty_civility', value);
@@ -51,4 +46,4 @@ export const sessionData = storage => ({
     },
 });
 
-export default sessionData(global.sessionStorage);
+export default permanentData(global.localStorage);

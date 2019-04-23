@@ -9,7 +9,6 @@ import { getPdfMessageBuffer } from './getPdfMessageBuffer';
 
 jest.mock('../mailer');
 jest.mock('./getPdfMessageBuffer');
-jest.mock('../../../front/src/sessionData');
 
 describe('Urgent Actions Router', () => {
     describe('GET /urgent-actions/${id}.pdf', () => {

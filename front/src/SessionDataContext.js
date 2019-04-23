@@ -1,7 +1,7 @@
 import React, { createContext, Component } from 'react';
 import PropTypes from 'prop-types';
 
-import sessionData from './sessionData';
+import data from './data';
 
 const { Provider, Consumer } = createContext({
     object: '',
@@ -30,66 +30,66 @@ export const SessionDataConsumer = Consumer;
 
 export class SessionDataProvider extends Component {
     state = {
-        object: sessionData.getMailObject(),
-        civility: sessionData.getCivility(),
-        surname: sessionData.getSurname(),
-        name: sessionData.getName(),
-        addressMain: sessionData.getAddressMain(),
-        addressMore: sessionData.getAddressMore(),
-        postalCode: sessionData.getPostalCode(),
-        city: sessionData.getCity(),
-        country: sessionData.getCountry(),
-        email: sessionData.getEmail(),
+        object: data.getMailObject(),
+        civility: data.getCivility(),
+        surname: data.getSurname(),
+        name: data.getName(),
+        addressMain: data.getAddressMain(),
+        addressMore: data.getAddressMore(),
+        postalCode: data.getPostalCode(),
+        city: data.getCity(),
+        country: data.getCountry(),
+        email: data.getEmail(),
     };
 
     setObject = object => {
         this.setState({ object });
-        sessionData.setMailObject(object);
+        data.setMailObject(object);
     };
 
     setCivility = civility => {
         this.setState({ civility });
-        sessionData.setCivility(civility);
+        data.setCivility(civility);
     };
 
     setSurname = surname => {
         this.setState({ surname });
-        sessionData.setSurname(surname);
+        data.setSurname(surname);
     };
 
     setName = name => {
         this.setState({ name });
-        sessionData.setName(name);
+        data.setName(name);
     };
 
     setAddressMain = addressMain => {
         this.setState({ addressMain });
-        sessionData.setAddressMain(addressMain);
+        data.setAddressMain(addressMain);
     };
 
     setAddressMore = addressMore => {
         this.setState({ addressMore });
-        sessionData.setAddressMore(addressMore);
+        data.setAddressMore(addressMore);
     };
 
     setPostalCode = postalCode => {
         this.setState({ postalCode });
-        sessionData.setPostalCode(postalCode);
+        data.setPostalCode(postalCode);
     };
 
     setCity = city => {
         this.setState({ city });
-        sessionData.setCity(city);
+        data.setCity(city);
     };
 
     setCountry = country => {
         this.setState({ country });
-        sessionData.setCountry(country);
+        data.setCountry(country);
     };
 
     setEmail = email => {
         this.setState({ email });
-        sessionData.setEmail(email);
+        data.setEmail(email);
     };
 
     render() {
