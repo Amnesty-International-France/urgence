@@ -43,12 +43,13 @@ export const LinkFacebook = ({ classes, url, action }) => (
 );
 
 LinkFacebook.propTypes = {
-    auId: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
     action: PropTypes.func,
+    classes: PropTypes.string,
 };
 
 LinkFacebook.defaultProps = {
-    auId: '',
+    url: '',
     action: () => {},
 };
 

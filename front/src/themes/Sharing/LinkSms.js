@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-import classnames from 'classnames';
+import { faCommentDots } from '@fortawesome/free-solid-svg-icons';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
@@ -21,28 +20,28 @@ const styles = {
     },
 };
 
-export const LinkWhatsapp = ({ classes, text, action }) => (
+export const LinkSms = ({ classes, text, action }) => (
     <Button
-        className={classnames(classes.root, 'twitter-share-button')}
-        href={`https://twitter.com/intent/tweet?text=${text}`}
-        target="whatsapp"
-        title="Partage Whatsapp"
+        className={classes.root}
+        href={`sms://+1234?body=${text}`}
+        target="sms"
+        title="Partage par sms"
         onClick={action}
     >
-        <FontAwesomeIcon icon={fab.faWhatsapp} className={classes.icon} />
-        Partager avec whatsapp
+        <FontAwesomeIcon icon={faCommentDots} className={classes.icon} />
+        Envoyer un sms
     </Button>
 );
 
-LinkWhatsapp.propTypes = {
+LinkSms.propTypes = {
     text: PropTypes.string.isRequired,
     action: PropTypes.func,
     classes: PropTypes.string,
 };
 
-LinkWhatsapp.defaultProps = {
+LinkSms.defaultProps = {
     text: '',
     action: () => {},
 };
 
-export default withStyles(styles)(LinkWhatsapp);
+export default withStyles(styles)(LinkSms);

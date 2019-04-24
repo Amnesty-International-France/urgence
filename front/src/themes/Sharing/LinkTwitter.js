@@ -37,6 +37,7 @@ export const LinkTwitter = ({ classes, text, action }) => (
 LinkTwitter.propTypes = {
     text: PropTypes.string.isRequired,
     action: PropTypes.func,
+    classes: PropTypes.string,
 };
 
 LinkTwitter.defaultProps = {
