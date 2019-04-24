@@ -154,8 +154,8 @@ export default gql`
     extend type Query {
         UrgentAction(id: ID!): UrgentAction
         allUrgentActions(
-            perPage: Int
             page: Int
+            perPage: Int
             sortField: String
             sortOrder: String
         ): [UrgentAction]

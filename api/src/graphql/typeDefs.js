@@ -21,4 +21,4 @@ const baseTypeDefs = gql`
     }
 `;
 
-export const typeDefs = [baseTypeDefs, activistsTypeDefs, urgentActionsTypeDefs, userTypeDefs];
+export default [baseTypeDefs, activistsTypeDefs, urgentActionsTypeDefs, userTypeDefs];

@@ -14,10 +14,15 @@ export default gql`
     extend type Query {
         Activist(id: ID!): Activist
         allActivists(perPage: Int, page: Int, sortField: String, sortOrder: String): [Activist]
-        _allActivists(page: Int, perPage: Int, sortField: String, sortOrder: String): ListMetadata
+        _allActivistsMeta(
+            page: Int
+            perPage: Int
+            sortField: String
+            sortOrder: String
+        ): ListMetadata
     }
 
     extend type Mutation {
-        create(firstname: String!, lastname: String!, email: String!): Activist
+        createActivist(firstname: String!, lastname: String!, email: String!): Activist
     }
 `;
