@@ -1,8 +1,6 @@
 import { gql } from 'apollo-server-express';
 
 export default gql`
-    scalar DATE
-
     scalar Uploadable
 
     enum Position {
@@ -109,7 +107,8 @@ export default gql`
         twitter_title: String
     }
 
-    input ShareInput{
+    input ShareInput {
+        active: Boolean
         message: String
         active_twitter: Boolean
         twitter_message: String
