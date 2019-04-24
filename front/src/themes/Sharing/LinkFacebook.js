@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fab } from '@fortawesome/free-brands-svg-icons';
@@ -21,26 +21,34 @@ const styles = {
     },
 };
 
-export const LinkFacebook = ({ classes, text, action }) => (
-    <Button
-        className={classnames(classes.root, 'twitter-share-button')}
-        href={`https://twitter.com/intent/tweet?text=${text}`}
-        target="facebook"
-        title="Partage facebook"
-        onClick={action}
-    >
-        <FontAwesomeIcon icon={fab.faFacebook} className={classes.icon} />
-        Partager sur facebook
-    </Button>
+export const LinkFacebook = ({ classes, url, action }) => (
+    <Fragment>
+        <script
+            async
+            defer
+            crossOrigin="anonymous"
+            src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.2"
+        />
+        <Button
+            className={classnames(classes.root, 'fb-share-button')}
+            href={`https://facebook.com/sharer/sharer.php?u=${url}`}
+            target="facebook"
+            title="Partage facebook"
+            onClick={action}
+        >
+            <FontAwesomeIcon icon={fab.faFacebook} className={classes.icon} />
+            Partager sur facebook
+        </Button>
+    </Fragment>
 );
 
 LinkFacebook.propTypes = {
-    text: PropTypes.string.isRequired,
+    auId: PropTypes.string.isRequired,
     action: PropTypes.func,
 };
 
 LinkFacebook.defaultProps = {
-    text: '',
+    auId: '',
     action: () => {},
 };
 

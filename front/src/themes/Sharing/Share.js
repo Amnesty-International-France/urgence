@@ -47,6 +47,8 @@ export const Share = ({
 
     const text = parseTextForUrl(message, auId);
 
+    const url = encodeURI(`${global.origin}/#/ua/${auId}`);
+
     const handleTwitterDone = () => {
         setTwitterDone(true);
     };
@@ -54,7 +56,7 @@ export const Share = ({
     const handleSocialDone = () => {
         setSocialDone(true);
     };
-
+console.log(global.location);
     return (
         <div className={className}>
             {active_twitter && (
@@ -69,7 +71,7 @@ export const Share = ({
             <SharingStep text="Activer votre réseau" done={socialDone} />
             <ul className="list">
                 <li>
-                    <LinkFacebook text={text} action={handleSocialDone} />
+                    <LinkFacebook url={url} action={handleSocialDone} />
                 </li>
                 <li>
                     <LinkWhatsapp text={text} action={handleSocialDone} />
