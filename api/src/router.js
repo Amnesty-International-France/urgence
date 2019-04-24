@@ -12,4 +12,4 @@ if (process.env.NODE_ENV === 'test') {
     router.use('/test', require('./tests/router').default);
 }
 
-export const apiRouter = router;
+export default router;

@@ -3,7 +3,7 @@ import express from 'express';
 
 import config from '../../config';
 import errorHandler from './errorHandler';
-import { apiRouter } from './router';
+import router from './router';
 import apolloServer from './graphql/apolloServer';
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(
     }),
 );
 
-app.use(config.api.prefixUrl, apiRouter);
+app.use(config.api.prefixUrl, router);
 
 apolloServer.applyMiddleware({
     app,
