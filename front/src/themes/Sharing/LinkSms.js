@@ -23,7 +23,7 @@ const styles = {
 export const LinkSms = ({ classes, text, action }) => (
     <Button
         className={classes.root}
-        href={`sms://+1234?body=${text}`}
+        href={`sms://?body=${text}`}
         target="sms"
         title="Partage par sms"
         onClick={action}

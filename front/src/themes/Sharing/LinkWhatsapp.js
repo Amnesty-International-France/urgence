@@ -23,8 +23,8 @@ const styles = {
 
 export const LinkWhatsapp = ({ classes, text, action }) => (
     <Button
-        className={classnames(classes.root, 'twitter-share-button')}
-        href={`https://twitter.com/intent/tweet?text=${text}`}
+        className={classes.root}
+        href={`whatsapp://send?text=${text}`}
         target="whatsapp"
         title="Partage Whatsapp"
         onClick={action}
