@@ -26,6 +26,7 @@ export default props => (
                     <TextField source="email" />
                     <TextField source="firstname" />
                     <TextField source="lastname" />
+                    <TextField source="phone" />
                 </Datagrid>
             }
         />
