@@ -11,10 +11,6 @@ export default gql`
         updated_on: DATE
     }
 
-    type ListMetadata {
-        count: Int!
-    }
-
     extend type Query {
         Activist(id: ID!): Activist
         allActivists(perPage: Int, page: Int, sortField: String, sortOrder: String): [Activist]

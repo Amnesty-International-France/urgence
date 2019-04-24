@@ -151,10 +151,6 @@ export default gql`
         letter_thank: Thanks
     }
 
-    type ListMetadata {
-        count: Int!
-    }
-
     extend type Query {
         UrgentAction(id: ID!): UrgentAction
         allUrgentActions(

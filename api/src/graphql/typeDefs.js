@@ -8,6 +8,10 @@ import urgentActionsTypeDefs from '../urgentActions/typeDefs';
 const baseTypeDefs = gql`
     scalar DATE
 
+    type ListMetadata {
+        count: Int!
+    }
+
     type Query {
         dummy: Boolean
     }
