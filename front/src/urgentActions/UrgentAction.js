@@ -67,8 +67,10 @@ const query = gql`
                 text
                 button
                 share {
-                    active
                     message
+                    active_twitter
+                    twitter_message
+                    twitter_title
                 }
                 link {
                     label

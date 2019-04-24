@@ -71,7 +71,7 @@ export const TransitionScreen = ({ className, actions, title, message, link, sha
             {actions()}
             {link && link.url && <Link {...link} color={black} />}
         </div>
-        {share && share.active && <Share message={share.message} auId={auId} />}
+        {share && <Share {...share} auId={auId} />}
     </div>
 );
 
