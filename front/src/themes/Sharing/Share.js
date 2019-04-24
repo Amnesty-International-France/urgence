@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import LinkTwitter from './LinkTwitter';
 import LinkFacebook from './LinkFacebook';
-import LinkSms from './LinkSms';
 import LinkWhatsapp from './LinkWhatsapp';
 import CopyToClipboard from './CopyToClipboard';
 import SharingStep from './SharingStep';
@@ -76,9 +75,6 @@ export const Share = ({
                 </li>
                 <li>
                     <LinkWhatsapp text={text} action={handleSocialDone} />
-                </li>
-                <li>
-                    <LinkSms text={text} action={handleSocialDone} />
                 </li>
                 <li>
                     <CopyToClipboard url={url} action={handleSocialDone} />
