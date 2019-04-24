@@ -29,8 +29,13 @@ const IconButtonContainer = glamorous.div({
     },
 });
 
-const IconButton = ({ className, children, onClick }) => (
-    <IconButtonContainer className={className} onClick={onClick}>
+const IconButton = ({ className, children, onClick, onMouseEnter, onMouseLeave }) => (
+    <IconButtonContainer
+        className={className}
+        onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+    >
         {children}
     </IconButtonContainer>
 );
@@ -39,6 +44,13 @@ IconButton.propTypes = {
     className: PropTypes.string,
     children: PropTypes.element.isRequired,
     onClick: PropTypes.func.isRequired,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+};
+
+IconButton.defaultProps = {
+    onMouseEnter: () => {},
+    onMouseLeave: () => {},
 };
 
 export default IconButton;

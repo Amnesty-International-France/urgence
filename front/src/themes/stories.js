@@ -61,9 +61,16 @@ storiesOf('User Interface', module)
     ))
     .add('Button', () => <Button label="click me" onClick={() => alert('clicked')} />)
     .add('CopyToClipboardButton', () => (
-        <CopyToClipboardButton textToCopy="Copy me">
-            <FontAwesomeIcon icon={faLink} size="xs" />
-        </CopyToClipboardButton>
+        <div
+            style={{
+                margin: 50,
+            }}
+        >
+            <CopyToClipboardButton textToCopy="Successfully copied!">
+                <FontAwesomeIcon icon={faLink} size="xs" />
+            </CopyToClipboardButton>
+            <input type="text" placeholder="Paste the copied text here" />
+        </div>
     ))
     .add('Steps', () => {
         return (
