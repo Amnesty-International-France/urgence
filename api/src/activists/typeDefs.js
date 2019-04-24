@@ -8,6 +8,7 @@ export default gql`
         firstname: String!
         lastname: String!
         email: String!
+        phone: String!
         created_on: DATE
         updated_on: DATE
     }

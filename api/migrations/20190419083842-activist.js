@@ -7,6 +7,7 @@ exports.up = function(db, cb) {
         firstname VARCHAR NOT NULL,
         lastname VARCHAR NOT NULL,
         email VARCHAR UNIQUE NOT NULL,
+        phone VARCHAR NOT NULL,
         PRIMARY KEY (id)
       );
   `;
