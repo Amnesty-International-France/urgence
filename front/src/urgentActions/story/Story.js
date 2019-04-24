@@ -109,7 +109,6 @@ export class Story extends Component {
                             <FontAwesomeIcon
                                 icon={faArrowRight}
                                 color={current === 0 ? white : black}
-                                size="xs"
                                 className="icon"
                             />
                         }
