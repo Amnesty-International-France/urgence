@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
 import { Router } from 'express';
 
-import { urgentActionsRouter } from './urgentActions/router';
+import urgentActionsRouter from './urgentActions/router';
 
 const router = new Router();
 

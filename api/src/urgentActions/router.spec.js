@@ -1,6 +1,5 @@
 import { stringify } from 'qs';
 import request from 'supertest';
-import pdf from 'html-pdf';
 
 import { sendMail } from '../mailer';
 import app from '../server';
