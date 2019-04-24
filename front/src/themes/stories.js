@@ -8,6 +8,7 @@ import LoadingScreen from './LoadingScreen';
 import Steps from './Steps';
 import Input from './Input';
 import TextArea from './TextArea';
+import CopyToClipboardButton from './CopyToClipboardButton';
 
 storiesOf('Screens', module).add('Loading Screen', () => <LoadingScreen />);
 
@@ -57,6 +58,11 @@ storiesOf('User Interface', module)
         />
     ))
     .add('Button', () => <Button label="click me" onClick={() => alert('clicked')} />)
+    .add('CopyToClipboardButton', () => (
+        <CopyToClipboardButton textToCopy="Copy me">
+            <span>Copy me</span>
+        </CopyToClipboardButton>
+    ))
     .add('Steps', () => {
         return (
             <div>
