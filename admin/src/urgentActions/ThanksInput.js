@@ -37,12 +37,12 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
         ? {
             title: 'Merci pour votre action.',
             text:
-                "Continuons d'agir pour augmenter les chances de victoire ! Allez plus loin dans ce combat grace aux réseaux sociaux.",
+                "Continuons d'agir pour augmenter les chances de victoire ! Allons plus loin dans ce combat grace aux réseaux sociaux.",
         }
         : {
             title: 'Se battre. Encore. Et Encore.',
             text:
-                "Continuons d'agir pour augmenter les chances de victoire ! Allez plus loin dans ce combat grace aux réseaux sociaux.",
+                "Continuons d'agir pour augmenter les chances de victoire ! Allons plus loin dans ce combat grace aux réseaux sociaux.",
             button: "Je continue d'agir",
         };
 

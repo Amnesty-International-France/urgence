@@ -23,7 +23,7 @@ export const ShareInput = ({ classes, source }) => {
 
     const defaultTitle = 'Interpeller la cible sur Twitter';
 
-    const defaultTweet = `Arrétez d'être méchant @cible`;
+    const defaultTweet = `@cible, respectez les droits humains !`;
 
     const defaultValue = `J'ai agi avec AmnestyFrance
 ${process.env.REACT_APP_FRONT_BASE_URL}/#/ua/$CURRENT_AU_ID`;
