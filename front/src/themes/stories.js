@@ -1,5 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLink } from '@fortawesome/free-solid-svg-icons';
 
 import RichText from './RichText';
 import Image from './Image';
@@ -19,9 +21,9 @@ storiesOf('User Interface', module)
             <TextArea />
             <p>Pre-filled textarea:</p>
             <TextArea>
-                Le 26 mars, une cour d'appel militaire a confirmé la condamnation à mort des deux
+                {`Le 26 mars, une cour d'appel militaire a confirmé la condamnation à mort des deux
                 hommes, à l'issue d'un procès manifestement inique fondé sur des « aveux » extorqués
-                sous la torture durant leur disparition forcée.
+                sous la torture durant leur disparition forcée.`}
             </TextArea>
         </div>
     ))
@@ -60,7 +62,7 @@ storiesOf('User Interface', module)
     .add('Button', () => <Button label="click me" onClick={() => alert('clicked')} />)
     .add('CopyToClipboardButton', () => (
         <CopyToClipboardButton textToCopy="Copy me">
-            <span>Copy me</span>
+            <FontAwesomeIcon icon={faLink} size="xs" />
         </CopyToClipboardButton>
     ))
     .add('Steps', () => {
