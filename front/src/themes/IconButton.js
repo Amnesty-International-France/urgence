@@ -32,12 +32,7 @@ const IconButtonContainer = glamorous.div({
 });
 
 const IconButton = ({ className, children, onClick }) => (
-    <IconButtonContainer
-        className={className}
-        onMouseDown={this.handleMouseDown}
-        onMouseUp={this.handleMouseUp}
-        onClick={onClick}
-    >
+    <IconButtonContainer className={className} onClick={onClick}>
         {children}
     </IconButtonContainer>
 );
