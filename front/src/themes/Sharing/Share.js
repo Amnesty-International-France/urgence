@@ -4,6 +4,7 @@ import glamorous from 'glamorous';
 import LinkTwitter from './LinkTwitter';
 import LinkFacebook from './LinkFacebook';
 import LinkWhatsapp from './LinkWhatsapp';
+import CopyToClipboard from './CopyToClipboard';
 import SharingStep from './SharingStep';
 import { black } from '../colors';
 
@@ -56,7 +57,6 @@ export const Share = ({
     const handleSocialDone = () => {
         setSocialDone(true);
     };
-console.log(global.location);
     return (
         <div className={className}>
             {active_twitter && (
@@ -75,6 +75,9 @@ console.log(global.location);
                 </li>
                 <li>
                     <LinkWhatsapp text={text} action={handleSocialDone} />
+                </li>
+                <li>
+                    <CopyToClipboard url={url} action={handleSocialDone} />
                 </li>
             </ul>
         </div>

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import IconButton from './IconButton';
-
 const copy = textToCopy => {
     const textField = document.createElement('textarea');
     textField.innerText = textToCopy;
@@ -49,15 +47,13 @@ const CopyToClipboard = ({ children, textToCopy, ...props }) => {
 
     return (
         <Tooltip title={copied ? 'Link copied!' : 'Click to copy'} open={hovered}>
-            <IconButton
-                link
-                onClick={handleOnClick}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                {...props}
-            >
-                {children}
-            </IconButton>
+            {React.cloneElement(children, {
+                link: true,
+                onClick: handleOnClick,
+                onMouseEnter: handleMouseEnter,
+                onMouseLeave: handleMouseLeave,
+                ...props,
+            })}
         </Tooltip>
     );
 };
