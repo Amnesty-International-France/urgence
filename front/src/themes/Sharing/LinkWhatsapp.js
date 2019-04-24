@@ -37,7 +37,7 @@ export const LinkWhatsapp = ({ classes, text, action }) => (
 LinkWhatsapp.propTypes = {
     text: PropTypes.string.isRequired,
     action: PropTypes.func,
-    classes: PropTypes.string,
+    classes: PropTypes.object,
 };
 
 LinkWhatsapp.defaultProps = {

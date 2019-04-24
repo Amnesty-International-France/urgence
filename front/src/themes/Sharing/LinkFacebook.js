@@ -45,7 +45,7 @@ export const LinkFacebook = ({ classes, url, action }) => (
 LinkFacebook.propTypes = {
     url: PropTypes.string.isRequired,
     action: PropTypes.func,
-    classes: PropTypes.string,
+    classes: PropTypes.object,
 };
 
 LinkFacebook.defaultProps = {

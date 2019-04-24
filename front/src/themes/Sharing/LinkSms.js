@@ -36,7 +36,7 @@ export const LinkSms = ({ classes, text, action }) => (
 LinkSms.propTypes = {
     text: PropTypes.string.isRequired,
     action: PropTypes.func,
-    classes: PropTypes.string,
+    classes: PropTypes.object,
 };
 
 LinkSms.defaultProps = {

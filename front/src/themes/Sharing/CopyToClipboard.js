@@ -34,7 +34,7 @@ export const CopyToClipboard = ({ classes, url, action }) => (
 CopyToClipboard.propTypes = {
     url: PropTypes.string.isRequired,
     action: PropTypes.func,
-    classes: PropTypes.string,
+    classes: PropTypes.object,
 };
 
 CopyToClipboard.defaultProps = {
