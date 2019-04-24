@@ -23,6 +23,11 @@ export default gql`
     }
 
     extend type Mutation {
-        createActivist(firstname: String!, lastname: String!, email: String!): Activist
+        createActivist(
+            firstname: String!
+            lastname: String!
+            email: String!
+            phone: String!
+        ): Activist
     }
 `;
