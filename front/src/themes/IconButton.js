@@ -10,11 +10,9 @@ const IconButtonContainer = glamorous.div({
     cursor: 'pointer',
     background: 'none',
     transition: 'all ease-in 0.2s',
-    fontSize: '28px',
-    borderRadius: '20px',
-    width: '40px',
-    height: '40px',
-    paddingTop: '4px',
+    borderRadius: '1.5em',
+    width: '1.5em',
+    height: '1.5em',
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
     userSelect: 'none',
     ':active': {
@@ -31,12 +29,12 @@ const IconButtonContainer = glamorous.div({
     },
 });
 
-const IconButton = ({ className, children, onClick }) => (
+const IconButton = ({ className, children, onClick, onMouseEnter, onMouseLeave }) => (
     <IconButtonContainer
         className={className}
-        onMouseDown={this.handleMouseDown}
-        onMouseUp={this.handleMouseUp}
         onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
     >
         {children}
     </IconButtonContainer>
@@ -46,6 +44,13 @@ IconButton.propTypes = {
     className: PropTypes.string,
     children: PropTypes.element.isRequired,
     onClick: PropTypes.func.isRequired,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+};
+
+IconButton.defaultProps = {
+    onMouseEnter: () => {},
+    onMouseLeave: () => {},
 };
 
 export default IconButton;
