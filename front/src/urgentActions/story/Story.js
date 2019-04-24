@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { withRouter } from 'react-router';
 import { compose } from 'recompose';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -12,7 +14,6 @@ import { withThemeContext } from '../../themes/ThemeContext';
 import Carousel from '../../themes/Carousel';
 import { StoryStepPropType, routeMatch, LinkType } from '../../propTypes';
 import generateUrl from '../../services/generateUrl';
-import RightArrow from '../../icons/RightArrow';
 
 import StorySlide from './StorySlide';
 import StoryCover from './StoryCover';
@@ -104,7 +105,14 @@ export class Story extends Component {
                         total={total + 1}
                         afterChange={this.afterChange}
                         afterLastChange={this.afterLastChange}
-                        icon={<RightArrow className="icon" fill={current === 0 ? white : black} />}
+                        icon={
+                            <FontAwesomeIcon
+                                icon={faArrowRight}
+                                color={current === 0 ? white : black}
+                                size="xs"
+                                className="icon"
+                            />
+                        }
                     >
                         {() => (
                             <Fragment>
