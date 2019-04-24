@@ -21,12 +21,13 @@ const styles = {
     },
 };
 
-export const LinkWhatsapp = ({ classes, text }) => (
+export const LinkWhatsapp = ({ classes, text, action }) => (
     <Button
         className={classnames(classes.root, 'twitter-share-button')}
         href={`https://twitter.com/intent/tweet?text=${text}`}
         target="whatsapp"
         title="Partage Whatsapp"
+        onClick={action}
     >
         <FontAwesomeIcon icon={fab.faWhatsapp} className={classes.icon} />
         Partager avec whatsapp
@@ -35,10 +36,12 @@ export const LinkWhatsapp = ({ classes, text }) => (
 
 LinkWhatsapp.propTypes = {
     text: PropTypes.string.isRequired,
+    action: PropTypes.func,
 };
 
 LinkWhatsapp.defaultProps = {
     text: '',
+    action: () => {},
 };
 
 export default withStyles(styles)(LinkWhatsapp);

@@ -21,12 +21,13 @@ const styles = {
     },
 };
 
-export const LinkFacebook = ({ classes, text }) => (
+export const LinkFacebook = ({ classes, text, action }) => (
     <Button
         className={classnames(classes.root, 'twitter-share-button')}
         href={`https://twitter.com/intent/tweet?text=${text}`}
         target="facebook"
         title="Partage facebook"
+        onClick={action}
     >
         <FontAwesomeIcon icon={fab.faFacebook} className={classes.icon} />
         Partager sur facebook
@@ -35,10 +36,12 @@ export const LinkFacebook = ({ classes, text }) => (
 
 LinkFacebook.propTypes = {
     text: PropTypes.string.isRequired,
+    action: PropTypes.func,
 };
 
 LinkFacebook.defaultProps = {
     text: '',
+    action: () => {},
 };
 
 export default withStyles(styles)(LinkFacebook);

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import LinkTwitter from './LinkTwitter';
@@ -31,23 +31,37 @@ export const Share = ({
     twitter_title,
     auId,
 }) => {
+    const [twitterDone, setTwitterDone] = useState(false);
+    const [shareDone, setShareDone] = useState(false);
+
     const text = parseTextForUrl(message, auId);
+
+    const handleTwitterDone = () => {
+        setTwitterDone(true);
+    };
+
+    const handleShareDone = () => {
+        setShareDone(true);
+    };
 
     return (
         <div className={className}>
             {active_twitter && (
                 <Fragment>
-                    <SharingStep text={twitter_title} done={false} />
-                    <LinkTwitter text={parseTextForUrl(twitter_message, auId)} />
+                    <SharingStep text={twitter_title} done={twitterDone} />
+                    <LinkTwitter
+                        text={parseTextForUrl(twitter_message, auId)}
+                        action={handleTwitterDone}
+                    />
                 </Fragment>
             )}
-            <SharingStep text="Activez votre réseau" done={true} />
+            <SharingStep text="Activer votre réseau" done={shareDone} />
             <ul className="list">
                 <li>
-                    <LinkFacebook text={text} />
+                    <LinkFacebook text={text} action={handleShareDone} />
                 </li>
                 <li>
-                    <LinkWhatsapp text={text} />
+                    <LinkWhatsapp text={text} action={handleShareDone} />
                 </li>
             </ul>
         </div>
@@ -60,6 +74,7 @@ Share.propTypes = {
     twitter_message: PropTypes.string,
     twitter_title: PropTypes.string,
     auId: PropTypes.string.isRequired,
+    className: PropTypes.string,
 };
 
 Share.defaultProps = {

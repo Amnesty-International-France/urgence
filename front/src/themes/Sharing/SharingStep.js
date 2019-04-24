@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import classnames from 'classnames';
 import glamorous from 'glamorous';
 
 import { black, green, orange } from '../colors';
@@ -12,6 +11,7 @@ const styles = {
     color: black,
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: 16,
+    fontWeight: 'bold',
     textTransform: 'none',
     '& .icon': {
         marginRight: 10,
@@ -19,12 +19,7 @@ const styles = {
 };
 
 export const SharingStep = ({ className, text, done }) => (
-    <span
-        className={classnames(className, 'twitter-share-button')}
-        href={`https://twitter.com/intent/tweet?text=${text}`}
-        target="facebook"
-        title="Partage facebook"
-    >
+    <span className={className}>
         <FontAwesomeIcon
             icon={done ? faCheckCircle : faCircle}
             color={done ? green : orange}
@@ -37,6 +32,7 @@ export const SharingStep = ({ className, text, done }) => (
 SharingStep.propTypes = {
     text: PropTypes.string.isRequired,
     done: PropTypes.bool,
+    className: PropTypes.string,
 };
 
 SharingStep.defaultProps = {

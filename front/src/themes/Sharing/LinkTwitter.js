@@ -34,12 +34,13 @@ const styles = {
     },
 };
 
-export const LinkTwitter = ({ classes, text }) => (
+export const LinkTwitter = ({ classes, text, action }) => (
     <Button
         className={classnames(classes.root, 'twitter-share-button')}
         href={`https://twitter.com/intent/tweet?text=${text}`}
         target="twitter"
         title="Partage Twitter"
+        onClick={action}
     >
         <FontAwesomeIcon icon={fab.faTwitter} className={classes.icon} />
         Envoyer le tweet
@@ -48,10 +49,12 @@ export const LinkTwitter = ({ classes, text }) => (
 
 LinkTwitter.propTypes = {
     text: PropTypes.string.isRequired,
+    action: PropTypes.func,
 };
 
 LinkTwitter.defaultProps = {
     text: '',
+    action: () => {},
 };
 
 export default withStyles(styles)(LinkTwitter);
