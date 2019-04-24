@@ -1,0 +1,75 @@
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import glamorous from 'glamorous';
+import { compose } from 'recompose';
+import classnames from 'classnames';
+
+import { white, black } from '../../themes/colors';
+import { withYellowLogo } from '../../themes/ThemeContext';
+import { withSessionData } from '../../SessionDataContext';
+
+import Form from './Form';
+
+const styles = {
+    fontFamily: 'Amnesty Trade Gothic LT',
+    fontSize: '16px',
+    display: 'flex',
+    minHeight: '100%',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    width: '100%',
+    padding: '100px 20px 20px 20px',
+    color: black,
+    backgroundColor: white,
+    '& .action': {
+        display: 'flex',
+        margin: '1em 0',
+    },
+    '@media (max-width: 350px)': {
+        fontSize: '0.8em',
+    },
+    '@media (min-width: 1024px)': {
+        padding: '10vh 10vw',
+    },
+    '& .formStep': {
+        margin: '5px 0px',
+    },
+};
+
+export const RegisterActivist = ({ action, className, ...props }) => {
+    return (
+        <Fragment>
+            <div className={classnames('register', className)}>
+                <p>
+                    {`L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !`}
+                </p>
+                <div className="formStep">
+                    <Form {...props} />
+                </div>
+                <div className="action">{action}</div>
+            </div>
+        </Fragment>
+    );
+};
+
+RegisterActivist.propTypes = {
+    className: PropTypes.string,
+    analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
+    email: PropTypes.string,
+    phone: PropTypes.string,
+    surname: PropTypes.string,
+    name: PropTypes.string,
+    setEmail: PropTypes.func.isRequired,
+    setPhone: PropTypes.func.isRequired,
+    setSurname: PropTypes.func.isRequired,
+    setName: PropTypes.func.isRequired,
+    action: PropTypes.node.isRequired,
+};
+
+export default glamorous(
+    compose(
+        withYellowLogo,
+        withSessionData,
+    )(RegisterActivist),
+)(styles);
