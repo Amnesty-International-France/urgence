@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import { routeMatch } from '../propTypes';
 import { withRouter } from 'react-router';
 import trackEvent from '../analytics/trackEvent';
+import { green } from './colors';
 
 const styles = {
     '& .textfield': {
@@ -21,7 +22,7 @@ const styles = {
         position: 'absolute',
         right: 0,
         content: '✓',
-        color: 'green',
+        color: green,
         paddingRight: 5,
     },
 };

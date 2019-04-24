@@ -8,7 +8,7 @@ import { yellow, white, black } from '../themes/colors';
 import { withBlackLogo } from '../themes/ThemeContext';
 import { LinkType } from '../propTypes';
 import Link from './Link';
-import Share from '../themes/Share';
+import Share from './Sharing/Share';
 
 const styles = {
     display: 'flex',
