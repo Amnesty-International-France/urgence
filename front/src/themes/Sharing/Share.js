@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import MobileDetect from 'mobile-detect';
 import LinkTwitter from './LinkTwitter';
 import LinkFacebook from './LinkFacebook';
 import LinkWhatsapp from './LinkWhatsapp';
@@ -43,6 +44,8 @@ export const Share = ({
     twitter_title,
     auId,
 }) => {
+    const md = new MobileDetect(navigator.userAgent);
+
     const [twitterDone, setTwitterDone] = setUseStateForAdmin();
     const [socialDone, setSocialDone] = setUseStateForAdmin();
 
@@ -73,9 +76,11 @@ export const Share = ({
                 <li>
                     <LinkFacebook url={url} action={handleSocialDone} />
                 </li>
-                <li>
-                    <LinkWhatsapp text={text} action={handleSocialDone} />
-                </li>
+                {md.mobile() && (
+                    <li>
+                        <LinkWhatsapp text={text} action={handleSocialDone} />
+                    </li>
+                )}
                 <li>
                     <CopyToClipboard url={url} action={handleSocialDone} />
                 </li>

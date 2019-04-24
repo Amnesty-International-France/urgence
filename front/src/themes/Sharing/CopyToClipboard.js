@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
@@ -25,9 +25,11 @@ const styles = {
 export const CopyToClipboard = ({ classes, url, action }) => (
     <Button className={classes.root} onClick={action}>
         <CopyToClipboardButton textToCopy={url}>
-            <FontAwesomeIcon icon={faLink} size="xs" className={classes.icon} />
+            <div>
+                <FontAwesomeIcon icon={faLink} className={classes.icon} />
+                <span>Copier le lien</span>
+            </div>
         </CopyToClipboardButton>
-        Copier le lien
     </Button>
 );
 
