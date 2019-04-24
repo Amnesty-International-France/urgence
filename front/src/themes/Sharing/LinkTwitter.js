@@ -16,20 +16,7 @@ const styles = {
         fontWeight: 'bold',
         fontSize: 27,
     },
-    svg: {
-        width: '100%',
-        height: '100%',
-    },
     icon: {
-        //border: '1px solid #000',
-        borderRadius: '50%',
-        alignItems: 'center',
-        width: 50,
-        height: 50,
-        padding: 10,
-        lineHeight: '50px',
-        display: 'flex',
-        justifyContent: 'center',
         marginRight: 10,
     },
 };

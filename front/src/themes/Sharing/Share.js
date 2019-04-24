@@ -14,6 +14,7 @@ const styles = {
     color: black,
     '& .list': {
         listStyle: 'none',
+        marginLeft: 20,
     },
 };
 
@@ -21,6 +22,16 @@ const parseTextForUrl = (text, auId) => {
     const encodedText = encodeURI(text);
     const hashTaggedText = encodedText.replace(/#/g, '%23');
     return hashTaggedText.replace('$CURRENT_AU_ID', auId);
+};
+
+const setUseStateForAdmin = () => {
+    try {
+        return useState(false);
+    } catch (error) {
+        console.log("useState doesn't work thru admin preview");
+        console.log(error.message);
+        return [false, () => true];
+    }
 };
 
 export const Share = ({
@@ -31,8 +42,8 @@ export const Share = ({
     twitter_title,
     auId,
 }) => {
-    const [twitterDone, setTwitterDone] = useState(false);
-    const [shareDone, setShareDone] = useState(false);
+    const [twitterDone, setTwitterDone] = setUseStateForAdmin();
+    const [socialDone, setSocialDone] = setUseStateForAdmin();
 
     const text = parseTextForUrl(message, auId);
 
@@ -40,8 +51,8 @@ export const Share = ({
         setTwitterDone(true);
     };
 
-    const handleShareDone = () => {
-        setShareDone(true);
+    const handleSocialDone = () => {
+        setSocialDone(true);
     };
 
     return (
@@ -55,13 +66,13 @@ export const Share = ({
                     />
                 </Fragment>
             )}
-            <SharingStep text="Activer votre réseau" done={shareDone} />
+            <SharingStep text="Activer votre réseau" done={socialDone} />
             <ul className="list">
                 <li>
-                    <LinkFacebook text={text} action={handleShareDone} />
+                    <LinkFacebook text={text} action={handleSocialDone} />
                 </li>
                 <li>
-                    <LinkWhatsapp text={text} action={handleShareDone} />
+                    <LinkWhatsapp text={text} action={handleSocialDone} />
                 </li>
             </ul>
         </div>
