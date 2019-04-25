@@ -25,3 +25,5 @@ export const getActivists = async ({ perPage, page, sortField, sortOrder }) =>
 export const countActivists = async () => query(activistCrudQueries.countAll());
 
 export const createActivist = async activist => query(activistCrudQueries.insertOne(activist));
+
+export const removeActivist = async id => query(activistCrudQueries.removeOne(id));

@@ -29,5 +29,6 @@ export default gql`
             email: String!
             phone: String!
         ): Activist
+        deleteUrgentAction(id: ID!): Activist
     }
 `;

@@ -9,5 +9,6 @@ export default {
     },
     Mutation: {
         createActivist: async (_, activist) => createActivist(activist),
+        removeActivist: async (_, id) => removeActivist(id),
     },
 };
