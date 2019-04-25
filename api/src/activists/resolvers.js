@@ -1,4 +1,10 @@
-import { getActivist, getActivists, countActivists, createActivist } from './repository';
+import {
+    getActivist,
+    getActivists,
+    countActivists,
+    createActivist,
+    removeActivist,
+} from './repository';
 
 export default {
     Query: {
@@ -9,6 +15,6 @@ export default {
     },
     Mutation: {
         createActivist: async (_, activist) => createActivist(activist),
-        removeActivist: async (_, id) => removeActivist(id),
+        deleteActivist: async (_, id) => removeActivist(id),
     },
 };
