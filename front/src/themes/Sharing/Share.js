@@ -36,6 +36,7 @@ const setUseStateForAdmin = () => {
     try {
         return useState(false);
     } catch (error) {
+        /* eslint-disable no-console */
         console.log("useState doesn't work through admin preview");
         console.log(error.message);
         return [false, () => true];
