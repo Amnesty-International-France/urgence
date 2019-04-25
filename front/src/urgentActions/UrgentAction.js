@@ -18,6 +18,7 @@ import SendMail from './message/SendMail';
 import { SessionDataProvider } from '../SessionDataContext';
 import LoadingScreen from '../themes/LoadingScreen';
 import MailPdfButton from './MailPdfButton';
+import RegisterActivist from './register/RegisterActivist';
 
 const query = gql`
     query urgentAction($id: ID!) {
@@ -94,6 +95,7 @@ const ANALYTICS_CATEGORIES = {
     MESSAGE: 'Email',
     THANKS_EMAIL: 'AskForLetter',
     ADDRESS: 'LetterManually',
+    REGISTER: 'RegisterActivist',
 };
 
 const isLetterStepPresent = recipient => {
@@ -208,6 +210,23 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     if (step === 'thanks-end') {
         const thankEnd = get(data, 'UrgentAction.letter_thank');
         return <Thanks data={thankEnd} />;
+    }
+
+    if (step === 'register') {
+        return (
+            <RegisterActivist
+                step={step}
+                analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
+                action={disabled => (
+                    <MailPdfButton
+                        step={step}
+                        disabled={disabled}
+                        buttonText={recipient.button}
+                        analyticsCategory={ANALYTICS_CATEGORIES.ADDRESS}
+                    />
+                )}
+            />
+        );
     }
 };
 
