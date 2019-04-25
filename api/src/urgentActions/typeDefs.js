@@ -103,13 +103,17 @@ export const urgentActionsTypeDefs = gql`
     }
 
     type Share {
-        active: Boolean
         message: String
+        active_twitter: Boolean
+        twitter_message: String
+        twitter_title: String
     }
 
     input ShareInput{
-        active: Boolean
         message: String
+        active_twitter: Boolean
+        twitter_message: String
+        twitter_title: String
     }
 
     type Thanks {

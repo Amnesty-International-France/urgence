@@ -37,12 +37,12 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
         ? {
             title: 'Merci pour votre action.',
             text:
-                "La lettre vous a été envoyée sur votre boîte e-mail. Poursuivez votre action en l'envoyant par La Poste.",
+                "Continuons d'agir pour augmenter les chances de victoire ! Allons plus loin dans ce combat grace aux réseaux sociaux.",
         }
         : {
             title: 'Se battre. Encore. Et Encore.',
             text:
-                "Continuons d'agir pour augmenter les chances de victoire ! Allez plus loin dans ce combat en envoyant ce message par courrier.",
+                "Continuons d'agir pour augmenter les chances de victoire ! Allons plus loin dans ce combat grace aux réseaux sociaux.",
             button: "Je continue d'agir",
         };
 
@@ -89,6 +89,7 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                         <FrontPreview className={classes.preview}>
                             <Thanks
                                 data={formData[source]}
+                                auId={formData['id']}
                                 actions={() =>
                                     !final && formData[source] && formData[source].button ? (
                                         <Link

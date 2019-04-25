@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import IconButton from './IconButton';
-
 const copy = textToCopy => {
     const textField = document.createElement('textarea');
     textField.innerText = textToCopy;
@@ -13,13 +11,33 @@ const copy = textToCopy => {
     textField.remove();
 };
 
+const setUseStateForAdmin = () => {
+    try {
+        return useState(false);
+    } catch (error) {
+        console.log("useState doesn't work through admin preview");
+        console.log(error.message);
+        return [false, () => true];
+    }
+};
+
+const setUseEffectForAdmin = action => {
+    try {
+        return useEffect(action);
+    } catch (error) {
+        console.log("useEffect doesn't work through admin preview");
+        console.log(error.message);
+        return [action, () => true];
+    }
+};
+
 const CopyToClipboard = ({ children, textToCopy, ...props }) => {
     if (!textToCopy) {
         return;
     }
 
-    const [copied, setCopied] = useState(false);
-    const [hovered, setHovered] = useState(false);
+    const [copied, setCopied] = setUseStateForAdmin();
+    const [hovered, setHovered] = setUseStateForAdmin();
 
     const handleOnClick = () => {
         copy(textToCopy);
@@ -34,7 +52,7 @@ const CopyToClipboard = ({ children, textToCopy, ...props }) => {
         setHovered(false);
     };
 
-    useEffect(() => {
+    setUseEffectForAdmin(() => {
         if (!copied) {
             return;
         }
@@ -49,21 +67,18 @@ const CopyToClipboard = ({ children, textToCopy, ...props }) => {
 
     return (
         <Tooltip title={copied ? 'Link copied!' : 'Click to copy'} open={hovered}>
-            <IconButton
-                link
-                onClick={handleOnClick}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                {...props}
-            >
-                {children}
-            </IconButton>
+            {React.cloneElement(children, {
+                onClick: handleOnClick,
+                onMouseEnter: handleMouseEnter,
+                onMouseLeave: handleMouseLeave,
+                ...props,
+            })}
         </Tooltip>
     );
 };
 
 CopyToClipboard.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]),
+    children: PropTypes.element,
     textToCopy: PropTypes.string,
 };
 

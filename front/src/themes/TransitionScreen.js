@@ -8,7 +8,7 @@ import { yellow, white, black } from '../themes/colors';
 import { withBlackLogo } from '../themes/ThemeContext';
 import { LinkType } from '../propTypes';
 import Link from './Link';
-import Share from '../themes/Share';
+import Share from './Sharing/Share';
 
 const styles = {
     display: 'flex',
@@ -71,7 +71,7 @@ export const TransitionScreen = ({ className, actions, title, message, link, sha
             {actions()}
             {link && link.url && <Link {...link} color={black} />}
         </div>
-        {share && share.active && <Share message={share.message} auId={auId} />}
+        {share && <Share {...share} auId={auId} />}
     </div>
 );
 
