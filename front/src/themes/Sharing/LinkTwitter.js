@@ -1,43 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-import classnames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import ShareLink from './ShareLink';
 
-import { black } from '../colors';
-
-const styles = {
-    root: {
-        textDecoration: 'none',
-        color: black,
-        fontFamily: 'Amnesty Trade Gothic Condensed',
-        fontWeight: 'bold',
-        fontSize: 27,
-    },
-    icon: {
-        marginRight: 10,
-    },
-};
-
-export const LinkTwitter = ({ classes, text, action }) => (
-    <Button
-        className={classnames(classes.root, 'twitter-share-button')}
+export const LinkTwitter = ({ text, action }) => (
+    <ShareLink
         href={`https://twitter.com/intent/tweet?text=${text}`}
         target="twitter"
         title="Partage Twitter"
-        onClick={action}
-    >
-        <FontAwesomeIcon icon={fab.faTwitter} className={classes.icon} />
-        Envoyer le tweet
-    </Button>
+        icon={faTwitter}
+        text="Envoyer le tweet"
+        action={action}
+        bigSize={true}
+        customClass="twitter-share-button"
+    />
 );
 
 LinkTwitter.propTypes = {
     text: PropTypes.string.isRequired,
     action: PropTypes.func,
-    classes: PropTypes.object,
 };
 
 LinkTwitter.defaultProps = {
@@ -45,4 +26,4 @@ LinkTwitter.defaultProps = {
     action: () => {},
 };
 
-export default withStyles(styles)(LinkTwitter);
+export default LinkTwitter;

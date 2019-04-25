@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +17,6 @@ const styles = {
         textTransform: 'none',
     },
     icon: {
-        fontSize: 16,
         marginRight: 10,
     },
 };
