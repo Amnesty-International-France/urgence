@@ -30,7 +30,7 @@ const setUseStateForAdmin = () => {
     try {
         return useState(false);
     } catch (error) {
-        console.log("useState doesn't work thru admin preview");
+        console.log("useState doesn't work through admin preview");
         console.log(error.message);
         return [false, () => true];
     }

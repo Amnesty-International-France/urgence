@@ -15,7 +15,7 @@ const setUseStateForAdmin = () => {
     try {
         return useState(false);
     } catch (error) {
-        console.log("useState doesn't work thru admin preview");
+        console.log("useState doesn't work through admin preview");
         console.log(error.message);
         return [false, () => true];
     }
@@ -25,7 +25,7 @@ const setUseEffectForAdmin = action => {
     try {
         return useEffect(action);
     } catch (error) {
-        console.log("useEffect doesn't work thru admin preview");
+        console.log("useEffect doesn't work through admin preview");
         console.log(error.message);
         return [action, () => true];
     }
