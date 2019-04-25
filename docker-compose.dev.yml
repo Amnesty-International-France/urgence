@@ -16,6 +16,7 @@ services:
         ports:
             - '5000:5000'
         working_dir: /app/admin
+        user: '${UID}:${GID}'
 
     maildev:
         image: djfarrelly/maildev
@@ -37,6 +38,7 @@ services:
             - API_PREFIX_URL=
         ports:
             - '4000:4000'
+        user: '${UID}:${GID}'
 
     db:
         volumes:
@@ -59,6 +61,7 @@ services:
         ports:
             - '9009:9009'
         working_dir: /app
+        user: '${UID}:${GID}'
 
     front:
         image: node:9
@@ -72,6 +75,7 @@ services:
             - REACT_APP_GA=UA-136476291-2
             - NODE_ENV=development
         working_dir: /app/front
+        user: '${UID}:${GID}'
         ports:
             - '3000:3000'
 
