@@ -18,6 +18,12 @@ const styles = {
         listStyle: 'none',
         marginLeft: 20,
     },
+    '& .twitter-share-button': {
+        '@media (min-width: 1024px)': {
+            alignSelf: 'start',
+            marginLeft: 20,
+        },
+    },
 };
 
 const parseTextForUrl = (text, auId) => {
