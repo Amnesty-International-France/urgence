@@ -1,13 +1,12 @@
 import { Router } from 'express';
 import isUUID from 'validator/lib/isUUID';
 
-import nunjucks from 'nunjucks';
 import { getUrgentAction } from './repository';
 import { getPdfMessageBuffer } from './getPdfMessageBuffer';
 import { sendMail } from '../mailer';
 import { getLetterMailBody } from './letterMailBody';
 
-export const urgentActionsRouter = new Router();
+const urgentActionsRouter = new Router();
 
 urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
     const { id } = req.params;
@@ -101,3 +100,5 @@ urgentActionsRouter.post('/:id/send', async (req, res, next) => {
 
     return res.end();
 });
+
+export default urgentActionsRouter;

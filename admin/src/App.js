@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Admin, Resource } from 'react-admin';
 
-import urgentAction from './urgentActions';
 import dataProviderFactory from './dataProvider';
 import { authProvider } from './authentication/authProvider';
+
+import activist from './activists';
+import urgentAction from './urgentActions';
 
 import { theme } from './theme';
 import { Title } from './Title';
@@ -33,6 +35,7 @@ class App extends Component {
                 dataProvider={dataProvider}
             >
                 <Resource {...urgentAction} />
+                <Resource {...activist} />
             </Admin>
         );
     }

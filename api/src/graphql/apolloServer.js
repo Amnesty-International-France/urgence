@@ -1,8 +1,8 @@
 import { ApolloServer } from 'apollo-server-express';
 
 import config from '../../../config';
-import { typeDefs } from './typeDefs';
-import { resolvers } from './resolvers';
+import typeDefs from './typeDefs';
+import resolvers from './resolvers';
 
 const options = {
     typeDefs,
@@ -13,8 +13,8 @@ if (config.env !== 'production') {
     options.playground = {
         endpoint: `${process.env.REACT_APP_API_URL}/graphql`,
         settings: {
-            'editor.theme': 'dark'
-        }
+            'editor.theme': 'dark',
+        },
     };
 }
 

@@ -1,8 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const urgentActionsTypeDefs = gql`
-    scalar DATE
-
+export default gql`
     scalar Uploadable
 
     enum Position {
@@ -109,7 +107,8 @@ export const urgentActionsTypeDefs = gql`
         twitter_title: String
     }
 
-    input ShareInput{
+    input ShareInput {
+        active: Boolean
         message: String
         active_twitter: Boolean
         twitter_message: String
@@ -152,15 +151,11 @@ export const urgentActionsTypeDefs = gql`
         letter_thank: Thanks
     }
 
-    type ListMetadata {
-        count: Int!
-    }
-
     extend type Query {
         UrgentAction(id: ID!): UrgentAction
         allUrgentActions(
-            perPage: Int
             page: Int
+            perPage: Int
             sortField: String
             sortOrder: String
         ): [UrgentAction]
