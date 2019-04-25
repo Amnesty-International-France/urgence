@@ -11,35 +11,13 @@ const copy = textToCopy => {
     textField.remove();
 };
 
-const setUseStateForAdmin = () => {
-    try {
-        return useState(false);
-    } catch (error) {
-        /* eslint-disable no-console */
-        console.log("useState doesn't work through admin preview");
-        console.log(error.message);
-        return [false, () => true];
-    }
-};
-
-const setUseEffectForAdmin = action => {
-    try {
-        return useEffect(action);
-    } catch (error) {
-        /* eslint-disable no-console */
-        console.log("useEffect doesn't work through admin preview");
-        console.log(error.message);
-        return [action, () => true];
-    }
-};
-
 const CopyToClipboard = ({ children, textToCopy, ...props }) => {
     if (!textToCopy) {
         return;
     }
 
-    const [copied, setCopied] = setUseStateForAdmin();
-    const [hovered, setHovered] = setUseStateForAdmin();
+    const [copied, setCopied] = useState(false);
+    const [hovered, setHovered] = useState(false);
 
     const handleOnClick = () => {
         copy(textToCopy);
@@ -54,7 +32,7 @@ const CopyToClipboard = ({ children, textToCopy, ...props }) => {
         setHovered(false);
     };
 
-    setUseEffectForAdmin(() => {
+    useEffect(() => {
         if (!copied) {
             return;
         }
