@@ -11,7 +11,7 @@ import { withYellowLogo } from '../../themes/ThemeContext';
 import { withSessionData } from '../../SessionDataContext';
 import Link from '../Link';
 import { LinkType } from '../../propTypes';
-import Input from '../../themes/Input';
+import Input, { isCorrectEmail } from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';
 
 const styles = {
@@ -182,7 +182,7 @@ export const FormStep = ({
                 type="email"
                 value={email}
                 onChange={handleChangeEmail}
-                error={!email}
+                error={!isCorrectEmail(email)}
                 autoComplete="email"
                 analyticsCategory={analyticsCategory}
                 step={step}
