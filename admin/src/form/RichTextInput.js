@@ -4,21 +4,16 @@ import PropTypes from 'prop-types';
 import { Labeled, required as originalRequired } from 'react-admin';
 import { default as BaseRichTextInput } from 'ra-input-rich-text';
 
-const toolbarOptions = [
-    [{ size: [false, 'large', 'huge']}, 'bold', 'italic']
-];
+const toolbarOptions = [[{ size: [false, 'large', 'huge'] }, 'bold', 'italic']];
 
-const stripHTML = text => text ? text.replace(/<.*?>/g, '') : text;
+const stripHTML = text => (text ? text.replace(/<.*?>/g, '') : text);
 
-const required = (value, ...rest) => originalRequired()(stripHTML(value) ? value : undefined, ...rest);
+const required = (value, ...rest) =>
+    originalRequired()(stripHTML(value) ? value : undefined, ...rest);
 
 export const RichTextInput = ({ label, isRequired, ...rest }) => (
     <Labeled label={label}>
-        <BaseRichTextInput
-            toolbar={toolbarOptions}
-            validate={isRequired && required}
-            {...rest}
-        />
+        <BaseRichTextInput toolbar={toolbarOptions} validate={isRequired && required} {...rest} />
     </Labeled>
 );
 
