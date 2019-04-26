@@ -80,13 +80,18 @@ export const Share = ({
             )}
             <SharingStep text="Activer votre réseau" done={socialDone} />
             <ul className="list">
-                <li>
-                    <LinkFacebook url={url} action={handleSocialDone} />
-                </li>
                 {md.mobile() && (
-                    <li>
-                        <LinkWhatsapp text={text} action={handleSocialDone} />
-                    </li>
+                    <Fragment>
+                        <li>
+                            <LinkFacebook
+                                url={`${global.origin}/#/ua/${auId}`}
+                                action={handleSocialDone}
+                            />
+                        </li>
+                        <li>
+                            <LinkWhatsapp text={text} action={handleSocialDone} />
+                        </li>
+                    </Fragment>
                 )}
                 <li>
                     <CopyToClipboard url={url} action={handleSocialDone} />

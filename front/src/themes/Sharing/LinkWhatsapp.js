@@ -9,7 +9,7 @@ export const LinkWhatsapp = ({ text, action }) => (
         target="whatsapp"
         title="Partage Whatsapp"
         icon={faWhatsapp}
-        text="Partager avec whatsapp"
+        text="Partager avec Whatsapp"
         action={action}
     />
 );
