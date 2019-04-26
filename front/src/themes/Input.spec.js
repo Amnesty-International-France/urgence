@@ -1,11 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Input, { isCorrectEmail } from './Input';
+import { Input, isCorrectEmail } from './Input';
 
 describe('<Input />', () => {
     it('should render a div with correct background image and title', () => {
-        const wrapper = shallow(<Input value="value" label="Title" />);
+        const wrapper = shallow(
+            <Input value="value" label="Title" match={{ params: { id: 0 } }} />,
+        );
         const input = wrapper.find('TextField');
 
         expect(input.prop('value')).toBe('value');
