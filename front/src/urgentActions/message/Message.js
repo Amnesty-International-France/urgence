@@ -36,7 +36,7 @@ const styles = {
         '@media (max-width: 1024px)': {
             backgroundColor: white,
             margin: 0,
-            marginLeft: -20,
+            left: 0,
             width: '100%',
             zIndex: 1000,
             position: 'fixed',
