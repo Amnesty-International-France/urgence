@@ -3433,6 +3433,10 @@ graphql-anywhere@^4.1.15:
   dependencies:
     apollo-utilities "^1.0.17"
 
+"graphql-ast-types@github:Kmaschta/graphql-ast-types#master":
+  version "1.0.2"
+  resolved "https://codeload.github.com/Kmaschta/graphql-ast-types/tar.gz/bd715ea03c2b4aeefc9a72ca7b42c80e807ec0c8"
+
 graphql-tag@^2.10.1:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.10.1.tgz#10aa41f1cd8fae5373eaf11f1f67260a3cad5e02"
@@ -6210,9 +6214,9 @@ quill@~1.3.6:
     parchment "^1.1.4"
     quill-delta "^3.6.2"
 
-ra-core@^2.2.3, ra-core@^2.8.6:
-  version "2.8.6"
-  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-2.8.6.tgz#77bdc480446a2575f44bc5ec85294e412fa98c79"
+ra-core@^2.3.3, ra-core@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-2.9.0.tgz#d5caa958a0379261ee0ca04e9de099993e735235"
   dependencies:
     classnames "~2.2.5"
     date-fns "^1.29.0"
@@ -6232,16 +6236,17 @@ ra-core@^2.2.3, ra-core@^2.8.6:
     redux-saga "~0.16.0"
     reselect "~3.0.0"
 
-ra-data-graphql-simple@~2.1.5:
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.1.5.tgz#14f3871fee6ed41fafe2dfb9dc271306fb6372dc"
+ra-data-graphql-simple@~2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.3.4.tgz#50daa5f847ae4338590ece9fcf00d3390b6141ff"
   dependencies:
+    graphql-ast-types Kmaschta/graphql-ast-types#master
     graphql-tag "^2.6.1"
     lodash "~4.17.5"
     pluralize "~7.0.0"
-    ra-data-graphql "^2.1.5"
+    ra-data-graphql "^2.3.4"
 
-ra-data-graphql@^2.1.5:
+ra-data-graphql@^2.3.4:
   version "2.8.4"
   resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.8.4.tgz#9ae6f070fe1bb3abf6e7a198c73c4ede91c93bd1"
   dependencies:
@@ -6251,21 +6256,21 @@ ra-data-graphql@^2.1.5:
     lodash "~4.17.5"
     pluralize "~7.0.0"
 
-ra-input-rich-text@~2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/ra-input-rich-text/-/ra-input-rich-text-2.2.1.tgz#7cf85dbbdb02ac2fa653e2de0d199ccee8f0d4da"
+ra-input-rich-text@~2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/ra-input-rich-text/-/ra-input-rich-text-2.3.2.tgz#2b1d3d7e8065eaf67d7cf0b0f31005b2b5916de0"
   dependencies:
     lodash "~4.17.5"
     prop-types "~15.6.1"
     quill "~1.3.6"
 
-ra-language-english@^2.2.0, ra-language-english@^2.8.5:
+ra-language-english@^2.3.0, ra-language-english@^2.8.5:
   version "2.8.5"
   resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-2.8.5.tgz#c8ca2dc8fcfc6c1c2aca2ee1192b55fc2b1365bf"
 
-ra-ui-materialui@^2.2.4:
-  version "2.8.6"
-  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-2.8.6.tgz#3e4f1da4dc6b56682db0352f59255fdc50f72a13"
+ra-ui-materialui@^2.3.4:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-2.9.0.tgz#6771aac265d16102d406d0e8f2fb8f6f573481f6"
   dependencies:
     "@material-ui/core" "^1.4.0"
     "@material-ui/icons" "^1.0.0"
@@ -6276,7 +6281,7 @@ ra-ui-materialui@^2.2.4:
     material-ui-chip-input "1.0.0-beta.6 - 1.0.0-beta.8"
     papaparse "^4.1.4"
     prop-types "~15.6.1"
-    ra-core "^2.8.6"
+    ra-core "^2.9.0"
     react-autosuggest "^9.4.2"
     react-dropzone "~4.0.1"
     react-headroom "^2.2.4"
@@ -6337,13 +6342,13 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-admin@~2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.2.4.tgz#3d4ea7d2cbfb7f79edd9d803d1bac0a7042919f9"
+react-admin@~2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.3.4.tgz#eb5dee65221ea7dbab967f4192feedbe337afe32"
   dependencies:
-    ra-core "^2.2.3"
-    ra-language-english "^2.2.0"
-    ra-ui-materialui "^2.2.4"
+    ra-core "^2.3.3"
+    ra-language-english "^2.3.0"
+    ra-ui-materialui "^2.3.4"
 
 react-autosuggest@^9.4.2:
   version "9.4.3"
