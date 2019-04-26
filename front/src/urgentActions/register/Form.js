@@ -53,7 +53,8 @@ const Form = ({
                 autoComplete="phone"
                 analyticsCategory={analyticsCategory}
                 step={step}
-                label="Votre numéro *"
+                label="Votre téléphone mobile *"
+                inputProps={{ autoFocus: true }}
             />
             <Input
                 className="surname"
