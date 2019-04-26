@@ -2,18 +2,12 @@
     "name": "urgent_reaction",
     "version": "0.1.0",
     "private": true,
-    "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
     "scripts": {
         "start-web": "node scripts/start.js",
         "build-web": "node scripts/build.js",
         "test-web": "node scripts/test.js --env=jsdom",
         "eject-web": "node scripts/eject.js",
-        "start-native": "react-native-scripts start",
-        "eject-native": "react-native-scripts eject",
-        "android": "react-native-scripts android",
-        "ios": "react-native-scripts ios",
-        "test-native": "node node_modules/jest/bin/jest.js --watch",
-        "test": "yarn run test-web && yarn run test-native",
+        "test": "yarn run test-web",
         "test-e2e": "jest ./e2e",
         "storybook": "start-storybook -p 9009 -s public",
         "build-storybook": "build-storybook -s public"
@@ -58,12 +52,8 @@
         "react-div-100vh": "~0.1.8",
         "react-dom": "~16.8.6",
         "react-ga": "~2.5.7",
-        "react-native": "~0.52.0",
-        "react-native-web": "~0.5.4",
-        "react-primitives": "~0.5.0",
         "react-router": "~4.2.0",
         "react-router-dom": "~4.2.2",
-        "react-router-native": "~4.2.0",
         "react-slick": "~0.23.1",
         "react-transition-group": "~2.3.1",
         "recompose": "~0.27.1",
@@ -112,20 +102,14 @@
         "eslint-plugin-react": "~7.12.4",
         "jest": "~22.4.3",
         "prettier": "~1.17.0",
-        "react-native-scripts": "~1.12.1",
         "react-test-renderer": "~16.2.0",
         "selenium-webdriver": "~3.6.0",
         "storybook-react-router": "~1.0.5"
     },
     "jest": {
-        "collectCoverageFrom": [
-            "src/**/*.{js,jsx,mjs}"
-        ],
+        "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
         "setupTestFrameworkScriptFile": "<rootDir>/config/setupTest.js",
-        "setupFiles": [
-            "babel-polyfill",
-            "<rootDir>/config/polyfills.js"
-        ],
+        "setupFiles": ["babel-polyfill", "<rootDir>/config/polyfills.js"],
         "testMatch": [
             "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
             "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}",
@@ -138,26 +122,11 @@
             "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
             "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
         },
-        "transformIgnorePatterns": [
-            "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-        ],
-        "moduleNameMapper": {
-            "^react-native$": "react-native-web"
-        },
-        "moduleFileExtensions": [
-            "web.js",
-            "js",
-            "json",
-            "web.jsx",
-            "jsx",
-            "node",
-            "mjs"
-        ]
+        "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
+        "moduleFileExtensions": ["web.js", "js", "json", "web.jsx", "jsx", "node", "mjs"]
     },
     "babel": {
-        "presets": [
-            "react-app"
-        ]
+        "presets": ["react-app"]
     },
     "eslintConfig": {
         "extends": "react-app"
