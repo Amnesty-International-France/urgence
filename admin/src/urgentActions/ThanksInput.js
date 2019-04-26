@@ -4,11 +4,8 @@ import PropTypes from 'prop-types';
 import {
     addField,
     required,
-    minLength,
-    maxLength,
     FormDataConsumer,
     LongTextInput,
-    TextInput,
 } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -69,16 +66,10 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                                         defaultValue={defaultValues.text}
                                         validate={[required()]}
                                     />
-                                    <ShareInput
-                                        source={source}
-                                    />
                                     {!final && (
                                         <Fragment>
-                                            <TextInput
-                                                source={`${source}.button`}
-                                                label="Button"
-                                                defaultValue={defaultValues.button}
-                                                validate={[required(), minLength(3), maxLength(25)]}
+                                            <ShareInput
+                                                source={source}
                                             />
                                             {withLink && <LinkInput source={`${source}.link`} />}
                                         </Fragment>

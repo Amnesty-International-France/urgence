@@ -207,26 +207,27 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
         );
     }
 
-    if (step === 'thanks-end') {
-        const thankEnd = get(data, 'UrgentAction.letter_thank');
-        return <Thanks data={thankEnd} />;
-    }
-
     if (step === 'register') {
         return (
             <RegisterActivist
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
-                action={disabled => (
-                    <MailPdfButton
+                action={
+                    <ToUrgentActionPageLink
+                        label={recipient.button}
                         step={step}
-                        disabled={disabled}
-                        buttonText={recipient.button}
-                        analyticsCategory={ANALYTICS_CATEGORIES.ADDRESS}
+                        pageName="thanks-end"
+                        analyticsCategory={ANALYTICS_CATEGORIES.THANKS}
+                        buttonName="ActionRegister"
                     />
-                )}
+                }
             />
         );
+    }
+
+    if (step === 'thanks-end') {
+        const thankEnd = get(data, 'UrgentAction.letter_thank');
+        return <Thanks data={thankEnd} />;
     }
 };
 

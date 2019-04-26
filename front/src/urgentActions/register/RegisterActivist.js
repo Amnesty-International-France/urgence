@@ -16,14 +16,25 @@ const styles = {
     display: 'flex',
     minHeight: '100%',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     width: '100%',
     padding: '100px 20px 20px 20px',
     color: black,
     backgroundColor: white,
     '& .action': {
-        display: 'flex',
-        margin: '1em 0',
+        '@media (min-width: 1024px)': {
+            display: 'flex',
+            margin: '1em 0',
+        },
+        '@media (max-width: 1024px)': {
+            backgroundColor: white,
+            margin: 0,
+            left: 0,
+            width: '100%',
+            zIndex: 1000,
+            position: 'fixed',
+            bottom: 0,
+        },
     },
     '@media (max-width: 350px)': {
         fontSize: '0.8em',

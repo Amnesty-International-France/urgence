@@ -16,6 +16,7 @@ import StoryTemplateInput from './StoryTemplateInput';
 import CallToActionInput from './CallToActionInput';
 import MessageInput from './MessageInput';
 import ThanksInput from './ThanksInput';
+import RegisterInput from './RegisterInput';
 import LetterInput from './LetterInput';
 
 import StoryStepFormIterator from './StoryStepFormIterator';
@@ -78,27 +79,23 @@ export const Form = ({ classes }) => (
 
         <div className={`${classes.form} continue`}>
             <h2>Continue</h2>
-            <ThanksInput
-                source="email_thank"
-                withLink={USE_CALL_TO_ACTION_LINK}
-                sharing
-                final={!LETTER_ACTIVATED}
-            />
+            <ThanksInput source="email_thank" withLink={USE_CALL_TO_ACTION_LINK} />
         </div>
 
-        {LETTER_ACTIVATED && (
-            <div className={`${classes.form} letter`}>
-                <h2>Letter</h2>
-                <LetterInput source="recipient" />
-            </div>
-        )}
+        {LETTER_ACTIVATED && <div className={`${classes.form} letter`}>
+            <h2>Letter</h2>
+            <LetterInput source="recipient" />
+        </div>}
 
-        {LETTER_ACTIVATED && (
-            <div className={`${classes.form} thank-you`}>
-                <h2>Thank You</h2>
-                <ThanksInput source="letter_thank" withLink={USE_CALL_TO_ACTION_LINK} final />
-            </div>
-        )}
+        <div className={`${classes.form} register`}>
+            <h2>Register</h2>
+            <RegisterInput source="letter_thank" />
+        </div>
+
+        <div className={`${classes.form} thank-you`}>
+            <h2>Thank You</h2>
+            <ThanksInput source="letter_thank" withLink={USE_CALL_TO_ACTION_LINK} final />
+        </div>
     </Fragment>
 );
 
