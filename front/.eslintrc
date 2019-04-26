@@ -15,6 +15,9 @@
         "prettier/react"
     ],
     "plugins": ["import", "react", "prettier", "mocha-no-only", "jest"],
+    "react": {
+        "version": "detect"
+    },
     "rules": {
         "react/display-name": "off",
         "mocha-no-only/mocha-no-only": ["error"],
