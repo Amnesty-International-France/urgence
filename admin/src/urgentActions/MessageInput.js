@@ -17,7 +17,7 @@ import Avatar from '@material-ui/core/Avatar';
 import classNames from 'classnames';
 import isEmail from 'validator/lib/isEmail';
 
-import { root, preview, formScreenPreview } from './styles';
+import { root, preview, messageFormScreenPreview } from './styles';
 import { get as getScreenIndex, MESSAGE } from './screenIndex';
 import ParagraphTemplateInput from './ParagraphTemplateInput';
 import FrontPreview from './FrontPreview';
@@ -34,7 +34,7 @@ const styles = theme => ({
     },
     preview: {
         ...preview,
-        ...formScreenPreview,
+        ...messageFormScreenPreview,
     },
 });
 
@@ -98,19 +98,19 @@ export const MessageInput = ({ classes, source, withLink }) => (
                             <Message
                                 messageTemplate={
                                     formData.message_template &&
-                                    formData.message_template[0] &&
-                                    formData.message_template[0].value
+                                        formData.message_template[0] &&
+                                        formData.message_template[0].value
                                         ? formData.message_template
                                         : initMessageTemplate
                                 }
                                 objectIndication={formData.object_indication || ''}
                                 link={formData.message_link}
                                 action={<Link to="#" label="J'envoie" />}
-                                setEmail={() => {}}
-                                setObject={() => {}}
-                                setCivility={() => {}}
-                                setSurname={() => {}}
-                                setName={() => {}}
+                                setEmail={() => { }}
+                                setObject={() => { }}
+                                setCivility={() => { }}
+                                setSurname={() => { }}
+                                setName={() => { }}
                             />
                         </FrontPreview>
                     )}

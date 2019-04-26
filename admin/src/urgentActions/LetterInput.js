@@ -17,7 +17,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-import { root, preview, formScreenPreview } from './styles';
+import { root, preview, messageFormScreenPreview } from './styles';
 import { get as getScreenIndex, ADDRESS } from './screenIndex';
 import FrontPreview from './FrontPreview';
 
@@ -31,7 +31,7 @@ const styles = theme => ({
     },
     preview: {
         ...preview,
-        ...formScreenPreview,
+        ...messageFormScreenPreview,
     },
 });
 

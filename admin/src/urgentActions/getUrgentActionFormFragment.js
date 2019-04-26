@@ -46,6 +46,9 @@ const styles = {
         '&.letter': {
             backgroundColor: teal[50],
         },
+        '&.register': {
+            backgroundColor: teal[50],
+        },
         '&.thank-you': {
             backgroundColor: green[50],
         },

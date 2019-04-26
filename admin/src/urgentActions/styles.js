@@ -1,4 +1,5 @@
-import { pink } from '../../../front/src/themes/colors';
+import { white, pink } from '../../../front/src/themes/colors';
+import { relative } from 'path';
 
 export const root = {
     root: {
@@ -44,10 +45,49 @@ export const transitionScreenPreview = {
     },
 };
 
-export const formScreenPreview = {
+export const messageFormScreenPreview = {
     ...preview,
     '& > div': {
         width: 'calc(100% - 40px)',
         padding: '100px 20px 20px 20px',
+    },
+    '& .action': {
+        backgroundColor: white,
+        margin: 0,
+        marginBottom: '-20px',
+        marginLeft: '-20px',
+        marginRight: '-20px',
+        left: 0,
+        width: 'calc(100% + 40px)',
+        zIndex: 1000,
+        position: 'sticky',
+        bottom: 0,
+        '& a': {
+            width: '100%',
+        }
+    },
+};
+
+export const registerFormScreenPreview = {
+    ...preview,
+    '& > div': {
+        width: 'calc(100% - 40px)',
+        padding: '100px 20px 20px 20px',
+        minHeight: 0,
+        height: '480px',
+    },
+    '& .action': {
+        backgroundColor: white,
+        margin: 0,
+        marginBottom: '-60px',
+        marginLeft: '-20px',
+        marginRight: '-20px',
+        left: 0,
+        width: 'calc(100% + 40px)',
+        zIndex: 1000,
+        bottom: 0,
+        '& a': {
+            width: '100%',
+        }
     },
 };
