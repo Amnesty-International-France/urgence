@@ -15,8 +15,10 @@
         "prettier/react"
     ],
     "plugins": ["import", "react", "prettier", "mocha-no-only", "jest"],
-    "react": {
-        "version": "detect"
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     },
     "rules": {
         "react/display-name": "off",
