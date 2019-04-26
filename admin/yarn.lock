@@ -6220,7 +6220,7 @@ quill@~1.3.6:
     parchment "^1.1.4"
     quill-delta "^3.6.2"
 
-ra-core@^2.8.6, ra-core@^2.9.0:
+ra-core@^2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-2.9.0.tgz#d5caa958a0379261ee0ca04e9de099993e735235"
   dependencies:
@@ -6242,9 +6242,9 @@ ra-core@^2.8.6, ra-core@^2.9.0:
     redux-saga "~0.16.0"
     reselect "~3.0.0"
 
-ra-data-graphql-simple@~2.8.6:
-  version "2.8.6"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.8.6.tgz#4e70bc5cb74b80d6fe751cac5fdc82db8fe9ac63"
+ra-data-graphql-simple@~2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.9.0.tgz#0e799b9775ce8798ff12a7e350d87890afe08334"
   dependencies:
     graphql-ast-types-browser "~1.0.2"
     graphql-tag "^2.10.1"
@@ -6274,7 +6274,7 @@ ra-language-english@^2.8.5:
   version "2.8.5"
   resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-2.8.5.tgz#c8ca2dc8fcfc6c1c2aca2ee1192b55fc2b1365bf"
 
-ra-ui-materialui@^2.8.6:
+ra-ui-materialui@^2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-2.9.0.tgz#6771aac265d16102d406d0e8f2fb8f6f573481f6"
   dependencies:
@@ -6349,13 +6349,13 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-admin@~2.8.6:
-  version "2.8.6"
-  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.8.6.tgz#f4754f1064ae36dffe931c80ee4b9af604598347"
+react-admin@~2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.9.0.tgz#9b0f413afe82322919aae0e1f4048daf686524db"
   dependencies:
-    ra-core "^2.8.6"
+    ra-core "^2.9.0"
     ra-language-english "^2.8.5"
-    ra-ui-materialui "^2.8.6"
+    ra-ui-materialui "^2.9.0"
 
 react-autosuggest@^9.4.2:
   version "9.4.3"
