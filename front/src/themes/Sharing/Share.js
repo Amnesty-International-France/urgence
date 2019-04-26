@@ -7,6 +7,7 @@ import LinkFacebook from './LinkFacebook';
 import LinkWhatsapp from './LinkWhatsapp';
 import CopyToClipboard from './CopyToClipboard';
 import SharingStep from './SharingStep';
+import ToUrgentActionPageLink from '../../urgentActions/ToUrgentActionPageLink';
 import { black } from '../colors';
 
 import { secureUseState } from '../../hooks/secureHooks';
@@ -19,6 +20,12 @@ const styles = {
     '& .list': {
         listStyle: 'none',
         marginLeft: 20,
+    },
+    '& .content': {
+        fontSize: 16,
+        fontFamily: 'Amnesty Trade Gothic LT',
+        alignSelf: 'center',
+        marginBottom: 10,
     },
     '& .twitter-share-button': {
         '@media (min-width: 1024px)': {
@@ -46,6 +53,7 @@ export const Share = ({
 
     const [twitterDone, setTwitterDone] = secureUseState();
     const [socialDone, setSocialDone] = secureUseState();
+    const [registerDone, setRegisterDone] = secureUseState();
 
     const text = parseTextForUrl(message, auId);
 
@@ -58,8 +66,14 @@ export const Share = ({
     const handleSocialDone = () => {
         setSocialDone(true);
     };
+
+    const handleRegisterDone = () => {
+        setRegisterDone(true);
+    };
     return (
         <div className={className}>
+            <SharingStep text="Participer à l'action urgente" done={true} />
+            <span className="content">Merci pour votre participation</span>
             {active_twitter && (
                 <Fragment>
                     <SharingStep text={twitter_title} done={twitterDone} />
@@ -88,6 +102,14 @@ export const Share = ({
                     <CopyToClipboard url={url} action={handleSocialDone} />
                 </li>
             </ul>
+            <SharingStep text="S'incrire aux Actions Urgentes" done={registerDone} />
+            <ToUrgentActionPageLink
+                label="S'inscrire"
+                step="thanks"
+                pageName="register"
+                analyticsCategory={'Share'}
+                buttonName="ToRegister"
+            />
         </div>
     );
 };

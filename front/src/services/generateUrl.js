@@ -10,6 +10,8 @@ export default (name, params = {}) => {
             return `/ua/${params.id}/message`;
         case 'thanks':
             return `/ua/${params.id}/thanks`;
+        case 'register':
+            return `/ua/${params.id}/register`;
         case 'address':
             return `/ua/${params.id}/address`;
         case 'thanks-end':
@@ -19,7 +21,7 @@ export default (name, params = {}) => {
         case 'letter': {
             return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}/send`;
         }
-        case 'register': {
+        case 'save-register': {
             return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}/register`;
         }
 

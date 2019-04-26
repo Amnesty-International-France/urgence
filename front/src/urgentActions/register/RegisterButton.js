@@ -21,7 +21,7 @@ export class RegisterButton extends Component {
             },
         } = this.props;
 
-        return fetch(generateUrl('register', { id }), {
+        return fetch(generateUrl('save-register', { id }), {
             method: 'POST',
             body: JSON.stringify({
                 civility,

@@ -42,7 +42,7 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                         </Card>
                         <FrontPreview className={classes.preview}>
                             <Register
-                                action={<Link
+                                action={() => <Link
                                     to="#"
                                     label="Je m'inscris"
                                     onClick={noop}

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-
 import RichText from '../themes/RichText';
 import LongText from '../themes/LongText';
 import { yellow, white, black } from '../themes/colors';
@@ -14,7 +13,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    height: '100%',
+    minHeight: '100%',
     width: '100%',
     padding: '100px 20px 20px 20px',
     color: white,
