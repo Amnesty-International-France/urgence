@@ -16,7 +16,7 @@ const styles = {
 
 export const Link = ({ className, color, url, label }) => (
     <div className={`link ${className}`}>
-        <a href={url} target="_blank" style={{ color }}>
+        <a href={url} target="_blank" rel="noopener noreferrer" style={{ color }}>
             {label || url}
         </a>
     </div>
