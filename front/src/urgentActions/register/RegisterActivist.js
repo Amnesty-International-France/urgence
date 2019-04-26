@@ -4,6 +4,8 @@ import glamorous from 'glamorous';
 import { compose } from 'recompose';
 import classnames from 'classnames';
 
+import { isCorrectEmail } from '../../themes/Input';
+
 import { white, black } from '../../themes/colors';
 import { withYellowLogo } from '../../themes/ThemeContext';
 import { withSessionData } from '../../SessionDataContext';
@@ -47,6 +49,11 @@ const styles = {
     },
 };
 
+const isDisabled = props => {
+    const { surname, name, phone, email } = props;
+    return !surname || !name || !phone || !isCorrectEmail(email);
+};
+
 export const RegisterActivist = ({ action, className, ...props }) => {
     return (
         <Fragment>
@@ -57,7 +64,7 @@ export const RegisterActivist = ({ action, className, ...props }) => {
                 <div className="formStep">
                     <Form {...props} />
                 </div>
-                <div className="action">{action}</div>
+                <div className="action">{action(isDisabled(props))}</div>
             </div>
         </Fragment>
     );
@@ -75,7 +82,7 @@ RegisterActivist.propTypes = {
     setPhone: PropTypes.func.isRequired,
     setSurname: PropTypes.func.isRequired,
     setName: PropTypes.func.isRequired,
-    action: PropTypes.node.isRequired,
+    action: PropTypes.func.isRequired,
 };
 
 export default glamorous(

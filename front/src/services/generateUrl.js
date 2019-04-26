@@ -16,9 +16,11 @@ export default (name, params = {}) => {
             return `/ua/${params.id}/thanks-end`;
         case 'home':
             return '/';
-
         case 'letter': {
             return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}/send`;
+        }
+        case 'register': {
+            return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}/register`;
         }
 
         default:

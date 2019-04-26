@@ -13,6 +13,7 @@ const { Provider, Consumer } = createContext({
     postalCode: '',
     city: '',
     country: '',
+    phone: '',
     email: '',
     setObject: () => null,
     setCivility: () => null,
@@ -23,6 +24,7 @@ const { Provider, Consumer } = createContext({
     setPostalCode: () => null,
     setCity: () => null,
     setCountry: () => null,
+    setPhone: () => null,
     setEmail: () => null,
 });
 
@@ -39,6 +41,7 @@ export class SessionDataProvider extends Component {
         postalCode: data.getPostalCode(),
         city: data.getCity(),
         country: data.getCountry(),
+        phone: data.getPhone(),
         email: data.getEmail(),
     };
 
@@ -87,6 +90,11 @@ export class SessionDataProvider extends Component {
         data.setCountry(country);
     };
 
+    setPhone = phone => {
+        this.setState({ phone });
+        data.setPhone(phone);
+    };
+
     setEmail = email => {
         this.setState({ email });
         data.setEmail(email);
@@ -106,6 +114,7 @@ export class SessionDataProvider extends Component {
                     setPostalCode: this.setPostalCode,
                     setCity: this.setCity,
                     setCountry: this.setCountry,
+                    setPhone: this.setPhone,
                     setEmail: this.setEmail,
                 }}
             >

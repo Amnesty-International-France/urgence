@@ -18,6 +18,7 @@ import SendMail from './message/SendMail';
 import { SessionDataProvider } from '../SessionDataContext';
 import LoadingScreen from '../themes/LoadingScreen';
 import MailPdfButton from './MailPdfButton';
+import RegisterButton from './register/RegisterButton';
 import RegisterActivist from './register/RegisterActivist';
 
 const query = gql`
@@ -212,15 +213,14 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
             <RegisterActivist
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
-                action={
-                    <ToUrgentActionPageLink
-                        label={recipient.button}
+                action={disabled => (
+                    <RegisterButton
                         step={step}
-                        pageName="thanks-end"
-                        analyticsCategory={ANALYTICS_CATEGORIES.THANKS}
-                        buttonName="ActionRegister"
+                        disabled={disabled}
+                        buttonText="Je m'inscris"
+                        analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                     />
-                }
+                )}
             />
         );
     }

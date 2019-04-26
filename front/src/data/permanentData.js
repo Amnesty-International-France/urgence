@@ -39,6 +39,11 @@ export const permanentData = storage => ({
         storage && storage.setItem('amnesty_country', value);
         return this;
     },
+    getPhone: () => (storage && storage.getItem('amnesty_phone')) || '',
+    setPhone(value) {
+        storage && storage.setItem('amnesty_phone', value);
+        return this;
+    },
     getEmail: () => (storage && storage.getItem('amnesty_email')) || '',
     setEmail(value) {
         storage && storage.setItem('amnesty_email', value);

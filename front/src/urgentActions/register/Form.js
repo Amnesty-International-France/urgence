@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import Input from '../../themes/Input';
+import Input, { isCorrectEmail } from '../../themes/Input';
 
 const Form = ({
     analyticsCategory,
@@ -38,7 +38,7 @@ const Form = ({
                 type="email"
                 value={email}
                 onChange={handleChangeEmail}
-                error={!email}
+                error={!isCorrectEmail(email)}
                 autoComplete="email"
                 analyticsCategory={analyticsCategory}
                 step={step}
