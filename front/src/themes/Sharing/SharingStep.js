@@ -26,6 +26,9 @@ const styles = {
     '& .text': {
         lineHeight: '50px',
     },
+    '& .greenText': {
+        color: green,
+    },
     '& .number': {
         marginLeft: 13,
         position: 'absolute',
@@ -56,7 +59,7 @@ export const SharingStep = ({ className, text, number, done }) => (
         />
         {done && <span className={classnames('mask', { top: number === 1 })}>&nbsp;</span>}
         {!done && <span className="number">{number}</span>}
-        <span className="text">{text}</span>
+        <span className={classnames('text', { greenText: done })}>{text}</span>
     </div>
 );
 
