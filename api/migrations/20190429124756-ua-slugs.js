@@ -3,7 +3,7 @@
 exports.up = function(db, cb) {
     const sql = `
       ALTER TABLE urgent_action
-        ADD COLUMN slug VARCHAR NOT NULL;
+        ADD COLUMN slug VARCHAR DEFAULT NULL;
   `;
 
     db.runSql(sql, cb);
