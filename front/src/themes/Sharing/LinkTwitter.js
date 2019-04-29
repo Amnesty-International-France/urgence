@@ -11,8 +11,8 @@ export const LinkTwitter = ({ text, action }) => (
         icon={faTwitter}
         text="Envoyer le tweet"
         action={action}
-        bigSize={true}
         customClass="twitter-share-button"
+        inLine
     />
 );
 
@@ -23,7 +23,7 @@ LinkTwitter.propTypes = {
 
 LinkTwitter.defaultProps = {
     text: '',
-    action: () => {},
+    action: () => { },
 };
 
 export default LinkTwitter;

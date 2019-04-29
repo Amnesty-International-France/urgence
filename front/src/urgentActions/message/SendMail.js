@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import MailTo from '../../themes/MailTo';
 import { templateToBodyText } from './templateToBodyText';
 import generateUrl from '../../services/generateUrl';
+import { isCorrectEmail } from '../../themes/Input';
 import { routeMatch } from '../../propTypes';
 import { SessionDataConsumer } from '../../SessionDataContext';
 
@@ -17,6 +18,7 @@ export const renderSendMail = ({
     step,
 }) => ({
     /* eslint-disable react/prop-types */
+    email,
     object,
     civility,
     surname,
@@ -24,7 +26,7 @@ export const renderSendMail = ({
     /* eslint-enable react/prop-types */
 }) => (
     <MailTo
-        disabled={!object || !civility || !surname || !name}
+        disabled={!isCorrectEmail(email) || !object || !civility || !surname || !name}
         label="J'envoie"
         recipient={recipient}
         subject={object}

@@ -4,22 +4,20 @@ import PropTypes from 'prop-types';
 import {
     addField,
     required,
-    minLength,
-    maxLength,
     FormDataConsumer,
     LongTextInput,
-    TextInput,
 } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 
-import { root, transitionScreenPreview } from './styles';
+import { root, transitionScreenPreview, sharingScreenPreview } from './styles';
 import { get as getScreenIndex, CONTINUE, THANKS } from './screenIndex';
 import RichTextInput from '../form/RichTextInput';
 import ShareInput from './ShareInput';
 import FrontPreview, { noop } from './FrontPreview';
+import classnames from 'classnames';
 
 import Thanks from '../../../front/src/urgentActions/Thanks';
 import Link from '../../../front/src/themes/Link';
@@ -27,8 +25,11 @@ import LinkInput from './LinkInput';
 
 const styles = {
     ...root,
-    preview: {
+    previewT: {
         ...transitionScreenPreview,
+    },
+    previewS: {
+        ...sharingScreenPreview,
     },
 };
 
@@ -69,16 +70,10 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                                         defaultValue={defaultValues.text}
                                         validate={[required()]}
                                     />
-                                    <ShareInput
-                                        source={source}
-                                    />
                                     {!final && (
                                         <Fragment>
-                                            <TextInput
-                                                source={`${source}.button`}
-                                                label="Button"
-                                                defaultValue={defaultValues.button}
-                                                validate={[required(), minLength(3), maxLength(25)]}
+                                            <ShareInput
+                                                source={source}
                                             />
                                             {withLink && <LinkInput source={`${source}.link`} />}
                                         </Fragment>
@@ -86,7 +81,7 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                                 </div>
                             </CardContent>
                         </Card>
-                        <FrontPreview className={classes.preview}>
+                        <FrontPreview className={classnames(final ? classes.previewT : classes.previewS)}>
                             <Thanks
                                 data={formData[source]}
                                 auId={formData['id']}

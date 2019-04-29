@@ -7,7 +7,10 @@ import LinkFacebook from './LinkFacebook';
 import LinkWhatsapp from './LinkWhatsapp';
 import CopyToClipboard from './CopyToClipboard';
 import SharingStep from './SharingStep';
-import { black } from '../colors';
+import ToUrgentActionPageLink from '../../urgentActions/ToUrgentActionPageLink';
+import { black, grey } from '../colors';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 import { secureUseState } from '../../hooks/secureHooks';
 
@@ -16,15 +19,27 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     color: black,
+    borderLeft: `solid 1px ${grey}`,
+    marginLeft: 16,
     '& .list': {
-        listStyle: 'none',
-        marginLeft: 20,
+        display: 'flex',
+        marginLeft: 41,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
     },
-    '& .twitter-share-button': {
-        '@media (min-width: 1024px)': {
-            alignSelf: 'start',
-            marginLeft: 20,
-        },
+    '& .link': {
+        display: 'flex',
+        marginTop: 10,
+    },
+    '& .content': {
+        fontSize: 16,
+        fontFamily: 'Amnesty Trade Gothic LT',
+        alignSelf: 'center',
+        marginBottom: 10,
+    },
+    '& .icon': {
+        height: 30,
+        marginRight: 10,
     },
 };
 
@@ -46,6 +61,7 @@ export const Share = ({
 
     const [twitterDone, setTwitterDone] = secureUseState();
     const [socialDone, setSocialDone] = secureUseState();
+    const [registerDone, setRegisterDone] = secureUseState();
 
     const text = parseTextForUrl(message, auId);
 
@@ -58,36 +74,63 @@ export const Share = ({
     const handleSocialDone = () => {
         setSocialDone(true);
     };
+
+    const handleRegisterDone = () => {
+        setRegisterDone(true);
+    };
+
+    let stepNumber = active_twitter ? 3 : 2;
+
     return (
         <div className={className}>
+            <SharingStep text="Participer à l'action urgente" done={true} number={1} />
             {active_twitter && (
                 <Fragment>
-                    <SharingStep text={twitter_title} done={twitterDone} />
+                    <SharingStep text={twitter_title} done={twitterDone} number={2} />
                     <LinkTwitter
                         text={parseTextForUrl(twitter_message, auId)}
                         action={handleTwitterDone}
                     />
                 </Fragment>
             )}
-            <SharingStep text="Activer votre réseau" done={socialDone} />
-            <ul className="list">
+            <SharingStep text="Activer votre réseau" done={socialDone} number={stepNumber} />
+            <div className="list">
                 {md.mobile() && (
                     <Fragment>
-                        <li>
+                        <div className="link">
                             <LinkFacebook
                                 url={`${global.origin}/#/ua/${auId}`}
                                 action={handleSocialDone}
                             />
-                        </li>
-                        <li>
+                        </div>
+                        <div className="link">
                             <LinkWhatsapp text={text} action={handleSocialDone} />
-                        </li>
+                        </div>
                     </Fragment>
                 )}
-                <li>
+                <div className="link">
                     <CopyToClipboard url={url} action={handleSocialDone} />
-                </li>
-            </ul>
+                </div>
+            </div>
+            <SharingStep
+                text="S'incrire aux Actions Urgentes"
+                done={registerDone}
+                number={stepNumber + 1}
+            />
+            <ToUrgentActionPageLink
+                label={
+                    <Fragment>
+                        <FontAwesomeIcon icon={faUserEdit} size="2x" className="icon" />
+                        <span>{`S'inscrire`}</span>
+                    </Fragment>
+                }
+                step="thanks"
+                pageName="register"
+                analyticsCategory={'Share'}
+                buttonName="ToRegister"
+                whiteLink={true}
+                onClick={handleRegisterDone}
+            />
         </div>
     );
 };

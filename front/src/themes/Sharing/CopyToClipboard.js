@@ -11,22 +11,29 @@ import { black } from '../colors';
 const styles = {
     root: {
         textDecoration: 'none',
+        alignSelf: 'start',
+        padding: 10,
         color: black,
         fontFamily: 'Amnesty Trade Gothic LT',
         fontSize: 16,
         textTransform: 'none',
     },
     icon: {
-        marginRight: 10,
+        alignSelf: 'center',
+        marginBottom: 10,
+        width: '28px !important',
+    },
+    bloc: {
+        display: 'flex',
+        flexDirection: 'column',
     },
 };
 
 export const CopyToClipboard = ({ classes, url, action }) => (
     <Button className={classes.root} onClick={action}>
         <CopyToClipboardButton textToCopy={url}>
-            <div>
-                <FontAwesomeIcon icon={faLink} className={classes.icon} />
-                <span>Copier le lien</span>
+            <div className={classes.bloc}>
+                <FontAwesomeIcon icon={faLink} size="2x" className={classes.icon} />
             </div>
         </CopyToClipboardButton>
     </Button>
@@ -40,7 +47,7 @@ CopyToClipboard.propTypes = {
 
 CopyToClipboard.defaultProps = {
     url: '',
-    action: () => {},
+    action: () => { },
 };
 
 export default withStyles(styles)(CopyToClipboard);

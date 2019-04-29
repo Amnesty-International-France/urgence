@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import RichText from '../themes/RichText';
-import LongText from '../themes/LongText';
-import { yellow, white, black } from '../themes/colors';
-import { withBlackLogo } from '../themes/ThemeContext';
-import { LinkType } from '../propTypes';
-import Link from './Link';
+import RichText from '../RichText';
+import LongText from '../LongText';
+import { white, black } from '../colors';
+import { withYellowLogo } from '../ThemeContext';
+import Share from './Share';
 
 const styles = {
     display: 'flex',
@@ -16,7 +15,7 @@ const styles = {
     width: '100%',
     padding: '100px 20px 20px 20px',
     color: white,
-    backgroundColor: yellow,
+    backgroundColor: white,
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
         '& .link': {
@@ -43,21 +42,9 @@ const styles = {
         fontFamily: 'Amnesty Trade Gothic LT',
         fontSize: '16px',
     },
-    '& .actions': {
-        fontFamily: 'Amnesty Trade Gothic Condensed',
-        fontWeight: 'bold',
-        fontSize: '26px',
-        margin: '1.5rem 0',
-        '& a': {
-            display: 'inline-block',
-            color: yellow,
-            backgroundColor: black,
-            height: 40,
-        },
-    },
 };
 
-export const TransitionScreen = ({ className, actions, title, message, link }) => (
+export const SharingScreen = ({ className, title, message, share, auId }) => (
     <div className={className}>
         <div>
             <h1>
@@ -65,25 +52,21 @@ export const TransitionScreen = ({ className, actions, title, message, link }) =
             </h1>
             {message && <RichText html={message} />}
         </div>
-        <div className="actions">
-            {actions()}
-            {link && link.url && <Link {...link} color={black} />}
-        </div>
+        {share && <Share {...share} auId={auId} />}
     </div>
 );
 
-TransitionScreen.propTypes = {
+SharingScreen.propTypes = {
     className: PropTypes.string.isRequired,
-    actions: PropTypes.func,
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
-    link: LinkType,
+    share: PropTypes.object,
+    auId: PropTypes.string,
 };
 
-TransitionScreen.defaultProps = {
-    actions: () => {},
+SharingScreen.defaultProps = {
     title: '',
     message: '',
 };
 
-export default glamorous(withBlackLogo(TransitionScreen))(styles);
+export default glamorous(withYellowLogo(SharingScreen))(styles);

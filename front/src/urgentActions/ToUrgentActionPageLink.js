@@ -17,6 +17,7 @@ export const ToUrgentActionPageLink = ({
     analyticsCategory,
     buttonName,
     step,
+    whiteLink,
 }) => (
     <Link
         onClick={onClick}
@@ -26,6 +27,7 @@ export const ToUrgentActionPageLink = ({
         analyticsCategory={analyticsCategory}
         buttonName={buttonName}
         step={step}
+        whiteLink={whiteLink}
     />
 );
 
@@ -38,6 +40,11 @@ ToUrgentActionPageLink.propTypes = {
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
     buttonName: PropTypes.string,
+    whiteLink: PropTypes.bool,
+};
+
+ToUrgentActionPageLink.defaultProps = {
+    whiteLink: false,
 };
 
 export default withRouter(ToUrgentActionPageLink);

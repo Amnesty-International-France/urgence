@@ -210,6 +210,7 @@ export const FormStep = ({
                 analyticsCategory={analyticsCategory}
                 step={step}
                 label="Objet de l'e-mail *"
+                inputProps={{ autoFocus: true }}
             />
             <p className="objectIndication">{objectIndication}</p>
             <RadioButton

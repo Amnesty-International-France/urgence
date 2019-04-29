@@ -10,17 +10,17 @@ export default (name, params = {}) => {
             return `/ua/${params.id}/message`;
         case 'thanks':
             return `/ua/${params.id}/thanks`;
+        case 'register':
+            return `/ua/${params.id}/register`;
         case 'address':
             return `/ua/${params.id}/address`;
         case 'thanks-end':
             return `/ua/${params.id}/thanks-end`;
         case 'home':
             return '/';
-
         case 'letter': {
             return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}/send`;
         }
-
         default:
             throw new Error(`Unknown route ${name} passed to generateUrl`);
     }

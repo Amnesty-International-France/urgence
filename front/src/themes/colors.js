@@ -5,6 +5,7 @@ export const yellow = '#ff0';
 export const pink = 'rgba(210, 3, 109, 1)';
 export const orange = '#ef8200';
 export const green = 'green';
+export const grey = '#ddd';
 
 export const textColorForBackgroundColor = bgColor =>
     [black, pink].includes(colors[bgColor]) ? white : black;
@@ -17,4 +18,5 @@ export const colors = {
     pink,
     orange,
     green,
+    grey,
 };

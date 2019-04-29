@@ -3,8 +3,10 @@ import {
     STORY,
     CALL_TO_ACTION,
     MESSAGE,
-    OBJECT,
-    FULLNAME,
+    CONTINUE,
+    ADDRESS,
+    REGISTER,
+    THANKS,
 } from './screenIndex';
 
 describe('screenIndex.get', () => {
@@ -14,14 +16,18 @@ describe('screenIndex.get', () => {
     });
 
     it('should return the amount of story steps + the step index if it\'s other steps', () => {
-        let index = get(CALL_TO_ACTION, { story: [1, 2 ]});
+        let index = get(CALL_TO_ACTION, { story: [1, 2] });
         expect(index).toEqual(3);
-        index = get(MESSAGE, { story: [1, 2 ]});
+        index = get(MESSAGE, { story: [1, 2] });
         expect(index).toEqual(4);
-        index = get(OBJECT, { story: [1, 2 ]});
+        index = get(CONTINUE, { story: [1, 2] });
         expect(index).toEqual(5);
-        index = get(FULLNAME, { story: [1, 2 ]});
+        index = get(ADDRESS, { story: [1, 2] });
         expect(index).toEqual(6);
+        index = get(REGISTER, { story: [1, 2] });
+        expect(index).toEqual(6);
+        index = get(THANKS, { story: [1, 2] });
+        expect(index).toEqual(7);
     });
 
 });

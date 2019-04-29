@@ -9,7 +9,6 @@ export const LinkWhatsapp = ({ text, action }) => (
         target="whatsapp"
         title="Partage Whatsapp"
         icon={faWhatsapp}
-        text="Partager avec Whatsapp"
         action={action}
     />
 );
@@ -21,7 +20,7 @@ LinkWhatsapp.propTypes = {
 
 LinkWhatsapp.defaultProps = {
     text: '',
-    action: () => {},
+    action: () => { },
 };
 
 export default LinkWhatsapp;
