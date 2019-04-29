@@ -1,10 +1,10 @@
-import get from 'lodash.get';
 import React from 'react';
 import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import PropTypes from 'prop-types';
+import get from 'lodash.get';
 
 import Story from './story/Story';
 import Act from './Act';
@@ -25,6 +25,7 @@ const query = gql`
     query urgentAction($id: ID!) {
         UrgentAction(id: $id) {
             id
+            slug
             story {
                 displayOptions {
                     mediumPosition
