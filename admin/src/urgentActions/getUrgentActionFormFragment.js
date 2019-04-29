@@ -59,7 +59,7 @@ const styles = {
 const generateSlug = title =>
     slugify(title, {
         replacement: '-',
-        remove: /[*+~.()'"!:@#]/g,
+        remove: /[*+~.()'"!:@#,]/g,
         lower: true,
     });
 
