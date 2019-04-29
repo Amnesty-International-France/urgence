@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ApolloProvider } from 'react-apollo';
-import { Switch } from 'react-router-dom';
+import { Switch, HashRouter as Router, Route } from 'react-router-dom';
 import glamorous from 'glamorous';
 import Div100Vh from 'react-div-100vh';
 
 import withTracker from './analytics/withTracker';
-import { Router, Route } from './gateway/ReactRouter';
 import generateUrl from './services/generateUrl';
 import UrgentAction from './urgentActions/UrgentAction';
 import Home from './Home';
