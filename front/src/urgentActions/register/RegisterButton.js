@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { compose } from 'recompose';
-import gql from 'graphql-tag';
-
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
 import { withSessionData } from '../../SessionDataContext';
 import { routeMatch } from '../../propTypes';
@@ -11,14 +9,12 @@ import { routeMatch } from '../../propTypes';
 const query = `
     mutation createActivist($firstname: String!, $lastname: String!, $email: String!, $phone: String!) {
         data: createActivist(firstname: $firstname, lastname: $lastname, email: $email, phone: $phone) {
-        id
-        firstname
-        lastname
-        email
-        phone
-        created_on
-        updated_on
-    }
+            id
+            firstname
+            lastname
+            email
+            phone
+        }
     }
 `;
 

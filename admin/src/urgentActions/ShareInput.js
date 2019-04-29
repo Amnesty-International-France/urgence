@@ -54,13 +54,6 @@ ${process.env.REACT_APP_FRONT_BASE_URL}/#/ua/$CURRENT_AU_ID`;
                                     disabled={disableSharing(formData, source)}
                                 />
                             )}
-                            <LongTextInput
-                                source={`${source}.share.message`}
-                                label="Sharing message"
-                                defaultValue={defaultValue}
-                                rows="2"
-                                rowsMax="10"
-                            />
                         </Fragment>
                     );
                 }}

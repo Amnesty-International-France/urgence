@@ -23,10 +23,6 @@ const styles = {
         marginBottom: 10,
         width: '28px !important',
     },
-    text: {
-        display: 'block',
-        lineHeight: '15px',
-    },
     bloc: {
         display: 'flex',
         flexDirection: 'column',
@@ -38,10 +34,6 @@ export const CopyToClipboard = ({ classes, url, action }) => (
         <CopyToClipboardButton textToCopy={url}>
             <div className={classes.bloc}>
                 <FontAwesomeIcon icon={faLink} size="2x" className={classes.icon} />
-                <span className={classes.text}>
-                    Copier le lien
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span>
             </div>
         </CopyToClipboardButton>
     </Button>
@@ -55,7 +47,7 @@ CopyToClipboard.propTypes = {
 
 CopyToClipboard.defaultProps = {
     url: '',
-    action: () => {},
+    action: () => { },
 };
 
 export default withStyles(styles)(CopyToClipboard);

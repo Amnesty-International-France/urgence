@@ -9,7 +9,6 @@ export const LinkFacebook = ({ url, action }) => (
         target="facebook"
         title="Partage Messenger"
         icon={faFacebookMessenger}
-        text="Partager sur Messenger"
         action={action}
     />
 );
@@ -21,7 +20,7 @@ LinkFacebook.propTypes = {
 
 LinkFacebook.defaultProps = {
     url: '',
-    action: () => {},
+    action: () => { },
 };
 
 export default LinkFacebook;

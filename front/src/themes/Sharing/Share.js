@@ -23,13 +23,11 @@ const styles = {
     marginLeft: 16,
     '& .list': {
         display: 'flex',
-        marginLeft: 23,
+        marginLeft: 41,
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
     '& .link': {
-        width: 100,
-        height: 100,
         display: 'flex',
         marginTop: 10,
     },

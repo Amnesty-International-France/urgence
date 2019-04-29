@@ -16,6 +16,7 @@ const styles = {
         textTransform: 'none',
         alignSelf: 'start',
         padding: 10,
+        marginRight: 20,
     },
     inLine: {
         textDecoration: 'none',

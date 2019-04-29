@@ -21,10 +21,6 @@ export default (name, params = {}) => {
         case 'letter': {
             return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}/send`;
         }
-        case 'save-register': {
-            return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}/register`;
-        }
-
         default:
             throw new Error(`Unknown route ${name} passed to generateUrl`);
     }
