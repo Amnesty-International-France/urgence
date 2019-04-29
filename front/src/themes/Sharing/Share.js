@@ -9,6 +9,8 @@ import CopyToClipboard from './CopyToClipboard';
 import SharingStep from './SharingStep';
 import ToUrgentActionPageLink from '../../urgentActions/ToUrgentActionPageLink';
 import { black } from '../colors';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 import { secureUseState } from '../../hooks/secureHooks';
 
@@ -34,6 +36,9 @@ const styles = {
         fontFamily: 'Amnesty Trade Gothic LT',
         alignSelf: 'center',
         marginBottom: 10,
+    },
+    '& .icon': {
+        marginRight: 10,
     },
 };
 
@@ -112,7 +117,12 @@ export const Share = ({
                 number={stepNumber + 1}
             />
             <ToUrgentActionPageLink
-                label="S'inscrire"
+                label={
+                    <Fragment>
+                        <FontAwesomeIcon icon={faUserEdit} size="2x" className="icon" />
+                        <span>{`S'inscrire`}</span>
+                    </Fragment>
+                }
                 step="thanks"
                 pageName="register"
                 analyticsCategory={'Share'}
