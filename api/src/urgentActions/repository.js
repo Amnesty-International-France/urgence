@@ -5,6 +5,7 @@ const query = require('../db/client');
 const columns = [
     'id',
     'title',
+    'slug',
     'story',
     'end_of_story_link',
     'call_to_action',

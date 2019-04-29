@@ -33,12 +33,12 @@ export default {
     },
     Mutation: {
         createUrgentAction: async (_, urgentAction) => {
-            const preparedStory = await prepareUrgentActionForDatabase(urgentAction);
-            return createUrgentAction(preparedStory);
+            const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
+            return createUrgentAction(preparedUa);
         },
         updateUrgentAction: async (_, urgentAction) => {
-            const preparedStory = await prepareUrgentActionForDatabase(urgentAction);
-            return updateUrgentAction(urgentAction.id, preparedStory);
+            const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
+            return updateUrgentAction(urgentAction.id, preparedUa);
         },
         deleteUrgentAction: (_, id) => removeUrgentAction(id),
     },
