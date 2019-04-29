@@ -40,6 +40,6 @@ describe('<RichTextInput />', () => {
         const editor = wrapper.find(BaseRichTextInput);
         const toolbar = editor.prop('toolbar');
 
-        expect(toolbar[0][0]).toEqual({ size: [false, 'large', 'huge']});
+        expect(toolbar[0][0]).toEqual({ size: [false, 'large', 'huge'] });
     });
 });

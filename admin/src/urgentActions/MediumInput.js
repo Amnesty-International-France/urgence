@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    TextInput,
-    ImageInput,
-    Labeled,
-} from 'react-admin';
+import { TextInput, ImageInput, Labeled } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import get from 'lodash.get';
 
@@ -19,7 +15,7 @@ const styles = {
                 display: 'none',
             },
         },
-        '& .previews' : {
+        '& .previews': {
             position: 'absolute',
             top: 74,
             textAlign: 'center',
@@ -31,7 +27,7 @@ const styles = {
             '& img': {
                 maxHeight: '9rem',
             },
-        }
+        },
     },
     dropZone: {
         height: 200,
@@ -39,7 +35,10 @@ const styles = {
 };
 
 export const validateMedium = (value, record, _, key) => {
-    const mediumKey = key.split('.').slice(0, -1).join('.');
+    const mediumKey = key
+        .split('.')
+        .slice(0, -1)
+        .join('.');
     const titleKey = `${mediumKey}.title`;
     const srcKey = `${mediumKey}.src`;
     const title = get(record, titleKey);
@@ -51,22 +50,29 @@ export const validateMedium = (value, record, _, key) => {
 };
 
 export const MediumInput = ({ label, classes, source, record }) => (
-    <Labeled label={label || "Medium"}>
+    <Labeled label={label || 'Medium'}>
         <div className={classes.root}>
             <div className={classes.imageWrapper}>
                 <ImageInput
-                    source={`${source}.src`} 
+                    source={`${source}.src`}
                     record={record}
                     label=""
-                    validate={validateMedium}  
+                    validate={validateMedium}
                     classes={{
                         dropZone: classes.dropZone,
-                    }}>
-                    <ImagePreview/>
+                    }}
+                >
+                    <ImagePreview />
                 </ImageInput>
             </div>
             <div className={classes.titleWrapper}>
-                <TextInput validate={validateMedium} fullWidth source={`${source}.title`} label="Alternate text" /><br/>
+                <TextInput
+                    validate={validateMedium}
+                    fullWidth
+                    source={`${source}.title`}
+                    label="Alternate text"
+                />
+                <br />
             </div>
         </div>
     </Labeled>

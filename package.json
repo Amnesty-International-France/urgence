@@ -1,22 +1,22 @@
 {
     "dependencies": {
-        "convict": "4.2.0",
-        "express-graphql": "0.6.12",
-        "graphql": "0.13.2",
-        "graphql-tag": "2.8.0"
+        "convict": "~4.2.0",
+        "express-graphql": "~0.6.12",
+        "graphql": "~0.13.2",
+        "graphql-tag": "~2.8.0"
+    },
+    "devDependencies": {
+        "jest": "~22.4.4",
+        "jest-canvas-mock": "~2.0.0",
+        "jest-cli": "~22.4.4",
+        "shipit-cli": "~4.0.2",
+        "shipit-deploy": "~4.0.2",
+        "svgr": "~1.9.2",
+        "uuid-by-string": "~0.6.0"
     },
     "scripts": {
         "test": "NODE_ENV=test jest --ci --forceExit",
         "test-watch": "NODE_ENV=test jest --watch"
-    },
-    "devDependencies": {
-        "jest": "22.4.3",
-        "jest-canvas-mock": "1.0.2",
-        "jest-cli": "22.4.3",
-        "shipit-cli": "4.0.2",
-        "shipit-deploy": "4.0.2",
-        "svgr": "^1.9.2",
-        "uuid-by-string": "0.6.0"
     },
     "jest": {
         "setupFiles": [
@@ -31,6 +31,7 @@
             "api/node_modules"
         ],
         "testEnvironment": "jsdom",
+        "testURL": "http://localhost",
         "testPathIgnorePatterns": [
             "node_modules",
             "e2e",

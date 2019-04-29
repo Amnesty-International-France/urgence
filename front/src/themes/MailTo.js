@@ -55,6 +55,7 @@ export class MailTo extends Component {
                     )
                     .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '')}
                 target="_blank"
+                rel="noopener noreferrer"
                 disabled={disabled}
             >
                 {label}

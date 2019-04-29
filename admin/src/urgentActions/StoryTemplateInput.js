@@ -89,8 +89,8 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
                                 {index === 0 ? (
                                     <StoryCoverInput source={source} />
                                 ) : (
-                                        <StoryStepInput source={source} />
-                                    )}
+                                    <StoryStepInput source={source} />
+                                )}
                             </div>
                         </CardContent>
                     </Card>

@@ -1,4 +1,3 @@
-import { Delete } from 'react-admin';
 import ViewListIcon from '@material-ui/icons/ViewList';
 
 import UrgentActionEdit from './UrgentActionEdit';
@@ -11,5 +10,4 @@ export default {
     list: UrgentActionList,
     edit: UrgentActionEdit,
     create: UrgentActionCreate,
-    remove: Delete,
 };

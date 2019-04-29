@@ -2,7 +2,11 @@
     "presets": ["babel-preset-expo"],
     "env": {
         "development": {
-            "plugins": ["transform-object-rest-spread", "transform-react-jsx-source", "transform-class-properties"]
+            "plugins": [
+                "transform-object-rest-spread",
+                "transform-react-jsx-source",
+                "transform-class-properties"
+            ]
         }
     }
 }

@@ -11,12 +11,13 @@ export const PreviewLink = ({ record }) =>
     !record ? null : (
         <Button
             color="primary"
+            size="small"
             href={generateAppUrl('urgentAction', { id: record.id })}
             target="_blank"
             rel="noopener noreferrer"
             disabled={!hasStory(record)}
         >
-            <Visibility />&nbsp; View
+            <Visibility />&nbsp;View
         </Button>
     );
 

@@ -78,18 +78,27 @@ export const Form = ({ classes }) => (
 
         <div className={`${classes.form} continue`}>
             <h2>Continue</h2>
-            <ThanksInput source="email_thank" withLink={USE_CALL_TO_ACTION_LINK} sharing final={!LETTER_ACTIVATED} />
+            <ThanksInput
+                source="email_thank"
+                withLink={USE_CALL_TO_ACTION_LINK}
+                sharing
+                final={!LETTER_ACTIVATED}
+            />
         </div>
 
-        {LETTER_ACTIVATED && <div className={`${classes.form} letter`}>
-            <h2>Letter</h2>
-            <LetterInput source="recipient" />
-        </div>}
+        {LETTER_ACTIVATED && (
+            <div className={`${classes.form} letter`}>
+                <h2>Letter</h2>
+                <LetterInput source="recipient" />
+            </div>
+        )}
 
-        {LETTER_ACTIVATED && <div className={`${classes.form} thank-you`}>
-            <h2>Thank You</h2>
-            <ThanksInput source="letter_thank" withLink={USE_CALL_TO_ACTION_LINK} final />
-        </div>}
+        {LETTER_ACTIVATED && (
+            <div className={`${classes.form} thank-you`}>
+                <h2>Thank You</h2>
+                <ThanksInput source="letter_thank" withLink={USE_CALL_TO_ACTION_LINK} final />
+            </div>
+        )}
     </Fragment>
 );
 
