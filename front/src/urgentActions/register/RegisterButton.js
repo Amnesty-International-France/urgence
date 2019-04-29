@@ -2,11 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { compose } from 'recompose';
+import gql from 'graphql-tag';
 
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
-import generateUrl from '../../services/generateUrl';
 import { withSessionData } from '../../SessionDataContext';
 import { routeMatch } from '../../propTypes';
+
+const query = `
+    mutation createActivist($firstname: String!, $lastname: String!, $email: String!, $phone: String!) {
+        data: createActivist(firstname: $firstname, lastname: $lastname, email: $email, phone: $phone) {
+        id
+        firstname
+        lastname
+        email
+        phone
+        created_on
+        updated_on
+    }
+    }
+`;
 
 export class RegisterButton extends Component {
     register = () => {
@@ -21,14 +35,20 @@ export class RegisterButton extends Component {
             },
         } = this.props;
 
-        return fetch(generateUrl('save-register', { id }), {
+        return fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
             method: 'POST',
             body: JSON.stringify({
-                civility,
-                surname,
-                name,
-                phone,
-                email,
+                operationName: 'createActivist',
+                query,
+                variables: {
+                    au: id,
+                    civility,
+                    query,
+                    firstname: surname,
+                    lastname: name,
+                    phone,
+                    email,
+                },
             }),
             headers: {
                 'content-type': 'application/json',
