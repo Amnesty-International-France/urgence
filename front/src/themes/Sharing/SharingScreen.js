@@ -4,7 +4,7 @@ import glamorous from 'glamorous';
 import RichText from '../RichText';
 import LongText from '../LongText';
 import { yellow, white, black } from '../colors';
-import { withBlackLogo } from '../ThemeContext';
+import { withYellowLogo } from '../ThemeContext';
 import { LinkType } from '../../propTypes';
 import Link from '../Link';
 import Share from './Share';
@@ -90,4 +90,4 @@ SharingScreen.defaultProps = {
     message: '',
 };
 
-export default glamorous(withBlackLogo(SharingScreen))(styles);
+export default glamorous(withYellowLogo(SharingScreen))(styles);
