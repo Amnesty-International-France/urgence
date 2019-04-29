@@ -36,12 +36,23 @@ export const preview = {
     fontFamily: "'Amnesty Trade Gothic', 'Arial', sans-serif",
 };
 
+export const sharingScreenPreview = {
+    ...preview,
+    '& > div': {
+        maxHeight: 'calc(100% + 120px)',
+        height: 'calc(100% + 120px)',
+        width: 'calc(100% - 40px)',
+        padding: '100px 20px 20px 20px',
+    },
+};
+
 export const transitionScreenPreview = {
     ...preview,
     '& > div': {
+        maxHeight: 'calc(100% - 120px)',
         height: 'calc(100% - 120px)',
         width: 'calc(100% - 40px)',
-        padding: '100px 20px 20px 20px',
+        padding: '0px 20px 0px 20px',
     },
 };
 

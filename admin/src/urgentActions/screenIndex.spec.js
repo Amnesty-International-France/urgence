@@ -3,8 +3,10 @@ import {
     STORY,
     CALL_TO_ACTION,
     MESSAGE,
-    OBJECT,
-    FULLNAME,
+    CONTINUE,
+    ADDRESS,
+    REGISTER,
+    THANKS,
 } from './screenIndex';
 
 describe('screenIndex.get', () => {

@@ -19,6 +19,7 @@ const styles = {
     height: '50px',
     marginTop: 30,
     marginLeft: -18,
+    position: 'relative',
     '& .icon': {
         marginRight: 10,
         height: '50px',
