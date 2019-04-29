@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import slugify from 'slugify';
 
-import { ArrayInput, LongTextInput, required, SimpleForm } from 'react-admin';
+import { ArrayInput, LongTextInput, SimpleForm, FormDataConsumer, required } from 'react-admin';
 
 import { withStyles } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
@@ -55,10 +56,23 @@ const styles = {
     },
 };
 
+const generateSlug = title =>
+    slugify(title, {
+        replacement: '-',
+        remove: /[*+~.()'"!:@#]/g,
+        lower: true,
+    });
+
 export const Form = ({ classes }) => (
     <Fragment>
         <div className={classes.form}>
             <LongTextInput source="title" validate={required()} />
+            <FormDataConsumer>
+                {({ formData }) => {
+                    formData.slug = generateSlug(formData.title);
+                    return <LongTextInput source="slug" disabled />;
+                }}
+            </FormDataConsumer>
         </div>
 
         <div className={`${classes.form} story`}>
