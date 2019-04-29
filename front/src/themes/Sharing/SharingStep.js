@@ -17,6 +17,7 @@ const styles = {
     lineHeight: '50px',
     display: 'flex',
     height: '50px',
+    marginTop: 30,
     marginLeft: -18,
     '& .icon': {
         marginRight: 10,
@@ -44,8 +45,8 @@ const styles = {
         zIndex: 1,
     },
     '& .top': {
-        marginTop: 0,
-        height: 35,
+        marginTop: -30,
+        height: 65,
     },
 };
 

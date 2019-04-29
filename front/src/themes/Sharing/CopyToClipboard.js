@@ -11,6 +11,8 @@ import { black } from '../colors';
 const styles = {
     root: {
         textDecoration: 'none',
+        alignSelf: 'start',
+        padding: 10,
         color: black,
         fontFamily: 'Amnesty Trade Gothic LT',
         fontSize: 16,
@@ -19,19 +21,27 @@ const styles = {
     icon: {
         alignSelf: 'center',
         marginBottom: 10,
+        width: '28px !important',
     },
     text: {
         display: 'block',
         lineHeight: '15px',
+    },
+    bloc: {
+        display: 'flex',
+        flexDirection: 'column',
     },
 };
 
 export const CopyToClipboard = ({ classes, url, action }) => (
     <Button className={classes.root} onClick={action}>
         <CopyToClipboardButton textToCopy={url}>
-            <div>
+            <div className={classes.bloc}>
                 <FontAwesomeIcon icon={faLink} size="2x" className={classes.icon} />
-                <span className={classes.text}>Copier le lien</span>
+                <span className={classes.text}>
+                    Copier le lien
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </span>
             </div>
         </CopyToClipboardButton>
     </Button>

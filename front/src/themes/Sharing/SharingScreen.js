@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import RichText from '../RichText';
 import LongText from '../LongText';
-import { yellow, white, black } from '../colors';
+import { white, black } from '../colors';
 import { withYellowLogo } from '../ThemeContext';
-import { LinkType } from '../../propTypes';
-import Link from '../Link';
 import Share from './Share';
 
 const styles = {
@@ -44,21 +42,9 @@ const styles = {
         fontFamily: 'Amnesty Trade Gothic LT',
         fontSize: '16px',
     },
-    '& .actions': {
-        fontFamily: 'Amnesty Trade Gothic Condensed',
-        fontWeight: 'bold',
-        fontSize: '26px',
-        margin: '1.5rem 0',
-        '& a': {
-            display: 'inline-block',
-            color: yellow,
-            backgroundColor: black,
-            height: 40,
-        },
-    },
 };
 
-export const SharingScreen = ({ className, actions, title, message, link, share, auId }) => (
+export const SharingScreen = ({ className, title, message, share, auId }) => (
     <div className={className}>
         <div>
             <h1>
@@ -66,26 +52,19 @@ export const SharingScreen = ({ className, actions, title, message, link, share,
             </h1>
             {message && <RichText html={message} />}
         </div>
-        <div className="actions">
-            {actions()}
-            {link && link.url && <Link {...link} color={black} />}
-        </div>
         {share && <Share {...share} auId={auId} />}
     </div>
 );
 
 SharingScreen.propTypes = {
     className: PropTypes.string.isRequired,
-    actions: PropTypes.func,
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
-    link: LinkType,
     share: PropTypes.object,
     auId: PropTypes.string,
 };
 
 SharingScreen.defaultProps = {
-    actions: () => {},
     title: '',
     message: '',
 };

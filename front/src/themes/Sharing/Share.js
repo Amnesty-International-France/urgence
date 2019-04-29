@@ -8,7 +8,7 @@ import LinkWhatsapp from './LinkWhatsapp';
 import CopyToClipboard from './CopyToClipboard';
 import SharingStep from './SharingStep';
 import ToUrgentActionPageLink from '../../urgentActions/ToUrgentActionPageLink';
-import { black } from '../colors';
+import { black, grey } from '../colors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,17 +19,19 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     color: black,
-    borderLeft: 'solid 1px black',
+    borderLeft: `solid 1px ${grey}`,
     marginLeft: 16,
     '& .list': {
         display: 'flex',
-        marginLeft: 20,
+        marginLeft: 23,
         flexDirection: 'row',
+        flexWrap: 'wrap',
     },
     '& .link': {
         width: 100,
         height: 100,
         display: 'flex',
+        marginTop: 10,
     },
     '& .content': {
         fontSize: 16,
@@ -38,6 +40,7 @@ const styles = {
         marginBottom: 10,
     },
     '& .icon': {
+        height: 30,
         marginRight: 10,
     },
 };

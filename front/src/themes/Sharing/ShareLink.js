@@ -24,7 +24,7 @@ const styles = {
         fontSize: 16,
         textTransform: 'none',
         alignSelf: 'start',
-        paddingLeft: 20,
+        paddingLeft: 55,
     },
     inLineButton: {
         display: 'flex',
@@ -64,26 +64,26 @@ export const ShareLink = ({
     customClass,
     customScript,
 }) => (
-    <Fragment>
-        {customScript}
-        <Button
-            className={classnames(inLine ? classes.inLine : classes.root, `${customClass}`)}
-            href={href}
-            target={target}
-            title={title}
-            onClick={action}
-        >
-            <div className={inLine ? classes.inLineButton : classes.button}>
-                <FontAwesomeIcon
-                    icon={icon}
-                    size="2x"
-                    className={inLine ? classes.inLineIcon : classes.icon}
-                />
-                <span>{text}</span>
-            </div>
-        </Button>
-    </Fragment>
-);
+        <Fragment>
+            {customScript}
+            <Button
+                className={classnames(inLine ? classes.inLine : classes.root, `${customClass}`)}
+                href={href}
+                target={target}
+                title={title}
+                onClick={action}
+            >
+                <div className={inLine ? classes.inLineButton : classes.button}>
+                    <FontAwesomeIcon
+                        icon={icon}
+                        size="2x"
+                        className={inLine ? classes.inLineIcon : classes.icon}
+                    />
+                    <span>{text}</span>
+                </div>
+            </Button>
+        </Fragment>
+    );
 
 ShareLink.propTypes = {
     href: PropTypes.string.isRequired,
@@ -100,7 +100,7 @@ ShareLink.propTypes = {
 
 ShareLink.defaultProps = {
     target: '_blank',
-    action: () => {},
+    action: () => { },
     inLine: false,
     customClass: '',
     customScript: null,

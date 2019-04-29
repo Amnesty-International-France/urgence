@@ -11,10 +11,8 @@ export const Thanks = ({ data, actions, auId }) => {
     if (share) {
         return (
             <SharingScreen
-                actions={actions}
                 title={get(data, 'title')}
                 message={get(data, 'text')}
-                link={get(data, 'link.url')}
                 share={get(data, 'share')}
                 auId={auId}
             />
