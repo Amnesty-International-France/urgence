@@ -138,7 +138,7 @@ export default gql`
     type UrgentAction {
         id: ID!
         title: String!
-        slug: String!
+        slug: String
         story: [StoryStep]
         end_of_story_link: Link
         call_to_action: CallToAction
@@ -171,7 +171,7 @@ export default gql`
     extend type Mutation {
         createUrgentAction(
             title: String!
-            slug: String!
+            slug: String
             story: [StoryStepInput]
             end_of_story_link: LinkInput
             call_to_action: CallToActionInput
@@ -185,7 +185,7 @@ export default gql`
         updateUrgentAction(
             id: ID!
             title: String!
-            slug: String!
+            slug: String
             story: [StoryStepInput]
             end_of_story_link: LinkInput
             call_to_action: CallToActionInput
