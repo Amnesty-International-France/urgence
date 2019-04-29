@@ -19,11 +19,18 @@ const columns = [
     'last_edition_date',
 ];
 
-const urgentActionCrudQueries = crud({
-    table: 'urgent_action',
-    writableCols: columns,
-    returnCols: columns,
-});
+const urgentActionCrudQueries = {
+    ...crud({
+        table: 'urgent_action',
+        writableCols: columns,
+        returnCols: columns,
+    }),
+    selectOneBySlug: selectOne({
+        table: 'urgent_action',
+        primaryKey: 'slug',
+        returnCols: columns,
+    }),
+};
 
 export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }) =>
     query(
@@ -38,6 +45,9 @@ export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }) 
 export const countUrgentActions = async () => query(urgentActionCrudQueries.countAll());
 
 export const getUrgentAction = async id => query(urgentActionCrudQueries.selectOne(id));
+
+export const getUrgentActionBySlug = async slug =>
+    query(urgentActionCrudQueries.selectOneBySlug(slug));
 
 export const createUrgentAction = async urgentAction =>
     query(urgentActionCrudQueries.insertOne(urgentAction));

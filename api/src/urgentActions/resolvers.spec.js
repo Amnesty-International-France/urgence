@@ -1,6 +1,7 @@
 import UrgentActionsResolver from './resolvers';
 import {
     getUrgentAction,
+    getUrgentActionBySlug,
     getUrgentActions,
     createUrgentAction,
     updateUrgentAction,
@@ -21,6 +22,15 @@ describe('Urgent Actions Resolvers', () => {
                 expect(getUrgentAction).toHaveBeenCalledWith(
                     '16fe5e43-df12-4104-b1fe-77f8b3653802',
                 );
+            });
+        });
+
+        describe('UrgentActionBySlug', () => {
+            it('should query urgent actions with corresponding slug', async () => {
+                const params = { slug: 'tom-marvolo-riddle' };
+                await UrgentActionsResolver.Query.UrgentAction(null, params);
+
+                expect(getUrgentActionBySlug).toHaveBeenCalledWith('tom-marvolo-riddle');
             });
         });
 

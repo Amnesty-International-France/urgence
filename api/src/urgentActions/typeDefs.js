@@ -154,6 +154,7 @@ export default gql`
 
     extend type Query {
         UrgentAction(id: ID!): UrgentAction
+        UrgentActionBySlug(slug: String!): UrgentAction
         allUrgentActions(
             page: Int
             perPage: Int

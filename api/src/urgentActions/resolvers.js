@@ -1,5 +1,6 @@
 import {
     getUrgentAction,
+    getUrgentActionBySlug,
     getUrgentActions,
     countUrgentActions,
     createUrgentAction,
@@ -29,6 +30,7 @@ export default {
         allUrgentActions: (_, { perPage, page, sortField, sortOrder }) =>
             getUrgentActions({ perPage, page, sortField, sortOrder }),
         UrgentAction: (_, { id }) => getUrgentAction(id),
+        UrgentActionBySlug: (_, { slug }) => getUrgentActionBySlug(slug),
         _allUrgentActionsMeta: () => countUrgentActions(),
     },
     Mutation: {
