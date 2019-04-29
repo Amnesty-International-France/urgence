@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from '@material-ui/core/Tooltip';
+
+import { secureUseState, secureUseEffect } from '../hooks/secureHooks';
 
 const copy = textToCopy => {
     const textField = document.createElement('textarea');
@@ -16,8 +18,8 @@ const CopyToClipboard = ({ children, textToCopy, ...props }) => {
         return;
     }
 
-    const [copied, setCopied] = useState(false);
-    const [hovered, setHovered] = useState(false);
+    const [copied, setCopied] = secureUseState(false);
+    const [hovered, setHovered] = secureUseState(false);
 
     const handleOnClick = () => {
         copy(textToCopy);
@@ -32,7 +34,7 @@ const CopyToClipboard = ({ children, textToCopy, ...props }) => {
         setHovered(false);
     };
 
-    useEffect(() => {
+    secureUseEffect(() => {
         if (!copied) {
             return;
         }

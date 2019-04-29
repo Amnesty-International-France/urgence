@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import MobileDetect from 'mobile-detect';
@@ -8,6 +8,8 @@ import LinkWhatsapp from './LinkWhatsapp';
 import CopyToClipboard from './CopyToClipboard';
 import SharingStep from './SharingStep';
 import { black } from '../colors';
+
+import { secureUseState } from '../../hooks/secureHooks';
 
 const styles = {
     display: 'flex',
@@ -32,17 +34,6 @@ const parseTextForUrl = (text, auId) => {
     return hashTaggedText.replace('$CURRENT_AU_ID', auId);
 };
 
-const setUseStateForAdmin = () => {
-    try {
-        return useState(false);
-    } catch (error) {
-        /* eslint-disable no-console */
-        console.log("useState doesn't work through admin preview");
-        console.log(error.message);
-        return [false, () => true];
-    }
-};
-
 export const Share = ({
     className,
     active_twitter,
@@ -53,8 +44,8 @@ export const Share = ({
 }) => {
     const md = new MobileDetect(navigator.userAgent);
 
-    const [twitterDone, setTwitterDone] = setUseStateForAdmin();
-    const [socialDone, setSocialDone] = setUseStateForAdmin();
+    const [twitterDone, setTwitterDone] = secureUseState();
+    const [socialDone, setSocialDone] = secureUseState();
 
     const text = parseTextForUrl(message, auId);
 
