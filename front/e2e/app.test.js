@@ -109,24 +109,6 @@ describe('app', () => {
         );
     });
 
-    it('should display address step', async () => {
-        await addressPage.navigate(urgentAction.id);
-        expect(await addressPage.isActionDisabled()).toBe(true);
-        await addressPage.typeAddressMain('4, rue du coin qui tourne en rond');
-        expect(await addressPage.isActionDisabled()).toBe(true);
-        await addressPage.typePostalCode('00 000');
-        expect(await addressPage.isActionDisabled()).toBe(true);
-        await addressPage.typeCity('Perpéte La Galette');
-        expect(await addressPage.isActionDisabled()).toBe(true);
-        await addressPage.typeCountry('France');
-        expect(await addressPage.isActionDisabled()).toBe(true);
-        await addressPage.typeEmail('dupond@perpéte.com');
-        expect(await addressPage.isActionDisabled()).toBe(false);
-
-        await addressPage.validate();
-        await thanksEndPage.isLoaded();
-    });
-
     it('should display thanks-end step', async () => {
         await thanksEndPage.navigate(urgentAction.id);
 
