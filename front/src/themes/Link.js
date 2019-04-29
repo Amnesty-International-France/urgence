@@ -7,7 +7,7 @@ import { routeMatch } from '../propTypes';
 import { withRouter } from 'react-router';
 import trackEvent from '../analytics/trackEvent';
 
-import { black, yellow } from './colors';
+import { black, yellow, white } from './colors';
 
 export const styles = {
     display: 'block',
@@ -29,6 +29,15 @@ export const styles = {
     '&.disabled': {
         opacity: 0.25,
         pointerEvents: 'none',
+    },
+    '&.white': {
+        backgroundColor: white,
+        fontFamily: 'Amnesty Trade Gothic LT',
+        fontSize: 16,
+        textTransform: 'none',
+        fontWeight: 'initial',
+        paddingLeft: 20,
+        textAlign: 'left',
     },
 };
 
@@ -52,11 +61,12 @@ export class Link extends Component {
             buttonName,
             step,
             match,
+            whiteLink,
         } = this.props;
         return (
             <RouterLink
                 to={to}
-                className={classnames(className, { disabled: disabled })}
+                className={classnames(className, { disabled: disabled, white: whiteLink })}
                 onClick={event => {
                     if (onClick) onClick(event);
                     trackEvent(
@@ -89,6 +99,11 @@ Link.propTypes = {
     buttonName: PropTypes.string,
     step: PropTypes.string,
     match: routeMatch,
+    whiteLink: PropTypes.bool,
+};
+
+Link.defaultProps = {
+    whiteLink: false,
 };
 
 export default glamorous(withRouter(Link))(styles);

@@ -17,21 +17,23 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     color: black,
+    borderLeft: 'solid 1px black',
+    marginLeft: 16,
     '& .list': {
-        listStyle: 'none',
+        display: 'flex',
         marginLeft: 20,
+        flexDirection: 'row',
+    },
+    '& .link': {
+        width: 100,
+        height: 100,
+        display: 'flex',
     },
     '& .content': {
         fontSize: 16,
         fontFamily: 'Amnesty Trade Gothic LT',
         alignSelf: 'center',
         marginBottom: 10,
-    },
-    '& .twitter-share-button': {
-        '@media (min-width: 1024px)': {
-            alignSelf: 'start',
-            marginLeft: 20,
-        },
     },
 };
 
@@ -70,45 +72,53 @@ export const Share = ({
     const handleRegisterDone = () => {
         setRegisterDone(true);
     };
+
+    let stepNumber = active_twitter ? 3 : 2;
+
     return (
         <div className={className}>
-            <SharingStep text="Participer à l'action urgente" done={true} />
-            <span className="content">Merci pour votre participation</span>
+            <SharingStep text="Participer à l'action urgente" done={true} number={1} />
             {active_twitter && (
                 <Fragment>
-                    <SharingStep text={twitter_title} done={twitterDone} />
+                    <SharingStep text={twitter_title} done={twitterDone} number={2} />
                     <LinkTwitter
                         text={parseTextForUrl(twitter_message, auId)}
                         action={handleTwitterDone}
                     />
                 </Fragment>
             )}
-            <SharingStep text="Activer votre réseau" done={socialDone} />
-            <ul className="list">
+            <SharingStep text="Activer votre réseau" done={socialDone} number={stepNumber} />
+            <div className="list">
                 {md.mobile() && (
                     <Fragment>
-                        <li>
+                        <div className="link">
                             <LinkFacebook
                                 url={`${global.origin}/#/ua/${auId}`}
                                 action={handleSocialDone}
                             />
-                        </li>
-                        <li>
+                        </div>
+                        <div className="link">
                             <LinkWhatsapp text={text} action={handleSocialDone} />
-                        </li>
+                        </div>
                     </Fragment>
                 )}
-                <li>
+                <div className="link">
                     <CopyToClipboard url={url} action={handleSocialDone} />
-                </li>
-            </ul>
-            <SharingStep text="S'incrire aux Actions Urgentes" done={registerDone} />
+                </div>
+            </div>
+            <SharingStep
+                text="S'incrire aux Actions Urgentes"
+                done={registerDone}
+                number={stepNumber + 1}
+            />
             <ToUrgentActionPageLink
                 label="S'inscrire"
                 step="thanks"
                 pageName="register"
                 analyticsCategory={'Share'}
                 buttonName="ToRegister"
+                whiteLink={true}
+                onClick={handleRegisterDone}
             />
         </div>
     );

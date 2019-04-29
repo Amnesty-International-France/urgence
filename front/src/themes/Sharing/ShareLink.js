@@ -14,16 +14,41 @@ const styles = {
         fontFamily: 'Amnesty Trade Gothic LT',
         fontSize: 16,
         textTransform: 'none',
+        alignSelf: 'start',
+        padding: 10,
     },
-    big: {
+    inLine: {
         textDecoration: 'none',
         color: black,
-        fontFamily: 'Amnesty Trade Gothic Condensed',
-        fontWeight: 'bold',
-        fontSize: 27,
+        fontFamily: 'Amnesty Trade Gothic LT',
+        fontSize: 16,
+        textTransform: 'none',
+        alignSelf: 'start',
+        paddingLeft: 20,
+    },
+    inLineButton: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    button: {
+        textDecoration: 'none',
+        color: black,
+        fontFamily: 'Amnesty Trade Gothic LT',
+        fontSize: 16,
+        textTransform: 'none',
+        alignSelf: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        textAlign: 'center',
+        lineHeight: '15px',
+    },
+    inLineIcon: {
+        marginRight: 10,
     },
     icon: {
-        marginRight: 10,
+        alignSelf: 'center',
+        marginBottom: 10,
     },
 };
 
@@ -35,21 +60,27 @@ export const ShareLink = ({
     title,
     text,
     icon,
-    bigSize,
+    inLine,
     customClass,
     customScript,
 }) => (
     <Fragment>
         {customScript}
         <Button
-            className={classnames(bigSize ? classes.big : classes.root, `${customClass}`)}
+            className={classnames(inLine ? classes.inLine : classes.root, `${customClass}`)}
             href={href}
             target={target}
             title={title}
             onClick={action}
         >
-            <FontAwesomeIcon icon={icon} className={classes.icon} />
-            {text}
+            <div className={inLine ? classes.inLineButton : classes.button}>
+                <FontAwesomeIcon
+                    icon={icon}
+                    size="2x"
+                    className={inLine ? classes.inLineIcon : classes.icon}
+                />
+                <span>{text}</span>
+            </div>
         </Button>
     </Fragment>
 );
@@ -62,7 +93,7 @@ ShareLink.propTypes = {
     text: PropTypes.string.isRequired,
     action: PropTypes.func,
     classes: PropTypes.object,
-    bigSize: PropTypes.bool,
+    inLine: PropTypes.bool,
     customClass: PropTypes.string,
     customScript: PropTypes.element,
 };
@@ -70,7 +101,7 @@ ShareLink.propTypes = {
 ShareLink.defaultProps = {
     target: '_blank',
     action: () => {},
-    bigSize: false,
+    inLine: false,
     customClass: '',
     customScript: null,
 };

@@ -17,7 +17,12 @@ const styles = {
         textTransform: 'none',
     },
     icon: {
-        marginRight: 10,
+        alignSelf: 'center',
+        marginBottom: 10,
+    },
+    text: {
+        display: 'block',
+        lineHeight: '15px',
     },
 };
 
@@ -25,8 +30,8 @@ export const CopyToClipboard = ({ classes, url, action }) => (
     <Button className={classes.root} onClick={action}>
         <CopyToClipboardButton textToCopy={url}>
             <div>
-                <FontAwesomeIcon icon={faLink} className={classes.icon} />
-                <span>Copier le lien</span>
+                <FontAwesomeIcon icon={faLink} size="2x" className={classes.icon} />
+                <span className={classes.text}>Copier le lien</span>
             </div>
         </CopyToClipboardButton>
     </Button>
