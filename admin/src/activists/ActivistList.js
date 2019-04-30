@@ -24,6 +24,7 @@ export default props => (
                         showTime
                     />
                     <TextField source="email" />
+                    <TextField source="civility" />
                     <TextField source="firstname" />
                     <TextField source="lastname" />
                     <TextField source="phone" />

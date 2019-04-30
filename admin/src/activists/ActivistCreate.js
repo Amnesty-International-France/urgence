@@ -5,6 +5,7 @@ export default props => (
     <Create title="Create New Activist" {...props}>
         <SimpleForm>
             <TextInput source="email" />
+            <TextInput source="civility" label="Civility" />
             <TextInput source="firstname" label="First Name" />
             <TextInput source="lastname" label="Last Name" />
             <TextInput source="phone" />
