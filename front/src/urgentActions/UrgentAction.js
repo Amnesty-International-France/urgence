@@ -22,8 +22,8 @@ import RegisterButton from './register/RegisterButton';
 import RegisterActivist from './register/RegisterActivist';
 
 const query = gql`
-    query UrgentActionBySlug($slug: String!) {
-        UrgentAction(id: $id) {
+    query urgentActionBySlug($slug: String!) {
+        UrgentActionBySlug(slug: $slug) {
             id
             slug
             story {
