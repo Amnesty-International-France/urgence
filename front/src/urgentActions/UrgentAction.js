@@ -172,11 +172,11 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
 
     if (step === 'thanks') {
         const emailThank = get(data, 'UrgentAction.email_thank');
-        const auId = get(data, 'UrgentAction.slug');
+
         return (
             <Thanks
+                slug={slug}
                 data={emailThank}
-                auId={auId}
                 actions={() =>
                     emailThank && emailThank.button && isLetterStepPresent(recipient) ? (
                         <ToUrgentActionPageLink

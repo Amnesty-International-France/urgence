@@ -8,13 +8,13 @@ import SharingScreen from '../themes/Sharing/SharingScreen';
 
 import generateUrl from '../services/generateUrl';
 
-export const Thanks = ({ data, actions }) => {
+export const Thanks = ({ slug, data, actions }) => {
     const title = get(data, 'title');
     const text = get(data, 'text');
     const share = get(data, 'share');
 
     if (share) {
-        const sharingLink = generateUrl('ua', { slug: get(data, 'slug') });
+        const sharingLink = `${global.origin}/#${generateUrl('ua', { slug })}`;
         return <SharingScreen title={title} message={text} share={share} link={sharingLink} />;
     }
     return (
@@ -28,13 +28,13 @@ export const Thanks = ({ data, actions }) => {
 };
 
 Thanks.propTypes = {
-    actions: PropTypes.func,
+    slug: PropTypes.string.isRequired,
     data: PropTypes.shape({
         title: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
         link: LinkType,
     }),
-    auId: PropTypes.string,
+    actions: PropTypes.func,
 };
 
 Thanks.defaultProps = {
