@@ -44,7 +44,7 @@ describe('app', () => {
     });
 
     it('should display act step', async () => {
-        await actPage.navigate(urgentAction.id);
+        await actPage.navigate(urgentAction.slug);
 
         const title = await actPage.getTitle();
         expect(title).toBe('GÉNIAL !');
