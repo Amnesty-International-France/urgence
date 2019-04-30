@@ -7,7 +7,7 @@ const buildDetail = (label, state) => {
     return details.join(', ');
 };
 
-export default (category, eventName, objectType, objectName, UAId, step, options = {}) => {
+export default (category, eventName, objectType, objectName, slug, step, options = {}) => {
     if (!category) {
         return;
     }
@@ -19,7 +19,7 @@ export default (category, eventName, objectType, objectName, UAId, step, options
         category,
         action,
         label: `${label} (${details})`,
-        dimension1: UAId,
+        dimension1: slug,
         dimension2: step,
     });
 };
