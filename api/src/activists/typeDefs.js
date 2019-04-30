@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
     type Activist {
         id: ID!
+        civility: String
         firstname: String!
         lastname: String!
         email: String!
@@ -24,6 +25,7 @@ export default gql`
 
     extend type Mutation {
         createActivist(
+            civility: String
             firstname: String!
             lastname: String!
             email: String!

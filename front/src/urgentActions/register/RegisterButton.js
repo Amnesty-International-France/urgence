@@ -7,9 +7,10 @@ import { withSessionData } from '../../DataContext';
 import { routeMatch } from '../../propTypes';
 
 const query = `
-    mutation createActivist($firstname: String!, $lastname: String!, $email: String!, $phone: String!) {
-        data: createActivist(firstname: $firstname, lastname: $lastname, email: $email, phone: $phone) {
+    mutation createActivist($civility: String!, $firstname: String!, $lastname: String!, $email: String!, $phone: String!) {
+        data: createActivist(civility: $civility, firstname: $firstname, lastname: $lastname, email: $email, phone: $phone) {
             id
+            civility
             firstname
             lastname
             email
