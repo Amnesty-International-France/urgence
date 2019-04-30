@@ -20,7 +20,7 @@ LinkWhatsapp.propTypes = {
 
 LinkWhatsapp.defaultProps = {
     text: '',
-    action: () => { },
+    action: () => {},
 };
 
 export default LinkWhatsapp;

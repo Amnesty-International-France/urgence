@@ -23,7 +23,7 @@ LinkTwitter.propTypes = {
 
 LinkTwitter.defaultProps = {
     text: '',
-    action: () => { },
+    action: () => {},
 };
 
 export default LinkTwitter;

@@ -1,5 +1,4 @@
 import { white, pink } from '../../../front/src/themes/colors';
-import { relative } from 'path';
 
 export const root = {
     root: {
@@ -75,7 +74,7 @@ export const messageFormScreenPreview = {
         bottom: 0,
         '& a': {
             width: '100%',
-        }
+        },
     },
 };
 
@@ -99,6 +98,6 @@ export const registerFormScreenPreview = {
         bottom: 0,
         '& a': {
             width: '100%',
-        }
+        },
     },
 };
