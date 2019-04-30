@@ -47,7 +47,7 @@ const styles = {
             '& .ql-size-huge': {
                 padding: '6px 0 !important',
                 fontSize: '36px !important',
-                lineHeight: '55px !important',
+                lineHeight: '54px !important',
             },
         },
     },
@@ -89,8 +89,8 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
                                 {index === 0 ? (
                                     <StoryCoverInput source={source} />
                                 ) : (
-                                    <StoryStepInput source={source} />
-                                )}
+                                        <StoryStepInput source={source} />
+                                    )}
                             </div>
                         </CardContent>
                     </Card>

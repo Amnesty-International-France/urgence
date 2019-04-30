@@ -42,6 +42,7 @@ const styles = {
         padding: '4px 0',
         lineHeight: '39px',
         boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
+        boxDecorationBreak: 'clone',
         '@media (min-width: 1024px)': {
             fontSize: '52px',
             lineHeight: '78px',
@@ -52,9 +53,10 @@ const styles = {
         color: black,
         backgroundColor: white,
         fontSize: '36px',
-        lineHeight: '55px',
+        lineHeight: '54px',
         padding: '6px 0',
         boxShadow: `12px 0 0 ${white}, -12px 0 0 ${white}`,
+        boxDecorationBreak: 'clone',
         '@media (min-width: 1024px)': {
             fontSize: '72px',
             lineHeight: '110px',
