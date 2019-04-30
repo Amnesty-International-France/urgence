@@ -92,7 +92,7 @@ export class Link extends Component {
 
 Link.propTypes = {
     to: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.node.isRequired]),
     disabled: PropTypes.bool,
     className: PropTypes.string,
     onClick: PropTypes.func,

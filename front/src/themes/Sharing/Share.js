@@ -43,10 +43,10 @@ const styles = {
     },
 };
 
-const parseTextForUrl = (text, auId) => {
+const parseTextForUrl = text => {
     const encodedText = encodeURI(text);
     const hashTaggedText = encodedText.replace(/#/g, '%23');
-    return hashTaggedText.replace('$CURRENT_AU_ID', auId);
+    return hashTaggedText;
 };
 
 export const Share = ({
@@ -56,14 +56,13 @@ export const Share = ({
     twitter_message,
     twitter_title,
     auId,
+    registered,
 }) => {
     const md = new MobileDetect(navigator.userAgent);
 
     const [twitterDone, setTwitterDone] = secureUseState();
     const [socialDone, setSocialDone] = secureUseState();
     const [registerDone, setRegisterDone] = secureUseState();
-
-    const text = parseTextForUrl(message, auId);
 
     const url = encodeURI(`${global.origin}/#/ua/${auId}`);
 
@@ -88,7 +87,7 @@ export const Share = ({
                 <Fragment>
                     <SharingStep text={twitter_title} done={twitterDone} number={2} />
                     <LinkTwitter
-                        text={parseTextForUrl(twitter_message, auId)}
+                        text={parseTextForUrl(twitter_message)}
                         action={handleTwitterDone}
                     />
                 </Fragment>
@@ -104,7 +103,10 @@ export const Share = ({
                             />
                         </div>
                         <div className="link">
-                            <LinkWhatsapp text={text} action={handleSocialDone} />
+                            <LinkWhatsapp
+                                text={parseTextForUrl(`${message}\n${url}`)}
+                                action={handleSocialDone}
+                            />
                         </div>
                     </Fragment>
                 )}
@@ -112,31 +114,36 @@ export const Share = ({
                     <CopyToClipboard url={url} action={handleSocialDone} />
                 </div>
             </div>
-            <SharingStep
-                text="S'incrire aux Actions Urgentes"
-                done={registerDone}
-                number={stepNumber + 1}
-            />
-            <ToUrgentActionPageLink
-                label={
-                    <Fragment>
-                        <FontAwesomeIcon icon={faUserEdit} size="2x" className="icon" />
-                        <span>{`S'inscrire`}</span>
-                    </Fragment>
-                }
-                step="thanks"
-                pageName="register"
-                analyticsCategory={'Share'}
-                buttonName="ToRegister"
-                whiteLink={true}
-                onClick={handleRegisterDone}
-            />
+            {!registered && (
+                <Fragment>
+                    <SharingStep
+                        text="S'incrire aux Actions Urgentes"
+                        done={registerDone}
+                        number={stepNumber + 1}
+                    />
+                    <ToUrgentActionPageLink
+                        label={
+                            <Fragment>
+                                <FontAwesomeIcon icon={faUserEdit} size="2x" className="icon" />
+                                <span>{`S'inscrire`}</span>
+                            </Fragment>
+                        }
+                        step="thanks"
+                        pageName="register"
+                        analyticsCategory={'Share'}
+                        buttonName="ToRegister"
+                        whiteLink={true}
+                        onClick={handleRegisterDone}
+                    />
+                </Fragment>
+            )}
         </div>
     );
 };
 
 Share.propTypes = {
     message: PropTypes.string.isRequired,
+    registered: PropTypes.bool,
     active_twitter: PropTypes.bool,
     twitter_message: PropTypes.string,
     twitter_title: PropTypes.string,
@@ -145,6 +152,7 @@ Share.propTypes = {
 };
 
 Share.defaultProps = {
+    registered: false,
     message: '',
     auId: '',
 };

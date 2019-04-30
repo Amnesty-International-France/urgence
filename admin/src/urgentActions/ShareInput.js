@@ -19,6 +19,7 @@ const disableSharing = (record, source) => {
 
 const defaultTitle = 'Interpeller la cible sur Twitter';
 const defaultTweet = `@cible, respectez les droits humains !`;
+const defaultValue = `J'ai agi avec AmnestyFrance!`;
 
 export const ShareInput = ({ classes, source }) => {
     return (
@@ -50,6 +51,13 @@ export const ShareInput = ({ classes, source }) => {
                                     disabled={disableSharing(formData, source)}
                                 />
                             )}
+                            <LongTextInput
+                                source={`${source}.share.message`}
+                                label="Sharing message"
+                                defaultValue={defaultValue}
+                                rows="2"
+                                rowsMax="10"
+                            />
                         </Fragment>
                     );
                 }}

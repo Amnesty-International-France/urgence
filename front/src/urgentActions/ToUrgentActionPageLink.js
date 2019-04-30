@@ -32,7 +32,7 @@ export const ToUrgentActionPageLink = ({
 );
 
 ToUrgentActionPageLink.propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.node.isRequired]),
     pageName: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,

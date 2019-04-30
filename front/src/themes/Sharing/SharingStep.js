@@ -67,7 +67,7 @@ export const SharingStep = ({ className, text, number, done }) => (
 
 SharingStep.propTypes = {
     text: PropTypes.string.isRequired,
-    number: PropTypes.string,
+    number: PropTypes.number,
     done: PropTypes.bool,
     className: PropTypes.string,
 };

@@ -91,7 +91,7 @@ ShareLink.propTypes = {
     target: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     icon: PropTypes.object.isRequired,
-    text: PropTypes.string.isRequired,
+    text: PropTypes.string,
     action: PropTypes.func,
     classes: PropTypes.object,
     inLine: PropTypes.bool,

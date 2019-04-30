@@ -13,7 +13,7 @@ export class MailPdfButton extends Component {
         const {
             object: subject,
             civility,
-            firsrname,
+            firstname,
             lastname,
             addressMain,
             addressMore,
@@ -31,7 +31,7 @@ export class MailPdfButton extends Component {
             body: JSON.stringify({
                 subject,
                 civility,
-                firsrname,
+                firstname,
                 lastname,
                 addressMain,
                 addressMore,
