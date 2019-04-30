@@ -88,8 +88,8 @@ describe('app', () => {
         expect(await messagePage.isButtonDisabled()).toBe(true);
         await messagePage.enterEmailText('super@man.fr');
         await messagePage.chooseCivility();
-        await messagePage.enterSurnameText('My');
-        await messagePage.enterNameText('name');
+        await messagePage.enterFirstnameText('My');
+        await messagePage.enterLastnameText('name');
         expect(await messagePage.isButtonDisabled()).toBe(false);
 
         const mailTo = await messagePage.getMailTo();

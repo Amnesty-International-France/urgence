@@ -34,7 +34,7 @@ describe('Urgent Actions Router', () => {
             expect(response.status).toBe(200);
         });
 
-        it('should return a PDF with correct subject and name', async () => {
+        it('should return a PDF with correct subject and fullname', async () => {
             const urgentAction = await createUrgentAction();
 
             await request(app).get(
@@ -88,7 +88,7 @@ describe('Urgent Actions Router', () => {
             expect(response.status).toBe(200);
         });
 
-        it('should generate PDF with correct subject and name', async () => {
+        it('should generate PDF with correct subject and fullname', async () => {
             const urgentAction = await createUrgentAction();
 
             await request(app)

@@ -164,8 +164,8 @@ describe('<UrgentAction />', () => {
         it('should add a link to address step as action when there is an address', () => {
             data.getMailObject.mockImplementation(() => 'Hello World!');
             data.getCivility.mockImplementation(() => 'M');
-            data.getSurname.mockImplementation(() => 'John');
-            data.getName.mockImplementation(() => 'Doe');
+            data.getFirstname.mockImplementation(() => 'John');
+            data.getLastname.mockImplementation(() => 'Doe');
 
             const props = {
                 ...defaultProps,
@@ -197,8 +197,8 @@ describe('<UrgentAction />', () => {
         it('should not add a link to address step as when there isnt address', () => {
             data.getMailObject.mockImplementation(() => 'Hello World!');
             data.getCivility.mockImplementation(() => 'M');
-            data.getSurname.mockImplementation(() => 'John');
-            data.getName.mockImplementation(() => 'Doe');
+            data.getFirstname.mockImplementation(() => 'John');
+            data.getLastname.mockImplementation(() => 'Doe');
 
             const props = {
                 ...defaultProps,

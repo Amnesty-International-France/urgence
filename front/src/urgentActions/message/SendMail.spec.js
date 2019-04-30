@@ -11,15 +11,15 @@ describe('renderSendMail', () => {
     };
     const defaultContext = {
         civility: 'civility',
-        surname: 'surname',
-        name: 'name',
+        firstname: 'firstname',
+        lastname: 'lastname',
         object: 'object',
     };
 
-    it('should render MailTo with body computed from messageTemplate and name', () => {
+    it('should render MailTo with body computed from messageTemplate and fullname', () => {
         const wrapper = shallow(renderSendMail(defaultProps)(defaultContext));
 
-        expect(wrapper.find('MailTo').prop('body')).toBe('hello\n\nworld\n\nsurname name');
+        expect(wrapper.find('MailTo').prop('body')).toBe('hello\n\nworld\n\firstname lastname');
     });
 
     it('should render MailTo with recipient props', () => {

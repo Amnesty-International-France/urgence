@@ -22,8 +22,8 @@ export class RegisterButton extends Component {
     register = () => {
         const {
             civility,
-            surname,
-            name,
+            firstname,
+            lastname,
             phone,
             email,
             match: {
@@ -37,11 +37,11 @@ export class RegisterButton extends Component {
                 operationName: 'createActivist',
                 query,
                 variables: {
+                    query,
                     au: id,
                     civility,
-                    query,
-                    firstname: surname,
-                    lastname: name,
+                    firstname,
+                    lastname,
                     phone,
                     email,
                 },
@@ -70,8 +70,8 @@ export class RegisterButton extends Component {
 
 RegisterButton.propTypes = {
     civility: PropTypes.string.isRequired,
-    surname: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    firstname: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
     match: routeMatch,

@@ -159,15 +159,15 @@ export const FormStep = ({
     objectIndication,
     object,
     civility,
-    surname,
-    name,
+    firstname,
+    lastname,
     analyticsCategory,
     step,
     setEmail,
     setObject,
     setCivility,
-    setSurname,
-    setName,
+    setFirstname,
+    setLastname,
 }) => {
     const handleChangeEmail = event => {
         setEmail(event.target.value);
@@ -181,12 +181,12 @@ export const FormStep = ({
         setCivility(event.target.value);
     };
 
-    const handleChangeSurname = event => {
-        setSurname(event.target.value);
+    const handleChangeFirstname = event => {
+        setFirstname(event.target.value);
     };
 
-    const handleChangeName = event => {
-        setName(event.target.value);
+    const handleChangeLastname = event => {
+        setLastname(event.target.value);
     };
 
     return (
@@ -225,20 +225,20 @@ export const FormStep = ({
                 choices={['M.', 'Mme.', 'Autre']}
             />
             <Input
-                className="surname"
-                value={surname}
-                onChange={handleChangeSurname}
-                error={!surname}
+                className="firstname"
+                value={firstname}
+                onChange={handleChangeFirstname}
+                error={!firstname}
                 analyticsCategory={analyticsCategory}
                 step={step}
                 autoComplete="given-name"
                 label="Votre prénom *"
             />
             <Input
-                className="name"
-                value={name}
-                onChange={handleChangeName}
-                error={!name}
+                className="lastname"
+                value={lastname}
+                onChange={handleChangeLastname}
+                error={!lastname}
                 analyticsCategory={analyticsCategory}
                 step={step}
                 autoComplete="family-name"
@@ -254,13 +254,13 @@ FormStep.propTypes = {
     objectIndication: PropTypes.string,
     object: PropTypes.string,
     civility: PropTypes.string,
-    surname: PropTypes.string,
-    name: PropTypes.string,
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
     setEmail: PropTypes.func.isRequired,
     setObject: PropTypes.func.isRequired,
     setCivility: PropTypes.func.isRequired,
-    setSurname: PropTypes.func.isRequired,
-    setName: PropTypes.func.isRequired,
+    setFirstname: PropTypes.func.isRequired,
+    setLastname: PropTypes.func.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
 };
@@ -308,12 +308,12 @@ Message.propTypes = {
     setEmail: PropTypes.func.isRequired,
     setObject: PropTypes.func.isRequired,
     setCivility: PropTypes.func.isRequired,
-    setSurname: PropTypes.func.isRequired,
-    setName: PropTypes.func.isRequired,
+    setFirstname: PropTypes.func.isRequired,
+    setLastname: PropTypes.func.isRequired,
     object: PropTypes.string,
     civility: PropTypes.string,
-    surname: PropTypes.string,
-    name: PropTypes.string,
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
     action: PropTypes.node.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,

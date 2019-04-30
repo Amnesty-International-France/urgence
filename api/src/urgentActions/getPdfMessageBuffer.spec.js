@@ -47,12 +47,12 @@ describe('getPdfMessageBuffer', () => {
         expect(renderedLetter).toContain('Asking for a fair trial');
     });
 
-    it('should display passed name', async () => {
+    it('should display passed fullname', async () => {
         const pdfSpy = jest.spyOn(pdf, 'create');
 
         await getPdfMessageBuffer(defaultUrgentAction, '', 'M.', 'John', 'Doe');
         const renderedLetter = pdfSpy.mock.calls[0][0];
-        expect(renderedLetter).toContain('<p class="name">John Doe</p>');
+        expect(renderedLetter).toContain('<p class="fullname">John Doe</p>');
     });
 
     it('should display emitter postal address', async () => {
@@ -73,7 +73,7 @@ describe('getPdfMessageBuffer', () => {
         expect(renderedLetter).toContain('FRANCE');
     });
 
-    it('should prefix address with name', async () => {
+    it('should prefix address with fullname', async () => {
         const pdfSpy = jest.spyOn(pdf, 'create');
 
         const urgentAction = { ...defaultUrgentAction };

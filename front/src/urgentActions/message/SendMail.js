@@ -21,16 +21,16 @@ export const renderSendMail = ({
     email,
     object,
     civility,
-    surname,
-    name,
+    firstname,
+    lastname,
     /* eslint-enable react/prop-types */
 }) => (
     <MailTo
-        disabled={!isCorrectEmail(email) || !object || !civility || !surname || !name}
+        disabled={!isCorrectEmail(email) || !object || !civility || !firstname || !lastname}
         label="J'envoie"
         recipient={recipient}
         subject={object}
-        body={templateToBodyText(messageTemplate, civility, surname, name)}
+        body={templateToBodyText(messageTemplate, civility, firstname, lastname)}
         afterMail={afterMail}
         analyticsCategory={analyticsCategory}
         match={match}
