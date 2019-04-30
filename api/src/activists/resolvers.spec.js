@@ -47,6 +47,7 @@ describe('Activist Resolvers', () => {
         describe('createActivist', () => {
             it('should create an activist', async () => {
                 await ActivistsResolver.Mutation.createActivist(null, {
+                    civility: 'M.',
                     firstname: 'Abel',
                     lastname: 'Chemoul',
                     email: 'abel.chemoul@lesinconnus.fr',
@@ -54,6 +55,7 @@ describe('Activist Resolvers', () => {
                 });
 
                 expect(createActivist).toHaveBeenCalledWith({
+                    civility: 'M.',
                     firstname: 'Abel',
                     lastname: 'Chemoul',
                     email: 'abel.chemoul@lesinconnus.fr',
