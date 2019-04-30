@@ -20,7 +20,11 @@ describe('<Story />', () => {
         },
         story: [defaultStep],
         loading: false,
-        match: { params: {} },
+        match: {
+            params: {
+                slug: 'you-are-my-only-hope',
+            },
+        },
         history: { push: () => null },
     };
 

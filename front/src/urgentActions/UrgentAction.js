@@ -172,7 +172,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
 
     if (step === 'thanks') {
         const emailThank = get(data, 'UrgentAction.email_thank');
-        const auId = get(data, 'UrgentAction.id');
+        const auId = get(data, 'UrgentAction.slug');
         return (
             <Thanks
                 data={emailThank}
@@ -200,6 +200,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
                 action={disabled => (
                     <MailPdfButton
                         step={step}
+                        auId={get(data, 'UrgentAction.id')}
                         disabled={disabled}
                         buttonText={recipient.button}
                         analyticsCategory={ANALYTICS_CATEGORIES.ADDRESS}

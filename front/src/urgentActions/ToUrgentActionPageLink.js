@@ -12,7 +12,7 @@ export const ToUrgentActionPageLink = ({
     disabled,
     onClick,
     match: {
-        params: { id },
+        params: { slug },
     },
     analyticsCategory,
     buttonName,
@@ -21,7 +21,7 @@ export const ToUrgentActionPageLink = ({
 }) => (
     <Link
         onClick={onClick}
-        to={generateUrl(pageName, { id })}
+        to={generateUrl(pageName, { slug })}
         label={label}
         disabled={disabled}
         analyticsCategory={analyticsCategory}

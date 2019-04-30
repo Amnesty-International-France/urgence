@@ -6,7 +6,7 @@ import { Input, isCorrectEmail } from './Input';
 describe('<Input />', () => {
     it('should render a div with correct background image and title', () => {
         const wrapper = shallow(
-            <Input value="value" label="Title" match={{ params: { id: 0 } }} />,
+            <Input value="value" label="Title" match={{ params: { slug: 'im-a-slug' } }} />,
         );
         const input = wrapper.find('TextField');
 

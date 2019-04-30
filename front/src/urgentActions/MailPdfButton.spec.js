@@ -6,6 +6,7 @@ import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 
 describe('MailPdfButton', () => {
     const defaultProps = {
+        auId: '1223-df432-f8d3s',
         object: 'object',
         civility: 'civility',
         firstname: 'firstname',
@@ -16,7 +17,6 @@ describe('MailPdfButton', () => {
         city: 'city',
         country: 'country',
         email: 'email',
-        match: { params: { id: 'id' } },
         buttonText: "J'envoie",
     };
 

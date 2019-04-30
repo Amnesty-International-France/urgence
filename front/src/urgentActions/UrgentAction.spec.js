@@ -21,6 +21,7 @@ const defaultStep = {
 describe('<UrgentAction />', () => {
     const defaultProps = {
         id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
+        slug: 'on-the-way',
         step: 'story',
         page: '1',
         loading: false,
@@ -171,6 +172,7 @@ describe('<UrgentAction />', () => {
                 ...defaultProps,
                 step: 'thanks',
                 id: '123456',
+                slug: 'one-two-three',
                 data: {
                     UrgentAction: {
                         email_thank: {
@@ -204,6 +206,7 @@ describe('<UrgentAction />', () => {
                 ...defaultProps,
                 step: 'thanks',
                 id: '123456',
+                slug: 'one-two-three',
                 data: {
                     UrgentAction: {
                         email_thank: {
@@ -246,6 +249,7 @@ describe('<UrgentAction />', () => {
                 ...defaultProps,
                 step: 'address',
                 id: '123456',
+                slug: 'one-two-three',
                 data: {
                     UrgentAction: {
                         recipient: {
@@ -267,6 +271,7 @@ describe('<UrgentAction />', () => {
         it('should display thanks if step is "thanks-end"', () => {
             const props = {
                 step: 'thanks-end',
+                slug: 'one-two-three',
                 loading: false,
                 data: {
                     UrgentAction: {

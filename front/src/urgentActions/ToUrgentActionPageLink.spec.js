@@ -14,7 +14,9 @@ describe('<ToUrgentActionPageLink />', () => {
         disabled: false,
         onClick: () => null,
         match: {
-            params: { id: 'id' },
+            params: {
+                slug: 'you-are-my-only-hope',
+            },
         },
     };
 

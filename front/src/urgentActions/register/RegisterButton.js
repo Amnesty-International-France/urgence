@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
-import { compose } from 'recompose';
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
 import { withSessionData } from '../../DataContext';
-import { routeMatch } from '../../propTypes';
 
 const query = `
     mutation createActivist($civility: String!, $firstname: String!, $lastname: String!, $email: String!, $phone: String!) {
@@ -21,17 +18,7 @@ const query = `
 
 export class RegisterButton extends Component {
     register = () => {
-        const {
-            civility,
-            firstname,
-            lastname,
-            phone,
-            email,
-            setRegistered,
-            match: {
-                params: { id },
-            },
-        } = this.props;
+        const { auId, civility, firstname, lastname, phone, email, setRegistered } = this.props;
 
         setRegistered('true');
 
@@ -41,8 +28,7 @@ export class RegisterButton extends Component {
                 operationName: 'createActivist',
                 query,
                 variables: {
-                    query,
-                    au: id,
+                    auId,
                     civility,
                     firstname,
                     lastname,
@@ -73,20 +59,17 @@ export class RegisterButton extends Component {
 }
 
 RegisterButton.propTypes = {
+    auId: PropTypes.string.isRequired,
     civility: PropTypes.string.isRequired,
     firstname: PropTypes.string.isRequired,
     lastname: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
     setRegistered: PropTypes.func.isRequired,
-    match: routeMatch,
     disabled: PropTypes.bool,
     buttonText: PropTypes.string.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
 };
 
-export default compose(
-    withSessionData,
-    withRouter,
-)(RegisterButton);
+export default withSessionData(RegisterButton);
