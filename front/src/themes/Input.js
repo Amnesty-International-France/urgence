@@ -54,12 +54,13 @@ export class Input extends Component {
     render() {
         const {
             className,
+            label,
             value,
             onChange,
             error,
             noValidate,
             analyticsCategory,
-            match,
+            match: { params: slug },
             step,
             staticContext,
             ...otherProps
@@ -70,7 +71,7 @@ export class Input extends Component {
         return (
             <div className={className}>
                 <TextField
-                    className={classnames('textfield', { ['valid']: showValid })}
+                    className={classnames('textfield', { valid: showValid })}
                     variant="outlined"
                     margin="dense"
                     error={showError && error}
@@ -80,32 +81,16 @@ export class Input extends Component {
                     }}
                     onBlur={event => {
                         this.showErrorState();
-                        trackEvent(
-                            analyticsCategory,
-                            'Exit',
-                            'field',
-                            this.props.label,
-                            match.params.id,
-                            step,
-                            {
-                                state: showValid ? 'valid' : error ? 'invalid' : 'null',
-                                value: event.target.value,
-                            },
-                        );
+                        trackEvent(analyticsCategory, 'Exit', 'field', label, slug, step, {
+                            state: showValid ? 'valid' : error ? 'invalid' : 'null',
+                            value: event.target.value,
+                        });
                     }}
                     onFocus={event => {
-                        trackEvent(
-                            analyticsCategory,
-                            'Enter',
-                            'field',
-                            this.props.label,
-                            match.params.id,
-                            step,
-                            {
-                                state: showValid ? 'valid' : error ? 'invalid' : 'null',
-                                value: event.target.value,
-                            },
-                        );
+                        trackEvent(analyticsCategory, 'Enter', 'field', label, slug, step, {
+                            state: showValid ? 'valid' : error ? 'invalid' : 'null',
+                            value: event.target.value,
+                        });
                     }}
                     value={value}
                     {...otherProps}
