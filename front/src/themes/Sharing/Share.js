@@ -52,11 +52,11 @@ const parseTextForUrl = text => {
 
 export const Share = ({
     className,
+    link,
     active_twitter,
     message,
     twitter_message,
     twitter_title,
-    auId,
     registered,
 }) => {
     const md = new MobileDetect(navigator.userAgent);
@@ -65,7 +65,7 @@ export const Share = ({
     const [socialDone, setSocialDone] = secureUseState();
     const [registerDone, setRegisterDone] = secureUseState(registered === 'true');
 
-    const url = encodeURI(`${global.origin}/#/ua/${auId}`);
+    const encodedUrl = parseTextForUrl(link);
 
     const handleTwitterDone = () => {
         setTwitterDone(true);
@@ -98,21 +98,18 @@ export const Share = ({
                 {md.mobile() && (
                     <Fragment>
                         <div className="link">
-                            <LinkFacebook
-                                url={`${global.origin}/#/ua/${auId}`}
-                                action={handleSocialDone}
-                            />
+                            <LinkFacebook url={encodedUrl} action={handleSocialDone} />
                         </div>
                         <div className="link">
                             <LinkWhatsapp
-                                text={parseTextForUrl(`${message}\n${url}`)}
+                                text={parseTextForUrl(`${message}\n${encodedUrl}`)}
                                 action={handleSocialDone}
                             />
                         </div>
                     </Fragment>
                 )}
                 <div className="link">
-                    <CopyToClipboard url={url} action={handleSocialDone} />
+                    <CopyToClipboard url={encodedUrl} action={handleSocialDone} />
                 </div>
             </div>
             <SharingStep
@@ -139,12 +136,12 @@ export const Share = ({
 };
 
 Share.propTypes = {
+    link: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     registered: PropTypes.string,
     active_twitter: PropTypes.bool,
     twitter_message: PropTypes.string,
     twitter_title: PropTypes.string,
-    auId: PropTypes.string.isRequired,
     className: PropTypes.string,
 };
 
