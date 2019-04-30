@@ -63,7 +63,7 @@ export const Share = ({
 
     const [twitterDone, setTwitterDone] = secureUseState();
     const [socialDone, setSocialDone] = secureUseState();
-    const [registerDone, setRegisterDone] = secureUseState(registered);
+    const [registerDone, setRegisterDone] = secureUseState(registered === 'true');
 
     const url = encodeURI(`${global.origin}/#/ua/${auId}`);
 
@@ -76,7 +76,7 @@ export const Share = ({
     };
 
     const handleRegisterDone = () => {
-        setRegisterDone('true');
+        setRegisterDone(true);
     };
 
     let stepNumber = active_twitter ? 3 : 2;
@@ -117,14 +117,14 @@ export const Share = ({
             </div>
             <SharingStep
                 text="S'incrire aux Actions Urgentes"
-                done={registerDone === 'true'}
+                done={registerDone}
                 number={stepNumber + 1}
             />
             <ToUrgentActionPageLink
                 label={
                     <Fragment>
                         <FontAwesomeIcon icon={faUserEdit} size="2x" className="icon" />
-                        <span>{`${registerDone === 'true' ? `Se réinscrire` : `S'inscrire`}`}</span>
+                        <span>{`${registerDone ? `Se réinscrire` : `S'inscrire`}`}</span>
                     </Fragment>
                 }
                 step="thanks"

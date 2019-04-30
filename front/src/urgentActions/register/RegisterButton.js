@@ -20,7 +20,7 @@ export class RegisterButton extends Component {
     register = () => {
         const { auId, civility, firstname, lastname, phone, email, setRegistered } = this.props;
 
-        setRegistered('true');
+        setRegistered();
 
         return fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
             method: 'POST',
