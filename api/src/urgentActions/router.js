@@ -17,8 +17,8 @@ urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
 
     const {
         civility,
-        surname,
-        name,
+        firstname,
+        lastname,
         subject,
         addressMain,
         addressMore,
@@ -37,8 +37,8 @@ urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
         urgentAction,
         subject,
         civility,
-        surname,
-        name,
+        firstname,
+        lastname,
         addressMain,
         addressMore,
         postalCode,
@@ -60,8 +60,8 @@ urgentActionsRouter.post('/:id/send', async (req, res, next) => {
     try {
         const {
             civility,
-            surname,
-            name,
+            firstname,
+            lastname,
             subject,
             email,
             addressMain,
@@ -81,8 +81,8 @@ urgentActionsRouter.post('/:id/send', async (req, res, next) => {
             urgentAction,
             subject,
             civility,
-            surname,
-            name,
+            firstname,
+            lastname,
             addressMain,
             addressMore,
             postalCode,

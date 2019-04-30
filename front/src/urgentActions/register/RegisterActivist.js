@@ -8,7 +8,7 @@ import { isCorrectEmail } from '../../themes/Input';
 
 import { white, black } from '../../themes/colors';
 import { withYellowLogo } from '../../themes/ThemeContext';
-import { withSessionData } from '../../SessionDataContext';
+import { withSessionData } from '../../DataContext';
 
 import Form from './Form';
 

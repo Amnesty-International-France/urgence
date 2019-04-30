@@ -8,7 +8,7 @@ import { white, black } from '../../themes/colors';
 import MessageStep from './MessageStep';
 import ShowButton from './ShowButton';
 import { withYellowLogo } from '../../themes/ThemeContext';
-import { withSessionData } from '../../SessionDataContext';
+import { withSessionData } from '../../DataContext';
 import Link from '../Link';
 import { LinkType } from '../../propTypes';
 import Input, { isCorrectEmail } from '../../themes/Input';

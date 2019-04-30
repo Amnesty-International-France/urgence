@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import generateUrl from '../services/generateUrl';
-import { withSessionData } from '../SessionDataContext';
+import { withSessionData } from '../DataContext';
 import { routeMatch } from '../propTypes';
 
 export class MailPdfButton extends Component {

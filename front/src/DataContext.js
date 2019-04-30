@@ -6,8 +6,8 @@ import data from './data';
 const { Provider, Consumer } = createContext({
     object: '',
     civility: '',
-    surname: '',
-    name: '',
+    firstname: '',
+    lastname: '',
     addressMain: '',
     addressMore: '',
     postalCode: '',
@@ -15,10 +15,11 @@ const { Provider, Consumer } = createContext({
     country: '',
     phone: '',
     email: '',
+    registered: false,
     setObject: () => null,
     setCivility: () => null,
-    setSurname: () => null,
-    setName: () => null,
+    setFirstname: () => null,
+    setLastname: () => null,
     setAddressMain: () => null,
     setAddressMore: () => null,
     setPostalCode: () => null,
@@ -26,16 +27,17 @@ const { Provider, Consumer } = createContext({
     setCountry: () => null,
     setPhone: () => null,
     setEmail: () => null,
+    setRegistered: () => false,
 });
 
-export const SessionDataConsumer = Consumer;
+export const DataConsumer = Consumer;
 
-export class SessionDataProvider extends Component {
+export class DataProvider extends Component {
     state = {
         object: data.getMailObject(),
         civility: data.getCivility(),
-        surname: data.getSurname(),
-        name: data.getName(),
+        firstname: data.setFirstname(),
+        lastname: data.setLastname(),
         addressMain: data.getAddressMain(),
         addressMore: data.getAddressMore(),
         postalCode: data.getPostalCode(),
@@ -43,6 +45,7 @@ export class SessionDataProvider extends Component {
         country: data.getCountry(),
         phone: data.getPhone(),
         email: data.getEmail(),
+        registered: data.getRegistered(),
     };
 
     setObject = object => {
@@ -55,14 +58,14 @@ export class SessionDataProvider extends Component {
         data.setCivility(civility);
     };
 
-    setSurname = surname => {
-        this.setState({ surname });
-        data.setSurname(surname);
+    setFirstname = firstname => {
+        this.setState({ firstname });
+        data.setFirstname(firstname);
     };
 
-    setName = name => {
-        this.setState({ name });
-        data.setName(name);
+    setLastname = lastname => {
+        this.setState({ lastname });
+        data.setLastname(lastname);
     };
 
     setAddressMain = addressMain => {
@@ -100,6 +103,11 @@ export class SessionDataProvider extends Component {
         data.setEmail(email);
     };
 
+    setRegistered = registered => {
+        this.setState({ registered });
+        data.setRegistered(registered);
+    };
+
     render() {
         return (
             <Provider
@@ -107,8 +115,8 @@ export class SessionDataProvider extends Component {
                     ...this.state,
                     setObject: this.setObject,
                     setCivility: this.setCivility,
-                    setSurname: this.setSurname,
-                    setName: this.setName,
+                    setFirstname: this.setFirstname,
+                    setLastname: this.setLastname,
                     setAddressMain: this.setAddressMain,
                     setAddressMore: this.setAddressMore,
                     setPostalCode: this.setPostalCode,
@@ -116,6 +124,7 @@ export class SessionDataProvider extends Component {
                     setCountry: this.setCountry,
                     setPhone: this.setPhone,
                     setEmail: this.setEmail,
+                    setRegistered: this.setRegistered,
                 }}
             >
                 {this.props.children}
@@ -124,10 +133,10 @@ export class SessionDataProvider extends Component {
     }
 }
 
-SessionDataProvider.propTypes = {
+DataProvider.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
 export const withSessionData = Component => props => (
-    <SessionDataConsumer>{context => <Component {...props} {...context} />}</SessionDataConsumer>
+    <DataConsumer>{context => <Component {...props} {...context} />}</DataConsumer>
 );

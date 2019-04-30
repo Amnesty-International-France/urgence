@@ -25,51 +25,51 @@ describe('permanentData', () => {
         });
     });
 
-    describe('.getSurname', () => {
-        it('calls storage.getItem(amnesty_surname) and returns its result', () => {
+    describe('.getFirstname', () => {
+        it('calls storage.getItem(amnesty_firstname) and returns its result', () => {
             const storage = {
-                getItem: jest.fn(() => 'surname value'),
+                getItem: jest.fn(() => 'firstname value'),
             };
 
-            expect(permanentData(storage).getSurname()).toBe('surname value');
-            expect(storage.getItem).toHaveBeenCalledWith('amnesty_surname');
+            expect(permanentData(storage).getFirstname()).toBe('firstname value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_firstname');
         });
     });
 
-    describe('.setSurname', () => {
-        it('calls storage.setItem(amnesty_surname, value) and returns itself', () => {
+    describe('.setFirstname', () => {
+        it('calls storage.setItem(amnesty_firstname, value) and returns itself', () => {
             const storage = {
                 setItem: jest.fn(),
             };
 
             const mySessionData = permanentData(storage);
 
-            expect(mySessionData.setSurname('value')).toEqual(mySessionData);
-            expect(storage.setItem).toHaveBeenCalledWith('amnesty_surname', 'value');
+            expect(mySessionData.setFirstname('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_firstname', 'value');
         });
     });
 
-    describe('.getName', () => {
-        it('calls storage.getItem(amnesty_name) and returns its result', () => {
+    describe('.getLastname', () => {
+        it('calls storage.getItem(amnesty_lastname) and returns its result', () => {
             const storage = {
-                getItem: jest.fn(() => 'name value'),
+                getItem: jest.fn(() => 'lastname value'),
             };
 
-            expect(permanentData(storage).getName()).toBe('name value');
-            expect(storage.getItem).toHaveBeenCalledWith('amnesty_name');
+            expect(permanentData(storage).getLastname()).toBe('lastname value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_lastname');
         });
     });
 
-    describe('.setName', () => {
-        it('calls storage.setItem(amnesty_name, value) and returns itself', () => {
+    describe('.setLastname', () => {
+        it('calls storage.setItem(amnesty_lastname, value) and returns itself', () => {
             const storage = {
                 setItem: jest.fn(),
             };
 
             const mySessionData = permanentData(storage);
 
-            expect(mySessionData.setName('value')).toEqual(mySessionData);
-            expect(storage.setItem).toHaveBeenCalledWith('amnesty_name', 'value');
+            expect(mySessionData.setLastname('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_lastname', 'value');
         });
     });
 
@@ -193,6 +193,41 @@ describe('permanentData', () => {
         });
     });
 
+    describe('.getPhone', () => {
+        it('calls storage.getItem(amnesty_phone) and returns its result', () => {
+            const storage = {
+                getItem: jest.fn(() => 'phone value'),
+            };
+
+            expect(permanentData(storage).getPhone()).toBe('phone value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_phone');
+        });
+    });
+
+    describe('.setPhone', () => {
+        it('calls storage.setItem(amnesty_phone, value) and returns itself', () => {
+            const storage = {
+                setItem: jest.fn(),
+            };
+
+            const mySessionData = permanentData(storage);
+
+            expect(mySessionData.setPhone('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_phone', 'value');
+        });
+    });
+
+    describe('.getEmail', () => {
+        it('calls storage.getItem(amnesty_email) and returns its result', () => {
+            const storage = {
+                getItem: jest.fn(() => 'email value'),
+            };
+
+            expect(permanentData(storage).getEmail()).toBe('email value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_email');
+        });
+    });
+
     describe('.setEmail', () => {
         it('calls storage.setItem(amnesty_email, value) and returns itself', () => {
             const storage = {
@@ -203,6 +238,30 @@ describe('permanentData', () => {
 
             expect(mySessionData.setEmail('value')).toEqual(mySessionData);
             expect(storage.setItem).toHaveBeenCalledWith('amnesty_email', 'value');
+        });
+    });
+
+    describe('.getRegistered', () => {
+        it('calls storage.getItem(amnesty_registered) and returns its result', () => {
+            const storage = {
+                getItem: jest.fn(() => 'registered value'),
+            };
+
+            expect(permanentData(storage).getRegistered()).toBe('registered value');
+            expect(storage.getItem).toHaveBeenCalledWith('amnesty_registered');
+        });
+    });
+
+    describe('.setRegistered', () => {
+        it('calls storage.setItem(amnesty_registered, value) and returns itself', () => {
+            const storage = {
+                setItem: jest.fn(),
+            };
+
+            const mySessionData = permanentData(storage);
+
+            expect(mySessionData.setRegistered('value')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_registered', 'value');
         });
     });
 });

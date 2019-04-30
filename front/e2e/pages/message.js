@@ -8,8 +8,8 @@ export default driver => {
         indication: By.css('.objectIndication'),
         inputEmail: By.css('.email input'),
         inputCivility: By.css('input[type=radio]'),
-        inputSurname: By.css('.surname input'),
-        inputName: By.css('.name input'),
+        inputFirstname: By.css('.firstname input'),
+        inputLastname: By.css('.lastname input'),
         sendMailButton: By.css('.action a'),
     };
     return {
@@ -27,8 +27,10 @@ export default driver => {
         enterObjectText: async value => driver.findElement(elements.inputObject).sendKeys(value),
         enterEmailText: async value => driver.findElement(elements.inputEmail).sendKeys(value),
         chooseCivility: async () => driver.findElement(elements.inputCivility).click(),
-        enterSurnameText: async value => driver.findElement(elements.inputSurname).sendKeys(value),
-        enterNameText: async value => driver.findElement(elements.inputName).sendKeys(value),
+        enterFirstnameText: async value =>
+            driver.findElement(elements.inputFirstname).sendKeys(value),
+        enterLastnameText: async value =>
+            driver.findElement(elements.inputLastname).sendKeys(value),
         getMailTo: async () => driver.findElement(elements.sendMailButton).getAttribute('href'),
         isButtonDisabled: async () => {
             const className = await driver

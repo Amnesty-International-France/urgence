@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { compose } from 'recompose';
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
-import { withSessionData } from '../../SessionDataContext';
+import { withSessionData } from '../../DataContext';
 import { routeMatch } from '../../propTypes';
 
 const query = `

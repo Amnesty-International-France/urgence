@@ -4,14 +4,14 @@ export const permanentData = storage => ({
         storage && storage.setItem('amnesty_civility', value);
         return this;
     },
-    getSurname: () => (storage && storage.getItem('amnesty_surname')) || '',
-    setSurname(value) {
-        storage && storage.setItem('amnesty_surname', value);
+    getFirstname: () => (storage && storage.getItem('amnesty_firstname')) || '',
+    setFirstname(value) {
+        storage && storage.setItem('amnesty_firstname', value);
         return this;
     },
-    getName: () => (storage && storage.getItem('amnesty_name')) || '',
-    setName(value) {
-        storage && storage.setItem('amnesty_name', value);
+    getLastname: () => (storage && storage.getItem('amnesty_lastname')) || '',
+    setLastname(value) {
+        storage && storage.setItem('amnesty_lastname', value);
         return this;
     },
     getAddressMain: () => (storage && storage.getItem('amnesty_address_main')) || '',
@@ -47,6 +47,11 @@ export const permanentData = storage => ({
     getEmail: () => (storage && storage.getItem('amnesty_email')) || '',
     setEmail(value) {
         storage && storage.setItem('amnesty_email', value);
+        return this;
+    },
+    getRegistered: () => (storage && storage.getItem('amnesty_registered')) || '',
+    setRegistered(value) {
+        storage && storage.setItem('amnesty_registered', value);
         return this;
     },
 });

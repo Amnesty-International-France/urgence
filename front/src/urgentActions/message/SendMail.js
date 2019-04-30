@@ -7,7 +7,7 @@ import { templateToBodyText } from './templateToBodyText';
 import generateUrl from '../../services/generateUrl';
 import { isCorrectEmail } from '../../themes/Input';
 import { routeMatch } from '../../propTypes';
-import { SessionDataConsumer } from '../../SessionDataContext';
+import { DataConsumer } from '../../DataContext';
 
 export const renderSendMail = ({
     messageTemplate,
@@ -51,7 +51,7 @@ export class SendMail extends Component {
         const { messageTemplate, recipient, analyticsCategory, step, match } = this.props;
 
         return (
-            <SessionDataConsumer>
+            <DataConsumer>
                 {renderSendMail({
                     messageTemplate,
                     recipient,
@@ -60,7 +60,7 @@ export class SendMail extends Component {
                     match,
                     step,
                 })}
-            </SessionDataConsumer>
+            </DataConsumer>
         );
     }
 }
