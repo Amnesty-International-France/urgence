@@ -27,7 +27,7 @@ const App = ({ className, client }) => (
                     <Switch>
                         <Route exact path={generateUrl('home')} component={withTracker(Home)} />
                         <Route
-                            path={'/ua/:id/:step?/:page?'}
+                            path={'/ua/:slug/:step?/:page?'}
                             component={withTracker(UrgentAction)}
                         />
                     </Switch>

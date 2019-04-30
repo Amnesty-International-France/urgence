@@ -22,7 +22,7 @@ import RegisterButton from './register/RegisterButton';
 import RegisterActivist from './register/RegisterActivist';
 
 const query = gql`
-    query urgentAction($id: ID!) {
+    query UrgentActionBySlug($slug: String!) {
         UrgentAction(id: $id) {
             id
             slug
@@ -104,7 +104,7 @@ const isLetterStepPresent = recipient => {
     return recipient.button && recipient.postal_address;
 };
 
-export const UrgentAction = ({ step, id, data, error, loading }) => {
+export const UrgentAction = ({ slug, data, step, error, loading }) => {
     const recipient = get(data, 'UrgentAction.recipient');
 
     if (error) {
@@ -117,7 +117,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (!step) {
-        return <Redirect to={generateUrl('story', { id })} />;
+        return <Redirect to={generateUrl('story', { slug })} />;
     }
 
     if (step === 'story') {
@@ -233,7 +233,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
 };
 
 UrgentAction.propTypes = {
-    id: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
     step: PropTypes.string,
     data: PropTypes.object,
     error: PropTypes.object,
@@ -242,13 +242,13 @@ UrgentAction.propTypes = {
 
 export const UrgentActionWithData = ({
     match: {
-        params: { id, step },
+        params: { slug, step },
     },
 }) => (
     <DataProvider>
-        <Query query={query} variables={{ id }}>
+        <Query query={query} variables={{ slug }}>
             {({ data, error, loading }) => (
-                <UrgentAction step={step} id={id} data={data} error={error} loading={loading} />
+                <UrgentAction slug={slug} step={step} data={data} error={error} loading={loading} />
             )}
         </Query>
     </DataProvider>
