@@ -8,10 +8,10 @@ export default driver => {
         lastButton: By.css('.swiper-controls .last-arrow'),
     };
     return {
-        navigate: async (id, step) => {
-            this.id = id;
+        navigate: async (slug, step) => {
+            this.slug = slug;
             this.step = step;
-            await driver.navigate().to(`http://front:3000/#/ua/${id}/story/${step}`);
+            await driver.navigate().to(`http://front:3000/#/ua/${slug}/story/${step}`);
             await driver.wait(until.elementLocated(elements.activeSlide));
         },
         getActiveText: async () => driver.findElement(elements.activeSlideText).getText(),
@@ -28,7 +28,7 @@ export default driver => {
             const lastButton = await driver.findElement(elements.lastButton);
             await driver.wait(until.elementIsVisible(lastButton));
             await lastButton.click();
-            await driver.wait(until.urlIs(`http://front:3000/#/ua/${this.id}/act`));
+            await driver.wait(until.urlIs(`http://front:3000/#/ua/${this.slug}/act`));
         },
     };
 };

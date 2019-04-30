@@ -14,8 +14,8 @@ export default driver => {
     };
     return {
         isLoaded: async () => driver.wait(until.elementLocated(elements.container)),
-        async navigate(id) {
-            await driver.navigate().to(`http://front:3000/#/ua/${id}/message`);
+        async navigate(slug) {
+            await driver.navigate().to(`http://front:3000/#/ua/${slug}/message`);
             await this.isLoaded();
         },
         getMessages: async () => {

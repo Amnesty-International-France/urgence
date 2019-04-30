@@ -7,8 +7,8 @@ export default driver => {
         messageButton: By.css('a'),
     };
     return {
-        navigate: async id => {
-            await driver.navigate().to(`http://front:3000/#/ua/${id}/act`);
+        navigate: async slug => {
+            await driver.navigate().to(`http://front:3000/#/ua/${slug}/act`);
             await driver.wait(until.elementLocated(elements.title));
         },
         getTitle: async () => driver.findElement(elements.title).getText(),
