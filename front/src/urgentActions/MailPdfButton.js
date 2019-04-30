@@ -24,7 +24,7 @@ export class MailPdfButton extends Component {
             email,
         } = this.props;
 
-        return fetch(generateUrl('letter', { auId }), {
+        return fetch(generateUrl('letter', { id: auId }), {
             method: 'POST',
             body: JSON.stringify({
                 subject,

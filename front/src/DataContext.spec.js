@@ -262,7 +262,7 @@ describe('DataContext', () => {
 
     it('should have setRegistered method to change the state registered', () => {
         const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setRegistered('new registered');
+        wrapper.instance().setRegistered();
         expect(wrapper.state()).toEqual({
             object: 'object value',
             civility: 'civility value',
@@ -275,8 +275,8 @@ describe('DataContext', () => {
             country: 'country value',
             phone: 'phone value',
             email: 'email value',
-            registered: 'new registered',
+            registered: 'true',
         });
-        expect(data.setRegistered).toBeCalledWith('new registered');
+        expect(data.setRegistered).toBeCalled();
     });
 });

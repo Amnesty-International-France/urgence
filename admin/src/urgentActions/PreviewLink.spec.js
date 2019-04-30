@@ -16,9 +16,7 @@ describe('<PreviewLink />', () => {
         const wrapper = shallow(<PreviewLink {...props} />);
 
         const button = wrapper.find(Button);
-        expect(button.prop('href')).toBe(
-            'http://localhost:3000/#/UA/3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
-        );
+        expect(button.prop('href')).toBe('http://localhost:3000/#/ua/i-am-your-father');
     });
 
     it('should be disabled if there is no story currently configured', () => {

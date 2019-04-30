@@ -28,7 +28,7 @@ describe('Urgent Actions Resolvers', () => {
         describe('UrgentActionBySlug', () => {
             it('should query urgent actions with corresponding slug', async () => {
                 const params = { slug: 'tom-marvolo-riddle' };
-                await UrgentActionsResolver.Query.UrgentAction(null, params);
+                await UrgentActionsResolver.Query.UrgentActionBySlug(null, params);
 
                 expect(getUrgentActionBySlug).toHaveBeenCalledWith('tom-marvolo-riddle');
             });

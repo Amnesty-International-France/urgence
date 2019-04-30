@@ -19,7 +19,7 @@ export default (name, params = {}) => {
         case 'thanks-end':
             return `/ua/${params.slug}/thanks-end`;
         case 'letter': {
-            return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.slug}/send`;
+            return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}/send`;
         }
         default:
             throw new Error(`Unknown route ${name} passed to generateUrl`);
