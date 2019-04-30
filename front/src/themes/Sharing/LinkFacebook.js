@@ -20,7 +20,7 @@ LinkFacebook.propTypes = {
 
 LinkFacebook.defaultProps = {
     url: '',
-    action: () => { },
+    action: () => {},
 };
 
 export default LinkFacebook;

@@ -47,7 +47,7 @@ CopyToClipboard.propTypes = {
 
 CopyToClipboard.defaultProps = {
     url: '',
-    action: () => { },
+    action: () => {},
 };
 
 export default withStyles(styles)(CopyToClipboard);
