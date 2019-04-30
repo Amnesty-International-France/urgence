@@ -12,12 +12,13 @@ export const PreviewLink = ({ record }) =>
         <Button
             color="primary"
             size="small"
-            href={generateAppUrl('urgentAction', { id: record.id })}
+            href={generateAppUrl('urgentAction', { id: record.id, slug: record.slug })}
             target="_blank"
             rel="noopener noreferrer"
             disabled={!hasStory(record)}
         >
-            <Visibility />&nbsp;View
+            <Visibility />
+            &nbsp;View
         </Button>
     );
 

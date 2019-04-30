@@ -3,11 +3,11 @@ import { shallow } from 'enzyme';
 import { PreviewLetter } from './PreviewLetter';
 import Button from '@material-ui/core/Button';
 
-
 describe('<PreviewLetter />', () => {
     const defaultProps = {
         record: {
             id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
+            slug: 'i-am-your-father',
         },
     };
 
