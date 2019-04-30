@@ -124,7 +124,7 @@ export const Share = ({
                 label={
                     <Fragment>
                         <FontAwesomeIcon icon={faUserEdit} size="2x" className="icon" />
-                        <span>{`S'inscrire`}</span>
+                        <span>{`${registerDone === 'true' ? `Se réinscrire` : `S'inscrire`}`}</span>
                     </Fragment>
                 }
                 step="thanks"
@@ -133,7 +133,6 @@ export const Share = ({
                 buttonName="ToRegister"
                 whiteLink={true}
                 onClick={handleRegisterDone}
-                disabled={registerDone === 'true'}
             />
         </div>
     );
