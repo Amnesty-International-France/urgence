@@ -26,7 +26,7 @@ const styles = {
         textTransform: 'uppercase',
         fontFamily: 'Amnesty Trade Gothic Condensed',
         fontSize: '36px',
-        lineHeight: '55px',
+        lineHeight: '54px',
         fontWeight: 'bold',
         margin: '1.5rem 12px',
         width: 'calc(100% - 24px)',
@@ -35,6 +35,7 @@ const styles = {
             backgroundColor: black,
             padding: '6px 0',
             boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
+            boxDecorationBreak: 'clone',
         },
     },
     '& .rich-text': {
