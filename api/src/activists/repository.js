@@ -2,7 +2,7 @@ const { crud } = require('co-postgres-queries');
 
 const query = require('../db/client');
 
-const columns = ['id', 'created_on', 'updated_on', 'firstname', 'lastname', 'email', 'phone'];
+const columns = ['id', 'created_on', 'updated_on', 'civility', 'firstname', 'lastname', 'email', 'phone'];
 
 const activistCrudQueries = crud({
     table: 'activist',
