@@ -23,7 +23,7 @@ import RegisterActivist from './register/RegisterActivist';
 
 const query = gql`
     query urgentActionBySlug($slug: String!) {
-        UrgentActionBySlug(slug: $slug) {
+        UrgentAction: UrgentActionBySlug(slug: $slug) {
             id
             slug
             story {
