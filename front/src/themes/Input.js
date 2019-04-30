@@ -71,9 +71,11 @@ export class Input extends Component {
         return (
             <div className={className}>
                 <TextField
-                    className={classnames('textfield', { valid: showValid })}
+                    className={classnames('textfield', { ['valid']: showValid })}
                     variant="outlined"
                     margin="dense"
+                    label={label}
+                    value={value}
                     error={showError && error}
                     onChange={event => {
                         if (onChange) onChange(event);
@@ -92,7 +94,6 @@ export class Input extends Component {
                             value: event.target.value,
                         });
                     }}
-                    value={value}
                     {...otherProps}
                 />
             </div>
