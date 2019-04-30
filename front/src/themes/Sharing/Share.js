@@ -44,12 +44,6 @@ const styles = {
     },
 };
 
-const parseTextForUrl = text => {
-    const encodedText = encodeURI(text);
-    const hashTaggedText = encodedText.replace(/#/g, '%23');
-    return hashTaggedText;
-};
-
 export const Share = ({
     className,
     link,
@@ -64,8 +58,6 @@ export const Share = ({
     const [twitterDone, setTwitterDone] = secureUseState();
     const [socialDone, setSocialDone] = secureUseState();
     const [registerDone, setRegisterDone] = secureUseState(registered === 'true');
-
-    const encodedUrl = parseTextForUrl(link);
 
     const handleTwitterDone = () => {
         setTwitterDone(true);
@@ -88,7 +80,7 @@ export const Share = ({
                 <Fragment>
                     <SharingStep text={twitter_title} done={twitterDone} number={2} />
                     <LinkTwitter
-                        text={parseTextForUrl(twitter_message)}
+                        text={encodeURIComponent(twitter_message)}
                         action={handleTwitterDone}
                     />
                 </Fragment>
@@ -98,18 +90,21 @@ export const Share = ({
                 {md.mobile() && (
                     <Fragment>
                         <div className="link">
-                            <LinkFacebook url={encodedUrl} action={handleSocialDone} />
+                            <LinkFacebook
+                                url={encodeURIComponent(link)}
+                                action={handleSocialDone}
+                            />
                         </div>
                         <div className="link">
                             <LinkWhatsapp
-                                text={parseTextForUrl(`${message}\n${encodedUrl}`)}
+                                text={encodeURIComponent(`${message}\n${link}`)}
                                 action={handleSocialDone}
                             />
                         </div>
                     </Fragment>
                 )}
                 <div className="link">
-                    <CopyToClipboard url={encodedUrl} action={handleSocialDone} />
+                    <CopyToClipboard url={link} action={handleSocialDone} />
                 </div>
             </div>
             <SharingStep

@@ -5,7 +5,7 @@ import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons';
 
 export const LinkFacebook = ({ url, action }) => (
     <ShareLink
-        href={`fb-messenger://share/?link=${encodeURIComponent(url)}`}
+        href={`fb-messenger://share/?link=${url}`}
         target="facebook"
         title="Partage Messenger"
         icon={faFacebookMessenger}
