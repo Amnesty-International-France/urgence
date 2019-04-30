@@ -36,8 +36,8 @@ export class DataProvider extends Component {
     state = {
         object: data.getMailObject(),
         civility: data.getCivility(),
-        firstname: data.setFirstname(),
-        lastname: data.setLastname(),
+        firstname: data.getFirstname(),
+        lastname: data.getLastname(),
         addressMain: data.getAddressMain(),
         addressMore: data.getAddressMore(),
         postalCode: data.getPostalCode(),

@@ -19,7 +19,7 @@ describe('renderSendMail', () => {
     it('should render MailTo with body computed from messageTemplate and fullname', () => {
         const wrapper = shallow(renderSendMail(defaultProps)(defaultContext));
 
-        expect(wrapper.find('MailTo').prop('body')).toBe('hello\n\nworld\n\firstname lastname');
+        expect(wrapper.find('MailTo').prop('body')).toBe('hello\n\nworld\n\nfirstname lastname');
     });
 
     it('should render MailTo with recipient props', () => {
