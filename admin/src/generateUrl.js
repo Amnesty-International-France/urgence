@@ -9,8 +9,8 @@ export const generateAppUrl = (route, params) => {
             return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}.pdf?${stringify({
                 subject: 'Custom Subject',
                 civility: 'M',
-                surname: 'John',
-                name: 'Doe',
+                firstname: 'John',
+                lastname: 'Doe',
                 addressMain: 'Amnesty International',
                 addressMore: 'Le Chaumontois',
                 postalCode: '75019',

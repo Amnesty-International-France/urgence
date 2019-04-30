@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`generateUrl generateAppUrl should return correct urgent action letter preview URL 1`] = `"http://localhost:4000/urgent-actions/87d1d7c4-0ecc-48c4-bcce-64bab69e0a61.pdf?subject=Custom%20Subject&civility=M&surname=John&name=Doe&addressMain=Amnesty%20International&addressMore=Le%20Chaumontois&postalCode=75019&city=Paris&country=France"`;
+exports[`generateUrl generateAppUrl should return correct urgent action letter preview URL 1`] = `"http://localhost:4000/urgent-actions/87d1d7c4-0ecc-48c4-bcce-64bab69e0a61.pdf?subject=Custom%20Subject&civility=M&firstname=John&lastname=Doe&addressMain=Amnesty%20International&addressMore=Le%20Chaumontois&postalCode=75019&city=Paris&country=France"`;

@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import generateUrl from '../services/generateUrl';
-import { withSessionData } from '../SessionDataContext';
+import { withSessionData } from '../DataContext';
 import { routeMatch } from '../propTypes';
 
 export class MailPdfButton extends Component {
@@ -13,8 +13,8 @@ export class MailPdfButton extends Component {
         const {
             object: subject,
             civility,
-            surname,
-            name,
+            firstname,
+            lastname,
             addressMain,
             addressMore,
             postalCode,
@@ -31,8 +31,8 @@ export class MailPdfButton extends Component {
             body: JSON.stringify({
                 subject,
                 civility,
-                surname,
-                name,
+                firstname,
+                lastname,
                 addressMain,
                 addressMore,
                 postalCode,
@@ -65,8 +65,8 @@ export class MailPdfButton extends Component {
 MailPdfButton.propTypes = {
     object: PropTypes.string.isRequired,
     civility: PropTypes.string.isRequired,
-    surname: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    firstname: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired,
     addressMain: PropTypes.string.isRequired,
     addressMore: PropTypes.string,
     postalCode: PropTypes.string.isRequired,

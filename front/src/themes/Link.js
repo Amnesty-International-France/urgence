@@ -20,8 +20,8 @@ export const styles = {
     fontFamily: 'Amnesty Trade Gothic Condensed',
     fontWeight: 'bold',
     fontSize: 27,
-    lineHeight: '30px',
-    height: 30,
+    lineHeight: '40px',
+    height: 40,
     textDecoration: 'none',
     textTransform: 'uppercase',
     textAlign: 'center',
@@ -92,7 +92,7 @@ export class Link extends Component {
 
 Link.propTypes = {
     to: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.node.isRequired]),
     disabled: PropTypes.bool,
     className: PropTypes.string,
     onClick: PropTypes.func,

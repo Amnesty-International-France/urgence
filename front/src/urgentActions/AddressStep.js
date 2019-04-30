@@ -4,7 +4,7 @@ import glamorous from 'glamorous';
 import { compose } from 'recompose';
 import classnames from 'classnames';
 
-import { withSessionData } from '../SessionDataContext';
+import { withSessionData } from '../DataContext';
 import { withYellowLogo } from '../themes/ThemeContext';
 import Input from '../themes/Input';
 

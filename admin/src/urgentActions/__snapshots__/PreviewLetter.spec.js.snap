@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<PreviewLetter /> should render as a link to front app urgent action letter page with pre-filled subject and emitter name 1`] = `"http://localhost:4000/urgent-actions/3b6e1a3e-2547-4d77-a310-1b39d15fa03a.pdf?subject=Custom%20Subject&civility=M&surname=John&name=Doe&addressMain=Amnesty%20International&addressMore=Le%20Chaumontois&postalCode=75019&city=Paris&country=France"`;
+exports[`<PreviewLetter /> should render as a link to front app urgent action letter page with pre-filled subject and emitter fullname 1`] = `"http://localhost:4000/urgent-actions/3b6e1a3e-2547-4d77-a310-1b39d15fa03a.pdf?subject=Custom%20Subject&civility=M&firstname=John&lastname=Doe&addressMain=Amnesty%20International&addressMore=Le%20Chaumontois&postalCode=75019&city=Paris&country=France"`;

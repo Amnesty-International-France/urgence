@@ -7,7 +7,7 @@ import { templateToBodyText } from './templateToBodyText';
 import generateUrl from '../../services/generateUrl';
 import { isCorrectEmail } from '../../themes/Input';
 import { routeMatch } from '../../propTypes';
-import { SessionDataConsumer } from '../../SessionDataContext';
+import { DataConsumer } from '../../DataContext';
 
 export const renderSendMail = ({
     messageTemplate,
@@ -21,16 +21,16 @@ export const renderSendMail = ({
     email,
     object,
     civility,
-    surname,
-    name,
+    firstname,
+    lastname,
     /* eslint-enable react/prop-types */
 }) => (
     <MailTo
-        disabled={!isCorrectEmail(email) || !object || !civility || !surname || !name}
+        disabled={!isCorrectEmail(email) || !object || !civility || !firstname || !lastname}
         label="J'envoie"
         recipient={recipient}
         subject={object}
-        body={templateToBodyText(messageTemplate, civility, surname, name)}
+        body={templateToBodyText(messageTemplate, civility, firstname, lastname)}
         afterMail={afterMail}
         analyticsCategory={analyticsCategory}
         match={match}
@@ -51,7 +51,7 @@ export class SendMail extends Component {
         const { messageTemplate, recipient, analyticsCategory, step, match } = this.props;
 
         return (
-            <SessionDataConsumer>
+            <DataConsumer>
                 {renderSendMail({
                     messageTemplate,
                     recipient,
@@ -60,7 +60,7 @@ export class SendMail extends Component {
                     match,
                     step,
                 })}
-            </SessionDataConsumer>
+            </DataConsumer>
         );
     }
 }

@@ -34,7 +34,7 @@ describe('Urgent Actions Router', () => {
             expect(response.status).toBe(200);
         });
 
-        it('should return a PDF with correct subject and name', async () => {
+        it('should return a PDF with correct subject and fullname', async () => {
             const urgentAction = await createUrgentAction();
 
             await request(app).get(
@@ -46,15 +46,15 @@ describe('Urgent Actions Router', () => {
                     country: 'France',
                     subject: 'Custom Subject',
                     civility: 'M',
-                    surname: 'Surname',
-                    name: 'Name',
+                    firstname: 'Firstname',
+                    lastname: 'Lastname',
                 })}`,
             );
 
             expect(getPdfMessageBuffer.mock.calls[0][1]).toBe('Custom Subject');
             expect(getPdfMessageBuffer.mock.calls[0][2]).toBe('M');
-            expect(getPdfMessageBuffer.mock.calls[0][3]).toBe('Surname');
-            expect(getPdfMessageBuffer.mock.calls[0][4]).toBe('Name');
+            expect(getPdfMessageBuffer.mock.calls[0][3]).toBe('Firstname');
+            expect(getPdfMessageBuffer.mock.calls[0][4]).toBe('Lastname');
             expect(getPdfMessageBuffer.mock.calls[0][5]).toBe('72-76, boulevard de la Villette');
             expect(getPdfMessageBuffer.mock.calls[0][6]).toBe('Le Chaumontois');
             expect(getPdfMessageBuffer.mock.calls[0][7]).toBe('75019');
@@ -88,7 +88,7 @@ describe('Urgent Actions Router', () => {
             expect(response.status).toBe(200);
         });
 
-        it('should generate PDF with correct subject and name', async () => {
+        it('should generate PDF with correct subject and fullname', async () => {
             const urgentAction = await createUrgentAction();
 
             await request(app)
@@ -96,14 +96,14 @@ describe('Urgent Actions Router', () => {
                 .send({
                     subject: 'Custom Subject',
                     civility: 'Civility',
-                    surname: 'Surname',
-                    name: 'Name',
+                    firstname: 'Firstname',
+                    lastname: 'Lastname',
                 });
 
             expect(getPdfMessageBuffer.mock.calls[0][1]).toBe('Custom Subject');
             expect(getPdfMessageBuffer.mock.calls[0][2]).toBe('Civility');
-            expect(getPdfMessageBuffer.mock.calls[0][3]).toBe('Surname');
-            expect(getPdfMessageBuffer.mock.calls[0][4]).toBe('Name');
+            expect(getPdfMessageBuffer.mock.calls[0][3]).toBe('Firstname');
+            expect(getPdfMessageBuffer.mock.calls[0][4]).toBe('Lastname');
         });
 
         it('should send email to correct recipient with attached PDF', async () => {

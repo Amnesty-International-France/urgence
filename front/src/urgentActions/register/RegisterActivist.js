@@ -8,7 +8,7 @@ import { isCorrectEmail } from '../../themes/Input';
 
 import { white, black } from '../../themes/colors';
 import { withYellowLogo } from '../../themes/ThemeContext';
-import { withSessionData } from '../../SessionDataContext';
+import { withSessionData } from '../../DataContext';
 
 import Form from './Form';
 
@@ -50,8 +50,8 @@ const styles = {
 };
 
 const isDisabled = props => {
-    const { surname, name, phone, email } = props;
-    return !surname || !name || !phone || !isCorrectEmail(email);
+    const { firstname, lastname, phone, email } = props;
+    return !firstname || !lastname || !phone || !isCorrectEmail(email);
 };
 
 export const RegisterActivist = ({ action, className, ...props }) => {
@@ -74,14 +74,16 @@ RegisterActivist.propTypes = {
     className: PropTypes.string,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
+    civility: PropTypes.string,
     email: PropTypes.string,
     phone: PropTypes.string,
-    surname: PropTypes.string,
-    name: PropTypes.string,
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
+    setCivility: PropTypes.func.isRequired,
     setEmail: PropTypes.func.isRequired,
     setPhone: PropTypes.func.isRequired,
-    setSurname: PropTypes.func.isRequired,
-    setName: PropTypes.func.isRequired,
+    setFirstname: PropTypes.func.isRequired,
+    setLastname: PropTypes.func.isRequired,
     action: PropTypes.func.isRequired,
 };
 

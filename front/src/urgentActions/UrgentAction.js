@@ -15,7 +15,7 @@ import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import AddressStep from './AddressStep';
 import SendMail from './message/SendMail';
-import { SessionDataProvider } from '../SessionDataContext';
+import { DataProvider } from '../DataContext';
 import LoadingScreen from '../themes/LoadingScreen';
 import MailPdfButton from './MailPdfButton';
 import RegisterButton from './register/RegisterButton';
@@ -244,13 +244,13 @@ export const UrgentActionWithData = ({
         params: { id, step },
     },
 }) => (
-    <SessionDataProvider>
+    <DataProvider>
         <Query query={query} variables={{ id }}>
             {({ data, error, loading }) => (
                 <UrgentAction step={step} id={id} data={data} error={error} loading={loading} />
             )}
         </Query>
-    </SessionDataProvider>
+    </DataProvider>
 );
 
 UrgentActionWithData.propTypes = {

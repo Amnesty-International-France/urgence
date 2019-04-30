@@ -8,12 +8,12 @@ const Form = ({
     step,
     email,
     phone,
-    surname,
-    name,
+    firstname,
+    lastname,
     setEmail,
     setPhone,
-    setSurname,
-    setName,
+    setFirstname,
+    setLastname,
 }) => {
     const handleChangeEmail = event => {
         setEmail(event.target.value);
@@ -23,12 +23,12 @@ const Form = ({
         setPhone(event.target.value);
     };
 
-    const handleChangeSurname = event => {
-        setSurname(event.target.value);
+    const handleChangeFirstname = event => {
+        setFirstname(event.target.value);
     };
 
-    const handleChangeName = event => {
-        setName(event.target.value);
+    const handleChangeLastname = event => {
+        setLastname(event.target.value);
     };
 
     return (
@@ -57,20 +57,20 @@ const Form = ({
                 inputProps={{ autoFocus: true }}
             />
             <Input
-                className="surname"
-                value={surname}
-                onChange={handleChangeSurname}
-                error={!surname}
+                className="firstname"
+                value={firstname}
+                onChange={handleChangeFirstname}
+                error={!firstname}
                 analyticsCategory={analyticsCategory}
                 step={step}
                 autoComplete="given-name"
                 label="Votre prénom *"
             />
             <Input
-                className="name"
-                value={name}
-                onChange={handleChangeName}
-                error={!name}
+                className="lastname"
+                value={lastname}
+                onChange={handleChangeLastname}
+                error={!lastname}
                 analyticsCategory={analyticsCategory}
                 step={step}
                 autoComplete="family-name"
@@ -84,12 +84,12 @@ Form.propTypes = {
     className: PropTypes.string,
     email: PropTypes.string,
     phone: PropTypes.string,
-    surname: PropTypes.string,
-    name: PropTypes.string,
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
     setEmail: PropTypes.func.isRequired,
     setPhone: PropTypes.func.isRequired,
-    setSurname: PropTypes.func.isRequired,
-    setName: PropTypes.func.isRequired,
+    setFirstname: PropTypes.func.isRequired,
+    setLastname: PropTypes.func.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
 };

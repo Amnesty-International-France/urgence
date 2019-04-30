@@ -109,8 +109,8 @@ export const MessageInput = ({ classes, source, withLink }) => (
                                 setEmail={() => { }}
                                 setObject={() => { }}
                                 setCivility={() => { }}
-                                setSurname={() => { }}
-                                setName={() => { }}
+                                setFirstname={() => { }}
+                                setLastname={() => { }}
                             />
                         </FrontPreview>
                     )}
