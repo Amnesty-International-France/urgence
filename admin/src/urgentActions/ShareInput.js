@@ -31,7 +31,7 @@ export const ShareInput = ({ classes, source }) => {
                             <BooleanInput
                                 source={`${source}.share.active_twitter`}
                                 defaultValue={true}
-                                label="Activate sharing"
+                                label="Activate twitter"
                             />
                             {!disableSharing(formData, source) && (
                                 <TextInput

@@ -26,10 +26,13 @@ export class RegisterButton extends Component {
             lastname,
             phone,
             email,
+            setRegistered,
             match: {
                 params: { id },
             },
         } = this.props;
+
+        setRegistered('true');
 
         return fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
             method: 'POST',
@@ -74,6 +77,7 @@ RegisterButton.propTypes = {
     lastname: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
+    setRegistered: PropTypes.func.isRequired,
     match: routeMatch,
     disabled: PropTypes.bool,
     buttonText: PropTypes.string.isRequired,

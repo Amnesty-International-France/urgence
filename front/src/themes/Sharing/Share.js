@@ -11,6 +11,7 @@ import ToUrgentActionPageLink from '../../urgentActions/ToUrgentActionPageLink';
 import { black, grey } from '../colors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import { withSessionData } from '../../DataContext';
 
 import { secureUseState } from '../../hooks/secureHooks';
 
@@ -62,7 +63,7 @@ export const Share = ({
 
     const [twitterDone, setTwitterDone] = secureUseState();
     const [socialDone, setSocialDone] = secureUseState();
-    const [registerDone, setRegisterDone] = secureUseState();
+    const [registerDone, setRegisterDone] = secureUseState(registered);
 
     const url = encodeURI(`${global.origin}/#/ua/${auId}`);
 
@@ -75,7 +76,7 @@ export const Share = ({
     };
 
     const handleRegisterDone = () => {
-        setRegisterDone(true);
+        setRegisterDone('true');
     };
 
     let stepNumber = active_twitter ? 3 : 2;
@@ -114,36 +115,33 @@ export const Share = ({
                     <CopyToClipboard url={url} action={handleSocialDone} />
                 </div>
             </div>
-            {!registered && (
-                <Fragment>
-                    <SharingStep
-                        text="S'incrire aux Actions Urgentes"
-                        done={registerDone}
-                        number={stepNumber + 1}
-                    />
-                    <ToUrgentActionPageLink
-                        label={
-                            <Fragment>
-                                <FontAwesomeIcon icon={faUserEdit} size="2x" className="icon" />
-                                <span>{`S'inscrire`}</span>
-                            </Fragment>
-                        }
-                        step="thanks"
-                        pageName="register"
-                        analyticsCategory={'Share'}
-                        buttonName="ToRegister"
-                        whiteLink={true}
-                        onClick={handleRegisterDone}
-                    />
-                </Fragment>
-            )}
+            <SharingStep
+                text="S'incrire aux Actions Urgentes"
+                done={registerDone === 'true'}
+                number={stepNumber + 1}
+            />
+            <ToUrgentActionPageLink
+                label={
+                    <Fragment>
+                        <FontAwesomeIcon icon={faUserEdit} size="2x" className="icon" />
+                        <span>{`S'inscrire`}</span>
+                    </Fragment>
+                }
+                step="thanks"
+                pageName="register"
+                analyticsCategory={'Share'}
+                buttonName="ToRegister"
+                whiteLink={true}
+                onClick={handleRegisterDone}
+                disabled={registerDone === 'true'}
+            />
         </div>
     );
 };
 
 Share.propTypes = {
     message: PropTypes.string.isRequired,
-    registered: PropTypes.bool,
+    registered: PropTypes.string,
     active_twitter: PropTypes.bool,
     twitter_message: PropTypes.string,
     twitter_title: PropTypes.string,
@@ -157,4 +155,4 @@ Share.defaultProps = {
     auId: '',
 };
 
-export default glamorous(Share)(styles);
+export default glamorous(withSessionData(Share))(styles);

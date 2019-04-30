@@ -15,7 +15,7 @@ const { Provider, Consumer } = createContext({
     country: '',
     phone: '',
     email: '',
-    registered: false,
+    registered: 'false',
     setObject: () => null,
     setCivility: () => null,
     setFirstname: () => null,
@@ -27,7 +27,7 @@ const { Provider, Consumer } = createContext({
     setCountry: () => null,
     setPhone: () => null,
     setEmail: () => null,
-    setRegistered: () => false,
+    setRegistered: () => null,
 });
 
 export const DataConsumer = Consumer;
