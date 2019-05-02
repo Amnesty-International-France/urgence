@@ -27,6 +27,7 @@ ShareStep.propTypes = {
 
 ShareStep.defaultProps = {
     actions: () => {},
+    slug: 'new-ua',
 };
 
 export default ShareStep;
