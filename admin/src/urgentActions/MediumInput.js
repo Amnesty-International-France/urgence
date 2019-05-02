@@ -34,6 +34,11 @@ const styles = {
     },
 };
 
+const maxSize = {
+    value: 2097152,
+    label: "2Mo"
+};
+
 export const validateMedium = (value, record, _, key) => {
     const mediumKey = key
         .split('.')
@@ -43,6 +48,11 @@ export const validateMedium = (value, record, _, key) => {
     const srcKey = `${mediumKey}.src`;
     const title = get(record, titleKey);
     const src = get(record, srcKey);
+
+    if (value && value.rawFile && value.rawFile.size > maxSize.value) {
+        return `File size can't exceed ${maxSize.label}`;
+    }
+
     if ((title && src) || (!title && !src)) {
         return undefined;
     }
@@ -61,12 +71,12 @@ export const MediumInput = ({ label, classes, source, record }) => (
                         <p>
                             Drop a picture to upload, or click to select it
                             <br />
-                            (max size 2mo)
+                            (max size {maxSize.label})
                         </p>
                     }
                     accept="image/*"
                     minSize="0"
-                    maxSize="2097152" // 2mo
+                    maxSize={maxSize.value}
                     validate={validateMedium}
                     classes={{
                         dropZone: classes.dropZone,
