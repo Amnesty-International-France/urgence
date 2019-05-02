@@ -68,6 +68,7 @@ SharingScreen.propTypes = {
 SharingScreen.defaultProps = {
     title: '',
     message: '',
+    share: {},
 };
 
 export default glamorous(withYellowLogo(SharingScreen))(styles);

@@ -20,6 +20,7 @@ ShareStep.propTypes = {
     data: PropTypes.shape({
         title: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
+        share: PropTypes.object,
     }),
     actions: PropTypes.func,
 };

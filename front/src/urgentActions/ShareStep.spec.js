@@ -19,6 +19,7 @@ describe('<ShareStep />', () => {
                 title: 'Merci !',
                 text: 'Envoyez le lien à vos potes.',
             },
+            share: { message: 'Some data...' },
             actions: () => <p className="customAction">Some actions...</p>,
         };
 
@@ -34,7 +35,7 @@ describe('<ShareStep />', () => {
                 title: 'Merci !',
                 text: 'Envoyez le lien à vos potes.',
             },
-            share: () => 'Some data...',
+            share: { message: 'Some data...' },
         };
 
         const wrapper = shallow(<ShareStep {...props} />);
@@ -42,6 +43,6 @@ describe('<ShareStep />', () => {
 
         expect(sharingScreen.prop('title')).toEqual('Merci !');
         expect(sharingScreen.prop('message')).toEqual('Envoyez le lien à vos potes.');
-        expect(sharingScreen.prop('share')()).toEqual('Some data...');
+        expect(sharingScreen.prop('share')()).toEqual({ message: 'Some data...' });
     });
 });
