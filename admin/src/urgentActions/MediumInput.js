@@ -36,7 +36,7 @@ const styles = {
 
 const maxSize = {
     value: 2097152,
-    label: "2Mo"
+    label: "2 Mo"
 };
 
 export const validateMedium = (value, record, _, key) => {
