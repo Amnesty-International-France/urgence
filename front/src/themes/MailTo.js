@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
@@ -8,6 +9,11 @@ import trackEvent from '../analytics/trackEvent';
 import { styles } from './Link';
 
 export class MailTo extends Component {
+    constructor(props) {
+        super(props);
+        this.contentMail = React.createRef();
+    }
+
     componentDidMount() {
         const {
             label,
@@ -23,6 +29,10 @@ export class MailTo extends Component {
             label,
         });
     }
+
+    openMailer = dest => {
+        ReactDOM.render(<iframe src={dest} />, this.contentMail.current);
+    };
 
     render() {
         const {
@@ -43,24 +53,30 @@ export class MailTo extends Component {
             <a
                 className={classnames(className, { disabled })}
                 onClick={event => {
-                    afterMail(event);
+                    this.openMailer(
+                        `mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
+                            subject,
+                        )}&body=${encodeURIComponent(body)}`
+                            .concat(
+                                recipient.copies_to
+                                    ? `&cc=${encodeURIComponent(recipient.copies_to)}`
+                                    : '',
+                            )
+                            .concat(
+                                recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '',
+                            ),
+                    );
+                    setTimeout(() => afterMail(event), 500);
                     trackEvent(analyticsCategory, 'Click', 'button', 'SendMail', slug, step, {
                         disabled: disabled ? 'disabled' : 'active',
                         label,
                     });
                 }}
-                href={`mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
-                    subject,
-                )}&body=${encodeURIComponent(body)}`
-                    .concat(
-                        recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '',
-                    )
-                    .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '')}
-                target="_blank"
                 rel="noopener noreferrer"
                 disabled={disabled}
             >
                 {label}
+                <div ref={this.contentMail} className="masked" />
             </a>
         );
     }
