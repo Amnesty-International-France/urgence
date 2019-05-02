@@ -14,19 +14,18 @@ const styles = {
     fontSize: 18,
     fontWeight: 'bold',
     textTransform: 'none',
-    lineHeight: '50px',
+    lineHeight: '40px',
     display: 'flex',
-    height: '50px',
     marginTop: 30,
     marginLeft: -18,
     position: 'relative',
     '& .icon': {
         marginRight: 10,
-        height: '50px',
+        height: '40px',
         zIndex: 2,
     },
     '& .text': {
-        lineHeight: '50px',
+        lineHeight: '40px',
     },
     '& .greenText': {
         color: green,

@@ -13,9 +13,13 @@ export const defaultData = {
         title: '',
         text: '',
     },
-    letter_thank: {
+    end_thank: {
         title: '',
         text: '',
+    },
+    register: {
+        text: '',
+        button: '',
     },
 };
 

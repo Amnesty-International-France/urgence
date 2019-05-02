@@ -25,7 +25,7 @@ const styles = {
         fontSize: 16,
         textTransform: 'none',
         alignSelf: 'start',
-        paddingLeft: 55,
+        marginLeft: 55,
     },
     inLineButton: {
         display: 'flex',

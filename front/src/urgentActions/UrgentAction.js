@@ -8,7 +8,8 @@ import get from 'lodash.get';
 
 import Story from './story/Story';
 import Act from './Act';
-import Thanks from './Thanks';
+import ThankStep from './ThankStep';
+import ShareStep from './ShareStep';
 import Message from './message/Message';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
@@ -80,7 +81,11 @@ const query = gql`
                     url
                 }
             }
-            letter_thank {
+            register {
+                text
+                button
+            }
+            end_thank {
                 title
                 text
                 link {
@@ -173,9 +178,11 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
     if (step === 'thanks') {
         const emailThank = get(data, 'UrgentAction.email_thank');
 
+        if (emailThank.share) {
+            return <ShareStep slug={slug} data={emailThank} />;
+        }
         return (
-            <Thanks
-                slug={slug}
+            <ThankStep
                 data={emailThank}
                 actions={() =>
                     emailThank && emailThank.button && isLetterStepPresent(recipient) ? (
@@ -211,8 +218,11 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
     }
 
     if (step === 'register') {
+        const register = get(data, 'UrgentAction.register');
+
         return (
             <RegisterActivist
+                data={register}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                 action={disabled => (
@@ -220,7 +230,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
                         auId={get(data, 'UrgentAction.id')}
                         step={step}
                         disabled={disabled}
-                        buttonText="Je m'inscris"
+                        buttonText={get(register, 'button')}
                         analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                     />
                 )}
@@ -229,8 +239,8 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
     }
 
     if (step === 'thanks-end') {
-        const thankEnd = get(data, 'UrgentAction.letter_thank');
-        return <Thanks data={thankEnd} />;
+        const thankEnd = get(data, 'UrgentAction.end_thank');
+        return <ThankStep data={thankEnd} />;
     }
 };
 

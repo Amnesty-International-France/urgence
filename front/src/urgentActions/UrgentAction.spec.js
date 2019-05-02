@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { UrgentAction } from './UrgentAction';
 import data from '../data';
 import Act from './Act';
-import Thanks from './Thanks';
+import ThankStep from './ThankStep';
 import Story from './story/Story';
 import AddressStep from './AddressStep';
 
@@ -154,7 +154,7 @@ describe('<UrgentAction />', () => {
 
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
-            const thanks = renderedComponent.find(Thanks);
+            const thanks = renderedComponent.find(ThankStep);
             expect(thanks.length).toBe(1);
 
             const data = thanks.prop('data');
@@ -189,7 +189,7 @@ describe('<UrgentAction />', () => {
             };
 
             const wrapper = shallow(<UrgentAction {...props} />);
-            const thanks = wrapper.find(Thanks);
+            const thanks = wrapper.find(ThankStep);
             const action = thanks.prop('actions')();
 
             expect(action.props.pageName).toBe('address');
@@ -220,7 +220,7 @@ describe('<UrgentAction />', () => {
             };
 
             const wrapper = shallow(<UrgentAction {...props} />);
-            const thanks = wrapper.find(Thanks);
+            const thanks = wrapper.find(ThankStep);
             const action = thanks.prop('actions')();
 
             expect(action).toBe(null);
@@ -275,7 +275,7 @@ describe('<UrgentAction />', () => {
                 loading: false,
                 data: {
                     UrgentAction: {
-                        letter_thank: {
+                        end_thank: {
                             title: 'Merci de votre engagement !',
                             text: "N'oubliez pas d'envoyer la lettre !",
                         },
@@ -285,7 +285,7 @@ describe('<UrgentAction />', () => {
 
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
-            const thanks = renderedComponent.find(Thanks);
+            const thanks = renderedComponent.find(ThankStep);
             expect(thanks.length).toBe(1);
 
             const data = thanks.prop('data');

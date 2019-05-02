@@ -7,12 +7,12 @@ import { ThanksInput } from './ThanksInput';
 describe('<ThanksInput />', () => {
     const defaultProps = {
         classes: {},
-        source: 'letter_thank',
+        source: 'end_thank',
     };
 
     const defaultRenderPropArgs = {
         formData: {
-            letter_thank: {},
+            end_thank: {},
         },
     };
 

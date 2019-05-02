@@ -115,6 +115,16 @@ export default gql`
         twitter_title: String
     }
 
+    type Register {
+        text: String
+        button: String
+    }
+
+    input RegisterInput {
+        text: String
+        button: String
+    }
+
     type Thanks {
         title: String
         text: String
@@ -149,7 +159,8 @@ export default gql`
         last_edition_date: DATE
         recipient: Recipient
         email_thank: Thanks
-        letter_thank: Thanks
+        end_thank: Thanks
+        register: Register
     }
 
     extend type Query {
@@ -181,7 +192,8 @@ export default gql`
             message_link: LinkInput
             recipient: RecipientInput
             email_thank: ThankInput
-            letter_thank: ThankInput
+            end_thank: ThankInput
+            register: RegisterInput
         ): UrgentAction
         updateUrgentAction(
             id: ID!
@@ -195,7 +207,8 @@ export default gql`
             message_link: LinkInput
             recipient: RecipientInput
             email_thank: ThankInput
-            letter_thank: ThankInput
+            end_thank: ThankInput
+            register: RegisterInput
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
     }

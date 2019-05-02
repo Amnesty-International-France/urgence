@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import { LETTER_ACTIVATED } from '../flags';
+
 import {
     addField,
     required,
@@ -12,24 +14,19 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 
-import { root, transitionScreenPreview, sharingScreenPreview } from './styles';
+import { root, transitionScreenPreview } from './styles';
 import { get as getScreenIndex, CONTINUE, THANKS } from './screenIndex';
 import RichTextInput from '../form/RichTextInput';
-import ShareInput from './ShareInput';
 import FrontPreview, { noop } from './FrontPreview';
-import classnames from 'classnames';
 
-import Thanks from '../../../front/src/urgentActions/Thanks';
+import ThankStep from '../../../front/src/urgentActions/ThankStep';
 import Link from '../../../front/src/themes/Link';
 import LinkInput from './LinkInput';
 
 const styles = {
     ...root,
-    previewT: {
+    preview: {
         ...transitionScreenPreview,
-    },
-    previewS: {
-        ...sharingScreenPreview,
     },
 };
 
@@ -38,12 +35,14 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
         ? {
             title: 'Merci pour votre action.',
             text:
-                "Continuons d'agir pour augmenter les chances de victoire ! Allons plus loin dans ce combat grace aux réseaux sociaux.",
+                LETTER_ACTIVATED ?
+                    "La lettre vous a été envoyée sur votre boîte e-mail. Poursuivez votre action en l'envoyant par La Poste." :
+                    "Nous comptons sur vous pour la prochaine action urgente.",
         }
         : {
             title: 'Se battre. Encore. Et Encore.',
             text:
-                "Continuons d'agir pour augmenter les chances de victoire ! Allons plus loin dans ce combat grace aux réseaux sociaux.",
+                "Continuons d'agir pour augmenter les chances de victoire ! Allez plus loin dans ce combat en envoyant ce message par courrier.",
             button: "Je continue d'agir",
         };
 
@@ -70,23 +69,15 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                                         defaultValue={defaultValues.text}
                                         validate={[required()]}
                                     />
-                                    {!final && (
-                                        <Fragment>
-                                            <ShareInput
-                                                source={source}
-                                            />
-                                            {withLink && <LinkInput source={`${source}.link`} />}
-                                        </Fragment>
-                                    )}
+                                    {!final && withLink && <LinkInput source={`${source}.link`} />}
                                 </div>
                             </CardContent>
                         </Card>
-                        <FrontPreview className={classnames(final ? classes.previewT : classes.previewS)}>
-                            <Thanks
+                        <FrontPreview className={classes.preview}>
+                            <ThankStep
                                 data={formData[source]}
-                                auId={formData['id']}
                                 actions={() =>
-                                    !final && formData[source] && formData[source].button ? (
+                                    !final && withLink && formData[source] && formData[source].button ? (
                                         <Link
                                             to="#"
                                             label={formData[source].button}

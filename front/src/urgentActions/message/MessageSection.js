@@ -4,18 +4,18 @@ import glamorous from 'glamorous';
 
 import RichText from '../../themes/RichText';
 
-export const MessageStep = ({ className, content }) => (
+export const MessageSection = ({ className, content }) => (
     <div className={className}>
         <RichText html={(content || '').trim().replace(/\n/g, '<br>')} />
     </div>
 );
 
-MessageStep.propTypes = {
+MessageSection.propTypes = {
     className: PropTypes.string,
     content: PropTypes.string,
 };
 
-export default glamorous(MessageStep)({
+export default glamorous(MessageSection)({
     '& .rich-text, & > p': {
         fontFamily: 'Amnesty Trade Gothic',
         lineHeight: '1.5em',

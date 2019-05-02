@@ -6,7 +6,7 @@ import Div100Vh from 'react-div-100vh';
 import StoryStep from './story/StoryStep';
 import { WithStylesStory as Story } from './story/Story';
 import Act from './Act';
-import Thanks from './Thanks';
+import ThankStep from './ThankStep';
 import Link from '../themes/Link';
 import { routerDecorator, history } from '../../.storybook/decorators';
 import { ThemeProvider } from '../themes/ThemeContext';
@@ -171,7 +171,7 @@ storiesOf('Thanks', module)
             <ThemeProvider>
                 <Div100Vh>
                     <AppLogo />
-                    <Thanks
+                    <ThankStep
                         data={data}
                         actions={() => (
                             <Link to="#" label={data.button} onClick={action('Link clicked')} />
@@ -192,7 +192,7 @@ storiesOf('Thanks', module)
             <ThemeProvider>
                 <Div100Vh>
                     <AppLogo />
-                    <Thanks data={data} />
+                    <ThankStep data={data} />
                 </Div100Vh>
             </ThemeProvider>
         );

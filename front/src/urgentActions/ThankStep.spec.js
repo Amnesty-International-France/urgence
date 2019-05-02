@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Thanks } from './Thanks';
+import { ThankStep } from './ThankStep';
 import TransitionScreen from '../themes/TransitionScreen';
 
-describe('<Thanks />', () => {
+describe('<ThankStep />', () => {
     const defaultProps = {
         className: '',
         data: {
@@ -22,7 +22,7 @@ describe('<Thanks />', () => {
             actions: () => <p className="customAction">Some actions...</p>,
         };
 
-        const wrapper = shallow(<Thanks {...props} />);
+        const wrapper = shallow(<ThankStep {...props} />);
         const transitionScreen = wrapper.find(TransitionScreen);
         expect(transitionScreen.length).toEqual(1);
     });
@@ -37,7 +37,7 @@ describe('<Thanks />', () => {
             actions: () => 'Some actions...',
         };
 
-        const wrapper = shallow(<Thanks {...props} />);
+        const wrapper = shallow(<ThankStep {...props} />);
         const transitionScreen = wrapper.find(TransitionScreen);
 
         expect(transitionScreen.prop('title')).toEqual('Merci !');
