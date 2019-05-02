@@ -43,6 +43,6 @@ describe('<ShareStep />', () => {
 
         expect(sharingScreen.prop('title')).toEqual('Merci !');
         expect(sharingScreen.prop('message')).toEqual('Envoyez le lien à vos potes.');
-        expect(sharingScreen.prop('share')()).toEqual({ message: 'Some data...' });
+        expect(sharingScreen.prop('share')).toEqual({ message: 'Some data...' });
     });
 });
