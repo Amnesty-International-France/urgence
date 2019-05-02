@@ -96,6 +96,7 @@ export const MessageInput = ({ classes, source, withLink }) => (
                     {formData.message_template && (
                         <FrontPreview className={classes.preview}>
                             <Message
+                                autoFocus={false}
                                 messageTemplate={
                                     formData.message_template &&
                                         formData.message_template[0] &&
