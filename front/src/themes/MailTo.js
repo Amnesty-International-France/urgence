@@ -8,6 +8,14 @@ import trackEvent from '../analytics/trackEvent';
 
 import { styles } from './Link';
 
+export const buildMailDest = (recipient, subject, body) => {
+    `mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
+        subject,
+    )}&body=${encodeURIComponent(body)}`
+        .concat(recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '')
+        .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '');
+};
+
 export class MailTo extends Component {
     constructor(props) {
         super(props);
@@ -30,7 +38,8 @@ export class MailTo extends Component {
         });
     }
 
-    openMailer = dest => {
+    openMailer = (recipient, subject, body) => {
+        const dest = buildMailDest(recipient, subject, body);
         ReactDOM.render(<iframe src={dest} />, this.contentMail.current);
     };
 
@@ -53,19 +62,7 @@ export class MailTo extends Component {
             <a
                 className={classnames(className, { disabled })}
                 onClick={event => {
-                    this.openMailer(
-                        `mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
-                            subject,
-                        )}&body=${encodeURIComponent(body)}`
-                            .concat(
-                                recipient.copies_to
-                                    ? `&cc=${encodeURIComponent(recipient.copies_to)}`
-                                    : '',
-                            )
-                            .concat(
-                                recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '',
-                            ),
-                    );
+                    this.openMailer(recipient, subject, body);
                     setTimeout(() => afterMail(event), 500);
                     trackEvent(analyticsCategory, 'Click', 'button', 'SendMail', slug, step, {
                         disabled: disabled ? 'disabled' : 'active',
