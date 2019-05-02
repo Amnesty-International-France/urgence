@@ -56,7 +56,7 @@ const styles = {
     },
 };
 
-const generateSlug = title =>
+const generateSlug = (title = '') =>
     slugify(title, {
         replacement: '-',
         remove: /[*+~.()'"!:@#,]/g,
@@ -99,10 +99,12 @@ export const Form = ({ classes }) => (
             <ThanksInput source="email_thank" withLink={USE_CALL_TO_ACTION_LINK} />
         </div>
 
-        {LETTER_ACTIVATED && <div className={`${classes.form} letter`}>
-            <h2>Letter</h2>
-            <LetterInput source="recipient" />
-        </div>}
+        {LETTER_ACTIVATED && (
+            <div className={`${classes.form} letter`}>
+                <h2>Letter</h2>
+                <LetterInput source="recipient" />
+            </div>
+        )}
 
         <div className={`${classes.form} register`}>
             <h2>Register</h2>
