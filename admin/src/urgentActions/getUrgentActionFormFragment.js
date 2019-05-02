@@ -17,6 +17,7 @@ import StoryTemplateInput from './StoryTemplateInput';
 import CallToActionInput from './CallToActionInput';
 import MessageInput from './MessageInput';
 import ThanksInput from './ThanksInput';
+import ShareInput from './ShareInput';
 import RegisterInput from './RegisterInput';
 import LetterInput from './LetterInput';
 
@@ -100,7 +101,9 @@ export const Form = ({ classes }) => (
 
         <div className={`${classes.form} continue`}>
             <h2>Continue</h2>
-            <ThanksInput source="email_thank" withLink={USE_CALL_TO_ACTION_LINK} />
+            {LETTER_ACTIVATED ?
+                <ThanksInput source="email_thank" withLink={USE_CALL_TO_ACTION_LINK} /> :
+                <ShareInput source="email_thank" />}
         </div>
 
         {LETTER_ACTIVATED && (
