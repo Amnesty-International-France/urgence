@@ -110,9 +110,9 @@ export const Form = ({ classes }) => (
             </div>
         )}
 
-        <div className={`${classes.form} register`}>
+         <div className={`${classes.form} register`}>
             <h2>Register</h2>
-            <RegisterInput source="letter_thank" />
+            <RegisterInput source="register" />
         </div>
 
         <div className={`${classes.form} thank-you`}>

@@ -15,6 +15,7 @@ const columns = [
     'recipient',
     'email_thank',
     'letter_thank',
+    'register',
     'creation_date',
     'last_edition_date',
 ];

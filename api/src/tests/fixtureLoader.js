@@ -8,6 +8,7 @@ export const createUrgentAction = async ({ story, message_template, ...urgentAct
         slug: 'commutation-of-william-montgomerys-sentence',
         recipient: {},
         letter_thank: {},
+        register: {},
     };
 
     return insertUrgentAction({

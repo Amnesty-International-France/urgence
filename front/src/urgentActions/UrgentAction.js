@@ -211,8 +211,11 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
     }
 
     if (step === 'register') {
+        const register = get(data, 'UrgentAction.register');
+
         return (
             <RegisterActivist
+                data={register}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                 action={disabled => (
@@ -220,7 +223,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
                         auId={get(data, 'UrgentAction.id')}
                         step={step}
                         disabled={disabled}
-                        buttonText="Je m'inscris"
+                        buttonText={get(register, 'button')}
                         analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                     />
                 )}

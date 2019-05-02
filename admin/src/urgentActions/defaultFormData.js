@@ -17,6 +17,10 @@ export const defaultData = {
         title: '',
         text: '',
     },
+    register: {
+        text: '',
+        button: '',
+    },
 };
 
 export const defaultStory = {

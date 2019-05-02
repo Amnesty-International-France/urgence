@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import get from 'lodash.get';
 import { compose } from 'recompose';
 import classnames from 'classnames';
 
@@ -54,13 +55,12 @@ const isDisabled = props => {
     return !firstname || !lastname || !phone || !isCorrectEmail(email);
 };
 
-export const RegisterActivist = ({ action, className, ...props }) => {
+export const RegisterActivist = ({ data, action, className, ...props }) => {
+    const text = get(data, 'text');
     return (
         <Fragment>
             <div className={classnames('register', className)}>
-                <p>
-                    {`L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !`}
-                </p>
+                <p>{text}</p>
                 <div className="formStep">
                     <Form {...props} />
                 </div>
@@ -72,6 +72,10 @@ export const RegisterActivist = ({ action, className, ...props }) => {
 
 RegisterActivist.propTypes = {
     className: PropTypes.string,
+    data: PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        button: PropTypes.string.isRequired,
+    }),
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
     civility: PropTypes.string,

@@ -55,5 +55,9 @@
     "letter_thank": {
         "title": "Merci de votre aide !",
         "text": "Il ne vous reste plus qu'à poster la lettre qui vous a été envoyée par courriel."
+    },
+    "register": {
+        "text": "L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !",
+        "button": "Je m'inscris"
     }
 }
