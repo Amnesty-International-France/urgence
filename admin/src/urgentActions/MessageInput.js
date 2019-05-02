@@ -88,6 +88,7 @@ export const MessageInput = ({ classes, source, withLink }) => (
                                     fullWidth
                                     label="Object tip"
                                     source={`${source}object_indication`}
+                                    defaultValue={`Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.`}
                                 />
                                 {withLink && <LinkInput source={`${source}message_link`} />}
                             </div>
