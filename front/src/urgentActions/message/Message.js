@@ -157,6 +157,7 @@ LetterView.propTypes = {
 export const FormStep = ({
     email,
     objectIndication,
+    autoFocus,
     object,
     civility,
     firstname,
@@ -210,7 +211,7 @@ export const FormStep = ({
                 analyticsCategory={analyticsCategory}
                 step={step}
                 label="Objet de l'e-mail *"
-                inputProps={{ autoFocus: true }}
+                inputProps={{ autoFocus: autoFocus }}
             />
             <p className="objectIndication">{objectIndication}</p>
             <RadioButton
@@ -250,6 +251,7 @@ export const FormStep = ({
 
 FormStep.propTypes = {
     className: PropTypes.string,
+    autoFocus: PropTypes.bool,
     email: PropTypes.string,
     objectIndication: PropTypes.string,
     object: PropTypes.string,
@@ -263,6 +265,10 @@ FormStep.propTypes = {
     setLastname: PropTypes.func.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
+};
+
+FormStep.defaultProps = {
+    autoFocus: true,
 };
 
 export const Message = ({ messageTemplate, action, className, link, ...props }) => {

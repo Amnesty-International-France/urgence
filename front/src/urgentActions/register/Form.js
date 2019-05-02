@@ -7,6 +7,7 @@ import RadioButton from '../../themes/RadioButton';
 const Form = ({
     analyticsCategory,
     step,
+    autoFocus,
     email,
     phone,
     civility,
@@ -61,7 +62,7 @@ const Form = ({
                 analyticsCategory={analyticsCategory}
                 step={step}
                 label="Votre téléphone mobile *"
-                inputProps={{ autoFocus: true }}
+                inputProps={{ autoFocus: autoFocus }}
             />
             <RadioButton
                 value={civility}
@@ -100,6 +101,7 @@ const Form = ({
 
 Form.propTypes = {
     className: PropTypes.string,
+    autoFocus: PropTypes.bool,
     email: PropTypes.string,
     phone: PropTypes.string,
     civility: PropTypes.string,
@@ -112,6 +114,10 @@ Form.propTypes = {
     setLastname: PropTypes.func.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
+};
+
+Form.defaultProps = {
+    autoFocus: true,
 };
 
 export default Form;
