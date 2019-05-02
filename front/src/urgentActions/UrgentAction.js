@@ -80,7 +80,11 @@ const query = gql`
                     url
                 }
             }
-            letter_thank {
+            register {
+                text
+                button
+            }
+            end_thank {
                 title
                 text
                 link {
@@ -232,7 +236,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
     }
 
     if (step === 'thanks-end') {
-        const thankEnd = get(data, 'UrgentAction.letter_thank');
+        const thankEnd = get(data, 'UrgentAction.end_thank');
         return <Thanks data={thankEnd} />;
     }
 };

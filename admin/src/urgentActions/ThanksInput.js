@@ -51,53 +51,53 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
         <div className={classes.root}>
             <FormDataConsumer>
                 {({ formData }) => (
-                        <Fragment>
-                            <Avatar className={classes.avatar}>
-                                {getScreenIndex(final ? THANKS : CONTINUE, formData)}
-                            </Avatar>
-                            <Card className={classes.card}>
-                                <CardContent className={classes.content}>
-                                    <div className={classes.formContainer}>
-                                        <LongTextInput
-                                            source={`${source}.title`}
-                                            label="Title"
-                                            defaultValue={defaultValues.title}
-                                            validate={[required()]}
-                                        />
-                                        <RichTextInput
-                                            source={`${source}.text`}
-                                            label="Text"
-                                            defaultValue={defaultValues.text}
-                                            validate={[required()]}
-                                        />
-                                        {!final && (
-                                            <Fragment>
-                                                <ShareInput
-                                                    source={source}
-                                                />
-                                                {withLink && <LinkInput source={`${source}.link`} />}
-                                            </Fragment>
-                                        )}
-                                    </div>
-                                </CardContent>
-                            </Card>
-                            <FrontPreview className={classnames(final ? classes.previewT : classes.previewS)}>
-                                <Thanks
-                                    data={formData[source]}
-                                    auId={formData['id']}
-                                    actions={() =>
-                                        !final && formData[source] && formData[source].button ? (
-                                            <Link
-                                                to="#"
-                                                label={formData[source].button}
-                                                onClick={noop}
+                    <Fragment>
+                        <Avatar className={classes.avatar}>
+                            {getScreenIndex(final ? THANKS : CONTINUE, formData)}
+                        </Avatar>
+                        <Card className={classes.card}>
+                            <CardContent className={classes.content}>
+                                <div className={classes.formContainer}>
+                                    <LongTextInput
+                                        source={`${source}.title`}
+                                        label="Title"
+                                        defaultValue={defaultValues.title}
+                                        validate={[required()]}
+                                    />
+                                    <RichTextInput
+                                        source={`${source}.text`}
+                                        label="Text"
+                                        defaultValue={defaultValues.text}
+                                        validate={[required()]}
+                                    />
+                                    {!final && (
+                                        <Fragment>
+                                            <ShareInput
+                                                source={source}
                                             />
-                                        ) : null
-                                    }
-                                />
-                            </FrontPreview>
-                        </Fragment>
-    )}
+                                            {withLink && <LinkInput source={`${source}.link`} />}
+                                        </Fragment>
+                                    )}
+                                </div>
+                            </CardContent>
+                        </Card>
+                        <FrontPreview className={classnames(final ? classes.previewT : classes.previewS)}>
+                            <Thanks
+                                data={formData[source]}
+                                auId={formData['id']}
+                                actions={() =>
+                                    !final && formData[source] && formData[source].button ? (
+                                        <Link
+                                            to="#"
+                                            label={formData[source].button}
+                                            onClick={noop}
+                                        />
+                                    ) : null
+                                }
+                            />
+                        </FrontPreview>
+                    </Fragment>
+                )}
             </FormDataConsumer>
         </div>
     );

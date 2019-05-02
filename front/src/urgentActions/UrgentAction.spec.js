@@ -275,7 +275,7 @@ describe('<UrgentAction />', () => {
                 loading: false,
                 data: {
                     UrgentAction: {
-                        letter_thank: {
+                        end_thank: {
                             title: 'Merci de votre engagement !',
                             text: "N'oubliez pas d'envoyer la lettre !",
                         },

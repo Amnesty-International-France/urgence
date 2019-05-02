@@ -159,7 +159,7 @@ export default gql`
         last_edition_date: DATE
         recipient: Recipient
         email_thank: Thanks
-        letter_thank: Thanks
+        end_thank: Thanks
         register: Register
     }
 
@@ -192,7 +192,7 @@ export default gql`
             message_link: LinkInput
             recipient: RecipientInput
             email_thank: ThankInput
-            letter_thank: ThankInput
+            end_thank: ThankInput
             register: RegisterInput
         ): UrgentAction
         updateUrgentAction(
@@ -207,7 +207,7 @@ export default gql`
             message_link: LinkInput
             recipient: RecipientInput
             email_thank: ThankInput
-            letter_thank: ThankInput
+            end_thank: ThankInput
             register: RegisterInput
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction

@@ -110,14 +110,14 @@ export const Form = ({ classes }) => (
             </div>
         )}
 
-         <div className={`${classes.form} register`}>
+        <div className={`${classes.form} register`}>
             <h2>Register</h2>
             <RegisterInput source="register" />
         </div>
 
         <div className={`${classes.form} thank-you`}>
             <h2>Thank You</h2>
-            <ThanksInput source="letter_thank" withLink={USE_CALL_TO_ACTION_LINK} final />
+            <ThanksInput source="end_thank" withLink={USE_CALL_TO_ACTION_LINK} final />
         </div>
     </Fragment>
 );

@@ -41,18 +41,20 @@ export const RegisterInput = ({ classes, source }) => {
                         </Avatar>
                         <Card className={classes.card}>
                             <CardContent className={classes.content}>
-                                <LongTextInput
-                                    source={`${source}.text`}
-                                    label="Text"
-                                    defaultValue={defaultMessage}
-                                    validate={[required()]}
-                                />
-                                <TextInput
-                                    source={`${source}.button`}
-                                    label="Button"
-                                    defaultValue={defaultButton}
-                                    validate={[required()]}
-                                />
+                                <div className={classes.formContainer}>
+                                    <LongTextInput
+                                        source={`${source}.text`}
+                                        label="Text"
+                                        defaultValue={defaultMessage}
+                                        validate={[required()]}
+                                    />
+                                    <TextInput
+                                        source={`${source}.button`}
+                                        label="Button"
+                                        defaultValue={defaultButton}
+                                        validate={[required()]}
+                                    />
+                                </div>
                             </CardContent>
                         </Card>
                         <FrontPreview className={classes.preview}>

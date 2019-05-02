@@ -20,7 +20,7 @@ const prepareUrgentActionForDatabase = async urgentAction => {
         message_template: JSON.stringify(urgentAction.message_template),
         message_link: JSON.stringify(urgentAction.message_link),
         email_thank: JSON.stringify(urgentAction.email_thank),
-        letter_thank: JSON.stringify(urgentAction.letter_thank),
+        end_thank: JSON.stringify(urgentAction.end_thank),
         call_to_action: JSON.stringify(urgentAction.call_to_action),
         register: JSON.stringify(urgentAction.register),
     };
