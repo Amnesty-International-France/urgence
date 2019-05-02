@@ -57,6 +57,16 @@ export const MediumInput = ({ label, classes, source, record }) => (
                     source={`${source}.src`}
                     record={record}
                     label=""
+                    placeholder={
+                        <p>
+                            Drop a picture to upload, or click to select it
+                            <br />
+                            (max size 2mo)
+                        </p>
+                    }
+                    accept="image/*"
+                    minSize="0"
+                    maxSize="2097152" // 2mo
                     validate={validateMedium}
                     classes={{
                         dropZone: classes.dropZone,
