@@ -17,33 +17,31 @@ describe('<ShareStep />', () => {
             ...defaultProps,
             data: {
                 title: 'Merci !',
-                text: 'Envoyez une lettre ou partagez cette histoire.',
+                text: 'Envoyez le lien à vos potes.',
             },
             actions: () => <p className="customAction">Some actions...</p>,
         };
 
         const wrapper = shallow(<ShareStep {...props} />);
-        const transitionScreen = wrapper.find(SharingScreen);
-        expect(transitionScreen.length).toEqual(1);
+        const sharingScreen = wrapper.find(SharingScreen);
+        expect(sharingScreen.length).toEqual(1);
     });
 
-    it('should pass props to <TransitionScreen />', () => {
+    it('should pass props to <SharingScreen />', () => {
         const props = {
             ...defaultProps,
             data: {
                 title: 'Merci !',
-                text: 'Envoyez une lettre ou partagez cette histoire.',
+                text: 'Envoyez le lien à vos potes.',
             },
-            actions: () => 'Some actions...',
+            share: () => 'Some data...',
         };
 
         const wrapper = shallow(<ShareStep {...props} />);
-        const transitionScreen = wrapper.find(SharingScreen);
+        const sharingScreen = wrapper.find(SharingScreen);
 
-        expect(transitionScreen.prop('title')).toEqual('Merci !');
-        expect(transitionScreen.prop('message')).toEqual(
-            'Envoyez une lettre ou partagez cette histoire.',
-        );
-        expect(transitionScreen.prop('actions')()).toEqual('Some actions...');
+        expect(sharingScreen.prop('title')).toEqual('Merci !');
+        expect(sharingScreen.prop('message')).toEqual('Envoyez le lien à vos potes.');
+        expect(sharingScreen.prop('share')()).toEqual('Some data...');
     });
 });
