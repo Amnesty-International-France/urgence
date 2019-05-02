@@ -75,8 +75,6 @@ export const MediumInput = ({ label, classes, source, record }) => (
                         </p>
                     }
                     accept="image/*"
-                    minSize="0"
-                    maxSize={maxSize.value}
                     validate={validateMedium}
                     classes={{
                         dropZone: classes.dropZone,
