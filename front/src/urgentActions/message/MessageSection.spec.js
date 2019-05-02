@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { MessageStep } from './MessageStep';
+import { MessageSection } from './MessageSection';
 
-describe('<MessageStep />', () => {
+describe('<MessageSection />', () => {
     const defaultProps = {
         content: 'Abdolfatah Soltani is a Human Rights Iranian lawyer.',
     };
@@ -14,7 +14,7 @@ describe('<MessageStep />', () => {
             content: '<p>Hello world!</p>',
         };
 
-        const wrapper = shallow(<MessageStep {...props} />);
+        const wrapper = shallow(<MessageSection {...props} />);
         const richText = wrapper.find('RichText');
         expect(richText.prop('html')).toBe('<p>Hello world!</p>');
     });

@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import classnames from 'classnames';
 
 import { white, black } from '../../themes/colors';
-import MessageStep from './MessageStep';
+import MessageSection from './MessageSection';
 import ShowButton from './ShowButton';
 import { withYellowLogo } from '../../themes/ThemeContext';
 import { withSessionData } from '../../DataContext';
@@ -131,7 +131,7 @@ export class LetterView extends Component {
                     )}
                 >
                     {messageTemplate.map(({ value }, key) => (
-                        <MessageStep key={key} content={value} />
+                        <MessageSection key={key} content={value} />
                     ))}
                     {letterOverflow && (
                         <span

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import { Message, LetterView } from './Message';
-import MessageStep from './MessageStep';
+import MessageSection from './MessageSection';
 
 describe('Message', () => {
     const defaultStep = [{ value: 'one' }, { value: 'two' }, { value: 'three' }];
@@ -35,7 +35,7 @@ describe('Message', () => {
     it('display all messageTemplate steps', () => {
         const wrapper = mount(<LetterView {...defaultProps} />);
 
-        const messages = wrapper.find(MessageStep);
+        const messages = wrapper.find(MessageSection);
 
         expect(messages.at(0).prop('content')).toBe('one');
         expect(messages.at(1).prop('content')).toBe('two');

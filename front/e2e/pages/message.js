@@ -19,9 +19,9 @@ export default driver => {
             await this.isLoaded();
         },
         getMessages: async () => {
-            const messageSteps = await driver.findElements(elements.richText);
+            const messageSections = await driver.findElements(elements.richText);
 
-            return Promise.all(messageSteps.map(messageStep => messageStep.getText()));
+            return Promise.all(messageSections.map(messageSection => messageSection.getText()));
         },
         getIndication: async () => driver.findElement(elements.indication).getText(),
         enterObjectText: async value => driver.findElement(elements.inputObject).sendKeys(value),
