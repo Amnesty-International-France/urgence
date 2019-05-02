@@ -9,6 +9,7 @@ import get from 'lodash.get';
 import Story from './story/Story';
 import Act from './Act';
 import ThankStep from './ThankStep';
+import ShareStep from './ShareStep';
 import Message from './message/Message';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
@@ -177,9 +178,11 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
     if (step === 'thanks') {
         const emailThank = get(data, 'UrgentAction.email_thank');
 
+        if (emailThank.share) {
+            return <ShareStep slug={slug} data={emailThank} />;
+        }
         return (
             <ThankStep
-                slug={slug}
                 data={emailThank}
                 actions={() =>
                     emailThank && emailThank.button && isLetterStepPresent(recipient) ? (
