@@ -34,13 +34,14 @@ const disableSharing = (record, source) => {
     );
 };
 
-export const ShareInput = ({ classes, source }) => {
-    const defaultTitle = 'Se battre. Encore. Et Encore.';
-    const defaultText = "Continuons d'agir pour augmenter les chances de victoire ! Allons plus loin dans ce combat grace aux réseaux sociaux.";
-    const defaultTweetTitle = 'Interpeller la cible sur Twitter';
-    const defaultTweet = `@cible, respectez les droits humains !`;
-    const defaultMessage = `J'ai agi avec AmnestyFrance!`;
+const defaultTitle = 'Se battre. Encore. Et Encore.';
+const defaultText =
+    "Continuons d'agir pour augmenter les chances de victoire ! Allons plus loin dans ce combat grace aux réseaux sociaux.";
+const defaultTweetTitle = 'Interpeller la cible sur Twitter';
+const defaultTweet = `@cible, respectez les droits humains !`;
+const defaultMessage = `J'ai agi avec Amnesty France!`;
 
+export const ShareInput = ({ classes, source }) => {
     return (
         <div className={classes.root}>
             <FormDataConsumer>
@@ -98,10 +99,7 @@ export const ShareInput = ({ classes, source }) => {
                             </CardContent>
                         </Card>
                         <FrontPreview className={classes.preview}>
-                            <ShareStep
-                                data={formData[source]}
-                                auId={formData['id']}
-                            />
+                            <ShareStep data={formData[source]} slug={formData.slug} />
                         </FrontPreview>
                     </Fragment>
                 )}
