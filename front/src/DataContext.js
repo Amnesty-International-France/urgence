@@ -103,9 +103,9 @@ export class DataProvider extends Component {
         data.setEmail(email);
     };
 
-    setRegistered = registered => {
-        this.setState({ registered });
-        data.setRegistered(registered);
+    setRegistered = () => {
+        this.setState({ registered: 'true' });
+        data.setRegistered('true');
     };
 
     render() {

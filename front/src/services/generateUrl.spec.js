@@ -6,35 +6,37 @@ describe('generateUrl', () => {
     });
 
     it('should generate url for ua', () => {
-        expect(generateUrl('ua')).toBe('/ua/:id');
+        expect(generateUrl('ua')).toBe('/ua/:slug');
     });
 
-    it('should generate url for ua/id', () => {
-        expect(generateUrl('ua', { id: 'id_value' })).toBe('/ua/id_value');
+    it('should generate url for ua/slug', () => {
+        expect(generateUrl('ua', { slug: 'ua-slug-value' })).toBe('/ua/ua-slug-value');
     });
 
-    it('should generate url for ua/id/story', () => {
-        expect(generateUrl('story', { id: 'id_value' })).toBe('/ua/id_value/story/0');
+    it('should generate url for ua/slug/story', () => {
+        expect(generateUrl('story', { slug: 'ua-slug-value' })).toBe('/ua/ua-slug-value/story/0');
     });
 
-    it('should generate url for ua/id/story step', () => {
-        expect(generateUrl('story', { id: 'id_value', page: 5 })).toBe('/ua/id_value/story/5');
+    it('should generate url for ua/slug/story step', () => {
+        expect(generateUrl('story', { slug: 'ua-slug-value', page: 5 })).toBe(
+            '/ua/ua-slug-value/story/5',
+        );
     });
 
-    it('should generate url for ua/id/act', () => {
-        expect(generateUrl('act', { id: 'id_value' })).toBe('/ua/id_value/act');
+    it('should generate url for ua/slug/act', () => {
+        expect(generateUrl('act', { slug: 'ua-slug-value' })).toBe('/ua/ua-slug-value/act');
     });
 
-    it('should generate url for ua/id/message', () => {
-        expect(generateUrl('message', { id: 'id_value' })).toBe('/ua/id_value/message');
+    it('should generate url for ua/slug/message', () => {
+        expect(generateUrl('message', { slug: 'ua-slug-value' })).toBe('/ua/ua-slug-value/message');
     });
 
-    it('should generate url for ua/id/thanks', () => {
-        expect(generateUrl('thanks', { id: 'id_value' })).toBe('/ua/id_value/thanks');
+    it('should generate url for ua/slug/thanks', () => {
+        expect(generateUrl('thanks', { slug: 'ua-slug-value' })).toBe('/ua/ua-slug-value/thanks');
     });
 
-    it('should generate url for ua/id/address', () => {
-        expect(generateUrl('address', { id: 'id_value' })).toBe('/ua/id_value/address');
+    it('should generate url for ua/slug/address', () => {
+        expect(generateUrl('address', { slug: 'ua-slug-value' })).toBe('/ua/ua-slug-value/address');
     });
 
     it('should throw error if receiving unknow route', () => {

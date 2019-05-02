@@ -12,7 +12,7 @@ describe('MailTo', () => {
         subject: 'the subject',
         body: 'the body',
         match: {
-            params: { id: 'ttt' },
+            params: { slug: 'im-a-slug' },
         },
     };
 

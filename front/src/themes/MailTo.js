@@ -9,8 +9,16 @@ import { styles } from './Link';
 
 export class MailTo extends Component {
     componentDidMount() {
-        const { label, disabled, analyticsCategory, step, match } = this.props;
-        trackEvent(analyticsCategory, 'Display', 'button', 'SendMail', match.params.id, step, {
+        const {
+            label,
+            disabled,
+            analyticsCategory,
+            step,
+            match: {
+                params: { slug },
+            },
+        } = this.props;
+        trackEvent(analyticsCategory, 'Display', 'button', 'SendMail', slug, step, {
             disabled: disabled ? 'disabled' : 'active',
             label,
         });
@@ -27,25 +35,19 @@ export class MailTo extends Component {
             className,
             analyticsCategory,
             step,
-            match,
+            match: {
+                params: { slug },
+            },
         } = this.props;
         return (
             <a
                 className={classnames(className, { disabled })}
                 onClick={event => {
                     afterMail(event);
-                    trackEvent(
-                        analyticsCategory,
-                        'Click',
-                        'button',
-                        'SendMail',
-                        match.params.id,
-                        step,
-                        {
-                            disabled: disabled ? 'disabled' : 'active',
-                            label,
-                        },
-                    );
+                    trackEvent(analyticsCategory, 'Click', 'button', 'SendMail', slug, step, {
+                        disabled: disabled ? 'disabled' : 'active',
+                        label,
+                    });
                 }}
                 href={`mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
                     subject,

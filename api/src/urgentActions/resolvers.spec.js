@@ -1,6 +1,7 @@
 import UrgentActionsResolver from './resolvers';
 import {
     getUrgentAction,
+    getUrgentActionBySlug,
     getUrgentActions,
     createUrgentAction,
     updateUrgentAction,
@@ -21,6 +22,15 @@ describe('Urgent Actions Resolvers', () => {
                 expect(getUrgentAction).toHaveBeenCalledWith(
                     '16fe5e43-df12-4104-b1fe-77f8b3653802',
                 );
+            });
+        });
+
+        describe('UrgentActionBySlug', () => {
+            it('should query urgent actions with corresponding slug', async () => {
+                const params = { slug: 'tom-marvolo-riddle' };
+                await UrgentActionsResolver.Query.UrgentActionBySlug(null, params);
+
+                expect(getUrgentActionBySlug).toHaveBeenCalledWith('tom-marvolo-riddle');
             });
         });
 
@@ -46,6 +56,7 @@ describe('Urgent Actions Resolvers', () => {
                 uploadImageFromStory.mockImplementation(() => 'uploadedStory');
                 await UrgentActionsResolver.Mutation.createUrgentAction(null, {
                     title: 'test',
+                    slug: 'test',
                     story: [
                         {
                             content: 'this is a test',
@@ -77,6 +88,7 @@ describe('Urgent Actions Resolvers', () => {
 
                 expect(createUrgentAction).toHaveBeenCalledWith({
                     title: 'test',
+                    slug: 'test',
                     story: '"uploadedStory"',
                 });
             });
@@ -88,6 +100,7 @@ describe('Urgent Actions Resolvers', () => {
                 await UrgentActionsResolver.Mutation.updateUrgentAction(null, {
                     id: 'id',
                     title: 'test',
+                    slug: 'test',
                     story: [
                         {
                             content: 'this is a test',
@@ -126,6 +139,7 @@ describe('Urgent Actions Resolvers', () => {
                 expect(updateUrgentAction).toHaveBeenCalledWith('id', {
                     id: 'id',
                     title: 'test',
+                    slug: 'test',
                     story: '"uploadedStory"',
                     call_to_action: '"call_to_action"',
                     email_thank: '"email_thank"',

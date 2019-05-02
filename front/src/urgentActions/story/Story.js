@@ -31,7 +31,7 @@ export class Story extends Component {
         const {
             context,
             match: {
-                params: { id, page: currentPage },
+                params: { slug, page: currentPage },
             },
             history,
             story,
@@ -43,7 +43,7 @@ export class Story extends Component {
         }
 
         context.changeLogoColor(getLogoColorForStep(story[page]));
-        history.push(generateUrl('story', { id, page }));
+        history.push(generateUrl('story', { slug, page }));
     };
 
     afterLastChange = () => {

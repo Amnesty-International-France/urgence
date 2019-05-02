@@ -1,10 +1,10 @@
-import get from 'lodash.get';
 import React from 'react';
 import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import PropTypes from 'prop-types';
+import get from 'lodash.get';
 
 import Story from './story/Story';
 import Act from './Act';
@@ -22,9 +22,10 @@ import RegisterButton from './register/RegisterButton';
 import RegisterActivist from './register/RegisterActivist';
 
 const query = gql`
-    query urgentAction($id: ID!) {
-        UrgentAction(id: $id) {
+    query urgentActionBySlug($slug: String!) {
+        UrgentAction: UrgentActionBySlug(slug: $slug) {
             id
+            slug
             story {
                 displayOptions {
                     mediumPosition
@@ -103,7 +104,7 @@ const isLetterStepPresent = recipient => {
     return recipient.button && recipient.postal_address;
 };
 
-export const UrgentAction = ({ step, id, data, error, loading }) => {
+export const UrgentAction = ({ slug, data, step, error, loading }) => {
     const recipient = get(data, 'UrgentAction.recipient');
 
     if (error) {
@@ -116,7 +117,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
     }
 
     if (!step) {
-        return <Redirect to={generateUrl('story', { id })} />;
+        return <Redirect to={generateUrl('story', { slug })} />;
     }
 
     if (step === 'story') {
@@ -171,11 +172,11 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
 
     if (step === 'thanks') {
         const emailThank = get(data, 'UrgentAction.email_thank');
-        const auId = get(data, 'UrgentAction.id');
+
         return (
             <Thanks
+                slug={slug}
                 data={emailThank}
-                auId={auId}
                 actions={() =>
                     emailThank && emailThank.button && isLetterStepPresent(recipient) ? (
                         <ToUrgentActionPageLink
@@ -199,6 +200,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                 action={disabled => (
                     <MailPdfButton
                         step={step}
+                        auId={get(data, 'UrgentAction.id')}
                         disabled={disabled}
                         buttonText={recipient.button}
                         analyticsCategory={ANALYTICS_CATEGORIES.ADDRESS}
@@ -215,6 +217,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                 action={disabled => (
                     <RegisterButton
+                        auId={get(data, 'UrgentAction.id')}
                         step={step}
                         disabled={disabled}
                         buttonText="Je m'inscris"
@@ -232,7 +235,7 @@ export const UrgentAction = ({ step, id, data, error, loading }) => {
 };
 
 UrgentAction.propTypes = {
-    id: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
     step: PropTypes.string,
     data: PropTypes.object,
     error: PropTypes.object,
@@ -241,13 +244,13 @@ UrgentAction.propTypes = {
 
 export const UrgentActionWithData = ({
     match: {
-        params: { id, step },
+        params: { slug, step },
     },
 }) => (
     <DataProvider>
-        <Query query={query} variables={{ id }}>
+        <Query query={query} variables={{ slug }}>
             {({ data, error, loading }) => (
-                <UrgentAction step={step} id={id} data={data} error={error} loading={loading} />
+                <UrgentAction slug={slug} step={step} data={data} error={error} loading={loading} />
             )}
         </Query>
     </DataProvider>

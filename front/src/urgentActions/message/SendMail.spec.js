@@ -38,13 +38,13 @@ describe('renderSendMail', () => {
     it('afterMail should call history.push with thanks url when clicked', () => {
         const props = {
             ...defaultProps,
-            match: { params: { id: 'id' } },
+            match: { params: { slug: 'slug-slug-slug' } },
             history: {
                 push: jest.fn(),
             },
         };
         const wrapper = shallow(<SendMail {...props} />, defaultContext);
         wrapper.instance().afterMail();
-        expect(props.history.push).toHaveBeenCalledWith('/ua/id/thanks');
+        expect(props.history.push).toHaveBeenCalledWith('/ua/slug-slug-slug/thanks');
     });
 });

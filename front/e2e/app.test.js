@@ -5,14 +5,12 @@ import storyPageFactory from './pages/story';
 import actPageFactory from './pages/act';
 import messagePageFactory from './pages/message';
 import thanksPageFactory from './pages/thanks';
-import addressPageFactory from './pages/address';
 import thanksEndPageFactory from './pages/thanksEnd';
 
 const storyPage = storyPageFactory(driver);
 const actPage = actPageFactory(driver);
 const messagePage = messagePageFactory(driver);
 const thanksPage = thanksPageFactory(driver);
-const addressPage = addressPageFactory(driver);
 const thanksEndPage = thanksEndPageFactory(driver);
 
 describe('app', () => {
@@ -23,7 +21,7 @@ describe('app', () => {
     });
 
     it('should display story', async () => {
-        await storyPage.navigate(urgentAction.id, 0);
+        await storyPage.navigate(urgentAction.slug, 0);
 
         const text = await storyPage.getActiveText();
         expect(text).toBe(
@@ -46,7 +44,7 @@ describe('app', () => {
     });
 
     it('should display act step', async () => {
-        await actPage.navigate(urgentAction.id);
+        await actPage.navigate(urgentAction.slug);
 
         const title = await actPage.getTitle();
         expect(title).toBe('GÉNIAL !');
@@ -62,7 +60,7 @@ describe('app', () => {
     });
 
     it('should display message steps', async () => {
-        await messagePage.navigate(urgentAction.id, 0);
+        await messagePage.navigate(urgentAction.slug, 0);
         const messages = await messagePage.getMessages();
         expect(messages[0]).toBe(
             'Dear Minister,\nI am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.',
@@ -98,7 +96,7 @@ describe('app', () => {
     });
 
     it('should display thanks step', async () => {
-        await thanksPage.navigate(urgentAction.id);
+        await thanksPage.navigate(urgentAction.slug);
 
         const title = await thanksPage.getTitle();
         expect(title).toBe('MERCI DE VOTRE SOUTIEN !');
@@ -110,7 +108,7 @@ describe('app', () => {
     });
 
     it('should display thanks-end step', async () => {
-        await thanksEndPage.navigate(urgentAction.id);
+        await thanksEndPage.navigate(urgentAction.slug);
 
         const title = await thanksEndPage.getTitle();
         expect(title).toBe('MERCI DE VOTRE AIDE !');

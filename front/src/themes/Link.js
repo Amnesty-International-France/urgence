@@ -44,8 +44,17 @@ export const styles = {
 
 export class Link extends Component {
     componentDidMount() {
-        const { label, disabled, analyticsCategory, buttonName, step, match } = this.props;
-        trackEvent(analyticsCategory, 'Display', 'button', buttonName, match.params.id, step, {
+        const {
+            label,
+            disabled,
+            analyticsCategory,
+            buttonName,
+            step,
+            match: {
+                params: { slug },
+            },
+        } = this.props;
+        trackEvent(analyticsCategory, 'Display', 'button', buttonName, slug, step, {
             disabled: disabled ? 'disabled' : 'active',
             label,
         });
@@ -61,7 +70,9 @@ export class Link extends Component {
             analyticsCategory,
             buttonName,
             step,
-            match,
+            match: {
+                params: { slug },
+            },
             whiteLink,
         } = this.props;
         return (
@@ -70,18 +81,10 @@ export class Link extends Component {
                 className={classnames(className, { disabled: disabled, white: whiteLink })}
                 onClick={event => {
                     if (onClick) onClick(event);
-                    trackEvent(
-                        analyticsCategory,
-                        'Click',
-                        'button',
-                        buttonName,
-                        match.params.id,
-                        step,
-                        {
-                            disabled: disabled ? 'disabled' : 'active',
-                            label,
-                        },
-                    );
+                    trackEvent(analyticsCategory, 'Click', 'button', buttonName, slug, step, {
+                        disabled: disabled ? 'disabled' : 'active',
+                        label,
+                    });
                 }}
             >
                 {label}

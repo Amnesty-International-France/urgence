@@ -44,28 +44,20 @@ const styles = {
     },
 };
 
-const parseTextForUrl = text => {
-    const encodedText = encodeURI(text);
-    const hashTaggedText = encodedText.replace(/#/g, '%23');
-    return hashTaggedText;
-};
-
 export const Share = ({
     className,
+    link,
     active_twitter,
     message,
     twitter_message,
     twitter_title,
-    auId,
     registered,
 }) => {
     const md = new MobileDetect(navigator.userAgent);
 
     const [twitterDone, setTwitterDone] = secureUseState();
     const [socialDone, setSocialDone] = secureUseState();
-    const [registerDone, setRegisterDone] = secureUseState(registered);
-
-    const url = encodeURI(`${global.origin}/#/ua/${auId}`);
+    const [registerDone, setRegisterDone] = secureUseState(registered === 'true');
 
     const handleTwitterDone = () => {
         setTwitterDone(true);
@@ -76,7 +68,7 @@ export const Share = ({
     };
 
     const handleRegisterDone = () => {
-        setRegisterDone('true');
+        setRegisterDone(true);
     };
 
     let stepNumber = active_twitter ? 3 : 2;
@@ -88,7 +80,7 @@ export const Share = ({
                 <Fragment>
                     <SharingStep text={twitter_title} done={twitterDone} number={2} />
                     <LinkTwitter
-                        text={parseTextForUrl(twitter_message)}
+                        text={encodeURIComponent(twitter_message)}
                         action={handleTwitterDone}
                     />
                 </Fragment>
@@ -99,32 +91,32 @@ export const Share = ({
                     <Fragment>
                         <div className="link">
                             <LinkFacebook
-                                url={`${global.origin}/#/ua/${auId}`}
+                                url={encodeURIComponent(link)}
                                 action={handleSocialDone}
                             />
                         </div>
                         <div className="link">
                             <LinkWhatsapp
-                                text={parseTextForUrl(`${message}\n${url}`)}
+                                text={encodeURIComponent(`${message}\n${link}`)}
                                 action={handleSocialDone}
                             />
                         </div>
                     </Fragment>
                 )}
                 <div className="link">
-                    <CopyToClipboard url={url} action={handleSocialDone} />
+                    <CopyToClipboard url={link} action={handleSocialDone} />
                 </div>
             </div>
             <SharingStep
                 text="S'incrire aux Actions Urgentes"
-                done={registerDone === 'true'}
+                done={registerDone}
                 number={stepNumber + 1}
             />
             <ToUrgentActionPageLink
                 label={
                     <Fragment>
                         <FontAwesomeIcon icon={faUserEdit} size="2x" className="icon" />
-                        <span>{`${registerDone === 'true' ? `Se réinscrire` : `S'inscrire`}`}</span>
+                        <span>{`${registerDone ? `Se réinscrire` : `S'inscrire`}`}</span>
                     </Fragment>
                 }
                 step="thanks"
@@ -139,12 +131,12 @@ export const Share = ({
 };
 
 Share.propTypes = {
+    link: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     registered: PropTypes.string,
     active_twitter: PropTypes.bool,
     twitter_message: PropTypes.string,
     twitter_title: PropTypes.string,
-    auId: PropTypes.string.isRequired,
     className: PropTypes.string,
 };
 

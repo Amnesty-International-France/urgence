@@ -11,6 +11,7 @@ import { routeMatch } from '../propTypes';
 export class MailPdfButton extends Component {
     sendMail = () => {
         const {
+            auId,
             object: subject,
             civility,
             firstname,
@@ -21,12 +22,9 @@ export class MailPdfButton extends Component {
             city,
             country,
             email,
-            match: {
-                params: { id },
-            },
         } = this.props;
 
-        return fetch(generateUrl('letter', { id }), {
+        return fetch(generateUrl('letter', { id: auId }), {
             method: 'POST',
             body: JSON.stringify({
                 subject,
@@ -45,6 +43,7 @@ export class MailPdfButton extends Component {
             },
         });
     };
+
     render() {
         const { disabled, buttonText, analyticsCategory, step } = this.props;
 
@@ -63,6 +62,7 @@ export class MailPdfButton extends Component {
 }
 
 MailPdfButton.propTypes = {
+    auId: PropTypes.string.isRequired,
     object: PropTypes.string.isRequired,
     civility: PropTypes.string.isRequired,
     firstname: PropTypes.string.isRequired,

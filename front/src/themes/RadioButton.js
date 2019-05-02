@@ -55,7 +55,9 @@ export class RadioButton extends Component {
             onChange,
             error,
             analyticsCategory,
-            match,
+            match: {
+                params: { slug },
+            },
             step,
         } = this.props;
         const { showError } = this.state;
@@ -86,8 +88,8 @@ export class RadioButton extends Component {
                                         analyticsCategory,
                                         'Exit',
                                         'field',
-                                        this.props.label,
-                                        match.params.id,
+                                        label,
+                                        slug,
                                         step,
                                         {
                                             state: error ? 'invalid' : 'valid',
@@ -100,8 +102,8 @@ export class RadioButton extends Component {
                                         analyticsCategory,
                                         'Click',
                                         'field',
-                                        this.props.label,
-                                        match.params.id,
+                                        label,
+                                        slug,
                                         step,
                                         {
                                             state: error ? 'invalid' : 'valid',

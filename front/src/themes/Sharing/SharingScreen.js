@@ -45,7 +45,7 @@ const styles = {
     },
 };
 
-export const SharingScreen = ({ className, title, message, share, auId }) => (
+export const SharingScreen = ({ className, title, message, share, link }) => (
     <div className={className}>
         <div>
             <h1>
@@ -53,7 +53,7 @@ export const SharingScreen = ({ className, title, message, share, auId }) => (
             </h1>
             {message && <RichText html={message} />}
         </div>
-        {share && <Share {...share} auId={auId} />}
+        {share && <Share {...share} link={link} />}
     </div>
 );
 
@@ -62,7 +62,7 @@ SharingScreen.propTypes = {
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     share: PropTypes.object,
-    auId: PropTypes.string,
+    link: PropTypes.string,
 };
 
 SharingScreen.defaultProps = {

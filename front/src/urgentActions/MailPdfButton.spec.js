@@ -6,6 +6,7 @@ import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 
 describe('MailPdfButton', () => {
     const defaultProps = {
+        auId: '1223-df432-f8d3s',
         object: 'object',
         civility: 'civility',
         firstname: 'firstname',
@@ -16,7 +17,6 @@ describe('MailPdfButton', () => {
         city: 'city',
         country: 'country',
         email: 'email',
-        match: { params: { id: 'id' } },
         buttonText: "J'envoie",
     };
 
@@ -33,13 +33,16 @@ describe('MailPdfButton', () => {
         global.fetch = jest.fn();
         const sendMail = shallow(<MailPdfButton {...defaultProps} />).instance().sendMail;
         sendMail();
-        expect(global.fetch).toHaveBeenCalledWith('http://localhost:4000/urgent-actions/id/send', {
-            body:
-                '{"subject":"object","civility":"civility","firstname":"firstname","lastname":"lastname","addressMain":"addressMain","addressMore":"addressMore","postalCode":"postalCode","city":"city","country":"country","email":"email"}',
-            headers: {
-                'content-type': 'application/json',
+        expect(global.fetch).toHaveBeenCalledWith(
+            'http://localhost:4000/urgent-actions/1223-df432-f8d3s/send',
+            {
+                body:
+                    '{"subject":"object","civility":"civility","firstname":"firstname","lastname":"lastname","addressMain":"addressMain","addressMore":"addressMore","postalCode":"postalCode","city":"city","country":"country","email":"email"}',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                method: 'POST',
             },
-            method: 'POST',
-        });
+        );
     });
 });
