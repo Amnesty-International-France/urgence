@@ -8,7 +8,7 @@ import get from 'lodash.get';
 
 import Story from './story/Story';
 import Act from './Act';
-import Thanks from './Thanks';
+import ThankStep from './ThankStep';
 import Message from './message/Message';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
@@ -178,7 +178,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
         const emailThank = get(data, 'UrgentAction.email_thank');
 
         return (
-            <Thanks
+            <ThankStep
                 slug={slug}
                 data={emailThank}
                 actions={() =>
@@ -237,7 +237,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
 
     if (step === 'thanks-end') {
         const thankEnd = get(data, 'UrgentAction.end_thank');
-        return <Thanks data={thankEnd} />;
+        return <ThankStep data={thankEnd} />;
     }
 };
 

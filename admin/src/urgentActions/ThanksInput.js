@@ -19,7 +19,7 @@ import { get as getScreenIndex, CONTINUE, THANKS } from './screenIndex';
 import RichTextInput from '../form/RichTextInput';
 import FrontPreview, { noop } from './FrontPreview';
 
-import Thanks from '../../../front/src/urgentActions/Thanks';
+import ThankStep from '../../../front/src/urgentActions/ThankStep';
 import Link from '../../../front/src/themes/Link';
 import LinkInput from './LinkInput';
 
@@ -74,7 +74,7 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                             </CardContent>
                         </Card>
                         <FrontPreview className={classes.preview}>
-                            <Thanks
+                            <ThankStep
                                 data={formData[source]}
                                 actions={() =>
                                     !final && withLink && formData[source] && formData[source].button ? (

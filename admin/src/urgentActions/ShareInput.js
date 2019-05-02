@@ -19,7 +19,7 @@ import { get as getScreenIndex, CONTINUE } from './screenIndex';
 import RichTextInput from '../form/RichTextInput';
 import FrontPreview from './FrontPreview';
 
-import Thanks from '../../../front/src/urgentActions/Thanks';
+import ShareStep from '../../../front/src/urgentActions/ShareStep';
 
 const styles = {
     ...root,
@@ -98,7 +98,7 @@ export const ShareInput = ({ classes, source }) => {
                             </CardContent>
                         </Card>
                         <FrontPreview className={classes.preview}>
-                            <Thanks
+                            <ShareStep
                                 data={formData[source]}
                                 auId={formData['id']}
                             />
