@@ -217,6 +217,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                 action={disabled => (
                     <RegisterButton
+                        auId={get(data, 'UrgentAction.id')}
                         step={step}
                         disabled={disabled}
                         buttonText="Je m'inscris"

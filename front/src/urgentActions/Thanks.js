@@ -28,7 +28,7 @@ export const Thanks = ({ slug, data, actions }) => {
 };
 
 Thanks.propTypes = {
-    slug: PropTypes.string.isRequired,
+    slug: PropTypes.string,
     data: PropTypes.shape({
         title: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
