@@ -34,8 +34,8 @@ describe('<ShareStep />', () => {
             data: {
                 title: 'Merci !',
                 text: 'Envoyez le lien à vos potes.',
+                share: { message: 'Some data...' },
             },
-            share: { message: 'Some data...' },
         };
 
         const wrapper = shallow(<ShareStep {...props} />);
