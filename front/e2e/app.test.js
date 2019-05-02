@@ -89,10 +89,6 @@ describe('app', () => {
         await messagePage.enterFirstnameText('My');
         await messagePage.enterLastnameText('name');
         expect(await messagePage.isButtonDisabled()).toBe(false);
-
-        const mailTo = await messagePage.getMailTo();
-        expect(mailTo).toContain('subject=My%20subject');
-        expect(mailTo).toContain('My%20name');
     });
 
     it('should display thanks step', async () => {
