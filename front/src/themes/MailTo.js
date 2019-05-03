@@ -40,7 +40,13 @@ export class MailTo extends Component {
 
     openMailer = (recipient, subject, body) => {
         const dest = buildMailDest(recipient, subject, body);
-        ReactDOM.render(<iframe src={dest} />, this.contentMail.current);
+        const windowRef = global.open(dest, 'mailto');
+        windowRef.focus();
+        setTimeout(function() {
+            if (!windowRef.document.hasFocus()) {
+                windowRef.close();
+            }
+        }, 500);
     };
 
     render() {
