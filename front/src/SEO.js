@@ -49,7 +49,7 @@ const SEO = ({ title, description, lang, extraMeta, keywords }) => {
                 lang,
             }}
             title={title}
-            titleTemplate={`%s | ${title}`}
+            titleTemplate={`%s | Réaction Rapide`}
             meta={meta}
         />
     );
@@ -57,7 +57,7 @@ const SEO = ({ title, description, lang, extraMeta, keywords }) => {
 
 SEO.defaultProps = {
     lang: `fr`,
-    meta: [],
+    extraMeta: [],
     keywords: [],
 };
 
