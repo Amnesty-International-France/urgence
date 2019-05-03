@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
+import SEO from './SEO';
 import { withYellowLogo } from './themes/ThemeContext';
 import { white } from './themes/colors';
 import AmnestyCandle from './icons/AmnestyCandle';
@@ -26,15 +27,25 @@ const styles = {
     },
 };
 
-const ErrorPage = ({ className }) => (
-    <div className={className}>
-        <AmnestyCandle className="candle" />
-        <p className="error">Oups. Une erreur s&#39;est produite 🙈</p>
-    </div>
+const ErrorPage = ({ className, title, description }) => (
+    <Fragment>
+        <SEO title={title} description={description} />
+        <div className={className}>
+            <AmnestyCandle className="candle" />
+            <p className="error">{description}</p>
+        </div>
+    </Fragment>
 );
 
 ErrorPage.propTypes = {
     className: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+};
+
+ErrorPage.defaultProps = {
+    title: `Une erreur s'est produite`,
+    description: `Oups. Une erreur s'est produite 🙈.`,
 };
 
 export default glamorous(withYellowLogo(ErrorPage))(styles);
