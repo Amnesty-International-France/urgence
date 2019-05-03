@@ -2,6 +2,8 @@ export default (name, params = {}) => {
     switch (name) {
         case 'home':
             return '/';
+        case 'error':
+            return '/error';
         case 'ua':
             return `/ua/${params.slug || ':slug'}`;
         case 'story':
