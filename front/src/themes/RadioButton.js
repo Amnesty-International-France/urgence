@@ -112,7 +112,7 @@ export class RadioButton extends Component {
                                     );
                                 }}
                             />
-                            <label htmlFor={item}>{item}</label>
+                            <label htmlFor={index}>{item}</label>
                         </div>
                     );
                 })}
