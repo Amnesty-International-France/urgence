@@ -31,7 +31,6 @@ export default driver => {
             driver.findElement(elements.inputFirstname).sendKeys(value),
         enterLastnameText: async value =>
             driver.findElement(elements.inputLastname).sendKeys(value),
-        getMailTo: async () => driver.findElement(elements.sendMailButton).getAttribute('href'),
         isButtonDisabled: async () => {
             const className = await driver
                 .findElement(elements.sendMailButton)

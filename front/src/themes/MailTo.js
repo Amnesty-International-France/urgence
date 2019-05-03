@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MobileDetect from 'mobile-detect';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
@@ -7,7 +8,20 @@ import trackEvent from '../analytics/trackEvent';
 
 import { styles } from './Link';
 
+export const buildMailDest = (recipient, subject, body) => {
+    return `mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
+        subject,
+    )}&body=${encodeURIComponent(body)}`
+        .concat(recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '')
+        .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '');
+};
+
 export class MailTo extends Component {
+    constructor(props) {
+        super(props);
+        this.md = new MobileDetect(navigator.userAgent);
+    }
+
     componentDidMount() {
         const {
             label,
@@ -24,6 +38,16 @@ export class MailTo extends Component {
         });
     }
 
+    openMailer = (dest) => {
+        const windowRef = global.open(dest, 'mailto');
+        windowRef.focus();
+        setTimeout(function () {
+            if (!windowRef.document.hasFocus()) {
+                windowRef.close();
+            }
+        }, 500);
+    };
+
     render() {
         const {
             recipient = {},
@@ -39,24 +63,24 @@ export class MailTo extends Component {
                 params: { slug },
             },
         } = this.props;
+
+        const dest = buildMailDest(recipient, subject, body);
+        const isIphone = this.md.is('iPhone');
         return (
             <a
                 className={classnames(className, { disabled })}
                 onClick={event => {
-                    afterMail(event);
+                    if (!isIphone) {
+                        this.openMailer(dest);
+                    }
+                    setTimeout(() => afterMail(event), 500);
                     trackEvent(analyticsCategory, 'Click', 'button', 'SendMail', slug, step, {
                         disabled: disabled ? 'disabled' : 'active',
                         label,
                     });
                 }}
-                href={`mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
-                    subject,
-                )}&body=${encodeURIComponent(body)}`
-                    .concat(
-                        recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '',
-                    )
-                    .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '')}
-                target="_blank"
+                href={isIphone ? dest : '#'}
+                target={isIphone ? 'mailto' : '_self'}
                 rel="noopener noreferrer"
                 disabled={disabled}
             >
