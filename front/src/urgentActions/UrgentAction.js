@@ -28,7 +28,6 @@ const seoPropsFromStory = story => {
         return null;
     }
     const storyCover = story[0];
-    const title = storyCover.content;
     const description = storyCover.content;
     const image = get(storyCover, 'medium.src');
     const alt = get(storyCover, 'medium.title');
@@ -55,7 +54,6 @@ const seoPropsFromStory = story => {
         : [];
 
     return {
-        title,
         description,
         extraMeta,
     };
@@ -302,7 +300,7 @@ export const UrgentActionWithData = ({
                 const seoProps = seoPropsFromStory(get(data, 'UrgentAction.story'));
                 return (
                     <Fragment>
-                        {seoProps && <SEO {...seoProps} />}
+                        {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
                         <UrgentAction
                             slug={slug}
                             step={step}
