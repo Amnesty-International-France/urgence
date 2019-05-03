@@ -65,6 +65,10 @@ export class Story extends Component {
             context,
         } = this.props;
 
+        if (!story[page]) {
+            return;
+        }
+
         if ((!prevProps.story && story) || prevProps.match.params.page !== page) {
             context.changeLogoColor(getLogoColorForStep(story[page]));
         }
@@ -83,7 +87,7 @@ export class Story extends Component {
         const total = story ? story.length : 0;
         const current = parseInt(page, 10);
 
-        if (current > total) {
+        if (current > total - 1) {
             return <Redirect to={generateUrl('error')} />;
         }
 
