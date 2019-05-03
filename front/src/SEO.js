@@ -32,16 +32,14 @@ const SEO = ({ title, description, lang, extraMeta, keywords }) => {
             name: `twitter:description`,
             content: description,
         },
-    ]
-        .concat(
-            keywords.length > 0
-                ? {
-                      name: `keywords`,
-                      content: keywords.join(`, `),
-                  }
-                : [],
-        )
-        .concat(extraMeta);
+        ...(keywords.length > 0
+            ? {
+                  name: `keywords`,
+                  content: keywords.join(`, `),
+              }
+            : []),
+        ...extraMeta,
+    ];
 
     return (
         <Helmet

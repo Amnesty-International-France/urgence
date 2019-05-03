@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { Query } from 'react-apollo';
 import PropTypes from 'prop-types';
 import get from 'lodash.get';
 
+import SEO from '../SEO';
 import Story from './story/Story';
 import Act from './Act';
 import ThankStep from './ThankStep';
@@ -21,6 +22,44 @@ import LoadingScreen from '../themes/LoadingScreen';
 import MailPdfButton from './MailPdfButton';
 import RegisterButton from './register/RegisterButton';
 import RegisterActivist from './register/RegisterActivist';
+
+const seoPropsFromStory = story => {
+    if (!story || story.length === 0) {
+        return null;
+    }
+    const storyCover = story[0];
+    const title = storyCover.content;
+    const description = storyCover.content;
+    const image = get(storyCover, 'medium.src');
+    const alt = get(storyCover, 'medium.title');
+
+    const extraMeta = image
+        ? [
+              {
+                  property: 'og:image',
+                  content: image,
+              },
+              {
+                  property: 'og:image:alt',
+                  content: alt,
+              },
+              {
+                  property: 'twitter:image',
+                  content: image,
+              },
+              {
+                  property: 'twitter:image:alt',
+                  content: alt,
+              },
+          ]
+        : [];
+
+    return {
+        title,
+        description,
+        extraMeta,
+    };
+};
 
 const query = gql`
     query urgentActionBySlug($slug: String!) {
@@ -259,9 +298,21 @@ export const UrgentActionWithData = ({
 }) => (
     <DataProvider>
         <Query query={query} variables={{ slug }}>
-            {({ data, error, loading }) => (
-                <UrgentAction slug={slug} step={step} data={data} error={error} loading={loading} />
-            )}
+            {({ data, error, loading }) => {
+                const seoProps = seoPropsFromStory(get(data, 'UrgentAction.story'));
+                return (
+                    <Fragment>
+                        {seoProps && <SEO {...seoProps} />}
+                        <UrgentAction
+                            slug={slug}
+                            step={step}
+                            data={data}
+                            error={error}
+                            loading={loading}
+                        />
+                    </Fragment>
+                );
+            }}
         </Query>
     </DataProvider>
 );
