@@ -63,6 +63,7 @@ const query = gql`
     query urgentActionBySlug($slug: String!) {
         UrgentAction: UrgentActionBySlug(slug: $slug) {
             id
+            title
             slug
             story {
                 displayOptions {
