@@ -108,7 +108,9 @@ export const Share = ({
                 </div>
             </div>
             <SharingStep
-                text="S'inscrire aux Actions Urgentes"
+                text={`${
+                    registerDone ? 'Vous êtes déjà inscrit' : 'Recevoir les prochaines actions'
+                }`}
                 done={registerDone}
                 number={stepNumber + 1}
             />
@@ -116,7 +118,7 @@ export const Share = ({
                 label={
                     <Fragment>
                         <FontAwesomeIcon icon={faUserEdit} size="2x" className="icon" />
-                        <span>{`${registerDone ? `Se réinscrire` : `S'inscrire`}`}</span>
+                        <span>{`${registerDone ? 'Modifier' : `S'inscrire`}`}</span>
                     </Fragment>
                 }
                 step="thanks"
