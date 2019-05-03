@@ -26,6 +26,7 @@ export const styles = {
     textTransform: 'uppercase',
     textAlign: 'center',
     transition: 'opacity 0.25s ease',
+    userSelect: 'none',
     '&.disabled': {
         opacity: 0.25,
         pointerEvents: 'none',
