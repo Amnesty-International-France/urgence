@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
-function SEO({ title, description, lang, extraMeta, keywords }) {
+const SEO = ({ title, description, lang, extraMeta, keywords }) => {
     const meta = [
         {
             name: `description`,
@@ -53,7 +53,7 @@ function SEO({ title, description, lang, extraMeta, keywords }) {
             meta={meta}
         />
     );
-}
+};
 
 SEO.defaultProps = {
     lang: `fr`,
