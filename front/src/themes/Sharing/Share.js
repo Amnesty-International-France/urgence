@@ -108,7 +108,7 @@ export const Share = ({
                 </div>
             </div>
             <SharingStep
-                text="S'incrire aux Actions Urgentes"
+                text="S'inscrire aux Actions Urgentes"
                 done={registerDone}
                 number={stepNumber + 1}
             />
