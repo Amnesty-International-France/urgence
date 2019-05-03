@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
-const SEO = ({ title, description, lang, extraMeta, keywords }) => {
+const SEO = ({ title, description, url, siteName, lang, extraMeta, keywords }) => {
     const meta = [
         {
             name: `description`,
@@ -19,6 +19,14 @@ const SEO = ({ title, description, lang, extraMeta, keywords }) => {
         {
             property: `og:type`,
             content: `website`,
+        },
+        {
+            property: `og:url`,
+            content: url,
+        },
+        {
+            property: `og:site_name`,
+            content: siteName,
         },
         {
             name: `twitter:card`,
@@ -54,12 +62,16 @@ const SEO = ({ title, description, lang, extraMeta, keywords }) => {
 };
 
 SEO.defaultProps = {
+    siteName: 'Réaction Rapide',
+    url: global.origin,
     lang: `fr`,
     extraMeta: [],
     keywords: [],
 };
 
 SEO.propTypes = {
+    siteName: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
     lang: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
