@@ -87,7 +87,7 @@ export class Story extends Component {
         const total = story ? story.length : 0;
         const current = parseInt(page, 10);
 
-        if (current > total - 1) {
+        if (!story || story.length === 0 || current > total - 1) {
             return <Redirect to={generateUrl('error')} />;
         }
 
