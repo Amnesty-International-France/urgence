@@ -1,0 +1,70 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+
+const SEO = ({ title, description, lang, extraMeta, keywords }) => {
+    const meta = [
+        {
+            name: `description`,
+            content: description,
+        },
+        {
+            property: `og:title`,
+            content: title,
+        },
+        {
+            property: `og:description`,
+            content: description,
+        },
+        {
+            property: `og:type`,
+            content: `website`,
+        },
+        {
+            name: `twitter:card`,
+            content: `summary`,
+        },
+        {
+            name: `twitter:title`,
+            content: title,
+        },
+        {
+            name: `twitter:description`,
+            content: description,
+        },
+        ...(keywords.length > 0
+            ? {
+                  name: `keywords`,
+                  content: keywords.join(`, `),
+              }
+            : []),
+        ...extraMeta,
+    ];
+
+    return (
+        <Helmet
+            htmlAttributes={{
+                lang,
+            }}
+            title={title}
+            titleTemplate={`%s | Réaction Rapide`}
+            meta={meta}
+        />
+    );
+};
+
+SEO.defaultProps = {
+    lang: `fr`,
+    extraMeta: [],
+    keywords: [],
+};
+
+SEO.propTypes = {
+    lang: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    extraMeta: PropTypes.arrayOf(PropTypes.object),
+    keywords: PropTypes.arrayOf(PropTypes.string),
+};
+
+export default SEO;

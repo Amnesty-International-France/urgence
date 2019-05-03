@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { withRouter } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import { compose } from 'recompose';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -64,6 +65,10 @@ export class Story extends Component {
             context,
         } = this.props;
 
+        if (!story[page]) {
+            return;
+        }
+
         if ((!prevProps.story && story) || prevProps.match.params.page !== page) {
             context.changeLogoColor(getLogoColorForStep(story[page]));
         }
@@ -79,16 +84,13 @@ export class Story extends Component {
             },
         } = this.props;
 
-        if (!story || !story.length) {
-            return (
-                <div className={className}>
-                    <p className="error">Cette action urgente n&#39;existe plus.</p>
-                </div>
-            );
-        }
-
         const total = story ? story.length : 0;
         const current = parseInt(page, 10);
+
+        if (!story || story.length === 0 || current > total - 1) {
+            return <Redirect to={generateUrl('error')} />;
+        }
+
         const [cover, ...restStory] = story;
 
         return (

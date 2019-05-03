@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Redirect } from 'react-router-dom';
 
 import { UrgentAction } from './UrgentAction';
 import data from '../data';
@@ -9,8 +10,10 @@ import Story from './story/Story';
 import AddressStep from './AddressStep';
 
 jest.mock('../data');
+jest.mock('react-router-dom');
 
 const defaultStep = {
+    id: '',
     content: '',
     displayOptions: {
         mediumPosition: 'top',
@@ -30,14 +33,16 @@ describe('<UrgentAction />', () => {
         },
     };
 
-    it('should return null if there is a GraphQL error', () => {
+    it('should Redirect to the error page if there is a GraphQL error', () => {
         const props = {
             ...defaultProps,
             error: new Error('An error occured'),
         };
         const wrapper = shallow(<UrgentAction foo="bar" {...props} />);
 
-        expect(wrapper.type()).toBe(null);
+        const redirect = wrapper.find(Redirect);
+        expect(redirect.length).toEqual(1);
+        expect(redirect.prop('to')).toEqual('/error');
     });
 
     it('should display story with retrieved GraphQL data if step is story', () => {
@@ -73,6 +78,11 @@ describe('<UrgentAction />', () => {
                 loading: false,
                 data: {
                     UrgentAction: {
+                        story: [
+                            {
+                                ...defaultStep,
+                            },
+                        ],
                         call_to_action: {
                             title: 'Call To Action',
                             message: 'My Message',
@@ -96,6 +106,11 @@ describe('<UrgentAction />', () => {
             data: {
                 ...defaultProps.data,
                 UrgentAction: {
+                    story: [
+                        {
+                            ...defaultStep,
+                        },
+                    ],
                     message_template: [{ value: 'first message' }, { value: 'second message' }],
                     object_indication: 'object indication',
                     recipient: {
@@ -117,6 +132,11 @@ describe('<UrgentAction />', () => {
             data: {
                 ...defaultProps.data,
                 UrgentAction: {
+                    story: [
+                        {
+                            ...defaultStep,
+                        },
+                    ],
                     message_template: [{ value: 'first message' }, { value: 'second message' }],
                     object_indication: 'object indication',
                     recipient: {
@@ -143,6 +163,11 @@ describe('<UrgentAction />', () => {
                 step: 'thanks',
                 data: {
                     UrgentAction: {
+                        story: [
+                            {
+                                ...defaultStep,
+                            },
+                        ],
                         email_thank: {
                             title: 'Thanks!',
                             text: 'My Message',
@@ -175,6 +200,11 @@ describe('<UrgentAction />', () => {
                 slug: 'one-two-three',
                 data: {
                     UrgentAction: {
+                        story: [
+                            {
+                                ...defaultStep,
+                            },
+                        ],
                         email_thank: {
                             title: 'Thanks!',
                             text: 'My Message',
@@ -209,6 +239,11 @@ describe('<UrgentAction />', () => {
                 slug: 'one-two-three',
                 data: {
                     UrgentAction: {
+                        story: [
+                            {
+                                ...defaultStep,
+                            },
+                        ],
                         email_thank: {
                             title: 'Thanks!',
                             text: 'My Message',
@@ -234,6 +269,11 @@ describe('<UrgentAction />', () => {
                 step: 'address',
                 data: {
                     UrgentAction: {
+                        story: [
+                            {
+                                ...defaultStep,
+                            },
+                        ],
                         email_thank: {
                             title: '',
                         },
@@ -252,6 +292,11 @@ describe('<UrgentAction />', () => {
                 slug: 'one-two-three',
                 data: {
                     UrgentAction: {
+                        story: [
+                            {
+                                ...defaultStep,
+                            },
+                        ],
                         recipient: {
                             button: 'Fin',
                         },
@@ -275,6 +320,11 @@ describe('<UrgentAction />', () => {
                 loading: false,
                 data: {
                     UrgentAction: {
+                        story: [
+                            {
+                                ...defaultStep,
+                            },
+                        ],
                         end_thank: {
                             title: 'Merci de votre engagement !',
                             text: "N'oubliez pas d'envoyer la lettre !",

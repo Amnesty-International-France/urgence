@@ -8,7 +8,8 @@ import Div100Vh from 'react-div-100vh';
 import withTracker from './analytics/withTracker';
 import generateUrl from './services/generateUrl';
 import UrgentAction from './urgentActions/UrgentAction';
-import Home from './Home';
+import HomePage from './HomePage';
+import ErrorPage from './ErrorPage';
 import AppLogo from './themes/AppLogo';
 import { ThemeProvider } from './themes/ThemeContext';
 
@@ -25,7 +26,12 @@ const App = ({ className, client }) => (
                 <AppLogo />
                 <Router>
                     <Switch>
-                        <Route exact path={generateUrl('home')} component={withTracker(Home)} />
+                        <Route exact path={generateUrl('home')} component={withTracker(HomePage)} />
+                        <Route
+                            exact
+                            path={generateUrl('error')}
+                            component={withTracker(ErrorPage)}
+                        />
                         <Route
                             path={'/ua/:slug/:step?/:page?'}
                             component={withTracker(UrgentAction)}
