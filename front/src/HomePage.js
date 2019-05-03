@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Home = () => {
+const Home = () => (
     <div>
         <p className="not-found">Cette action urgente n&#39;existe pas ou plus.</p>
-    </div>;
-};
+    </div>
+);
 
 export default Home;
