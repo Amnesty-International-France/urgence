@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import MobileDetect from 'mobile-detect';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
@@ -19,7 +19,7 @@ export const buildMailDest = (recipient, subject, body) => {
 export class MailTo extends Component {
     constructor(props) {
         super(props);
-        this.contentMail = React.createRef();
+        this.md = new MobileDetect(navigator.userAgent);
     }
 
     componentDidMount() {
@@ -38,11 +38,10 @@ export class MailTo extends Component {
         });
     }
 
-    openMailer = (recipient, subject, body) => {
-        const dest = buildMailDest(recipient, subject, body);
+    openMailer = (dest) => {
         const windowRef = global.open(dest, 'mailto');
         windowRef.focus();
-        setTimeout(function() {
+        setTimeout(function () {
             if (!windowRef.document.hasFocus()) {
                 windowRef.close();
             }
@@ -64,22 +63,28 @@ export class MailTo extends Component {
                 params: { slug },
             },
         } = this.props;
+
+        const dest = buildMailDest(recipient, subject, body);
+        const isIphone = this.md.is('iPhone');
         return (
             <a
                 className={classnames(className, { disabled })}
                 onClick={event => {
-                    this.openMailer(recipient, subject, body);
+                    if (!isIphone) {
+                        this.openMailer(dest);
+                    }
                     setTimeout(() => afterMail(event), 500);
                     trackEvent(analyticsCategory, 'Click', 'button', 'SendMail', slug, step, {
                         disabled: disabled ? 'disabled' : 'active',
                         label,
                     });
                 }}
+                href={isIphone ? dest : '#'}
+                target={isIphone ? 'mailto' : '_self'}
                 rel="noopener noreferrer"
                 disabled={disabled}
             >
                 {label}
-                <div ref={this.contentMail} className="masked" />
             </a>
         );
     }

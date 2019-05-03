@@ -40,9 +40,6 @@ export const styles = {
         paddingLeft: 55,
         textAlign: 'left',
     },
-    '&.masked': {
-        display: 'none',
-    },
 };
 
 export class Link extends Component {
