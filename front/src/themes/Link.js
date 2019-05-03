@@ -27,6 +27,7 @@ export const styles = {
     textAlign: 'center',
     transition: 'opacity 0.25s ease',
     userSelect: 'none',
+    cursor: 'pointer',
     '&.disabled': {
         opacity: 0.25,
         pointerEvents: 'none',
