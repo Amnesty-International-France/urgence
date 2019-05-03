@@ -110,15 +110,20 @@ const isLetterStepPresent = recipient => {
 };
 
 export const UrgentAction = ({ slug, data, step, error, loading }) => {
-    const recipient = get(data, 'UrgentAction.recipient');
-
     if (error) {
         console.error(error);
-        return null;
+        return <Redirect to={generateUrl('error')} />;
     }
 
     if (loading) {
         return <LoadingScreen />;
+    }
+
+    const recipient = get(data, 'UrgentAction.recipient');
+    const story = get(data, 'UrgentAction.story');
+
+    if (!story || !story.length) {
+        return <Redirect to={generateUrl('home')} />;
     }
 
     if (!step) {
@@ -126,12 +131,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
     }
 
     if (step === 'story') {
-        return (
-            <Story
-                story={get(data, 'UrgentAction.story')}
-                endStoryLink={get(data, 'UrgentAction.end_of_story_link')}
-            />
-        );
+        return <Story story={story} endStoryLink={get(data, 'UrgentAction.end_of_story_link')} />;
     }
 
     if (step === 'act') {
