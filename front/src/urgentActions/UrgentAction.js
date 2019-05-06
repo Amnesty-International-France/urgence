@@ -78,10 +78,6 @@ const query = gql`
                 }
                 content
             }
-            end_of_story_link {
-                label
-                url
-            }
             call_to_action {
                 title
                 message
@@ -94,10 +90,6 @@ const query = gql`
             object_indication
             message_template {
                 value
-            }
-            message_link {
-                label
-                url
             }
             recipient {
                 mail
@@ -162,7 +154,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
     }
 
     if (step === 'story') {
-        return <Story story={story} endStoryLink={get(data, 'UrgentAction.end_of_story_link')} />;
+        return <Story story={story} />;
     }
 
     if (step === 'act') {
