@@ -5,8 +5,7 @@ import glamorous from 'glamorous';
 
 import RichText from '../../themes/RichText';
 import { StoryStepPropType, LinkType } from '../../propTypes';
-import { textColorForBackgroundColor, colors, black, white, yellow } from '../../themes/colors';
-import Link from '../Link';
+import { colors, black, white, yellow } from '../../themes/colors';
 
 const styles = {
     display: 'flex',
@@ -56,15 +55,13 @@ export const getLogoColorForStep = step => {
     return white;
 };
 
-export const StoryStep = ({ className, content, link }) => (
+export const StoryStep = ({ className, content }) => (
     <div className={className}>
         <div className="step">
             <div className="content">
                 <RichText html={content} />
             </div>
         </div>
-
-        {link && link.url && <Link {...link} color={textColorForBackgroundColor(white)} />}
     </div>
 );
 StoryStep.propTypes = {

@@ -264,7 +264,7 @@ FormStep.propTypes = {
     step: PropTypes.string,
 };
 
-export const Message = ({ messageTemplate, action, className, link, ...props }) => {
+export const Message = ({ messageTemplate, action, className, ...props }) => {
     return (
         <Fragment>
             {(!messageTemplate || !messageTemplate.length) && (
@@ -288,10 +288,7 @@ export const Message = ({ messageTemplate, action, className, link, ...props }) 
                     <div className="formStep">
                         <FormStep {...props} />
                     </div>
-                    <div className="action">
-                        {action}
-                        {link && link.url && <Link {...link} />}
-                    </div>
+                    <div className="action">{action}</div>
                 </div>
             )}
         </Fragment>
@@ -300,7 +297,6 @@ export const Message = ({ messageTemplate, action, className, link, ...props }) 
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
-    link: LinkType,
     email: PropTypes.string,
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
