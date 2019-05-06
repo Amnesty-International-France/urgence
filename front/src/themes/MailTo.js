@@ -66,6 +66,10 @@ export class MailTo extends Component {
 
         const dest = buildMailDest(recipient, subject, body);
         const isIphone = this.md.is('iPhone');
+        const options = {};
+        if (isIphone) {
+            options.href = dest;
+        }
         return (
             <a
                 className={classnames(className, { disabled })}
@@ -79,10 +83,10 @@ export class MailTo extends Component {
                         label,
                     });
                 }}
-                href={isIphone ? dest : '#'}
                 target={isIphone ? 'mailto' : '_self'}
                 rel="noopener noreferrer"
                 disabled={disabled}
+                {...options}
             >
                 {label}
             </a>
