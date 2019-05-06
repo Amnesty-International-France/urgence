@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { withStyles } from '@material-ui/core/styles';
+import trackEvent from '../../analytics/trackEvent';
 import CopyToClipboardButton from '../CopyToClipboardButton';
 import Button from '@material-ui/core/Button';
 
@@ -29,8 +30,17 @@ const styles = {
     },
 };
 
-export const CopyToClipboard = ({ classes, url, action }) => (
-    <Button className={classes.root} onClick={action}>
+export const CopyToClipboard = ({ classes, slug, step, url, action, analyticsCategory }) => (
+    <Button
+        className={classes.root}
+        onClick={event => {
+            if (action) action(event);
+            trackEvent(analyticsCategory, 'Click', 'button', 'CopyToClipboard', slug, step, {
+                disabled: false,
+                label: 'Copy to clipboard',
+            });
+        }}
+    >
         <CopyToClipboardButton textToCopy={url}>
             <div className={classes.bloc}>
                 <FontAwesomeIcon icon={faLink} size="2x" className={classes.icon} />
@@ -40,9 +50,12 @@ export const CopyToClipboard = ({ classes, url, action }) => (
 );
 
 CopyToClipboard.propTypes = {
+    slug: PropTypes.string,
+    step: PropTypes.string,
     url: PropTypes.string.isRequired,
     action: PropTypes.func,
     classes: PropTypes.object,
+    analyticsCategory: PropTypes.string,
 };
 
 CopyToClipboard.defaultProps = {

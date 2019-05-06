@@ -11,6 +11,7 @@ import Story from './story/Story';
 import Act from './Act';
 import ThankStep from './ThankStep';
 import ShareStep from './ShareStep';
+import ANALYTICS_CATEGORIES from '../analytics/categories';
 import Message from './message/Message';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
@@ -135,14 +136,6 @@ const query = gql`
     }
 `;
 
-const ANALYTICS_CATEGORIES = {
-    ACT: 'AskForEmail',
-    MESSAGE: 'Email',
-    THANKS_EMAIL: 'AskForLetter',
-    ADDRESS: 'LetterManually',
-    REGISTER: 'RegisterActivist',
-};
-
 const isLetterStepPresent = recipient => {
     return recipient.button && recipient.postal_address;
 };
@@ -217,7 +210,14 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
         const emailThank = get(data, 'UrgentAction.email_thank');
 
         if (emailThank.share) {
-            return <ShareStep slug={slug} data={emailThank} />;
+            return (
+                <ShareStep
+                    slug={slug}
+                    step={step}
+                    data={emailThank}
+                    analyticsCategory={ANALYTICS_CATEGORIES.SHARE}
+                />
+            );
         }
         return (
             <ThankStep

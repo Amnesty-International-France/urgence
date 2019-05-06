@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+import trackEvent from '../../analytics/trackEvent';
 import Button from '@material-ui/core/Button';
+import { secureUseEffect } from '../../hooks/secureHooks';
 
 import { black } from '../colors';
 
@@ -55,6 +57,8 @@ const styles = {
 
 export const ShareLink = ({
     classes,
+    slug,
+    step,
     action,
     href,
     target,
@@ -64,29 +68,47 @@ export const ShareLink = ({
     inLine,
     customClass,
     customScript,
-}) => (
-    <Fragment>
-        {customScript}
-        <Button
-            className={classnames(inLine ? classes.inLine : classes.root, `${customClass}`)}
-            href={href}
-            target={target}
-            title={title}
-            onClick={action}
-        >
-            <div className={inLine ? classes.inLineButton : classes.button}>
-                <FontAwesomeIcon
-                    icon={icon}
-                    size="2x"
-                    className={inLine ? classes.inLineIcon : classes.icon}
-                />
-                <span>{text}</span>
-            </div>
-        </Button>
-    </Fragment>
-);
+    analyticsCategory,
+    buttonName,
+}) => {
+    secureUseEffect(() => {
+        trackEvent(analyticsCategory, 'Display', 'button', buttonName, slug, step, {
+            disabled: 'active',
+            label: title,
+        });
+    });
+    return (
+        <Fragment>
+            {customScript}
+            <Button
+                className={classnames(inLine ? classes.inLine : classes.root, `${customClass}`)}
+                href={href}
+                target={target}
+                title={title}
+                onClick={event => {
+                    if (action) action(event);
+                    trackEvent(analyticsCategory, 'Click', 'button', buttonName, slug, step, {
+                        disabled: 'active',
+                        label: title,
+                    });
+                }}
+            >
+                <div className={inLine ? classes.inLineButton : classes.button}>
+                    <FontAwesomeIcon
+                        icon={icon}
+                        size="2x"
+                        className={inLine ? classes.inLineIcon : classes.icon}
+                    />
+                    <span>{text}</span>
+                </div>
+            </Button>
+        </Fragment>
+    );
+};
 
 ShareLink.propTypes = {
+    slug: PropTypes.string,
+    step: PropTypes.string,
     href: PropTypes.string.isRequired,
     target: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -97,6 +119,8 @@ ShareLink.propTypes = {
     inLine: PropTypes.bool,
     customClass: PropTypes.string,
     customScript: PropTypes.element,
+    analyticsCategory: PropTypes.string,
+    buttonName: PropTypes.string,
 };
 
 ShareLink.defaultProps = {
