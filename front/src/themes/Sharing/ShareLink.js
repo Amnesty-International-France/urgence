@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+import trackEvent from '../../analytics/trackEvent';
 import Button from '@material-ui/core/Button';
 
 import { black } from '../colors';
@@ -55,6 +56,8 @@ const styles = {
 
 export const ShareLink = ({
     classes,
+    slug,
+    step,
     action,
     href,
     target,
@@ -64,6 +67,8 @@ export const ShareLink = ({
     inLine,
     customClass,
     customScript,
+    analyticsCategory,
+    buttonName,
 }) => (
     <Fragment>
         {customScript}
@@ -72,7 +77,13 @@ export const ShareLink = ({
             href={href}
             target={target}
             title={title}
-            onClick={action}
+            onClick={event => {
+                if (action) action(event);
+                trackEvent(analyticsCategory, 'Click', 'button', buttonName, slug, step, {
+                    disabled: false,
+                    label: title,
+                });
+            }}
         >
             <div className={inLine ? classes.inLineButton : classes.button}>
                 <FontAwesomeIcon
@@ -87,6 +98,8 @@ export const ShareLink = ({
 );
 
 ShareLink.propTypes = {
+    slug: PropTypes.string,
+    step: PropTypes.string,
     href: PropTypes.string.isRequired,
     target: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -97,6 +110,8 @@ ShareLink.propTypes = {
     inLine: PropTypes.bool,
     customClass: PropTypes.string,
     customScript: PropTypes.element,
+    analyticsCategory: PropTypes.string,
+    buttonName: PropTypes.string,
 };
 
 ShareLink.defaultProps = {

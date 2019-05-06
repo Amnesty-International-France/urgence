@@ -210,7 +210,14 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
         const emailThank = get(data, 'UrgentAction.email_thank');
 
         if (emailThank.share) {
-            return <ShareStep slug={slug} data={emailThank} />;
+            return (
+                <ShareStep
+                    slug={slug}
+                    step={step}
+                    data={emailThank}
+                    analyticsCategory={ANALYTICS_CATEGORIES.SHARE}
+                />
+            );
         }
         return (
             <ThankStep

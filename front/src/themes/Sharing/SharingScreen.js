@@ -45,7 +45,16 @@ const styles = {
     },
 };
 
-export const SharingScreen = ({ className, title, message, share, link }) => (
+export const SharingScreen = ({
+    className,
+    slug,
+    step,
+    title,
+    message,
+    share,
+    link,
+    analyticsCategory,
+}) => (
     <div className={className}>
         <div>
             <h1>
@@ -53,15 +62,26 @@ export const SharingScreen = ({ className, title, message, share, link }) => (
             </h1>
             {message && <RichText html={message} />}
         </div>
-        {share && <Share {...share} link={link} />}
+        {share && (
+            <Share
+                {...share}
+                slug={slug}
+                step={step}
+                link={link}
+                analyticsCategory={analyticsCategory}
+            />
+        )}
     </div>
 );
 
 SharingScreen.propTypes = {
+    slug: PropTypes.string,
+    step: PropTypes.string,
     className: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     share: PropTypes.object,
+    analyticsCategory: PropTypes.string,
     link: PropTypes.string,
 };
 

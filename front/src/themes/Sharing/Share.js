@@ -46,12 +46,15 @@ const styles = {
 
 export const Share = ({
     className,
+    slug,
+    step,
     link,
     active_twitter,
     message,
     twitter_message,
     twitter_title,
     registered,
+    analyticsCategory,
 }) => {
     const md = new MobileDetect(navigator.userAgent);
 
@@ -80,8 +83,11 @@ export const Share = ({
                 <Fragment>
                     <SharingStep text={twitter_title} done={twitterDone} number={2} />
                     <LinkTwitter
+                        slug={slug}
+                        step={step}
                         text={encodeURIComponent(twitter_message)}
                         action={handleTwitterDone}
+                        analyticsCategory={analyticsCategory}
                     />
                 </Fragment>
             )}
@@ -91,26 +97,38 @@ export const Share = ({
                     <Fragment>
                         <div className="link">
                             <LinkFacebook
+                                slug={slug}
+                                step={step}
                                 url={encodeURIComponent(link)}
                                 action={handleSocialDone}
+                                analyticsCategory={analyticsCategory}
                             />
                         </div>
                         <div className="link">
                             <LinkWhatsapp
+                                slug={slug}
+                                step={step}
                                 text={encodeURIComponent(`${message}\n${link}`)}
                                 action={handleSocialDone}
+                                analyticsCategory={analyticsCategory}
                             />
                         </div>
                     </Fragment>
                 )}
                 <div className="link">
-                    <CopyToClipboard url={link} action={handleSocialDone} />
+                    <CopyToClipboard
+                        slug={slug}
+                        step={step}
+                        url={link}
+                        action={handleSocialDone}
+                        analyticsCategory={analyticsCategory}
+                    />
                 </div>
             </div>
             <SharingStep
                 text={`${
                     registerDone ? 'Vous êtes déjà inscrit' : 'Recevoir les prochaines actions'
-                }`}
+                    }`}
                 done={registerDone}
                 number={stepNumber + 1}
             />
@@ -121,9 +139,9 @@ export const Share = ({
                         <span>{`${registerDone ? 'Modifier' : `S'inscrire`}`}</span>
                     </Fragment>
                 }
-                step="thanks"
+                step={step}
                 pageName="register"
-                analyticsCategory={'Share'}
+                analyticsCategory={analyticsCategory}
                 buttonName="ToRegister"
                 whiteLink={true}
                 onClick={handleRegisterDone}
@@ -133,12 +151,15 @@ export const Share = ({
 };
 
 Share.propTypes = {
+    slug: PropTypes.string,
+    step: PropTypes.string,
     link: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     registered: PropTypes.string,
     active_twitter: PropTypes.bool,
     twitter_message: PropTypes.string,
     twitter_title: PropTypes.string,
+    analyticsCategory: PropTypes.string,
     className: PropTypes.string,
 };
 
