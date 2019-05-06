@@ -1,4 +1,4 @@
-const ANALYTICS_CATEGORIES = {
+export default {
     ACT: 'AskForEmail',
     MESSAGE: 'Email',
     THANKS_EMAIL: 'AskForLetter',
@@ -6,5 +6,3 @@ const ANALYTICS_CATEGORIES = {
     SHARE: 'Share',
     REGISTER: 'RegisterActivist',
 };
-
-export default ANALYTICS_CATEGORIES;
