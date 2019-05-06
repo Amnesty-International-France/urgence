@@ -48,7 +48,7 @@ const CopyToClipboard = ({ children, textToCopy, ...props }) => {
     }, [copied]);
 
     return (
-        <Tooltip title={copied ? 'Link copied!' : 'Click to copy'} open={hovered}>
+        <Tooltip title={copied ? 'Lien copié !' : 'Cliquer pour copier'} open={hovered}>
             {React.cloneElement(children, {
                 onClick: handleOnClick,
                 onMouseEnter: handleMouseEnter,
