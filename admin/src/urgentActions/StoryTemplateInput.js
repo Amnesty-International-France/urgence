@@ -89,8 +89,8 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
                                 {index === 0 ? (
                                     <StoryCoverInput source={source} />
                                 ) : (
-                                        <StoryStepInput source={source} />
-                                    )}
+                                    <StoryStepInput source={source} />
+                                )}
                             </div>
                         </CardContent>
                     </Card>
@@ -116,8 +116,6 @@ StoryTemplateInput.propTypes = {
     index: PropTypes.number.isRequired,
 };
 
-StoryTemplateInput.defaultProps = {
-    source: '',
-};
+StoryTemplateInput.defaultProps = {};
 
 export default addField(withStyles(styles)(StoryTemplateInput));

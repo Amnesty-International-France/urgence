@@ -52,7 +52,6 @@ LinkInput.propTypes = {
 };
 
 LinkInput.defaultProps = {
-    source: '',
     label: null,
 };
 
