@@ -128,7 +128,7 @@ export const Share = ({
             <SharingStep
                 text={`${
                     registerDone ? 'Vous êtes déjà inscrit' : 'Recevoir les prochaines actions'
-                    }`}
+                }`}
                 done={registerDone}
                 number={stepNumber + 1}
             />

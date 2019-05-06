@@ -13,7 +13,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { black, white } from '../../themes/colors';
 import { withThemeContext } from '../../themes/ThemeContext';
 import Carousel from '../../themes/Carousel';
-import { StoryStepPropType, routeMatch, LinkType } from '../../propTypes';
+import { StoryStepPropType, routeMatch } from '../../propTypes';
 import generateUrl from '../../services/generateUrl';
 
 import StorySlide from './StorySlide';
@@ -78,7 +78,6 @@ export class Story extends Component {
         const {
             className,
             story,
-            endStoryLink,
             match: {
                 params: { page },
             },
@@ -122,12 +121,7 @@ export class Story extends Component {
                                 </StorySlide>
                                 {restStory.map((step, index) => (
                                     <StorySlide key={index + 1} index={index + 1} step={step}>
-                                        {storyStepProps => (
-                                            <StoryStep
-                                                {...storyStepProps}
-                                                link={total === index + 1 ? endStoryLink : null}
-                                            />
-                                        )}
+                                        {storyStepProps => <StoryStep {...storyStepProps} />}
                                     </StorySlide>
                                 ))}
                             </Fragment>
@@ -144,7 +138,6 @@ Story.propTypes = {
     context: PropTypes.shape({
         changeLogoColor: PropTypes.func.isRequired,
     }).isRequired,
-    endStoryLink: LinkType,
     story: PropTypes.arrayOf(PropTypes.shape(StoryStepPropType)),
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,

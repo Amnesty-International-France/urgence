@@ -27,11 +27,6 @@ export default gql`
         url: String
     }
 
-    input LinkInput {
-        label: String
-        url: String
-    }
-
     type StoryStep {
         content: String!
         medium: Medium
@@ -77,7 +72,6 @@ export default gql`
         title: String
         message: String
         button: String
-        link: LinkInput
     }
 
     type ParagraphTemplate {
@@ -138,7 +132,6 @@ export default gql`
         text: String
         button: String
         share: ShareInput
-        link: LinkInput
     }
 
     input MessageTemplateInput {
@@ -150,11 +143,9 @@ export default gql`
         title: String!
         slug: String
         story: [StoryStep]
-        end_of_story_link: Link
         call_to_action: CallToAction
         object_indication: String
         message_template: [ParagraphTemplate]
-        message_link: Link
         creation_date: DATE
         last_edition_date: DATE
         recipient: Recipient
@@ -185,11 +176,9 @@ export default gql`
             title: String!
             slug: String
             story: [StoryStepInput]
-            end_of_story_link: LinkInput
             call_to_action: CallToActionInput
             object_indication: String
             message_template: [MessageTemplateInput]
-            message_link: LinkInput
             recipient: RecipientInput
             email_thank: ThankInput
             end_thank: ThankInput
@@ -200,11 +189,9 @@ export default gql`
             title: String!
             slug: String
             story: [StoryStepInput]
-            end_of_story_link: LinkInput
             call_to_action: CallToActionInput
             object_indication: String
             message_template: [MessageTemplateInput]
-            message_link: LinkInput
             recipient: RecipientInput
             email_thank: ThankInput
             end_thank: ThankInput

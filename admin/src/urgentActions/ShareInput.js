@@ -113,8 +113,4 @@ ShareInput.propTypes = {
     source: PropTypes.string,
 };
 
-ShareInput.defaultProps = {
-    withLink: false,
-};
-
 export default addField(withStyles(styles)(ShareInput));

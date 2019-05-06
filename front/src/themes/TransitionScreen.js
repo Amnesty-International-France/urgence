@@ -5,8 +5,6 @@ import RichText from '../themes/RichText';
 import LongText from '../themes/LongText';
 import { yellow, white, black } from '../themes/colors';
 import { withBlackLogo } from '../themes/ThemeContext';
-import { LinkType } from '../propTypes';
-import Link from './Link';
 
 const styles = {
     display: 'flex',
@@ -58,7 +56,7 @@ const styles = {
     },
 };
 
-export const TransitionScreen = ({ className, actions, title, message, link }) => (
+export const TransitionScreen = ({ className, actions, title, message }) => (
     <div className={className}>
         <div>
             <h1>
@@ -66,10 +64,7 @@ export const TransitionScreen = ({ className, actions, title, message, link }) =
             </h1>
             {message && <RichText html={message} />}
         </div>
-        <div className="actions">
-            {actions()}
-            {link && link.url && <Link {...link} color={black} />}
-        </div>
+        <div className="actions">{actions()}</div>
     </div>
 );
 
@@ -78,7 +73,6 @@ TransitionScreen.propTypes = {
     actions: PropTypes.func,
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
-    link: LinkType,
 };
 
 TransitionScreen.defaultProps = {

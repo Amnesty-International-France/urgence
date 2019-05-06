@@ -11,7 +11,7 @@ import yellow from '@material-ui/core/colors/yellow';
 import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
 
-import { USE_CALL_TO_ACTION_LINK, LETTER_ACTIVATED } from '../flags';
+import { LETTER_ACTIVATED } from '../flags';
 
 import StoryTemplateInput from './StoryTemplateInput';
 import CallToActionInput from './CallToActionInput';
@@ -67,11 +67,7 @@ const generateSlug = (title = '') =>
 export const Form = ({ classes }) => (
     <Fragment>
         <div className={classes.form}>
-            <LongTextInput
-                source="title"
-                validate={required()}
-                inputProps={{ autoFocus: true }}
-            />
+            <LongTextInput source="title" validate={required()} inputProps={{ autoFocus: true }} />
             <FormDataConsumer>
                 {({ formData }) => {
                     formData.slug = generateSlug(formData.title);
@@ -84,26 +80,28 @@ export const Form = ({ classes }) => (
             <h2>Story</h2>
             <ArrayInput source="story" label="">
                 <StoryStepFormIterator>
-                    <StoryTemplateInput source="" withLink={USE_CALL_TO_ACTION_LINK} />
+                    <StoryTemplateInput source="" />
                 </StoryStepFormIterator>
             </ArrayInput>
         </div>
 
         <div className={`${classes.form} call-to-action`}>
             <h2>Call to Action</h2>
-            <CallToActionInput source="call_to_action" withLink={USE_CALL_TO_ACTION_LINK} />
+            <CallToActionInput source="call_to_action" />
         </div>
 
         <div className={`${classes.form} message`}>
             <h2>Message</h2>
-            <MessageInput source="" withLink={USE_CALL_TO_ACTION_LINK} />
+            <MessageInput source="" />
         </div>
 
         <div className={`${classes.form} continue`}>
             <h2>Continue</h2>
-            {LETTER_ACTIVATED ?
-                <ThanksInput source="email_thank" withLink={USE_CALL_TO_ACTION_LINK} /> :
-                <ShareInput source="email_thank" />}
+            {LETTER_ACTIVATED ? (
+                <ThanksInput source="email_thank" />
+            ) : (
+                <ShareInput source="email_thank" />
+            )}
         </div>
 
         {LETTER_ACTIVATED && (
@@ -120,7 +118,7 @@ export const Form = ({ classes }) => (
 
         <div className={`${classes.form} thank-you`}>
             <h2>Thank You</h2>
-            <ThanksInput source="end_thank" withLink={USE_CALL_TO_ACTION_LINK} final />
+            <ThanksInput source="end_thank" final />
         </div>
     </Fragment>
 );

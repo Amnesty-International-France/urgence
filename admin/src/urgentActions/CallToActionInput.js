@@ -22,7 +22,6 @@ import FrontPreview, { noop } from './FrontPreview';
 
 import Act from '../../../front/src/urgentActions/Act';
 import Link from '../../../front/src/themes/Link';
-import LinkInput from './LinkInput';
 
 const styles = {
     ...root,
@@ -31,7 +30,7 @@ const styles = {
     },
 };
 
-export const CallToActionInput = ({ classes, source, withLink }) => (
+export const CallToActionInput = ({ classes, source }) => (
     <div className={classes.root}>
         <FormDataConsumer>
             {({ formData }) => (
@@ -61,7 +60,6 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
                                     defaultValue="Voir l'email"
                                     validate={[required(), minLength(3), maxLength(25)]}
                                 />
-                                {withLink && <LinkInput source={`${source}.link`} />}
                             </div>
                         </CardContent>
                     </Card>
@@ -88,11 +86,6 @@ export const CallToActionInput = ({ classes, source, withLink }) => (
 CallToActionInput.propTypes = {
     classes: PropTypes.object,
     source: PropTypes.string,
-    withLink: PropTypes.bool,
-};
-
-CallToActionInput.defaultProps = {
-    withLink: false,
 };
 
 export default addField(withStyles(styles)(CallToActionInput));
