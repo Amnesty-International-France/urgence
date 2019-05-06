@@ -9,8 +9,6 @@ import MessageSection from './MessageSection';
 import ShowButton from './ShowButton';
 import { withYellowLogo } from '../../themes/ThemeContext';
 import { withSessionData } from '../../DataContext';
-import Link from '../Link';
-import { LinkType } from '../../propTypes';
 import Input, { isCorrectEmail } from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';
 
