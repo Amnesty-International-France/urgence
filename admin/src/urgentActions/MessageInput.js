@@ -25,7 +25,6 @@ import FrontPreview from './FrontPreview';
 import Message from '../../../front/src/urgentActions/message/Message';
 import Link from '../../../front/src/themes/Link';
 import SimpleParagraphFormIterator from './SimpleParagraphFormIterator';
-import LinkInput from './LinkInput';
 
 const styles = theme => ({
     ...root,
@@ -47,7 +46,7 @@ export const validateEmailsList = text =>
 
 const initMessageTemplate = [{ value: '' }];
 
-export const MessageInput = ({ classes, source, withLink }) => (
+export const MessageInput = ({ classes, source }) => (
     <div className={classNames(classes.root, classes.bordered)}>
         <FormDataConsumer>
             {({ formData }) => (
@@ -90,7 +89,6 @@ export const MessageInput = ({ classes, source, withLink }) => (
                                     source={`${source}object_indication`}
                                     defaultValue={`Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.`}
                                 />
-                                {withLink && <LinkInput source={`${source}message_link`} />}
                             </div>
                         </CardContent>
                     </Card>
@@ -99,19 +97,19 @@ export const MessageInput = ({ classes, source, withLink }) => (
                             <Message
                                 messageTemplate={
                                     formData.message_template &&
-                                        formData.message_template[0] &&
-                                        formData.message_template[0].value
+                                    formData.message_template[0] &&
+                                    formData.message_template[0].value
                                         ? formData.message_template
                                         : initMessageTemplate
                                 }
                                 objectIndication={formData.object_indication || ''}
                                 link={formData.message_link}
                                 action={<Link to="#" label="J'envoie" />}
-                                setEmail={() => { }}
-                                setObject={() => { }}
-                                setCivility={() => { }}
-                                setFirstname={() => { }}
-                                setLastname={() => { }}
+                                setEmail={() => {}}
+                                setObject={() => {}}
+                                setCivility={() => {}}
+                                setFirstname={() => {}}
+                                setLastname={() => {}}
                             />
                         </FrontPreview>
                     )}
@@ -124,12 +122,10 @@ export const MessageInput = ({ classes, source, withLink }) => (
 MessageInput.propTypes = {
     classes: PropTypes.object,
     source: PropTypes.string,
-    withLink: PropTypes.bool,
 };
 
 MessageInput.defaultProps = {
     source: '',
-    withLink: false,
 };
 
 export default addField(withStyles(styles)(MessageInput));
