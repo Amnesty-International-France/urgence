@@ -27,11 +27,6 @@ export default gql`
         url: String
     }
 
-    input LinkInput {
-        label: String
-        url: String
-    }
-
     type StoryStep {
         content: String!
         medium: Medium
@@ -77,7 +72,6 @@ export default gql`
         title: String
         message: String
         button: String
-        link: LinkInput
     }
 
     type ParagraphTemplate {
@@ -138,7 +132,6 @@ export default gql`
         text: String
         button: String
         share: ShareInput
-        link: LinkInput
     }
 
     input MessageTemplateInput {
