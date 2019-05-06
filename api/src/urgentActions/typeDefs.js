@@ -153,7 +153,6 @@ export default gql`
         call_to_action: CallToAction
         object_indication: String
         message_template: [ParagraphTemplate]
-        message_link: Link
         creation_date: DATE
         last_edition_date: DATE
         recipient: Recipient

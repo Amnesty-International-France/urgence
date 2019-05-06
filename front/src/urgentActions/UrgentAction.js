@@ -182,7 +182,6 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
                 objectIndication={get(data, 'UrgentAction.object_indication')}
-                link={get(data, 'UrgentAction.message_link')}
                 loading={loading}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}

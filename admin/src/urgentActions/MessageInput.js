@@ -103,7 +103,6 @@ export const MessageInput = ({ classes, source }) => (
                                         : initMessageTemplate
                                 }
                                 objectIndication={formData.object_indication || ''}
-                                link={formData.message_link}
                                 action={<Link to="#" label="J'envoie" />}
                                 setEmail={() => {}}
                                 setObject={() => {}}
