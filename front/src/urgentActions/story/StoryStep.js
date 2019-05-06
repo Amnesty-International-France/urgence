@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 import RichText from '../../themes/RichText';
-import { StoryStepPropType, LinkType } from '../../propTypes';
+import { StoryStepPropType } from '../../propTypes';
 import { colors, black, white, yellow } from '../../themes/colors';
 
 const styles = {
@@ -66,7 +66,6 @@ export const StoryStep = ({ className, content }) => (
 );
 StoryStep.propTypes = {
     className: PropTypes.string,
-    link: LinkType,
     ...StoryStepPropType,
 };
 

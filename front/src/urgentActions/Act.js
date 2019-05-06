@@ -6,12 +6,7 @@ import { LinkType } from '../propTypes';
 import TransitionScreen from '../themes/TransitionScreen';
 
 const Act = ({ data, actions }) => (
-    <TransitionScreen
-        actions={actions}
-        title={get(data, 'title')}
-        message={get(data, 'message')}
-        link={get(data, 'link.url')}
-    />
+    <TransitionScreen actions={actions} title={get(data, 'title')} message={get(data, 'message')} />
 );
 
 Act.propTypes = {
