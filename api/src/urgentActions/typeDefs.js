@@ -150,7 +150,6 @@ export default gql`
         title: String!
         slug: String
         story: [StoryStep]
-        end_of_story_link: Link
         call_to_action: CallToAction
         object_indication: String
         message_template: [ParagraphTemplate]
@@ -185,11 +184,9 @@ export default gql`
             title: String!
             slug: String
             story: [StoryStepInput]
-            end_of_story_link: LinkInput
             call_to_action: CallToActionInput
             object_indication: String
             message_template: [MessageTemplateInput]
-            message_link: LinkInput
             recipient: RecipientInput
             email_thank: ThankInput
             end_thank: ThankInput
@@ -200,11 +197,9 @@ export default gql`
             title: String!
             slug: String
             story: [StoryStepInput]
-            end_of_story_link: LinkInput
             call_to_action: CallToActionInput
             object_indication: String
             message_template: [MessageTemplateInput]
-            message_link: LinkInput
             recipient: RecipientInput
             email_thank: ThankInput
             end_thank: ThankInput
