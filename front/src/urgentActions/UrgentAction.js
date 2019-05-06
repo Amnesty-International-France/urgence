@@ -11,6 +11,7 @@ import Story from './story/Story';
 import Act from './Act';
 import ThankStep from './ThankStep';
 import ShareStep from './ShareStep';
+import ANALYTICS_CATEGORIES from '../analytics/categories';
 import Message from './message/Message';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
@@ -134,14 +135,6 @@ const query = gql`
         }
     }
 `;
-
-const ANALYTICS_CATEGORIES = {
-    ACT: 'AskForEmail',
-    MESSAGE: 'Email',
-    THANKS_EMAIL: 'AskForLetter',
-    ADDRESS: 'LetterManually',
-    REGISTER: 'RegisterActivist',
-};
 
 const isLetterStepPresent = recipient => {
     return recipient.button && recipient.postal_address;
