@@ -123,6 +123,4 @@ MessageInput.propTypes = {
     source: PropTypes.string,
 };
 
-MessageInput.defaultProps = {};
-
 export default addField(withStyles(styles)(MessageInput));

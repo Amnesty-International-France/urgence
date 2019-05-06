@@ -116,6 +116,4 @@ StoryTemplateInput.propTypes = {
     index: PropTypes.number.isRequired,
 };
 
-StoryTemplateInput.defaultProps = {};
-
 export default addField(withStyles(styles)(StoryTemplateInput));

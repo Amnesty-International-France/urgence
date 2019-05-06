@@ -88,6 +88,4 @@ CallToActionInput.propTypes = {
     source: PropTypes.string,
 };
 
-CallToActionInput.defaultProps = {};
-
 export default addField(withStyles(styles)(CallToActionInput));
