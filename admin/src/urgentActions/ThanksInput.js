@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 
 import { LETTER_ACTIVATED } from '../flags';
 
-import {
-    addField,
-    required,
-    FormDataConsumer,
-    LongTextInput,
-} from 'react-admin';
+import { addField, required, FormDataConsumer, LongTextInput } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -21,7 +16,6 @@ import FrontPreview, { noop } from './FrontPreview';
 
 import ThankStep from '../../../front/src/urgentActions/ThankStep';
 import Link from '../../../front/src/themes/Link';
-import LinkInput from './LinkInput';
 
 const styles = {
     ...root,
@@ -30,21 +24,20 @@ const styles = {
     },
 };
 
-export const ThanksInput = ({ classes, source, withLink, final }) => {
+export const ThanksInput = ({ classes, source, final }) => {
     const defaultValues = final
         ? {
-            title: 'Merci pour votre action.',
-            text:
-                LETTER_ACTIVATED ?
-                    "La lettre vous a été envoyée sur votre boîte e-mail. Poursuivez votre action en l'envoyant par La Poste." :
-                    "Nous comptons sur vous pour la prochaine action urgente.",
-        }
+              title: 'Merci pour votre action.',
+              text: LETTER_ACTIVATED
+                  ? "La lettre vous a été envoyée sur votre boîte e-mail. Poursuivez votre action en l'envoyant par La Poste."
+                  : 'Nous comptons sur vous pour la prochaine action urgente.',
+          }
         : {
-            title: 'Se battre. Encore. Et Encore.',
-            text:
-                "Continuons d'agir pour augmenter les chances de victoire ! Allez plus loin dans ce combat en envoyant ce message par courrier.",
-            button: "Je continue d'agir",
-        };
+              title: 'Se battre. Encore. Et Encore.',
+              text:
+                  "Continuons d'agir pour augmenter les chances de victoire ! Allez plus loin dans ce combat en envoyant ce message par courrier.",
+              button: "Je continue d'agir",
+          };
 
     return (
         <div className={classes.root}>
@@ -69,7 +62,6 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                                         defaultValue={defaultValues.text}
                                         validate={[required()]}
                                     />
-                                    {!final && withLink && <LinkInput source={`${source}.link`} />}
                                 </div>
                             </CardContent>
                         </Card>
@@ -77,7 +69,7 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
                             <ThankStep
                                 data={formData[source]}
                                 actions={() =>
-                                    !final && withLink && formData[source] && formData[source].button ? (
+                                    !final && formData[source] && formData[source].button ? (
                                         <Link
                                             to="#"
                                             label={formData[source].button}
@@ -97,13 +89,11 @@ export const ThanksInput = ({ classes, source, withLink, final }) => {
 ThanksInput.propTypes = {
     classes: PropTypes.object,
     source: PropTypes.string,
-    withLink: PropTypes.bool,
     final: PropTypes.bool,
 };
 
 ThanksInput.defaultProps = {
     final: false,
-    withLink: false,
 };
 
 export default addField(withStyles(styles)(ThanksInput));
