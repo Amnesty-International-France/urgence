@@ -65,7 +65,6 @@ export default gql`
         title: String
         message: String
         button: String
-        link: Link
     }
 
     input CallToActionInput {
@@ -124,7 +123,6 @@ export default gql`
         text: String
         button: String
         share: Share
-        link: Link
     }
 
     input ThankInput {

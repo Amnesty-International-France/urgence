@@ -82,10 +82,6 @@ const query = gql`
                 title
                 message
                 button
-                link {
-                    label
-                    url
-                }
             }
             object_indication
             message_template {
@@ -107,10 +103,6 @@ const query = gql`
                     twitter_message
                     twitter_title
                 }
-                link {
-                    label
-                    url
-                }
             }
             register {
                 text
@@ -119,10 +111,6 @@ const query = gql`
             end_thank {
                 title
                 text
-                link {
-                    label
-                    url
-                }
             }
         }
     }
