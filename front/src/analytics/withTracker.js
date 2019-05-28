@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
+import ReactPixel from 'react-facebook-pixel';
 import PropTypes from 'prop-types';
 
 const withTracker = (WrappedComponent, options = {}) => {
@@ -11,6 +12,13 @@ const withTracker = (WrappedComponent, options = {}) => {
             ...options,
         });
         GoogleAnalytics.pageview(page, [], step);
+
+        ReactPixel.track('PageView', {
+            page,
+            dimension1: AURef,
+            dimension2: step,
+            ...options,
+        });
     };
 
     const HOC = class extends Component {

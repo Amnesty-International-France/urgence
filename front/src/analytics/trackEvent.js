@@ -1,4 +1,5 @@
 import GoogleAnalytics from 'react-ga';
+import ReactPixel from 'react-facebook-pixel';
 
 const buildDetail = (label, state) => {
     let details = [];
@@ -21,5 +22,13 @@ export default (category, eventName, objectType, objectName, slug, step, options
         label: `${label} (${details})`,
         dimension1: slug,
         dimension2: step,
+    });
+
+    ReactPixel.trackCustom(eventName, {
+        objectType,
+        objectName,
+        slug,
+        step,
+        ...options,
     });
 };
