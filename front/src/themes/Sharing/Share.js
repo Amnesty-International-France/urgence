@@ -125,6 +125,7 @@ export const Share = ({
                     />
                 </div>
             </div>
+            {/* Commenting this out for now since there are no RGPD disclaimers yet
             <SharingStep
                 text={`${
                     registerDone ? 'Vous êtes déjà inscrit' : 'Recevoir les prochaines actions'
@@ -146,6 +147,7 @@ export const Share = ({
                 whiteLink={true}
                 onClick={handleRegisterDone}
             />
+            */}
         </div>
     );
 };
