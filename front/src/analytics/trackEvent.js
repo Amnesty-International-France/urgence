@@ -25,6 +25,7 @@ export default (category, eventName, objectType, objectName, slug, step, options
     });
 
     ReactPixel.trackCustom(eventName, {
+        category,
         objectType,
         objectName,
         slug,
