@@ -125,29 +125,33 @@ export const Share = ({
                     />
                 </div>
             </div>
-            {/* Commenting this out for now since there are no RGPD disclaimers yet
-            <SharingStep
-                text={`${
-                    registerDone ? 'Vous êtes déjà inscrit' : 'Recevoir les prochaines actions'
-                }`}
-                done={registerDone}
-                number={stepNumber + 1}
-            />
-            <ToUrgentActionPageLink
-                label={
-                    <Fragment>
-                        <FontAwesomeIcon icon={faUserEdit} size="2x" className="icon" />
-                        <span>{`${registerDone ? 'Modifier' : `S'inscrire`}`}</span>
-                    </Fragment>
-                }
-                step={step}
-                pageName="register"
-                analyticsCategory={analyticsCategory}
-                buttonName="ToRegister"
-                whiteLink={true}
-                onClick={handleRegisterDone}
-            />
-            */}
+            {false && (
+                // Commenting this out for now since there are no RGPD disclaimers yet
+                // Can't use comment because linter is strict
+                <SharingStep
+                    text={`${
+                        registerDone ? 'Vous êtes déjà inscrit' : 'Recevoir les prochaines actions'
+                    }`}
+                    done={registerDone}
+                    number={stepNumber + 1}
+                />
+            )}
+            {false && (
+                <ToUrgentActionPageLink
+                    label={
+                        <Fragment>
+                            <FontAwesomeIcon icon={faUserEdit} size="2x" className="icon" />
+                            <span>{`${registerDone ? 'Modifier' : `S'inscrire`}`}</span>
+                        </Fragment>
+                    }
+                    step={step}
+                    pageName="register"
+                    analyticsCategory={analyticsCategory}
+                    buttonName="ToRegister"
+                    whiteLink={true}
+                    onClick={handleRegisterDone}
+                />
+            )}
         </div>
     );
 };
