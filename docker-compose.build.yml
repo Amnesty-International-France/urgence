@@ -64,6 +64,7 @@ services:
             NODE_ENV: production
             REACT_APP_API_URL: https://amnesty.marmelab.com/api
             REACT_APP_GA: UA-136476291-1
+            REACT_APP_FB: '2252258794861771'
         user: '${UID}:${GID}'
         working_dir: /app
 
@@ -76,6 +77,7 @@ services:
             NODE_ENV: production
             REACT_APP_API_URL: https://rapide.amnesty.fr/api
             REACT_APP_GA: UA-5960278-37
+            REACT_APP_FB: '364255110870457'
         user: '${UID}:${GID}'
         working_dir: /app
 
@@ -88,6 +90,7 @@ services:
             NODE_ENV: production
             REACT_APP_API_URL: http://localhost/api
             REACT_APP_GA: UA-136476291-2
+            REACT_APP_FB: '2385476921667035'
         user: '${UID}:${GID}'
         working_dir: /app
 
