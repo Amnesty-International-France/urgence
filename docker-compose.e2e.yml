@@ -44,16 +44,16 @@ services:
 
     front:
         image: node:9
-        command: "yarn run start-web"
+        command: 'yarn run start-web'
         volumes:
-            - ".:/app"
-            - "/tmp:/tmp"
+            - '.:/app'
+            - '/tmp:/tmp'
         environment:
             - HOME=/tmp
             - REACT_APP_API_URL=http://api:4000
             - NODE_ENV=development
         working_dir: /app/front
-        user: "${UID}:${GID}"
+        user: '${UID}:${GID}'
 
     api:
         command: yarn run start-dev
@@ -74,7 +74,7 @@ services:
     db-e2e:
         image: postgres:10
         expose:
-            - "5432"
+            - '5432'
         environment:
             - NODE_ENV=test
             - POSTGRES_USER=amnesty

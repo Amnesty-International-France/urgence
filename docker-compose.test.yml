@@ -5,7 +5,7 @@ services:
         image: node:9
         working_dir: /app
         volumes:
-            - "./:/app"
+            - './:/app'
         environment:
             - NODE_ENV=test
             - POSTGRES_DATABASE=reaction-rapide-test
@@ -20,14 +20,14 @@ services:
             - db
 
     api:
-        command: "yarn run start-dev"
+        command: 'yarn run start-dev'
         environment:
             NODE_ENV: test
             POSTGRES_DATABASE: reaction-rapide-test
 
     db:
         volumes:
-            - "./var/data-test:/var/lib/postgresql/data/"
+            - './var/data-test:/var/lib/postgresql/data/'
         environment:
             POSTGRES_USER: amnesty
             POSTGRES_PASSWORD: amnesty
