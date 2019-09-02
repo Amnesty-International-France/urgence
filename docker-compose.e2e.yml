@@ -72,9 +72,6 @@ services:
             - SMTP_USER=
 
     db-e2e:
-        image: postgres:10
-        expose:
-            - '5432'
         environment:
             - NODE_ENV=test
             - POSTGRES_USER=amnesty
