@@ -135,12 +135,6 @@ migration-e2e:
 populate-db:
 	$(DOCKER_COMPOSE) run --rm api node src/bin/populateDb.js
 
-selenium:
-	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
-
-selenium-debug:
-	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chromedebug
-
 deploy-staging:
 	NODE_ENV=staging npx shipit staging deploy
 
