@@ -58,25 +58,31 @@ services:
     api:
         command: yarn run start-dev
         depends_on:
-            - db-e2e
+            - db
             - maildev
         environment:
             - NODE_ENV=test
             - JWT_SECRET_KEY=jwtsecret
             - POSTGRES_DATABASE=reaction-rapide-e2e
-            - POSTGRES_HOST=db-e2e
             - API_PREFIX_URL=
             - SMTP_HOST=maildev
             - SMTP_PORT=25
             - SMTP_IGNORE_TLS=true
             - SMTP_USER=
 
-    db-e2e:
+    db:
+        volumes:
+            - amnesty-postgres-data:/var/lib/postgresql/data
+        user: '${UID}:${GID}'
         environment:
             - NODE_ENV=test
             - POSTGRES_USER=amnesty
             - POSTGRES_PASSWORD=amnesty
             - POSTGRES_DB=reaction-rapide-e2e
+            - PGDATA=/var/lib/postgresql/data/amnesty-e2e
 
     maildev:
         image: djfarrelly/maildev
+
+volumes:
+    amnesty-postgres-data: {}
