@@ -33,7 +33,7 @@
         "validator": "~10.2.0"
     },
     "scripts": {
-        "start-dev": "pm2 startOrRestart --no-daemon pm2/development.json",
+        "start-dev": "PM2_HOME=.pm2 pm2 startOrRestart --no-daemon pm2/development.json",
         "start": "pm2 startOrRestart --no-daemon pm2/production.json",
         "build": "npx babel src/ --out-dir dist/ && cp src/urgentActions/*.html dist/urgentActions/",
         "test": "jest --ci --forceExit",
