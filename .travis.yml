@@ -16,13 +16,17 @@ cache:
         - node_modules
         - /tmp/amnesty
 
-script:
-    - make test
-
 stages:
     - name: test
+    - name: e2e
 
 jobs:
     include:
         - stage: test
           env: NODE_ENV=test
+          script:
+              - make test-unit
+        - stage: e2e
+          env: NODE_ENV=test
+          script:
+              - make test-e2e

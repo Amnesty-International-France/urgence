@@ -56,9 +56,13 @@ update-icons-components:
 		./node_modules/.bin/prettier --write front/src/icons/*.js \
 	"
 
-test: migration-test test-unit test-e2e ## Run the tests. Usage make test.
+test: ## Run the tests. Usage `make test`.
+	make test-e2e
+	make test-unit
 
-test-unit:
+test-unit: ## Run the unit tests. Usage `make test-unit`.
+	$(MAKE) migration-test
+	sleep 10
 	$(DOCKER_COMPOSE_TEST) run --rm test yarn run test
 
 test-watch: ## Run the tests in watch mode. Usage make test.
@@ -67,7 +71,7 @@ test-watch: ## Run the tests in watch mode. Usage make test.
 test-stop-dockers:
 	$(DOCKER_COMPOSE_TEST) down
 
-test-e2e:
+test-e2e: ## Run the e2e tests. Usage `make test-e2e`.
 	$(MAKE) migration-e2e
 	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
 	sleep 10
