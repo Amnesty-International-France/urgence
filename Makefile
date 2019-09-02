@@ -52,8 +52,8 @@ psql:
 
 update-icons-components:
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app front bash -ci "\
-		./node_modules/.bin/svgr --no-semi --icon --ids -d front/src/icons front/src/icons && \
-		./node_modules/.bin/prettier --write front/src/icons/*.js \
+		npx svgr --no-semi --icon --ids -d front/src/icons front/src/icons && \
+		npx prettier --write front/src/icons/*.js \
 	"
 
 test: ## Run the tests. Usage `make test`.
@@ -85,27 +85,27 @@ debug-e2e:
 test-e2e-stop-dockers:
 	$(DOCKER_COMPOSE_E2E) down
 
-DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && ./node_modules/.bin/db-migrate \
+DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
 	-e api
 
-DB_MIGRATE_TEST = $(DOCKER_COMPOSE_TEST) run --rm test sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && ./api/node_modules/.bin/db-migrate \
-	--config=./api/database.js \
-	--migrations-dir=/app/api/migrations \
-	-e api
-
-DB_MIGRATE_STAGING = $(DOCKER_COMPOSE_STAGING) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && ./node_modules/.bin/db-migrate \
+DB_MIGRATE_TEST = $(DOCKER_COMPOSE_TEST) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
 	-e api
 
-DB_MIGRATE_PROD = $(DOCKER_COMPOSE_PROD) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && ./node_modules/.bin/db-migrate \
+DB_MIGRATE_STAGING = $(DOCKER_COMPOSE_STAGING) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
 	-e api
 
-DB_MIGRATE_E2E = $(DOCKER_COMPOSE_E2E) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && ./node_modules/.bin/db-migrate \
+DB_MIGRATE_PROD = $(DOCKER_COMPOSE_PROD) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
+	--config=database.js \
+	--migrations-dir=migrations \
+	-e api
+
+DB_MIGRATE_E2E = $(DOCKER_COMPOSE_E2E) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
 	-e api
