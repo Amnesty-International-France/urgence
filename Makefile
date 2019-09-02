@@ -6,6 +6,8 @@ default: help
 help: ## SOS? Usage make help (default).
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | gawk 'match($$0, /(makefile:)?(.*):.*?## (.*)/, a) {printf "\033[36m%-30s\033[0m %s\n", a[2], a[3]}'
 
+#### STARTING ###
+
 DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
 DOCKER_COMPOSE_BUILD = docker-compose -p reaction-rapide-build -f docker-compose.build.yml
 DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
@@ -41,22 +43,26 @@ start-prod:
 stop-prod:
 	$(DOCKER_COMPOSE_PROD) down
 
+run-nginx-dev:
+	${DOCKER_COMPOSE_DEV_NGINX} up --force-recreate
+
+stop-nginx-dev:
+	${DOCKER_COMPOSE_DEV_NGINX} down
+
+log-nginx-dev:
+	${DOCKER_COMPOSE_DEV_NGINX} logs -f
+
+nginx-dev: build-dev run-nginx-dev
+
 logs:
 	$(DOCKER_COMPOSE) logs -f
 
 connect-api:
 	$(DOCKER_COMPOSE) exec api bash
 
-psql:
-	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
+#### TESTS ####
 
-update-icons-components:
-	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app front bash -ci "\
-		npx svgr --no-semi --icon --ids -d front/src/icons front/src/icons && \
-		npx prettier --write front/src/icons/*.js \
-	"
-
-test: ## Run the tests. Usage `make test`.
+test: ## Run all the tests. Usage `make test`.
 	make test-e2e
 	make test-unit
 
@@ -64,11 +70,13 @@ test-unit: ## Run the unit tests. Usage `make test-unit`.
 	$(MAKE) migration-test
 	sleep 10
 	$(DOCKER_COMPOSE_TEST) run --rm test yarn run test
+	sleep 10
+	$(DOCKER_COMPOSE_E2E) down
 
-test-watch: ## Run the tests in watch mode. Usage make test.
+test-unit-watch: ## Run the unit tests in watch mode. Usage make `test-unit-watch`.
 	$(DOCKER_COMPOSE_TEST) run --rm test yarn run test-watch
 
-test-stop-dockers:
+test-unit-stop: ## Stop the unit tests. Usage `make test-unit-stop`
 	$(DOCKER_COMPOSE_TEST) down
 
 test-e2e: ## Run the e2e tests. Usage `make test-e2e`.
@@ -79,11 +87,16 @@ test-e2e: ## Run the e2e tests. Usage `make test-e2e`.
 	sleep 10
 	$(DOCKER_COMPOSE_E2E) down
 
-debug-e2e:
+test-e2e-debug: ## Run the e2e tests for debugging. Usage `make test-e2e-debug`
 	$(DOCKER_COMPOSE_E2E) run test-e2e
 
-test-e2e-stop-dockers:
+test-e2e-stop: ## Stop the e2e tests. Usage `make test-e2e-stop`
 	$(DOCKER_COMPOSE_E2E) down
+
+#### DATABASE & MIGRATIONS ####
+
+psql: ## Connect to the running database. Usage `make psql`.
+	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
 
 DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
 	--config=database.js \
@@ -135,6 +148,8 @@ migration-e2e:
 populate-db:
 	$(DOCKER_COMPOSE) run --rm api node src/bin/populateDb.js
 
+#### DEPLOYMENT ####
+
 deploy-staging:
 	NODE_ENV=staging npx shipit staging deploy
 
@@ -173,14 +188,3 @@ build-api:
 	$(DOCKER_COMPOSE) run --rm --no-deps api yarn run build
 
 build-dev: build-front-dev build-admin-dev
-
-run-nginx-dev:
-	${DOCKER_COMPOSE_DEV_NGINX} up --force-recreate
-
-stop-nginx-dev:
-	${DOCKER_COMPOSE_DEV_NGINX} down
-
-log-nginx-dev:
-	${DOCKER_COMPOSE_DEV_NGINX} logs -f
-
-nginx-dev: build-dev run-nginx-dev
