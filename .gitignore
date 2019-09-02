@@ -1,13 +1,10 @@
-/api/dist/
-/front/build
-/front/storybook-static
+## General
 node_modules
 npm-debug.log*
-var/data/
-var/data-test/
 yarn-debug.log*
 yarn-error.log*
-/front/.expo
+var/data/
+var/data-test/
 var/deploy.key
 var/deploy-prod.key
 var/amnesty-staging-deploy
@@ -15,6 +12,17 @@ var/amnesty-staging-deploy.pub
 var/amnestystaging.pem
 var/amnesty-prod
 var/amnesty-prod.pub
-/admin/build
 var/uploads
 var/
+
+## Api
+/api/dist/
+/api/.pm2
+
+## Front
+/front/build
+/front/storybook-static
+/front/.expo
+
+## Admin
+/admin/build

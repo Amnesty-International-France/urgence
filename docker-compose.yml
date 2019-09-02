@@ -3,6 +3,7 @@ version: '3'
 services:
     api:
         image: node:9
+        working_dir: /app/api
         volumes:
             - '.:/app'
             - './config:/app/config'
@@ -13,7 +14,6 @@ services:
             - ADMIN_USERNAME
             - ADMIN_PASSWORD
             - JWT_SECRET_KEY
-        working_dir: /app/api
         depends_on:
             - db
 
@@ -21,5 +21,5 @@ services:
         image: postgres:10
         volumes:
             - '/etc/passwd:/etc/passwd:ro'
-        expose:
+        ports:
             - '5432'

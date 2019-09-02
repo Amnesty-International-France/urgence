@@ -56,9 +56,13 @@ update-icons-components:
 		./node_modules/.bin/prettier --write front/src/icons/*.js \
 	"
 
-test: migration-test test-unit test-e2e ## Run the tests. Usage make test.
+test: ## Run the tests. Usage `make test`.
+	make test-e2e
+	make test-unit
 
-test-unit:
+test-unit: ## Run the unit tests. Usage `make test-unit`.
+	$(MAKE) migration-test
+	sleep 10
 	$(DOCKER_COMPOSE_TEST) run --rm test yarn run test
 
 test-watch: ## Run the tests in watch mode. Usage make test.
@@ -67,7 +71,7 @@ test-watch: ## Run the tests in watch mode. Usage make test.
 test-stop-dockers:
 	$(DOCKER_COMPOSE_TEST) down
 
-test-e2e:
+test-e2e: ## Run the e2e tests. Usage `make test-e2e`.
 	$(MAKE) migration-e2e
 	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
 	sleep 10
@@ -99,7 +103,7 @@ DB_MIGRATE_PROD = $(DOCKER_COMPOSE_PROD) run --rm api sh -c "/app/var/wait-for-i
 	--migrations-dir=migrations \
 	-e api
 
-DB_MIGRATE_E2E = $(DOCKER_COMPOSE_E2E) run --rm api sh -c "/app/var/wait-for-it.sh -h db-e2e -p 5432 -t 30 && ./node_modules/.bin/db-migrate \
+DB_MIGRATE_E2E = $(DOCKER_COMPOSE_E2E) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && ./node_modules/.bin/db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
 	-e api
@@ -115,7 +119,6 @@ migration-down: ## make create-migration NB_MIGRATIONS=2
 	$(DB_MIGRATE) down -c ${NB_MIGRATIONS}"
 
 migration-test:
-	mkdir -p var/data-test/
 	$(DB_MIGRATE_TEST) up"
 
 migration-staging:
