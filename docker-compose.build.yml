@@ -16,7 +16,6 @@ services:
             PUBLIC_URL: https://amnesty.marmelab.com/admin
             REACT_APP_API_URL: https://amnesty.marmelab.com/api
             REACT_APP_FRONT_BASE_URL: https://amnesty.marmelab.com
-        user: '${UID}:${GID}'
         working_dir: /app/admin
 
     admin_prod:
@@ -34,7 +33,6 @@ services:
             PUBLIC_URL: https://rapide.amnesty.fr/admin
             REACT_APP_API_URL: https://rapide.amnesty.fr/api
             REACT_APP_FRONT_BASE_URL: https://rapide.amnesty.fr
-        user: '${UID}:${GID}'
         working_dir: /app/admin
 
     admin_dev:
@@ -52,7 +50,6 @@ services:
             PUBLIC_URL: http://localhost/admin
             REACT_APP_API_URL: http://localhost/api
             REACT_APP_FRONT_BASE_URL: http://localhost
-        user: '${UID}:${GID}'
         working_dir: /app/admin
 
     front_staging:
@@ -65,7 +62,6 @@ services:
             REACT_APP_API_URL: https://amnesty.marmelab.com/api
             REACT_APP_GA: UA-136476291-1
             REACT_APP_FB: '2252258794861771'
-        user: '${UID}:${GID}'
         working_dir: /app
 
     front_prod:
@@ -78,7 +74,6 @@ services:
             REACT_APP_API_URL: https://rapide.amnesty.fr/api
             REACT_APP_GA: UA-5960278-37
             REACT_APP_FB: '364255110870457'
-        user: '${UID}:${GID}'
         working_dir: /app
 
     front_dev:
@@ -91,7 +86,6 @@ services:
             REACT_APP_API_URL: http://localhost/api
             REACT_APP_GA: UA-136476291-2
             REACT_APP_FB: '2385476921667035'
-        user: '${UID}:${GID}'
         working_dir: /app
 
     storybook:
@@ -102,5 +96,4 @@ services:
         environment:
             NODE_ENV: production
             PUBLIC_URL: https://amnesty.marmelab.com/storybook
-        user: '${UID}:${GID}'
         working_dir: /app

@@ -7,7 +7,6 @@ services:
         working_dir: /app
         volumes:
             - './:/app'
-        user: '${UID}:${GID}'
         environment:
             - NODE_ENV=test
             - POSTGRES_DATABASE=reaction-rapide-test
