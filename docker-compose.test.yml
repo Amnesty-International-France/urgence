@@ -3,9 +3,11 @@ version: '3'
 services:
     test:
         image: node:9
+        command: 'yarn run test'
         working_dir: /app
         volumes:
             - './:/app'
+        user: '${UID}:${GID}'
         environment:
             - NODE_ENV=test
             - POSTGRES_DATABASE=reaction-rapide-test
@@ -15,20 +17,25 @@ services:
             - REACT_APP_FRONT_BASE_URL=http://localhost:3000
             - REACT_APP_API_URL=http://localhost:4000
             - API_PREFIX_URL=
-        command: yarn run test
         depends_on:
             - db
 
     api:
         command: 'yarn run start-dev'
+        user: '${UID}:${GID}'
         environment:
             NODE_ENV: test
             POSTGRES_DATABASE: reaction-rapide-test
 
     db:
         volumes:
-            - './var/data-test:/var/lib/postgresql/data/'
+            - amnesty-postgres-data:/var/lib/postgresql/data
+        user: '${UID}:${GID}'
         environment:
-            POSTGRES_USER: amnesty
-            POSTGRES_PASSWORD: amnesty
-            POSTGRES_DB: reaction-rapide-test
+            - POSTGRES_USER=amnesty
+            - POSTGRES_PASSWORD=amnesty
+            - POSTGRES_DB=reaction-rapide-test
+            - PGDATA=/var/lib/postgresql/data/amnesty-test
+
+volumes:
+    amnesty-postgres-data: {}

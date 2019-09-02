@@ -115,7 +115,6 @@ migration-down: ## make create-migration NB_MIGRATIONS=2
 	$(DB_MIGRATE) down -c ${NB_MIGRATIONS}"
 
 migration-test:
-	mkdir -p var/data-test/
 	$(DB_MIGRATE_TEST) up"
 
 migration-staging:
