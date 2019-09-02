@@ -4,6 +4,7 @@ services:
     admin:
         image: node:9
         command: 'yarn run start'
+        working_dir: /app/admin
         volumes:
             - '.:/app'
             - '/tmp:/tmp'
@@ -16,7 +17,6 @@ services:
             - REACT_APP_FRONT_BASE_URL=http://localhost:3000
         ports:
             - '5000:5000'
-        working_dir: /app/admin
 
     maildev:
         image: djfarrelly/maildev
@@ -53,6 +53,7 @@ services:
     storybook:
         image: node:9
         command: 'yarn run storybook'
+        working_dir: /app
         volumes:
             - './front:/app'
             - '/tmp:/tmp'
@@ -61,11 +62,11 @@ services:
             - NODE_ENV=development
         ports:
             - '9009:9009'
-        working_dir: /app
 
     front:
         image: node:9
         command: 'yarn run start-web'
+        working_dir: /app/front
         volumes:
             - '.:/app'
             - '/tmp:/tmp'
@@ -76,7 +77,6 @@ services:
             - REACT_APP_GA=UA-136476291-2
             - REACT_APP_FB=2385476921667035
             - NODE_ENV=development
-        working_dir: /app/front
         ports:
             - '3000:3000'
 
