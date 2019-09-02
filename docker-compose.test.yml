@@ -33,6 +33,7 @@ services:
             - SMTP_PORT=25
             - SMTP_IGNORE_TLS=true
             - SMTP_USER=
+            - PM2_HOME=".pm2"
 
     db:
         volumes:

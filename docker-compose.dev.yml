@@ -37,6 +37,7 @@ services:
             - SMTP_IGNORE_TLS=true
             - SMTP_USER=
             - API_PREFIX_URL=
+            - PM2_HOME=".pm2"
         ports:
             - '4000:4000'
 
