@@ -74,6 +74,7 @@ export const Form = ({ classes }) => (
                     return <LongTextInput source="slug" disabled />;
                 }}
             </FormDataConsumer>
+            <LongTextInput source="campaign_code" />
         </div>
 
         <div className={`${classes.form} story`}>
