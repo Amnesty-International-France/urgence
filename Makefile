@@ -68,11 +68,11 @@ test: ## Run all the tests. Usage `make test`.
 	make test-unit
 
 test-unit: ## Run the unit tests. Usage `make test-unit`.
+	$(DOCKER_COMPOSE_TEST) up --force-recreate -d db
 	$(MAKE) migration-test
-	sleep 10
-	$(DOCKER_COMPOSE_TEST) run --rm test yarn run test
-	sleep 10
-	$(DOCKER_COMPOSE_E2E) down
+	sleep 5
+	$(DOCKER_COMPOSE_TEST) run test
+	$(DOCKER_COMPOSE_TEST) down
 
 test-unit-watch: ## Run the unit tests in watch mode. Usage make `test-unit-watch`.
 	$(DOCKER_COMPOSE_TEST) run --rm test yarn run test-watch
@@ -81,11 +81,11 @@ test-unit-stop: ## Stop the unit tests. Usage `make test-unit-stop`
 	$(DOCKER_COMPOSE_TEST) down
 
 test-e2e: ## Run the e2e tests. Usage `make test-e2e`.
+	$(DOCKER_COMPOSE_E2E) up --force-recreate -d db
 	$(MAKE) migration-e2e
 	$(DOCKER_COMPOSE_E2E) up --force-recreate -d chrome
-	sleep 10
+	sleep 5
 	$(DOCKER_COMPOSE_E2E) run test-e2e
-	sleep 10
 	$(DOCKER_COMPOSE_E2E) down
 
 test-e2e-debug: ## Run the e2e tests for debugging. Usage `make test-e2e-debug`
@@ -97,7 +97,8 @@ test-e2e-stop: ## Stop the e2e tests. Usage `make test-e2e-stop`
 #### DATABASE & MIGRATIONS ####
 
 psql: ## Connect to the running database. Usage `make psql`.
-	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
+	$(DOCKER_COMPOSE_TEST) up --force-recreate -d
+	$(DOCKER_COMPOSE_TEST) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide-test"
 
 DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
 	--config=database.js \
