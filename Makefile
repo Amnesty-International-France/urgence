@@ -16,20 +16,24 @@ DOCKER_COMPOSE_STAGING = docker-compose -p reaction-rapide-staging -f docker-com
 DOCKER_COMPOSE_PROD = docker-compose -p reaction-rapide-prod -f docker-compose.yml -f docker-compose.prod.yml
 DOCKER_COMPOSE_DEV_NGINX = docker-compose -p reaction-rapide-dev-nginx -f docker-compose.yml -f docker-compose.dev-nginx.yml
 
-install: install-admin ## Install all dependencies. Usage make install.
+install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api yarn install
 	$(DOCKER_COMPOSE) run --rm --no-deps api yarn install
+	$(DOCKER_COMPOSE) run --rm --no-deps admin yarn install
 	$(DOCKER_COMPOSE) run --rm --no-deps front yarn install
 
 install-staging:
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api yarn install --production
 	$(DOCKER_COMPOSE) run --rm --no-deps api yarn install --production
 
-start: ## Start the project with docker. Usage make start.
+start: ## Start the project with docker. Usage `make start`.
 	$(DOCKER_COMPOSE) up --force-recreate -d
 
-stop: ## Stop the project with docker. Usage make stop.
+stop: ## Stop the project with docker. Usage `make stop`.
 	$(DOCKER_COMPOSE) down
+
+logs:
+	$(DOCKER_COMPOSE) logs -f
 
 start-staging:
 	$(DOCKER_COMPOSE_STAGING) up -d
@@ -53,9 +57,6 @@ log-nginx-dev:
 	${DOCKER_COMPOSE_DEV_NGINX} logs -f
 
 nginx-dev: build-dev run-nginx-dev
-
-logs:
-	$(DOCKER_COMPOSE) logs -f
 
 connect-api:
 	$(DOCKER_COMPOSE) exec api bash
@@ -155,9 +156,6 @@ deploy-staging:
 
 deploy-prod:
 	NODE_ENV=production npx shipit production deploy
-
-install-admin:
-	$(DOCKER_COMPOSE) run --rm --no-deps admin yarn install
 
 build-storybook:
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps storybook
