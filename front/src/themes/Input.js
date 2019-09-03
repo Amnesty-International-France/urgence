@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import TextField from '@material-ui/core/TextField';
-import classnames from 'classnames';
+import { TextField, InputAdornment } from '@material-ui/core';
 import { routeMatch } from '../propTypes';
 import { withRouter } from 'react-router';
 import trackEvent from '../analytics/trackEvent';
@@ -18,13 +17,6 @@ const styles = {
             borderRadius: 0,
         },
     },
-    '& .valid div:after': {
-        position: 'absolute',
-        right: 0,
-        content: '✓',
-        color: green,
-        paddingRight: 5,
-    },
 };
 
 const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -32,6 +24,24 @@ const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9
 export const isCorrectEmail = email => {
     return re.test(email);
 };
+
+const checkStyles = {
+    '& .check': {
+        color: green,
+        padding: 5,
+    },
+};
+
+const CheckAdornment = glamorous(({ className, isValid, ...props }) => {
+    if (!isValid) {
+        return null;
+    }
+    return (
+        <InputAdornment position="end" className={className} {...props}>
+            <span className="check">✓</span>
+        </InputAdornment>
+    );
+})(checkStyles);
 
 export class Input extends Component {
     state = {
@@ -71,12 +81,15 @@ export class Input extends Component {
         return (
             <div className={className}>
                 <TextField
-                    className={classnames('textfield', { ['valid']: showValid })}
+                    className="textfield"
                     variant="outlined"
                     margin="dense"
                     label={label}
                     value={value}
                     error={showError && error}
+                    InputProps={{
+                        endAdornment: <CheckAdornment isValid={showValid} />,
+                    }}
                     onChange={event => {
                         if (onChange) onChange(event);
                         this.showErrorState();

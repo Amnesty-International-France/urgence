@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Admin, Resource } from 'react-admin';
+import JssProvider from 'react-jss/lib/JssProvider';
+import { CircularProgress } from '@material-ui/core';
 
+import generateClassName from './generateClassName';
 import dataProviderFactory from './dataProvider';
 import { authProvider } from './authentication/authProvider';
 
@@ -15,7 +18,6 @@ class App extends Component {
 
     async componentWillMount() {
         const dataProvider = await dataProviderFactory();
-
         this.setState({ dataProvider });
     }
 
@@ -23,20 +25,22 @@ class App extends Component {
         const { dataProvider } = this.state;
 
         if (!dataProvider) {
-            return <div>Loading</div>;
+            return <CircularProgress />;
         }
 
         return (
-            <Admin
-                locale="en"
-                theme={theme}
-                title={<Title />}
-                authProvider={authProvider}
-                dataProvider={dataProvider}
-            >
-                <Resource {...urgentAction} />
-                <Resource {...activist} />
-            </Admin>
+            <JssProvider generateClassName={generateClassName}>
+                <Admin
+                    locale="en"
+                    theme={theme}
+                    title={<Title />}
+                    authProvider={authProvider}
+                    dataProvider={dataProvider}
+                >
+                    <Resource {...urgentAction} />
+                    <Resource {...activist} />
+                </Admin>
+            </JssProvider>
         );
     }
 }
