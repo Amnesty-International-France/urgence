@@ -1,4 +1,11 @@
-import { getSetting, getSettings, countSettings, createSetting, removeSetting } from './repository';
+import {
+    getSetting,
+    getSettings,
+    countSettings,
+    createSetting,
+    updateSetting,
+    removeSetting,
+} from './repository';
 
 export default {
     Query: {
@@ -9,6 +16,7 @@ export default {
     },
     Mutation: {
         createSetting: async (_, setting) => createSetting(setting),
+        updateSetting: async (_, setting) => updateSetting(id, setting),
         deleteSetting: async (_, id) => removeSetting(id),
     },
 };

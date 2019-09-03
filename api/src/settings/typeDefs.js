@@ -22,6 +22,7 @@ export default gql`
 
     extend type Mutation {
         createSetting(type: String!, content: String!): Setting
+        updateSetting(id: ID!, type: String!, content: String!): Setting
         deleteSetting(id: ID!): Setting
     }
 `;
