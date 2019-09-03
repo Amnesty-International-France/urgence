@@ -1,4 +1,4 @@
-// Fix for jss minification problemscaused by a different version of material-ui used in react-admin
+// Fix for jss minification problems caused by a different version of material-ui used in react-admin
 // Fix is copied from https://github.com/marmelab/react-admin/issues/1782
 
 const escapeRegex = /([[\].#*$><+~=|^:(),"'`\s])/g;
