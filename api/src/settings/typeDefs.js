@@ -5,12 +5,8 @@ export default gql`
         id: ID!
         created_on: DATE
         updated_on: DATE
-        type: Types!
+        type: String!
         content: String!
-    }
-
-    enum Types {
-        rgpd
     }
 
     extend type Query {
@@ -25,7 +21,7 @@ export default gql`
     }
 
     extend type Mutation {
-        createSetting(type: Types!, content: String!): Setting
+        createSetting(type: String!, content: String!): Setting
         deleteSetting(id: ID!): Setting
     }
 `;
