@@ -16,7 +16,7 @@ export default {
     },
     Mutation: {
         createSetting: async (_, setting) => createSetting(setting),
-        updateSetting: async (_, setting) => updateSetting(id, setting),
+        updateSetting: async (_, { id, ...setting }) => updateSetting(id, setting),
         deleteSetting: async (_, id) => removeSetting(id),
     },
 };

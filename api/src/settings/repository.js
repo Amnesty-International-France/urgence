@@ -26,11 +26,12 @@ export const countSettings = async () => query(settingsCrudQueries.countAll());
 
 export const createSetting = async setting => query(settingsCrudQueries.insertOne(setting));
 
-export const updateSetting = async (id, setting, updated_on = new Date()) =>
+export const updateSetting = async (id, setting) =>
     query(
         settingsCrudQueries.updateOne(id, {
+            id,
             ...setting,
-            updated_on,
+            updated_on: new Date(),
         }),
     );
 
