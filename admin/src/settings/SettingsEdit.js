@@ -18,7 +18,6 @@ export default props => (
             <DateField source="created_on" label="Created On" options={dateFormat} showTime />
             <DateField source="updated_on" label="Updated On" options={dateFormat} showTime />
             <TextInput source="type" label="Type" validate={required()} />
-            <TextInput source="type" label="Type" validate={required()} />
             <SettingsContentInput source="content" label="Content *" validate={required()} />
         </SimpleForm>
     </Edit>
