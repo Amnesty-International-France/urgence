@@ -37,7 +37,7 @@ const styles = {
         padding: '10vh 10vw',
     },
     '& .formStep': {
-        margin: '5px 0px',
+        margin: '5px 0px 10px 0px',
     },
 };
 
