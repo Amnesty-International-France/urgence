@@ -63,7 +63,7 @@ connect-api:
 
 #### TESTS ####
 
-test: ## Run all the tests. Usage `make test`.
+test: ## Run all tests. Usage `make test`.
 	make test-e2e
 	make test-unit
 
