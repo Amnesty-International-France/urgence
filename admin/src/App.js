@@ -7,7 +7,6 @@ import generateClassName from './generateClassName';
 import dataProviderFactory from './dataProvider';
 import { authProvider } from './authentication/authProvider';
 
-import activist from './activists';
 import urgentAction from './urgentActions';
 
 import { theme } from './theme';
@@ -38,7 +37,6 @@ class App extends Component {
                     dataProvider={dataProvider}
                 >
                     <Resource {...urgentAction} />
-                    <Resource {...activist} />
                 </Admin>
             </JssProvider>
         );
