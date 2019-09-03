@@ -1,5 +1,5 @@
 import React from 'react';
-import { Datagrid, List, TextField, DateField } from 'react-admin';
+import { Datagrid, List, EditButton, TextField, DateField } from 'react-admin';
 
 const dateFormat = {
     year: 'numeric',
@@ -18,6 +18,7 @@ export default props => (
             <TextField source="type" />
             <DateField source="created_on" label="Created On" options={dateFormat} showTime />
             <DateField source="updated_on" label="Updated On" options={dateFormat} showTime />
+            <EditButton />
         </Datagrid>
     </List>
 );
