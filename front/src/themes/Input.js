@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import { TextField, InputAdornment } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { routeMatch } from '../propTypes';
 import { withRouter } from 'react-router';
+
 import trackEvent from '../analytics/trackEvent';
-import { green } from './colors';
+import CheckAdornment from './CheckAdornment';
 
 const styles = {
     '& .textfield': {
@@ -24,24 +25,6 @@ const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9
 export const isCorrectEmail = email => {
     return re.test(email);
 };
-
-const checkStyles = {
-    '& .check': {
-        color: green,
-        padding: 5,
-    },
-};
-
-const CheckAdornment = glamorous(({ className, isValid, ...props }) => {
-    if (!isValid) {
-        return null;
-    }
-    return (
-        <InputAdornment position="end" className={className} {...props}>
-            <span className="check">✓</span>
-        </InputAdornment>
-    );
-})(checkStyles);
 
 export class Input extends Component {
     state = {

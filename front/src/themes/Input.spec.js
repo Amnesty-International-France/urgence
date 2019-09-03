@@ -1,10 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import { Input, isCorrectEmail } from './Input';
 
 describe('<Input />', () => {
-    it('should render a div with correct background image and title', () => {
+    it('should render an Input with correct value and label', () => {
         const wrapper = shallow(
             <Input value="value" label="Title" match={{ params: { slug: 'im-a-slug' } }} />,
         );
@@ -12,6 +12,38 @@ describe('<Input />', () => {
 
         expect(input.prop('value')).toBe('value');
         expect(input.prop('label')).toBe('Title');
+    });
+
+    it('should render an Adornment if there is no error', () => {
+        const wrapper = shallow(
+            <Input
+                value="value"
+                label="Title"
+                match={{ params: { slug: 'im-a-slug' } }}
+                error={false}
+            />,
+        );
+        const input = wrapper.find('TextField');
+        const InputProps = input.prop('InputProps');
+
+        const wrapperAdornment = mount(InputProps.endAdornment);
+        expect(wrapperAdornment.childAt(0).isEmptyRender()).toBe(false);
+    });
+
+    it('should render no Adornment if there is an error', () => {
+        const wrapper = shallow(
+            <Input
+                value="value"
+                label="Title"
+                match={{ params: { slug: 'im-a-slug' } }}
+                error={true}
+            />,
+        );
+        const input = wrapper.find('TextField');
+        const InputProps = input.prop('InputProps');
+
+        const wrapperAdornment = mount(InputProps.endAdornment);
+        expect(wrapperAdornment.childAt(0).isEmptyRender()).toBe(true);
     });
 });
 
