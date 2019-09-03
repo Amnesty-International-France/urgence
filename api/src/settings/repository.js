@@ -22,8 +22,8 @@ export const getSettings = async ({ perPage, page, sortField, sortOrder }) =>
         }),
     );
 
-export const countSettings = async () => query(settingCrudQueries.countAll());
+export const countSettings = async () => query(settingsCrudQueries.countAll());
 
-export const createSetting = async setting => query(settingCrudQueries.insertOne(setting));
+export const createSetting = async setting => query(settingsCrudQueries.insertOne(setting));
 
-export const removeSetting = async id => query(settingCrudQueries.removeOne(id));
+export const removeSetting = async id => query(settingsCrudQueries.removeOne(id));
