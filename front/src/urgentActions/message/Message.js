@@ -31,15 +31,6 @@ const styles = {
             display: 'flex',
             margin: '1em 0',
         },
-        '@media (max-width: 1024px)': {
-            backgroundColor: white,
-            margin: 0,
-            left: 0,
-            width: '100%',
-            zIndex: 1000,
-            position: 'fixed',
-            bottom: 0,
-        },
     },
     '@media (max-width: 350px)': {
         fontSize: '0.8em',
