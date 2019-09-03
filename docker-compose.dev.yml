@@ -8,7 +8,6 @@ services:
         volumes:
             - '.:/app'
             - '/tmp:/tmp'
-        user: '${UID}:${GID}'
         environment:
             - PORT=5000
             - NODE_ENV=development
@@ -27,7 +26,6 @@ services:
 
     api:
         command: 'yarn run start-dev'
-        user: '${UID}:${GID}'
         environment:
             - ADMIN_USERNAME=admin
             - ADMIN_PASSWORD=password
@@ -37,6 +35,7 @@ services:
             - SMTP_IGNORE_TLS=true
             - SMTP_USER=
             - API_PREFIX_URL=
+            - PM2_HOME=.pm2
         ports:
             - '4000:4000'
 
@@ -57,7 +56,6 @@ services:
         volumes:
             - './front:/app'
             - '/tmp:/tmp'
-        user: '${UID}:${GID}'
         environment:
             - NODE_ENV=development
         ports:
@@ -70,7 +68,6 @@ services:
         volumes:
             - '.:/app'
             - '/tmp:/tmp'
-        user: '${UID}:${GID}'
         environment:
             - HOME=/tmp
             - REACT_APP_API_URL=http://localhost:4000

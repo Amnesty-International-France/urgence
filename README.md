@@ -29,7 +29,7 @@ make deploy-staging
 By default, it deploys `master` branch. However, it is possible to deploy another branch by setting a `BRANCH` environment variable. For instance:
 
 ```sh
-BRANCH=feature deploy-staging
+BRANCH=feature make deploy-staging
 ```
 
 ## Certificates
