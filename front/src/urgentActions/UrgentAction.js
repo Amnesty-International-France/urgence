@@ -113,6 +113,16 @@ const query = gql`
                 text
             }
         }
+        GdprMessage: Setting(id: "1") {
+            id
+            type
+            content
+        }
+        GdprRegister: Setting(id: "2") {
+            id
+            type
+            content
+        }
     }
 `;
 
@@ -170,6 +180,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
                 objectIndication={get(data, 'UrgentAction.object_indication')}
+                gdpr={get(data, 'GdprMessage.content')}
                 loading={loading}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
@@ -241,6 +252,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
         return (
             <RegisterActivist
                 data={register}
+                gdpr={get(data, 'GdprRegister.content')}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                 action={disabled => (
