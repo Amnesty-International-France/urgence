@@ -22,7 +22,7 @@ const { Provider, Consumer } = createContext({
 
 export const DataConsumer = Consumer;
 
-export const DataProvider = ({ children, gdprMessage, gdprRegister }) => {
+export const DataProvider = ({ children, defaultGdprMessage, defaultGdprRegister }) => {
     if (gdprMessage) {
         data.setGdprMessage(gdprMessage);
     }
@@ -31,111 +31,122 @@ export const DataProvider = ({ children, gdprMessage, gdprRegister }) => {
         data.setGdprMessage(gdprRegister);
     }
 
-    const [state, setState] = useState({
-        object: data.getMailObject(),
-        civility: data.getCivility(),
-        firstname: data.getFirstname(),
-        lastname: data.getLastname(),
-        addressMain: data.getAddressMain(),
-        addressMore: data.getAddressMore(),
-        postalCode: data.getPostalCode(),
-        city: data.getCity(),
-        country: data.getCountry(),
-        phone: data.getPhone(),
-        email: data.getEmail(),
-        registered: data.getRegistered(),
-        gdprMessage: gdprMessage || data.getGdprMessage(),
-        gdprRegister: gdprRegister || data.getGdprRegister(),
-    });
+    const [object, setMailObject] = useState(data.getMailObject());
+    const [civility, setCivility] = useState(data.getCivility());
+    const [firstname, setFirstname] = useState(data.getFirstname());
+    const [lastname, setLastname] = useState(data.getLastname());
+    const [addressMain, setAddressMain] = useState(data.getAddressMain());
+    const [addressMore, setAddressMore] = useState(data.getAddressMore());
+    const [postalCode, setPostalCode] = useState(data.getPostalCode());
+    const [city, setCity] = useState(data.getCity());
+    const [country, setCountry] = useState(data.getCountry());
+    const [phone, setPhone] = useState(data.getPhone());
+    const [email, setEmail] = useState(data.getEmail());
+    const [registered, setRegistered] = useState(data.getRegistered());
+    const [gdprMessage, setGdprMessage] = useState(defaultGdprMessage || data.getGdprMessage());
+    const [gdprRegister, setGdprRegister] = useState(defaultGdprRegister || data.getGdprRegister());
 
-    const setObject = object => {
-        setState({ ...state, object });
-        data.setMailObject(object);
+    const handleSetObject = newObject => {
+        setMailObject(newObject);
+        data.setMailObject(newObject);
     };
 
-    const setCivility = civility => {
-        setState({ ...state, civility });
+    const handleSetCivility = civility => {
+        setCivility(civility);
         data.setCivility(civility);
     };
 
-    const setFirstname = firstname => {
-        this.setState({ ...state, firstname });
+    const handleSetFirstname = firstname => {
+        setFirstname(firstname);
         data.setFirstname(firstname);
     };
 
-    const setLastname = lastname => {
-        setState({ ...state, lastname });
+    const handleSetLastname = lastname => {
+        setLastname(lastname);
         data.setLastname(lastname);
     };
 
-    const setAddressMain = addressMain => {
-        this.setState({ ...state, addressMain });
+    const handleSetAddressMain = addressMain => {
+        setAddressMain(addressMain);
         data.setAddressMain(addressMain);
     };
 
-    const setAddressMore = addressMore => {
-        setState({ ...state, addressMore });
+    const handleSetAddressMore = addressMore => {
+        setAddressMore(addressMore);
         data.setAddressMore(addressMore);
     };
 
-    const setPostalCode = postalCode => {
-        setState({ ...state, postalCode });
+    const handleSetPostalCode = postalCode => {
+        setPostalCode(postalCode);
         data.setPostalCode(postalCode);
     };
 
-    const setCity = city => {
-        setState({ ...state, city });
+    const handleSetCity = city => {
+        setCity(city);
         data.setCity(city);
     };
 
-    const setCountry = country => {
-        setState({ ...state, country });
+    const handleSetCountry = country => {
+        setCountry(country);
         data.setCountry(country);
     };
 
-    const setPhone = phone => {
-        setState({ ...state, phone });
+    const handleSetPhone = phone => {
+        setPhone(phone);
         data.setPhone(phone);
     };
 
-    const setEmail = email => {
-        setState({ ...state, email });
+    const handleSetEmail = email => {
+        setEmail(email);
         data.setEmail(email);
     };
 
-    const setRegistered = () => {
-        setState({ ...state, registered: 'true' });
+    const handleSetRegistered = () => {
+        setRegistered('true');
         data.setRegistered('true');
     };
 
-    const setGdprMessage = gdprMessage => {
-        setState({ ...state, gdprMessage });
+    const handleSetGdprMessage = gdprMessage => {
+        setGdprMessage(gdprMessage);
         data.setGdprMessage(gdprMessage);
     };
 
-    const setGdprRegister = gdprRegister => {
-        setState({ ...state, gdprRegister });
+    const handleSetGdprRegister = gdprRegister => {
+        setGdprRegister(gdprRegister);
         data.setGdprRegister(gdprRegister);
     };
 
     return (
         <Provider
             value={{
-                ...state,
-                setObject,
-                setCivility,
-                setFirstname,
-                setLastname,
-                setAddressMain,
-                setAddressMore,
-                setPostalCode,
-                setCity,
-                setCountry,
-                setPhone,
-                setEmail,
-                setRegistered,
-                setGdprMessage,
-                setGdprRegister,
+                object,
+                civility,
+                firstname,
+                lastname,
+                addressMain,
+                addressMore,
+                postalCode,
+                city,
+                country,
+                phone,
+                email,
+                registered,
+                gdprMessage,
+                gdprRegister,
+                setObject: handleSetObject,
+                setCivility: handleSetCivility,
+                setFirstname: handleSetFirstname,
+                setLastname: handleSetLastname,
+                setAddressMain: handleSetAddressMain,
+                setAddressMore: handleSetAddressMore,
+                setPostalCode: handleSetPostalCode,
+                setCity: handleSetCity,
+                setCountry: handleSetCountry,
+                setPhone: handleSetPhone,
+                setEmail: handleSetEmail,
+                setRegistered: handleSetRegistered,
+                setGdprMessage: handleSetGdprMessage,
+                setGdprRegister: handleSetGdprRegister,
             }}
         >
             {children}
@@ -145,8 +156,8 @@ export const DataProvider = ({ children, gdprMessage, gdprRegister }) => {
 
 DataProvider.propTypes = {
     children: PropTypes.node.isRequired,
-    gdprMessage: PropTypes.string,
-    gdprRegister: PropTypes.string,
+    defaultGdprMessage: PropTypes.string,
+    defaultGdprRegister: PropTypes.string,
 };
 
 export const withSessionData = Component => props => (
