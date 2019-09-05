@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import slugify from 'slugify';
 
@@ -10,6 +10,7 @@ import blue from '@material-ui/core/colors/blue';
 import yellow from '@material-ui/core/colors/yellow';
 import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
+import orange from '@material-ui/core/colors/orange';
 
 import { LETTER_ACTIVATED } from '../flags';
 
@@ -55,6 +56,9 @@ const styles = {
             backgroundColor: green[50],
         },
     },
+    warning: {
+        color: orange[600],
+    },
 };
 
 const generateSlug = (title = '') =>
@@ -64,65 +68,91 @@ const generateSlug = (title = '') =>
         lower: true,
     });
 
-export const Form = ({ classes }) => (
-    <Fragment>
-        <div className={classes.form}>
-            <LongTextInput source="campaign_code" />
-            <LongTextInput source="title" validate={required()} inputProps={{ autoFocus: true }} />
-            <FormDataConsumer>
-                {({ formData }) => {
-                    formData.slug = generateSlug(formData.title);
-                    return <LongTextInput source="slug" disabled />;
-                }}
-            </FormDataConsumer>
-        </div>
+const autoFocusProps = { autoFocus: true };
 
-        <div className={`${classes.form} story`}>
-            <h2>Story</h2>
-            <ArrayInput source="story" label="">
-                <StoryStepFormIterator>
-                    <StoryTemplateInput source="" />
-                </StoryStepFormIterator>
-            </ArrayInput>
-        </div>
+const Form = ({ classes, record }) => {
+    const [emptyCode, setEmptyCode] = useState(
+        !record.campaign_code || record.campaign_code === '',
+    );
 
-        <div className={`${classes.form} call-to-action`}>
-            <h2>Call to Action</h2>
-            <CallToActionInput source="call_to_action" />
-        </div>
+    const handleTextFieldChange = e => {
+        setEmptyCode(e.target.value === '');
+    };
 
-        <div className={`${classes.form} message`}>
-            <h2>Message</h2>
-            <MessageInput source="" />
-        </div>
-
-        <div className={`${classes.form} continue`}>
-            <h2>Continue</h2>
-            {LETTER_ACTIVATED ? (
-                <ThanksInput source="email_thank" />
-            ) : (
-                <ShareInput source="email_thank" />
-            )}
-        </div>
-
-        {LETTER_ACTIVATED && (
-            <div className={`${classes.form} letter`}>
-                <h2>Letter</h2>
-                <LetterInput source="recipient" />
+    return (
+        <Fragment>
+            <div className={classes.form}>
+                <LongTextInput
+                    source="campaign_code"
+                    onChange={handleTextFieldChange}
+                    helperText={
+                        emptyCode ? (
+                            <span className={classes.warning}>
+                                Activists actions won't be sent down to SalesForce while this field
+                                remains empty.
+                            </span>
+                        ) : (
+                            ''
+                        )
+                    }
+                    inputProps={autoFocusProps}
+                />
+                <LongTextInput source="title" validate={required()} />
+                <FormDataConsumer>
+                    {({ formData }) => {
+                        formData.slug = generateSlug(formData.title);
+                        return <LongTextInput source="slug" disabled />;
+                    }}
+                </FormDataConsumer>
             </div>
-        )}
 
-        <div className={`${classes.form} register`}>
-            <h2>Register</h2>
-            <RegisterInput source="register" />
-        </div>
+            <div className={`${classes.form} story`}>
+                <h2>Story</h2>
+                <ArrayInput source="story" label="">
+                    <StoryStepFormIterator>
+                        <StoryTemplateInput source="" />
+                    </StoryStepFormIterator>
+                </ArrayInput>
+            </div>
 
-        <div className={`${classes.form} thank-you`}>
-            <h2>Thank You</h2>
-            <ThanksInput source="end_thank" final />
-        </div>
-    </Fragment>
-);
+            <div className={`${classes.form} call-to-action`}>
+                <h2>Call to Action</h2>
+                <CallToActionInput source="call_to_action" />
+            </div>
+
+            <div className={`${classes.form} message`}>
+                <h2>Message</h2>
+                <MessageInput source="" />
+            </div>
+
+            <div className={`${classes.form} continue`}>
+                <h2>Continue</h2>
+                {LETTER_ACTIVATED ? (
+                    <ThanksInput source="email_thank" />
+                ) : (
+                    <ShareInput source="email_thank" />
+                )}
+            </div>
+
+            {LETTER_ACTIVATED && (
+                <div className={`${classes.form} letter`}>
+                    <h2>Letter</h2>
+                    <LetterInput source="recipient" />
+                </div>
+            )}
+
+            <div className={`${classes.form} register`}>
+                <h2>Register</h2>
+                <RegisterInput source="register" />
+            </div>
+
+            <div className={`${classes.form} thank-you`}>
+                <h2>Thank You</h2>
+                <ThanksInput source="end_thank" final />
+            </div>
+        </Fragment>
+    );
+};
 
 Form.propTypes = {
     classes: PropTypes.object,

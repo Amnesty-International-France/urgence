@@ -58,6 +58,10 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
         return Error('Not Found');
     }
 
+    if (!urgentAction.campaign_code || urgentAction.campaign_code === '') {
+        return;
+    }
+
     const authResponse = await authenticate();
     const auth = await authResponse.json();
 
