@@ -62,16 +62,6 @@ export const messageFormScreenPreview = {
         padding: '100px 20px 20px 20px',
     },
     '& .action': {
-        backgroundColor: white,
-        margin: 0,
-        marginBottom: '-20px',
-        marginLeft: '-20px',
-        marginRight: '-20px',
-        left: 0,
-        width: 'calc(100% + 40px)',
-        zIndex: 1000,
-        position: 'sticky',
-        bottom: 0,
         '& a': {
             width: '100%',
         },
@@ -87,15 +77,6 @@ export const registerFormScreenPreview = {
         height: '480px',
     },
     '& .action': {
-        backgroundColor: white,
-        margin: 0,
-        marginBottom: '-60px',
-        marginLeft: '-20px',
-        marginRight: '-20px',
-        left: 0,
-        width: 'calc(100% + 40px)',
-        zIndex: 1000,
-        bottom: 0,
         '& a': {
             width: '100%',
         },
