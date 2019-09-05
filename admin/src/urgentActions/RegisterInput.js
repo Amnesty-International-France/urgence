@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import {
     addField,
     FormDataConsumer,
+    ReferenceInput,
     LongTextInput,
     TextInput,
+    SelectInput,
     required,
 } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
@@ -54,6 +56,14 @@ export const RegisterInput = ({ classes, source }) => {
                                         defaultValue={defaultButton}
                                         validate={[required()]}
                                     />
+                                    <ReferenceInput
+                                        fullWidth
+                                        label="Legal Information | GDPR"
+                                        source={`${source}gdpr`}
+                                        reference="Settings"
+                                    >
+                                        <SelectInput optionText="type" />
+                                    </ReferenceInput>
                                 </div>
                             </CardContent>
                         </Card>
@@ -61,13 +71,15 @@ export const RegisterInput = ({ classes, source }) => {
                             <RegisterActivist
                                 autoFocus={false}
                                 data={formData[source]}
-                                action={() => formData[source] && formData[source].button ? (
-                                    <Link
-                                        to="#"
-                                        label={formData[source].button}
-                                        onClick={noop}
-                                    />
-                                ) : null}
+                                action={() =>
+                                    formData[source] && formData[source].button ? (
+                                        <Link
+                                            to="#"
+                                            label={formData[source].button}
+                                            onClick={noop}
+                                        />
+                                    ) : null
+                                }
                             />
                         </FrontPreview>
                     </Fragment>
