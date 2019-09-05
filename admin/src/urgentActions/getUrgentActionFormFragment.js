@@ -67,6 +67,7 @@ const generateSlug = (title = '') =>
 export const Form = ({ classes }) => (
     <Fragment>
         <div className={classes.form}>
+            <LongTextInput source="campaign_code" />
             <LongTextInput source="title" validate={required()} inputProps={{ autoFocus: true }} />
             <FormDataConsumer>
                 {({ formData }) => {
@@ -74,7 +75,6 @@ export const Form = ({ classes }) => (
                     return <LongTextInput source="slug" disabled />;
                 }}
             </FormDataConsumer>
-            <LongTextInput source="campaign_code" />
         </div>
 
         <div className={`${classes.form} story`}>

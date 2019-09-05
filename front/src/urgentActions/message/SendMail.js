@@ -31,21 +31,44 @@ export const renderSendMail = ({
         recipient={recipient}
         subject={object}
         body={templateToBodyText(messageTemplate, civility, firstname, lastname)}
-        afterMail={afterMail}
+        afterMail={() => afterMail({ email, firstname, lastname })}
         analyticsCategory={analyticsCategory}
         match={match}
         step={step}
     />
 );
 
+const query = `
+    mutation AddCampaignMember($id: ID!, $member: CampaignMember!) {
+        addCampaignMember(id: $id, member: $member) {
+            valid
+        }
+    }
+`;
+
 export class SendMail extends Component {
-    afterMail = () => {
+    afterMail = member => {
         const {
             history,
             match: { params },
+            urgentActionId,
         } = this.props;
 
         history.push(generateUrl('thanks', params));
+
+        fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
+            method: 'POST',
+            body: JSON.stringify({
+                query,
+                variables: {
+                    id: urgentActionId,
+                    member,
+                },
+            }),
+            headers: {
+                'content-type': 'application/json',
+            },
+        });
     };
     render() {
         const { messageTemplate, recipient, analyticsCategory, step, match } = this.props;
@@ -79,6 +102,7 @@ SendMail.propTypes = {
     }).isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
+    urgentActionId: PropTypes.string,
 };
 
 export default withRouter(SendMail);

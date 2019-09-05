@@ -153,6 +153,16 @@ export default gql`
         register: Register
     }
 
+    input CampaignMember {
+        firstname: String!
+        lastname: String!
+        email: String!
+    }
+
+    type Validation {
+        valid: String
+    }
+
     extend type Query {
         UrgentAction(id: ID!): UrgentAction
         UrgentActionBySlug(slug: String!): UrgentAction
@@ -199,5 +209,6 @@ export default gql`
             register: RegisterInput
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
+        addCampaignMember(id: ID!, member: CampaignMember): Validation
     }
 `;

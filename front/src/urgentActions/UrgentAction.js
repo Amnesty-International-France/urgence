@@ -179,6 +179,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
                         recipient={recipient}
                         messageTemplate={get(data, 'UrgentAction.message_template')}
                         analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
+                        urgentActionId={get(data, 'UrgentAction.id')}
                     />
                 }
             />
