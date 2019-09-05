@@ -6,10 +6,8 @@ import {
     required,
     FormDataConsumer,
     email,
-    ReferenceInput,
     TextInput,
     ArrayInput,
-    SelectInput,
     Labeled,
 } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
@@ -92,15 +90,6 @@ export const MessageInput = ({ classes, source }) => (
                                     source={`${source}object_indication`}
                                     defaultValue={`Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.`}
                                 />
-                                <ReferenceInput
-                                    fullWidth
-                                    label="Legal Information | GDPR"
-                                    source={`${source}gdpr`}
-                                    reference="Settings"
-                                    allowEmpty
-                                >
-                                    <SelectInput optionText="type" />
-                                </ReferenceInput>
                             </div>
                         </CardContent>
                     </Card>
@@ -115,7 +104,6 @@ export const MessageInput = ({ classes, source }) => (
                                         : initMessageTemplate
                                 }
                                 objectIndication={formData.object_indication || ''}
-                                gdpr={formData.gdpr}
                                 action={<Link to="#" label="J'envoie" />}
                                 setEmail={() => {}}
                                 setObject={() => {}}

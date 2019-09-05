@@ -1,15 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-    addField,
-    FormDataConsumer,
-    ReferenceInput,
-    LongTextInput,
-    TextInput,
-    SelectInput,
-    required,
-} from 'react-admin';
+import { addField, FormDataConsumer, LongTextInput, TextInput, required } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -56,15 +48,6 @@ export const RegisterInput = ({ classes, source }) => {
                                         defaultValue={defaultButton}
                                         validate={[required()]}
                                     />
-                                    <ReferenceInput
-                                        fullWidth
-                                        label="Legal Information | GDPR"
-                                        source={`${source}gdpr`}
-                                        reference="Settings"
-                                        allowEmpty
-                                    >
-                                        <SelectInput optionText="type" />
-                                    </ReferenceInput>
                                 </div>
                             </CardContent>
                         </Card>
