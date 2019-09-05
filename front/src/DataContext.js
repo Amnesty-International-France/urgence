@@ -16,18 +16,8 @@ const { Provider, Consumer } = createContext({
     phone: '',
     email: '',
     registered: 'false',
-    setObject: () => null,
-    setCivility: () => null,
-    setFirstname: () => null,
-    setLastname: () => null,
-    setAddressMain: () => null,
-    setAddressMore: () => null,
-    setPostalCode: () => null,
-    setCity: () => null,
-    setCountry: () => null,
-    setPhone: () => null,
-    setEmail: () => null,
-    setRegistered: () => null,
+    gdprMessage: null,
+    gdprRegister: null,
 });
 
 export const DataConsumer = Consumer;
@@ -46,6 +36,8 @@ export class DataProvider extends Component {
         phone: data.getPhone(),
         email: data.getEmail(),
         registered: data.getRegistered(),
+        gdprMessage: data.getGdprMessage(),
+        gdprRegister: data.getGdprRegister(),
     };
 
     setObject = object => {
@@ -106,6 +98,16 @@ export class DataProvider extends Component {
     setRegistered = () => {
         this.setState({ registered: 'true' });
         data.setRegistered('true');
+    };
+
+    setGdprRegister = gdprMessage => {
+        this.setState({ gdprMessage });
+        data.setGdprRegister(gdprMessage);
+    };
+
+    setGdprRegister = gdprRegister => {
+        this.setState({ gdprRegister });
+        data.setGdprRegister(gdprRegister);
     };
 
     render() {
