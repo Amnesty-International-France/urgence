@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import RichText from '../themes/RichText';
+
 const LegalInformation = ({ content }) => {
     if (!content) {
         return null;
     }
-    return <span>{content}</span>;
+    return <RichText html={content} />;
 };
 
 LegalInformation.propTypes = {
