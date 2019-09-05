@@ -11,6 +11,7 @@ import { withYellowLogo } from '../../themes/ThemeContext';
 import { withSessionData } from '../../DataContext';
 import Input, { isCorrectEmail } from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';
+import LegalInformation from '../LegalInformation';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -253,7 +254,7 @@ FormStep.propTypes = {
     step: PropTypes.string,
 };
 
-export const Message = ({ messageTemplate, action, className, ...props }) => {
+export const Message = ({ messageTemplate, gdpr, action, className, ...props }) => {
     return (
         <Fragment>
             {(!messageTemplate || !messageTemplate.length) && (
@@ -278,6 +279,7 @@ export const Message = ({ messageTemplate, action, className, ...props }) => {
                         <FormStep {...props} />
                     </div>
                     <div className="action">{action}</div>
+                    <LegalInformation content={gdpr} />
                 </div>
             )}
         </Fragment>
@@ -286,6 +288,7 @@ export const Message = ({ messageTemplate, action, className, ...props }) => {
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
+    gdpr: PropTypes.string,
     email: PropTypes.string,
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
