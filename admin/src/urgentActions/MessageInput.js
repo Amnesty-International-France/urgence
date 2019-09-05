@@ -60,13 +60,13 @@ export const MessageInput = ({ classes, source }) => (
                                         <TextInput
                                             fullWidth
                                             type="email"
-                                            label="Mail"
+                                            label="Mail To"
                                             source={`${source}recipient.mail`}
                                             validate={validateRecipientEmail}
                                         />
                                         <TextInput
                                             fullWidth
-                                            label="Copies to"
+                                            label="Copies To"
                                             source={`${source}recipient.copies_to`}
                                             validate={validateEmailsList}
                                         />
