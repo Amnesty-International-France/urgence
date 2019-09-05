@@ -9,7 +9,7 @@ const dateFormat = {
     minute: 'numeric',
 };
 
-const sort = { field: 'updated_on', order: 'DESC' };
+const sort = { field: 'id', order: 'DESC' };
 
 export default props => (
     <List {...props} title="Settings" sort={sort} perPage={25}>
