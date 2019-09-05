@@ -47,7 +47,7 @@ const isDisabled = props => {
     return !firstname || !lastname || !phone || !isCorrectEmail(email);
 };
 
-export const RegisterActivist = ({ data, gdpr, action, className, ...props }) => {
+export const RegisterActivist = ({ data, gdprRegister, action, className, ...props }) => {
     const text = get(data, 'text');
     return (
         <Fragment>
@@ -57,7 +57,7 @@ export const RegisterActivist = ({ data, gdpr, action, className, ...props }) =>
                     <Form {...props} />
                 </div>
                 <div className="action">{action(isDisabled(props))}</div>
-                <LegalInformation content={gdpr} />
+                <LegalInformation content={gdprRegister} />
             </div>
         </Fragment>
     );
@@ -69,7 +69,7 @@ RegisterActivist.propTypes = {
         text: PropTypes.string.isRequired,
         button: PropTypes.string.isRequired,
     }),
-    gdpr: PropTypes.string,
+    gdprRegister: PropTypes.string,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
     civility: PropTypes.string,

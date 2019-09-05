@@ -254,41 +254,39 @@ FormStep.propTypes = {
     step: PropTypes.string,
 };
 
-export const Message = ({ messageTemplate, gdpr, action, className, ...props }) => {
-    return (
-        <Fragment>
-            {(!messageTemplate || !messageTemplate.length) && (
-                <p className="error">Cette action urgente n&#39;existe plus.</p>
-            )}
+export const Message = ({ messageTemplate, gdprMessage, action, className, ...props }) => (
+    <Fragment>
+        {(!messageTemplate || !messageTemplate.length) && (
+            <p className="error">Cette action urgente n&#39;existe plus.</p>
+        )}
 
-            {messageTemplate && messageTemplate.length > 0 && (
-                <div className={classnames('message', className)}>
-                    <p>
-                        Pour agir plus vite,&nbsp;
-                        <strong className="importantText"> nous vous proposons ce message :</strong>
-                    </p>
-                    <LetterView messageTemplate={messageTemplate} />
-                    <p>
-                        Parce que les messages uniques ont plus d&#39;impact,&nbsp;
-                        <strong className="importantText">
-                            {' '}
-                            nous vous invitons à le personnaliser.
-                        </strong>
-                    </p>
-                    <div className="formStep">
-                        <FormStep {...props} />
-                    </div>
-                    <div className="action">{action}</div>
-                    <LegalInformation content={gdpr} />
+        {messageTemplate && messageTemplate.length > 0 && (
+            <div className={classnames('message', className)}>
+                <p>
+                    Pour agir plus vite,&nbsp;
+                    <strong className="importantText"> nous vous proposons ce message :</strong>
+                </p>
+                <LetterView messageTemplate={messageTemplate} />
+                <p>
+                    Parce que les messages uniques ont plus d&#39;impact,&nbsp;
+                    <strong className="importantText">
+                        {' '}
+                        nous vous invitons à le personnaliser.
+                    </strong>
+                </p>
+                <div className="formStep">
+                    <FormStep {...props} />
                 </div>
-            )}
-        </Fragment>
-    );
-};
+                <div className="action">{action}</div>
+                <LegalInformation content={gdprMessage} />
+            </div>
+        )}
+    </Fragment>
+);
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
-    gdpr: PropTypes.string,
+    gdprMessage: PropTypes.string,
     email: PropTypes.string,
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
