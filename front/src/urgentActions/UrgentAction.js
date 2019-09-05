@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
@@ -180,7 +180,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
                 objectIndication={get(data, 'UrgentAction.object_indication')}
-                gdpr={get(data, 'GdprMessage.content')}
+                gdprMessage={get(data, 'GdprMessage.content')}
                 loading={loading}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
@@ -252,7 +252,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
         return (
             <RegisterActivist
                 data={register}
-                gdpr={get(data, 'GdprRegister.content')}
+                gdprRegister={get(data, 'GdprRegister.content')}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                 action={disabled => (
@@ -287,25 +287,26 @@ export const UrgentActionWithData = ({
         params: { slug, step },
     },
 }) => (
-    <DataProvider>
-        <Query query={query} variables={{ slug }}>
-            {({ data, error, loading }) => {
-                const seoProps = seoPropsFromStory(get(data, 'UrgentAction.story'));
-                return (
-                    <Fragment>
-                        {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
-                        <UrgentAction
-                            slug={slug}
-                            step={step}
-                            data={data}
-                            error={error}
-                            loading={loading}
-                        />
-                    </Fragment>
-                );
-            }}
-        </Query>
-    </DataProvider>
+    <Query query={query} variables={{ slug }}>
+        {({ data, error, loading }) => {
+            const seoProps = seoPropsFromStory(get(data, 'UrgentAction.story'));
+            return (
+                <DataProvider
+                    defaultGdprMessage={get(data, 'GdprMessage.content', null)}
+                    defaultGdprRegister={get(data, 'GdprRegister.content', null)}
+                >
+                    {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
+                    <UrgentAction
+                        slug={slug}
+                        step={step}
+                        data={data}
+                        error={error}
+                        loading={loading}
+                    />
+                </DataProvider>
+            );
+        }}
+    </Query>
 );
 
 UrgentActionWithData.propTypes = {
