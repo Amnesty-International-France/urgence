@@ -20,7 +20,7 @@ export const root = {
             margin: 0,
             marginBottom: 25,
             '& > label': {
-                fontSize: '1.5em',
+                fontSize: '1.4em',
                 fontWeight: 'bold',
             },
         },
