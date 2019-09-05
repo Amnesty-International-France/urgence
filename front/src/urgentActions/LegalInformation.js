@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LegalInformation = ({ gdpr }) => {
-    if (!gdpr) {
+const LegalInformation = ({ content }) => {
+    if (!content) {
         return null;
     }
-    return <span>{gdpr}</span>;
+    return <span>{content}</span>;
 };
 
 LegalInformation.propTypes = {
-    gdpr: PropTypes.number.isRequired,
+    content: PropTypes.string.isRequired,
 };
 
 LegalInformation.defaultProps = {
-    gdpr: null,
+    content: null,
 };
 
 export default LegalInformation;
