@@ -61,6 +61,7 @@ export const RegisterInput = ({ classes, source }) => {
                                         label="Legal Information | GDPR"
                                         source={`${source}gdpr`}
                                         reference="Settings"
+                                        allowEmpty
                                     >
                                         <SelectInput optionText="type" />
                                     </ReferenceInput>
