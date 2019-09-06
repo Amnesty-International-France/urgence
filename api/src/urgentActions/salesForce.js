@@ -2,14 +2,12 @@ import isUUID from 'validator/lib/isUUID';
 import fetch from 'isomorphic-unfetch';
 
 import { getUrgentAction } from './repository';
-import config from '../../../config';
+import { salesforce } from '../../../config';
 
 const JSON_TYPE = 'application/json';
 
-const authenticate = async () => {
-    const { salesforce } = config;
-
-    return fetch(
+const authenticate = () =>
+    fetch(
         `${salesforce.baseUrl}/oauth2/token?grant_type=password&client_id=${
             salesforce.consumerKey
         }&client_secret=${salesforce.consumerSecret}&username=${salesforce.username}&password=${
@@ -22,12 +20,9 @@ const authenticate = async () => {
             },
         },
     );
-};
 
-const updateCampaignMember = async (access_token, campaignCode, { firstname, lastname, email }) => {
-    const { salesforce } = config;
-
-    return fetch(`${salesforce.baseUrl}/data/v44.0/sobjects/CampaignMember`, {
+const registerCampaignMember = async (access_token, campaignCode, { firstname, lastname, email }) =>
+    fetch(`${salesforce.baseUrl}/data/v44.0/sobjects/CampaignMember`, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${access_token}`,
@@ -46,7 +41,6 @@ const updateCampaignMember = async (access_token, campaignCode, { firstname, las
             },
         }),
     });
-};
 
 export const addCampaignMember = async (id, { firstname, lastname, email }) => {
     if (!isUUID(id)) {
@@ -69,7 +63,7 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
         return Error('Unable to contact SalesForce');
     }
 
-    updateCampaignMember(auth.access_token, urgentAction.campaign_code, {
+    return registerCampaignMember(auth.access_token, urgentAction.campaign_code, {
         firstname,
         lastname,
         email,

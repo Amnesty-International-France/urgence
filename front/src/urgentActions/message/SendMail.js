@@ -39,12 +39,27 @@ export const renderSendMail = ({
 );
 
 const query = `
-    mutation AddCampaignMember($id: ID!, $member: CampaignMember!) {
+    mutation AddCampaignMember($id: ID!, $member: CampaignMemberInput!) {
         addCampaignMember(id: $id, member: $member) {
-            valid
+            email
         }
     }
 `;
+
+const addCampaignMember = (urgentActionId, member) =>
+    fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
+        method: 'POST',
+        body: JSON.stringify({
+            query,
+            variables: {
+                id: urgentActionId,
+                member,
+            },
+        }),
+        headers: {
+            'content-type': 'application/json',
+        },
+    });
 
 export class SendMail extends Component {
     afterMail = member => {
@@ -54,21 +69,9 @@ export class SendMail extends Component {
             urgentActionId,
         } = this.props;
 
-        history.push(generateUrl('thanks', params));
+        addCampaignMember(urgentActionId, member);
 
-        fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
-            method: 'POST',
-            body: JSON.stringify({
-                query,
-                variables: {
-                    id: urgentActionId,
-                    member,
-                },
-            }),
-            headers: {
-                'content-type': 'application/json',
-            },
-        });
+        history.push(generateUrl('thanks', params));
     };
     render() {
         const { messageTemplate, recipient, analyticsCategory, step, match } = this.props;

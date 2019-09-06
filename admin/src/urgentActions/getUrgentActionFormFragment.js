@@ -71,9 +71,7 @@ const generateSlug = (title = '') =>
 const autoFocusProps = { autoFocus: true };
 
 const Form = ({ classes, record }) => {
-    const [emptyCode, setEmptyCode] = useState(
-        !record.campaign_code || record.campaign_code === '',
-    );
+    const [emptyCode, setEmptyCode] = useState(!record.campaign_code);
 
     const handleTextFieldChange = e => {
         setEmptyCode(e.target.value === '');
