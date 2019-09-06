@@ -140,6 +140,7 @@ export default gql`
         id: ID!
         title: String!
         slug: String
+        campaign_code: String
         story: [StoryStep]
         call_to_action: CallToAction
         object_indication: String
@@ -150,6 +151,18 @@ export default gql`
         email_thank: Thanks
         end_thank: Thanks
         register: Register
+    }
+
+    input CampaignMemberInput {
+        firstname: String!
+        lastname: String!
+        email: String!
+    }
+
+    type CampaignMember {
+        firstname: String!
+        lastname: String!
+        email: String!
     }
 
     extend type Query {
@@ -173,6 +186,7 @@ export default gql`
         createUrgentAction(
             title: String!
             slug: String
+            campaign_code: String
             story: [StoryStepInput]
             call_to_action: CallToActionInput
             object_indication: String
@@ -186,6 +200,7 @@ export default gql`
             id: ID!
             title: String!
             slug: String
+            campaign_code: String
             story: [StoryStepInput]
             call_to_action: CallToActionInput
             object_indication: String
@@ -196,5 +211,6 @@ export default gql`
             register: RegisterInput
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
+        addCampaignMember(id: ID!, member: CampaignMemberInput): CampaignMember
     }
 `;

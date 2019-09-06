@@ -143,6 +143,38 @@ const config = convict({
             },
         },
     },
+    salesforce: {
+        baseUrl: {
+            format: String,
+            default: '',
+            env: 'SF_BASE_URL',
+        },
+        consumerKey: {
+            format: String,
+            default: '',
+            env: 'SF_CONSUMER_KEY',
+        },
+        consumerSecret: {
+            format: String,
+            default: '',
+            env: 'SF_CONSUMER_SECRET',
+        },
+        username: {
+            format: String,
+            default: '',
+            env: 'SF_USERNAME',
+        },
+        password: {
+            format: String,
+            default: '',
+            env: 'SF_PASSWORD',
+        },
+        securityToken: {
+            format: String,
+            default: '',
+            env: 'SF_SECURITY_TOKEN',
+        },
+    },
 });
 
 // Perform validation

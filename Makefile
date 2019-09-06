@@ -129,10 +129,10 @@ migration:
 	mkdir -p var/data # we can't commit it as PostGres wants an empty folder
 	$(DB_MIGRATE) up"
 
-migration-new: ## make create-migration MIGRATION_TITLE=whatever-title
+migration-new: ## make migration-new MIGRATION_TITLE=whatever-title
 	$(DB_MIGRATE) create ${MIGRATION_TITLE}"
 
-migration-down: ## make create-migration NB_MIGRATIONS=2
+migration-down: ## make migration-down NB_MIGRATIONS=2
 	$(DB_MIGRATE) down -c ${NB_MIGRATIONS}"
 
 migration-test:

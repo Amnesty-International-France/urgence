@@ -6,6 +6,7 @@ const columns = [
     'id',
     'title',
     'slug',
+    'campaign_code',
     'story',
     'call_to_action',
     'object_indication',

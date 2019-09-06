@@ -7,6 +7,7 @@ import {
     updateUrgentAction,
     removeUrgentAction,
 } from './repository';
+import { addCampaignMember } from './salesForce';
 
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
 
@@ -42,5 +43,6 @@ export default {
             return updateUrgentAction(urgentAction.id, preparedUa);
         },
         deleteUrgentAction: (_, id) => removeUrgentAction(id),
+        addCampaignMember: (_, { id, member }) => addCampaignMember(id, member),
     },
 };

@@ -20,6 +20,7 @@ export default props => (
             medium={
                 <Datagrid>
                     <TextField source="title" />
+                    <TextField source="campaign_code" label="Campaign code" />
                     <DateField
                         showTime
                         label="Last Updated"
