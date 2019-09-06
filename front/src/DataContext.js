@@ -23,12 +23,12 @@ const { Provider, Consumer } = createContext({
 export const DataConsumer = Consumer;
 
 export const DataProvider = ({ children, defaultGdprMessage, defaultGdprRegister }) => {
-    if (gdprMessage) {
-        data.setGdprMessage(gdprMessage);
+    if (defaultGdprMessage) {
+        data.setGdprMessage(defaultGdprMessage);
     }
 
-    if (gdprRegister) {
-        data.setGdprMessage(gdprRegister);
+    if (defaultGdprRegister) {
+        data.setGdprMessage(defaultGdprRegister);
     }
 
     const [object, setMailObject] = useState(data.getMailObject());
