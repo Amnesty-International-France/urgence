@@ -7,7 +7,7 @@ const LegalInformation = ({ content }) => {
     if (!content) {
         return null;
     }
-    return <RichText html={content} />;
+    return <RichText className="legal-information" html={content} />;
 };
 
 LegalInformation.propTypes = {

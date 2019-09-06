@@ -121,7 +121,11 @@ export class LetterView extends Component {
                     )}
                 >
                     {messageTemplate.map(({ value }, key) => (
-                        <MessageSection key={key} content={value} />
+                        <MessageSection
+                            key={key}
+                            className="letter-message-section"
+                            content={value}
+                        />
                     ))}
                     {letterOverflow && (
                         <span
