@@ -1,5 +1,6 @@
 import {
     getSetting,
+    getSettingByType,
     getSettings,
     countSettings,
     createSetting,

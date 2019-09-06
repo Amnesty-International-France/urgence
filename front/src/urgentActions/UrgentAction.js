@@ -113,12 +113,12 @@ const query = gql`
                 text
             }
         }
-        GdprMessage: Setting(type: "gdpr-message") {
+        GdprMessage: SettingByType(type: "gdpr-message") {
             id
             type
             content
         }
-        GdprRegister: Setting(type: "gdpr-register") {
+        GdprRegister: SettingByType(type: "gdpr-register") {
             id
             type
             content
