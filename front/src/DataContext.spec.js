@@ -1,7 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
-import { DataProvider } from './DataContext';
+import { DataProvider, DataConsumer } from './DataContext';
 import data from './data';
 
 jest.mock('./data');
@@ -20,363 +20,232 @@ describe('DataContext', () => {
         data.getPhone.mockImplementation(() => 'phone value');
         data.getEmail.mockImplementation(() => 'email value');
         data.getRegistered.mockImplementation(() => 'false');
-        data.getGdprMessage.mockImplementation(() => ({
-            id: 1,
-            type: 'gdpr-message',
-            content: 'serious business',
-        }));
-        data.getGdprMessage.mockImplementation(() => ({
-            id: 2,
-            type: 'gdpr-register',
-            content: 'cool setting',
-        }));
+        data.getGdprMessage.mockImplementation(() => 'serious business');
+        data.getGdprRegister.mockImplementation(() => 'cool setting');
     });
 
-    it('should have state from sessionData', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
+    it('should initialize the context from data', () => {
+        let contextTest = null;
 
-        const state = wrapper.state();
-        expect(state.object).toEqual('object value');
-        expect(state.civility).toEqual('civility value');
-        expect(state.firstname).toEqual('firstname value');
-        expect(state.lastname).toEqual('lastname value');
-        expect(state.addressMain).toEqual('addressMain value');
-        expect(state.addressMore).toEqual('addressMore value');
-        expect(state.postalCode).toEqual('postalCode value');
-        expect(state.city).toEqual('city value');
-        expect(state.country).toEqual('country value');
-        expect(state.phone).toEqual('phone value');
-        expect(state.email).toEqual('email value');
-        expect(state.registered).toEqual('false');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+        const render = context => {
+            contextTest = { ...context };
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
+        expect(contextTest.object).toEqual('object value');
+        expect(contextTest.civility).toEqual('civility value');
+        expect(contextTest.firstname).toEqual('firstname value');
+        expect(contextTest.lastname).toEqual('lastname value');
+        expect(contextTest.addressMain).toEqual('addressMain value');
+        expect(contextTest.addressMore).toEqual('addressMore value');
+        expect(contextTest.postalCode).toEqual('postalCode value');
+        expect(contextTest.city).toEqual('city value');
+        expect(contextTest.country).toEqual('country value');
+        expect(contextTest.phone).toEqual('phone value');
+        expect(contextTest.email).toEqual('email value');
+        expect(contextTest.registered).toEqual('false');
+        expect(contextTest.gdprMessage).toEqual('serious business');
+        expect(contextTest.gdprRegister).toEqual('cool setting');
     });
 
-    it('should have setObject method to change state.object', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setObject('new object');
-
-        const state = wrapper.state();
-        expect(state.object).toEqual('new object');
-        expect(state.civility).toEqual('civility value');
-        expect(state.firstname).toEqual('firstname value');
-        expect(state.lastname).toEqual('lastname value');
-        expect(state.addressMain).toEqual('addressMain value');
-        expect(state.addressMore).toEqual('addressMore value');
-        expect(state.postalCode).toEqual('postalCode value');
-        expect(state.city).toEqual('city value');
-        expect(state.country).toEqual('country value');
-        expect(state.phone).toEqual('phone value');
-        expect(state.email).toEqual('email value');
-        expect(state.registered).toEqual('false');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+    it('should have a "setObject" method to change the state "object"', () => {
+        const render = context => {
+            context.setObject('new object');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
 
         expect(data.setMailObject).toBeCalledWith('new object');
     });
 
-    it('should have setCivility method to change the state civility', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setCivility('new civility');
-
-        const state = wrapper.state();
-        expect(state.object).toEqual('object value');
-        expect(state.civility).toEqual('new civility');
-        expect(state.firstname).toEqual('firstname value');
-        expect(state.lastname).toEqual('lastname value');
-        expect(state.addressMain).toEqual('addressMain value');
-        expect(state.addressMore).toEqual('addressMore value');
-        expect(state.postalCode).toEqual('postalCode value');
-        expect(state.city).toEqual('city value');
-        expect(state.country).toEqual('country value');
-        expect(state.phone).toEqual('phone value');
-        expect(state.email).toEqual('email value');
-        expect(state.registered).toEqual('false');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+    it('should have a "setCivility" method to change the state "civility"', () => {
+        const render = context => {
+            context.setCivility('new civility');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
 
         expect(data.setCivility).toBeCalledWith('new civility');
     });
 
-    it('should have setFirstname method to change the state firstname', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setFirstname('new firstname');
-
-        const state = wrapper.state();
-        expect(state.object).toEqual('object value');
-        expect(state.civility).toEqual('civility value');
-        expect(state.firstname).toEqual('new firstname');
-        expect(state.lastname).toEqual('lastname value');
-        expect(state.addressMain).toEqual('addressMain value');
-        expect(state.addressMore).toEqual('addressMore value');
-        expect(state.postalCode).toEqual('postalCode value');
-        expect(state.city).toEqual('city value');
-        expect(state.country).toEqual('country value');
-        expect(state.phone).toEqual('phone value');
-        expect(state.email).toEqual('email value');
-        expect(state.registered).toEqual('false');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+    it('should have a "setFirstname" method to change the state "firstname"', () => {
+        const render = context => {
+            context.setFirstname('new firstname');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
 
         expect(data.setFirstname).toBeCalledWith('new firstname');
     });
 
-    it('should have setLastname method to change the state lastname', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setLastname('new lastname');
-
-        const state = wrapper.state();
-        expect(state.object).toEqual('object value');
-        expect(state.civility).toEqual('civility value');
-        expect(state.firstname).toEqual('firstname value');
-        expect(state.lastname).toEqual('new lastname');
-        expect(state.addressMain).toEqual('addressMain value');
-        expect(state.addressMore).toEqual('addressMore value');
-        expect(state.postalCode).toEqual('postalCode value');
-        expect(state.city).toEqual('city value');
-        expect(state.country).toEqual('country value');
-        expect(state.phone).toEqual('phone value');
-        expect(state.email).toEqual('email value');
-        expect(state.registered).toEqual('false');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+    it('should have a "setLastname" method to change the state "lastname"', () => {
+        const render = context => {
+            context.setLastname('new lastname');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
 
         expect(data.setLastname).toBeCalledWith('new lastname');
     });
 
-    it('should have setAddressMain method to change the state addressMain', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setAddressMain('new addressMain');
-
-        const state = wrapper.state();
-        expect(state.object).toEqual('object value');
-        expect(state.civility).toEqual('civility value');
-        expect(state.firstname).toEqual('firstname value');
-        expect(state.lastname).toEqual('lastname value');
-        expect(state.addressMain).toEqual('new addressMain');
-        expect(state.addressMore).toEqual('addressMore value');
-        expect(state.postalCode).toEqual('postalCode value');
-        expect(state.city).toEqual('city value');
-        expect(state.country).toEqual('country value');
-        expect(state.phone).toEqual('phone value');
-        expect(state.email).toEqual('email value');
-        expect(state.registered).toEqual('false');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+    it('should have a "setAddressMain" method to change the state "addressMain"', () => {
+        const render = context => {
+            context.setAddressMain('new addressMain');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
 
         expect(data.setAddressMain).toBeCalledWith('new addressMain');
     });
 
-    it('should have setAddressMore method to change the state addressMore', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setAddressMore('new addressMore');
-
-        const state = wrapper.state();
-        expect(state.object).toEqual('object value');
-        expect(state.civility).toEqual('civility value');
-        expect(state.firstname).toEqual('firstname value');
-        expect(state.lastname).toEqual('lastname value');
-        expect(state.addressMain).toEqual('addressMain value');
-        expect(state.addressMore).toEqual('new addressMore');
-        expect(state.postalCode).toEqual('postalCode value');
-        expect(state.city).toEqual('city value');
-        expect(state.country).toEqual('country value');
-        expect(state.phone).toEqual('phone value');
-        expect(state.email).toEqual('email value');
-        expect(state.registered).toEqual('false');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+    it('should have a "setAddressMore" method to change the state "addressMore"', () => {
+        const render = context => {
+            context.setAddressMore('new addressMore');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
 
         expect(data.setAddressMore).toBeCalledWith('new addressMore');
     });
 
-    it('should have setPostalCode method to change the state postalCode', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setPostalCode('new postalCode');
-
-        const state = wrapper.state();
-        expect(state.object).toEqual('object value');
-        expect(state.civility).toEqual('civility value');
-        expect(state.firstname).toEqual('firstname value');
-        expect(state.lastname).toEqual('lastname value');
-        expect(state.addressMain).toEqual('addressMain value');
-        expect(state.addressMore).toEqual('addressMore value');
-        expect(state.postalCode).toEqual('new postalCode');
-        expect(state.city).toEqual('city value');
-        expect(state.country).toEqual('country value');
-        expect(state.phone).toEqual('phone value');
-        expect(state.email).toEqual('email value');
-        expect(state.registered).toEqual('false');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+    it('should have a "setPostalCode" method to change the state "postalCode"', () => {
+        const render = context => {
+            context.setPostalCode('new postalCode');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
 
         expect(data.setPostalCode).toBeCalledWith('new postalCode');
     });
 
-    it('should have setCity method to change the state city', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setCity('new city');
-
-        const state = wrapper.state();
-        expect(state.object).toEqual('object value');
-        expect(state.civility).toEqual('civility value');
-        expect(state.firstname).toEqual('firstname value');
-        expect(state.lastname).toEqual('lastname value');
-        expect(state.addressMain).toEqual('addressMain value');
-        expect(state.addressMore).toEqual('addressMore value');
-        expect(state.postalCode).toEqual('postalCode value');
-        expect(state.city).toEqual('new city');
-        expect(state.country).toEqual('country value');
-        expect(state.phone).toEqual('phone value');
-        expect(state.email).toEqual('email value');
-        expect(state.registered).toEqual('false');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+    it('should have a "setCity" method to change the state "city"', () => {
+        const render = context => {
+            context.setCity('new city');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
 
         expect(data.setCity).toBeCalledWith('new city');
     });
 
-    it('should have setCountry method to change the state country', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setCountry('new country');
-
-        const state = wrapper.state();
-        expect(state.object).toEqual('object value');
-        expect(state.civility).toEqual('civility value');
-        expect(state.firstname).toEqual('firstname value');
-        expect(state.lastname).toEqual('lastname value');
-        expect(state.addressMain).toEqual('addressMain value');
-        expect(state.addressMore).toEqual('addressMore value');
-        expect(state.postalCode).toEqual('postalCode value');
-        expect(state.city).toEqual('city value');
-        expect(state.country).toEqual('new country');
-        expect(state.phone).toEqual('phone value');
-        expect(state.email).toEqual('email value');
-        expect(state.registered).toEqual('false');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+    it('should have a "setCountry" method to change the state "country"', () => {
+        const render = context => {
+            context.setCountry('new country');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
 
         expect(data.setCountry).toBeCalledWith('new country');
     });
 
-    it('should have setPhone method to change the state phone', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setPhone('new phone');
-
-        const state = wrapper.state();
-        expect(state.object).toEqual('object value');
-        expect(state.civility).toEqual('civility value');
-        expect(state.firstname).toEqual('firstname value');
-        expect(state.lastname).toEqual('lastname value');
-        expect(state.addressMain).toEqual('addressMain value');
-        expect(state.addressMore).toEqual('addressMore value');
-        expect(state.postalCode).toEqual('postalCode value');
-        expect(state.city).toEqual('city value');
-        expect(state.country).toEqual('country value');
-        expect(state.phone).toEqual('new phone');
-        expect(state.email).toEqual('email value');
-        expect(state.registered).toEqual('false');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+    it('should have a "setPhone" method to change the state "phone"', () => {
+        const render = context => {
+            context.setPhone('new phone');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
 
         expect(data.setPhone).toBeCalledWith('new phone');
     });
 
-    it('should have setEmail method to change the state email', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setEmail('new email');
-
-        const state = wrapper.state();
-        expect(state.object).toEqual('object value');
-        expect(state.civility).toEqual('civility value');
-        expect(state.firstname).toEqual('firstname value');
-        expect(state.lastname).toEqual('lastname value');
-        expect(state.addressMain).toEqual('addressMain value');
-        expect(state.addressMore).toEqual('addressMore value');
-        expect(state.postalCode).toEqual('postalCode value');
-        expect(state.city).toEqual('city value');
-        expect(state.country).toEqual('country value');
-        expect(state.phone).toEqual('phone value');
-        expect(state.email).toEqual('new email');
-        expect(state.registered).toEqual('false');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+    it('should have a "setEmail" method to change the state "email"', () => {
+        const render = context => {
+            context.setEmail('new email');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
 
         expect(data.setEmail).toBeCalledWith('new email');
     });
 
-    it('should have setRegistered method to change the state registered', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setRegistered();
-
-        const state = wrapper.state();
-        expect(state.object).toEqual('object value');
-        expect(state.civility).toEqual('civility value');
-        expect(state.firstname).toEqual('firstname value');
-        expect(state.lastname).toEqual('lastname value');
-        expect(state.addressMain).toEqual('addressMain value');
-        expect(state.addressMore).toEqual('addressMore value');
-        expect(state.postalCode).toEqual('postalCode value');
-        expect(state.city).toEqual('city value');
-        expect(state.country).toEqual('country value');
-        expect(state.phone).toEqual('phone value');
-        expect(state.email).toEqual('email value');
-        expect(state.registered).toEqual('true');
-        expect(state.gdprMessage.id).toEqual(1);
-        expect(state.gdprMessage.type).toEqual('gdpr-message');
-        expect(state.gdprMessage.id).toEqual('serious business');
-        expect(state.gdprRegister.content).toEqual(2);
-        expect(state.gdprRegister.type).toEqual('gdpr-register');
-        expect(state.gdprRegister.content).toEqual('cool setting');
+    it('should have a "setRegistered" method to change the state "registered"', () => {
+        const render = context => {
+            context.setRegistered();
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
 
         expect(data.setRegistered).toBeCalled();
+    });
+
+    it('should have a "setGdprMessage" method to change the state "gdprMessage"', () => {
+        const render = context => {
+            context.setGdprMessage('new gdprMessage');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
+        expect(data.setGdprMessage).toBeCalledWith('new gdprMessage');
+    });
+
+    it('should have a "setGdprRegister" method to change the state "setGdprRegister"', () => {
+        const render = context => {
+            context.setGdprRegister('new gdprRegister');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
+        expect(data.setGdprRegister).toBeCalledWith('new gdprRegister');
     });
 });
