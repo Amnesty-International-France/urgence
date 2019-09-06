@@ -28,13 +28,10 @@ describe('sessionData', () => {
     describe('.getGdprMessage', () => {
         it('calls storage.getItem(amnesty_gdpr_message) and returns its result', () => {
             const storage = {
-                getItem: jest.fn(() => ({ id: 10, type: 'rgpd', content: 'darwin' })),
+                getItem: jest.fn(() => 'darwin'),
             };
 
-            const data = sessionData(storage).getGdprMessage();
-            expect(data.id).toBe(10);
-            expect(data.type).toBe('rgpd');
-            expect(data.content).toBe('darwin');
+            expect(sessionData(storage).getGdprMessage()).toBe('darwin');
             expect(storage.getItem).toHaveBeenCalledWith('amnesty_gdpr_message');
         });
     });
@@ -46,26 +43,18 @@ describe('sessionData', () => {
             };
 
             const mySessionData = sessionData(storage);
-            expect(
-                mySessionData.setGdprMessage({ id: 10, type: 'rgpd', content: 'darwin' }),
-            ).toEqual(mySessionData);
-            expect(storage.setItem).toHaveBeenCalledWith(
-                'amnesty_gdpr_message',
-                JSON.stringify({ id: 10, type: 'rgpd', content: 'darwin' }),
-            );
+            expect(mySessionData.setGdprMessage('darwin')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_gdpr_message', 'darwin');
         });
     });
 
     describe('.getGdprRegister', () => {
         it('calls storage.getItem(amnesty_gdpr_register) and returns its result', () => {
             const storage = {
-                getItem: jest.fn(() => ({ id: 10, type: 'rgpd', content: 'darwin' })),
+                getItem: jest.fn(() => 'darwin'),
             };
 
-            const data = sessionData(storage).getGdprRegister();
-            expect(data.id).toBe(10);
-            expect(data.type).toBe('rgpd');
-            expect(data.content).toBe('darwin');
+            expect(sessionData(storage).getGdprRegister()).toBe('darwin');
             expect(storage.getItem).toHaveBeenCalledWith('amnesty_gdpr_register');
         });
     });
@@ -77,13 +66,8 @@ describe('sessionData', () => {
             };
 
             const mySessionData = sessionData(storage);
-            expect(
-                mySessionData.setGdprRegister({ id: 10, type: 'rgpd', content: 'darwin' }),
-            ).toEqual(mySessionData);
-            expect(storage.setItem).toHaveBeenCalledWith(
-                'amnesty_gdpr_register',
-                JSON.stringify({ id: 10, type: 'rgpd', content: 'darwin' }),
-            );
+            expect(mySessionData.setGdprRegister('darwin')).toEqual(mySessionData);
+            expect(storage.setItem).toHaveBeenCalledWith('amnesty_gdpr_register', 'darwin');
         });
     });
 });
