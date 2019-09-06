@@ -10,6 +10,7 @@ import {
 export default {
     Query: {
         Setting: (_, { id }) => getSetting(id),
+        SettingByType: (_, { type }) => getSettingByType(type),
         allSettings: (_, { perPage, page, sortField, sortOrder }) =>
             getSettings({ perPage, page, sortField, sortOrder }),
         _allSettingsMeta: () => countSettings(),

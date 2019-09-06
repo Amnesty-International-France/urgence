@@ -4,13 +4,22 @@ const query = require('../db/client');
 
 const columns = ['id', 'created_on', 'updated_on', 'type', 'content'];
 
-const settingsCrudQueries = crud({
-    table: 'settings',
-    writableCols: columns,
-    returnCols: columns,
-});
+const settingsCrudQueries = {
+    ...crud({
+        table: 'settings',
+        writableCols: columns,
+        returnCols: columns,
+    }),
+    selectOneByType: selectOne({
+        table: 'settings',
+        primaryKey: 'type',
+        returnCols: columns,
+    }),
+};
 
 export const getSetting = async id => query(settingsCrudQueries.selectOne(id));
+
+export const getSettingByType = async type => query(settingsCrudQueries.selectOneByType(type));
 
 export const getSettings = async ({ perPage, page, sortField, sortOrder }) =>
     query(

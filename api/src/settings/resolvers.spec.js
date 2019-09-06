@@ -1,5 +1,12 @@
 import settingsResolver from './resolvers';
-import { getSetting, getSettings, countSettings, createSetting, removeSetting } from './repository';
+import {
+    getSetting,
+    getSettingByType,
+    getSettings,
+    countSettings,
+    createSetting,
+    removeSetting,
+} from './repository';
 
 jest.mock('./repository');
 
@@ -11,6 +18,15 @@ describe('Setting Resolvers', () => {
                 await settingsResolver.Query.Setting(null, params);
 
                 expect(getSetting).toHaveBeenCalledWith(10);
+            });
+        });
+
+        describe('SettingByType', () => {
+            it('should query settings with corresponding type', async () => {
+                const params = { type: 'i-am-lord-voldemort' };
+                await settingsResolver.Query.Setting(null, params);
+
+                expect(getSettingByType).toHaveBeenCalledWith('i-am-lord-voldemort');
             });
         });
 
