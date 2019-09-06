@@ -28,9 +28,9 @@ const styles = {
         marginBottom: 40,
     },
     '& .action': {
+        margin: '1em 0',
         '@media (min-width: 1024px)': {
             display: 'flex',
-            margin: '1em 0',
         },
     },
     '@media (max-width: 350px)': {
