@@ -26,7 +26,7 @@ describe('renderSendMail', () => {
         const wrapper = shallow(renderSendMail(defaultProps)(defaultContext));
 
         expect(wrapper.find('MailTo').prop('recipient')).toBe(defaultProps.recipient);
-        expect(wrapper.find('MailTo').prop('afterMail')).toBe(defaultProps.afterMail);
+        expect(wrapper.find('MailTo').prop('afterMail')).toBeInstanceOf(Function);
     });
 
     it('should render MailTo with object props', () => {
