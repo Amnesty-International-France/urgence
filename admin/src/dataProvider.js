@@ -20,8 +20,6 @@ export const getApolloClient = () =>
 export default () => {
     const getGqlResource = resource => {
         switch (resource) {
-            case 'Activists':
-                return 'Activist';
             case 'Urgent Actions':
                 return 'UrgentAction';
             case 'Settings':
