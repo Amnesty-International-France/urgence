@@ -24,6 +24,8 @@ export default () => {
                 return 'Activist';
             case 'Urgent Actions':
                 return 'UrgentAction';
+            case 'Settings':
+                return 'Setting';
             default:
                 throw new Error(`Unknown resource ${resource}`);
         }

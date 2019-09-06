@@ -8,6 +8,7 @@ import dataProviderFactory from './dataProvider';
 import { authProvider } from './authentication/authProvider';
 
 import urgentAction from './urgentActions';
+import settings from './settings';
 
 import { theme } from './theme';
 import { Title } from './Title';
@@ -37,6 +38,7 @@ class App extends Component {
                     dataProvider={dataProvider}
                 >
                     <Resource {...urgentAction} />
+                    <Resource {...settings} />
                 </Admin>
             </JssProvider>
         );
