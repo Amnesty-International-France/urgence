@@ -1,4 +1,4 @@
-import { white, pink } from '../../../front/src/themes/colors';
+import { pink } from '../../../front/src/themes/colors';
 
 export const root = {
     root: {
