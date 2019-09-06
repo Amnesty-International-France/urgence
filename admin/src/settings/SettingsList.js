@@ -1,13 +1,7 @@
 import React from 'react';
 import { Datagrid, List, EditButton, TextField, DateField } from 'react-admin';
 
-const dateFormat = {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-};
+import dateFormat from '../dateFormat';
 
 const sort = { field: 'id', order: 'DESC' };
 

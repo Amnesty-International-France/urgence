@@ -1,15 +1,8 @@
 import React from 'react';
 import { Edit, SimpleForm, TextField, DateField, TextInput, required } from 'react-admin';
 
+import dateFormat from '../dateFormat';
 import SettingsContentInput from './SettingsContentInput';
-
-const dateFormat = {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-};
 
 export default props => (
     <Edit {...props}>

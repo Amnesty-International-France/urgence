@@ -1,16 +1,9 @@
 import React from 'react';
 import { Datagrid, EditButton, List, Responsive, TextField, DateField } from 'react-admin';
 
+import dateFormat from '../dateFormat';
 import PreviewLink from './PreviewLink';
 import PreviewLetter from './PreviewLetter';
-
-const dateFormat = {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-};
 
 const sort = { field: 'last_edition_date', order: 'DESC' };
 
