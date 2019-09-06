@@ -20,8 +20,6 @@ describe('DataContext', () => {
         data.getPhone.mockImplementation(() => 'phone value');
         data.getEmail.mockImplementation(() => 'email value');
         data.getRegistered.mockImplementation(() => 'false');
-        data.getGdprMessage.mockImplementation(() => 'serious business');
-        data.getGdprRegister.mockImplementation(() => 'cool setting');
     });
 
     it('should initialize the context from data', () => {
@@ -49,8 +47,6 @@ describe('DataContext', () => {
         expect(contextTest.phone).toEqual('phone value');
         expect(contextTest.email).toEqual('email value');
         expect(contextTest.registered).toEqual('false');
-        expect(contextTest.gdprMessage).toEqual('serious business');
-        expect(contextTest.gdprRegister).toEqual('cool setting');
     });
 
     it('should have a "setObject" method to change the state "object"', () => {
@@ -219,33 +215,5 @@ describe('DataContext', () => {
         );
 
         expect(data.setRegistered).toBeCalled();
-    });
-
-    it('should have a "setGdprMessage" method to change the state "gdprMessage"', () => {
-        const render = context => {
-            context.setGdprMessage('new gdprMessage');
-            return <span>OK</span>;
-        };
-        mount(
-            <DataProvider>
-                <DataConsumer>{render}</DataConsumer>
-            </DataProvider>,
-        );
-
-        expect(data.setGdprMessage).toBeCalledWith('new gdprMessage');
-    });
-
-    it('should have a "setGdprRegister" method to change the state "setGdprRegister"', () => {
-        const render = context => {
-            context.setGdprRegister('new gdprRegister');
-            return <span>OK</span>;
-        };
-        mount(
-            <DataProvider>
-                <DataConsumer>{render}</DataConsumer>
-            </DataProvider>,
-        );
-
-        expect(data.setGdprRegister).toBeCalledWith('new gdprRegister');
     });
 });

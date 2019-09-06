@@ -16,21 +16,11 @@ const { Provider, Consumer } = createContext({
     phone: '',
     email: '',
     registered: 'false',
-    gdprMessage: null,
-    gdprRegister: null,
 });
 
 export const DataConsumer = Consumer;
 
-export const DataProvider = ({ children, defaultGdprMessage, defaultGdprRegister }) => {
-    if (defaultGdprMessage) {
-        data.setGdprMessage(defaultGdprMessage);
-    }
-
-    if (defaultGdprRegister) {
-        data.setGdprMessage(defaultGdprRegister);
-    }
-
+export const DataProvider = ({ children }) => {
     const [object, setMailObject] = useState(data.getMailObject());
     const [civility, setCivility] = useState(data.getCivility());
     const [firstname, setFirstname] = useState(data.getFirstname());
@@ -43,8 +33,6 @@ export const DataProvider = ({ children, defaultGdprMessage, defaultGdprRegister
     const [phone, setPhone] = useState(data.getPhone());
     const [email, setEmail] = useState(data.getEmail());
     const [registered, setRegistered] = useState(data.getRegistered());
-    const [gdprMessage, setGdprMessage] = useState(defaultGdprMessage || data.getGdprMessage());
-    const [gdprRegister, setGdprRegister] = useState(defaultGdprRegister || data.getGdprRegister());
 
     const handleSetObject = newObject => {
         setMailObject(newObject);
@@ -106,16 +94,6 @@ export const DataProvider = ({ children, defaultGdprMessage, defaultGdprRegister
         data.setRegistered('true');
     };
 
-    const handleSetGdprMessage = gdprMessage => {
-        setGdprMessage(gdprMessage);
-        data.setGdprMessage(gdprMessage);
-    };
-
-    const handleSetGdprRegister = gdprRegister => {
-        setGdprRegister(gdprRegister);
-        data.setGdprRegister(gdprRegister);
-    };
-
     return (
         <Provider
             value={{
@@ -131,8 +109,6 @@ export const DataProvider = ({ children, defaultGdprMessage, defaultGdprRegister
                 phone,
                 email,
                 registered,
-                gdprMessage,
-                gdprRegister,
                 setObject: handleSetObject,
                 setCivility: handleSetCivility,
                 setFirstname: handleSetFirstname,
@@ -145,8 +121,6 @@ export const DataProvider = ({ children, defaultGdprMessage, defaultGdprRegister
                 setPhone: handleSetPhone,
                 setEmail: handleSetEmail,
                 setRegistered: handleSetRegistered,
-                setGdprMessage: handleSetGdprMessage,
-                setGdprRegister: handleSetGdprRegister,
             }}
         >
             {children}
@@ -156,8 +130,6 @@ export const DataProvider = ({ children, defaultGdprMessage, defaultGdprRegister
 
 DataProvider.propTypes = {
     children: PropTypes.node.isRequired,
-    defaultGdprMessage: PropTypes.string,
-    defaultGdprRegister: PropTypes.string,
 };
 
 export const withSessionData = Component => props => (

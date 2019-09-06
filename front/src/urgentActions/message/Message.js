@@ -286,7 +286,6 @@ export const Message = ({ messageTemplate, gdprMessage, action, className, ...pr
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
-    gdprMessage: PropTypes.string,
     email: PropTypes.string,
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
@@ -299,6 +298,7 @@ Message.propTypes = {
     civility: PropTypes.string,
     firstname: PropTypes.string,
     lastname: PropTypes.string,
+    gdprMessage: PropTypes.string,
     action: PropTypes.node.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,

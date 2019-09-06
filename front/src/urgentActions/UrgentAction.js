@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { Query } from 'react-apollo';
 import PropTypes from 'prop-types';
 import get from 'lodash.get';
 
+import { DataProvider } from '../DataContext';
 import SEO from '../SEO';
 import Story from './story/Story';
 import Act from './Act';
@@ -18,7 +19,6 @@ import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import AddressStep from './AddressStep';
 import SendMail from './message/SendMail';
-import { DataProvider } from '../DataContext';
 import LoadingScreen from '../themes/LoadingScreen';
 import MailPdfButton from './MailPdfButton';
 import RegisterButton from './register/RegisterButton';
@@ -130,16 +130,7 @@ const isLetterStepPresent = recipient => {
     return recipient.button && recipient.postal_address;
 };
 
-export const UrgentAction = ({ slug, data, step, error, loading }) => {
-    if (error) {
-        console.error(error);
-        return <Redirect to={generateUrl('error')} />;
-    }
-
-    if (loading) {
-        return <LoadingScreen />;
-    }
-
+export const UrgentAction = ({ slug, data, step }) => {
     const recipient = get(data, 'UrgentAction.recipient');
     const story = get(data, 'UrgentAction.story');
 
@@ -181,7 +172,6 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
                 messageTemplate={get(data, 'UrgentAction.message_template')}
                 objectIndication={get(data, 'UrgentAction.object_indication')}
                 gdprMessage={get(data, 'GdprMessage.content')}
-                loading={loading}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
@@ -287,26 +277,35 @@ export const UrgentActionWithData = ({
         params: { slug, step },
     },
 }) => (
-    <Query query={query} variables={{ slug }}>
-        {({ data, error, loading }) => {
-            const seoProps = seoPropsFromStory(get(data, 'UrgentAction.story'));
-            return (
-                <DataProvider
-                    defaultGdprMessage={get(data, 'GdprMessage.content', null)}
-                    defaultGdprRegister={get(data, 'GdprRegister.content', null)}
-                >
-                    {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
-                    <UrgentAction
-                        slug={slug}
-                        step={step}
-                        data={data}
-                        error={error}
-                        loading={loading}
-                    />
-                </DataProvider>
-            );
-        }}
-    </Query>
+    <DataProvider>
+        <Query query={query} variables={{ slug }}>
+            {({ data, error, loading }) => {
+                if (error) {
+                    console.error(error);
+                    return <Redirect to={generateUrl('error')} />;
+                }
+
+                if (loading) {
+                    return <LoadingScreen />;
+                }
+
+                const seoProps = seoPropsFromStory(get(data, 'UrgentAction.story'));
+
+                return (
+                    <Fragment>
+                        {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
+                        <UrgentAction
+                            slug={slug}
+                            step={step}
+                            data={data}
+                            error={error}
+                            loading={loading}
+                        />
+                    </Fragment>
+                );
+            }}
+        </Query>
+    </DataProvider>
 );
 
 UrgentActionWithData.propTypes = {
