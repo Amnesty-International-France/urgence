@@ -1,4 +1,4 @@
-const { crud } = require('co-postgres-queries');
+const { crud, selectOne } = require('co-postgres-queries');
 
 const query = require('../db/client');
 
