@@ -1,14 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import get from 'lodash.get';
 import { compose } from 'recompose';
 import classnames from 'classnames';
 
+import RichText from '../../themes/RichText';
+import LongText from '../../themes/LongText';
 import { isCorrectEmail } from '../../themes/Input';
-
 import { white, black } from '../../themes/colors';
 import { withYellowLogo } from '../../themes/ThemeContext';
+
 import { withSessionData } from '../../DataContext';
 
 import Form from './Form';
@@ -25,6 +27,27 @@ const styles = {
     padding: '100px 20px 20px 20px',
     color: black,
     backgroundColor: white,
+    '& h1': {
+        textTransform: 'uppercase',
+        fontFamily: 'Amnesty Trade Gothic Condensed',
+        fontSize: '36px',
+        lineHeight: '54px',
+        fontWeight: 'bold',
+        margin: '1.5rem 12px',
+        width: 'calc(100% - 24px)',
+        '> span': {
+            color: white,
+            backgroundColor: black,
+            padding: '6px 0',
+            boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
+            boxDecorationBreak: 'clone',
+        },
+    },
+    '& .rich-text': {
+        color: black,
+        fontFamily: 'Amnesty Trade Gothic LT',
+        fontSize: '16px',
+    },
     '& .action': {
         margin: '1em 0',
         '@media (min-width: 1024px)': {
@@ -48,18 +71,23 @@ const isDisabled = props => {
 };
 
 export const RegisterActivist = ({ data, gdprRegister, action, className, ...props }) => {
+    const title = get(data, 'title');
     const text = get(data, 'text');
     return (
-        <Fragment>
-            <div className={classnames('register', className)}>
-                <p>{text}</p>
-                <div className="formStep">
-                    <Form {...props} />
-                </div>
-                <div className="action">{action(isDisabled(props))}</div>
-                <LegalInformation content={gdprRegister} />
+        <div className={classnames('register', className)}>
+            <div>
+                <h1>
+                    <LongText text={title} />
+                </h1>
+                <RichText html={text} />
             </div>
-        </Fragment>
+
+            <div className="formStep">
+                <Form {...props} />
+            </div>
+            <div className="action">{action(isDisabled(props))}</div>
+            <LegalInformation content={gdprRegister} />
+        </div>
     );
 };
 

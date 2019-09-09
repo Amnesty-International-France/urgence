@@ -5,7 +5,7 @@ import RichText from '../../themes/RichText';
 import LongText from '../../themes/LongText';
 import { white, black } from '../../themes/colors';
 import { withYellowLogo } from '../../themes/ThemeContext';
-import Share from '../../themes/Sharing/Share';
+import Share from '../../themes/Sharing/ShareForm';
 
 const styles = {
     display: 'flex',
@@ -14,7 +14,7 @@ const styles = {
     minHeight: '100%',
     width: '100%',
     padding: '100px 20px 20px 20px',
-    color: white,
+    color: black,
     backgroundColor: white,
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
