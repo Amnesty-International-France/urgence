@@ -6,6 +6,7 @@ import { Query } from 'react-apollo';
 import PropTypes from 'prop-types';
 import get from 'lodash.get';
 
+import { DataProvider } from '../DataContext';
 import SEO from '../SEO';
 import Story from './story/Story';
 import Act from './Act';
@@ -18,7 +19,6 @@ import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import AddressStep from './AddressStep';
 import SendMail from './message/SendMail';
-import { DataProvider } from '../DataContext';
 import LoadingScreen from '../themes/LoadingScreen';
 import MailPdfButton from './MailPdfButton';
 import RegisterButton from './register/RegisterButton';
@@ -113,6 +113,16 @@ const query = gql`
                 text
             }
         }
+        GdprMessage: SettingByType(type: "gdpr-message") {
+            id
+            type
+            content
+        }
+        GdprRegister: SettingByType(type: "gdpr-register") {
+            id
+            type
+            content
+        }
     }
 `;
 
@@ -120,16 +130,7 @@ const isLetterStepPresent = recipient => {
     return recipient.button && recipient.postal_address;
 };
 
-export const UrgentAction = ({ slug, data, step, error, loading }) => {
-    if (error) {
-        console.error(error);
-        return <Redirect to={generateUrl('error')} />;
-    }
-
-    if (loading) {
-        return <LoadingScreen />;
-    }
-
+export const UrgentAction = ({ slug, data, step }) => {
     const recipient = get(data, 'UrgentAction.recipient');
     const story = get(data, 'UrgentAction.story');
 
@@ -170,7 +171,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
             <Message
                 messageTemplate={get(data, 'UrgentAction.message_template')}
                 objectIndication={get(data, 'UrgentAction.object_indication')}
-                loading={loading}
+                gdprMessage={get(data, 'GdprMessage.content')}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
@@ -241,6 +242,7 @@ export const UrgentAction = ({ slug, data, step, error, loading }) => {
         return (
             <RegisterActivist
                 data={register}
+                gdprRegister={get(data, 'GdprRegister.content')}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                 action={disabled => (
@@ -270,6 +272,26 @@ UrgentAction.propTypes = {
     loading: PropTypes.bool,
 };
 
+export const renderUrgentActionWithData = (slug, step) => ({ data, error, loading }) => {
+    if (error) {
+        console.error(error);
+        return <Redirect to={generateUrl('error')} />;
+    }
+
+    if (loading) {
+        return <LoadingScreen />;
+    }
+
+    const seoProps = seoPropsFromStory(get(data, 'UrgentAction.story'));
+
+    return (
+        <Fragment>
+            {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
+            <UrgentAction slug={slug} step={step} data={data} error={error} loading={loading} />
+        </Fragment>
+    );
+};
+
 export const UrgentActionWithData = ({
     match: {
         params: { slug, step },
@@ -277,21 +299,7 @@ export const UrgentActionWithData = ({
 }) => (
     <DataProvider>
         <Query query={query} variables={{ slug }}>
-            {({ data, error, loading }) => {
-                const seoProps = seoPropsFromStory(get(data, 'UrgentAction.story'));
-                return (
-                    <Fragment>
-                        {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
-                        <UrgentAction
-                            slug={slug}
-                            step={step}
-                            data={data}
-                            error={error}
-                            loading={loading}
-                        />
-                    </Fragment>
-                );
-            }}
+            {renderUrgentActionWithData(slug, step)}
         </Query>
     </DataProvider>
 );

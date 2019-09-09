@@ -2,7 +2,7 @@ import { sessionData } from './sessionData';
 
 describe('sessionData', () => {
     describe('.getMailObject', () => {
-        it('calls storage.getItem(amnesty_opbject) and returns its result', () => {
+        it('calls storage.getItem(amnesty_mail_object) and returns its result', () => {
             const storage = {
                 getItem: jest.fn(() => 'object value'),
             };
@@ -13,7 +13,7 @@ describe('sessionData', () => {
     });
 
     describe('.setMailObject', () => {
-        it('calls storage.setItem(amnesty_object, value) and returns itself', () => {
+        it('calls storage.setItem(amnesty_mail_object, value) and returns itself', () => {
             const storage = {
                 setItem: jest.fn(),
             };

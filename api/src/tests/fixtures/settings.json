@@ -1,0 +1,10 @@
+[
+    {
+        "type": "gdpr-message",
+        "content": "Vos données personnelles sont traitées par Amnesty International France."
+    },
+    {
+        "type": "gdpr-register",
+        "content": "Vos données personnelles sont traitées par Amnesty International France."
+    }
+]

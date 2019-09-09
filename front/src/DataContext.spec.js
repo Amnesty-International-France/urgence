@@ -1,7 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
-import { DataProvider } from './DataContext';
+import { DataProvider, DataConsumer } from './DataContext';
 import data from './data';
 
 jest.mock('./data');
@@ -19,264 +19,201 @@ describe('DataContext', () => {
         data.getCountry.mockImplementation(() => 'country value');
         data.getPhone.mockImplementation(() => 'phone value');
         data.getEmail.mockImplementation(() => 'email value');
-        data.getRegistered.mockImplementation(() => 'registered value');
+        data.getRegistered.mockImplementation(() => 'false');
     });
 
-    it('should have state from sessionData', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        expect(wrapper.state()).toEqual({
-            object: 'object value',
-            civility: 'civility value',
-            firstname: 'firstname value',
-            lastname: 'lastname value',
-            addressMain: 'addressMain value',
-            addressMore: 'addressMore value',
-            postalCode: 'postalCode value',
-            city: 'city value',
-            country: 'country value',
-            phone: 'phone value',
-            email: 'email value',
-            registered: 'registered value',
-        });
+    it('should initialize the context from data', () => {
+        let contextTest = null;
+
+        const render = context => {
+            contextTest = { ...context };
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
+        expect(contextTest.object).toEqual('object value');
+        expect(contextTest.civility).toEqual('civility value');
+        expect(contextTest.firstname).toEqual('firstname value');
+        expect(contextTest.lastname).toEqual('lastname value');
+        expect(contextTest.addressMain).toEqual('addressMain value');
+        expect(contextTest.addressMore).toEqual('addressMore value');
+        expect(contextTest.postalCode).toEqual('postalCode value');
+        expect(contextTest.city).toEqual('city value');
+        expect(contextTest.country).toEqual('country value');
+        expect(contextTest.phone).toEqual('phone value');
+        expect(contextTest.email).toEqual('email value');
+        expect(contextTest.registered).toEqual('false');
     });
 
-    it('should have setObject method to change state.object', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setObject('new object');
-        expect(wrapper.state()).toEqual({
-            object: 'new object',
-            civility: 'civility value',
-            firstname: 'firstname value',
-            lastname: 'lastname value',
-            addressMain: 'addressMain value',
-            addressMore: 'addressMore value',
-            postalCode: 'postalCode value',
-            city: 'city value',
-            country: 'country value',
-            phone: 'phone value',
-            email: 'email value',
-            registered: 'registered value',
-        });
+    it('should have a "setObject" method to change the state "object"', () => {
+        const render = context => {
+            context.setObject('new object');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
         expect(data.setMailObject).toBeCalledWith('new object');
     });
 
-    it('should have setCivility method to change the state civility', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setCivility('new civility');
-        expect(wrapper.state()).toEqual({
-            object: 'object value',
-            civility: 'new civility',
-            firstname: 'firstname value',
-            lastname: 'lastname value',
-            addressMain: 'addressMain value',
-            addressMore: 'addressMore value',
-            postalCode: 'postalCode value',
-            city: 'city value',
-            country: 'country value',
-            phone: 'phone value',
-            email: 'email value',
-            registered: 'registered value',
-        });
+    it('should have a "setCivility" method to change the state "civility"', () => {
+        const render = context => {
+            context.setCivility('new civility');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
         expect(data.setCivility).toBeCalledWith('new civility');
     });
 
-    it('should have setFirstname method to change the state firstname', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setFirstname('new firstname');
-        expect(wrapper.state()).toEqual({
-            object: 'object value',
-            civility: 'civility value',
-            firstname: 'new firstname',
-            lastname: 'lastname value',
-            addressMain: 'addressMain value',
-            addressMore: 'addressMore value',
-            postalCode: 'postalCode value',
-            city: 'city value',
-            country: 'country value',
-            phone: 'phone value',
-            email: 'email value',
-            registered: 'registered value',
-        });
+    it('should have a "setFirstname" method to change the state "firstname"', () => {
+        const render = context => {
+            context.setFirstname('new firstname');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
         expect(data.setFirstname).toBeCalledWith('new firstname');
     });
 
-    it('should have setLastname method to change the state lastname', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setLastname('new lastname');
-        expect(wrapper.state()).toEqual({
-            object: 'object value',
-            civility: 'civility value',
-            firstname: 'firstname value',
-            lastname: 'new lastname',
-            addressMain: 'addressMain value',
-            addressMore: 'addressMore value',
-            postalCode: 'postalCode value',
-            city: 'city value',
-            country: 'country value',
-            phone: 'phone value',
-            email: 'email value',
-            registered: 'registered value',
-        });
+    it('should have a "setLastname" method to change the state "lastname"', () => {
+        const render = context => {
+            context.setLastname('new lastname');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
         expect(data.setLastname).toBeCalledWith('new lastname');
     });
 
-    it('should have setAddressMain method to change the state addressMain', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setAddressMain('new addressMain');
-        expect(wrapper.state()).toEqual({
-            object: 'object value',
-            civility: 'civility value',
-            firstname: 'firstname value',
-            lastname: 'lastname value',
-            addressMain: 'new addressMain',
-            addressMore: 'addressMore value',
-            postalCode: 'postalCode value',
-            city: 'city value',
-            country: 'country value',
-            phone: 'phone value',
-            email: 'email value',
-            registered: 'registered value',
-        });
+    it('should have a "setAddressMain" method to change the state "addressMain"', () => {
+        const render = context => {
+            context.setAddressMain('new addressMain');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
         expect(data.setAddressMain).toBeCalledWith('new addressMain');
     });
 
-    it('should have setAddressMore method to change the state addressMore', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setAddressMore('new addressMore');
-        expect(wrapper.state()).toEqual({
-            object: 'object value',
-            civility: 'civility value',
-            firstname: 'firstname value',
-            lastname: 'lastname value',
-            addressMain: 'addressMain value',
-            addressMore: 'new addressMore',
-            postalCode: 'postalCode value',
-            city: 'city value',
-            country: 'country value',
-            phone: 'phone value',
-            email: 'email value',
-            registered: 'registered value',
-        });
+    it('should have a "setAddressMore" method to change the state "addressMore"', () => {
+        const render = context => {
+            context.setAddressMore('new addressMore');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
         expect(data.setAddressMore).toBeCalledWith('new addressMore');
     });
 
-    it('should have setPostalCode method to change the state postalCode', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setPostalCode('new postalCode');
-        expect(wrapper.state()).toEqual({
-            object: 'object value',
-            civility: 'civility value',
-            firstname: 'firstname value',
-            lastname: 'lastname value',
-            addressMain: 'addressMain value',
-            addressMore: 'addressMore value',
-            postalCode: 'new postalCode',
-            city: 'city value',
-            country: 'country value',
-            phone: 'phone value',
-            email: 'email value',
-            registered: 'registered value',
-        });
+    it('should have a "setPostalCode" method to change the state "postalCode"', () => {
+        const render = context => {
+            context.setPostalCode('new postalCode');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
         expect(data.setPostalCode).toBeCalledWith('new postalCode');
     });
 
-    it('should have setCity method to change the state city', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setCity('new city');
-        expect(wrapper.state()).toEqual({
-            object: 'object value',
-            civility: 'civility value',
-            firstname: 'firstname value',
-            lastname: 'lastname value',
-            addressMain: 'addressMain value',
-            addressMore: 'addressMore value',
-            postalCode: 'postalCode value',
-            city: 'new city',
-            country: 'country value',
-            phone: 'phone value',
-            email: 'email value',
-            registered: 'registered value',
-        });
+    it('should have a "setCity" method to change the state "city"', () => {
+        const render = context => {
+            context.setCity('new city');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
         expect(data.setCity).toBeCalledWith('new city');
     });
 
-    it('should have setCountry method to change the state country', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setCountry('new country');
-        expect(wrapper.state()).toEqual({
-            object: 'object value',
-            civility: 'civility value',
-            firstname: 'firstname value',
-            lastname: 'lastname value',
-            addressMain: 'addressMain value',
-            addressMore: 'addressMore value',
-            postalCode: 'postalCode value',
-            city: 'city value',
-            country: 'new country',
-            phone: 'phone value',
-            email: 'email value',
-            registered: 'registered value',
-        });
+    it('should have a "setCountry" method to change the state "country"', () => {
+        const render = context => {
+            context.setCountry('new country');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
         expect(data.setCountry).toBeCalledWith('new country');
     });
 
-    it('should have setPhone method to change the state phone', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setPhone('new phone');
-        expect(wrapper.state()).toEqual({
-            object: 'object value',
-            civility: 'civility value',
-            firstname: 'firstname value',
-            lastname: 'lastname value',
-            addressMain: 'addressMain value',
-            addressMore: 'addressMore value',
-            postalCode: 'postalCode value',
-            city: 'city value',
-            country: 'country value',
-            phone: 'new phone',
-            email: 'email value',
-            registered: 'registered value',
-        });
+    it('should have a "setPhone" method to change the state "phone"', () => {
+        const render = context => {
+            context.setPhone('new phone');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
         expect(data.setPhone).toBeCalledWith('new phone');
     });
 
-    it('should have setEmail method to change the state email', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setEmail('new email');
-        expect(wrapper.state()).toEqual({
-            object: 'object value',
-            civility: 'civility value',
-            firstname: 'firstname value',
-            lastname: 'lastname value',
-            addressMain: 'addressMain value',
-            addressMore: 'addressMore value',
-            postalCode: 'postalCode value',
-            city: 'city value',
-            country: 'country value',
-            phone: 'phone value',
-            email: 'new email',
-            registered: 'registered value',
-        });
+    it('should have a "setEmail" method to change the state "email"', () => {
+        const render = context => {
+            context.setEmail('new email');
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
         expect(data.setEmail).toBeCalledWith('new email');
     });
 
-    it('should have setRegistered method to change the state registered', () => {
-        const wrapper = shallow(<DataProvider>OK</DataProvider>);
-        wrapper.instance().setRegistered();
-        expect(wrapper.state()).toEqual({
-            object: 'object value',
-            civility: 'civility value',
-            firstname: 'firstname value',
-            lastname: 'lastname value',
-            addressMain: 'addressMain value',
-            addressMore: 'addressMore value',
-            postalCode: 'postalCode value',
-            city: 'city value',
-            country: 'country value',
-            phone: 'phone value',
-            email: 'email value',
-            registered: 'true',
-        });
+    it('should have a "setRegistered" method to change the state "registered"', () => {
+        const render = context => {
+            context.setRegistered();
+            return <span>OK</span>;
+        };
+        mount(
+            <DataProvider>
+                <DataConsumer>{render}</DataConsumer>
+            </DataProvider>,
+        );
+
         expect(data.setRegistered).toBeCalled();
     });
 });

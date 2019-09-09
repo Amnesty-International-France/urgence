@@ -11,6 +11,7 @@ export default gql`
 
     extend type Query {
         Setting(id: ID!): Setting
+        SettingByType(type: String!): Setting
         allSettings(perPage: Int, page: Int, sortField: String, sortOrder: String): [Setting]
         _allSettingsMeta(
             page: Int

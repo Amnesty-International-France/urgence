@@ -1,15 +1,9 @@
 import React from 'react';
 import { Datagrid, List, EditButton, TextField, DateField } from 'react-admin';
 
-const dateFormat = {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-};
+import dateFormat from '../dateFormat';
 
-const sort = { field: 'updated_on', order: 'DESC' };
+const sort = { field: 'id', order: 'DESC' };
 
 export default props => (
     <List {...props} title="Settings" sort={sort} perPage={25}>

@@ -60,13 +60,13 @@ export const MessageInput = ({ classes, source }) => (
                                         <TextInput
                                             fullWidth
                                             type="email"
-                                            label="Mail"
+                                            label="Mail To"
                                             source={`${source}recipient.mail`}
                                             validate={validateRecipientEmail}
                                         />
                                         <TextInput
                                             fullWidth
-                                            label="Copies to"
+                                            label="Copies To"
                                             source={`${source}recipient.copies_to`}
                                             validate={validateEmailsList}
                                         />
@@ -85,6 +85,7 @@ export const MessageInput = ({ classes, source }) => (
                                 </ArrayInput>
                                 <TextInput
                                     fullWidth
+                                    multiline
                                     label="Object tip"
                                     source={`${source}object_indication`}
                                     defaultValue={`Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.`}

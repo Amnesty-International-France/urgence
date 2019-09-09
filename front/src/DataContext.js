@@ -1,4 +1,4 @@
-import React, { createContext, Component } from 'react';
+import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import data from './data';
@@ -16,122 +16,117 @@ const { Provider, Consumer } = createContext({
     phone: '',
     email: '',
     registered: 'false',
-    setObject: () => null,
-    setCivility: () => null,
-    setFirstname: () => null,
-    setLastname: () => null,
-    setAddressMain: () => null,
-    setAddressMore: () => null,
-    setPostalCode: () => null,
-    setCity: () => null,
-    setCountry: () => null,
-    setPhone: () => null,
-    setEmail: () => null,
-    setRegistered: () => null,
 });
 
 export const DataConsumer = Consumer;
 
-export class DataProvider extends Component {
-    state = {
-        object: data.getMailObject(),
-        civility: data.getCivility(),
-        firstname: data.getFirstname(),
-        lastname: data.getLastname(),
-        addressMain: data.getAddressMain(),
-        addressMore: data.getAddressMore(),
-        postalCode: data.getPostalCode(),
-        city: data.getCity(),
-        country: data.getCountry(),
-        phone: data.getPhone(),
-        email: data.getEmail(),
-        registered: data.getRegistered(),
+export const DataProvider = ({ children }) => {
+    const [object, setMailObject] = useState(data.getMailObject());
+    const [civility, setCivility] = useState(data.getCivility());
+    const [firstname, setFirstname] = useState(data.getFirstname());
+    const [lastname, setLastname] = useState(data.getLastname());
+    const [addressMain, setAddressMain] = useState(data.getAddressMain());
+    const [addressMore, setAddressMore] = useState(data.getAddressMore());
+    const [postalCode, setPostalCode] = useState(data.getPostalCode());
+    const [city, setCity] = useState(data.getCity());
+    const [country, setCountry] = useState(data.getCountry());
+    const [phone, setPhone] = useState(data.getPhone());
+    const [email, setEmail] = useState(data.getEmail());
+    const [registered, setRegistered] = useState(data.getRegistered());
+
+    const handleSetObject = newObject => {
+        setMailObject(newObject);
+        data.setMailObject(newObject);
     };
 
-    setObject = object => {
-        this.setState({ object });
-        data.setMailObject(object);
-    };
-
-    setCivility = civility => {
-        this.setState({ civility });
+    const handleSetCivility = civility => {
+        setCivility(civility);
         data.setCivility(civility);
     };
 
-    setFirstname = firstname => {
-        this.setState({ firstname });
+    const handleSetFirstname = firstname => {
+        setFirstname(firstname);
         data.setFirstname(firstname);
     };
 
-    setLastname = lastname => {
-        this.setState({ lastname });
+    const handleSetLastname = lastname => {
+        setLastname(lastname);
         data.setLastname(lastname);
     };
 
-    setAddressMain = addressMain => {
-        this.setState({ addressMain });
+    const handleSetAddressMain = addressMain => {
+        setAddressMain(addressMain);
         data.setAddressMain(addressMain);
     };
 
-    setAddressMore = addressMore => {
-        this.setState({ addressMore });
+    const handleSetAddressMore = addressMore => {
+        setAddressMore(addressMore);
         data.setAddressMore(addressMore);
     };
 
-    setPostalCode = postalCode => {
-        this.setState({ postalCode });
+    const handleSetPostalCode = postalCode => {
+        setPostalCode(postalCode);
         data.setPostalCode(postalCode);
     };
 
-    setCity = city => {
-        this.setState({ city });
+    const handleSetCity = city => {
+        setCity(city);
         data.setCity(city);
     };
 
-    setCountry = country => {
-        this.setState({ country });
+    const handleSetCountry = country => {
+        setCountry(country);
         data.setCountry(country);
     };
 
-    setPhone = phone => {
-        this.setState({ phone });
+    const handleSetPhone = phone => {
+        setPhone(phone);
         data.setPhone(phone);
     };
 
-    setEmail = email => {
-        this.setState({ email });
+    const handleSetEmail = email => {
+        setEmail(email);
         data.setEmail(email);
     };
 
-    setRegistered = () => {
-        this.setState({ registered: 'true' });
+    const handleSetRegistered = () => {
+        setRegistered('true');
         data.setRegistered('true');
     };
 
-    render() {
-        return (
-            <Provider
-                value={{
-                    ...this.state,
-                    setObject: this.setObject,
-                    setCivility: this.setCivility,
-                    setFirstname: this.setFirstname,
-                    setLastname: this.setLastname,
-                    setAddressMain: this.setAddressMain,
-                    setAddressMore: this.setAddressMore,
-                    setPostalCode: this.setPostalCode,
-                    setCity: this.setCity,
-                    setCountry: this.setCountry,
-                    setPhone: this.setPhone,
-                    setEmail: this.setEmail,
-                    setRegistered: this.setRegistered,
-                }}
-            >
-                {this.props.children}
-            </Provider>
-        );
-    }
-}
+    return (
+        <Provider
+            value={{
+                object,
+                civility,
+                firstname,
+                lastname,
+                addressMain,
+                addressMore,
+                postalCode,
+                city,
+                country,
+                phone,
+                email,
+                registered,
+                setObject: handleSetObject,
+                setCivility: handleSetCivility,
+                setFirstname: handleSetFirstname,
+                setLastname: handleSetLastname,
+                setAddressMain: handleSetAddressMain,
+                setAddressMore: handleSetAddressMore,
+                setPostalCode: handleSetPostalCode,
+                setCity: handleSetCity,
+                setCountry: handleSetCountry,
+                setPhone: handleSetPhone,
+                setEmail: handleSetEmail,
+                setRegistered: handleSetRegistered,
+            }}
+        >
+            {children}
+        </Provider>
+    );
+};
 
 DataProvider.propTypes = {
     children: PropTypes.node.isRequired,

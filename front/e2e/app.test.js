@@ -18,6 +18,7 @@ describe('app', () => {
 
     beforeAll(async () => {
         urgentAction = await fetch('http://api:4000/test/createUrgentAction').then(r => r.json());
+        await fetch('http://api:4000/test/createSettings').then(r => r.json());
     });
 
     it('should display story', async () => {
@@ -89,6 +90,11 @@ describe('app', () => {
         await messagePage.enterFirstnameText('My');
         await messagePage.enterLastnameText('name');
         expect(await messagePage.isButtonDisabled()).toBe(false);
+
+        const legalInformation = await messagePage.getLegalInformation();
+        expect(legalInformation).toBe(
+            'Vos données personnelles sont traitées par Amnesty International France.',
+        );
     });
 
     it('should display thanks step', async () => {

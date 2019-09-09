@@ -11,6 +11,7 @@ import { withYellowLogo } from '../../themes/ThemeContext';
 import { withSessionData } from '../../DataContext';
 import Input, { isCorrectEmail } from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';
+import LegalInformation from '../LegalInformation';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -27,9 +28,9 @@ const styles = {
         marginBottom: 40,
     },
     '& .action': {
+        margin: '1em 0',
         '@media (min-width: 1024px)': {
             display: 'flex',
-            margin: '1em 0',
         },
     },
     '@media (max-width: 350px)': {
@@ -120,7 +121,11 @@ export class LetterView extends Component {
                     )}
                 >
                     {messageTemplate.map(({ value }, key) => (
-                        <MessageSection key={key} content={value} />
+                        <MessageSection
+                            key={key}
+                            className="letter-message-section"
+                            content={value}
+                        />
                     ))}
                     {letterOverflow && (
                         <span
@@ -253,36 +258,35 @@ FormStep.propTypes = {
     step: PropTypes.string,
 };
 
-export const Message = ({ messageTemplate, action, className, ...props }) => {
-    return (
-        <Fragment>
-            {(!messageTemplate || !messageTemplate.length) && (
-                <p className="error">Cette action urgente n&#39;existe plus.</p>
-            )}
+export const Message = ({ messageTemplate, gdprMessage, action, className, ...props }) => (
+    <Fragment>
+        {(!messageTemplate || !messageTemplate.length) && (
+            <p className="error">Cette action urgente n&#39;existe plus.</p>
+        )}
 
-            {messageTemplate && messageTemplate.length > 0 && (
-                <div className={classnames('message', className)}>
-                    <p>
-                        Pour agir plus vite,&nbsp;
-                        <strong className="importantText"> nous vous proposons ce message :</strong>
-                    </p>
-                    <LetterView messageTemplate={messageTemplate} />
-                    <p>
-                        Parce que les messages uniques ont plus d&#39;impact,&nbsp;
-                        <strong className="importantText">
-                            {' '}
-                            nous vous invitons à le personnaliser.
-                        </strong>
-                    </p>
-                    <div className="formStep">
-                        <FormStep {...props} />
-                    </div>
-                    <div className="action">{action}</div>
+        {messageTemplate && messageTemplate.length > 0 && (
+            <div className={classnames('message', className)}>
+                <p>
+                    Pour agir plus vite,&nbsp;
+                    <strong className="importantText"> nous vous proposons ce message :</strong>
+                </p>
+                <LetterView messageTemplate={messageTemplate} />
+                <p>
+                    Parce que les messages uniques ont plus d&#39;impact,&nbsp;
+                    <strong className="importantText">
+                        {' '}
+                        nous vous invitons à le personnaliser.
+                    </strong>
+                </p>
+                <div className="formStep">
+                    <FormStep {...props} />
                 </div>
-            )}
-        </Fragment>
-    );
-};
+                <div className="action">{action}</div>
+                <LegalInformation content={gdprMessage} />
+            </div>
+        )}
+    </Fragment>
+);
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
@@ -298,6 +302,7 @@ Message.propTypes = {
     civility: PropTypes.string,
     firstname: PropTypes.string,
     lastname: PropTypes.string,
+    gdprMessage: PropTypes.string,
     action: PropTypes.node.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,

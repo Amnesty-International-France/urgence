@@ -6,7 +6,12 @@ import SettingsContentInput from './SettingsContentInput';
 export default props => (
     <Create title="Create New Setting" {...props}>
         <SimpleForm>
-            <TextInput source="type" label="Type" validate={required()} />
+            <TextInput
+                source="type"
+                label="Type"
+                validate={required()}
+                helperText="The type should be unique"
+            />
             <SettingsContentInput source="content" label="Content *" validate={required()} />
         </SimpleForm>
     </Create>

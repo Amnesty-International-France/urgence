@@ -1,13 +1,22 @@
 import { Router } from 'express';
 
-import { createUrgentAction, truncateAll } from './fixtureLoader';
+import { createUrgentAction, createSetting, truncateAll } from './fixtureLoader';
 import urgentAction from './fixtures/urgentAction.json';
+import settings from './fixtures/settings.json';
 
 export const testRouter = new Router();
 
-testRouter.get('/createUrgentAction', async (req, res) =>
-    res.send(await createUrgentAction(urgentAction)));
+testRouter.get('/createUrgentAction', async (req, res) => {
+    const result = await createUrgentAction(urgentAction);
+    res.send(result);
+});
 
+testRouter.get('/createSettings', async (req, res) => {
+    settings.map(async setting => {
+        await createSetting(setting);
+    });
+    res.send({ done: true });
+});
 
 testRouter.delete('/clearDb', async (req, res) => {
     const id = await truncateAll();
