@@ -17,12 +17,10 @@ import Form from './Form';
 import LegalInformation from '../LegalInformation';
 
 const styles = {
-    fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '16px',
     display: 'flex',
-    minHeight: '100%',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
+    minHeight: '100%',
     width: '100%',
     padding: '100px 20px 20px 20px',
     color: black,
@@ -54,14 +52,14 @@ const styles = {
             display: 'flex',
         },
     },
+    '& .formStep': {
+        margin: '5px 0px 10px 0px',
+    },
     '@media (max-width: 350px)': {
         fontSize: '0.8em',
     },
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
-    },
-    '& .formStep': {
-        margin: '5px 0px 10px 0px',
     },
 };
 
