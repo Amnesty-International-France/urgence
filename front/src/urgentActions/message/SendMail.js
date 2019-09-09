@@ -45,10 +45,11 @@ export const SendMail = ({
     civility,
     firstname,
     lastname,
+    registered,
 }) => {
     const handleAfterMail = () => {
         addCampaignMember(auId, { email, firstname, lastname });
-        afterMail();
+        afterMail({ registered: registered === 'true' });
     };
 
     return (
@@ -87,6 +88,7 @@ SendMail.propTypes = {
     civility: PropTypes.string.isRequired,
     firstname: PropTypes.string.isRequired,
     lastname: PropTypes.string.isRequired,
+    registered: PropTypes.string.isRequired,
 };
 
 SendMail.defaultProps = {
