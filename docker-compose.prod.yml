@@ -2,7 +2,7 @@ version: '3'
 
 services:
     api:
-        command: "yarn run start"
+        command: 'yarn run start'
         environment:
             - NODE_ENV=staging
             - POSTGRES_PASSWORD
@@ -14,21 +14,28 @@ services:
             - SMTP_PASSWORD
             - SMTP_PORT
             - SMTP_SERVICE
+            - SF_BASE_URL
+            - SF_CONSUMER_KEY
+            - SF_CONSUMER_SECRET
+            - SF_USERNAME
+            - SF_PASSWORD
+            - SF_SECURITY_TOKEN
         volumes:
             - /home/amnesty/uploads:/app/uploads
 
     nginx:
         image: nginx
         ports:
-            - "80:80"
-            - "443:443"
+            - '80:80'
+            - '443:443'
         volumes:
             - .:/app
             - ./var/nginx/staging.conf:/etc/nginx/conf.d/default.conf
             - /home/amnesty/uploads:/app/uploads
             - /etc/letsencrypt/live/rapide.amnesty.fr/fullchain.pem:/etc/nginx/conf.d/selfsigned.crt
             - /etc/letsencrypt/live/rapide.amnesty.fr/privkey.pem:/etc/nginx/conf.d/selfsigned.key
-        command: [sh, -c, "chmod -R o+X /app; chmod -R o+r /app/admin/build/; nginx -g 'daemon off;'"]
+        command:
+            [sh, -c, "chmod -R o+X /app; chmod -R o+r /app/admin/build/; nginx -g 'daemon off;'"]
         depends_on:
             - api
 
@@ -38,4 +45,4 @@ services:
             - POSTGRES_PASSWORD
             - POSTGRES_DB=reaction-rapide
         volumes:
-            - "~/data:/var/lib/postgresql/data/"
+            - '~/data:/var/lib/postgresql/data/'
