@@ -2,7 +2,8 @@ import { By, until } from 'selenium-webdriver';
 
 export default driver => {
     const elements = {
-        richText: By.css('.rich-text'),
+        letterMessageSections: By.css('.letter-message-section > .rich-text'),
+        legalInformation: By.css('.legal-information > .rich-text'),
         container: By.className('message'),
         inputObject: By.css('.object input'),
         indication: By.css('.objectIndication'),
@@ -19,10 +20,10 @@ export default driver => {
             await this.isLoaded();
         },
         getMessages: async () => {
-            const messageSections = await driver.findElements(elements.richText);
-
+            const messageSections = await driver.findElements(elements.letterMessageSections);
             return Promise.all(messageSections.map(messageSection => messageSection.getText()));
         },
+        getLegalInformation: async () => driver.findElement(elements.legalInformation).getText(),
         getIndication: async () => driver.findElement(elements.indication).getText(),
         enterObjectText: async value => driver.findElement(elements.inputObject).sendKeys(value),
         enterEmailText: async value => driver.findElement(elements.inputEmail).sendKeys(value),

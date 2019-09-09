@@ -1,6 +1,7 @@
 const query = require('../db/client');
 
 import { createUrgentAction as insertUrgentAction } from '../urgentActions/repository';
+import { createSetting as insertSetting } from '../settings/repository';
 
 export const createUrgentAction = async ({ story, message_template, ...urgentAction } = {}) => {
     const defaultUrgentAction = {
@@ -19,4 +20,19 @@ export const createUrgentAction = async ({ story, message_template, ...urgentAct
     });
 };
 
-export const truncateAll = async () => query('TRUNCATE urgent_action');
+export const createSetting = async setting => {
+    const defaultSetting = {
+        type: 'my-type',
+        content: '',
+    };
+
+    return insertSetting({
+        ...defaultSetting,
+        ...setting,
+    });
+};
+
+export const truncateAll = async () => {
+    await query('TRUNCATE urgent_action');
+    await query('TRUNCATE settings');
+};
