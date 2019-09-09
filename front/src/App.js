@@ -12,6 +12,7 @@ import HomePage from './HomePage';
 import ErrorPage from './ErrorPage';
 import AppLogo from './themes/AppLogo';
 import { ThemeProvider } from './themes/ThemeContext';
+import DesktopAlert from './DesktopAlert';
 
 export const styles = {
     '&': {
@@ -24,6 +25,7 @@ const App = ({ className, client }) => (
         <ThemeProvider>
             <Div100Vh className={className}>
                 <AppLogo />
+                <DesktopAlert />
                 <Router>
                     <Switch>
                         <Route exact path={generateUrl('home')} component={withTracker(HomePage)} />
