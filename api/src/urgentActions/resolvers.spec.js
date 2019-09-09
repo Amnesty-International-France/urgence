@@ -8,9 +8,11 @@ import {
     removeUrgentAction,
 } from './repository';
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
+import { authenticate, registerCampaignMember } from './salesForceApi';
 
 jest.mock('./repository');
 jest.mock('../services/uploadImageFromStory');
+jest.mock('./salesForceApi');
 
 describe('Urgent Actions Resolvers', () => {
     describe('Queries', () => {
@@ -153,6 +155,94 @@ describe('Urgent Actions Resolvers', () => {
             it('should remove urgent action with given id', async () => {
                 await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id');
                 expect(removeUrgentAction).toHaveBeenCalledWith('id');
+            });
+        });
+
+        describe('addCapmaignMember', () => {
+            it('should return an exception the campaign id is invalid', async () => {
+                const params = {
+                    id: '16fe5e',
+                    member: { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
+                };
+                const response = await UrgentActionsResolver.Mutation.addCampaignMember(
+                    null,
+                    params,
+                );
+
+                expect(response).toEqual(Error('Invalid UUID format: 16fe5e'));
+                expect(authenticate).not.toHaveBeenCalled();
+            });
+
+            it('should return an exception the campaign id does not exist', async () => {
+                const params = {
+                    id: '16fe5e43-df12-4104-b1fe-77f8b3653802',
+                    member: { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
+                };
+                const response = await UrgentActionsResolver.Mutation.addCampaignMember(
+                    null,
+                    params,
+                );
+
+                expect(response).toEqual(Error('Not Found'));
+                expect(authenticate).not.toHaveBeenCalled();
+            });
+
+            it('should not call salesforce, the campaign code is not defined', async () => {
+                const params = {
+                    id: '16fe5e43-df12-4104-b1fe-77f8b3653802',
+                    member: { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
+                };
+
+                getUrgentAction.mockReturnValue({});
+                const response = await UrgentActionsResolver.Mutation.addCampaignMember(
+                    null,
+                    params,
+                );
+
+                expect(response).toEqual(undefined);
+                expect(authenticate).not.toHaveBeenCalled();
+            });
+
+            it('should not call salesforce, the campaign code is not empty', async () => {
+                const params = {
+                    id: '16fe5e43-df12-4104-b1fe-77f8b3653802',
+                    member: { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
+                };
+
+                getUrgentAction.mockReturnValue({ campaign_code: '' });
+                const response = await UrgentActionsResolver.Mutation.addCampaignMember(
+                    null,
+                    params,
+                );
+
+                expect(response).toEqual(undefined);
+                expect(authenticate).not.toHaveBeenCalled();
+            });
+
+            it('should call salesforce', async () => {
+                const params = {
+                    id: '16fe5e43-df12-4104-b1fe-77f8b3653802',
+                    member: { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
+                };
+
+                getUrgentAction.mockReturnValue({ campaign_code: 'AU-007' });
+                const authResponse = {
+                    status: 200,
+                    json: async () =>
+                        Promise.resolve({ access_token: 'psjgf-dfgersdf-sf486sf-sdf' }),
+                };
+                authenticate.mockReturnValue(authResponse);
+                const response = await UrgentActionsResolver.Mutation.addCampaignMember(
+                    null,
+                    params,
+                );
+
+                expect(response).toEqual(undefined);
+                expect(registerCampaignMember).toHaveBeenCalledWith(
+                    'psjgf-dfgersdf-sf486sf-sdf',
+                    'AU-007',
+                    { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
+                );
             });
         });
     });

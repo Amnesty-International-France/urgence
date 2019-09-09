@@ -1,12 +1,10 @@
-import isUUID from 'validator/lib/isUUID';
 import fetch from 'isomorphic-unfetch';
 
-import { getUrgentAction } from './repository';
 import { salesforce } from '../../../config';
 
 const JSON_TYPE = 'application/json';
 
-const authenticate = () =>
+export const authenticate = () =>
     fetch(
         `${salesforce.baseUrl}/oauth2/token?grant_type=password&client_id=${
             salesforce.consumerKey
@@ -21,7 +19,11 @@ const authenticate = () =>
         },
     );
 
-const registerCampaignMember = async (access_token, campaignCode, { firstname, lastname, email }) =>
+export const registerCampaignMember = async (
+    access_token,
+    campaignCode,
+    { firstname, lastname, email },
+) =>
     fetch(`${salesforce.baseUrl}/data/v44.0/sobjects/CampaignMember`, {
         method: 'POST',
         headers: {
@@ -41,31 +43,3 @@ const registerCampaignMember = async (access_token, campaignCode, { firstname, l
             },
         }),
     });
-
-export const addCampaignMember = async (id, { firstname, lastname, email }) => {
-    if (!isUUID(id)) {
-        return Error(`Invalid UUID format: ${id}`);
-    }
-
-    const urgentAction = await getUrgentAction(id);
-    if (!urgentAction) {
-        return Error('Not Found');
-    }
-
-    if (!urgentAction.campaign_code || urgentAction.campaign_code === '') {
-        return;
-    }
-
-    const authResponse = await authenticate();
-    const auth = await authResponse.json();
-
-    if (authResponse.status !== 200) {
-        return Error('Unable to contact SalesForce');
-    }
-
-    return registerCampaignMember(auth.access_token, urgentAction.campaign_code, {
-        firstname,
-        lastname,
-        email,
-    });
-};
