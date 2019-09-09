@@ -11,8 +11,10 @@ testRouter.get('/createUrgentAction', async (req, res) => {
     res.send(result);
 });
 
-testRouter.get('/createSetting', async (req, res) => {
-    const result = await Promise.all(settings.map(setting => createSetting(setting)));
+testRouter.get('/createSettings', async (req, res) => {
+    settings.map(async setting => {
+        await createSetting(setting);
+    });
     res.send({ done: true });
 });
 
