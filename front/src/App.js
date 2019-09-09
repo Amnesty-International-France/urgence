@@ -12,7 +12,7 @@ import HomePage from './HomePage';
 import ErrorPage from './ErrorPage';
 import AppLogo from './themes/AppLogo';
 import { ThemeProvider } from './themes/ThemeContext';
-import DesktopAlert from './DesktopAlert';
+import DesktopAlert from './themes/DesktopAlert';
 
 export const styles = {
     '&': {

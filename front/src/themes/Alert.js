@@ -1,44 +1,41 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withStyles } from '@material-ui/core/styles';
-
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import MobileDetect from 'mobile-detect';
+
+import { RichText } from './RichText';
 
 const styles = {
     icon: {
         cursor: 'pointer',
     },
-    message: {
-        opacity: 0.6,
-    },
 };
 
-const DesktopAlert = ({ classes }) => {
-    const [open, setOpen] = useState(window.innerWidth > 900);
+const isOnDesktop = () => {
+    const md = new MobileDetect(window.navigator.userAgent);
+    return !md.mobile();
+};
 
-    function handleClose(event, reason) {
-        if (reason === 'clickaway') {
-            return;
-        }
+const Alert = ({ classes, message }) => {
+    const [open, setOpen] = useState(isOnDesktop());
 
+    function handleClose() {
         setOpen(false);
     }
 
     return (
         <Snackbar
-            className={classes.message}
             anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
             open={open}
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
-            message={
-                <span id="message-id">
-                    Cette action est optimisée pour un affichage sur <b>smartphone</b>.
-                </span>
-            }
+            message={<RichText html={message} />}
+            TransitionComponent={props => <Slide {...props} direction="up" />}
             action={
                 <FontAwesomeIcon
                     icon={faTimes}
@@ -51,8 +48,9 @@ const DesktopAlert = ({ classes }) => {
     );
 };
 
-DesktopAlert.propTypes = {
+Alert.propTypes = {
     classes: PropTypes.object.isRequired,
+    message: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(DesktopAlert);
+export default withStyles(styles)(Alert);
