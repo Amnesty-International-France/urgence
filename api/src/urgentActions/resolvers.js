@@ -7,7 +7,7 @@ import {
     updateUrgentAction,
     removeUrgentAction,
 } from './repository';
-import { addCampaignMember } from './salesForce';
+import { addCampaignMember } from './campaignMember';
 
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
 

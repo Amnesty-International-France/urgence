@@ -36,6 +36,12 @@ services:
             - SMTP_USER=
             - API_PREFIX_URL=
             - PM2_HOME=.pm2
+            - SF_BASE_URL
+            - SF_CONSUMER_KEY
+            - SF_CONSUMER_SECRET
+            - SF_USERNAME
+            - SF_PASSWORD
+            - SF_SECURITY_TOKEN
         ports:
             - '4000:4000'
 
