@@ -1,42 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
+import { compose } from 'recompose';
 
 import MailTo from '../../themes/MailTo';
 import { templateToBodyText } from './templateToBodyText';
-import generateUrl from '../../services/generateUrl';
 import { isCorrectEmail } from '../../themes/Input';
 import { routeMatch } from '../../propTypes';
-import { DataConsumer } from '../../DataContext';
-
-export const renderSendMail = ({
-    messageTemplate,
-    recipient,
-    afterMail,
-    analyticsCategory,
-    match,
-    step,
-}) => ({
-    /* eslint-disable react/prop-types */
-    email,
-    object,
-    civility,
-    firstname,
-    lastname,
-    /* eslint-enable react/prop-types */
-}) => (
-    <MailTo
-        disabled={!isCorrectEmail(email) || !object || !civility || !firstname || !lastname}
-        label="J'envoie"
-        recipient={recipient}
-        subject={object}
-        body={templateToBodyText(messageTemplate, civility, firstname, lastname)}
-        afterMail={() => afterMail({ email, firstname, lastname })}
-        analyticsCategory={analyticsCategory}
-        match={match}
-        step={step}
-    />
-);
+import { withSessionData } from '../../DataContext';
 
 const query = `
     mutation AddCampaignMember($id: ID!, $member: CampaignMemberInput!) {
@@ -61,35 +32,39 @@ const addCampaignMember = (urgentActionId, member) =>
         },
     });
 
-export class SendMail extends Component {
-    afterMail = member => {
-        const {
-            history,
-            match: { params },
-            urgentActionId,
-        } = this.props;
-
-        addCampaignMember(urgentActionId, member);
-
-        history.push(generateUrl('thanks', params));
+export const SendMail = ({
+    messageTemplate,
+    recipient,
+    analyticsCategory,
+    step,
+    match,
+    afterMail,
+    auId,
+    email,
+    object,
+    civility,
+    firstname,
+    lastname,
+}) => {
+    const handleAfterMail = () => {
+        addCampaignMember(auId, { email, firstname, lastname });
+        afterMail();
     };
-    render() {
-        const { messageTemplate, recipient, analyticsCategory, step, match } = this.props;
 
-        return (
-            <DataConsumer>
-                {renderSendMail({
-                    messageTemplate,
-                    recipient,
-                    afterMail: this.afterMail,
-                    analyticsCategory,
-                    match,
-                    step,
-                })}
-            </DataConsumer>
-        );
-    }
-}
+    return (
+        <MailTo
+            disabled={!isCorrectEmail(email) || !object || !civility || !firstname || !lastname}
+            label="J'envoie"
+            recipient={recipient}
+            subject={object}
+            body={templateToBodyText(messageTemplate, civility, firstname, lastname)}
+            afterMail={handleAfterMail}
+            analyticsCategory={analyticsCategory}
+            match={match}
+            step={step}
+        />
+    );
+};
 
 SendMail.propTypes = {
     className: PropTypes.string,
@@ -104,8 +79,21 @@ SendMail.propTypes = {
         push: PropTypes.func.isRequired,
     }).isRequired,
     analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
-    urgentActionId: PropTypes.string,
+    step: PropTypes.string.isRequired,
+    auId: PropTypes.string.isRequired,
+    afterMail: PropTypes.func,
+    email: PropTypes.string.isRequired,
+    object: PropTypes.string.isRequired,
+    civility: PropTypes.string.isRequired,
+    firstname: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired,
 };
 
-export default withRouter(SendMail);
+SendMail.defaultProps = {
+    onMailSent: () => {},
+};
+
+export default compose(
+    withSessionData,
+    withRouter,
+)(SendMail);
