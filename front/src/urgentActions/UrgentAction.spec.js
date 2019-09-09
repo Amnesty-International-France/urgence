@@ -65,6 +65,9 @@ describe('<UrgentActionWithData />', () => {
 describe('<UrgentAction />', () => {
     const defaultProps = {
         id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
+        history: {
+            push: jest.fn(),
+        },
         slug: 'on-the-way',
         step: 'story',
         page: '1',
