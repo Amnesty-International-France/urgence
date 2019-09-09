@@ -2,12 +2,14 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Redirect } from 'react-router-dom';
 
-import { UrgentAction } from './UrgentAction';
+import { renderUrgentActionWithData, UrgentAction } from './UrgentAction';
 import data from '../data';
 import Act from './Act';
 import ThankStep from './ThankStep';
 import Story from './story/Story';
 import AddressStep from './AddressStep';
+
+import LoadingScreen from '../themes/LoadingScreen';
 
 jest.mock('../data');
 jest.mock('react-router-dom');
@@ -21,6 +23,45 @@ const defaultStep = {
     },
 };
 
+describe('<UrgentActionWithData />', () => {
+    const defaultProps = {
+        id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
+        page: '1',
+        loading: false,
+        data: {
+            UrgentAction: {},
+        },
+    };
+
+    it('should display the LoadingScreen when GraphQL is loading', () => {
+        const props = {
+            ...defaultProps,
+            loading: true,
+            error: false,
+        };
+
+        const UrgentActionWithData = renderUrgentActionWithData('on-the-way', 'story');
+        const wrapper = shallow(<UrgentActionWithData {...props} />);
+
+        const loading = wrapper.find(LoadingScreen);
+        expect(loading.length).toEqual(1);
+    });
+
+    it('should Redirect to the error page if there is a GraphQL error', () => {
+        const props = {
+            ...defaultProps,
+            error: new Error('An error occured'),
+        };
+
+        const UrgentActionWithData = renderUrgentActionWithData('on-the-way', 'story');
+        const wrapper = shallow(<UrgentActionWithData {...props} />);
+
+        const redirect = wrapper.find(Redirect);
+        expect(redirect.length).toEqual(1);
+        expect(redirect.prop('to')).toEqual('/error');
+    });
+});
+
 describe('<UrgentAction />', () => {
     const defaultProps = {
         id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
@@ -32,18 +73,6 @@ describe('<UrgentAction />', () => {
             UrgentAction: {},
         },
     };
-
-    it('should Redirect to the error page if there is a GraphQL error', () => {
-        const props = {
-            ...defaultProps,
-            error: new Error('An error occured'),
-        };
-        const wrapper = shallow(<UrgentAction foo="bar" {...props} />);
-
-        const redirect = wrapper.find(Redirect);
-        expect(redirect.length).toEqual(1);
-        expect(redirect.prop('to')).toEqual('/error');
-    });
 
     it('should display story with retrieved GraphQL data if step is story', () => {
         const props = {

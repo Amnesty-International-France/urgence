@@ -24,7 +24,7 @@ describe('Setting Resolvers', () => {
         describe('SettingByType', () => {
             it('should query settings with corresponding type', async () => {
                 const params = { type: 'i-am-lord-voldemort' };
-                await settingsResolver.Query.Setting(null, params);
+                await settingsResolver.Query.SettingByType(null, params);
 
                 expect(getSettingByType).toHaveBeenCalledWith('i-am-lord-voldemort');
             });

@@ -272,6 +272,26 @@ UrgentAction.propTypes = {
     loading: PropTypes.bool,
 };
 
+export const renderUrgentActionWithData = (slug, step) => ({ data, error, loading }) => {
+    if (error) {
+        console.error(error);
+        return <Redirect to={generateUrl('error')} />;
+    }
+
+    if (loading) {
+        return <LoadingScreen />;
+    }
+
+    const seoProps = seoPropsFromStory(get(data, 'UrgentAction.story'));
+
+    return (
+        <Fragment>
+            {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
+            <UrgentAction slug={slug} step={step} data={data} error={error} loading={loading} />
+        </Fragment>
+    );
+};
+
 export const UrgentActionWithData = ({
     match: {
         params: { slug, step },
@@ -279,31 +299,7 @@ export const UrgentActionWithData = ({
 }) => (
     <DataProvider>
         <Query query={query} variables={{ slug }}>
-            {({ data, error, loading }) => {
-                if (error) {
-                    console.error(error);
-                    return <Redirect to={generateUrl('error')} />;
-                }
-
-                if (loading) {
-                    return <LoadingScreen />;
-                }
-
-                const seoProps = seoPropsFromStory(get(data, 'UrgentAction.story'));
-
-                return (
-                    <Fragment>
-                        {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
-                        <UrgentAction
-                            slug={slug}
-                            step={step}
-                            data={data}
-                            error={error}
-                            loading={loading}
-                        />
-                    </Fragment>
-                );
-            }}
+            {renderUrgentActionWithData(slug, step)}
         </Query>
     </DataProvider>
 );
