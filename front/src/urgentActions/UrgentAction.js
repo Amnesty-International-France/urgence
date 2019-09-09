@@ -105,6 +105,7 @@ const query = gql`
                 }
             }
             register {
+                title
                 text
                 button
             }
