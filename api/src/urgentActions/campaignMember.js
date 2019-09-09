@@ -17,17 +17,12 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
         return;
     }
 
-    console.log('FINGERS CROSSED');
     const authResponse = await authenticate();
-    console.log('AUTHOKAY');
     const auth = await authResponse.json();
-    console.log(auth);
 
     if (authResponse.status !== 200) {
         return Error('Unable to contact SalesForce');
     }
-
-    console.log('OKAYYYYYYYYYYYYYYYY');
 
     registerCampaignMember(auth.access_token, urgentAction.campaign_code, {
         firstname,
