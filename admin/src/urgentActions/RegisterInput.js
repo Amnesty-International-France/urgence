@@ -21,10 +21,11 @@ const styles = () => ({
     },
 });
 
-export const RegisterInput = ({ classes, source }) => {
-    const defaultMessage = `L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !`;
-    const defaultButton = `Je m'inscris`;
+const defaultTitle = 'Merci pour votre action';
+const defaultMessage = `L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !`;
+const defaultButton = `Je m'inscris`;
 
+export const RegisterInput = ({ classes, source }) => {
     return (
         <div className={classes.root}>
             <FormDataConsumer>
@@ -36,6 +37,12 @@ export const RegisterInput = ({ classes, source }) => {
                         <Card className={classes.card}>
                             <CardContent className={classes.content}>
                                 <div className={classes.formContainer}>
+                                    <LongTextInput
+                                        source={`${source}.title`}
+                                        label="Title"
+                                        defaultValue={defaultTitle}
+                                        validate={[required()]}
+                                    />
                                     <LongTextInput
                                         source={`${source}.text`}
                                         label="Text"
