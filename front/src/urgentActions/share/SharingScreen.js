@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import RichText from '../RichText';
-import LongText from '../LongText';
-import { white, black } from '../colors';
-import { withYellowLogo } from '../ThemeContext';
-import Share from './Share';
+import RichText from '../../themes/RichText';
+import LongText from '../../themes/LongText';
+import { white, black } from '../../themes/colors';
+import { withYellowLogo } from '../../themes/ThemeContext';
+import Share from '../../themes/Sharing/Share';
 
 const styles = {
     display: 'flex',

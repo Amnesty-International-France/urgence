@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { ShareStep } from './ShareStep';
-import SharingScreen from '../themes/Sharing/SharingScreen';
+import Share from './Share';
+import SharingScreen from './SharingScreen';
 
-describe('<ShareStep />', () => {
+describe('<Share />', () => {
     const defaultProps = {
         className: '',
         data: {
@@ -23,7 +23,7 @@ describe('<ShareStep />', () => {
             actions: () => <p className="customAction">Some actions...</p>,
         };
 
-        const wrapper = shallow(<ShareStep {...props} />);
+        const wrapper = shallow(<Share {...props} />);
         const sharingScreen = wrapper.find(SharingScreen);
         expect(sharingScreen.length).toEqual(1);
     });
@@ -38,7 +38,7 @@ describe('<ShareStep />', () => {
             },
         };
 
-        const wrapper = shallow(<ShareStep {...props} />);
+        const wrapper = shallow(<Share {...props} />);
         const sharingScreen = wrapper.find(SharingScreen);
 
         expect(sharingScreen.prop('title')).toEqual('Merci !');
