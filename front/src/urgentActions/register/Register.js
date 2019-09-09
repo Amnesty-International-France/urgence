@@ -25,6 +25,9 @@ const styles = {
     padding: '100px 20px 20px 20px',
     color: black,
     backgroundColor: white,
+    '& .header': {
+        margin: '1em 0',
+    },
     '& h1': {
         textTransform: 'uppercase',
         fontFamily: 'Amnesty Trade Gothic Condensed',
@@ -40,11 +43,6 @@ const styles = {
             boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
             boxDecorationBreak: 'clone',
         },
-    },
-    '& .rich-text': {
-        color: black,
-        fontFamily: 'Amnesty Trade Gothic LT',
-        fontSize: '16px',
     },
     '& .action': {
         margin: '1em 0',
@@ -73,13 +71,12 @@ export const RegisterActivist = ({ data, gdprRegister, action, className, ...pro
     const text = get(data, 'text');
     return (
         <div className={classnames('register', className)}>
-            <div>
+            <div className="header">
                 <h1>
                     <LongText text={title} />
                 </h1>
-                <RichText html={text} />
+                {text && <RichText html={text} />}
             </div>
-
             <div className="formStep">
                 <Form {...props} />
             </div>

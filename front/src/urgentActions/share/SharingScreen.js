@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import classnames from 'classnames';
+
 import RichText from '../../themes/RichText';
 import LongText from '../../themes/LongText';
 import { white, black } from '../../themes/colors';
@@ -22,6 +24,9 @@ const styles = {
             textAlign: 'center',
         },
     },
+    '& .header': {
+        margin: '1em 0',
+    },
     '& h1': {
         textTransform: 'uppercase',
         fontFamily: 'Amnesty Trade Gothic Condensed',
@@ -38,11 +43,6 @@ const styles = {
             boxDecorationBreak: 'clone',
         },
     },
-    '& .rich-text': {
-        color: black,
-        fontFamily: 'Amnesty Trade Gothic LT',
-        fontSize: '16px',
-    },
 };
 
 export const SharingScreen = ({
@@ -55,8 +55,8 @@ export const SharingScreen = ({
     link,
     analyticsCategory,
 }) => (
-    <div className={className}>
-        <div>
+    <div className={classnames('share', className)}>
+        <div className="header">
             <h1>
                 <LongText text={title} />
             </h1>
