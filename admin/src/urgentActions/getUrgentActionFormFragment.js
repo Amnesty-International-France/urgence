@@ -5,13 +5,7 @@ import slugify from 'slugify';
 import { ArrayInput, LongTextInput, SimpleForm, FormDataConsumer, required } from 'react-admin';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-import teal from '@material-ui/core/colors/teal';
-import blue from '@material-ui/core/colors/blue';
-import red from '@material-ui/core/colors/blue';
-import yellow from '@material-ui/core/colors/yellow';
-import green from '@material-ui/core/colors/green';
-import grey from '@material-ui/core/colors/grey';
-import orange from '@material-ui/core/colors/orange';
+import { teal, blue, red, yellow, green, grey, orange } from '@material-ui/core/colors';
 
 import { LETTER_ACTIVATED } from '../flags';
 
