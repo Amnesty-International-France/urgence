@@ -3,7 +3,7 @@ import { By, until } from 'selenium-webdriver';
 export default driver => {
     const elements = {
         letterMessageSections: By.css('.letter-message-section > .rich-text'),
-        legalInformation: By.css('.legal-information > .rich-text'),
+        legalInformation: By.css('.legal-information'),
         container: By.className('message'),
         inputObject: By.css('.object input'),
         indication: By.css('.objectIndication'),
