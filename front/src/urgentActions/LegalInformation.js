@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 
 import RichText from '../themes/RichText';
 
+const styles = {
+    fontSize: '14px',
+};
+
 const LegalInformation = ({ content }) => {
     if (!content) {
         return null;
     }
-    return <RichText className="legal-information" html={content} />;
+    return <RichText className="legal-information" html={content} style={styles} />;
 };
 
 LegalInformation.propTypes = {
