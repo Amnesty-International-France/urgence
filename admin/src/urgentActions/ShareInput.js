@@ -20,7 +20,7 @@ import { get as getScreenIndex, SHARE } from './screenIndex';
 import RichTextInput from '../form/RichTextInput';
 import FrontPreview from './FrontPreview';
 
-import ShareStep from '../../../front/src/urgentActions/ShareStep';
+import Share from '../../../front/src/urgentActions/share/Share';
 
 const styles = theme => ({
     ...root,
@@ -103,7 +103,7 @@ export const ShareInput = ({ classes, source }) => {
                             </CardContent>
                         </Card>
                         <FrontPreview className={classes.preview}>
-                            <ShareStep data={formData[source]} slug={formData.slug} />
+                            <Share data={formData[source]} slug={formData.slug} />
                         </FrontPreview>
                     </Fragment>
                 )}
