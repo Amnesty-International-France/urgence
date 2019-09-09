@@ -22,7 +22,7 @@ import SendMail from './message/SendMail';
 import LoadingScreen from '../themes/LoadingScreen';
 import MailPdfButton from './MailPdfButton';
 import RegisterButton from './register/RegisterButton';
-import RegisterActivist from './register/RegisterActivist';
+import Register from './register/Register';
 
 const seoPropsFromStory = story => {
     if (!story || story.length === 0) {
@@ -240,10 +240,10 @@ export const UrgentAction = ({ slug, data, step }) => {
         const register = get(data, 'UrgentAction.register');
 
         return (
-            <RegisterActivist
+            <Register
+                step={step}
                 data={register}
                 gdprRegister={get(data, 'GdprRegister.content')}
-                step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                 action={disabled => (
                     <RegisterButton
