@@ -1,6 +1,5 @@
 import { gql } from 'apollo-server-express';
 
-import activistsTypeDefs from '../activists/typeDefs';
 import userTypeDefs from '../users/typeDefs';
 import urgentActionsTypeDefs from '../urgentActions/typeDefs';
 import settingsTypeDefs from '../settings/typeDefs';
@@ -22,10 +21,4 @@ const baseTypeDefs = gql`
     }
 `;
 
-export default [
-    baseTypeDefs,
-    activistsTypeDefs,
-    urgentActionsTypeDefs,
-    userTypeDefs,
-    settingsTypeDefs,
-];
+export default [baseTypeDefs, urgentActionsTypeDefs, userTypeDefs, settingsTypeDefs];
