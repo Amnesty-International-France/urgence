@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
 import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/blue';
 import yellow from '@material-ui/core/colors/yellow';
 import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
@@ -41,12 +42,12 @@ const styles = {
             backgroundColor: yellow[50],
         },
         '&.message': {
-            backgroundColor: teal[50],
-        },
-        '&.continue': {
-            backgroundColor: yellow[50],
+            backgroundColor: red[50],
         },
         '&.letter': {
+            backgroundColor: red[50],
+        },
+        '&.share': {
             backgroundColor: teal[50],
         },
         '&.register': {
@@ -130,21 +131,17 @@ const Form = ({ classes, record }) => {
                 <MessageInput source="" />
             </div>
 
-            <div className={`${classes.form} continue`}>
-                <h2>Continue</h2>
-                {LETTER_ACTIVATED ? (
-                    <ThanksInput source="email_thank" />
-                ) : (
-                    <ShareInput source="email_thank" />
-                )}
-            </div>
-
             {LETTER_ACTIVATED && (
                 <div className={`${classes.form} letter`}>
                     <h2>Letter</h2>
                     <LetterInput source="recipient" />
                 </div>
             )}
+
+            <div className={`${classes.form} share`}>
+                <h2>Share (already registered)</h2>
+                <ShareInput source="email_thank" />
+            </div>
 
             <div className={`${classes.form} register`}>
                 <h2>Register</h2>

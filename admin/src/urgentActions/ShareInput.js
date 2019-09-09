@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 import {
     addField,
@@ -15,18 +16,21 @@ import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 
 import { root, sharingScreenPreview } from './styles';
-import { get as getScreenIndex, CONTINUE } from './screenIndex';
+import { get as getScreenIndex, SHARE } from './screenIndex';
 import RichTextInput from '../form/RichTextInput';
 import FrontPreview from './FrontPreview';
 
 import ShareStep from '../../../front/src/urgentActions/ShareStep';
 
-const styles = {
+const styles = theme => ({
     ...root,
+    bordered: {
+        borderBottom: `solid 1px ${theme.palette.divider}`,
+    },
     preview: {
         ...sharingScreenPreview,
     },
-};
+});
 
 const disableSharing = (record, source) => {
     return (
@@ -43,12 +47,12 @@ const defaultMessage = `J'ai agi avec Amnesty France!`;
 
 export const ShareInput = ({ classes, source }) => {
     return (
-        <div className={classes.root}>
+        <div className={classnames(classes.root, classes.bordered)}>
             <FormDataConsumer>
                 {({ formData }) => (
                     <Fragment>
                         <Avatar className={classes.avatar}>
-                            {getScreenIndex(CONTINUE, formData)}
+                            {getScreenIndex(SHARE, formData) + 'A'}
                         </Avatar>
                         <Card className={classes.card}>
                             <CardContent className={classes.content}>

@@ -14,12 +14,12 @@ import FrontPreview, { noop } from './FrontPreview';
 import RegisterActivist from '../../../front/src/urgentActions/register/RegisterActivist';
 import Link from '../../../front/src/themes/Link';
 
-const styles = {
+const styles = () => ({
     ...root,
     preview: {
         ...registerFormScreenPreview,
     },
-};
+});
 
 export const RegisterInput = ({ classes, source }) => {
     const defaultMessage = `L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !`;
@@ -31,7 +31,7 @@ export const RegisterInput = ({ classes, source }) => {
                 {({ formData }) => (
                     <Fragment>
                         <Avatar className={classes.avatar}>
-                            {getScreenIndex(REGISTER, formData)}
+                            {getScreenIndex(REGISTER, formData) + 'B'}
                         </Avatar>
                         <Card className={classes.card}>
                             <CardContent className={classes.content}>
