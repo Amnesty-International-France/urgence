@@ -272,6 +272,7 @@ UrgentAction.propTypes = {
     loading: PropTypes.bool,
 };
 
+// eslint-disable-next-line react/prop-types
 export const renderUrgentActionWithData = (slug, step) => ({ data, error, loading }) => {
     if (error) {
         console.error(error);
