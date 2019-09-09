@@ -11,7 +11,7 @@ import { root, registerFormScreenPreview } from './styles';
 import { get as getScreenIndex, REGISTER } from './screenIndex';
 import FrontPreview, { noop } from './FrontPreview';
 
-import RegisterActivist from '../../../front/src/urgentActions/register/RegisterActivist';
+import Register from '../../../front/src/urgentActions/register/Register';
 import Link from '../../../front/src/themes/Link';
 
 const styles = () => ({
@@ -59,7 +59,7 @@ export const RegisterInput = ({ classes, source }) => {
                             </CardContent>
                         </Card>
                         <FrontPreview className={classes.preview}>
-                            <RegisterActivist
+                            <Register
                                 autoFocus={false}
                                 data={formData[source]}
                                 action={() =>
