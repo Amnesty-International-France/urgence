@@ -38,8 +38,6 @@ export const preview = {
 export const sharingScreenPreview = {
     ...preview,
     '& > div': {
-        maxHeight: 'calc(100% + 120px)',
-        height: 'calc(100% + 120px)',
         width: 'calc(100% - 40px)',
         padding: '100px 20px 20px 20px',
     },
@@ -73,8 +71,6 @@ export const registerFormScreenPreview = {
     '& > div': {
         width: 'calc(100% - 40px)',
         padding: '100px 20px 20px 20px',
-        minHeight: 0,
-        height: '480px',
     },
     '& .action': {
         '& a': {
