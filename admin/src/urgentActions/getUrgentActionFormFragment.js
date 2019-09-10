@@ -133,17 +133,17 @@ const Form = ({ classes, record }) => {
             )}
 
             <div className={`${classes.form} share`}>
-                <h2>Share (already registered)</h2>
+                <h2>Share (only for members already registered)</h2>
                 <ShareInput source="email_thank" />
             </div>
 
             <div className={`${classes.form} register`}>
-                <h2>Register</h2>
+                <h2>Register (for new members)</h2>
                 <RegisterInput source="register" />
             </div>
 
             <div className={`${classes.form} thank-you`}>
-                <h2>Thank You</h2>
+                <h2>Final Thank You</h2>
                 <ThanksInput source="end_thank" final />
             </div>
         </Fragment>
