@@ -19,12 +19,33 @@ export const authenticate = () =>
         },
     );
 
+export const getCampaignMemberDetails = async (access_token, { id }) => {
+    const url = `${
+        salesforce.baseUrl
+    }/data/v44.0/query/?q=SELECT+ID,Contact.name,Contact.Optin_Actions_Urgentes__c+from+campaignmember+where+id=${id}`;
+
+    const result = await fetch(url, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+            'Content-Type': JSON_TYPE,
+        },
+    });
+
+    const registered = result.records.some(record => !!record.Optin_Actions_Urgentes__c);
+
+    return { registered };
+};
+
 export const registerCampaignMember = async (
     access_token,
     { campaign_code, origin_code },
     { firstname, lastname, email },
-) =>
-    fetch(`${salesforce.baseUrl}/data/v44.0/sobjects/CampaignMember`, {
+) => {
+    const url = `${salesforce.baseUrl}/data/v44.0/sobjects/CampaignMember`;
+
+    return fetch(url, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${access_token}`,
@@ -44,3 +65,4 @@ export const registerCampaignMember = async (
             },
         }),
     });
+};
