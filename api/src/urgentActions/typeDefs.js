@@ -166,6 +166,7 @@ export default gql`
         firstname: String!
         lastname: String!
         email: String!
+        registered: Bool!
     }
 
     extend type Query {
