@@ -29,13 +29,13 @@ const Alert = ({ classes, message }) => {
 
     return (
         <Snackbar
-            anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+            anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
             open={open}
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
             message={<RichText html={message} />}
-            TransitionComponent={props => <Slide {...props} direction="up" />}
+            TransitionComponent={props => <Slide {...props} direction="down" />}
             action={
                 <FontAwesomeIcon
                     icon={faTimes}
