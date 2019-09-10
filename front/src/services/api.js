@@ -2,6 +2,7 @@ const addCampaignMemberQuery = `
     mutation AddCampaignMember($id: ID!, $member: CampaignMemberInput!) {
         addCampaignMember(id: $id, member: $member) {
             email
+            registered
         }
     }
 `;

@@ -25,14 +25,20 @@ export const SendMail = ({
     firstname,
     lastname,
     registered,
+    setRegistered,
 }) => {
     const handleAfterMail = () => {
-        const afterMailParams = { registered: registered === 'true' };
+        let isRegistered = registered;
         return addCampaignMember(auId, { email, firstname, lastname })
-            .then(() => {})
+            .then(result => {
+                isRegistered = result.registered;
+                if (result.registered) {
+                    setRegistered();
+                }
+            })
             .catch(() => {})
             .then(() => {
-                afterMail(afterMailParams);
+                afterMail({ registered: isRegistered });
             });
     };
 
@@ -73,6 +79,7 @@ SendMail.propTypes = {
     lastname: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     registered: PropTypes.string.isRequired,
+    setRegistered: PropTypes.func.isRequired,
 };
 
 SendMail.defaultProps = {
