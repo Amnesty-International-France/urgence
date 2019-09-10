@@ -96,9 +96,17 @@ test-e2e-stop: ## Stop the e2e tests. Usage `make test-e2e-stop`
 
 #### DATABASE & MIGRATIONS ####
 
-psql: ## Connect to the running database. Usage `make psql`.
+psql: ## Connect to the test database. Usage `make psql`.
+	$(DOCKER_COMPOSE) up --force-recreate -d
+	$(DOCKER_COMPOSE) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide"
+
+psql-test: ## Connect to the test database. Usage `make psql-test`.
 	$(DOCKER_COMPOSE_TEST) up --force-recreate -d
 	$(DOCKER_COMPOSE_TEST) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide-test"
+
+psql-e2e: ## Connect to the e2e database. Usage `make psql-e2e`.
+	$(DOCKER_COMPOSE_E2E) up --force-recreate -d
+	$(DOCKER_COMPOSE_E2E) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide-e2e"
 
 DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
 	--config=database.js \
