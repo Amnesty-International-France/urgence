@@ -39,5 +39,8 @@ export default driver => {
 
             return className.includes('disabled');
         },
+        clickButton: async () => {
+            driver.findElement(elements.sendMailButton).click();
+        },
     };
 };
