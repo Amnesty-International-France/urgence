@@ -6,7 +6,7 @@ const query = `
     }
 `;
 
-export const addCampaignMember = async (urgentActionId, member) =>
+export const addCampaignMember = (urgentActionId, member) =>
     fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
         method: 'POST',
         body: JSON.stringify({

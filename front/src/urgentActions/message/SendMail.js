@@ -26,10 +26,11 @@ export const SendMail = ({
     lastname,
     setRegistered,
 }) => {
-    const handleAfterMail = async () => {
-        await addCampaignMember(auId, { email, firstname, lastname });
-        setRegistered(); // Todo: call setRegistered only if the addCampaingMember returns a registered member
-        afterMail({ registered: true });
+    const handleAfterMail = () => {
+        addCampaignMember(auId, { email, firstname, lastname }).finally(() => {
+            setRegistered(); // Todo: call setRegistered only if the addCampaingMember returns a registered member
+            afterMail({ registered: true });
+        });
     };
 
     return (
