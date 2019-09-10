@@ -5,12 +5,14 @@ import storyPageFactory from './pages/story';
 import actPageFactory from './pages/act';
 import messagePageFactory from './pages/message';
 import registerPageFactory from './pages/register';
+import sharePageFactory from './pages/share';
 import thanksEndPageFactory from './pages/thanksEnd';
 
 const storyPage = storyPageFactory(driver);
 const actPage = actPageFactory(driver);
 const messagePage = messagePageFactory(driver);
 const registerPage = registerPageFactory(driver);
+const sharePage = sharePageFactory(driver);
 const thanksEndPage = thanksEndPageFactory(driver);
 
 describe('app', () => {
@@ -120,6 +122,16 @@ describe('app', () => {
 
         await registerPage.clickButton();
         await thanksEndPage.isLoaded();
+    });
+
+    it('should display share step', async () => {
+        await sharePage.navigate(urgentAction.slug);
+
+        const title = await sharePage.getTitle();
+        expect(title).toBe('SE BATTRE. ENCORE. ET ENCORE.');
+
+        const text = await sharePage.getText();
+        expect(text).toBe("Continuons d'agir en partageant cette histoire.");
     });
 
     it('should display thanks-end step', async () => {
