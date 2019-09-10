@@ -11,7 +11,7 @@ export default driver => {
         inputCivility: By.css('input[type=radio]'),
         inputFirstname: By.css('.firstname input'),
         inputLastname: By.css('.lastname input'),
-        registerButton: By.css('.action a'),
+        registerButton: By.css('a'),
     };
     return {
         isLoaded: async () => driver.wait(until.elementLocated(elements.header)),
