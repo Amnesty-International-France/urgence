@@ -24,12 +24,11 @@ export const SendMail = ({
     civility,
     firstname,
     lastname,
-    setRegistered,
+    registered,
 }) => {
     const handleAfterMail = () => {
         addCampaignMember(auId, { email, firstname, lastname }).finally(() => {
-            setRegistered(); // Todo: call setRegistered only if the addCampaingMember returns a registered member
-            afterMail({ registered: true });
+            afterMail({ registered: registered === 'true' });
         });
     };
 
@@ -69,12 +68,11 @@ SendMail.propTypes = {
     civility: PropTypes.string.isRequired,
     firstname: PropTypes.string.isRequired,
     lastname: PropTypes.string.isRequired,
-    setRegistered: PropTypes.func,
+    registered: PropTypes.func.isRequired,
 };
 
 SendMail.defaultProps = {
     onMailSent: () => {},
-    setRegistered: () => {},
 };
 
 export default compose(
