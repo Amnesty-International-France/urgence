@@ -72,7 +72,7 @@ SendMail.propTypes = {
     firstname: PropTypes.string.isRequired,
     lastname: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    registered: PropTypes.func.isRequired,
+    registered: PropTypes.string.isRequired,
 };
 
 SendMail.defaultProps = {
