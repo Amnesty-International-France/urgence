@@ -141,6 +141,7 @@ export default gql`
         title: String!
         slug: String
         campaign_code: String
+        origin_code: String
         story: [StoryStep]
         call_to_action: CallToAction
         object_indication: String
@@ -187,6 +188,7 @@ export default gql`
             title: String!
             slug: String
             campaign_code: String
+            origin_code: String
             story: [StoryStepInput]
             call_to_action: CallToActionInput
             object_indication: String
@@ -201,6 +203,7 @@ export default gql`
             title: String!
             slug: String
             campaign_code: String
+            origin_code: String
             story: [StoryStepInput]
             call_to_action: CallToActionInput
             object_indication: String

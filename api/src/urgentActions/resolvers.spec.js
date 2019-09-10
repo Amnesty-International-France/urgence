@@ -225,7 +225,8 @@ describe('Urgent Actions Resolvers', () => {
                     member: { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
                 };
 
-                getUrgentAction.mockReturnValue({ campaign_code: 'AU-007' });
+                const ua = { campaign_code: 'AU-007', origin_code: 'AU_WEB_APP' };
+                getUrgentAction.mockReturnValue(ua);
                 const authResponse = {
                     status: 200,
                     json: async () =>
@@ -240,7 +241,7 @@ describe('Urgent Actions Resolvers', () => {
                 expect(response).toEqual(undefined);
                 expect(registerCampaignMember).toHaveBeenCalledWith(
                     'psjgf-dfgersdf-sf486sf-sdf',
-                    'AU-007',
+                    ua,
                     { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
                 );
             });
