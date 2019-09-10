@@ -9,7 +9,7 @@ import { isCorrectEmail } from '../../themes/Input';
 import { routeMatch } from '../../propTypes';
 import { withSessionData } from '../../DataContext';
 
-import { addCampaignMember } from '../../services/salesforceAPI';
+import { addCampaignMember } from '../../services/api';
 
 export const SendMail = ({
     messageTemplate,
