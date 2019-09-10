@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import slugify from 'slugify';
 
 import { ArrayInput, LongTextInput, SimpleForm, FormDataConsumer, required } from 'react-admin';
-
+import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
 import blue from '@material-ui/core/colors/blue';
@@ -80,21 +80,28 @@ const Form = ({ classes, record }) => {
     return (
         <Fragment>
             <div className={classes.form}>
-                <LongTextInput
-                    source="campaign_code"
-                    onChange={handleTextFieldChange}
-                    helperText={
-                        emptyCode ? (
-                            <span className={classes.warning}>
-                                Activists actions won't be sent down to SalesForce while this field
-                                remains empty.
-                            </span>
-                        ) : (
-                            ''
-                        )
-                    }
-                    inputProps={autoFocusProps}
-                />
+                <Grid container spacing={0} justify="space-between">
+                    <Grid item xs={5}>
+                        <LongTextInput
+                            source="campaign_code"
+                            onChange={handleTextFieldChange}
+                            helperText={
+                                emptyCode ? (
+                                    <span className={classes.warning}>
+                                        Activists actions won't be sent down to SalesForce while
+                                        this field remains empty.
+                                    </span>
+                                ) : (
+                                    ''
+                                )
+                            }
+                            inputProps={autoFocusProps}
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <LongTextInput source="origin_code" defaultValue="AU_WEB_APP" />
+                    </Grid>
+                </Grid>
                 <LongTextInput source="title" validate={required()} />
                 <FormDataConsumer>
                     {({ formData }) => {

@@ -21,7 +21,7 @@ export const authenticate = () =>
 
 export const registerCampaignMember = async (
     access_token,
-    campaignCode,
+    { campaign_code, origin_code },
     { firstname, lastname, email },
 ) =>
     fetch(`${salesforce.baseUrl}/data/v44.0/sobjects/CampaignMember`, {
@@ -35,11 +35,12 @@ export const registerCampaignMember = async (
             Tech_Email__c: email,
             Tech_FirstName__c: firstname,
             Tech_LastName__c: lastname,
+            Tech_CodeOrigine__c: origin_code,
             Type_de_participation__c: 'Smartphone',
             Actions_effectuees__c: 'Email',
             Status: 'a participé',
             Campaign: {
-                Code__c: campaignCode,
+                Code__c: campaign_code,
             },
         }),
     });

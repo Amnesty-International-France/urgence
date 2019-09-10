@@ -24,7 +24,7 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
         return Error('Unable to contact SalesForce');
     }
 
-    registerCampaignMember(auth.access_token, urgentAction.campaign_code, {
+    registerCampaignMember(auth.access_token, urgentAction, {
         firstname,
         lastname,
         email,

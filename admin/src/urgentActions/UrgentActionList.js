@@ -14,6 +14,7 @@ export default props => (
                 <Datagrid>
                     <TextField source="title" />
                     <TextField source="campaign_code" label="Campaign code" />
+                    <TextField source="origin_code" label="Origin code" />
                     <DateField
                         showTime
                         label="Last Updated"
