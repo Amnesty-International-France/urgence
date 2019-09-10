@@ -1,7 +1,7 @@
 import isUUID from 'validator/lib/isUUID';
 
 import { getUrgentAction } from './repository';
-import { authenticate, registerCampaignMember } from './salesForceApi';
+import { authenticate, registerCampaignMember, getCampaignMemberDetails } from './salesForceApi';
 
 export const addCampaignMember = async (id, { firstname, lastname, email }) => {
     if (!isUUID(id)) {
@@ -24,9 +24,25 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
         return Error('Unable to contact SalesForce');
     }
 
-    registerCampaignMember(auth.access_token, urgentAction, {
+    const registerCampaignMemberResult = await registerCampaignMember(
+        auth.access_token,
+        urgentAction,
+        {
+            firstname,
+            lastname,
+            email,
+        },
+    );
+
+    const { registered } = await getCampaignMemberDetails(
+        auth.access_token,
+        registerCampaignMemberResult,
+    );
+
+    return {
         firstname,
         lastname,
         email,
-    });
+        registered,
+    };
 };
