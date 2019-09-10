@@ -9,28 +9,7 @@ import { isCorrectEmail } from '../../themes/Input';
 import { routeMatch } from '../../propTypes';
 import { withSessionData } from '../../DataContext';
 
-const query = `
-    mutation AddCampaignMember($id: ID!, $member: CampaignMemberInput!) {
-        addCampaignMember(id: $id, member: $member) {
-            email
-        }
-    }
-`;
-
-const addCampaignMember = (urgentActionId, member) =>
-    fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
-        method: 'POST',
-        body: JSON.stringify({
-            query,
-            variables: {
-                id: urgentActionId,
-                member,
-            },
-        }),
-        headers: {
-            'content-type': 'application/json',
-        },
-    });
+import { addCampaignMember } from '../../services/salesforceAPI';
 
 export const SendMail = ({
     messageTemplate,
