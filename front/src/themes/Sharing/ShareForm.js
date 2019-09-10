@@ -24,13 +24,12 @@ const styles = {
     marginLeft: 16,
     '& .list': {
         display: 'flex',
-        marginLeft: 41,
+        marginLeft: 25,
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
     '& .link': {
         display: 'flex',
-        marginTop: 10,
     },
     '& .content': {
         fontSize: 16,

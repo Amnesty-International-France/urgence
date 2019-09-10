@@ -19,14 +19,25 @@ const styles = {
         fontSize: 16,
         textTransform: 'none',
     },
+    inLine: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     icon: {
         alignSelf: 'center',
-        marginBottom: 10,
+        marginRight: 10,
         width: '28px !important',
     },
-    bloc: {
-        display: 'flex',
-        flexDirection: 'column',
+    url: {
+        maxWidth: 220,
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        '@media (min-width: 1024px)': {
+            maxWidth: '100%',
+        },
     },
 };
 
@@ -42,8 +53,9 @@ export const CopyToClipboard = ({ classes, slug, step, url, action, analyticsCat
         }}
     >
         <CopyToClipboardButton textToCopy={url}>
-            <div className={classes.bloc}>
-                <FontAwesomeIcon icon={faLink} size="2x" className={classes.icon} />
+            <div className={classes.inLine}>
+                <FontAwesomeIcon icon={faLink} size="2x" className={classes.icon} />{' '}
+                <span className={classes.url}>{url}</span>
             </div>
         </CopyToClipboardButton>
     </Button>
