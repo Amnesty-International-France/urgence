@@ -48,9 +48,8 @@
         "cci": "amnesty@gmail.com"
     },
     "email_thank": {
-        "title": "Merci de votre soutien !",
-        "text": "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
-        "button": "Je continue d'agir"
+        "title": "Se battre. Encore. Et encore.",
+        "text": "Continuons d'agir en partageant cette histoire."
     },
     "register": {
         "title": "Continuons d'agir ensemble !",
