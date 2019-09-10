@@ -4,13 +4,13 @@ import driver from './driver';
 import storyPageFactory from './pages/story';
 import actPageFactory from './pages/act';
 import messagePageFactory from './pages/message';
-import thanksPageFactory from './pages/thanks';
+import registerPageFactory from './pages/register';
 import thanksEndPageFactory from './pages/thanksEnd';
 
 const storyPage = storyPageFactory(driver);
 const actPage = actPageFactory(driver);
 const messagePage = messagePageFactory(driver);
-const thanksPage = thanksPageFactory(driver);
+const registerPage = registerPageFactory(driver);
 const thanksEndPage = thanksEndPageFactory(driver);
 
 describe('app', () => {
@@ -95,18 +95,31 @@ describe('app', () => {
         expect(legalInformation).toBe(
             'Vos données personnelles sont traitées par Amnesty International France.',
         );
+
+        await messagePage.clickButton();
+        await registerPage.isLoaded();
     });
 
-    it('should display thanks step', async () => {
-        await thanksPage.navigate(urgentAction.slug);
+    it('should display register step', async () => {
+        await registerPage.navigate(urgentAction.slug);
 
-        const title = await thanksPage.getTitle();
-        expect(title).toBe('MERCI DE VOTRE SOUTIEN !');
+        const title = await registerPage.getTitle();
+        expect(title).toBe("CONTINUONS D'AGIR ENSEMBLE !");
 
-        const text = await thanksPage.getText();
+        const text = await registerPage.getText();
         expect(text).toBe(
-            "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
+            "L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !",
         );
+
+        expect(await registerPage.isButtonDisabled()).toBe(true);
+        await registerPage.enterEmailText('super@man.fr');
+        await registerPage.chooseCivility();
+        await registerPage.enterFirstnameText('My');
+        await registerPage.enterLastnameText('name');
+        expect(await registerPage.isButtonDisabled()).toBe(false);
+
+        await registerPage.clickButton();
+        await thanksEndPage.isLoaded();
     });
 
     it('should display thanks-end step', async () => {
@@ -116,8 +129,6 @@ describe('app', () => {
         expect(title).toBe('MERCI DE VOTRE AIDE !');
 
         const text = await thanksEndPage.getText();
-        expect(text).toBe(
-            "Il ne vous reste plus qu'à poster la lettre qui vous a été envoyée par courriel.",
-        );
+        expect(text).toBe('Nous comptons sur vous pour la prochaine action urgente.');
     });
 });
