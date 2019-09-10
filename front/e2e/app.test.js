@@ -119,6 +119,7 @@ describe('app', () => {
 
         expect(await registerPage.isButtonDisabled()).toBe(true);
         await registerPage.enterEmailText('super@man.fr');
+        await registerPage.enterPhoneText('0836656565');
         await registerPage.chooseCivility();
         await registerPage.enterFirstnameText('My');
         await registerPage.enterLastnameText('name');
