@@ -3,15 +3,15 @@ import { By, until } from 'selenium-webdriver';
 export default driver => {
     const elements = {
         header: By.className('header'),
-        title: By.css('.header .long-text'),
-        text: By.css('.header .rich-text'),
+        title: By.css('.header > h1 > .long-text'),
+        text: By.css('.header > .rich-text'),
         legalInformation: By.css('.legal-information'),
         inputEmail: By.css('.email input'),
         inputPhone: By.css('.phone input'),
         inputCivility: By.css('input[type=radio]'),
         inputFirstname: By.css('.firstname input'),
         inputLastname: By.css('.lastname input'),
-        registerButton: By.css('a'),
+        registerButton: By.css('.action a'),
     };
     return {
         isLoaded: async () => driver.wait(until.elementLocated(elements.header)),
