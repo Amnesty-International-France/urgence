@@ -32,15 +32,13 @@ export default driver => {
             driver.findElement(elements.inputFirstname).sendKeys(value),
         enterLastnameText: async value =>
             driver.findElement(elements.inputLastname).sendKeys(value),
+        clickButton: async () => driver.findElement(elements.sendMailButton).click(),
         isButtonDisabled: async () => {
             const className = await driver
                 .findElement(elements.sendMailButton)
                 .getAttribute('class');
 
             return className.includes('disabled');
-        },
-        clickButton: async () => {
-            driver.findElement(elements.sendMailButton).click();
         },
     };
 };
