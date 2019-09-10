@@ -23,6 +23,10 @@ describe('app', () => {
         await fetch('http://api:4000/test/createSettings').then(r => r.json());
     });
 
+    afterAll(async () => {
+        await fetch('http://api:4000/test/clearDb');
+    });
+
     it('should display story', async () => {
         await storyPage.navigate(urgentAction.slug, 0);
 

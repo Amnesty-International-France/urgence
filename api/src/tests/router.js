@@ -19,8 +19,7 @@ testRouter.get('/createSettings', async (req, res) => {
 });
 
 testRouter.delete('/clearDb', async (req, res) => {
-    const id = await truncateAll();
-
+    await truncateAll();
     res.send({ done: true });
 });
 
