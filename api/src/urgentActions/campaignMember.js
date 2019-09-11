@@ -1,52 +1,42 @@
 import isUUID from 'validator/lib/isUUID';
 
 import { getUrgentAction } from './repository';
-import {
-    authenticate,
-    registerCampaignMember,
-    getCampaignMemberDetails,
-} from '../services/salesForceApi';
+import { authenticate, registerCampaignMember, getContactByEmail } from '../services/salesForceApi';
 
 export const addCampaignMember = async (id, { firstname, lastname, email }) => {
     if (!isUUID(id)) {
-        return Error(`Invalid UUID format: ${id}`);
+        return new Error(`Invalid UUID format: ${id}`);
     }
 
     const urgentAction = await getUrgentAction(id);
     if (!urgentAction) {
-        return Error('Not Found');
+        return new Error('Not Found');
     }
 
     if (!urgentAction.campaign_code) {
-        return;
+        return { firstname, lastname, email };
     }
 
-    const authResponse = await authenticate();
-    const auth = await authResponse.json();
+    const { status: authStatus, body: authBody } = await authenticate();
 
-    if (authResponse.status !== 200) {
-        return Error('Unable to contact SalesForce');
+    if (authStatus !== 200) {
+        return new Error('Authentication to SalesForce API failed');
     }
 
-    const registerCampaignMemberResult = await registerCampaignMember(
-        auth.access_token,
-        urgentAction,
-        {
-            firstname,
-            lastname,
-            email,
-        },
-    );
-
-    const { registered } = await getCampaignMemberDetails(
-        auth.access_token,
-        registerCampaignMemberResult,
-    );
-
-    return {
+    await registerCampaignMember(authBody.access_token, urgentAction, {
         firstname,
         lastname,
         email,
-        registered,
-    };
+    });
+
+    const { status: contactStatus, body: contactBody } = await getContactByEmail(
+        authBody.access_token,
+        email,
+    );
+
+    if (contactStatus !== 200) {
+        return new Error('Unable to query contacts in SalesForce API');
+    }
+
+    return { firstname, lastname, email, registered: contactBody.registered };
 };

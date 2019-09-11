@@ -16,13 +16,18 @@ const JSON_TYPE = 'application/json';
 
 const AUTHENTICATE_URL = `${baseUrl}/oauth2/token?grant_type=password&client_id=${consumerKey}&client_secret=${consumerSecret}&username=${username}&password=${password}${securityToken}`;
 
-export const authenticate = () =>
-    fetch(AUTHENTICATE_URL, {
+export const authenticate = async () => {
+    const response = await fetch(AUTHENTICATE_URL, {
         method: 'POST',
         headers: {
             Accept: JSON_TYPE,
         },
     });
+    const status = response.status;
+    const body = await response.json();
+
+    return { status, body };
+};
 
 const QUERY_BASE_URL = `${baseUrl}/data/${version}`;
 
@@ -33,7 +38,7 @@ export const registerCampaignMember = async (
 ) => {
     const url = `${QUERY_BASE_URL}/sobjects/CampaignMember`;
 
-    return fetch(url, {
+    const response = await fetch(url, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${access_token}`,
@@ -53,21 +58,38 @@ export const registerCampaignMember = async (
             },
         }),
     });
+
+    const status = response.status;
+    const body = await response.json();
+
+    return { status, body };
 };
 
-export const getCampaignMemberDetails = async (access_token, { id }) => {
-    const url = `${QUERY_BASE_URL}/query/?q=SELECT+ID,Contact.name,Contact.Optin_Actions_Urgentes__c+from+campaignmember+where+id=${id}`;
+export const getContactByEmail = async (access_token, email) => {
+    const url = `${QUERY_BASE_URL}/query?q=SELECT+Optin_Actions_Urgentes__c+from+contact+where+email='${email}'`;
 
-    const result = await fetch(url, {
+    const response = await fetch(url, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${access_token}`,
             Accept: JSON_TYPE,
-            'Content-Type': JSON_TYPE,
         },
     });
 
-    const registered = result.records.some(record => !!record.Optin_Actions_Urgentes__c);
+    const status = response.status;
+    const body = await response.json();
 
-    return { registered };
+    if (!body || !body.records || body.records.length === 0) {
+        return { contacts: [], registered: false };
+    }
+
+    const registered = body.records.some(record => !!record.Actions_urgentes_via_le_smartphone__c);
+
+    return {
+        status,
+        body: {
+            contacts: [...body.records],
+            registered,
+        },
+    };
 };

@@ -8,11 +8,7 @@ import {
     removeUrgentAction,
 } from './repository';
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
-import {
-    authenticate,
-    registerCampaignMember,
-    getCampaignMemberDetails,
-} from '../services/salesForceApi';
+import { authenticate, registerCampaignMember, getContactByEmail } from '../services/salesForceApi';
 
 jest.mock('./repository');
 jest.mock('../services/uploadImageFromStory');
@@ -239,9 +235,6 @@ describe('Urgent Actions Resolvers', () => {
                 };
                 authenticate.mockReturnValue(authResponse);
 
-                const campaingMember = { id: 18 };
-                registerCampaignMember.mockReturnValue(campaingMember);
-
                 const campaingMemberDetails = { registered: false };
                 getCampaignMemberDetails.mockReturnValue(campaingMemberDetails);
 
@@ -260,10 +253,9 @@ describe('Urgent Actions Resolvers', () => {
                     ua,
                     { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
                 );
-                expect(getCampaignMemberDetails).toHaveBeenCalledWith(
-                    'psjgf-dfgersdf-sf486sf-sdf',
-                    { id: 18 },
-                );
+                expect(getContactByEmail).toHaveBeenCalledWith('psjgf-dfgersdf-sf486sf-sdf', {
+                    email: 'jean.bon@gmail.com',
+                });
             });
         });
     });
