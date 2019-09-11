@@ -8,11 +8,11 @@ import {
     removeUrgentAction,
 } from './repository';
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
-import { authenticate, registerCampaignMember } from './salesForceApi';
+import { authenticate, registerCampaignMember } from '../services/salesForceApi';
 
 jest.mock('./repository');
 jest.mock('../services/uploadImageFromStory');
-jest.mock('./salesForceApi');
+jest.mock('../services/salesForceApi');
 
 describe('Urgent Actions Resolvers', () => {
     describe('Queries', () => {
