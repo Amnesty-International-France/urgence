@@ -166,7 +166,7 @@ export default gql`
         firstname: String!
         lastname: String!
         email: String!
-        registered: Boolean!
+        registered: Boolean
     }
 
     extend type Query {
@@ -217,6 +217,6 @@ export default gql`
             register: RegisterInput
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
-        addCampaignMember(id: ID!, member: CampaignMemberInput): CampaignMember
+        addCampaignMember(id: ID!, member: CampaignMemberInput!): CampaignMember!
     }
 `;
