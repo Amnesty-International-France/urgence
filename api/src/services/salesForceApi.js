@@ -66,7 +66,7 @@ export const registerCampaignMember = async (
 };
 
 export const getContactByEmail = async (access_token, email) => {
-    const url = `${QUERY_BASE_URL}/query?q=SELECT+Optin_Actions_Urgentes__c+from+contact+where+email='${email}'`;
+    const url = `${QUERY_BASE_URL}/query?q=SELECT+Actions_urgentes_via_le_smartphone__c+from+contact+where+email='${email}'`;
 
     const response = await fetch(url, {
         method: 'GET',
