@@ -2,48 +2,36 @@ import fetch from 'isomorphic-unfetch';
 
 import { salesforce } from '../../../config';
 
+const {
+    baseUrl,
+    version,
+    consumerKey,
+    consumerSecret,
+    username,
+    password,
+    securityToken,
+} = salesforce;
+
 const JSON_TYPE = 'application/json';
 
+const AUTHENTICATE_URL = `${baseUrl}/oauth2/token?grant_type=password&client_id=${consumerKey}&client_secret=${consumerSecret}&username=${username}&password=${password}${securityToken}`;
+
 export const authenticate = () =>
-    fetch(
-        `${salesforce.baseUrl}/oauth2/token?grant_type=password&client_id=${
-            salesforce.consumerKey
-        }&client_secret=${salesforce.consumerSecret}&username=${salesforce.username}&password=${
-            salesforce.password
-        }${salesforce.securityToken}`,
-        {
-            method: 'POST',
-            headers: {
-                Accept: JSON_TYPE,
-            },
-        },
-    );
-
-export const getCampaignMemberDetails = async (access_token, { id }) => {
-    const url = `${
-        salesforce.baseUrl
-    }/data/v44.0/query/?q=SELECT+ID,Contact.name,Contact.Optin_Actions_Urgentes__c+from+campaignmember+where+id=${id}`;
-
-    const result = await fetch(url, {
-        method: 'GET',
+    fetch(AUTHENTICATE_URL, {
+        method: 'POST',
         headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: JSON_TYPE,
-            'Content-Type': JSON_TYPE,
         },
     });
 
-    const registered = result.records.some(record => !!record.Optin_Actions_Urgentes__c);
-
-    return { registered };
-};
+const QUERY_BASE_URL = `${baseUrl}/data/${version}`;
 
 export const registerCampaignMember = async (
     access_token,
     { campaign_code, origin_code },
     { firstname, lastname, email },
 ) => {
-    const url = `${salesforce.baseUrl}/data/v44.0/sobjects/CampaignMember`;
+    const url = `${QUERY_BASE_URL}/sobjects/CampaignMember`;
 
     return fetch(url, {
         method: 'POST',
@@ -65,4 +53,21 @@ export const registerCampaignMember = async (
             },
         }),
     });
+};
+
+export const getCampaignMemberDetails = async (access_token, { id }) => {
+    const url = `${QUERY_BASE_URL}/query/?q=SELECT+ID,Contact.name,Contact.Optin_Actions_Urgentes__c+from+campaignmember+where+id=${id}`;
+
+    const result = await fetch(url, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+            'Content-Type': JSON_TYPE,
+        },
+    });
+
+    const registered = result.records.some(record => !!record.Optin_Actions_Urgentes__c);
+
+    return { registered };
 };

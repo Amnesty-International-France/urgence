@@ -8,7 +8,11 @@ import {
     removeUrgentAction,
 } from './repository';
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
-import { authenticate, registerCampaignMember } from '../services/salesForceApi';
+import {
+    authenticate,
+    registerCampaignMember,
+    getCampaignMemberDetails,
+} from '../services/salesForceApi';
 
 jest.mock('./repository');
 jest.mock('../services/uploadImageFromStory');
@@ -219,7 +223,7 @@ describe('Urgent Actions Resolvers', () => {
                 expect(authenticate).not.toHaveBeenCalled();
             });
 
-            it('should call salesforce', async () => {
+            it('should call salesforce api', async () => {
                 const params = {
                     id: '16fe5e43-df12-4104-b1fe-77f8b3653802',
                     member: { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
@@ -227,22 +231,38 @@ describe('Urgent Actions Resolvers', () => {
 
                 const ua = { campaign_code: 'AU-007', origin_code: 'AU_WEB_APP' };
                 getUrgentAction.mockReturnValue(ua);
+
                 const authResponse = {
                     status: 200,
                     json: async () =>
                         Promise.resolve({ access_token: 'psjgf-dfgersdf-sf486sf-sdf' }),
                 };
                 authenticate.mockReturnValue(authResponse);
+
+                const campaingMember = { id: 18 };
+                registerCampaignMember.mockReturnValue(campaingMember);
+
+                const campaingMemberDetails = { registered: false };
+                getCampaignMemberDetails.mockReturnValue(campaingMemberDetails);
+
                 const response = await UrgentActionsResolver.Mutation.addCampaignMember(
                     null,
                     params,
                 );
 
-                expect(response).toEqual(undefined);
+                expect(response.email).toEqual('jean.bon@gmail.com');
+                expect(response.firstname).toEqual('Jean');
+                expect(response.lastname).toEqual('Bon');
+                expect(response.registered).toEqual(false);
+
                 expect(registerCampaignMember).toHaveBeenCalledWith(
                     'psjgf-dfgersdf-sf486sf-sdf',
                     ua,
                     { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
+                );
+                expect(getCampaignMemberDetails).toHaveBeenCalledWith(
+                    'psjgf-dfgersdf-sf486sf-sdf',
+                    { id: 18 },
                 );
             });
         });
