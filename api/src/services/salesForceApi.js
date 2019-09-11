@@ -79,16 +79,13 @@ export const getContactByEmail = async (access_token, email) => {
     const status = response.status;
     const body = await response.json();
 
-    if (!body || !body.records || body.records.length === 0) {
-        return { contacts: [], registered: false };
-    }
-
-    const registered = body.records.some(record => !!record.Actions_urgentes_via_le_smartphone__c);
+    const contacts = body.records || [];
+    const registered = contacts.some(record => !!record.Actions_urgentes_via_le_smartphone__c);
 
     return {
         status,
         body: {
-            contacts: [...body.records],
+            contacts,
             registered,
         },
     };
