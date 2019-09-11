@@ -242,8 +242,13 @@ describe('Urgent Actions Resolvers', () => {
                 };
                 authenticate.mockReturnValue(authResponse);
 
-                const campaingMemberDetails = { registered: false };
-                getContactByEmail.mockReturnValue(campaingMemberDetails);
+                const contactResponse = {
+                    status: 200,
+                    body: {
+                        registered: false,
+                    },
+                };
+                getContactByEmail.mockReturnValue(contactResponse);
 
                 const response = await UrgentActionsResolver.Mutation.addCampaignMember(
                     null,
