@@ -89,7 +89,7 @@ export const DataProvider = ({ children }) => {
         data.setEmail(newEmail);
     };
 
-    const handleSetRegistered = (newRegistered = 'true') => {
+    const handleSetRegistered = (newRegistered = 'false') => {
         setRegistered(newRegistered);
         data.setRegistered(newRegistered);
     };

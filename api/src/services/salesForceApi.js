@@ -13,8 +13,8 @@ const {
 } = salesforce;
 
 const JSON_TYPE = 'application/json';
-
 const AUTHENTICATE_URL = `${baseUrl}/oauth2/token?grant_type=password&client_id=${consumerKey}&client_secret=${consumerSecret}&username=${username}&password=${password}${securityToken}`;
+const QUERY_BASE_URL = `${baseUrl}/data/${version}`;
 
 export const authenticate = async () => {
     const response = await fetch(AUTHENTICATE_URL, {
@@ -28,8 +28,6 @@ export const authenticate = async () => {
 
     return { status, body };
 };
-
-const QUERY_BASE_URL = `${baseUrl}/data/${version}`;
 
 export const registerCampaignMember = async (
     access_token,

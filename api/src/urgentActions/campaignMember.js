@@ -17,10 +17,10 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
         return { firstname, lastname, email };
     }
 
-    const { status: authStatus, body: authBody } = await authenticate();
+    const { status: authResponseStatus, body: authBody } = await authenticate();
     const accessToken = authBody ? authBody.access_token : null;
 
-    if (authStatus !== 200 || !accessToken) {
+    if (authResponseStatus !== 200 || !accessToken) {
         return new Error('Authentication to SalesForce API failed');
     }
 
@@ -30,12 +30,12 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
         email,
     });
 
-    const { status: contactStatus, body: contactBody } = await getContactByEmail(
+    const { status: contactResponseStatus, body: contactBody } = await getContactByEmail(
         authBody.access_token,
         email,
     );
 
-    if (contactStatus !== 200) {
+    if (contactResponseStatus !== 200) {
         return new Error('Unable to query contacts in SalesForce API');
     }
 

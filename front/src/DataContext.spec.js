@@ -205,7 +205,7 @@ describe('DataContext', () => {
 
     it('should have a "setRegistered" method to change the state "registered"', () => {
         const render = context => {
-            context.setRegistered('false');
+            context.setRegistered('true');
             return <span>OK</span>;
         };
         mount(
@@ -214,7 +214,7 @@ describe('DataContext', () => {
             </DataProvider>,
         );
 
-        expect(data.setRegistered).toBeCalledWith('false');
+        expect(data.setRegistered).toBeCalledWith('true');
     });
 
     it('should have a "setRegistered" method with a default param to change the state "registered"', () => {
@@ -228,6 +228,6 @@ describe('DataContext', () => {
             </DataProvider>,
         );
 
-        expect(data.setRegistered).toBeCalledWith('true');
+        expect(data.setRegistered).toBeCalledWith('false');
     });
 });
