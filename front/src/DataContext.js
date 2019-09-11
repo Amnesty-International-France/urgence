@@ -39,59 +39,59 @@ export const DataProvider = ({ children }) => {
         data.setMailObject(newObject);
     };
 
-    const handleSetCivility = civility => {
-        setCivility(civility);
-        data.setCivility(civility);
+    const handleSetCivility = newCivility => {
+        setCivility(newCivility);
+        data.setCivility(newCivility);
     };
 
-    const handleSetFirstname = firstname => {
-        setFirstname(firstname);
-        data.setFirstname(firstname);
+    const handleSetFirstname = newFirstname => {
+        setFirstname(newFirstname);
+        data.setFirstname(newFirstname);
     };
 
-    const handleSetLastname = lastname => {
-        setLastname(lastname);
-        data.setLastname(lastname);
+    const handleSetLastname = newLastname => {
+        setLastname(newLastname);
+        data.setLastname(newLastname);
     };
 
-    const handleSetAddressMain = addressMain => {
-        setAddressMain(addressMain);
-        data.setAddressMain(addressMain);
+    const handleSetAddressMain = newAddressMain => {
+        setAddressMain(newAddressMain);
+        data.setAddressMain(newAddressMain);
     };
 
-    const handleSetAddressMore = addressMore => {
-        setAddressMore(addressMore);
-        data.setAddressMore(addressMore);
+    const handleSetAddressMore = newAddressMore => {
+        setAddressMore(newAddressMore);
+        data.setAddressMore(newAddressMore);
     };
 
-    const handleSetPostalCode = postalCode => {
-        setPostalCode(postalCode);
-        data.setPostalCode(postalCode);
+    const handleSetPostalCode = newPostalCode => {
+        setPostalCode(newPostalCode);
+        data.setPostalCode(newPostalCode);
     };
 
-    const handleSetCity = city => {
-        setCity(city);
-        data.setCity(city);
+    const handleSetCity = newCity => {
+        setCity(newCity);
+        data.setCity(newCity);
     };
 
-    const handleSetCountry = country => {
-        setCountry(country);
-        data.setCountry(country);
+    const handleSetCountry = newCountry => {
+        setCountry(newCountry);
+        data.setCountry(newCountry);
     };
 
-    const handleSetPhone = phone => {
-        setPhone(phone);
-        data.setPhone(phone);
+    const handleSetPhone = newPhone => {
+        setPhone(newPhone);
+        data.setPhone(newPhone);
     };
 
-    const handleSetEmail = email => {
-        setEmail(email);
-        data.setEmail(email);
+    const handleSetEmail = newEmail => {
+        setEmail(newEmail);
+        data.setEmail(newEmail);
     };
 
-    const handleSetRegistered = () => {
-        setRegistered('true');
-        data.setRegistered('true');
+    const handleSetRegistered = (newRegistered = 'true') => {
+        setRegistered(newRegistered);
+        data.setRegistered(newRegistered);
     };
 
     return (
