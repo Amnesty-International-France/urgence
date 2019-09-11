@@ -21,4 +21,4 @@ export const addCampaignMember = (urgentActionId, member) =>
         headers: {
             'content-type': 'application/json',
         },
-    });
+    }).then(res => res.json());

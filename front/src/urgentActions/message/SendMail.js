@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { compose } from 'recompose';
+import get from 'lodash.get';
 
 import MailTo from '../../themes/MailTo';
 import { templateToBodyText } from './templateToBodyText';
@@ -31,10 +32,8 @@ export const SendMail = ({
         let isRegistered = registered;
         return addCampaignMember(auId, { email, firstname, lastname })
             .then(result => {
-                isRegistered = result.registered;
-                if (result.registered) {
-                    setRegistered();
-                }
+                isRegistered = get(result, 'data.addCampaignMember.registered', false);
+                setRegistered(isRegistered ? 'true' : 'false');
             })
             .catch(() => {})
             .then(() => {
