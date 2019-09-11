@@ -18,8 +18,9 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
     }
 
     const { status: authStatus, body: authBody } = await authenticate();
+    const accessToken = authBody ? authBody.access_token : null;
 
-    if (authStatus !== 200) {
+    if (authStatus !== 200 || !accessToken) {
         return new Error('Authentication to SalesForce API failed');
     }
 

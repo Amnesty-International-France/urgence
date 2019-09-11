@@ -236,8 +236,9 @@ describe('Urgent Actions Resolvers', () => {
 
                 const authResponse = {
                     status: 200,
-                    json: async () =>
-                        Promise.resolve({ access_token: 'psjgf-dfgersdf-sf486sf-sdf' }),
+                    body: {
+                        access_token: 'psjgf-dfgersdf-sf486sf-sdf',
+                    },
                 };
                 authenticate.mockReturnValue(authResponse);
 
