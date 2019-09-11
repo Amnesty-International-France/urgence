@@ -1,32 +1,43 @@
 import isUUID from 'validator/lib/isUUID';
 
 import { getUrgentAction } from './repository';
-import { authenticate, registerCampaignMember } from './salesForceApi';
+import { authenticate, registerCampaignMember, getContactByEmail } from '../services/salesForceApi';
 
 export const addCampaignMember = async (id, { firstname, lastname, email }) => {
     if (!isUUID(id)) {
-        return Error(`Invalid UUID format: ${id}`);
+        return new Error(`Invalid UUID format: ${id}`);
     }
 
     const urgentAction = await getUrgentAction(id);
     if (!urgentAction) {
-        return Error('Not Found');
+        return new Error('Not Found');
     }
 
     if (!urgentAction.campaign_code) {
-        return;
+        return { firstname, lastname, email };
     }
 
-    const authResponse = await authenticate();
-    const auth = await authResponse.json();
+    const { status: authResponseStatus, body: authBody } = await authenticate();
+    const accessToken = authBody ? authBody.access_token : null;
 
-    if (authResponse.status !== 200) {
-        return Error('Unable to contact SalesForce');
+    if (authResponseStatus !== 200 || !accessToken) {
+        return new Error('Authentication to SalesForce API failed');
     }
 
-    registerCampaignMember(auth.access_token, urgentAction, {
+    await registerCampaignMember(authBody.access_token, urgentAction, {
         firstname,
         lastname,
         email,
     });
+
+    const { status: contactResponseStatus, body: contactBody } = await getContactByEmail(
+        authBody.access_token,
+        email,
+    );
+
+    if (contactResponseStatus !== 200) {
+        return new Error('Unable to query contacts in SalesForce API');
+    }
+
+    return { firstname, lastname, email, registered: contactBody.registered };
 };

@@ -8,11 +8,11 @@ import {
     removeUrgentAction,
 } from './repository';
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
-import { authenticate, registerCampaignMember } from './salesForceApi';
+import { authenticate, registerCampaignMember, getContactByEmail } from '../services/salesForceApi';
 
 jest.mock('./repository');
 jest.mock('../services/uploadImageFromStory');
-jest.mock('./salesForceApi');
+jest.mock('../services/salesForceApi');
 
 describe('Urgent Actions Resolvers', () => {
     describe('Queries', () => {
@@ -158,7 +158,7 @@ describe('Urgent Actions Resolvers', () => {
             });
         });
 
-        describe('addCapmaignMember', () => {
+        describe('addCampaignMember', () => {
             it('should return an exception the campaign id is invalid', async () => {
                 const params = {
                     id: '16fe5e',
@@ -187,7 +187,7 @@ describe('Urgent Actions Resolvers', () => {
                 expect(authenticate).not.toHaveBeenCalled();
             });
 
-            it('should not call salesforce, the campaign code is not defined', async () => {
+            it('should not call the salesforce api if the campaign code is not defined', async () => {
                 const params = {
                     id: '16fe5e43-df12-4104-b1fe-77f8b3653802',
                     member: { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
@@ -199,11 +199,14 @@ describe('Urgent Actions Resolvers', () => {
                     params,
                 );
 
-                expect(response).toEqual(undefined);
+                expect(response.email).toEqual('jean.bon@gmail.com');
+                expect(response.firstname).toEqual('Jean');
+                expect(response.lastname).toEqual('Bon');
+
                 expect(authenticate).not.toHaveBeenCalled();
             });
 
-            it('should not call salesforce, the campaign code is not empty', async () => {
+            it('should not call the salesforce api if the campaign code is empty', async () => {
                 const params = {
                     id: '16fe5e43-df12-4104-b1fe-77f8b3653802',
                     member: { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
@@ -215,11 +218,14 @@ describe('Urgent Actions Resolvers', () => {
                     params,
                 );
 
-                expect(response).toEqual(undefined);
+                expect(response.email).toEqual('jean.bon@gmail.com');
+                expect(response.firstname).toEqual('Jean');
+                expect(response.lastname).toEqual('Bon');
+
                 expect(authenticate).not.toHaveBeenCalled();
             });
 
-            it('should call salesforce', async () => {
+            it('should call salesforce api', async () => {
                 const params = {
                     id: '16fe5e43-df12-4104-b1fe-77f8b3653802',
                     member: { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
@@ -227,22 +233,41 @@ describe('Urgent Actions Resolvers', () => {
 
                 const ua = { campaign_code: 'AU-007', origin_code: 'AU_WEB_APP' };
                 getUrgentAction.mockReturnValue(ua);
+
                 const authResponse = {
                     status: 200,
-                    json: async () =>
-                        Promise.resolve({ access_token: 'psjgf-dfgersdf-sf486sf-sdf' }),
+                    body: {
+                        access_token: 'psjgf-dfgersdf-sf486sf-sdf',
+                    },
                 };
                 authenticate.mockReturnValue(authResponse);
+
+                const contactResponse = {
+                    status: 200,
+                    body: {
+                        registered: false,
+                    },
+                };
+                getContactByEmail.mockReturnValue(contactResponse);
+
                 const response = await UrgentActionsResolver.Mutation.addCampaignMember(
                     null,
                     params,
                 );
 
-                expect(response).toEqual(undefined);
+                expect(response.email).toEqual('jean.bon@gmail.com');
+                expect(response.firstname).toEqual('Jean');
+                expect(response.lastname).toEqual('Bon');
+                expect(response.registered).toEqual(false);
+
                 expect(registerCampaignMember).toHaveBeenCalledWith(
                     'psjgf-dfgersdf-sf486sf-sdf',
                     ua,
                     { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
+                );
+                expect(getContactByEmail).toHaveBeenCalledWith(
+                    'psjgf-dfgersdf-sf486sf-sdf',
+                    'jean.bon@gmail.com',
                 );
             });
         });

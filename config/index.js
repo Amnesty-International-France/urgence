@@ -149,6 +149,11 @@ const config = convict({
             default: '',
             env: 'SF_BASE_URL',
         },
+        version: {
+            format: String,
+            default: 'v45.0',
+            env: 'SF_API_VERSION',
+        },
         consumerKey: {
             format: String,
             default: '',

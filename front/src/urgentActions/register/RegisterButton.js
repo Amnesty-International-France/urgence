@@ -11,7 +11,7 @@ export const RegisterButton = ({
     setRegistered,
 }) => {
     const register = () => {
-        setRegistered();
+        setRegistered('true');
     };
 
     return (
