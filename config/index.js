@@ -152,7 +152,7 @@ const config = convict({
         version: {
             format: String,
             default: 'v45.0',
-            env: 'SF_VERSION',
+            env: 'SF_API_VERSION',
         },
         consumerKey: {
             format: String,

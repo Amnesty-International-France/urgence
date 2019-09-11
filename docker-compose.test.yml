@@ -34,7 +34,7 @@ services:
             - SMTP_USER=
             - PM2_HOME=.pm2
             - SF_BASE_URL
-            - SF_VERSION
+            - SF_API_VERSION
             - SF_CONSUMER_KEY
             - SF_CONSUMER_SECRET
             - SF_USERNAME
