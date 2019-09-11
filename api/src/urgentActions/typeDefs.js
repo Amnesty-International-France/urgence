@@ -109,11 +109,13 @@ export default gql`
     }
 
     type Register {
+        title: String
         text: String
         button: String
     }
 
     input RegisterInput {
+        title: String
         text: String
         button: String
     }

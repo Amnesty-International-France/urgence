@@ -1,44 +1,63 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import get from 'lodash.get';
 import { compose } from 'recompose';
 import classnames from 'classnames';
 
+import RichText from '../../themes/RichText';
+import LongText from '../../themes/LongText';
 import { isCorrectEmail } from '../../themes/Input';
-
 import { white, black } from '../../themes/colors';
 import { withYellowLogo } from '../../themes/ThemeContext';
+
 import { withSessionData } from '../../DataContext';
 
 import Form from './Form';
 import LegalInformation from '../LegalInformation';
 
 const styles = {
-    fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '16px',
     display: 'flex',
-    minHeight: '100%',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
+    minHeight: '100%',
     width: '100%',
     padding: '100px 20px 20px 20px',
     color: black,
     backgroundColor: white,
+    '& .header': {
+        margin: '1em 0',
+    },
+    '& h1': {
+        textTransform: 'uppercase',
+        fontFamily: 'Amnesty Trade Gothic Condensed',
+        fontSize: '36px',
+        lineHeight: '54px',
+        fontWeight: 'bold',
+        margin: '1.5rem 12px',
+        width: 'calc(100% - 24px)',
+        '> span': {
+            color: white,
+            backgroundColor: black,
+            padding: '6px 0',
+            boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
+            boxDecorationBreak: 'clone',
+        },
+    },
     '& .action': {
         margin: '1em 0',
         '@media (min-width: 1024px)': {
             display: 'flex',
         },
     },
+    '& .formStep': {
+        margin: '5px 0px 10px 0px',
+    },
     '@media (max-width: 350px)': {
         fontSize: '0.8em',
     },
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
-    },
-    '& .formStep': {
-        margin: '5px 0px 10px 0px',
     },
 };
 
@@ -48,18 +67,22 @@ const isDisabled = props => {
 };
 
 export const RegisterActivist = ({ data, gdprRegister, action, className, ...props }) => {
+    const title = get(data, 'title');
     const text = get(data, 'text');
     return (
-        <Fragment>
-            <div className={classnames('register', className)}>
-                <p>{text}</p>
-                <div className="formStep">
-                    <Form {...props} />
-                </div>
-                <div className="action">{action(isDisabled(props))}</div>
-                <LegalInformation content={gdprRegister} />
+        <div className={classnames('register', className)}>
+            <div className="header">
+                <h1>
+                    <LongText text={title} />
+                </h1>
+                {text && <RichText html={text} />}
             </div>
-        </Fragment>
+            <div className="formStep">
+                <Form {...props} />
+            </div>
+            <div className="action">{action(isDisabled(props))}</div>
+            <LegalInformation content={gdprRegister} />
+        </div>
     );
 };
 

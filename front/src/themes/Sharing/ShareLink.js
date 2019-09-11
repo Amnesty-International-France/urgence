@@ -27,11 +27,13 @@ const styles = {
         fontSize: 16,
         textTransform: 'none',
         alignSelf: 'start',
-        marginLeft: 55,
+        marginLeft: 25,
     },
     inLineButton: {
         display: 'flex',
         flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     button: {
         textDecoration: 'none',
@@ -51,7 +53,6 @@ const styles = {
     },
     icon: {
         alignSelf: 'center',
-        marginBottom: 10,
     },
 };
 

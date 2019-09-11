@@ -16,6 +16,8 @@ export default (name, params = {}) => {
             return `/ua/${params.slug}/thanks`;
         case 'register':
             return `/ua/${params.slug}/register`;
+        case 'share':
+            return `/ua/${params.slug}/share`;
         case 'address':
             return `/ua/${params.slug}/address`;
         case 'thanks-end':

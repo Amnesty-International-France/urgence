@@ -11,31 +11,38 @@ import { root, registerFormScreenPreview } from './styles';
 import { get as getScreenIndex, REGISTER } from './screenIndex';
 import FrontPreview, { noop } from './FrontPreview';
 
-import RegisterActivist from '../../../front/src/urgentActions/register/RegisterActivist';
+import Register from '../../../front/src/urgentActions/register/Register';
 import Link from '../../../front/src/themes/Link';
 
-const styles = {
+const styles = () => ({
     ...root,
     preview: {
         ...registerFormScreenPreview,
     },
-};
+});
+
+const defaultTitle = 'Merci pour votre action';
+const defaultMessage = `L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !`;
+const defaultButton = `Je m'inscris`;
 
 export const RegisterInput = ({ classes, source }) => {
-    const defaultMessage = `L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !`;
-    const defaultButton = `Je m'inscris`;
-
     return (
         <div className={classes.root}>
             <FormDataConsumer>
                 {({ formData }) => (
                     <Fragment>
                         <Avatar className={classes.avatar}>
-                            {getScreenIndex(REGISTER, formData)}
+                            {getScreenIndex(REGISTER, formData) + 'B'}
                         </Avatar>
                         <Card className={classes.card}>
                             <CardContent className={classes.content}>
                                 <div className={classes.formContainer}>
+                                    <LongTextInput
+                                        source={`${source}.title`}
+                                        label="Title"
+                                        defaultValue={defaultTitle}
+                                        validate={[required()]}
+                                    />
                                     <LongTextInput
                                         source={`${source}.text`}
                                         label="Text"
@@ -52,7 +59,7 @@ export const RegisterInput = ({ classes, source }) => {
                             </CardContent>
                         </Card>
                         <FrontPreview className={classes.preview}>
-                            <RegisterActivist
+                            <Register
                                 autoFocus={false}
                                 data={formData[source]}
                                 action={() =>

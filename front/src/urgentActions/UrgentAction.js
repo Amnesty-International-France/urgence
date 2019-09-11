@@ -11,18 +11,16 @@ import SEO from '../SEO';
 import Story from './story/Story';
 import Act from './Act';
 import ThankStep from './ThankStep';
-import ShareStep from './ShareStep';
+import Share from './share/Share';
 import ANALYTICS_CATEGORIES from '../analytics/categories';
 import Message from './message/Message';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
-import AddressStep from './AddressStep';
 import SendMail from './message/SendMail';
 import LoadingScreen from '../themes/LoadingScreen';
-import MailPdfButton from './MailPdfButton';
 import RegisterButton from './register/RegisterButton';
-import RegisterActivist from './register/RegisterActivist';
+import Register from './register/Register';
 
 const seoPropsFromStory = story => {
     if (!story || story.length === 0) {
@@ -105,6 +103,7 @@ const query = gql`
                 }
             }
             register {
+                title
                 text
                 button
             }
@@ -126,11 +125,7 @@ const query = gql`
     }
 `;
 
-const isLetterStepPresent = recipient => {
-    return recipient.button && recipient.postal_address;
-};
-
-export const UrgentAction = ({ slug, data, step }) => {
+export const UrgentAction = ({ history, slug, step, data }) => {
     const recipient = get(data, 'UrgentAction.recipient');
     const story = get(data, 'UrgentAction.story');
 
@@ -167,71 +162,42 @@ export const UrgentAction = ({ slug, data, step }) => {
     }
 
     if (step === 'message') {
+        const messageTemplate = get(data, 'UrgentAction.message_template');
+        const objectIndication = get(data, 'UrgentAction.object_indication');
+        const gdprMessage = get(data, 'GdprMessage.content');
+        const id = get(data, 'UrgentAction.id');
         return (
             <Message
-                messageTemplate={get(data, 'UrgentAction.message_template')}
-                objectIndication={get(data, 'UrgentAction.object_indication')}
-                gdprMessage={get(data, 'GdprMessage.content')}
+                messageTemplate={messageTemplate}
+                objectIndication={objectIndication}
+                gdprMessage={gdprMessage}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
                     <SendMail
                         step={step}
                         recipient={recipient}
-                        messageTemplate={get(data, 'UrgentAction.message_template')}
+                        messageTemplate={messageTemplate}
                         analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
-                        urgentActionId={get(data, 'UrgentAction.id')}
+                        auId={id}
+                        afterMail={({ registered }) =>
+                            history.push(generateUrl(registered ? 'share' : 'register', { slug }))
+                        }
                     />
                 }
             />
         );
     }
 
-    if (step === 'thanks') {
+    if (step === 'share') {
         const emailThank = get(data, 'UrgentAction.email_thank');
 
-        if (emailThank.share) {
-            return (
-                <ShareStep
-                    slug={slug}
-                    step={step}
-                    data={emailThank}
-                    analyticsCategory={ANALYTICS_CATEGORIES.SHARE}
-                />
-            );
-        }
         return (
-            <ThankStep
-                data={emailThank}
-                actions={() =>
-                    emailThank && emailThank.button && isLetterStepPresent(recipient) ? (
-                        <ToUrgentActionPageLink
-                            label={emailThank.button}
-                            step={step}
-                            pageName="address"
-                            analyticsCategory={ANALYTICS_CATEGORIES.THANKS}
-                            buttonName="ActionLetter"
-                        />
-                    ) : null
-                }
-            />
-        );
-    }
-
-    if (step === 'address') {
-        return (
-            <AddressStep
+            <Share
+                slug={slug}
                 step={step}
-                analyticsCategory={ANALYTICS_CATEGORIES.ADDRESS}
-                action={disabled => (
-                    <MailPdfButton
-                        step={step}
-                        auId={get(data, 'UrgentAction.id')}
-                        disabled={disabled}
-                        buttonText={recipient.button}
-                        analyticsCategory={ANALYTICS_CATEGORIES.ADDRESS}
-                    />
-                )}
+                data={emailThank}
+                analyticsCategory={ANALYTICS_CATEGORIES.SHARE}
             />
         );
     }
@@ -240,10 +206,10 @@ export const UrgentAction = ({ slug, data, step }) => {
         const register = get(data, 'UrgentAction.register');
 
         return (
-            <RegisterActivist
+            <Register
+                step={step}
                 data={register}
                 gdprRegister={get(data, 'GdprRegister.content')}
-                step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                 action={disabled => (
                     <RegisterButton
@@ -265,14 +231,14 @@ export const UrgentAction = ({ slug, data, step }) => {
 };
 
 UrgentAction.propTypes = {
+    history: PropTypes.object.isRequired,
     slug: PropTypes.string.isRequired,
     step: PropTypes.string,
     data: PropTypes.object,
-    error: PropTypes.object,
-    loading: PropTypes.bool,
 };
 
-export const renderUrgentActionWithData = (slug, step) => ({ data, error, loading }) => {
+// eslint-disable-next-line react/prop-types
+export const renderUrgentActionWithData = (history, slug, step) => ({ data, error, loading }) => {
     if (error) {
         console.error(error);
         return <Redirect to={generateUrl('error')} />;
@@ -287,24 +253,28 @@ export const renderUrgentActionWithData = (slug, step) => ({ data, error, loadin
     return (
         <Fragment>
             {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
-            <UrgentAction slug={slug} step={step} data={data} error={error} loading={loading} />
+            <UrgentAction history={history} slug={slug} step={step} data={data} />
         </Fragment>
     );
 };
 
 export const UrgentActionWithData = ({
+    history,
     match: {
         params: { slug, step },
     },
 }) => (
     <DataProvider>
         <Query query={query} variables={{ slug }}>
-            {renderUrgentActionWithData(slug, step)}
+            {renderUrgentActionWithData(history, slug, step)}
         </Query>
     </DataProvider>
 );
 
 UrgentActionWithData.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
     match: routeMatch,
 };
 

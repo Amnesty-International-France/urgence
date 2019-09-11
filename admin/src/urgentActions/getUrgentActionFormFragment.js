@@ -5,12 +5,7 @@ import slugify from 'slugify';
 import { ArrayInput, LongTextInput, SimpleForm, FormDataConsumer, required } from 'react-admin';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-import teal from '@material-ui/core/colors/teal';
-import blue from '@material-ui/core/colors/blue';
-import yellow from '@material-ui/core/colors/yellow';
-import green from '@material-ui/core/colors/green';
-import grey from '@material-ui/core/colors/grey';
-import orange from '@material-ui/core/colors/orange';
+import { teal, blue, red, yellow, green, grey, orange } from '@material-ui/core/colors';
 
 import { LETTER_ACTIVATED } from '../flags';
 
@@ -41,12 +36,12 @@ const styles = {
             backgroundColor: yellow[50],
         },
         '&.message': {
-            backgroundColor: teal[50],
-        },
-        '&.continue': {
-            backgroundColor: yellow[50],
+            backgroundColor: red[50],
         },
         '&.letter': {
+            backgroundColor: red[50],
+        },
+        '&.share': {
             backgroundColor: teal[50],
         },
         '&.register': {
@@ -130,15 +125,6 @@ const Form = ({ classes, record }) => {
                 <MessageInput source="" />
             </div>
 
-            <div className={`${classes.form} continue`}>
-                <h2>Continue</h2>
-                {LETTER_ACTIVATED ? (
-                    <ThanksInput source="email_thank" />
-                ) : (
-                    <ShareInput source="email_thank" />
-                )}
-            </div>
-
             {LETTER_ACTIVATED && (
                 <div className={`${classes.form} letter`}>
                     <h2>Letter</h2>
@@ -146,13 +132,18 @@ const Form = ({ classes, record }) => {
                 </div>
             )}
 
+            <div className={`${classes.form} share`}>
+                <h2>Share (only for members already registered)</h2>
+                <ShareInput source="email_thank" />
+            </div>
+
             <div className={`${classes.form} register`}>
-                <h2>Register</h2>
+                <h2>Register (for new members)</h2>
                 <RegisterInput source="register" />
             </div>
 
             <div className={`${classes.form} thank-you`}>
-                <h2>Thank You</h2>
+                <h2>Final Thank You</h2>
                 <ThanksInput source="end_thank" final />
             </div>
         </Fragment>

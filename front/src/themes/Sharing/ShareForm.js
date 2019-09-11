@@ -24,13 +24,12 @@ const styles = {
     marginLeft: 16,
     '& .list': {
         display: 'flex',
-        marginLeft: 41,
+        marginLeft: 25,
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
     '& .link': {
         display: 'flex',
-        marginTop: 10,
     },
     '& .content': {
         fontSize: 16,
@@ -44,7 +43,7 @@ const styles = {
     },
 };
 
-export const Share = ({
+export const ShareForm = ({
     className,
     slug,
     step,
@@ -156,7 +155,7 @@ export const Share = ({
     );
 };
 
-Share.propTypes = {
+ShareForm.propTypes = {
     slug: PropTypes.string,
     step: PropTypes.string,
     link: PropTypes.string.isRequired,
@@ -169,10 +168,10 @@ Share.propTypes = {
     className: PropTypes.string,
 };
 
-Share.defaultProps = {
+ShareForm.defaultProps = {
     registered: false,
     message: '',
     auId: '',
 };
 
-export default glamorous(withSessionData(Share))(styles);
+export default glamorous(withSessionData(ShareForm))(styles);

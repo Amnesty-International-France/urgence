@@ -26,6 +26,8 @@ import Message from '../../../front/src/urgentActions/message/Message';
 import Link from '../../../front/src/themes/Link';
 import SimpleParagraphFormIterator from './SimpleParagraphFormIterator';
 
+import { LETTER_ACTIVATED } from '../flags';
+
 const styles = theme => ({
     ...root,
     bordered: {
@@ -47,7 +49,7 @@ export const validateEmailsList = text =>
 const initMessageTemplate = [{ value: '' }];
 
 export const MessageInput = ({ classes, source }) => (
-    <div className={classNames(classes.root, classes.bordered)}>
+    <div className={classNames(classes.root, { [classes.bordered]: LETTER_ACTIVATED })}>
         <FormDataConsumer>
             {({ formData }) => (
                 <Fragment>

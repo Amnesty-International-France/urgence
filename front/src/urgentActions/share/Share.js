@@ -2,11 +2,11 @@ import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SharingScreen from '../themes/Sharing/SharingScreen';
+import SharingScreen from './SharingScreen';
 
-import generateUrl from '../services/generateUrl';
+import generateUrl from '../../services/generateUrl';
 
-export const ShareStep = ({ slug, step, data, analyticsCategory }) => {
+const Share = ({ slug, step, data, analyticsCategory }) => {
     const title = get(data, 'title');
     const text = get(data, 'text');
     const share = get(data, 'share');
@@ -25,7 +25,7 @@ export const ShareStep = ({ slug, step, data, analyticsCategory }) => {
     );
 };
 
-ShareStep.propTypes = {
+Share.propTypes = {
     slug: PropTypes.string.isRequired,
     step: PropTypes.string,
     data: PropTypes.shape({
@@ -37,9 +37,9 @@ ShareStep.propTypes = {
     actions: PropTypes.func,
 };
 
-ShareStep.defaultProps = {
+Share.defaultProps = {
     actions: () => {},
     slug: 'new-ua',
 };
 
-export default ShareStep;
+export default Share;

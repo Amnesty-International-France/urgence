@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withStyles } from '@material-ui/core/styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import MobileDetect from 'mobile-detect';
 
+import { white } from '../themes/colors';
 import { RichText } from './RichText';
+
+const alertStyles = {
+    color: white,
+};
 
 const styles = {
     icon: {
@@ -23,9 +28,9 @@ const isOnDesktop = () => {
 const Alert = ({ classes, message }) => {
     const [open, setOpen] = useState(isOnDesktop());
 
-    function handleClose() {
+    const handleClose = () => {
         setOpen(false);
-    }
+    };
 
     return (
         <Snackbar
@@ -34,7 +39,7 @@ const Alert = ({ classes, message }) => {
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
-            message={<RichText html={message} />}
+            message={<RichText html={message} style={alertStyles} />}
             TransitionComponent={props => <Slide {...props} direction="down" />}
             action={
                 <FontAwesomeIcon

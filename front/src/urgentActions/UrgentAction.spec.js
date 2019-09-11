@@ -3,11 +3,12 @@ import { shallow } from 'enzyme';
 import { Redirect } from 'react-router-dom';
 
 import { renderUrgentActionWithData, UrgentAction } from './UrgentAction';
-import data from '../data';
-import Act from './Act';
-import ThankStep from './ThankStep';
 import Story from './story/Story';
-import AddressStep from './AddressStep';
+import Act from './Act';
+import Message from './message/Message';
+import Share from './share/Share';
+import Register from './register/Register';
+import ThankStep from './ThankStep';
 
 import LoadingScreen from '../themes/LoadingScreen';
 
@@ -65,6 +66,9 @@ describe('<UrgentActionWithData />', () => {
 describe('<UrgentAction />', () => {
     const defaultProps = {
         id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
+        history: {
+            push: jest.fn(),
+        },
         slug: 'on-the-way',
         step: 'story',
         page: '1',
@@ -74,34 +78,36 @@ describe('<UrgentAction />', () => {
         },
     };
 
-    it('should display story with retrieved GraphQL data if step is story', () => {
-        const props = {
-            ...defaultProps,
-            loading: false,
-            data: {
-                UrgentAction: {
-                    story: [
-                        {
-                            ...defaultStep,
-                            id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
-                        },
-                    ],
+    describe('Story Step', () => {
+        it('should display the "story"', () => {
+            const props = {
+                ...defaultProps,
+                loading: false,
+                data: {
+                    UrgentAction: {
+                        story: [
+                            {
+                                ...defaultStep,
+                                id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
+                            },
+                        ],
+                    },
                 },
-            },
-        };
-        const wrapper = shallow(<UrgentAction {...props} />);
-        const story = wrapper.find(Story);
+            };
+            const wrapper = shallow(<UrgentAction {...props} />);
+            const story = wrapper.find(Story);
 
-        expect(story.prop('story')).toEqual([
-            {
-                ...defaultStep,
-                id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
-            },
-        ]);
+            expect(story.prop('story')).toEqual([
+                {
+                    ...defaultStep,
+                    id: '3b6e1a3e-2547-4d77-a310-1b39d15fa03a',
+                },
+            ]);
+        });
     });
 
     describe('Act Step', () => {
-        it('should display act with call_to_action from graphql data if step is act', () => {
+        it('should display the "title" and the "message"', () => {
             const props = {
                 step: 'act',
                 loading: false,
@@ -128,79 +134,23 @@ describe('<UrgentAction />', () => {
         });
     });
 
-    it('should display message with retrieved GraphQL data if step is message', () => {
-        const props = {
-            ...defaultProps,
-            step: 'message',
-            data: {
-                ...defaultProps.data,
-                UrgentAction: {
-                    story: [
-                        {
-                            ...defaultStep,
-                        },
-                    ],
-                    message_template: [{ value: 'first message' }, { value: 'second message' }],
-                    object_indication: 'object indication',
-                    recipient: {
-                        mail: 'mail',
-                    },
-                },
-            },
-        };
-        const wrapper = shallow(<UrgentAction {...props} />);
-
-        expect(wrapper.prop('messageTemplate')).toBe(props.data.UrgentAction.message_template);
-        expect(wrapper.prop('objectIndication')).toBe('object indication');
-    });
-
-    it('should display sendMail with retrieved GraphQL data if step is message', () => {
-        const props = {
-            ...defaultProps,
-            step: 'message',
-            data: {
-                ...defaultProps.data,
-                UrgentAction: {
-                    story: [
-                        {
-                            ...defaultStep,
-                        },
-                    ],
-                    message_template: [{ value: 'first message' }, { value: 'second message' }],
-                    object_indication: 'object indication',
-                    recipient: {
-                        mail: 'mail',
-                    },
-                },
-            },
-        };
-        const wrapper = shallow(<UrgentAction {...props} />);
-
-        const sendMail = wrapper.prop('action');
-        expect(sendMail.props.recipient).toEqual({ mail: 'mail' });
-        expect(sendMail.props.messageTemplate).toEqual([
-            { value: 'first message' },
-            { value: 'second message' },
-        ]);
-    });
-
-    describe('Email Thanks Step', () => {
-        it('should display Thanks if step is thanks', () => {
+    describe('Message Step', () => {
+        it('should display the "message"', () => {
             const props = {
                 ...defaultProps,
-                loading: false,
-                step: 'thanks',
+                step: 'message',
                 data: {
+                    ...defaultProps.data,
                     UrgentAction: {
                         story: [
                             {
                                 ...defaultStep,
                             },
                         ],
-                        email_thank: {
-                            title: 'Thanks!',
-                            text: 'My Message',
-                            button: 'Continuer',
+                        message_template: [{ value: 'first message' }, { value: 'second message' }],
+                        object_indication: 'object indication',
+                        recipient: {
+                            mail: 'mail',
                         },
                     },
                 },
@@ -208,64 +158,52 @@ describe('<UrgentAction />', () => {
 
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
-            const thanks = renderedComponent.find(ThankStep);
-            expect(thanks.length).toBe(1);
+            const message = renderedComponent.find(Message);
+            expect(message.length).toBe(1);
 
-            const data = thanks.prop('data');
-            expect(data.title).toBe('Thanks!');
-            expect(data.text).toBe('My Message');
+            expect(message.prop('messageTemplate')).toBe(props.data.UrgentAction.message_template);
+            expect(message.prop('objectIndication')).toBe('object indication');
         });
 
-        it('should add a link to address step as action when there is an address', () => {
-            data.getMailObject.mockImplementation(() => 'Hello World!');
-            data.getCivility.mockImplementation(() => 'M');
-            data.getFirstname.mockImplementation(() => 'John');
-            data.getLastname.mockImplementation(() => 'Doe');
-
+        it('should display the "sendMail" button', () => {
             const props = {
                 ...defaultProps,
-                step: 'thanks',
-                id: '123456',
-                slug: 'one-two-three',
+                step: 'message',
                 data: {
+                    ...defaultProps.data,
                     UrgentAction: {
                         story: [
                             {
                                 ...defaultStep,
                             },
                         ],
-                        email_thank: {
-                            title: 'Thanks!',
-                            text: 'My Message',
-                            button: 'Continuer',
-                        },
+                        message_template: [{ value: 'first message' }, { value: 'second message' }],
+                        object_indication: 'object indication',
                         recipient: {
-                            postal_address: 'Ici',
-                            button: 'Fin',
+                            mail: 'mail',
                         },
                     },
                 },
             };
 
-            const wrapper = shallow(<UrgentAction {...props} />);
-            const thanks = wrapper.find(ThankStep);
-            const action = thanks.prop('actions')();
+            const renderedComponent = shallow(<UrgentAction {...props} />);
 
-            expect(action.props.pageName).toBe('address');
-            expect(action.props.label).toBe('Continuer');
+            const message = renderedComponent.find(Message);
+            expect(message.length).toBe(1);
+
+            const sendMail = message.prop('action');
+            expect(sendMail.props.recipient).toEqual({ mail: 'mail' });
+            expect(sendMail.props.messageTemplate).toEqual([
+                { value: 'first message' },
+                { value: 'second message' },
+            ]);
         });
 
-        it('should not add a link to address step as when there isnt address', () => {
-            data.getMailObject.mockImplementation(() => 'Hello World!');
-            data.getCivility.mockImplementation(() => 'M');
-            data.getFirstname.mockImplementation(() => 'John');
-            data.getLastname.mockImplementation(() => 'Doe');
-
+        it('should display the "gdprMessage"', () => {
             const props = {
                 ...defaultProps,
-                step: 'thanks',
-                id: '123456',
-                slug: 'one-two-three',
+                loading: false,
+                step: 'message',
                 data: {
                     UrgentAction: {
                         story: [
@@ -273,29 +211,102 @@ describe('<UrgentAction />', () => {
                                 ...defaultStep,
                             },
                         ],
-                        email_thank: {
-                            title: 'Thanks!',
-                            text: 'My Message',
-                            button: 'Continuer',
+                        message_template: [{ value: 'first message' }, { value: 'second message' }],
+                        object_indication: 'object indication',
+                        recipient: {
+                            mail: 'mail',
                         },
-                        recipient: {},
+                    },
+                    GdprMessage: {
+                        id: '1',
+                        type: 'gdpr-message',
+                        content: 'Gdpr Stuff',
                     },
                 },
             };
 
-            const wrapper = shallow(<UrgentAction {...props} />);
-            const thanks = wrapper.find(ThankStep);
-            const action = thanks.prop('actions')();
+            const renderedComponent = shallow(<UrgentAction {...props} />);
 
-            expect(action).toBe(null);
+            const message = renderedComponent.find(Message);
+            expect(message.length).toBe(1);
+
+            const gdpr = message.prop('gdprMessage');
+            expect(gdpr).toBe('Gdpr Stuff');
         });
     });
 
-    describe('Address Step', () => {
-        it('should display AddressStep if step is addres', () => {
+    describe('Register Step', () => {
+        it('should display the "title" and the "text"', () => {
             const props = {
+                ...defaultProps,
                 loading: false,
-                step: 'address',
+                step: 'register',
+                data: {
+                    UrgentAction: {
+                        story: [
+                            {
+                                ...defaultStep,
+                            },
+                        ],
+                        register: {
+                            title: 'Subscribe to Urgent Action Network!',
+                            text: 'My Message',
+                        },
+                    },
+                },
+            };
+
+            const renderedComponent = shallow(<UrgentAction {...props} />);
+
+            const register = renderedComponent.find(Register);
+            expect(register.length).toBe(1);
+
+            const data = register.prop('data');
+            expect(data.title).toBe('Subscribe to Urgent Action Network!');
+            expect(data.text).toBe('My Message');
+        });
+
+        it('should display the "gdprRegister"', () => {
+            const props = {
+                ...defaultProps,
+                loading: false,
+                step: 'register',
+                data: {
+                    UrgentAction: {
+                        story: [
+                            {
+                                ...defaultStep,
+                            },
+                        ],
+                        register: {
+                            title: 'Subscribe to Urgent Action Network!',
+                            text: 'My Message',
+                        },
+                    },
+                    GdprRegister: {
+                        id: '1',
+                        type: 'gdpr-register',
+                        content: 'Gdpr Stuff',
+                    },
+                },
+            };
+
+            const renderedComponent = shallow(<UrgentAction {...props} />);
+
+            const register = renderedComponent.find(Register);
+            expect(register.length).toBe(1);
+
+            const gdpr = register.prop('gdprRegister');
+            expect(gdpr).toBe('Gdpr Stuff');
+        });
+    });
+
+    describe('Share Step', () => {
+        it('should display the "title" and the "text"', () => {
+            const props = {
+                ...defaultProps,
+                loading: false,
+                step: 'share',
                 data: {
                     UrgentAction: {
                         story: [
@@ -304,40 +315,23 @@ describe('<UrgentAction />', () => {
                             },
                         ],
                         email_thank: {
-                            title: '',
-                        },
-                    },
-                },
-            };
-            const wrapper = shallow(<UrgentAction {...props} />);
-            expect(wrapper.find(AddressStep).length).toBe(1);
-        });
-
-        it('should add a link to thanks-end step as action', () => {
-            const props = {
-                ...defaultProps,
-                step: 'address',
-                id: '123456',
-                slug: 'one-two-three',
-                data: {
-                    UrgentAction: {
-                        story: [
-                            {
-                                ...defaultStep,
-                            },
-                        ],
-                        recipient: {
-                            button: 'Fin',
+                            title: 'Thanks!',
+                            text: 'My Message',
+                            button: 'Continuer',
+                            share: {},
                         },
                     },
                 },
             };
 
-            const wrapper = shallow(<UrgentAction {...props} />);
-            const address = wrapper.find(AddressStep);
-            const action = address.prop('action')();
+            const renderedComponent = shallow(<UrgentAction {...props} />);
 
-            expect(action.props.buttonText).toBe('Fin');
+            const share = renderedComponent.find(Share);
+            expect(share.length).toBe(1);
+
+            const data = share.prop('data');
+            expect(data.title).toBe('Thanks!');
+            expect(data.text).toBe('My Message');
         });
     });
 

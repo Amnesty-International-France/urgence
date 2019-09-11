@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import RichText from '../RichText';
-import LongText from '../LongText';
-import { white, black } from '../colors';
-import { withYellowLogo } from '../ThemeContext';
-import Share from './Share';
+import classnames from 'classnames';
+
+import RichText from '../../themes/RichText';
+import LongText from '../../themes/LongText';
+import { white, black } from '../../themes/colors';
+import { withYellowLogo } from '../../themes/ThemeContext';
+import Share from '../../themes/Sharing/ShareForm';
 
 const styles = {
     display: 'flex',
@@ -14,13 +16,16 @@ const styles = {
     minHeight: '100%',
     width: '100%',
     padding: '100px 20px 20px 20px',
-    color: white,
+    color: black,
     backgroundColor: white,
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
         '& .link': {
             textAlign: 'center',
         },
+    },
+    '& .header': {
+        margin: '1em 0',
     },
     '& h1': {
         textTransform: 'uppercase',
@@ -38,11 +43,6 @@ const styles = {
             boxDecorationBreak: 'clone',
         },
     },
-    '& .rich-text': {
-        color: black,
-        fontFamily: 'Amnesty Trade Gothic LT',
-        fontSize: '16px',
-    },
 };
 
 export const SharingScreen = ({
@@ -55,8 +55,8 @@ export const SharingScreen = ({
     link,
     analyticsCategory,
 }) => (
-    <div className={className}>
-        <div>
+    <div className={classnames('share', className)}>
+        <div className="header">
             <h1>
                 <LongText text={title} />
             </h1>
