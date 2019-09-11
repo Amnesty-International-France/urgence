@@ -63,6 +63,15 @@ describe('SendMail', () => {
 
     describe('afterMail', () => {
         it('should call afterMail with registered true when clicked', done => {
+            const addCampaignMemberResult = {
+                data: {
+                    addCampaignMember: {
+                        registered: true,
+                    },
+                },
+            };
+            addCampaignMember.mockReturnValue(Promise.resolve(addCampaignMemberResult));
+
             const props = {
                 ...defaultProps,
                 ...defaultContext,
@@ -81,6 +90,15 @@ describe('SendMail', () => {
         });
 
         it('should call afterMail with registered false when clicked', done => {
+            const addCampaignMemberResult = {
+                data: {
+                    addCampaignMember: {
+                        registered: false,
+                    },
+                },
+            };
+            addCampaignMember.mockReturnValue(Promise.resolve(addCampaignMemberResult));
+
             const props = {
                 ...defaultProps,
                 ...defaultContext,
