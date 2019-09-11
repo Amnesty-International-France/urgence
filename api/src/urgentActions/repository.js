@@ -31,6 +31,12 @@ const urgentActionCrudQueries = {
         primaryKey: 'slug',
         returnCols: columns,
     }),
+    selectDefault: select({
+        table: 'urgent_action',
+        primaryKey: 'id',
+        returnCols: columns,
+        returnOne: true,
+    }),
 };
 
 export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }) =>
@@ -46,6 +52,15 @@ export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }) 
 export const countUrgentActions = async () => query(urgentActionCrudQueries.countAll());
 
 export const getUrgentAction = async id => query(urgentActionCrudQueries.selectOne(id));
+
+export const getDefaultUrgentAction = async () =>
+    query(
+        urgentActionCrudQueries.selectDefault({
+            filter: {
+                is_default: true,
+            },
+        }),
+    );
 
 export const getUrgentActionBySlug = async slug =>
     query(urgentActionCrudQueries.selectOneBySlug(slug));
