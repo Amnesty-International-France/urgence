@@ -6,7 +6,6 @@ import classnames from 'classnames';
 import 'swiper/dist/css/swiper.css';
 
 import IconButton from './IconButton';
-import Steps from './Steps';
 
 const styles = {
     '& .swiper-container': {
@@ -87,9 +86,6 @@ export class Carousel extends Component {
                     >
                         {icon}
                     </IconButton>
-                </div>
-                <div className="swiper-progress-bar">
-                    <Steps current={current} total={total} />
                 </div>
             </div>
         );

@@ -22,6 +22,8 @@ import LoadingScreen from '../themes/LoadingScreen';
 import RegisterButton from './register/RegisterButton';
 import Register from './register/Register';
 
+import Steps from '../themes/Steps';
+
 const seoPropsFromStory = story => {
     if (!story || story.length === 0) {
         return null;
@@ -238,7 +240,11 @@ UrgentAction.propTypes = {
 };
 
 // eslint-disable-next-line react/prop-types
-export const renderUrgentActionWithData = (history, slug, step) => ({ data, error, loading }) => {
+export const renderUrgentActionWithData = (history, slug, step, page) => ({
+    data,
+    error,
+    loading,
+}) => {
     if (error) {
         console.error(error);
         return <Redirect to={generateUrl('error')} />;
@@ -254,6 +260,7 @@ export const renderUrgentActionWithData = (history, slug, step) => ({ data, erro
         <Fragment>
             {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
             <UrgentAction history={history} slug={slug} step={step} data={data} />
+            <Steps data={data} step={step} page={page} />
         </Fragment>
     );
 };
@@ -261,12 +268,12 @@ export const renderUrgentActionWithData = (history, slug, step) => ({ data, erro
 export const UrgentActionWithData = ({
     history,
     match: {
-        params: { slug, step },
+        params: { slug, step, page },
     },
 }) => (
     <DataProvider>
         <Query query={query} variables={{ slug }}>
-            {renderUrgentActionWithData(history, slug, step)}
+            {renderUrgentActionWithData(history, slug, step, page)}
         </Query>
     </DataProvider>
 );
