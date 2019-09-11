@@ -4,9 +4,9 @@ import { shallow } from 'enzyme';
 import MailTo from '../../themes/MailTo';
 import { SendMail } from './SendMail';
 
-import { addCampaignMember } from '../../services/salesforceAPI';
+import { addCampaignMember } from '../../services/api';
 
-jest.mock('../../services/salesforceAPI');
+jest.mock('../../services/api');
 
 describe('SendMail', () => {
     const defaultProps = {
