@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import glamorous from 'glamorous';
 import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
+import get from 'lodash.get';
 
 import { withYellowLogo } from './themes/ThemeContext';
 import { white } from './themes/colors';
@@ -31,8 +32,8 @@ const styles = {
 };
 
 const query = gql`
-    query defaultUrgentAction() {
-        UrgentAction: DefaultUrgentAction() {
+    {
+        UrgentAction: DefaultUrgentAction {
             id
             title
             slug
@@ -51,8 +52,8 @@ const HomePage = () => (
             if (loading) {
                 return <LoadingScreen />;
             }
-
-            return <Redirect to={generateUrl('ua', { slug: data.slug })} />;
+            const slug = get(data, 'UrgentAction.slug');
+            return <Redirect to={generateUrl('ua', { slug })} />;
         }}
     </Query>
 );
