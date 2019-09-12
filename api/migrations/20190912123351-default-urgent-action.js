@@ -2,7 +2,7 @@
 
 exports.up = function(db, cb) {
     const sql = `
-        ALTER TABLE urgent_action ADD COLUMN is_default BOOLEAN;
+        ALTER TABLE urgent_action ADD COLUMN is_default BOOLEAN DEFAULT false;
     `;
 
     db.runSql(sql, cb);
