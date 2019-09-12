@@ -142,6 +142,7 @@ export default gql`
         id: ID!
         title: String!
         slug: String
+        is_default: Boolean
         campaign_code: String
         origin_code: String
         story: [StoryStep]
@@ -208,6 +209,7 @@ export default gql`
             slug: String
             campaign_code: String
             origin_code: String
+            is_default: Boolean
             story: [StoryStepInput]
             call_to_action: CallToActionInput
             object_indication: String
