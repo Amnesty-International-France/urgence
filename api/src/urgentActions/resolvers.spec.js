@@ -241,7 +241,7 @@ describe('Urgent Actions Resolvers', () => {
                     member: { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
                 };
 
-                const ua = { campaign_code: 'AU-007', origin_code: 'AU_WEB_APP' };
+                const ua = { campaign_code: 'AU-007', origin_code: 'AU_WEBAPP' };
                 getUrgentAction.mockReturnValue(ua);
 
                 const authResponse = {
