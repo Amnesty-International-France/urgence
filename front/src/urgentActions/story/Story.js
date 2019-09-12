@@ -17,6 +17,7 @@ import { StoryStepPropType, routeMatch } from '../../propTypes';
 import generateUrl from '../../services/generateUrl';
 
 import StorySlide from './StorySlide';
+import StorySlidePlaceholder from './StorySlidePlaceholder';
 import StoryCover from './StoryCover';
 import StoryStep, { getLogoColorForStep } from './StoryStep';
 
@@ -124,6 +125,7 @@ export class Story extends Component {
                                         {storyStepProps => <StoryStep {...storyStepProps} />}
                                     </StorySlide>
                                 ))}
+                                <StorySlidePlaceholder />
                             </Fragment>
                         )}
                     </Carousel>

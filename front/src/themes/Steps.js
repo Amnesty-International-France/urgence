@@ -29,14 +29,12 @@ const stepStyle = {
     borderColor: black,
     borderTop: '0',
     borderBottom: '0',
-    backgroundColor: white,
     transition: 'all ease-in 0.2s',
 };
 
 const FilledStep = glamorous.div({
     ...style,
     ...stepStyle,
-    backgroundColor: black,
 });
 
 const steps = {
