@@ -8,7 +8,7 @@ export default driver => {
 
     return {
         navigate: async slug => {
-            await driver.navigate().to(`http://front:3000/#/ua/${slug}/share`);
+            await driver.navigate().to(`http://front:3000/ua/${slug}/share`);
             await driver.wait(until.elementLocated(elements.title));
         },
         getTitle: async () => driver.findElement(elements.title).getText(),

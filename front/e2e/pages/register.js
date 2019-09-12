@@ -16,7 +16,7 @@ export default driver => {
     return {
         isLoaded: async () => driver.wait(until.elementLocated(elements.header)),
         async navigate(slug) {
-            await driver.navigate().to(`http://front:3000/#/ua/${slug}/register`);
+            await driver.navigate().to(`http://front:3000/ua/${slug}/register`);
             await this.isLoaded();
         },
         getTitle: async () => driver.findElement(elements.title).getText(),

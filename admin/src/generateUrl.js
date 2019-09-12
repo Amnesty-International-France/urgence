@@ -3,7 +3,7 @@ import { stringify } from 'qs';
 export const generateAppUrl = (route, params) => {
     switch (route) {
         case 'urgentAction':
-            return `${process.env.REACT_APP_FRONT_BASE_URL}/#/ua/${params.slug}`;
+            return `${process.env.REACT_APP_FRONT_BASE_URL}/ua/${params.slug}`;
         case 'urgentActionLetter':
             return `${process.env.REACT_APP_API_URL}/urgent-actions/${params.id}.pdf?${stringify({
                 subject: 'Custom Subject',

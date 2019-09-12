@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ApolloProvider } from 'react-apollo';
-import { Switch, HashRouter as Router, Route } from 'react-router-dom';
+import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import glamorous from 'glamorous';
 import Div100Vh from 'react-div-100vh';
 
