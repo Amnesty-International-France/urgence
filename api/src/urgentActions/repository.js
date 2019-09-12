@@ -1,7 +1,8 @@
-const { crud, selectOne } = require('co-postgres-queries');
+import { crud, selectOne, select } from 'co-postgres-queries';
 
-const query = require('../db/client');
+import query from '../db/client';
 
+const table = 'urgent_action';
 const columns = [
     'id',
     'title',
@@ -22,18 +23,17 @@ const columns = [
 
 const urgentActionCrudQueries = {
     ...crud({
-        table: 'urgent_action',
+        table,
         writableCols: columns,
         returnCols: columns,
     }),
     selectOneBySlug: selectOne({
-        table: 'urgent_action',
+        table,
         primaryKey: 'slug',
         returnCols: columns,
     }),
     selectDefault: select({
-        table: 'urgent_action',
-        primaryKey: 'id',
+        table,
         returnCols: columns,
         returnOne: true,
     }),
