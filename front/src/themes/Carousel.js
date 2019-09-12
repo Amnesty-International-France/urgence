@@ -90,8 +90,8 @@ export class Carousel extends Component {
                 <div className="swiper-controls">
                     <IconButton
                         className={classnames({
-                            'next-arrow': current + 1 !== total,
-                            'last-arrow': current + 1 === total,
+                            'next-arrow': current !== total,
+                            'last-arrow': current === total,
                         })}
                         onClick={this.slide}
                     >
