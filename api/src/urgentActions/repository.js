@@ -58,7 +58,7 @@ export const getDefaultUrgentAction = async () =>
     query(
         urgentActionCrudQueries.selectDefault({
             filter: {
-                is_default: true,
+                is_default: false,
             },
         }),
     );
