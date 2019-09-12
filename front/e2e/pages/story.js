@@ -21,9 +21,7 @@ export default driver => {
             await nextButton.click();
             await driver.sleep(220); // wait for transition to end
             this.step++;
-            await driver.wait(
-                until.urlIs(`http://front:3000/ua/${this.slug}/story/${this.step}`),
-            );
+            await driver.wait(until.urlIs(`http://front:3000/ua/${this.slug}/story/${this.step}`));
             await driver.wait(until.elementLocated(elements.activeSlide));
         },
         lastStep: async () => {
