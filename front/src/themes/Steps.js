@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import get from 'lodash.get';
 
-import { black, white, yellow } from './colors';
+import { black, white } from './colors';
 
 const style = {
     height: '100%',
@@ -18,6 +19,9 @@ const Container = glamorous.div({
     '& :last-child': {
         borderRight: '0px',
     },
+    position: 'fixed',
+    bottom: 0,
+    height: '10px',
 });
 
 const stepStyle = {
@@ -25,23 +29,38 @@ const stepStyle = {
     borderColor: black,
     borderTop: '0',
     borderBottom: '0',
-    backgroundColor: white,
     transition: 'all ease-in 0.2s',
 };
 
 const FilledStep = glamorous.div({
     ...style,
     ...stepStyle,
-    backgroundColor: yellow,
 });
 
-const Steps = ({ current, total }) => {
+const steps = {
+    story: 0,
+    act: 1,
+    message: 2,
+    share: 3,
+    register: 3,
+};
+
+const Steps = ({ data, step, page }) => {
+    const stepNumber = steps[step];
+    if (stepNumber == null) {
+        return null;
+    }
+
+    const story = get(data, 'UrgentAction.story');
+    const current = page ? Number(page) + stepNumber + 1 : story.length + stepNumber;
+    const total = story.length + 3;
+
     return (
         <Container title={`Step ${current}/${total}`}>
-            {[...Array(total)].map((element, index) => (
+            {[...Array(total)].map((_, index) => (
                 <FilledStep
                     key={index}
-                    style={{ backgroundColor: index < current ? yellow : white }}
+                    style={{ backgroundColor: index < current ? black : white }}
                 />
             ))}
         </Container>
@@ -49,8 +68,9 @@ const Steps = ({ current, total }) => {
 };
 
 Steps.propTypes = {
-    current: PropTypes.number,
-    total: PropTypes.number,
+    data: PropTypes.object.isRequired,
+    step: PropTypes.string.isRequired,
+    page: PropTypes.string,
 };
 
 export default Steps;

@@ -105,7 +105,7 @@ const Form = ({ classes, record }) => {
                         <LongTextInput
                             source="origin_code"
                             label="Origin Code"
-                            defaultValue="AU_WEB_APP"
+                            defaultValue="AU_WEBAPP"
                         />
                     </Grid>
                     <Grid item xs>

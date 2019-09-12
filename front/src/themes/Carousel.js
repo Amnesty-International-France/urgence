@@ -6,14 +6,13 @@ import classnames from 'classnames';
 import 'swiper/dist/css/swiper.css';
 
 import IconButton from './IconButton';
-import Steps from './Steps';
 
 const styles = {
     '& .swiper-container': {
         height: '100%',
     },
     '& .swiper-wrapper': {
-        height: 'calc(100% - 15px)',
+        height: 'calc(100% - 10px)',
     },
     '& .swiper-controls': {
         position: 'relative',
@@ -37,7 +36,7 @@ const styles = {
 
 export class Carousel extends Component {
     componentDidMount() {
-        const { initialSlide, afterChange } = this.props;
+        const { initialSlide, afterChange, total } = this.props;
         const swiper = new Swiper(this.container, {
             initialSlide,
             direction: 'horizontal',
@@ -47,6 +46,15 @@ export class Carousel extends Component {
                         return;
                     }
                     afterChange(swiper.activeIndex);
+                },
+                touchEnd: function() {
+                    if (
+                        swiper &&
+                        swiper.activeIndex + 1 === total &&
+                        swiper.swipeDirection === 'next'
+                    ) {
+                        afterChange(swiper.activeIndex);
+                    }
                 },
             },
         });
@@ -60,7 +68,7 @@ export class Carousel extends Component {
     slide = () => {
         const { current, total } = this.props;
 
-        if (current + 1 === total) {
+        if (current === total) {
             this.props.afterLastChange();
             return;
         }
@@ -68,7 +76,9 @@ export class Carousel extends Component {
     };
 
     componentWillUnmount() {
-        this.swiper.destroy();
+        setTimeout(() => {
+            this.swiper.destroy();
+        }, 100);
     }
 
     render() {
@@ -80,16 +90,13 @@ export class Carousel extends Component {
                 <div className="swiper-controls">
                     <IconButton
                         className={classnames({
-                            'next-arrow': current + 1 !== total,
-                            'last-arrow': current + 1 === total,
+                            'next-arrow': current !== total,
+                            'last-arrow': current === total,
                         })}
                         onClick={this.slide}
                     >
                         {icon}
                     </IconButton>
-                </div>
-                <div className="swiper-progress-bar">
-                    <Steps current={current} total={total} />
                 </div>
             </div>
         );

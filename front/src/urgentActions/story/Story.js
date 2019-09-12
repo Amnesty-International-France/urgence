@@ -17,6 +17,7 @@ import { StoryStepPropType, routeMatch } from '../../propTypes';
 import generateUrl from '../../services/generateUrl';
 
 import StorySlide from './StorySlide';
+import StorySlidePlaceholder from './StorySlidePlaceholder';
 import StoryCover from './StoryCover';
 import StoryStep, { getLogoColorForStep } from './StoryStep';
 
@@ -103,7 +104,7 @@ export class Story extends Component {
                     <Carousel
                         initialSlide={current}
                         current={current + 1}
-                        total={total + 1}
+                        total={total}
                         afterChange={this.afterChange}
                         afterLastChange={this.afterLastChange}
                         icon={
@@ -116,7 +117,7 @@ export class Story extends Component {
                     >
                         {() => (
                             <Fragment>
-                                <StorySlide index={0} step={cover} total={total}>
+                                <StorySlide index={0} step={cover}>
                                     {storyCoverProps => <StoryCover {...storyCoverProps} />}
                                 </StorySlide>
                                 {restStory.map((step, index) => (
@@ -124,6 +125,7 @@ export class Story extends Component {
                                         {storyStepProps => <StoryStep {...storyStepProps} />}
                                     </StorySlide>
                                 ))}
+                                <StorySlidePlaceholder />
                             </Fragment>
                         )}
                     </Carousel>
