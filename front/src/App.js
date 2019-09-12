@@ -35,7 +35,7 @@ const App = ({ className, client }) => (
                             component={withTracker(ErrorPage)}
                         />
                         <Route
-                            path={'/ua/:slug/:step?/:page?'}
+                            path="/ua/:slug/:step?/:page?"
                             component={withTracker(UrgentAction)}
                         />
                         <Redirect from="*" to={generateUrl('error')} />
