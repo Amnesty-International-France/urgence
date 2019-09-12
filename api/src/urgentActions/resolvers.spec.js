@@ -2,6 +2,7 @@ import UrgentActionsResolver from './resolvers';
 import {
     getUrgentAction,
     getUrgentActionBySlug,
+    getDefaultUrgentAction,
     getUrgentActions,
     createUrgentAction,
     updateUrgentAction,
@@ -17,7 +18,7 @@ jest.mock('../services/salesForceApi');
 describe('Urgent Actions Resolvers', () => {
     describe('Queries', () => {
         describe('UrgentAction', () => {
-            it('should query urgent actions with corresponding id', async () => {
+            it('should query the urgent action that corresponds to the provided id', async () => {
                 const params = { id: '16fe5e43-df12-4104-b1fe-77f8b3653802' };
                 await UrgentActionsResolver.Query.UrgentAction(null, params);
 
@@ -28,11 +29,20 @@ describe('Urgent Actions Resolvers', () => {
         });
 
         describe('UrgentActionBySlug', () => {
-            it('should query urgent actions with corresponding slug', async () => {
+            it('should query the urgent action that corresponds to the provided slug', async () => {
                 const params = { slug: 'tom-marvolo-riddle' };
                 await UrgentActionsResolver.Query.UrgentActionBySlug(null, params);
 
                 expect(getUrgentActionBySlug).toHaveBeenCalledWith('tom-marvolo-riddle');
+            });
+        });
+
+        describe('DefaultUrgentAction', () => {
+            it('should query the default urgent action', async () => {
+                const params = {};
+                await UrgentActionsResolver.Query.DefaultUrgentAction(null, params);
+
+                expect(getDefaultUrgentAction).toHaveBeenCalled();
             });
         });
 

@@ -2,7 +2,14 @@ import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import slugify from 'slugify';
 
-import { ArrayInput, LongTextInput, SimpleForm, FormDataConsumer, required } from 'react-admin';
+import {
+    ArrayInput,
+    LongTextInput,
+    SelectInput,
+    SimpleForm,
+    FormDataConsumer,
+    required,
+} from 'react-admin';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import { teal, blue, red, yellow, green, grey, orange } from '@material-ui/core/colors';
@@ -75,10 +82,11 @@ const Form = ({ classes, record }) => {
     return (
         <Fragment>
             <div className={classes.form}>
-                <Grid container spacing={0} justify="space-between">
-                    <Grid item xs={5}>
+                <Grid container spacing={8} justify="space-between">
+                    <Grid item xs>
                         <LongTextInput
                             source="campaign_code"
+                            label="Campaign Code"
                             onChange={handleTextFieldChange}
                             helperText={
                                 emptyCode ? (
@@ -93,8 +101,21 @@ const Form = ({ classes, record }) => {
                             inputProps={autoFocusProps}
                         />
                     </Grid>
-                    <Grid item xs={6}>
-                        <LongTextInput source="origin_code" defaultValue="AU_WEB_APP" />
+                    <Grid item xs>
+                        <LongTextInput
+                            source="origin_code"
+                            label="Origin Code"
+                            defaultValue="AU_WEB_APP"
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <SelectInput
+                            source="is_default"
+                            label="Set As Default"
+                            defaultValue={false}
+                            style={{ width: '100%' }}
+                            choices={[{ id: true, name: 'Yes' }, { id: false, name: 'No' }]}
+                        />
                     </Grid>
                 </Grid>
                 <LongTextInput source="title" validate={required()} />

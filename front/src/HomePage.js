@@ -1,11 +1,15 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import gql from 'graphql-tag';
 import glamorous from 'glamorous';
+import { Redirect } from 'react-router-dom';
+import { Query } from 'react-apollo';
+import get from 'lodash.get';
 
-import SEO from './SEO';
 import { withYellowLogo } from './themes/ThemeContext';
 import { white } from './themes/colors';
-import AmnestyCandle from './icons/AmnestyCandle';
+import LoadingScreen from './themes/LoadingScreen';
+
+import generateUrl from './services/generateUrl';
 
 const styles = {
     fontSize: 33,
@@ -27,25 +31,36 @@ const styles = {
     },
 };
 
-const HomePage = ({ className, title, description }) => (
-    <Fragment>
-        <SEO title={title} description={description} />
-        <div className={className}>
-            <AmnestyCandle className="candle" />
-            <p className="not-found">{description}</p>
-        </div>
-    </Fragment>
+const query = gql`
+    {
+        UrgentAction: DefaultUrgentAction {
+            id
+            title
+            slug
+        }
+    }
+`;
+
+const HomePage = () => (
+    <Query query={query}>
+        {({ data, error, loading }) => {
+            if (error) {
+                console.error(error);
+                return <Redirect to={generateUrl('error')} />;
+            }
+
+            if (loading) {
+                return <LoadingScreen />;
+            }
+
+            const slug = get(data, 'UrgentAction.slug');
+            return <Redirect to={generateUrl('ua', { slug })} />;
+        }}
+    </Query>
 );
 
-HomePage.propTypes = {
-    className: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-};
+HomePage.propTypes = {};
 
-HomePage.defaultProps = {
-    title: `404`,
-    description: `Cette action urgente n'existe plus.`,
-};
+HomePage.defaultProps = {};
 
 export default glamorous(withYellowLogo(HomePage))(styles);

@@ -11,7 +11,7 @@ const Share = ({ slug, step, data, analyticsCategory }) => {
     const text = get(data, 'text');
     const share = get(data, 'share');
 
-    const sharingLink = `${global.origin}/#${generateUrl('ua', { slug })}`;
+    const sharingLink = `${global.origin}/${generateUrl('ua', { slug })}`;
     return (
         <SharingScreen
             slug={slug}

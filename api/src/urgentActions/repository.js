@@ -1,11 +1,13 @@
-const { crud, selectOne } = require('co-postgres-queries');
+import { crud, selectOne, select } from 'co-postgres-queries';
 
-const query = require('../db/client');
+import query from '../db/client';
 
+const table = 'urgent_action';
 const columns = [
     'id',
     'title',
     'slug',
+    'is_default',
     'campaign_code',
     'origin_code',
     'story',
@@ -22,14 +24,19 @@ const columns = [
 
 const urgentActionCrudQueries = {
     ...crud({
-        table: 'urgent_action',
+        table,
         writableCols: columns,
         returnCols: columns,
     }),
     selectOneBySlug: selectOne({
-        table: 'urgent_action',
+        table,
         primaryKey: 'slug',
         returnCols: columns,
+    }),
+    selectDefault: select({
+        table,
+        returnCols: columns,
+        returnOne: true,
     }),
 };
 
@@ -46,6 +53,15 @@ export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }) 
 export const countUrgentActions = async () => query(urgentActionCrudQueries.countAll());
 
 export const getUrgentAction = async id => query(urgentActionCrudQueries.selectOne(id));
+
+export const getDefaultUrgentAction = async () =>
+    query(
+        urgentActionCrudQueries.selectDefault({
+            filter: {
+                is_default: false,
+            },
+        }),
+    );
 
 export const getUrgentActionBySlug = async slug =>
     query(urgentActionCrudQueries.selectOneBySlug(slug));

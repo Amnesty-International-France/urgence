@@ -1,6 +1,9 @@
 import fetch from 'isomorphic-fetch';
 
 import driver from './driver';
+
+import homePageFactory from './pages/home';
+import errorPageFactory from './pages/error';
 import storyPageFactory from './pages/story';
 import actPageFactory from './pages/act';
 import messagePageFactory from './pages/message';
@@ -8,6 +11,8 @@ import registerPageFactory from './pages/register';
 import sharePageFactory from './pages/share';
 import thanksEndPageFactory from './pages/thanksEnd';
 
+const homePage = homePageFactory(driver);
+const errorPage = errorPageFactory(driver);
 const storyPage = storyPageFactory(driver);
 const actPage = actPageFactory(driver);
 const messagePage = messagePageFactory(driver);
@@ -143,5 +148,40 @@ describe('app', () => {
 
         const text = await thanksEndPage.getText();
         expect(text).toBe('Nous comptons sur vous pour la prochaine action urgente.');
+    });
+});
+
+describe('home', () => {
+    beforeAll(async () => {
+        await fetch('http://api:4000/test/createUrgentAction').then(r => r.json());
+    });
+
+    afterAll(async () => {
+        await fetch('http://api:4000/test/clearDb');
+    });
+
+    it('should display the last default urgent action', async () => {
+        await homePage.navigate();
+
+        const text = await storyPage.getActiveText();
+        expect(text).toBe(
+            'Ho Duy Hai a été condamné à mort en 2008 après avoir été déclaré coupable de pillage de biens et de meurtre.',
+        );
+    });
+});
+
+describe('error', () => {
+    it('should display the error page', async () => {
+        await errorPage.navigate();
+
+        const text = await errorPage.getErrorMessage();
+        expect(text).toBe(`Oups. Tout ne s'est pas passé comme prévu 🙈.`);
+    });
+
+    it('should display the error page if url is wrong', async () => {
+        await errorPage.navigateWrongUrl();
+
+        const text = await errorPage.getErrorMessage();
+        expect(text).toBe(`Oups. Tout ne s'est pas passé comme prévu 🙈.`);
     });
 });

@@ -14,7 +14,7 @@ export default driver => {
     return {
         isLoaded: () => driver.wait(until.elementLocated(elements.container)),
         async navigate(slug) {
-            await driver.navigate().to(`http://front:3000/#/ua/${slug}/address`);
+            await driver.navigate().to(`http://front:3000/ua/${slug}/address`);
             await this.isLoaded();
         },
         typeAddressMain: async value =>

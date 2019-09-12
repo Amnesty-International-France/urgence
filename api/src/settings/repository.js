@@ -1,17 +1,18 @@
-const { crud, selectOne } = require('co-postgres-queries');
+import { crud, selectOne } from 'co-postgres-queries';
 
-const query = require('../db/client');
+import query from '../db/client';
 
+const table = 'settings';
 const columns = ['id', 'created_on', 'updated_on', 'type', 'content'];
 
 const settingsCrudQueries = {
     ...crud({
-        table: 'settings',
+        table,
         writableCols: columns,
         returnCols: columns,
     }),
     selectOneByType: selectOne({
-        table: 'settings',
+        table,
         primaryKey: 'type',
         returnCols: columns,
     }),
