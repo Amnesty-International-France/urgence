@@ -31,13 +31,14 @@ const styles = {
 };
 
 export const StorySlide = ({ children, className, index, step }) => {
+    const src = get(step, 'medium.src', null);
+
     return (
         <div
             style={{
                 ...(index === 0 &&
-                    step.medium &&
-                    step.medium.src && {
-                        backgroundImage: `url(${step.medium.src})`,
+                    src && {
+                        backgroundImage: `url(${src})`,
                         backgroundPosition: 'top',
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',

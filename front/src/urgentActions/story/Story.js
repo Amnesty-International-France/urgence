@@ -43,7 +43,9 @@ export class Story extends Component {
             this.afterLastChange();
             return;
         }
-
+        if (!story[page]) {
+            return;
+        }
         context.changeLogoColor(getLogoColorForStep(story[page]));
         history.push(generateUrl('story', { slug, page }));
     };

@@ -43,6 +43,10 @@ const styles = {
 };
 
 export const getLogoColorForStep = step => {
+    if (!step) {
+        return white;
+    }
+
     const backgroundColor = colors[get(step, 'displayOptions.backgroundColor')];
     if (step.medium && get(step, 'displayOptions.mediumPosition') === 'top') {
         return white;

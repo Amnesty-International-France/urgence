@@ -40,7 +40,7 @@ const Steps = ({ className, data, step, page }) => {
 Steps.propTypes = {
     className: PropTypes.string,
     data: PropTypes.object.isRequired,
-    step: PropTypes.string.isRequired,
+    step: PropTypes.string,
     page: PropTypes.string,
 };
 
