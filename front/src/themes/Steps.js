@@ -20,8 +20,8 @@ const Container = glamorous.div({
         borderRight: '0px',
     },
     position: 'fixed',
-    height: 10,
     bottom: 0,
+    height: '10px',
 });
 
 const stepStyle = {

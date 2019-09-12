@@ -12,7 +12,7 @@ const styles = {
         height: '100%',
     },
     '& .swiper-wrapper': {
-        height: 'calc(100% - 15px)',
+        height: 'calc(100% - 10px)',
     },
     '& .swiper-controls': {
         position: 'relative',
