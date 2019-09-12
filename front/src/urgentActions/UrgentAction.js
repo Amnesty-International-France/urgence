@@ -239,11 +239,12 @@ UrgentAction.propTypes = {
     data: PropTypes.object,
 };
 
-// eslint-disable-next-line react/prop-types
 export const renderUrgentActionWithData = (history, slug, step, page) => ({
+    /* eslint-disable react/prop-types */
     data,
     error,
     loading,
+    /* eslint-enable react/prop-types */
 }) => {
     if (error) {
         console.error(error);
