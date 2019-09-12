@@ -40,7 +40,7 @@ describe('Urgent Actions Resolvers', () => {
         describe('DefaultUrgentAction', () => {
             it('should query the default urgent action', async () => {
                 const params = {};
-                await UrgentActionsResolver.Query.UrgentActionBySlug(null, params);
+                await UrgentActionsResolver.Query.DefaultUrgentAction(null, params);
 
                 expect(getDefaultUrgentAction).toHaveBeenCalled();
             });
