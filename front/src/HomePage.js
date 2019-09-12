@@ -52,6 +52,7 @@ const HomePage = () => (
             if (loading) {
                 return <LoadingScreen />;
             }
+
             const slug = get(data, 'UrgentAction.slug');
             return <Redirect to={generateUrl('ua', { slug })} />;
         }}
