@@ -38,6 +38,10 @@ const styles = {
             backgroundColor: black,
             height: 40,
         },
+        '& a:hover': {
+            color: black,
+            backgroundColor: yellow,
+        },
     },
 };
 
@@ -48,7 +52,7 @@ const ErrorPage = ({ className, title, description }) => (
             <AmnestyCandle className="candle" />
             <p className="error">{description}</p>
             <div className="actions">
-                <Link to={generateUrl('home')} label="Retrouver notre dernière action urgente" />
+                <Link to={generateUrl('home')} label="Participer à notre dernière action urgente" />
             </div>
         </div>
     </Fragment>
