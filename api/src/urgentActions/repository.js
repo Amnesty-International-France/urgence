@@ -37,6 +37,9 @@ const urgentActionCrudQueries = {
         table,
         returnCols: columns,
         returnOne: true,
+        permanentFilters: {
+            is_default: true,
+        },
     }),
 };
 
@@ -54,14 +57,7 @@ export const countUrgentActions = async () => query(urgentActionCrudQueries.coun
 
 export const getUrgentAction = async id => query(urgentActionCrudQueries.selectOne(id));
 
-export const getDefaultUrgentAction = async () =>
-    query(
-        urgentActionCrudQueries.selectDefault({
-            filter: {
-                is_default: false,
-            },
-        }),
-    );
+export const getDefaultUrgentAction = async () => query(urgentActionCrudQueries.selectDefault());
 
 export const getUrgentActionBySlug = async slug =>
     query(urgentActionCrudQueries.selectOneBySlug(slug));
