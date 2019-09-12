@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import get from 'lodash.get';
 
-import { black, white, yellow } from './colors';
+import { black, white } from './colors';
 
 const style = {
     height: '100%',
@@ -36,7 +36,7 @@ const stepStyle = {
 const FilledStep = glamorous.div({
     ...style,
     ...stepStyle,
-    backgroundColor: yellow,
+    backgroundColor: black,
 });
 
 const steps = {
@@ -62,7 +62,7 @@ const Steps = ({ data, step, page }) => {
             {[...Array(total)].map((_, index) => (
                 <FilledStep
                     key={index}
-                    style={{ backgroundColor: index < current ? yellow : white }}
+                    style={{ backgroundColor: index < current ? black : white }}
                 />
             ))}
         </Container>
