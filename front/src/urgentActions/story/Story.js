@@ -103,7 +103,7 @@ export class Story extends Component {
                     <Carousel
                         initialSlide={current}
                         current={current + 1}
-                        total={total + 1}
+                        total={total}
                         afterChange={this.afterChange}
                         afterLastChange={this.afterLastChange}
                         icon={
@@ -116,7 +116,7 @@ export class Story extends Component {
                     >
                         {() => (
                             <Fragment>
-                                <StorySlide index={0} step={cover} total={total}>
+                                <StorySlide index={0} step={cover}>
                                     {storyCoverProps => <StoryCover {...storyCoverProps} />}
                                 </StorySlide>
                                 {restStory.map((step, index) => (

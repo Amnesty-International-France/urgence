@@ -36,7 +36,7 @@ const styles = {
 
 export class Carousel extends Component {
     componentDidMount() {
-        const { initialSlide, afterChange } = this.props;
+        const { initialSlide, afterChange, total } = this.props;
         const swiper = new Swiper(this.container, {
             initialSlide,
             direction: 'horizontal',
@@ -46,6 +46,15 @@ export class Carousel extends Component {
                         return;
                     }
                     afterChange(swiper.activeIndex);
+                },
+                touchEnd: function() {
+                    if (
+                        swiper &&
+                        swiper.activeIndex + 1 === total &&
+                        swiper.swipeDirection === 'next'
+                    ) {
+                        afterChange(swiper.activeIndex);
+                    }
                 },
             },
         });
@@ -59,7 +68,7 @@ export class Carousel extends Component {
     slide = () => {
         const { current, total } = this.props;
 
-        if (current + 1 === total) {
+        if (current === total) {
             this.props.afterLastChange();
             return;
         }
@@ -67,7 +76,9 @@ export class Carousel extends Component {
     };
 
     componentWillUnmount() {
-        this.swiper.destroy();
+        setTimeout(() => {
+            this.swiper.destroy();
+        }, 100);
     }
 
     render() {
