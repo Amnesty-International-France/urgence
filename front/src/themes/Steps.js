@@ -2,40 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import get from 'lodash.get';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
-import { black, white } from './colors';
-
-const style = {
-    height: '100%',
-    width: '100%',
-};
-
-const Container = glamorous.div({
-    ...style,
-    display: 'inline-flex',
-    '& :first-child': {
-        borderLeft: '0px',
-    },
-    '& :last-child': {
-        borderRight: '0px',
-    },
+const styles = {
     position: 'fixed',
     bottom: 0,
-    height: '10px',
-});
-
-const stepStyle = {
-    border: '0.5px solid',
-    borderColor: black,
-    borderTop: '0',
-    borderBottom: '0',
-    transition: 'all ease-in 0.2s',
+    width: '100%',
 };
-
-const FilledStep = glamorous.div({
-    ...style,
-    ...stepStyle,
-});
 
 const steps = {
     story: 0,
@@ -45,7 +18,7 @@ const steps = {
     register: 3,
 };
 
-const Steps = ({ data, step, page }) => {
+const Steps = ({ className, data, step, page }) => {
     const stepNumber = steps[step];
     if (stepNumber == null) {
         return null;
@@ -55,22 +28,20 @@ const Steps = ({ data, step, page }) => {
     const current = page ? Number(page) + stepNumber + 1 : story.length + stepNumber;
     const total = story.length + 3;
 
+    const completed = (current / total) * 100;
+
     return (
-        <Container title={`Step ${current}/${total}`}>
-            {[...Array(total)].map((_, index) => (
-                <FilledStep
-                    key={index}
-                    style={{ backgroundColor: index < current ? black : white }}
-                />
-            ))}
-        </Container>
+        <div className={className}>
+            <LinearProgress variant="determinate" value={completed} />
+        </div>
     );
 };
 
 Steps.propTypes = {
+    className: PropTypes.string,
     data: PropTypes.object.isRequired,
     step: PropTypes.string.isRequired,
     page: PropTypes.string,
 };
 
-export default Steps;
+export default glamorous(Steps)(styles);
