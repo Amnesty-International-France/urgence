@@ -172,7 +172,7 @@ export default gql`
     extend type Query {
         UrgentAction(id: ID!): UrgentAction
         UrgentActionBySlug(slug: String!): UrgentAction
-        DefaultUrgentAction(): UrgentAction
+        DefaultUrgentAction: UrgentAction
         allUrgentActions(
             page: Int
             perPage: Int
