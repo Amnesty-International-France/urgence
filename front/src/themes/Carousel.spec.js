@@ -6,7 +6,7 @@ import { Carousel } from './Carousel';
 
 jest.mock('swiper');
 
-var wait = ms => new Promise((r, j) => setTimeout(r, ms));
+const wait = duration => new Promise(resolve => setTimeout(resolve, duration));
 
 describe('<Carousel />', () => {
     const defaultProps = {
