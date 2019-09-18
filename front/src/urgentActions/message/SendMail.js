@@ -32,6 +32,13 @@ export const SendMail = ({
         let isRegistered = registered;
         return addCampaignMember(auId, { email, firstname, lastname })
             .then(result => {
+                if (result.errors && result.errors.length) {
+                    // eslint-disable-next-line no-console
+                    console.log(
+                        'Failed adding campaign member',
+                        result.errors.map(error => `- ${error.message}`).join('\n'),
+                    );
+                }
                 isRegistered = get(result, 'data.addCampaignMember.registered', false);
                 setRegistered(isRegistered ? 'true' : 'false');
             })

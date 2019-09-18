@@ -26,6 +26,10 @@ export const authenticate = async () => {
     const status = response.status;
     const body = await response.json();
 
+    if (status !== 200) {
+        throw new Error(`Error authenticating to SalesForce: ${body.error_description}`);
+    }
+
     return { status, body };
 };
 
@@ -60,6 +64,14 @@ export const registerCampaignMember = async (
     const status = response.status;
     const body = await response.json();
 
+    if (status !== 200) {
+        throw new Error(
+            `Error while registering campaign member into SalesForce: ${body
+                .map(({ message }) => message)
+                .join(', ')}`,
+        );
+    }
+
     return { status, body };
 };
 
@@ -76,6 +88,14 @@ export const getContactByEmail = async (access_token, email) => {
 
     const status = response.status;
     const body = await response.json();
+
+    if (contactResponseStatus !== 200) {
+        return new Error(
+            `Error while quering contacts from SalesForce: ${body
+                .map(({ message }) => message)
+                .join(', ')}`,
+        );
+    }
 
     const contacts = body.records || [];
     const registered = contacts.some(record => !!record.Actions_urgentes_via_le_smartphone__c);
