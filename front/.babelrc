@@ -7,6 +7,12 @@
                 "transform-react-jsx-source",
                 "transform-class-properties"
             ]
+        },
+        "staging": {
+            "plugins": []
+        },
+        "production": {
+            "plugins": ["taransform-remove-console"]
         }
     }
 }
