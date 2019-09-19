@@ -47,6 +47,7 @@ services:
             - ./front:/app
         environment:
             NODE_ENV: production
+            BABEL_ENV: staging
             REACT_APP_NODE_ENV: production
             REACT_APP_API_URL: https://amnesty.marmelab.com/api
             REACT_APP_GA: UA-136476291-1
@@ -60,6 +61,7 @@ services:
             - ./front:/app
         environment:
             NODE_ENV: production
+            BABEL_ENV: production
             REACT_APP_NODE_ENV: production
             REACT_APP_API_URL: https://rapide.amnesty.fr/api
             REACT_APP_GA: UA-5960278-37
@@ -73,6 +75,7 @@ services:
             - ./front:/app
         environment:
             NODE_ENV: production
+            BABEL_ENV: development
             REACT_APP_NODE_ENV: production
             REACT_APP_API_URL: http://localhost/api
             REACT_APP_GA: UA-136476291-2

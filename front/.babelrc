@@ -9,7 +9,7 @@
             ]
         },
         "staging": {
-            "plugins": ["transform-remove-console"]
+            "plugins": []
         },
         "production": {
             "plugins": ["transform-remove-console"]
