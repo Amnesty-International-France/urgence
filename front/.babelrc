@@ -12,7 +12,7 @@
             "plugins": []
         },
         "production": {
-            "plugins": ["taransform-remove-console"]
+            "plugins": ["transform-remove-console"]
         }
     }
 }
