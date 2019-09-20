@@ -33,7 +33,8 @@ export const authenticate = async () => {
     return { status, body };
 };
 
-const isMemberAlreadyAddedError = (error) => error.every(({errorCode}) => errorCode === 'DUPLICATE_VALUE');
+const isMemberAlreadyAddedError = errors =>
+    errors.every(({ errorCode }) => errorCode === 'DUPLICATE_VALUE');
 
 export const addCampaignMember = async (
     access_token,
@@ -66,7 +67,7 @@ export const addCampaignMember = async (
     const status = response.status;
     const body = await response.json();
 
-    console.log('Add campaign member',status,body);
+    console.log('Add campaign member', status, body);
 
     if (status >= 400 && !isMemberAlreadyAddedError(body)) {
         throw new Error(

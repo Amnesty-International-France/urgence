@@ -22,7 +22,7 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
         return { firstname, lastname, email };
     }
 
-    const { status: authResponseStatus, body: authBody } = await authenticate();
+    const { body: authBody } = await authenticate();
     const accessToken = authBody ? authBody.access_token : null;
 
     await addCampaignMemberIntoSalesForce(accessToken, urgentAction, {
@@ -31,19 +31,16 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
         email,
     });
 
-    const { status: contactResponseStatus, body: contactBody } = await getContactByEmail(
-        authBody.access_token,
-        email,
-    );
+    const { body: contactBody } = await getContactByEmail(authBody.access_token, email);
 
     return { firstname, lastname, email, registered: contactBody.registered };
 };
 
 export const registerContact = async ({ firstname, lastname, email, phone }) => {
-    const { status: authResponseStatus, body: authBody } = await authenticate();
+    const { body: authBody } = await authenticate();
     const accessToken = authBody ? authBody.access_token : null;
 
-    const registerResponse = await register(accessToken, { firstname, lastname, email, phone });
+    await register(accessToken, { firstname, lastname, email, phone });
 
     return { firstname, lastname, email, registered: true };
 };
