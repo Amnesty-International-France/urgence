@@ -8,7 +8,7 @@ import {
     updateUrgentAction,
     removeUrgentAction,
 } from './repository';
-import { addCampaignMember } from './campaignMember';
+import { addCampaignMember, registerContact } from './campaignMember';
 
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
 
@@ -46,5 +46,6 @@ export default {
         },
         deleteUrgentAction: (_, id) => removeUrgentAction(id),
         addCampaignMember: (_, { id, member }) => addCampaignMember(id, member),
+        registerContact: (_, { member }) => registerContact(member),
     },
 };

@@ -213,13 +213,14 @@ export const UrgentAction = ({ history, slug, step, data }) => {
                 data={register}
                 gdprRegister={get(data, 'GdprRegister.content')}
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
-                action={disabled => (
+                action={(disabled, formValues) => (
                     <RegisterButton
                         auId={get(data, 'UrgentAction.id')}
                         step={step}
                         disabled={disabled}
                         buttonText={get(register, 'button')}
                         analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
+                        formValues={formValues}
                     />
                 )}
             />

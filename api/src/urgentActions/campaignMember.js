@@ -1,7 +1,12 @@
 import isUUID from 'validator/lib/isUUID';
 
 import { getUrgentAction } from './repository';
-import { authenticate, registerCampaignMember, getContactByEmail } from '../services/salesForceApi';
+import {
+    authenticate,
+    addCampaignMember as addCampaignMemberIntoSalesForce,
+    getContactByEmail,
+    register,
+} from '../services/salesForceApi';
 
 export const addCampaignMember = async (id, { firstname, lastname, email }) => {
     if (!isUUID(id)) {
@@ -20,7 +25,7 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
     const { status: authResponseStatus, body: authBody } = await authenticate();
     const accessToken = authBody ? authBody.access_token : null;
 
-    await registerCampaignMember(authBody.access_token, urgentAction, {
+    await addCampaignMemberIntoSalesForce(accessToken, urgentAction, {
         firstname,
         lastname,
         email,
@@ -31,6 +36,14 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
         email,
     );
 
-
     return { firstname, lastname, email, registered: contactBody.registered };
+};
+
+export const registerContact = async ({ firstname, lastname, email, phone }) => {
+    const { status: authResponseStatus, body: authBody } = await authenticate();
+    const accessToken = authBody ? authBody.access_token : null;
+
+    const registerResponse = await register(accessToken, { firstname, lastname, email, phone });
+
+    return { firstname, lastname, email, registered: true };
 };

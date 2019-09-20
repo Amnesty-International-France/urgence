@@ -161,6 +161,7 @@ export default gql`
         firstname: String!
         lastname: String!
         email: String!
+        phone: String
     }
 
     type CampaignMember {
@@ -221,5 +222,6 @@ export default gql`
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
         addCampaignMember(id: ID!, member: CampaignMemberInput!): CampaignMember!
+        registerContact(member: CampaignMemberInput!): CampaignMember!
     }
 `;

@@ -9,7 +9,7 @@ import {
     removeUrgentAction,
 } from './repository';
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
-import { authenticate, registerCampaignMember, getContactByEmail } from '../services/salesForceApi';
+import { authenticate, addCampaignMember, getContactByEmail } from '../services/salesForceApi';
 
 jest.mock('./repository');
 jest.mock('../services/uploadImageFromStory');
@@ -270,7 +270,7 @@ describe('Urgent Actions Resolvers', () => {
                 expect(response.lastname).toEqual('Bon');
                 expect(response.registered).toEqual(false);
 
-                expect(registerCampaignMember).toHaveBeenCalledWith(
+                expect(addCampaignMember).toHaveBeenCalledWith(
                     'psjgf-dfgersdf-sf486sf-sdf',
                     ua,
                     { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
