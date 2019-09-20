@@ -68,6 +68,7 @@ const isDisabled = props => {
 
 export const RegisterActivist = ({ data, gdprRegister, action, className, ...props }) => {
     const title = get(data, 'title');
+    const { firstname, lastname, phone, email } = props;
     const text = get(data, 'text');
     return (
         <div className={classnames('register', className)}>
@@ -80,7 +81,9 @@ export const RegisterActivist = ({ data, gdprRegister, action, className, ...pro
             <div className="formStep">
                 <Form {...props} />
             </div>
-            <div className="action">{action(isDisabled(props))}</div>
+            <div className="action">
+                {action(isDisabled(props), { firstname, lastname, phone, email })}
+            </div>
             <LegalInformation content={gdprRegister} />
         </div>
     );

@@ -26,14 +26,16 @@ export const authenticate = async () => {
     const status = response.status;
     const body = await response.json();
 
-    if (status !== 200) {
+    if (status >= 400) {
         throw new Error(`Error authenticating to SalesForce: ${body.error_description}`);
     }
 
     return { status, body };
 };
 
-export const registerCampaignMember = async (
+const isMemberAlreadyAddedError = (error) => error.every(({errorCode}) => errorCode === 'DUPLICATE_VALUE');
+
+export const addCampaignMember = async (
     access_token,
     { campaign_code, origin_code },
     { firstname, lastname, email },
@@ -64,9 +66,46 @@ export const registerCampaignMember = async (
     const status = response.status;
     const body = await response.json();
 
-    if (status !== 200) {
+    console.log('Add campaign member',status,body);
+
+    if (status >= 400 && !isMemberAlreadyAddedError(body)) {
         throw new Error(
             `Error while registering campaign member into SalesForce: ${body
+                .map(({ message }) => message)
+                .join(', ')}`,
+        );
+    }
+
+    return { status, body };
+};
+
+export const register = async (access_token, { firstname, lastname, email, phone }) => {
+    const url = `${QUERY_BASE_URL}/sobjects/Contact`;
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+            'Content-Type': JSON_TYPE,
+        },
+        body: JSON.stringify({
+            Actions_urgentes_via_le_smartphone__c: true,
+            LastName: lastname,
+            FirstName: firstname,
+            EMAIL: email,
+            MobilePhone: phone,
+        }),
+    });
+
+    const status = response.status;
+    const body = await response.json();
+
+    console.log('Register', status, body);
+
+    if (status >= 400) {
+        throw new Error(
+            `Error while registering contact into SalesForce: ${body
                 .map(({ message }) => message)
                 .join(', ')}`,
         );
@@ -89,13 +128,15 @@ export const getContactByEmail = async (access_token, email) => {
     const status = response.status;
     const body = await response.json();
 
-    if (contactResponseStatus !== 200) {
+    if (status >= 400) {
         return new Error(
             `Error while quering contacts from SalesForce: ${body
                 .map(({ message }) => message)
                 .join(', ')}`,
         );
     }
+
+    console.log('getContactByEmail', status, body);
 
     const contacts = body.records || [];
     const registered = contacts.some(record => !!record.Actions_urgentes_via_le_smartphone__c);

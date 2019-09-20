@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import get from 'lodash.get';
+
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
 import { withSessionData } from '../../DataContext';
+import { registerContact } from '../../services/api';
 
 export const RegisterButton = ({
     disabled,
@@ -9,9 +12,21 @@ export const RegisterButton = ({
     analyticsCategory,
     step,
     setRegistered,
+    formValues,
 }) => {
+    const { firstname, lastname, phone, email } = formValues;
     const register = () => {
-        setRegistered('true');
+        return registerContact({ email, phone, firstname, lastname }).then(result => {
+            if (result.errors && result.errors.length) {
+                // eslint-disable-next-line no-console
+                console.log(
+                    'Failed registering campaign member',
+                    result.errors.map(error => `- ${error.message}`).join('\n'),
+                );
+            }
+            const isRegistered = get(result, 'data.registerContact.registered', false);
+            setRegistered(isRegistered ? 'true' : 'false');
+        });
     };
 
     return (
@@ -32,6 +47,7 @@ RegisterButton.propTypes = {
     civility: PropTypes.string.isRequired,
     firstname: PropTypes.string.isRequired,
     lastname: PropTypes.string.isRequired,
+    formValues: PropTypes.array,
     email: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
     setRegistered: PropTypes.func.isRequired,
@@ -39,6 +55,10 @@ RegisterButton.propTypes = {
     buttonText: PropTypes.string.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
+};
+
+RegisterButton.defaultProps = {
+    formValues: {},
 };
 
 export default withSessionData(RegisterButton);
