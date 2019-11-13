@@ -5,7 +5,7 @@ import { Labeled, required as originalRequired } from 'react-admin';
 import { default as BaseRichTextInput } from 'ra-input-rich-text';
 
 const toolbarOptions = [
-    [{ size: [false, 'large', 'huge'] }, 'bold', 'italic'],
+    [{ size: ['small', 'normal', 'large', 'huge'] }, 'bold', 'italic'],
     [{ color: [] }, { background: [] }],
 ];
 
