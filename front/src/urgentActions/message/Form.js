@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import Input, { isCorrectEmail } from '../../themes/Input';
@@ -40,7 +40,7 @@ const Form = ({
     };
 
     return (
-        <>
+        <Fragment>
             <Input
                 className="object"
                 value={object}
@@ -93,7 +93,7 @@ const Form = ({
                 autoComplete="family-name"
                 label="Votre nom *"
             />
-        </>
+        </Fragment>
     );
 };
 

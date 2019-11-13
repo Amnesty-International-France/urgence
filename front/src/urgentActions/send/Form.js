@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import Input, { isCorrectEmail } from '../../themes/Input';
@@ -33,7 +33,7 @@ export const Form = ({
     };
 
     return (
-        <>
+        <Fragment>
             <RadioButton
                 value={civility}
                 name="civility"
@@ -76,7 +76,7 @@ export const Form = ({
                 step={step}
                 label="Votre adresse e-mail *"
             />
-        </>
+        </Fragment>
     );
 };
 
