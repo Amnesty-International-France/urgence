@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import { Labeled, required as originalRequired } from 'react-admin';
 import { default as BaseRichTextInput } from 'ra-input-rich-text';
 
-const toolbarOptions = [[{ size: [false, 'large', 'huge'] }, 'bold', 'italic']];
+const toolbarOptions = [
+    [{ size: [false, 'large', 'huge'] }, 'bold', 'italic'],
+    [{ color: [] }, { background: [] }],
+];
 
 const stripHTML = text => (text ? text.replace(/<.*?>/g, '') : text);
 
