@@ -79,7 +79,7 @@ const styles = {
     },
     '& .objectIndication': {
         fontStyle: 'italic',
-        opacity: '0.5',
+        fontSize: '14px',
     },
     '& .formStep': {
         margin: '5px 0px 10px 0px',
