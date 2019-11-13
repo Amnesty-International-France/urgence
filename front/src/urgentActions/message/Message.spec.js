@@ -1,8 +1,9 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
-import { Message, LetterView } from './Message';
-import MessageSection from './MessageSection';
+import { Message } from './Message';
+import LetterView from './LetterView';
+import Form from './Form';
 
 describe('Message', () => {
     const defaultStep = [{ value: 'one' }, { value: 'two' }, { value: 'three' }];
@@ -32,13 +33,17 @@ describe('Message', () => {
         test([defaultStep], false);
     });
 
-    it('display all messageTemplate steps', () => {
-        const wrapper = mount(<LetterView {...defaultProps} />);
+    it('display a letter', () => {
+        const wrapper = shallow(<Message {...defaultProps} />);
 
-        const messages = wrapper.find(MessageSection);
+        const letter = wrapper.find(LetterView);
+        expect(letter.length).toBe(1);
+    });
 
-        expect(messages.at(0).prop('content')).toBe('one');
-        expect(messages.at(1).prop('content')).toBe('two');
-        expect(messages.at(2).prop('content')).toBe('three');
+    it('display a form', () => {
+        const wrapper = shallow(<Message {...defaultProps} />);
+
+        const form = wrapper.find(Form);
+        expect(form.length).toBe(1);
     });
 });
