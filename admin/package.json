@@ -43,6 +43,7 @@
         "object-assign": "~4.1.1",
         "postcss-flexbugs-fixes": "~3.2.0",
         "postcss-loader": "~2.0.8",
+        "prettier": "~1.19.1",
         "promise": "~8.0.1",
         "qs": "~6.5.2",
         "ra-data-graphql-simple": "~2.9.6",
