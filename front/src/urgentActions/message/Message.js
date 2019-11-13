@@ -93,7 +93,6 @@ export const Message = ({ messageTemplate, gdprMessage, action, className, ...pr
 
     return (
         <div className={classnames('message', className)}>
-            <LetterView messageTemplate={messageTemplate} />
             <p>
                 Parce que les messages uniques ont plus d&#39;impact,&nbsp;
                 <strong className="importantText">
@@ -103,6 +102,7 @@ export const Message = ({ messageTemplate, gdprMessage, action, className, ...pr
             <div className="formStep">
                 <Form {...props} />
             </div>
+            <LetterView messageTemplate={messageTemplate} />
             <div className="action">{action}</div>
             <LegalInformation content={gdprMessage} />
         </div>
