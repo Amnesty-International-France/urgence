@@ -111,9 +111,6 @@ RegisterActivist.propTypes = {
     action: PropTypes.func.isRequired,
 };
 
-export default glamorous(
-    compose(
-        withYellowLogo,
-        withSessionData,
-    )(RegisterActivist),
-)(styles);
+const WithStylesRegisterActivist = glamorous(RegisterActivist)(styles);
+
+export default compose(withYellowLogo, withSessionData)(WithStylesRegisterActivist);
