@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import Input from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';
+import RichText from '../../themes/RichText';
 
 import Form from './Form';
 
@@ -24,6 +25,8 @@ describe('Form', () => {
 
         const inputs = wrapper.find(Input);
 
+        expect(inputs.length).toBe(4);
+
         expect(inputs.at(0).prop('className')).toBe('object');
         expect(inputs.at(0).prop('label')).toBe(`Objet de l'e-mail *`);
 
@@ -42,6 +45,16 @@ describe('Form', () => {
 
         const radio = wrapper.find(RadioButton);
 
+        expect(radio.length).toBe(1);
         expect(radio.at(0).prop('label')).toBe('Civilité *');
+    });
+
+    it('display a rich text for object indication', () => {
+        const wrapper = shallow(<Form {...defaultProps} />);
+
+        const richText = wrapper.find(RichText);
+
+        expect(richText.length).toBe(1);
+        expect(richText.at(0).prop('className')).toBe('objectIndication');
     });
 });

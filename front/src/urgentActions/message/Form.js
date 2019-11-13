@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Input, { isCorrectEmail } from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';
+import RichText from '../../themes/RichText';
 
 const Form = ({
     email,
@@ -50,7 +51,7 @@ const Form = ({
                 step={step}
                 label="Objet de l'e-mail *"
             />
-            <p className="objectIndication">{objectIndication}</p>
+            <RichText className="objectIndication" html={objectIndication} />
             <Input
                 className="email"
                 type="email"
