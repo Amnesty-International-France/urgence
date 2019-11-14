@@ -4,8 +4,6 @@ import glamorous from 'glamorous';
 
 import { grey } from './colors';
 
-const bgColor = grey;
-
 const styles = {
     '& .rectangle': {
         zIndex: -1,
@@ -14,7 +12,7 @@ const styles = {
         left: 0,
         width: '100vw',
         height: '30vh',
-        background: bgColor,
+        background: grey,
     },
     '& .triangle': {
         zIndex: -1,
@@ -23,7 +21,7 @@ const styles = {
         left: 0,
         width: 0,
         height: 0,
-        borderTop: `50vh solid ${bgColor}`,
+        borderTop: `50vh solid ${grey}`,
         borderRight: '100vw solid transparent',
     },
 };
