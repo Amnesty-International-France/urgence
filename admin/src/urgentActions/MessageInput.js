@@ -62,14 +62,14 @@ export const MessageInput = ({ classes, source }) => (
                                     fullWidth
                                     multiline
                                     label="Message Tip"
-                                    source={`${source}text`}
+                                    source={`${source}.text`}
                                     defaultValue="Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email."
                                 />
                                 <RichTextInput
                                     fullWidth
                                     multiline
                                     label="Object Tip"
-                                    source={`${source}object_indication`}
+                                    source={`${source}.object_indication`}
                                     defaultValue="Indiquez par exemple que vous souhaitez parler de cette situation inacceptable."
                                 />
                                 <Labeled label="Recipient">
@@ -78,24 +78,24 @@ export const MessageInput = ({ classes, source }) => (
                                             fullWidth
                                             type="email"
                                             label="Mail To"
-                                            source={`${source}recipient.mail`}
+                                            source={`${source}.recipient.mail`}
                                             validate={validateRecipientEmail}
                                         />
                                         <TextInput
                                             fullWidth
                                             label="Copies To"
-                                            source={`${source}recipient.copies_to`}
+                                            source={`${source}.recipient.copies_to`}
                                             validate={validateEmailsList}
                                         />
                                         <TextInput
                                             fullWidth
                                             label="CCI"
-                                            source={`${source}recipient.cci`}
+                                            source={`${source}.recipient.cci`}
                                             validate={validateEmailsList}
                                         />
                                     </Fragment>
                                 </Labeled>
-                                <ArrayInput label="Message" source={`${source}message_template`}>
+                                <ArrayInput label="Message" source={`${source}.message_template`}>
                                     <SimpleParagraphFormIterator>
                                         <ParagraphTemplateInput source="" />
                                     </SimpleParagraphFormIterator>
@@ -103,18 +103,18 @@ export const MessageInput = ({ classes, source }) => (
                             </div>
                         </CardContent>
                     </Card>
-                    {formData.message.message_template && (
+                    {formData[source].message_template && (
                         <FrontPreview className={classes.preview}>
                             <Message
-                                text={formData.message.text || ''}
+                                text={formData[source].text || ''}
                                 messageTemplate={
-                                    formData.message.message_template &&
-                                    formData.message.message_template[0] &&
-                                    formData.message.message_template[0].value
-                                        ? formData.message.message_template
+                                    formData[source].message_template &&
+                                    formData[source].message_template[0] &&
+                                    formData[source].message_template[0].value
+                                        ? formData[source].message_template
                                         : initMessageTemplate
                                 }
-                                objectIndication={formData.message.object_indication || ''}
+                                objectIndication={formData[source].object_indication || ''}
                                 action={<Link to="#" label="J'envoie" />}
                                 setEmail={() => {}}
                                 setObject={() => {}}
