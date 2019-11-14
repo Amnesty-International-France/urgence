@@ -62,7 +62,6 @@ const Form = ({
                 analyticsCategory={analyticsCategory}
                 step={step}
                 label="Votre téléphone mobile *"
-                inputProps={{ autoFocus: autoFocus }}
             />
             <RadioButton
                 value={civility}
