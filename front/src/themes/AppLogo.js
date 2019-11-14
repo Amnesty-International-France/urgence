@@ -8,8 +8,8 @@ import { withThemeContext } from './ThemeContext';
 const styles = {
     position: 'absolute',
     fontSize: 33,
-    top: 20,
-    left: 20,
+    top: 80,
+    left: 0,
     zIndex: 100,
 };
 

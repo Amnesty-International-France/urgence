@@ -11,6 +11,7 @@ import UrgentAction from './urgentActions/UrgentAction';
 import HomePage from './HomePage';
 import ErrorPage from './ErrorPage';
 import AppLogo from './themes/AppLogo';
+import AppBackground from './themes/AppBackground';
 import { ThemeProvider } from './themes/ThemeContext';
 import DesktopAlert from './themes/DesktopAlert';
 
@@ -18,29 +19,39 @@ export const styles = {
     '&': {
         width: '100vw',
     },
+    '& .page': {
+        padding: '60px 15px 20px',
+    },
 };
 
 const App = ({ className, client }) => (
     <ApolloProvider client={client}>
         <ThemeProvider>
             <Div100Vh className={className}>
-                <AppLogo />
-                <DesktopAlert />
-                <Router>
-                    <Switch>
-                        <Route exact path={generateUrl('home')} component={withTracker(HomePage)} />
-                        <Route
-                            exact
-                            path={generateUrl('error')}
-                            component={withTracker(ErrorPage)}
-                        />
-                        <Route
-                            path="/ua/:slug/:step?/:page?"
-                            component={withTracker(UrgentAction)}
-                        />
-                        <Redirect from="*" to={generateUrl('error')} />
-                    </Switch>
-                </Router>
+                <div className="page">
+                    <AppBackground />
+                    <AppLogo />
+                    <DesktopAlert />
+                    <Router>
+                        <Switch>
+                            <Route
+                                exact
+                                path={generateUrl('home')}
+                                component={withTracker(HomePage)}
+                            />
+                            <Route
+                                exact
+                                path={generateUrl('error')}
+                                component={withTracker(ErrorPage)}
+                            />
+                            <Route
+                                path="/ua/:slug/:step?/:page?"
+                                component={withTracker(UrgentAction)}
+                            />
+                            <Redirect from="*" to={generateUrl('error')} />
+                        </Switch>
+                    </Router>
+                </div>
             </Div100Vh>
         </ThemeProvider>
     </ApolloProvider>
