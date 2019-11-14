@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { compose } from 'recompose';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import Paper from '@material-ui/core/Paper';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -22,7 +23,7 @@ import StoryCover from './StoryCover';
 import StoryStep, { getLogoColorForStep } from './StoryStep';
 
 const styles = {
-    height: '100%',
+    height: '80vh',
     '& .icon': {
         cursor: 'pointer',
     },
@@ -96,12 +97,7 @@ export class Story extends Component {
         const [cover, ...restStory] = story;
 
         return (
-            <div
-                className={className}
-                style={{
-                    backgroundColor: white,
-                }}
-            >
+            <Paper className={className} elevation={4}>
                 {total > 0 && (
                     <Carousel
                         initialSlide={current}
@@ -132,7 +128,7 @@ export class Story extends Component {
                         )}
                     </Carousel>
                 )}
-            </div>
+            </Paper>
         );
     }
 }

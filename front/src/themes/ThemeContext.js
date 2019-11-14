@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { lifecycle, compose } from 'recompose';
 
-import { black, yellow } from './colors';
+import { black, yellow, white } from './colors';
 
 const { Consumer, Provider } = createContext();
 
@@ -21,7 +21,7 @@ export class ThemeProvider extends Component {
 
     theme = createMuiTheme({
         palette: {
-            primary: { 500: black },
+            primary: { 500: white },
         },
     });
 
@@ -48,7 +48,7 @@ export const withBlackLogo = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
-            this.props.context.changeLogoColor({ color: yellow, backgroundColor: black });
+            this.props.context.changeLogoColor({ color: white, backgroundColor: black });
         },
     }),
 );

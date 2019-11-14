@@ -5,6 +5,7 @@ import RichText from '../themes/RichText';
 import LongText from '../themes/LongText';
 import { yellow, white, black } from '../themes/colors';
 import { withBlackLogo } from '../themes/ThemeContext';
+import Paper from '@material-ui/core/Paper';
 
 const styles = {
     display: 'flex',
@@ -14,7 +15,7 @@ const styles = {
     width: '100%',
     padding: '100px 20px 20px 20px',
     color: white,
-    backgroundColor: yellow,
+    backgroundColor: `${yellow} !important`,
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
         '& .link': {
@@ -57,7 +58,7 @@ const styles = {
 };
 
 export const TransitionScreen = ({ className, actions, title, message }) => (
-    <div className={className}>
+    <Paper className={className} elevation={4}>
         <div>
             <h1>
                 <LongText text={title} />
@@ -65,7 +66,7 @@ export const TransitionScreen = ({ className, actions, title, message }) => (
             {message && <RichText html={message} />}
         </div>
         <div className="actions">{actions()}</div>
-    </div>
+    </Paper>
 );
 
 TransitionScreen.propTypes = {
