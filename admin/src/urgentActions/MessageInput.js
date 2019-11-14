@@ -58,6 +58,20 @@ export const MessageInput = ({ classes, source }) => (
                     <Card className={classes.card}>
                         <CardContent className={classes.content}>
                             <div className={classes.formContainer}>
+                                <RichTextInput
+                                    fullWidth
+                                    multiline
+                                    label="Message Tip"
+                                    source={`${source}message`}
+                                    defaultValue="Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email."
+                                />
+                                <RichTextInput
+                                    fullWidth
+                                    multiline
+                                    label="Object Tip"
+                                    source={`${source}object_indication`}
+                                    defaultValue="Indiquez par exemple que vous souhaitez parler de cette situation inacceptable."
+                                />
                                 <Labeled label="Recipient">
                                     <Fragment>
                                         <TextInput
@@ -86,13 +100,6 @@ export const MessageInput = ({ classes, source }) => (
                                         <ParagraphTemplateInput source="" />
                                     </SimpleParagraphFormIterator>
                                 </ArrayInput>
-                                <RichTextInput
-                                    fullWidth
-                                    multiline
-                                    label="Object tip"
-                                    source={`${source}object_indication`}
-                                    defaultValue={`Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.`}
-                                />
                             </div>
                         </CardContent>
                     </Card>

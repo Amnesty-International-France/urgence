@@ -146,7 +146,7 @@ const Form = ({ classes, record }) => {
 
             <div className={`${classes.form} message`}>
                 <h2>Message</h2>
-                <MessageInput source="" />
+                <MessageInput source="message" />
             </div>
 
             {LETTER_ACTIVATED && (
