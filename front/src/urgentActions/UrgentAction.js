@@ -19,10 +19,9 @@ import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import SendMail from './message/SendMail';
 import LoadingScreen from '../themes/LoadingScreen';
+import Stepper from '../themes/Stepper';
 import RegisterButton from './register/RegisterButton';
 import Register from './register/Register';
-
-import Steps from '../themes/Steps';
 
 const seoPropsFromStory = story => {
     if (!story || story.length === 0) {
@@ -266,9 +265,9 @@ export const renderUrgentActionWithData = (history, slug, step, page) => ({
 
     return (
         <Fragment>
+            <Stepper data={data} step={step} page={page} />
             {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
             <UrgentAction history={history} slug={slug} step={step} data={data} />
-            <Steps data={data} step={step} page={page} />
         </Fragment>
     );
 };
