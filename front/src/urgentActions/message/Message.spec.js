@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import RichText from '../../themes/RichText';
 import { Message } from './Message';
 import LetterView from './LetterView';
 import Form from './Form';
@@ -8,14 +9,15 @@ import Form from './Form';
 describe('Message', () => {
     const defaultStep = [{ value: 'one' }, { value: 'two' }, { value: 'three' }];
     const defaultProps = {
-        messageTemplate: defaultStep,
+        text: 'text',
         objectIndication: 'object indication',
-        loading: false,
-        match: { params: {} },
-        history: { push: () => null },
+        messageTemplate: defaultStep,
         recipient: {
             mail: 'mail',
         },
+        loading: false,
+        match: { params: {} },
+        history: { push: () => null },
     };
 
     it('should display a 404 message if story has no message step', () => {
@@ -45,5 +47,12 @@ describe('Message', () => {
 
         const form = wrapper.find(Form);
         expect(form.length).toBe(1);
+    });
+
+    it('display a rich text', () => {
+        const wrapper = shallow(<Message {...defaultProps} />);
+
+        const text = wrapper.find(RichText);
+        expect(text.length).toBe(1);
     });
 });

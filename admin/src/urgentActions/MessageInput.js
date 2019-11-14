@@ -103,17 +103,18 @@ export const MessageInput = ({ classes, source }) => (
                             </div>
                         </CardContent>
                     </Card>
-                    {formData.message_template && (
+                    {formData.message.message_template && (
                         <FrontPreview className={classes.preview}>
                             <Message
+                                text={formData.message.text || ''}
                                 messageTemplate={
-                                    formData.message_template &&
-                                    formData.message_template[0] &&
-                                    formData.message_template[0].value
-                                        ? formData.message_template
+                                    formData.message.message_template &&
+                                    formData.message.message_template[0] &&
+                                    formData.message.message_template[0].value
+                                        ? formData.message.message_template
                                         : initMessageTemplate
                                 }
-                                objectIndication={formData.object_indication || ''}
+                                objectIndication={formData.message.object_indication || ''}
                                 action={<Link to="#" label="J'envoie" />}
                                 setEmail={() => {}}
                                 setObject={() => {}}

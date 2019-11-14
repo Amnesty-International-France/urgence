@@ -83,15 +83,18 @@ const query = gql`
                 message
                 button
             }
-            object_indication
-            message_template {
-                value
-            }
-            recipient {
-                mail
-                copies_to
-                cci
-                button
+            message {
+                text
+                object_indication
+                message_template {
+                    value
+                }
+                recipient {
+                    mail
+                    copies_to
+                    cci
+                    button
+                }
             }
             email_thank {
                 title
@@ -164,14 +167,16 @@ export const UrgentAction = ({ history, slug, step, data }) => {
     }
 
     if (step === 'message') {
-        const messageTemplate = get(data, 'UrgentAction.message_template');
-        const objectIndication = get(data, 'UrgentAction.object_indication');
+        const text = get(data, 'UrgentAction.message.text');
+        const objectIndication = get(data, 'UrgentAction.message.object_indication');
+        const messageTemplate = get(data, 'UrgentAction.message.message_template');
         const gdprMessage = get(data, 'GdprMessage.content');
         const id = get(data, 'UrgentAction.id');
         return (
             <Message
-                messageTemplate={messageTemplate}
+                text={text}
                 objectIndication={objectIndication}
+                messageTemplate={messageTemplate}
                 gdprMessage={gdprMessage}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
