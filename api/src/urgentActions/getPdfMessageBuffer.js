@@ -3,12 +3,27 @@ import { format } from 'date-fns';
 import frLocale from 'date-fns/locale/fr';
 import pdf from 'html-pdf';
 import nunjucks from 'nunjucks';
+import get from 'lodash.get';
 
-export const getPdfMessageBuffer = async (urgentAction, subject, civility, firstname, lastname, emitterAddressMain, emitterAddressMore, emitterPostalCode, emitterCity, emitterCountry) =>
+export const getPdfMessageBuffer = async (
+    urgentAction,
+    subject,
+    civility,
+    firstname,
+    lastname,
+    emitterAddressMain,
+    emitterAddressMore,
+    emitterPostalCode,
+    emitterCity,
+    emitterCountry,
+) =>
     new Promise((resolve, reject) => {
+        const recipientAddress = get(urgentAction, 'message.recipient.postal_address', '');
+        const date = format(new Date(), 'DD MMMM YYYY', { locale: frLocale });
+
         const urgentActionLetter = nunjucks.render(path.join(__dirname, './letter.html'), {
-            date: format(new Date(), 'DD MMMM YYYY', { locale: frLocale }),
-            recipientAddress: urgentAction.recipient.postal_address,
+            date,
+            recipientAddress,
             civility,
             firstname,
             lastname,
@@ -35,7 +50,6 @@ export const getPdfMessageBuffer = async (urgentAction, subject, civility, first
                 if (err) {
                     return reject(err);
                 }
-
                 return resolve(buffer);
             });
     });
