@@ -131,7 +131,6 @@ const query = gql`
 `;
 
 export const UrgentAction = ({ history, slug, step, data }) => {
-    const recipient = get(data, 'UrgentAction.recipient');
     const story = get(data, 'UrgentAction.story');
 
     if (!story || !story.length) {
@@ -172,6 +171,8 @@ export const UrgentAction = ({ history, slug, step, data }) => {
         const messageTemplate = get(data, 'UrgentAction.message.message_template');
         const gdprMessage = get(data, 'GdprMessage.content');
         const id = get(data, 'UrgentAction.id');
+        const recipient = get(data, 'UrgentAction.message.recipient');
+
         return (
             <Message
                 text={text}
