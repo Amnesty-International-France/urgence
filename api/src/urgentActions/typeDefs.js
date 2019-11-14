@@ -18,10 +18,6 @@ export default gql`
         transparent
     }
 
-    enum ParagraphTemplateType {
-        fixed
-    }
-
     type Link {
         label: String
         url: String
@@ -73,10 +69,6 @@ export default gql`
         button: String
     }
 
-    type ParagraphTemplate {
-        value: String!
-    }
-
     type Recipient {
         mail: String!
         copies_to: String
@@ -91,6 +83,28 @@ export default gql`
         cci: String
         postal_address: String
         button: String
+    }
+
+    type MessageTemplate {
+        value: String!
+    }
+
+    input MessageTemplateInput {
+        value: String!
+    }
+
+    type Message {
+        indication: String!
+        object_indication: String
+        message_template: [MessageTemplate]
+        recipient: Recipient
+    }
+
+    input MessageInput {
+        indication: String!
+        object_indication: String
+        message_template: [MessageTemplate]
+        recipient: Recipient
     }
 
     type Share {
@@ -134,10 +148,6 @@ export default gql`
         share: ShareInput
     }
 
-    input MessageTemplateInput {
-        value: String!
-    }
-
     type UrgentAction {
         id: ID!
         title: String!
@@ -147,11 +157,9 @@ export default gql`
         origin_code: String
         story: [StoryStep]
         call_to_action: CallToAction
-        object_indication: String
-        message_template: [ParagraphTemplate]
+        message: Message
         creation_date: DATE
         last_edition_date: DATE
-        recipient: Recipient
         email_thank: Thanks
         end_thank: Thanks
         register: Register
@@ -197,9 +205,7 @@ export default gql`
             origin_code: String
             story: [StoryStepInput]
             call_to_action: CallToActionInput
-            object_indication: String
-            message_template: [MessageTemplateInput]
-            recipient: RecipientInput
+            message: MessageInput
             email_thank: ThankInput
             end_thank: ThankInput
             register: RegisterInput
@@ -213,9 +219,7 @@ export default gql`
             is_default: Boolean
             story: [StoryStepInput]
             call_to_action: CallToActionInput
-            object_indication: String
-            message_template: [MessageTemplateInput]
-            recipient: RecipientInput
+            message: MessageInput
             email_thank: ThankInput
             end_thank: ThankInput
             register: RegisterInput
