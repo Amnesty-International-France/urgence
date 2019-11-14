@@ -5,8 +5,10 @@ exports.up = function(db, cb) {
     ALTER TABLE urgent_action ADD COLUMN message JSON DEFAULT '{
         "text": "Parce que les messages uniques ont plus d''impact nous vous invitons à personnaliser l''objet de l''email.",
         "object_indication": "Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.",
-        "message_template": "",
-        "recipient": ""
+        "message_template": [],
+        "recipient": {
+            "mail": "amnesty@marmelab.com"
+        }
     }';
 
 
