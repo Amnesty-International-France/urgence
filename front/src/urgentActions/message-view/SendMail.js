@@ -20,12 +20,12 @@ export const SendMail = ({
     match,
     afterMail,
     auId,
-    email,
+    label,
     object,
     civility,
     firstname,
     lastname,
-    buttonSend,
+    email,
     registered,
     setRegistered,
 }) => {
@@ -52,7 +52,7 @@ export const SendMail = ({
     return (
         <MailTo
             disabled={!isCorrectEmail(email) || !object || !civility || !firstname || !lastname}
-            label={buttonSend}
+            label={label}
             recipient={recipient}
             subject={object}
             body={templateToBodyText(messageTemplate, civility, firstname, lastname)}
@@ -79,13 +79,13 @@ SendMail.propTypes = {
     analyticsCategory: PropTypes.string,
     step: PropTypes.string.isRequired,
     auId: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     afterMail: PropTypes.func,
     object: PropTypes.string.isRequired,
     civility: PropTypes.string.isRequired,
     firstname: PropTypes.string.isRequired,
     lastname: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    buttonSend: PropTypes.string.isRequired,
     registered: PropTypes.string.isRequired,
     setRegistered: PropTypes.func.isRequired,
 };

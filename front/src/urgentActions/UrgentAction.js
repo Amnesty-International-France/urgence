@@ -170,7 +170,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
         const text = get(data, 'UrgentAction.message.text_view');
         const objectIndication = get(data, 'UrgentAction.message.object_indication');
         const messageTemplate = get(data, 'UrgentAction.message.message_template');
-        const buttonNext = get(data, 'UrgentAction.message.button_next');
+        const buttonNext = get(data, 'UrgentAction.message.button_next', 'Suivant');
 
         return (
             <Message
@@ -183,8 +183,8 @@ export const UrgentAction = ({ history, slug, step, data }) => {
                     <ToUrgentActionPageLink
                         label={buttonNext}
                         step={step}
-                        pageName="send"
-                        analyticsCategory={ANALYTICS_CATEGORIES.ACT}
+                        pageName="message-send"
+                        analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                         buttonName="Next"
                     />
                 }
@@ -193,10 +193,12 @@ export const UrgentAction = ({ history, slug, step, data }) => {
     }
 
     if (step === 'message-send') {
-        const text = get(data, 'UrgentAction.message.text_send');
-        const gdprMessage = get(data, 'GdprMessage.content');
         const id = get(data, 'UrgentAction.id');
+        const text = get(data, 'UrgentAction.message.text_send');
         const recipient = get(data, 'UrgentAction.message.recipient');
+        const messageTemplate = get(data, 'UrgentAction.message.message_template');
+        const buttonSend = get(data, 'UrgentAction.message.button_send', "J'envoie");
+        const gdprMessage = get(data, 'GdprMessage.content');
 
         return (
             <Send
@@ -206,6 +208,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
                     <SendMail
+                        label={buttonSend}
                         step={step}
                         recipient={recipient}
                         messageTemplate={messageTemplate}
