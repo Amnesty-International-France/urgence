@@ -62,7 +62,7 @@ export const MessageInput = ({ classes, source }) => (
                                     fullWidth
                                     multiline
                                     label="Message Tip"
-                                    source={`${source}message`}
+                                    source={`${source}text`}
                                     defaultValue="Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email."
                                 />
                                 <RichTextInput

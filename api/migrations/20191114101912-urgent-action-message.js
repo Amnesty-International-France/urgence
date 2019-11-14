@@ -3,7 +3,7 @@
 exports.up = function(db, cb) {
     const sql = `
     ALTER TABLE urgent_action ADD COLUMN message JSON DEFAULT '{
-        "indication": "Parce que les messages uniques ont plus d''impact nous vous invitons à personnaliser l''objet de l''email.",
+        "text": "Parce que les messages uniques ont plus d''impact nous vous invitons à personnaliser l''objet de l''email.",
         "object_indication": "Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.",
         "message_template": "",
         "recipient": ""

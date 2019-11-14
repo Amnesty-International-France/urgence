@@ -94,14 +94,14 @@ export default gql`
     }
 
     type Message {
-        indication: String!
+        text: String!
         object_indication: String
         message_template: [MessageTemplate]
         recipient: Recipient
     }
 
     input MessageInput {
-        indication: String!
+        text: String!
         object_indication: String
         message_template: [MessageTemplate]
         recipient: Recipient
