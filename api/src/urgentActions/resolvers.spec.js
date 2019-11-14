@@ -127,10 +127,10 @@ describe('Urgent Actions Resolvers', () => {
                         },
                     ],
                     call_to_action: 'call_to_action',
+                    message: 'message',
                     email_thank: 'email_thank',
                     register: 'register',
                     end_thank: 'end_thank',
-                    message_template: 'message_template',
                 });
 
                 expect(uploadImageFromStory).toHaveBeenCalledWith([
@@ -153,10 +153,10 @@ describe('Urgent Actions Resolvers', () => {
                     slug: 'test',
                     story: '"uploadedStory"',
                     call_to_action: '"call_to_action"',
+                    message: '"message"',
                     email_thank: '"email_thank"',
                     register: '"register"',
                     end_thank: '"end_thank"',
-                    message_template: '"message_template"',
                 });
             });
         });
@@ -270,11 +270,11 @@ describe('Urgent Actions Resolvers', () => {
                 expect(response.lastname).toEqual('Bon');
                 expect(response.registered).toEqual(false);
 
-                expect(addCampaignMember).toHaveBeenCalledWith(
-                    'psjgf-dfgersdf-sf486sf-sdf',
-                    ua,
-                    { email: 'jean.bon@gmail.com', firstname: 'Jean', lastname: 'Bon' },
-                );
+                expect(addCampaignMember).toHaveBeenCalledWith('psjgf-dfgersdf-sf486sf-sdf', ua, {
+                    email: 'jean.bon@gmail.com',
+                    firstname: 'Jean',
+                    lastname: 'Bon',
+                });
                 expect(getContactByEmail).toHaveBeenCalledWith(
                     'psjgf-dfgersdf-sf486sf-sdf',
                     'jean.bon@gmail.com',
