@@ -1,12 +1,14 @@
 import lolex from 'lolex';
 import pdf from 'html-pdf';
 
-import { createUrgentAction, truncateAll } from '../tests/fixtureLoader';
+import { createUrgentAction } from '../tests/fixtureLoader';
 import { getPdfMessageBuffer } from './getPdfMessageBuffer';
 
 describe('getPdfMessageBuffer', () => {
     const defaultUrgentAction = {
-        recipient: {},
+        message: {
+            recipient: {},
+        },
     };
 
     let clock;
@@ -112,8 +114,10 @@ describe('getPdfMessageBuffer', () => {
 
         const urgentAction = {
             ...defaultUrgentAction,
-            recipient: {
-                postal_address: 'Aryeh Deri\n2 Kaplan Street',
+            message: {
+                recipient: {
+                    postal_address: 'Aryeh Deri\n2 Kaplan Street',
+                },
             },
         };
 
