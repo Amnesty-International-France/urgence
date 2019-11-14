@@ -25,6 +25,7 @@ export const SendMail = ({
     civility,
     firstname,
     lastname,
+    buttonSend,
     registered,
     setRegistered,
 }) => {
@@ -51,7 +52,7 @@ export const SendMail = ({
     return (
         <MailTo
             disabled={!isCorrectEmail(email) || !object || !civility || !firstname || !lastname}
-            label="J'envoie"
+            label={buttonSend}
             recipient={recipient}
             subject={object}
             body={templateToBodyText(messageTemplate, civility, firstname, lastname)}
@@ -84,6 +85,7 @@ SendMail.propTypes = {
     firstname: PropTypes.string.isRequired,
     lastname: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
+    buttonSend: PropTypes.string.isRequired,
     registered: PropTypes.string.isRequired,
     setRegistered: PropTypes.func.isRequired,
 };

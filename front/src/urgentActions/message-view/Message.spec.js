@@ -20,13 +20,13 @@ describe('Message', () => {
         history: { push: () => null },
     };
 
-    it('should display a 404 message if story has no message step', () => {
-        const test = (messageTemplate, shouldBeErred) => {
+    it('should display a 404 message if there is no message template', () => {
+        const test = (messageTemplate, shouldBeErrored) => {
             const props = { ...defaultProps, messageTemplate };
             const wrapper = shallow(<Message {...props} />);
 
             const error = wrapper.find('.error');
-            expect(error.length > 0).toBe(shouldBeErred);
+            expect(error.length > 0).toBe(shouldBeErrored);
         };
 
         test(null, true);

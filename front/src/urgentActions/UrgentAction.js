@@ -14,11 +14,12 @@ import Act from './Act';
 import ThankStep from './ThankStep';
 import Share from './share/Share';
 import ANALYTICS_CATEGORIES from '../analytics/categories';
-import Message from './message/Message';
+import Message from './message-view/Message';
+import Send from './message-send/Send';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
-import SendMail from './message/SendMail';
+import SendMail from './message-view/SendMail';
 import LoadingScreen from '../themes/LoadingScreen';
 import Stepper from '../themes/Stepper';
 import RegisterButton from './register/RegisterButton';
@@ -165,19 +166,41 @@ export const UrgentAction = ({ history, slug, step, data }) => {
         );
     }
 
-    if (step === 'message') {
-        const text = get(data, 'UrgentAction.message.text');
+    if (step === 'message-view') {
+        const text = get(data, 'UrgentAction.message.text_view');
         const objectIndication = get(data, 'UrgentAction.message.object_indication');
         const messageTemplate = get(data, 'UrgentAction.message.message_template');
-        const gdprMessage = get(data, 'GdprMessage.content');
-        const id = get(data, 'UrgentAction.id');
-        const recipient = get(data, 'UrgentAction.message.recipient');
+        const buttonNext = get(data, 'UrgentAction.message.button_next');
 
         return (
             <Message
                 text={text}
                 objectIndication={objectIndication}
                 messageTemplate={messageTemplate}
+                step={step}
+                analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
+                action={
+                    <ToUrgentActionPageLink
+                        label={buttonNext}
+                        step={step}
+                        pageName="send"
+                        analyticsCategory={ANALYTICS_CATEGORIES.ACT}
+                        buttonName="Next"
+                    />
+                }
+            />
+        );
+    }
+
+    if (step === 'message-send') {
+        const text = get(data, 'UrgentAction.message.text_send');
+        const gdprMessage = get(data, 'GdprMessage.content');
+        const id = get(data, 'UrgentAction.id');
+        const recipient = get(data, 'UrgentAction.message.recipient');
+
+        return (
+            <Send
+                text={text}
                 gdprMessage={gdprMessage}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
