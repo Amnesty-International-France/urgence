@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Input from '../../themes/Input';
-import RadioButton from '../../themes/RadioButton';
 import RichText from '../../themes/RichText';
 
 import Form from './Form';
@@ -25,28 +24,10 @@ describe('Form', () => {
 
         const inputs = wrapper.find(Input);
 
-        expect(inputs.length).toBe(4);
+        expect(inputs.length).toBe(1);
 
         expect(inputs.at(0).prop('className')).toBe('object');
         expect(inputs.at(0).prop('label')).toBe(`Objet de l'e-mail *`);
-
-        expect(inputs.at(1).prop('className')).toBe('email');
-        expect(inputs.at(1).prop('label')).toBe(`Votre adresse e-mail *`);
-
-        expect(inputs.at(2).prop('className')).toBe('firstname');
-        expect(inputs.at(2).prop('label')).toBe(`Votre prénom *`);
-
-        expect(inputs.at(3).prop('className')).toBe('lastname');
-        expect(inputs.at(3).prop('label')).toBe(`Votre nom *`);
-    });
-
-    it('display a radio button', () => {
-        const wrapper = shallow(<Form {...defaultProps} />);
-
-        const radio = wrapper.find(RadioButton);
-
-        expect(radio.length).toBe(1);
-        expect(radio.at(0).prop('label')).toBe('Civilité *');
     });
 
     it('display a rich text for object indication', () => {
