@@ -1,16 +1,15 @@
-import React, { Fragment, Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { compose } from 'recompose';
 import classnames from 'classnames';
 
 import { white, black } from '../../themes/colors';
-import MessageSection from './MessageSection';
-import ShowButton from './ShowButton';
+
+import Form from './Form';
+import LetterView from './LetterView';
 import { withYellowLogo } from '../../themes/ThemeContext';
 import { withSessionData } from '../../DataContext';
-import Input, { isCorrectEmail } from '../../themes/Input';
-import RadioButton from '../../themes/RadioButton';
 import LegalInformation from '../LegalInformation';
 
 const styles = {
@@ -80,213 +79,35 @@ const styles = {
     },
     '& .objectIndication': {
         fontStyle: 'italic',
-        opacity: '0.5',
+        fontSize: '14px',
     },
     '& .formStep': {
         margin: '5px 0px 10px 0px',
     },
 };
 
-export class LetterView extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { showAllText: false, letterOverflow: true };
-        this.contentText = React.createRef();
+export const Message = ({ messageTemplate, gdprMessage, action, className, ...props }) => {
+    if (!messageTemplate || !messageTemplate.length) {
+        return <p className="error">Cette action urgente n&#39;existe plus.</p>;
     }
-
-    setShowMode = () => {
-        this.setState({ showAllText: !this.state.showAllText });
-    };
-
-    componentDidMount() {
-        const totalHeight = this.contentText.current.scrollHeight;
-        const clippedHeight = this.contentText.current.clientHeight;
-        this.setState({
-            letterOverflow: totalHeight > clippedHeight,
-        });
-    }
-
-    render() {
-        const { messageTemplate } = this.props;
-        const { showAllText, letterOverflow } = this.state;
-        return (
-            <div className="letter">
-                <div
-                    ref={this.contentText}
-                    className={classnames(
-                        'content',
-                        showAllText || !letterOverflow
-                            ? 'showFullTextContent'
-                            : 'showOnlyBeginContent',
-                    )}
-                >
-                    {messageTemplate.map(({ value }, key) => (
-                        <MessageSection
-                            key={key}
-                            className="letter-message-section"
-                            content={value}
-                        />
-                    ))}
-                    {letterOverflow && (
-                        <span
-                            className={classnames(
-                                'end',
-                                showAllText || !letterOverflow ? 'pleinEnd' : 'opacifyEnd',
-                            )}
-                        />
-                    )}
-                </div>
-                {letterOverflow && (
-                    <ShowButton showAllText={showAllText} action={this.setShowMode} />
-                )}
-            </div>
-        );
-    }
-}
-
-LetterView.propTypes = {
-    messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
-};
-
-export const FormStep = ({
-    email,
-    objectIndication,
-    object,
-    civility,
-    firstname,
-    lastname,
-    analyticsCategory,
-    step,
-    setEmail,
-    setObject,
-    setCivility,
-    setFirstname,
-    setLastname,
-}) => {
-    const handleChangeEmail = event => {
-        setEmail(event.target.value);
-    };
-
-    const handleChangeObject = event => {
-        setObject(event.target.value);
-    };
-
-    const handleChangeCivility = event => {
-        setCivility(event.target.value);
-    };
-
-    const handleChangeFirstname = event => {
-        setFirstname(event.target.value);
-    };
-
-    const handleChangeLastname = event => {
-        setLastname(event.target.value);
-    };
 
     return (
-        <Fragment>
-            <Input
-                className="email"
-                type="email"
-                value={email}
-                onChange={handleChangeEmail}
-                error={!isCorrectEmail(email)}
-                autoComplete="email"
-                analyticsCategory={analyticsCategory}
-                step={step}
-                label="Votre adresse e-mail *"
-            />
-            <Input
-                className="object"
-                value={object}
-                onChange={handleChangeObject}
-                error={!object}
-                analyticsCategory={analyticsCategory}
-                step={step}
-                label="Objet de l'e-mail *"
-            />
-            <p className="objectIndication">{objectIndication}</p>
-            <RadioButton
-                value={civility}
-                name="civility"
-                onChange={handleChangeCivility}
-                error={!civility}
-                analyticsCategory={analyticsCategory}
-                step={step}
-                label="Civilité *"
-                autoComplete="civility"
-                choices={['M.', 'Mme.', 'Autre']}
-            />
-            <Input
-                className="firstname"
-                value={firstname}
-                onChange={handleChangeFirstname}
-                error={!firstname}
-                analyticsCategory={analyticsCategory}
-                step={step}
-                autoComplete="given-name"
-                label="Votre prénom *"
-            />
-            <Input
-                className="lastname"
-                value={lastname}
-                onChange={handleChangeLastname}
-                error={!lastname}
-                analyticsCategory={analyticsCategory}
-                step={step}
-                autoComplete="family-name"
-                label="Votre nom *"
-            />
-        </Fragment>
+        <div className={classnames('message', className)}>
+            <p>
+                Parce que les messages uniques ont plus d&#39;impact,&nbsp;
+                <strong className="importantText">
+                    nous vous invitons à personnaliser l&#39;objet de l&#39;email.
+                </strong>
+            </p>
+            <div className="formStep">
+                <Form {...props} />
+            </div>
+            <LetterView messageTemplate={messageTemplate} />
+            <div className="action">{action}</div>
+            <LegalInformation content={gdprMessage} />
+        </div>
     );
 };
-
-FormStep.propTypes = {
-    className: PropTypes.string,
-    email: PropTypes.string,
-    objectIndication: PropTypes.string,
-    object: PropTypes.string,
-    civility: PropTypes.string,
-    firstname: PropTypes.string,
-    lastname: PropTypes.string,
-    setEmail: PropTypes.func.isRequired,
-    setObject: PropTypes.func.isRequired,
-    setCivility: PropTypes.func.isRequired,
-    setFirstname: PropTypes.func.isRequired,
-    setLastname: PropTypes.func.isRequired,
-    analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
-};
-
-export const Message = ({ messageTemplate, gdprMessage, action, className, ...props }) => (
-    <Fragment>
-        {(!messageTemplate || !messageTemplate.length) && (
-            <p className="error">Cette action urgente n&#39;existe plus.</p>
-        )}
-
-        {messageTemplate && messageTemplate.length > 0 && (
-            <div className={classnames('message', className)}>
-                <p>
-                    Pour agir plus vite,&nbsp;
-                    <strong className="importantText"> nous vous proposons ce message :</strong>
-                </p>
-                <LetterView messageTemplate={messageTemplate} />
-                <p>
-                    Parce que les messages uniques ont plus d&#39;impact,&nbsp;
-                    <strong className="importantText">
-                        {' '}
-                        nous vous invitons à le personnaliser.
-                    </strong>
-                </p>
-                <div className="formStep">
-                    <FormStep {...props} />
-                </div>
-                <div className="action">{action}</div>
-                <LegalInformation content={gdprMessage} />
-            </div>
-        )}
-    </Fragment>
-);
 
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),

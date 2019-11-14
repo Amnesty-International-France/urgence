@@ -20,6 +20,7 @@ import isEmail from 'validator/lib/isEmail';
 import { root, preview, messageFormScreenPreview } from './styles';
 import { get as getScreenIndex, MESSAGE } from './screenIndex';
 import ParagraphTemplateInput from './ParagraphTemplateInput';
+import RichTextInput from '../form/RichTextInput';
 import FrontPreview from './FrontPreview';
 
 import Message from '../../../front/src/urgentActions/message/Message';
@@ -85,7 +86,7 @@ export const MessageInput = ({ classes, source }) => (
                                         <ParagraphTemplateInput source="" />
                                     </SimpleParagraphFormIterator>
                                 </ArrayInput>
-                                <TextInput
+                                <RichTextInput
                                     fullWidth
                                     multiline
                                     label="Object tip"

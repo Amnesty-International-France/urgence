@@ -32,11 +32,8 @@ const styles = theme => ({
     },
 });
 
-const disableSharing = (record, source) => {
-    return (
-        !record || !record[source] || !record[source].share || !record[source].share.active_twitter
-    );
-};
+const disableSharing = (record, source) =>
+    !record || !record[source] || !record[source].share || !record[source].share.active_twitter;
 
 const defaultTitle = 'Se battre. Encore. Et Encore.';
 const defaultText =

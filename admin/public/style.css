@@ -45,6 +45,10 @@ body {
     flex-direction: column;
 }
 
+.ql-size-small {
+    font-size: 14px;
+}
+
 .ql-size-large {
     font-weight: bold;
     font-size: 28px;

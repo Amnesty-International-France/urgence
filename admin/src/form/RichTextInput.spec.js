@@ -33,13 +33,24 @@ describe('<RichTextInput />', () => {
         expect(toolbar[0]).toContain('bold');
     });
 
-    it('should allow 3 different font sizes', () => {
+    it('should allow all font sizes', () => {
         const props = { ...defaultProps };
         const wrapper = shallow(<RichTextInput {...props} />);
 
         const editor = wrapper.find(BaseRichTextInput);
         const toolbar = editor.prop('toolbar');
 
-        expect(toolbar[0][0]).toEqual({ size: [false, 'large', 'huge'] });
+        expect(toolbar[0][0]).toEqual({ size: ['small', false, 'large', 'huge'] });
+    });
+
+    it('should allow colors and background colors', () => {
+        const props = { ...defaultProps };
+        const wrapper = shallow(<RichTextInput {...props} />);
+
+        const editor = wrapper.find(BaseRichTextInput);
+        const toolbar = editor.prop('toolbar');
+
+        expect(toolbar[1][0]).toEqual({ color: [] });
+        expect(toolbar[1][1]).toEqual({ background: [] });
     });
 });
