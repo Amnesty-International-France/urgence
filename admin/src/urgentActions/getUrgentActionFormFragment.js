@@ -114,7 +114,10 @@ const Form = ({ classes, record }) => {
                             label="Set As Default"
                             defaultValue={false}
                             style={{ width: '100%' }}
-                            choices={[{ id: true, name: 'Yes' }, { id: false, name: 'No' }]}
+                            choices={[
+                                { id: true, name: 'Yes' },
+                                { id: false, name: 'No' },
+                            ]}
                         />
                     </Grid>
                 </Grid>
