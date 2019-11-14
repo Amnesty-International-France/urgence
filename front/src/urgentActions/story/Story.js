@@ -151,7 +151,4 @@ Story.propTypes = {
 
 export const WithStylesStory = glamorous(Story)(styles);
 
-export default compose(
-    withRouter,
-    withThemeContext,
-)(WithStylesStory);
+export default compose(withRouter, withThemeContext)(WithStylesStory);

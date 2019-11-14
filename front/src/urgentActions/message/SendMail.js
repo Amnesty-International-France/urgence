@@ -92,7 +92,4 @@ SendMail.defaultProps = {
     onMailSent: () => {},
 };
 
-export default compose(
-    withSessionData,
-    withRouter,
-)(SendMail);
+export default compose(withSessionData, withRouter)(SendMail);

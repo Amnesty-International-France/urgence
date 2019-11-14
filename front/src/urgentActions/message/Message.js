@@ -308,9 +308,6 @@ Message.propTypes = {
     step: PropTypes.string,
 };
 
-export default glamorous(
-    compose(
-        withYellowLogo,
-        withSessionData,
-    )(Message),
-)(styles);
+const WithStylesMessage = glamorous(Message)(styles);
+
+export default compose(withYellowLogo, withSessionData)(WithStylesMessage);
