@@ -103,8 +103,8 @@ export default gql`
     input MessageInput {
         text: String!
         object_indication: String
-        message_template: [MessageTemplate]
-        recipient: Recipient
+        message_template: [MessageTemplateInput]
+        recipient: RecipientInput
     }
 
     type Share {
