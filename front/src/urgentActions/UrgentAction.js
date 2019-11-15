@@ -24,13 +24,6 @@ import Stepper from '../themes/Stepper';
 import RegisterButton from './register/RegisterButton';
 import Register from './register/Register';
 
-const styles = {
-    position: 'absolute',
-    top: 20,
-    left: 0,
-    width: '100vw',
-};
-
 const seoPropsFromStory = story => {
     if (!story || story.length === 0) {
         return null;
@@ -253,7 +246,14 @@ UrgentAction.propTypes = {
     data: PropTypes.object,
 };
 
-export const renderUrgentActionWithData = (history, slug, step, page, className) => ({
+const StepperContainer = glamorous.div({
+    position: 'absolute',
+    top: 20,
+    left: 0,
+    width: '100vw',
+});
+
+export const renderUrgentActionWithData = (history, slug, step, page) => ({
     /* eslint-disable react/prop-types */
     data,
     error,
@@ -273,9 +273,9 @@ export const renderUrgentActionWithData = (history, slug, step, page, className)
 
     return (
         <Fragment>
-            <div className={className}>
+            <StepperContainer>
                 <Stepper data={data} step={step} page={page} />
-            </div>
+            </StepperContainer>
             {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
             <UrgentAction history={history} slug={slug} step={step} data={data} />
         </Fragment>
@@ -287,11 +287,10 @@ export const UrgentActionWithData = ({
     match: {
         params: { slug, step, page },
     },
-    className,
 }) => (
     <DataProvider>
         <Query query={query} variables={{ slug }}>
-            {renderUrgentActionWithData(history, slug, step, page, className)}
+            {renderUrgentActionWithData(history, slug, step, page)}
         </Query>
     </DataProvider>
 );
@@ -301,7 +300,6 @@ UrgentActionWithData.propTypes = {
         push: PropTypes.func.isRequired,
     }).isRequired,
     match: routeMatch,
-    className: PropTypes.string,
 };
 
-export default glamorous(withRouter(UrgentActionWithData))(styles);
+export default withRouter(UrgentActionWithData);
