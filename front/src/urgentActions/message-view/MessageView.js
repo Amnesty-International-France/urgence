@@ -18,7 +18,7 @@ const styles = {
     display: 'flex',
     minHeight: '100%',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     width: '100%',
     padding: '135px 20px 20px 20px',
     color: black,
