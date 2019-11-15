@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import PropTypes from 'prop-types';
 import get from 'lodash.get';
+import glamorous from 'glamorous';
 
 import { DataProvider } from '../DataContext';
 import SEO from '../SEO';
@@ -19,10 +20,9 @@ import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import SendMail from './message/SendMail';
 import LoadingScreen from '../themes/LoadingScreen';
+import Stepper from '../themes/Stepper';
 import RegisterButton from './register/RegisterButton';
 import Register from './register/Register';
-
-import Steps from '../themes/Steps';
 
 const seoPropsFromStory = story => {
     if (!story || story.length === 0) {
@@ -246,6 +246,13 @@ UrgentAction.propTypes = {
     data: PropTypes.object,
 };
 
+const StepperContainer = glamorous.div({
+    position: 'absolute',
+    top: 20,
+    left: 0,
+    width: '100vw',
+});
+
 export const renderUrgentActionWithData = (history, slug, step, page) => ({
     /* eslint-disable react/prop-types */
     data,
@@ -266,9 +273,11 @@ export const renderUrgentActionWithData = (history, slug, step, page) => ({
 
     return (
         <Fragment>
+            <StepperContainer>
+                <Stepper data={data} step={step} page={page} />
+            </StepperContainer>
             {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
             <UrgentAction history={history} slug={slug} step={step} data={data} />
-            <Steps data={data} step={step} page={page} />
         </Fragment>
     );
 };

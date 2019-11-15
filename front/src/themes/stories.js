@@ -7,7 +7,7 @@ import RichText from './RichText';
 import Image from './Image';
 import { Button } from './Button';
 import LoadingScreen from './LoadingScreen';
-import Steps from './Steps';
+import Stepper from './Stepper';
 import Input from './Input';
 import TextArea from './TextArea';
 import CopyToClipboardButton from './CopyToClipboardButton';
@@ -72,13 +72,13 @@ storiesOf('User Interface', module)
             <input type="text" placeholder="Paste the copied text here" />
         </div>
     ))
-    .add('Steps', () => {
+    .add('Stepper', () => {
         return (
             <div>
-                <p>Step 3/5</p>
-                <Steps current={3} total={5} />
-                <p>Step 5/5</p>
-                <Steps current={5} total={5} />
+                <p>Stepper 2/5</p>
+                <Stepper data={{ UrgentAction: { story: ['', ''] } }} step="story" page="1" />
+                <p>Stepper 5/5</p>
+                <Stepper data={{ UrgentAction: { story: ['', ''] } }} step="share" page="1" />
             </div>
         );
     });

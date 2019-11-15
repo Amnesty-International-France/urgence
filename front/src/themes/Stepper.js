@@ -2,12 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import get from 'lodash.get';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import classNames from 'classnames';
+
+import { black, darkGrey } from './colors';
 
 const styles = {
-    position: 'fixed',
-    bottom: 0,
-    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    '& .step': {
+        height: 5,
+        width: 30,
+        margin: '0px 5px',
+    },
+    '& .done': {
+        backgroundColor: black,
+    },
+    '& .todo': {
+        backgroundColor: darkGrey,
+    },
 };
 
 const steps = {
@@ -18,7 +30,7 @@ const steps = {
     register: 3,
 };
 
-const Steps = ({ className, data, step, page }) => {
+const Stepper = ({ className, data, step, page }) => {
     const stepNumber = steps[step];
     if (stepNumber == null) {
         return null;
@@ -28,20 +40,22 @@ const Steps = ({ className, data, step, page }) => {
     const current = page ? Number(page) + stepNumber + 1 : story.length + stepNumber;
     const total = story.length + 3;
 
-    const completed = (current / total) * 100;
+    const stepStates = Array.from({ length: total }, (_, i) => (i < current ? 'done' : 'todo'));
 
     return (
         <div className={className}>
-            <LinearProgress variant="determinate" value={completed} />
+            {stepStates.map((stepState, i) => (
+                <div key={i} className={classNames('step', stepState)} />
+            ))}
         </div>
     );
 };
 
-Steps.propTypes = {
+Stepper.propTypes = {
     className: PropTypes.string,
     data: PropTypes.object.isRequired,
     step: PropTypes.string,
     page: PropTypes.string,
 };
 
-export default glamorous(Steps)(styles);
+export default glamorous(Stepper)(styles);

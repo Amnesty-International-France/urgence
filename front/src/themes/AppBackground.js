@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
-import { grey } from './colors';
+import { lightGrey } from './colors';
 
 const styles = {
     '& .rectangle': {
@@ -12,7 +12,7 @@ const styles = {
         left: 0,
         width: '100vw',
         height: '30vh',
-        background: grey,
+        background: lightGrey,
     },
     '& .triangle': {
         zIndex: -1,
@@ -21,7 +21,7 @@ const styles = {
         left: 0,
         width: 0,
         height: 0,
-        borderTop: `50vh solid ${grey}`,
+        borderTop: `50vh solid ${lightGrey}`,
         borderRight: '100vw solid transparent',
     },
 };
