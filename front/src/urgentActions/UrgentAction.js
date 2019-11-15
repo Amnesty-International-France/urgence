@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import PropTypes from 'prop-types';
 import get from 'lodash.get';
+import glamorous from 'glamorous';
 
 import { DataProvider } from '../DataContext';
 import SEO from '../SEO';
@@ -22,6 +23,13 @@ import LoadingScreen from '../themes/LoadingScreen';
 import Stepper from '../themes/Stepper';
 import RegisterButton from './register/RegisterButton';
 import Register from './register/Register';
+
+const styles = {
+    position: 'absolute',
+    top: 20,
+    left: 0,
+    width: '100vw',
+};
 
 const seoPropsFromStory = story => {
     if (!story || story.length === 0) {
@@ -245,7 +253,7 @@ UrgentAction.propTypes = {
     data: PropTypes.object,
 };
 
-export const renderUrgentActionWithData = (history, slug, step, page) => ({
+export const renderUrgentActionWithData = (history, slug, step, page, className) => ({
     /* eslint-disable react/prop-types */
     data,
     error,
@@ -265,7 +273,9 @@ export const renderUrgentActionWithData = (history, slug, step, page) => ({
 
     return (
         <Fragment>
-            <Stepper data={data} step={step} page={page} />
+            <div className={className}>
+                <Stepper data={data} step={step} page={page} />
+            </div>
             {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
             <UrgentAction history={history} slug={slug} step={step} data={data} />
         </Fragment>
@@ -277,10 +287,11 @@ export const UrgentActionWithData = ({
     match: {
         params: { slug, step, page },
     },
+    className,
 }) => (
     <DataProvider>
         <Query query={query} variables={{ slug }}>
-            {renderUrgentActionWithData(history, slug, step, page)}
+            {renderUrgentActionWithData(history, slug, step, page, className)}
         </Query>
     </DataProvider>
 );
@@ -290,6 +301,7 @@ UrgentActionWithData.propTypes = {
         push: PropTypes.func.isRequired,
     }).isRequired,
     match: routeMatch,
+    className: PropTypes.string,
 };
 
-export default withRouter(UrgentActionWithData);
+export default glamorous(withRouter(UrgentActionWithData))(styles);

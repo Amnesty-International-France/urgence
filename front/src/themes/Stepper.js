@@ -7,12 +7,8 @@ import classNames from 'classnames';
 import { black, darkGrey } from './colors';
 
 const styles = {
-    position: 'absolute',
-    top: 20,
-    left: 0,
     display: 'flex',
     justifyContent: 'center',
-    width: '100vw',
     '& .step': {
         height: 5,
         width: 30,
