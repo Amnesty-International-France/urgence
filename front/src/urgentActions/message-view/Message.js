@@ -11,7 +11,6 @@ import LetterView from './LetterView';
 import { withYellowLogo } from '../../themes/ThemeContext';
 import RichText from '../../themes/RichText';
 import { withSessionData } from '../../DataContext';
-import LegalInformation from '../LegalInformation';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -38,9 +37,6 @@ const styles = {
     },
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
-    },
-    '& .importantText': {
-        fontWeight: 'bold',
     },
     '& .letter': {
         border: 'solid 1px',
@@ -100,7 +96,6 @@ export const Message = ({ text, messageTemplate, gdprMessage, action, className,
             </div>
             <LetterView messageTemplate={messageTemplate} />
             <div className="action">{action}</div>
-            <LegalInformation content={gdprMessage} />
         </div>
     );
 };
