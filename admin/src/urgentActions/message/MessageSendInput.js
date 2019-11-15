@@ -1,24 +1,15 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-    addField,
-    minLength,
-    maxLength,
-    required,
-    FormDataConsumer,
-    email,
-    TextInput,
-} from 'react-admin';
+import { addField, minLength, maxLength, required, FormDataConsumer, TextInput } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import classNames from 'classnames';
-import isEmail from 'validator/lib/isEmail';
 
 import { root, preview, messageFormScreenPreview } from '../styles';
-import { get as getScreenIndex, MESSAGE } from '../screenIndex';
+import { get as getScreenIndex, MESSAGE_SEND } from '../screenIndex';
 import RichTextInput from '../../form/RichTextInput';
 import FrontPreview from '../FrontPreview';
 
@@ -38,13 +29,6 @@ const styles = theme => ({
     },
 });
 
-export const validateRecipientEmail = [required(), email()];
-
-export const validateEmailsList = text =>
-    text && !!text.split(',').find(t => !isEmail(t))
-        ? 'Must contain only emails separated by a comma.'
-        : null;
-
 export const MessageInput = ({ classes, source }) => (
     <div className={classNames(classes.root, { [classes.bordered]: LETTER_ACTIVATED })}>
         <FormDataConsumer>
@@ -54,7 +38,7 @@ export const MessageInput = ({ classes, source }) => (
                 return (
                     <Fragment>
                         <Avatar className={classes.avatar}>
-                            {getScreenIndex(MESSAGE, formData)}
+                            {getScreenIndex(MESSAGE_SEND, formData)}
                         </Avatar>
                         <Card className={classes.card}>
                             <CardContent className={classes.content}>

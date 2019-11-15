@@ -18,16 +18,14 @@ import classNames from 'classnames';
 import isEmail from 'validator/lib/isEmail';
 
 import { root, preview, messageFormScreenPreview } from '../styles';
-import { get as getScreenIndex, MESSAGE } from '../screenIndex';
+import { get as getScreenIndex, MESSAGE_VIEW } from '../screenIndex';
 import ParagraphTemplateInput from './ParagraphTemplateInput';
 import RichTextInput from '../../form/RichTextInput';
 import FrontPreview from '../FrontPreview';
 
-import Message from '../../../front/src/urgentActions/message/Message';
+import MessageView from '../../../front/src/urgentActions/message-view/MessageView';
 import Link from '../../../../front/src/themes/Link';
 import SimpleParagraphFormIterator from '../SimpleParagraphFormIterator';
-
-import { LETTER_ACTIVATED } from '../../flags';
 
 const styles = theme => ({
     ...root,
@@ -48,7 +46,7 @@ export const validateEmailsList = text =>
         : null;
 
 export const MessageInput = ({ classes, source }) => (
-    <div className={classNames(classes.root, { [classes.bordered]: LETTER_ACTIVATED })}>
+    <div className={classNames(classes.root, classes.bordered)}>
         <FormDataConsumer>
             {({ formData }) => {
                 const data = formData[source];
@@ -56,7 +54,7 @@ export const MessageInput = ({ classes, source }) => (
                 return (
                     <Fragment>
                         <Avatar className={classes.avatar}>
-                            {getScreenIndex(MESSAGE, formData)}
+                            {getScreenIndex(MESSAGE_VIEW, formData)}
                         </Avatar>
                         <Card className={classes.card}>
                             <CardContent className={classes.content}>
@@ -111,11 +109,11 @@ export const MessageInput = ({ classes, source }) => (
                         </Card>
                         <FrontPreview className={classes.preview}>
                             {data && (
-                                <Message
+                                <MessageView
                                     text={data.text || ''}
                                     messageTemplate={data.message_template}
                                     objectIndication={data.object_indication || ''}
-                                    action={<Link to="#" label="J'envoie" />}
+                                    action={<Link to="#" label="Suivant" />}
                                     setEmail={() => {}}
                                     setObject={() => {}}
                                     setCivility={() => {}}
