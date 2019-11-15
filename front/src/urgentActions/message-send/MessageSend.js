@@ -38,49 +38,6 @@ const styles = {
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
     },
-    '& .importantText': {
-        fontWeight: 'bold',
-    },
-    '& .letter': {
-        border: 'solid 1px',
-        borderColor: 'rgba(0, 0, 0, 0.20)',
-        boxShadow:
-            '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
-        color: black,
-        padding: '1em 0 0 0',
-        margin: '1em 0',
-    },
-    '& .content': {
-        fontSize: '14px',
-        position: 'relative',
-        transition: 'all cubic-bezier(0.25, 0.1, 0.25, 1) 1s',
-    },
-    '& .showFullTextContent': {
-        maxHeight: '548vh',
-    },
-    '& .showOnlyBeginContent': {
-        maxHeight: '42vh',
-        overflow: 'hidden',
-    },
-    '& .end': {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        width: '100%',
-        margin: 0,
-        backgroundImage: 'linear-gradient(to bottom, rgba(255,255,255,0), white)',
-        transition: 'all 1s',
-    },
-    '& .opacifyEnd': {
-        paddingTop: '30vh',
-    },
-    '& .pleinEnd': {
-        paddingTop: '10px',
-    },
-    '& .objectIndication': {
-        fontStyle: 'italic',
-        fontSize: '14px',
-    },
     '& .formStep': {
         margin: '5px 0px 10px 0px',
     },
