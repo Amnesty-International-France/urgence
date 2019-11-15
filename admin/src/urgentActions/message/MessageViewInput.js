@@ -45,7 +45,7 @@ export const validateEmailsList = text =>
         ? 'Must contain only emails separated by a comma.'
         : null;
 
-export const MessageInput = ({ classes, source }) => (
+export const MessageSendInput = ({ classes, source }) => (
     <div className={classNames(classes.root, classes.bordered)}>
         <FormDataConsumer>
             {({ formData }) => {
@@ -129,9 +129,9 @@ export const MessageInput = ({ classes, source }) => (
     </div>
 );
 
-MessageInput.propTypes = {
+MessageSendInput.propTypes = {
     classes: PropTypes.object,
     source: PropTypes.string,
 };
 
-export default addField(withStyles(styles)(MessageInput));
+export default addField(withStyles(styles)(MessageSendInput));

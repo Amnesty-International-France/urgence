@@ -149,12 +149,12 @@ const Form = ({ classes, record }) => {
             </div>
 
             <div className={`${classes.form} message-view`}>
-                <h2>Message</h2>
+                <h2>Message View</h2>
                 <MessageViewInput source="message" />
             </div>
 
             <div className={`${classes.form} message-send`}>
-                <h2>Message View</h2>
+                <h2>Message Send</h2>
                 <MessageSendInput source="message" />
             </div>
 
