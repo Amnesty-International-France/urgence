@@ -13,7 +13,7 @@ import { get as getScreenIndex, MESSAGE_SEND } from '../screenIndex';
 import RichTextInput from '../../form/RichTextInput';
 import FrontPreview from '../FrontPreview';
 
-import MessageSend from '../../../front/src/urgentActions/message-send/MessageSend';
+import MessageSend from '../../../../front/src/urgentActions/message-send/MessageSend';
 import Link from '../../../../front/src/themes/Link';
 
 import { LETTER_ACTIVATED } from '../../flags';

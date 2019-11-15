@@ -19,7 +19,7 @@ import { LETTER_ACTIVATED } from '../flags';
 import StoryTemplateInput from './StoryTemplateInput';
 import CallToActionInput from './CallToActionInput';
 import MessageViewInput from './message/MessageViewInput';
-import MessageSendInput from './message/MessageViewInput';
+import MessageSendInput from './message/MessageSendInput';
 import ThanksInput from './ThanksInput';
 import ShareInput from './ShareInput';
 import RegisterInput from './RegisterInput';

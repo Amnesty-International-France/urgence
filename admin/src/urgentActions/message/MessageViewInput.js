@@ -23,7 +23,7 @@ import ParagraphTemplateInput from './ParagraphTemplateInput';
 import RichTextInput from '../../form/RichTextInput';
 import FrontPreview from '../FrontPreview';
 
-import MessageView from '../../../front/src/urgentActions/message-view/MessageView';
+import MessageView from '../../../../front/src/urgentActions/message-view/MessageView';
 import Link from '../../../../front/src/themes/Link';
 import SimpleParagraphFormIterator from '../SimpleParagraphFormIterator';
 
