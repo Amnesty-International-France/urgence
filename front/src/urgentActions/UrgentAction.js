@@ -157,9 +157,9 @@ export const UrgentAction = ({ history, slug, step, data }) => {
                         <ToUrgentActionPageLink
                             label={callToAction.button}
                             step={step}
-                            pageName="message"
+                            pageName="message-view"
                             analyticsCategory={ANALYTICS_CATEGORIES.ACT}
-                            buttonName="ShowMail"
+                            buttonName="OpenMessageView"
                         />
                     ) : null
                 }
@@ -186,7 +186,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
                         step={step}
                         pageName="message-send"
                         analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
-                        buttonName="Next"
+                        buttonName="OpenMessageSend"
                     />
                 }
             />
