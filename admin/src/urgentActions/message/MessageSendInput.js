@@ -1,0 +1,105 @@
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+
+import {
+    addField,
+    minLength,
+    maxLength,
+    required,
+    FormDataConsumer,
+    email,
+    TextInput,
+} from 'react-admin';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Avatar from '@material-ui/core/Avatar';
+import classNames from 'classnames';
+import isEmail from 'validator/lib/isEmail';
+
+import { root, preview, messageFormScreenPreview } from '../styles';
+import { get as getScreenIndex, MESSAGE } from '../screenIndex';
+import RichTextInput from '../../form/RichTextInput';
+import FrontPreview from '../FrontPreview';
+
+import MessageSend from '../../../front/src/urgentActions/message-send/MessageSend';
+import Link from '../../../../front/src/themes/Link';
+
+import { LETTER_ACTIVATED } from '../../flags';
+
+const styles = theme => ({
+    ...root,
+    bordered: {
+        borderBottom: `solid 1px ${theme.palette.divider}`,
+    },
+    preview: {
+        ...preview,
+        ...messageFormScreenPreview,
+    },
+});
+
+export const validateRecipientEmail = [required(), email()];
+
+export const validateEmailsList = text =>
+    text && !!text.split(',').find(t => !isEmail(t))
+        ? 'Must contain only emails separated by a comma.'
+        : null;
+
+export const MessageInput = ({ classes, source }) => (
+    <div className={classNames(classes.root, { [classes.bordered]: LETTER_ACTIVATED })}>
+        <FormDataConsumer>
+            {({ formData }) => {
+                const data = formData[source];
+
+                return (
+                    <Fragment>
+                        <Avatar className={classes.avatar}>
+                            {getScreenIndex(MESSAGE, formData)}
+                        </Avatar>
+                        <Card className={classes.card}>
+                            <CardContent className={classes.content}>
+                                <div className={classes.formContainer}>
+                                    <RichTextInput
+                                        fullWidth
+                                        multiline
+                                        label="Message Send Tip"
+                                        source={`${source}.text_send`}
+                                        defaultValue="Complétez ce formulaire pour envoyer ce message."
+                                    />
+                                    <TextInput
+                                        source={`${source}.button_send`}
+                                        label="Button"
+                                        defaultValue="Voir l'email"
+                                        validate={[required(), minLength(3), maxLength(25)]}
+                                    />
+                                </div>
+                            </CardContent>
+                        </Card>
+                        <FrontPreview className={classes.preview}>
+                            {data && (
+                                <MessageSend
+                                    text={data.text || ''}
+                                    messageTemplate={data.message_template}
+                                    objectIndication={data.object_indication || ''}
+                                    action={<Link to="#" label={data.button_send} />}
+                                    setEmail={() => {}}
+                                    setObject={() => {}}
+                                    setCivility={() => {}}
+                                    setFirstname={() => {}}
+                                    setLastname={() => {}}
+                                />
+                            )}
+                        </FrontPreview>
+                    </Fragment>
+                );
+            }}
+        </FormDataConsumer>
+    </div>
+);
+
+MessageInput.propTypes = {
+    classes: PropTypes.object,
+    source: PropTypes.string,
+};
+
+export default addField(withStyles(styles)(MessageInput));
