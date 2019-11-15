@@ -7,7 +7,6 @@ import classnames from 'classnames';
 import { white, black } from '../../themes/colors';
 
 import Form from './Form';
-import LetterView from './LetterView';
 import { withYellowLogo } from '../../themes/ThemeContext';
 import RichText from '../../themes/RichText';
 import { withSessionData } from '../../DataContext';
@@ -87,7 +86,14 @@ const styles = {
     },
 };
 
-export const Message = ({ text, messageTemplate, gdprMessage, action, className, ...props }) => {
+export const MessageSend = ({
+    text,
+    messageTemplate,
+    gdprMessage,
+    action,
+    className,
+    ...props
+}) => {
     if (!messageTemplate || !messageTemplate.length) {
         return <p className="error">Cette action urgente n&#39;existe plus.</p>;
     }
@@ -98,14 +104,13 @@ export const Message = ({ text, messageTemplate, gdprMessage, action, className,
             <div className="formStep">
                 <Form {...props} />
             </div>
-            <LetterView messageTemplate={messageTemplate} />
             <div className="action">{action}</div>
             <LegalInformation content={gdprMessage} />
         </div>
     );
 };
 
-Message.propTypes = {
+MessageSend.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
     email: PropTypes.string,
     text: PropTypes.string.isRequired,
@@ -126,6 +131,6 @@ Message.propTypes = {
     step: PropTypes.string,
 };
 
-const WithStylesMessage = glamorous(Message)(styles);
+const WithStylesMessageSend = glamorous(MessageSend)(styles);
 
-export default compose(withYellowLogo, withSessionData)(WithStylesMessage);
+export default compose(withYellowLogo, withSessionData)(WithStylesMessageSend);
