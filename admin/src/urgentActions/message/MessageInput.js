@@ -17,17 +17,17 @@ import Avatar from '@material-ui/core/Avatar';
 import classNames from 'classnames';
 import isEmail from 'validator/lib/isEmail';
 
-import { root, preview, messageFormScreenPreview } from './styles';
-import { get as getScreenIndex, MESSAGE } from './screenIndex';
+import { root, preview, messageFormScreenPreview } from '../styles';
+import { get as getScreenIndex, MESSAGE } from '../screenIndex';
 import ParagraphTemplateInput from './ParagraphTemplateInput';
-import RichTextInput from '../form/RichTextInput';
-import FrontPreview from './FrontPreview';
+import RichTextInput from '../../form/RichTextInput';
+import FrontPreview from '../FrontPreview';
 
 import Message from '../../../front/src/urgentActions/message/Message';
-import Link from '../../../front/src/themes/Link';
-import SimpleParagraphFormIterator from './SimpleParagraphFormIterator';
+import Link from '../../../../front/src/themes/Link';
+import SimpleParagraphFormIterator from '../SimpleParagraphFormIterator';
 
-import { LETTER_ACTIVATED } from '../flags';
+import { LETTER_ACTIVATED } from '../../flags';
 
 const styles = theme => ({
     ...root,
