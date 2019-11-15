@@ -87,6 +87,8 @@ const query = gql`
             message {
                 text_view
                 text_send
+                button_view
+                button_send
                 object_indication
                 message_template {
                     value
@@ -171,7 +173,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
         const text = get(data, 'UrgentAction.message.text_view');
         const objectIndication = get(data, 'UrgentAction.message.object_indication');
         const messageTemplate = get(data, 'UrgentAction.message.message_template');
-        const buttonNext = get(data, 'UrgentAction.message.button_next', 'Suivant');
+        const buttonView = get(data, 'UrgentAction.message.button_view', 'Suivant');
 
         return (
             <MessageView
@@ -182,7 +184,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
                     <ToUrgentActionPageLink
-                        label={buttonNext}
+                        label={buttonView}
                         step={step}
                         pageName="message-send"
                         analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
