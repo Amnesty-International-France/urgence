@@ -85,7 +85,8 @@ const query = gql`
                 button
             }
             message {
-                text
+                text_view
+                text_send
                 object_indication
                 message_template {
                     value
