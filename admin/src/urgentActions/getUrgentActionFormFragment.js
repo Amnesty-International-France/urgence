@@ -114,7 +114,10 @@ const Form = ({ classes, record }) => {
                             label="Set As Default"
                             defaultValue={false}
                             style={{ width: '100%' }}
-                            choices={[{ id: true, name: 'Yes' }, { id: false, name: 'No' }]}
+                            choices={[
+                                { id: true, name: 'Yes' },
+                                { id: false, name: 'No' },
+                            ]}
                         />
                     </Grid>
                 </Grid>
@@ -143,7 +146,7 @@ const Form = ({ classes, record }) => {
 
             <div className={`${classes.form} message`}>
                 <h2>Message</h2>
-                <MessageInput source="" />
+                <MessageInput source="message" />
             </div>
 
             {LETTER_ACTIVATED && (

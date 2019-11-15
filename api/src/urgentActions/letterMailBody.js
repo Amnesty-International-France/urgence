@@ -14,7 +14,7 @@ Il ne vous reste plus que quelques étapes :
 
 Ce courrier est à adresser à :
 
-${urgentAction.recipient.postal_address}
+${urgentAction.message.recipient.postal_address}
 
 **Astuce :** saviez-vous que vous pouvez acheter et imprimer vos timbres en ligne ?
 

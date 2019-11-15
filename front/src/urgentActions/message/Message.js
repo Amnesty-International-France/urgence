@@ -9,6 +9,7 @@ import { white, black } from '../../themes/colors';
 import Form from './Form';
 import LetterView from './LetterView';
 import { withYellowLogo } from '../../themes/ThemeContext';
+import RichText from '../../themes/RichText';
 import { withSessionData } from '../../DataContext';
 import LegalInformation from '../LegalInformation';
 
@@ -86,19 +87,14 @@ const styles = {
     },
 };
 
-export const Message = ({ messageTemplate, gdprMessage, action, className, ...props }) => {
+export const Message = ({ text, messageTemplate, gdprMessage, action, className, ...props }) => {
     if (!messageTemplate || !messageTemplate.length) {
         return <p className="error">Cette action urgente n&#39;existe plus.</p>;
     }
 
     return (
         <div className={classnames('message', className)}>
-            <p>
-                Parce que les messages uniques ont plus d&#39;impact,&nbsp;
-                <strong className="importantText">
-                    nous vous invitons à personnaliser l&#39;objet de l&#39;email.
-                </strong>
-            </p>
+            <RichText className="message" html={text} />
             <div className="formStep">
                 <Form {...props} />
             </div>
@@ -112,6 +108,7 @@ export const Message = ({ messageTemplate, gdprMessage, action, className, ...pr
 Message.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
     email: PropTypes.string,
+    text: PropTypes.string.isRequired,
     objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
     setEmail: PropTypes.func.isRequired,

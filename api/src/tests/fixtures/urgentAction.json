@@ -32,21 +32,25 @@
         "message": "<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>",
         "button": "Voir l'email"
     },
-    "message_template": [
-        {
-            "value": "Dear Minister,\nI am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month."
-        },
-        {
-            "value": "On 5 July, police arrested Idil Eser along with seven other human rights defenders and two trainers, who were simply attending a workshop in Istanbul."
-        },
-        {
-            "value": "They were doing nothing wrong. They are being investigated on suspicion of \"membership of an armed terrorist organization\", a baseless and ridiculous accusation."
+    "message": {
+        "text": "Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email.",
+        "object_indication": "Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.",
+        "message_template": [
+            {
+                "value": "Dear Minister,\nI am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month."
+            },
+            {
+                "value": "On 5 July, police arrested Idil Eser along with seven other human rights defenders and two trainers, who were simply attending a workshop in Istanbul."
+            },
+            {
+                "value": "They were doing nothing wrong. They are being investigated on suspicion of \"membership of an armed terrorist organization\", a baseless and ridiculous accusation."
+            }
+        ],
+        "recipient": {
+            "mail": "governor@gmail.com",
+            "copies_to": "ambassador@gmail.com",
+            "cci": "amnesty@gmail.com"
         }
-    ],
-    "recipient": {
-        "mail": "governor@gmail.com",
-        "copies_to": "ambassador@gmail.com",
-        "cci": "amnesty@gmail.com"
     },
     "email_thank": {
         "title": "Se battre. Encore. Et encore.",

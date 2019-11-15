@@ -147,10 +147,16 @@ describe('<UrgentAction />', () => {
                                 ...defaultStep,
                             },
                         ],
-                        message_template: [{ value: 'first message' }, { value: 'second message' }],
-                        object_indication: 'object indication',
-                        recipient: {
-                            mail: 'mail',
+                        message: {
+                            text: 'text',
+                            object_indication: 'object indication',
+                            message_template: [
+                                { value: 'first message' },
+                                { value: 'second message' },
+                            ],
+                            recipient: {
+                                mail: 'mail',
+                            },
                         },
                     },
                 },
@@ -161,8 +167,11 @@ describe('<UrgentAction />', () => {
             const message = renderedComponent.find(Message);
             expect(message.length).toBe(1);
 
-            expect(message.prop('messageTemplate')).toBe(props.data.UrgentAction.message_template);
             expect(message.prop('objectIndication')).toBe('object indication');
+            expect(message.prop('text')).toBe('text');
+            expect(message.prop('messageTemplate').length).toBe(2);
+            expect(message.prop('messageTemplate')[0].value).toBe('first message');
+            expect(message.prop('messageTemplate')[1].value).toBe('second message');
         });
 
         it('should display the "sendMail" button', () => {
@@ -177,10 +186,16 @@ describe('<UrgentAction />', () => {
                                 ...defaultStep,
                             },
                         ],
-                        message_template: [{ value: 'first message' }, { value: 'second message' }],
-                        object_indication: 'object indication',
-                        recipient: {
-                            mail: 'mail',
+                        message: {
+                            text: 'text',
+                            object_indication: 'object indication',
+                            message_template: [
+                                { value: 'first message' },
+                                { value: 'second message' },
+                            ],
+                            recipient: {
+                                mail: 'mail',
+                            },
                         },
                     },
                 },
@@ -193,10 +208,6 @@ describe('<UrgentAction />', () => {
 
             const sendMail = message.prop('action');
             expect(sendMail.props.recipient).toEqual({ mail: 'mail' });
-            expect(sendMail.props.messageTemplate).toEqual([
-                { value: 'first message' },
-                { value: 'second message' },
-            ]);
         });
 
         it('should display the "gdprMessage"', () => {
@@ -211,10 +222,16 @@ describe('<UrgentAction />', () => {
                                 ...defaultStep,
                             },
                         ],
-                        message_template: [{ value: 'first message' }, { value: 'second message' }],
-                        object_indication: 'object indication',
-                        recipient: {
-                            mail: 'mail',
+                        message: {
+                            text: 'text',
+                            object_indication: 'object indication',
+                            message_template: [
+                                { value: 'first message' },
+                                { value: 'second message' },
+                            ],
+                            recipient: {
+                                mail: 'mail',
+                            },
                         },
                     },
                     GdprMessage: {

@@ -1,12 +1,14 @@
 import lolex from 'lolex';
 import pdf from 'html-pdf';
 
-import { createUrgentAction, truncateAll } from '../tests/fixtureLoader';
+import { createUrgentAction } from '../tests/fixtureLoader';
 import { getPdfMessageBuffer } from './getPdfMessageBuffer';
 
 describe('getPdfMessageBuffer', () => {
     const defaultUrgentAction = {
-        recipient: {},
+        message: {
+            recipient: {},
+        },
     };
 
     let clock;
@@ -60,12 +62,25 @@ describe('getPdfMessageBuffer', () => {
 
         const urgentAction = {
             ...defaultUrgentAction,
-            recipient: {
-                postal_address: 'Aryeh Deri\n2 Kaplan Street',
+            message: {
+                recipient: {
+                    postal_address: 'Aryeh Deri\n2 Kaplan Street',
+                },
             },
         };
 
-        await getPdfMessageBuffer(urgentAction, 'subject', 'civility', 'firstname', 'lastname', '4, rue Girardet', 'sous-sol', '54000', 'Nancy', 'France');
+        await getPdfMessageBuffer(
+            urgentAction,
+            'subject',
+            'civility',
+            'firstname',
+            'lastname',
+            '4, rue Girardet',
+            'sous-sol',
+            '54000',
+            'Nancy',
+            'France',
+        );
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('4, rue Girardet');
         expect(renderedLetter).toContain('sous-sol');
@@ -77,7 +92,18 @@ describe('getPdfMessageBuffer', () => {
         const pdfSpy = jest.spyOn(pdf, 'create');
 
         const urgentAction = { ...defaultUrgentAction };
-        await getPdfMessageBuffer(urgentAction, 'subject', 'civility', 'firstname', 'lastname', '4, rue Girardet', 'sous-sol', '54000', 'Nancy', 'France');
+        await getPdfMessageBuffer(
+            urgentAction,
+            'subject',
+            'civility',
+            'firstname',
+            'lastname',
+            '4, rue Girardet',
+            'sous-sol',
+            '54000',
+            'Nancy',
+            'France',
+        );
 
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toMatchSnapshot();
@@ -88,8 +114,10 @@ describe('getPdfMessageBuffer', () => {
 
         const urgentAction = {
             ...defaultUrgentAction,
-            recipient: {
-                postal_address: 'Aryeh Deri\n2 Kaplan Street',
+            message: {
+                recipient: {
+                    postal_address: 'Aryeh Deri\n2 Kaplan Street',
+                },
             },
         };
 
