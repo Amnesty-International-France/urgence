@@ -64,15 +64,13 @@ export const MessageSendInput = ({ classes, source }) => (
                         {displayPreview ? (
                             <FrontPreview className={classes.preview}>
                                 <MessageSend
-                                    text={data.text || ''}
+                                    text={data.text_send || ''}
                                     messageTemplate={data.message_template}
-                                    objectIndication={data.object_indication || ''}
                                     action={<Link to="#" label={data.button_send} />}
-                                    setEmail={() => {}}
-                                    setObject={() => {}}
                                     setCivility={() => {}}
                                     setFirstname={() => {}}
                                     setLastname={() => {}}
+                                    setEmail={() => {}}
                                 />
                             </FrontPreview>
                         ) : (

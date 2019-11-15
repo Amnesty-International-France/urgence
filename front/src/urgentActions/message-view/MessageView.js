@@ -83,14 +83,7 @@ const styles = {
     },
 };
 
-export const MessageView = ({
-    text,
-    messageTemplate,
-    gdprMessage,
-    action,
-    className,
-    ...props
-}) => {
+export const MessageView = ({ className, text, messageTemplate, action, ...props }) => {
     if (!messageTemplate || !messageTemplate.length) {
         return <p className="error">Cette action urgente n&#39;existe plus.</p>;
     }
@@ -108,21 +101,12 @@ export const MessageView = ({
 };
 
 MessageView.propTypes = {
-    messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
-    email: PropTypes.string,
-    text: PropTypes.string.isRequired,
-    objectIndication: PropTypes.string.isRequired,
     className: PropTypes.string,
-    setEmail: PropTypes.func.isRequired,
-    setObject: PropTypes.func.isRequired,
-    setCivility: PropTypes.func.isRequired,
-    setFirstname: PropTypes.func.isRequired,
-    setLastname: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired,
+    messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
+    objectIndication: PropTypes.string.isRequired,
     object: PropTypes.string,
-    civility: PropTypes.string,
-    firstname: PropTypes.string,
-    lastname: PropTypes.string,
-    gdprMessage: PropTypes.string,
+    setObject: PropTypes.func.isRequired,
     action: PropTypes.node.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,

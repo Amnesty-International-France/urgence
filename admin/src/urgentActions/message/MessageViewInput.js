@@ -67,7 +67,7 @@ export const MessageSendInput = ({ classes, source }) => (
                                         fullWidth
                                         multiline
                                         label="Message Tip"
-                                        source={`${source}.text`}
+                                        source={`${source}.text_view`}
                                         defaultValue="Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email."
                                     />
                                     <RichTextInput
@@ -120,7 +120,7 @@ export const MessageSendInput = ({ classes, source }) => (
                         {displayPreview ? (
                             <FrontPreview className={classes.preview}>
                                 <MessageView
-                                    text={data.text || ''}
+                                    text={data.text_view || ''}
                                     messageTemplate={data.message_template}
                                     objectIndication={data.object_indication || ''}
                                     action={<Link to="#" label="Suivant" />}
