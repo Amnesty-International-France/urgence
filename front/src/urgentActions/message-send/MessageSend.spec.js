@@ -9,8 +9,8 @@ import Form from './Form';
 describe('MessageSend', () => {
     const defaultStep = [{ value: 'one' }, { value: 'two' }, { value: 'three' }];
     const defaultProps = {
-        text: 'text',
-        objectIndication: 'object indication',
+        text_send: 'text',
+        button_send: 'button',
         messageTemplate: defaultStep,
         recipient: {
             mail: 'mail',
