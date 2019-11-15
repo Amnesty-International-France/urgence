@@ -104,6 +104,12 @@ export const MessageSendInput = ({ classes, source }) => (
                                             <ParagraphTemplateInput source="" />
                                         </SimpleParagraphFormIterator>
                                     </ArrayInput>
+                                    <TextInput
+                                        source={`${source}.button_view`}
+                                        label="Button"
+                                        defaultValue="Suivant"
+                                        validate={[required(), minLength(3), maxLength(25)]}
+                                    />
                                 </div>
                             </CardContent>
                         </Card>
