@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { black, white } from '../../themes/colors';
+import { black } from '../../themes/colors';
 import { withThemeContext } from '../../themes/ThemeContext';
 import Carousel from '../../themes/Carousel';
 import { StoryStepPropType, routeMatch } from '../../propTypes';
@@ -97,7 +97,7 @@ export class Story extends Component {
         const [cover, ...restStory] = story;
 
         return (
-            <Paper className={className} elevation={4}>
+            <Paper className={className} elevation={4} square={true}>
                 {total > 0 && (
                     <Carousel
                         initialSlide={current}
@@ -106,11 +106,7 @@ export class Story extends Component {
                         afterChange={this.afterChange}
                         afterLastChange={this.afterLastChange}
                         icon={
-                            <FontAwesomeIcon
-                                icon={faArrowRight}
-                                color={current === 0 ? white : black}
-                                className="icon"
-                            />
+                            <FontAwesomeIcon icon={faArrowRight} color={black} className="icon" />
                         }
                     >
                         {() => (

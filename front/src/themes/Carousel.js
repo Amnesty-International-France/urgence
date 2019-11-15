@@ -8,29 +8,16 @@ import 'swiper/dist/css/swiper.css';
 import IconButton from './IconButton';
 
 const styles = {
-    '& .swiper-container': {
-        height: '100%',
-    },
-    '& .swiper-wrapper': {
-        height: 'calc(100% - 5px)',
-    },
+    height: '100%',
     '& .swiper-controls': {
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        padding: '5px 24px',
-        marginTop: '-60px',
+        padding: '5px 15px',
+        marginTop: '-30px',
         height: '60px',
-        width: '100%',
         zIndex: '100',
-    },
-    '& .swiper-progress-bar': {
-        position: 'relative',
-        margin: '0px',
-        padding: '0px',
-        height: '100%',
-        width: '100%',
     },
 };
 
@@ -85,8 +72,10 @@ export class Carousel extends Component {
         const { children, icon, className, current, total } = this.props;
 
         return (
-            <div className={classnames(className, 'swiper-container')} ref={this.initContainer}>
-                <div className="swiper-wrapper">{children()}</div>
+            <div className={className}>
+                <div className="swiper-container" ref={this.initContainer}>
+                    <div className="swiper-wrapper">{children()}</div>
+                </div>
                 <div className="swiper-controls">
                     <IconButton
                         className={classnames({
