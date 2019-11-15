@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { yellow } from './colors';
 
 import glamorous from 'glamorous';
 
@@ -8,25 +9,13 @@ const IconButtonContainer = glamorous.div({
     justifyContent: 'center',
     alignItems: 'center',
     cursor: 'pointer',
-    background: 'none',
+    backgroundColor: yellow,
     transition: 'all ease-in 0.2s',
-    borderRadius: '1.5em',
-    width: '1.5em',
-    height: '1.5em',
-    WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+    width: '40px',
+    height: '40px',
+    boxShadow:
+        '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
     userSelect: 'none',
-    ':active': {
-        backgroundColor: 'rgb(255, 255, 0, 0.6)',
-    },
-    '@media (min-width: 1024px)': {
-        fontSize: '38px',
-        borderRadius: '25px',
-        width: '50px',
-        height: '50px',
-        '&:hover': {
-            backgroundColor: 'rgb(255, 255, 0, 0.6)',
-        },
-    },
 });
 
 const IconButton = ({ className, children, onClick, onMouseEnter, onMouseLeave }) => (
