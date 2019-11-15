@@ -198,14 +198,15 @@ export const UrgentAction = ({ history, slug, step, data }) => {
     if (step === 'message-send') {
         const id = get(data, 'UrgentAction.id');
         const text = get(data, 'UrgentAction.message.text_send');
-        const recipient = get(data, 'UrgentAction.message.recipient');
         const messageTemplate = get(data, 'UrgentAction.message.message_template');
+        const recipient = get(data, 'UrgentAction.message.recipient');
         const buttonSend = get(data, 'UrgentAction.message.button_send', "J'envoie");
         const gdprMessage = get(data, 'GdprMessage.content');
 
         return (
             <MessageSend
                 text={text}
+                messageTemplate={messageTemplate}
                 gdprMessage={gdprMessage}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
