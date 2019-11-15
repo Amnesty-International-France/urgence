@@ -15,7 +15,7 @@ const styles = {
     justifyContent: 'center',
     minHeight: '100%',
     width: '100%',
-    padding: '100px 20px 20px 20px',
+    padding: '135px 20px 20px 20px',
     color: black,
     backgroundColor: white,
     '@media (min-width: 1024px)': {
