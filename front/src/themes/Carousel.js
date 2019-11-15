@@ -11,9 +11,6 @@ const styles = {
     '& .swiper-container': {
         height: '100%',
     },
-    '& .swiper-wrapper': {
-        height: 'calc(100% - 5px)',
-    },
     '& .swiper-controls': {
         position: 'relative',
         display: 'flex',

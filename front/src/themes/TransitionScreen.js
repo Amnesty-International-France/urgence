@@ -58,7 +58,7 @@ const styles = {
 };
 
 export const TransitionScreen = ({ className, actions, title, message }) => (
-    <Paper className={className} elevation={4}>
+    <Paper className={className} elevation={4} square={true}>
         <div>
             <h1>
                 <LongText text={title} />

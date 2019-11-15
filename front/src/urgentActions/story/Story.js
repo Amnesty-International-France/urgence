@@ -97,7 +97,7 @@ export class Story extends Component {
         const [cover, ...restStory] = story;
 
         return (
-            <Paper className={className} elevation={4}>
+            <Paper className={className} elevation={4} square={true}>
                 {total > 0 && (
                     <Carousel
                         initialSlide={current}
