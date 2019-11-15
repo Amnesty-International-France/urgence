@@ -83,7 +83,14 @@ const styles = {
     },
 };
 
-export const Message = ({ text, messageTemplate, gdprMessage, action, className, ...props }) => {
+export const MessageView = ({
+    text,
+    messageTemplate,
+    gdprMessage,
+    action,
+    className,
+    ...props
+}) => {
     if (!messageTemplate || !messageTemplate.length) {
         return <p className="error">Cette action urgente n&#39;existe plus.</p>;
     }
@@ -100,7 +107,7 @@ export const Message = ({ text, messageTemplate, gdprMessage, action, className,
     );
 };
 
-Message.propTypes = {
+MessageView.propTypes = {
     messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
     email: PropTypes.string,
     text: PropTypes.string.isRequired,
@@ -121,6 +128,6 @@ Message.propTypes = {
     step: PropTypes.string,
 };
 
-const WithStylesMessage = glamorous(Message)(styles);
+const WithStylesMessageView = glamorous(MessageView)(styles);
 
-export default compose(withYellowLogo, withSessionData)(WithStylesMessage);
+export default compose(withYellowLogo, withSessionData)(WithStylesMessageView);
