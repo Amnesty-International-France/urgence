@@ -14,8 +14,8 @@ import Act from './Act';
 import ThankStep from './ThankStep';
 import Share from './share/Share';
 import ANALYTICS_CATEGORIES from '../analytics/categories';
-import Message from './message-view/Message';
-import Send from './message-send/Send';
+import MessageView from './message-view/MessageView';
+import MessageSend from './message-send/MessageSend';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
@@ -173,7 +173,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
         const buttonNext = get(data, 'UrgentAction.message.button_next', 'Suivant');
 
         return (
-            <Message
+            <MessageView
                 text={text}
                 objectIndication={objectIndication}
                 messageTemplate={messageTemplate}
@@ -201,7 +201,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
         const gdprMessage = get(data, 'GdprMessage.content');
 
         return (
-            <Send
+            <MessageSend
                 text={text}
                 gdprMessage={gdprMessage}
                 step={step}
