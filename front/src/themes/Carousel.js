@@ -73,7 +73,7 @@ export class Carousel extends Component {
 
         return (
             <div className={className}>
-                <div className={'swiper-container'} ref={this.initContainer}>
+                <div className="swiper-container" ref={this.initContainer}>
                     <div className="swiper-wrapper">{children()}</div>
                 </div>
                 <div className="swiper-controls">

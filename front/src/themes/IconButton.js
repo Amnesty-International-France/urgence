@@ -10,9 +10,9 @@ const IconButtonContainer = glamorous.div({
     alignItems: 'center',
     cursor: 'pointer',
     backgroundColor: yellow,
-    transition: 'all ease-in 0.2s',
     width: '40px',
     height: '40px',
+    WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
     boxShadow:
         '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
     userSelect: 'none',
