@@ -40,13 +40,7 @@ const Stepper = ({ className, data, step, page }) => {
     const current = page ? Number(page) + stepNumber + 1 : story.length + stepNumber;
     const total = story.length + 3;
 
-    const stepStates = [];
-    for (var i = 0; i < current; i++) {
-        stepStates.push('done');
-    }
-    for (var j = current; j < total; j++) {
-        stepStates.push('todo');
-    }
+    const stepStates = Array.from({ length: total }, (_, i) => (i < current ? 'done' : 'todo'));
 
     return (
         <div className={className}>
