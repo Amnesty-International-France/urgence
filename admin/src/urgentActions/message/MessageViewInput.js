@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import {
     addField,
+    minLength,
+    maxLength,
     required,
     FormDataConsumer,
     email,
@@ -50,6 +52,8 @@ export const MessageSendInput = ({ classes, source }) => (
         <FormDataConsumer>
             {({ formData }) => {
                 const data = formData[source];
+                const displayPreview =
+                    data && data.message_template && data.message_template.length > 0;
 
                 return (
                     <Fragment>
@@ -113,8 +117,8 @@ export const MessageSendInput = ({ classes, source }) => (
                                 </div>
                             </CardContent>
                         </Card>
-                        <FrontPreview className={classes.preview}>
-                            {data && (
+                        {displayPreview ? (
+                            <FrontPreview className={classes.preview}>
                                 <MessageView
                                     text={data.text || ''}
                                     messageTemplate={data.message_template}
@@ -126,8 +130,10 @@ export const MessageSendInput = ({ classes, source }) => (
                                     setFirstname={() => {}}
                                     setLastname={() => {}}
                                 />
-                            )}
-                        </FrontPreview>
+                            </FrontPreview>
+                        ) : (
+                            <p>You should write a message to see this preview</p>
+                        )}
                     </Fragment>
                 );
             }}
