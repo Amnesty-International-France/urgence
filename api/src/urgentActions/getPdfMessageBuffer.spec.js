@@ -21,13 +21,16 @@ describe('getPdfMessageBuffer', () => {
 
         const urgentAction = {
             ...defaultUrgentAction,
-            message_template: [
-                { value: 'Dear Minister,' },
-                {
-                    value:
-                        'I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.',
-                },
-            ],
+            message: {
+                recipient: {},
+                message_template: [
+                    { value: 'Dear Minister,' },
+                    {
+                        value:
+                            'I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.',
+                    },
+                ],
+            },
         };
 
         await getPdfMessageBuffer(urgentAction);
