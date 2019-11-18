@@ -6,7 +6,8 @@ import homePageFactory from './pages/home';
 import errorPageFactory from './pages/error';
 import storyPageFactory from './pages/story';
 import actPageFactory from './pages/act';
-import messagePageFactory from './pages/message';
+import messageViewPageFactory from './pages/messageView';
+import messageSendPageFactory from './pages/messageSend';
 import registerPageFactory from './pages/register';
 import sharePageFactory from './pages/share';
 import thanksEndPageFactory from './pages/thanksEnd';
@@ -15,7 +16,8 @@ const homePage = homePageFactory(driver);
 const errorPage = errorPageFactory(driver);
 const storyPage = storyPageFactory(driver);
 const actPage = actPageFactory(driver);
-const messagePage = messagePageFactory(driver);
+const messageViewPage = messageViewPageFactory(driver);
+const messageSendPage = messageSendPageFactory(driver);
 const registerPage = registerPageFactory(driver);
 const sharePage = sharePageFactory(driver);
 const thanksEndPage = thanksEndPageFactory(driver);
@@ -69,12 +71,12 @@ describe('Urgent Action', () => {
 
             await actPage.next();
 
-            await messagePage.isLoaded();
+            await messageViewPage.isLoaded();
         });
 
-        it('should display message steps', async () => {
-            await messagePage.navigate(urgentAction.slug, 0);
-            const messages = await messagePage.getMessages();
+        it('should display message view steps', async () => {
+            await messageViewPage.navigate(urgentAction.slug, 0);
+            const messages = await messageViewPage.getMessages();
             expect(messages[0]).toBe(
                 'Dear Minister,\nI am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.',
             );
@@ -87,28 +89,38 @@ describe('Urgent Action', () => {
                 'They were doing nothing wrong. They are being investigated on suspicion of "membership of an armed terrorist organization", a baseless and ridiculous accusation.',
             );
 
-            await messagePage.isLoaded();
+            await messageViewPage.isLoaded();
 
-            const indication = await messagePage.getIndication();
+            const indication = await messageViewPage.getIndication();
             expect(indication).toBe(
                 'Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.',
             );
 
-            await messagePage.enterObjectText('My subject');
+            expect(await messageViewPage.isButtonDisabled()).toBe(true);
+            await messageViewPage.enterObjectText('My subject');
+            expect(await messageViewPage.isButtonDisabled()).toBe(false);
 
-            expect(await messagePage.isButtonDisabled()).toBe(true);
-            await messagePage.enterEmailText('super@man.fr');
-            await messagePage.chooseCivility();
-            await messagePage.enterFirstnameText('My');
-            await messagePage.enterLastnameText('name');
-            expect(await messagePage.isButtonDisabled()).toBe(false);
+            await messageViewPage.clickButton();
+            await messageSendPage.isLoaded();
+        });
 
-            const legalInformation = await messagePage.getLegalInformation();
+        it('should display message send steps', async () => {
+            await messageSendPage.navigate(urgentAction.slug, 0);
+            await messageSendPage.isLoaded();
+
+            expect(await messageSendPage.isButtonDisabled()).toBe(true);
+            await messageSendPage.chooseCivility();
+            await messageSendPage.enterFirstnameText('My');
+            await messageSendPage.enterLastnameText('name');
+            await messageSendPage.enterEmailText('super@man.fr');
+            expect(await messageSendPage.isButtonDisabled()).toBe(false);
+
+            const legalInformation = await messageSendPage.getLegalInformation();
             expect(legalInformation).toBe(
                 'Vos données personnelles sont traitées par Amnesty International France.',
             );
 
-            await messagePage.clickButton();
+            await messageSendPage.clickButton();
             await registerPage.isLoaded();
         });
 

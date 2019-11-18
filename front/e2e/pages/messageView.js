@@ -3,16 +3,12 @@ import { By, until } from 'selenium-webdriver';
 export default driver => {
     const elements = {
         letterMessageSections: By.css('.letter-message-section > .rich-text'),
-        legalInformation: By.css('.legal-information'),
         container: By.className('message'),
         inputObject: By.css('.object input'),
         indication: By.css('.objectIndication'),
-        inputEmail: By.css('.email input'),
-        inputCivility: By.css('input[type=radio]'),
-        inputFirstname: By.css('.firstname input'),
-        inputLastname: By.css('.lastname input'),
-        sendMailButton: By.css('.action a'),
+        nextButton: By.css('.action a'),
     };
+
     return {
         isLoaded: async () => driver.wait(until.elementLocated(elements.container)),
         async navigate(slug) {
@@ -23,20 +19,11 @@ export default driver => {
             const messageSections = await driver.findElements(elements.letterMessageSections);
             return Promise.all(messageSections.map(messageSection => messageSection.getText()));
         },
-        getLegalInformation: async () => driver.findElement(elements.legalInformation).getText(),
         getIndication: async () => driver.findElement(elements.indication).getText(),
         enterObjectText: async value => driver.findElement(elements.inputObject).sendKeys(value),
-        enterEmailText: async value => driver.findElement(elements.inputEmail).sendKeys(value),
-        chooseCivility: async () => driver.findElement(elements.inputCivility).click(),
-        enterFirstnameText: async value =>
-            driver.findElement(elements.inputFirstname).sendKeys(value),
-        enterLastnameText: async value =>
-            driver.findElement(elements.inputLastname).sendKeys(value),
-        clickButton: async () => driver.findElement(elements.sendMailButton).click(),
+        clickButton: async () => driver.findElement(elements.nextButton).click(),
         isButtonDisabled: async () => {
-            const className = await driver
-                .findElement(elements.sendMailButton)
-                .getAttribute('class');
+            const className = await driver.findElement(elements.nextButton).getAttribute('class');
 
             return className.includes('disabled');
         },
