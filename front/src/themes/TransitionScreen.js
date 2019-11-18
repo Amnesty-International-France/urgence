@@ -8,16 +8,20 @@ import { withBlackLogo } from '../themes/ThemeContext';
 import Paper from '@material-ui/core/Paper';
 
 const styles = {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    minHeight: '100%',
-    width: '100%',
-    padding: '100px 20px 20px 20px',
-    color: white,
-    backgroundColor: `${yellow} !important`,
+    '& .page': {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        minHeight: '100%',
+        width: '100%',
+        padding: '100px 20px 40px 20px',
+        color: white,
+        backgroundColor: yellow,
+    },
     '@media (min-width: 1024px)': {
-        padding: '10vh 10vw',
+        '& .page': {
+            padding: '10vh 10vw',
+        },
         '& .link': {
             textAlign: 'center',
         },
@@ -47,26 +51,28 @@ const styles = {
         fontFamily: 'Amnesty Trade Gothic Condensed',
         fontWeight: 'bold',
         fontSize: '26px',
-        margin: '1.5rem 0',
-        '& a': {
-            display: 'inline-block',
-            color: yellow,
-            backgroundColor: black,
-            height: 40,
-        },
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '5px 15px',
+        marginTop: '-30px',
+        height: '60px',
     },
 };
 
 export const TransitionScreen = ({ className, actions, title, message }) => (
-    <Paper className={className} elevation={4} square={true}>
-        <div>
-            <h1>
-                <LongText text={title} />
-            </h1>
-            {message && <RichText html={message} />}
-        </div>
+    <div className={className}>
+        <Paper className="page" elevation={4} square={true}>
+            <div>
+                <h1>
+                    <LongText text={title} />
+                </h1>
+                {message && <RichText html={message} />}
+            </div>
+        </Paper>
         <div className="actions">{actions()}</div>
-    </Paper>
+    </div>
 );
 
 TransitionScreen.propTypes = {
