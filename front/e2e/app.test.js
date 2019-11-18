@@ -58,7 +58,7 @@ describe('Urgent Action', () => {
             await storyPage.lastStep();
         });
 
-        it('should display the act step', async () => {
+        it.skip('should display the act step', async () => {
             await actPage.navigate(urgentAction.slug);
 
             const title = await actPage.getTitle();
@@ -71,7 +71,7 @@ describe('Urgent Action', () => {
 
             await actPage.next();
 
-            // await messageViewPage.isLoaded();
+            await messageViewPage.isLoaded();
         });
 
         it.skip('should display the message view step', async () => {
