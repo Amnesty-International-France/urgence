@@ -2,7 +2,8 @@ import {
     get,
     STORY,
     CALL_TO_ACTION,
-    MESSAGE,
+    MESSAGE_VIEW,
+    MESSAGE_SEND,
     ADDRESS,
     REGISTER,
     SHARE,
@@ -19,7 +20,10 @@ describe('screenIndex.get', () => {
         let index = get(CALL_TO_ACTION, { story: [1, 2] });
         expect(index).toEqual(3);
 
-        index = get(MESSAGE, { story: [1, 2] });
+        index = get(MESSAGE_VIEW, { story: [1, 2] });
+        expect(index).toEqual(4);
+
+        index = get(MESSAGE_SEND, { story: [1, 2] });
         expect(index).toEqual(4);
 
         index = get(ADDRESS, { story: [1, 2] });
