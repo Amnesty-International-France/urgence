@@ -74,7 +74,7 @@ describe('Urgent Action', () => {
             // await messageViewPage.isLoaded();
         });
 
-        it('should display the message view step', async () => {
+        it.skip('should display the message view step', async () => {
             await messageViewPage.navigate(urgentAction.slug);
 
             const text = await messageViewPage.getText();
@@ -105,10 +105,10 @@ describe('Urgent Action', () => {
             expect(await messageViewPage.isButtonDisabled()).toBe(false);
 
             await messageViewPage.clickButton();
-            // await messageSendPage.isLoaded();
+            await messageSendPage.isLoaded();
         });
 
-        it('should display the message send step', async () => {
+        it.skip('should display the message send step', async () => {
             await messageSendPage.navigate(urgentAction.slug);
 
             const text = await messageSendPage.getText();
@@ -130,7 +130,7 @@ describe('Urgent Action', () => {
             await registerPage.isLoaded();
         });
 
-        it('should display the register step', async () => {
+        it.skip('should display the register step', async () => {
             await registerPage.navigate(urgentAction.slug);
 
             const title = await registerPage.getTitle();
@@ -170,30 +170,30 @@ describe('Urgent Action', () => {
         });
     });
 
-    // describe('home', () => {
-    //     it('should display the last default urgent action', async () => {
-    //         await homePage.navigate();
+    describe('home', () => {
+        it('should display the last default urgent action', async () => {
+            await homePage.navigate();
 
-    //         const text = await storyPage.getActiveText();
-    //         expect(text).toBe(
-    //             'Ho Duy Hai a été condamné à mort en 2008 après avoir été déclaré coupable de pillage de biens et de meurtre.',
-    //         );
-    //     });
-    // });
+            const text = await storyPage.getActiveText();
+            expect(text).toBe(
+                'Ho Duy Hai a été condamné à mort en 2008 après avoir été déclaré coupable de pillage de biens et de meurtre.',
+            );
+        });
+    });
 
-    // describe('error', () => {
-    //     it('should display the error page', async () => {
-    //         await errorPage.navigate();
+    describe('error', () => {
+        it('should display the error page', async () => {
+            await errorPage.navigate();
 
-    //         const text = await errorPage.getErrorMessage();
-    //         expect(text).toBe(`Oups. Tout ne s'est pas passé comme prévu 🙈.`);
-    //     });
+            const text = await errorPage.getErrorMessage();
+            expect(text).toBe(`Oups. Tout ne s'est pas passé comme prévu 🙈.`);
+        });
 
-    //     it('should display the error page if url is wrong', async () => {
-    //         await errorPage.navigateWrongUrl();
+        it('should display the error page if url is wrong', async () => {
+            await errorPage.navigateWrongUrl();
 
-    //         const text = await errorPage.getErrorMessage();
-    //         expect(text).toBe(`Oups. Tout ne s'est pas passé comme prévu 🙈.`);
-    //     });
-    // });
+            const text = await errorPage.getErrorMessage();
+            expect(text).toBe(`Oups. Tout ne s'est pas passé comme prévu 🙈.`);
+        });
+    });
 });
