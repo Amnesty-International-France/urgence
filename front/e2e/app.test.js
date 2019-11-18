@@ -35,7 +35,7 @@ describe('Urgent Action', () => {
     });
 
     describe('app', () => {
-        it('should display story', async () => {
+        it('should display the story step', async () => {
             await storyPage.navigate(urgentAction.slug, 0);
 
             const text = await storyPage.getActiveText();
@@ -58,7 +58,7 @@ describe('Urgent Action', () => {
             await storyPage.lastStep();
         });
 
-        it('should display act step', async () => {
+        it('should display the act step', async () => {
             await actPage.navigate(urgentAction.slug);
 
             const title = await actPage.getTitle();
@@ -74,8 +74,15 @@ describe('Urgent Action', () => {
             await messageViewPage.isLoaded();
         });
 
-        it('should display message view steps', async () => {
+        it('should display the message view step', async () => {
             await messageViewPage.navigate(urgentAction.slug, 0);
+            await messageViewPage.isLoaded();
+
+            const text = await messageViewPage.getText();
+            expect(text).toBe(
+                "Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email.",
+            );
+
             const messages = await messageViewPage.getMessages();
             expect(messages[0]).toBe(
                 'Dear Minister,\nI am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.',
@@ -104,9 +111,12 @@ describe('Urgent Action', () => {
             await messageSendPage.isLoaded();
         });
 
-        it('should display message send steps', async () => {
+        it('should display the message send step', async () => {
             await messageSendPage.navigate(urgentAction.slug, 0);
             await messageSendPage.isLoaded();
+
+            const text = await messageSendPage.getText();
+            expect(text).toBe('Compléter le formulaire suivant pour envoyer le message.');
 
             expect(await messageSendPage.isButtonDisabled()).toBe(true);
             await messageSendPage.chooseCivility();
@@ -124,7 +134,7 @@ describe('Urgent Action', () => {
             await registerPage.isLoaded();
         });
 
-        it('should display register step', async () => {
+        it('should display the register step', async () => {
             await registerPage.navigate(urgentAction.slug);
 
             const title = await registerPage.getTitle();
@@ -143,7 +153,7 @@ describe('Urgent Action', () => {
             await thanksEndPage.isLoaded();
         });
 
-        it('should display share step', async () => {
+        it('should display the share step', async () => {
             await sharePage.navigate(urgentAction.slug);
 
             const title = await sharePage.getTitle();
@@ -153,7 +163,7 @@ describe('Urgent Action', () => {
             expect(text).toBe("Continuons d'agir en partageant cette histoire.");
         });
 
-        it('should display thanks-end step', async () => {
+        it('should display the thanks-end step', async () => {
             await thanksEndPage.navigate(urgentAction.slug);
 
             const title = await thanksEndPage.getTitle();

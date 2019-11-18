@@ -2,6 +2,8 @@ import { By, until } from 'selenium-webdriver';
 
 export default driver => {
     const elements = {
+        container: By.className('message-send'),
+        text: By.css('.text > .rich-text'),
         inputCivility: By.css('input[type=radio]'),
         inputFirstname: By.css('.firstname input'),
         inputLastname: By.css('.lastname input'),
@@ -15,14 +17,16 @@ export default driver => {
             await driver.navigate().to(`http://front:3000/ua/${slug}/message`);
             await this.isLoaded();
         },
+        getText: async () => driver.findElement(elements.text).getText(),
         chooseCivility: async () => driver.findElement(elements.inputCivility).click(),
         enterFirstnameText: async value =>
             driver.findElement(elements.inputFirstname).sendKeys(value),
         enterLastnameText: async value =>
             driver.findElement(elements.inputLastname).sendKeys(value),
         enterEmailText: async value => driver.findElement(elements.inputEmail).sendKeys(value),
-        clickButton: async () => driver.findElement(elements.sendMailButton).click(),
         getLegalInformation: async () => driver.findElement(elements.legalInformation).getText(),
+        clickButton: async () => driver.findElement(elements.sendMailButton).click(),
+        getButtonText: async () => driver.findElement(elements.sendMailButton).getText(),
         isButtonDisabled: async () => {
             const className = await driver
                 .findElement(elements.sendMailButton)
