@@ -7,16 +7,21 @@ export const createUrgentAction = async ({ story, message, ...urgentAction } = {
     const defaultUrgentAction = {
         title: "Commutation of William Montgomery's sentence",
         slug: 'commutation-of-william-montgomerys-sentence',
+        story: [],
+        call_to_action: {},
+        message: {
+            message_template: [],
+        },
+        email_thank: {},
+        register: {},
+        end_thank: {},
     };
 
     return insertUrgentAction({
         ...defaultUrgentAction,
         ...urgentAction,
         story: JSON.stringify(story),
-        message: {
-            ...message,
-            message_template: JSON.stringify(message.message_template),
-        },
+        message: JSON.stringify(message),
     });
 };
 

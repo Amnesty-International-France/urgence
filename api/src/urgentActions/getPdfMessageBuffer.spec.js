@@ -8,6 +8,7 @@ describe('getPdfMessageBuffer', () => {
     const defaultUrgentAction = {
         message: {
             recipient: {},
+            message_template: [],
         },
     };
 
@@ -143,7 +144,9 @@ describe('getPdfMessageBuffer', () => {
 
         const urgentAction = {
             ...defaultUrgentAction,
-            message_template: [{ value: 'Dear Minister,\n\nBla bla bla' }],
+            message: {
+                message_template: [{ value: 'Dear Minister,\n\nBla bla bla' }],
+            },
         };
 
         await getPdfMessageBuffer(urgentAction);

@@ -48,7 +48,7 @@ exports[`getPdfMessageBuffer should prefix address with fullname 1`] = `
         <br />FRANCE
     </p>
     <p class=\\"recipient\\">
-${'        '}
+        
         <br />
         <br /> Le 14 mai 2018
     </p>
@@ -56,7 +56,7 @@ ${'        '}
         <h3 class=\\"subject\\">
             <strong>Objet :</strong> subject
         </h3>
-${'        '}
+        
         <p class=\\"fullname\\">firstname lastname</p>
     </div>
 </body>
