@@ -56,8 +56,8 @@ export const MessageSend = ({
     }
 
     return (
-        <div className={classnames('message', className)}>
-            <RichText className="message" html={text} />
+        <div className={classnames('message-send', className)}>
+            <RichText className="text" html={text} />
             <div className="formStep">
                 <Form {...props} />
             </div>

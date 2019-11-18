@@ -26,17 +26,17 @@ const styles = {
     '@media (max-width: 1024px)': {
         marginBottom: 40,
     },
-    '& .action': {
-        margin: '1em 0',
-        '@media (min-width: 1024px)': {
-            display: 'flex',
-        },
-    },
     '@media (max-width: 350px)': {
         fontSize: '0.8em',
     },
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
+    },
+    '& .action': {
+        margin: '1em 0',
+        '@media (min-width: 1024px)': {
+            display: 'flex',
+        },
     },
     '& .letter': {
         border: 'solid 1px',
@@ -89,8 +89,8 @@ export const MessageView = ({ className, text, messageTemplate, action, ...props
     }
 
     return (
-        <div className={classnames('message', className)}>
-            <RichText className="message" html={text} />
+        <div className={classnames('message-view', className)}>
+            <RichText className="text" html={text} />
             <div className="formStep">
                 <Form {...props} />
             </div>
