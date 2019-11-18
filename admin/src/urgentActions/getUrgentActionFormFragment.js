@@ -43,19 +43,10 @@ const styles = {
         '&.call-to-action': {
             backgroundColor: yellow[50],
         },
-        '&.message-view': {
+        '&.message-view, &.message-send, &.letter': {
             backgroundColor: red[50],
         },
-        '&.message-send': {
-            backgroundColor: red[50],
-        },
-        '&.letter': {
-            backgroundColor: red[50],
-        },
-        '&.share': {
-            backgroundColor: teal[50],
-        },
-        '&.register': {
+        '&.share, &.register': {
             backgroundColor: teal[50],
         },
         '&.thank-you': {
