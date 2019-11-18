@@ -2,7 +2,7 @@ import { By, until } from 'selenium-webdriver';
 
 export default driver => {
     const elements = {
-        container: By.className('message-send'),
+        container: By.css('.message-send'),
         text: By.css('.text > .rich-text'),
         inputCivility: By.css('input[type=radio]'),
         inputFirstname: By.css('.firstname input'),
@@ -14,8 +14,8 @@ export default driver => {
     return {
         isLoaded: async () => driver.wait(until.elementLocated(elements.container)),
         async navigate(slug) {
-            await driver.navigate().to(`http://front:3000/ua/${slug}/message`);
-            await this.isLoaded();
+            await driver.navigate().to(`http://front:3000/ua/${slug}/message-send`);
+            // await this.isLoaded();
         },
         getText: async () => driver.findElement(elements.text).getText(),
         chooseCivility: async () => driver.findElement(elements.inputCivility).click(),

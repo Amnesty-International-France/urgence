@@ -2,7 +2,7 @@ import { By, until } from 'selenium-webdriver';
 
 export default driver => {
     const elements = {
-        container: By.className('message-view'),
+        container: By.css('.message-view'),
         text: By.css('.text > .rich-text'),
         letterMessageSections: By.css('.letter-message-section > .rich-text'),
         inputObject: By.css('.object input'),
@@ -13,8 +13,8 @@ export default driver => {
     return {
         isLoaded: async () => driver.wait(until.elementLocated(elements.container)),
         async navigate(slug) {
-            await driver.navigate().to(`http://front:3000/ua/${slug}/message`);
-            await this.isLoaded();
+            await driver.navigate().to(`http://front:3000/ua/${slug}/message-view`);
+            // await this.isLoaded();
         },
         getText: async () => driver.findElement(elements.text).getText(),
         getMessages: async () => {

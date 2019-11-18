@@ -90,7 +90,9 @@ export const MessageView = ({ className, text, messageTemplate, action, ...props
 
     return (
         <div className={classnames('message-view', className)}>
-            <RichText className="text" html={text} />
+            <div className="text">
+                <RichText html={text} />
+            </div>
             <div className="formStep">
                 <Form {...props} />
             </div>
