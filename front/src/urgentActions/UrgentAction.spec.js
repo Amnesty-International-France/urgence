@@ -167,7 +167,7 @@ describe('<UrgentAction />', () => {
             expect(message.length).toBe(1);
 
             expect(message.prop('objectIndication')).toBe('object indication');
-            expect(message.prop('text_view')).toBe('text view');
+            expect(message.prop('text')).toBe('text view');
             expect(message.prop('messageTemplate').length).toBe(2);
             expect(message.prop('messageTemplate')[0].value).toBe('first message');
             expect(message.prop('messageTemplate')[1].value).toBe('second message');
@@ -176,7 +176,7 @@ describe('<UrgentAction />', () => {
         it('should display the "next" button', () => {
             const props = {
                 ...defaultProps,
-                step: 'message',
+                step: 'message-view',
                 data: {
                     ...defaultProps.data,
                     UrgentAction: {
@@ -199,7 +199,7 @@ describe('<UrgentAction />', () => {
 
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
-            const message = renderedComponent.find(MessageSend);
+            const message = renderedComponent.find(MessageView);
             expect(message.length).toBe(1);
 
             const sendMail = message.prop('action');
@@ -240,13 +240,13 @@ describe('<UrgentAction />', () => {
             const message = renderedComponent.find(MessageSend);
             expect(message.length).toBe(1);
 
-            expect(message.prop('text_send')).toBe('text send');
+            expect(message.prop('text')).toBe('text send');
         });
 
         it('should display the "sendMail" button', () => {
             const props = {
                 ...defaultProps,
-                step: 'message',
+                step: 'message-send',
                 data: {
                     ...defaultProps.data,
                     UrgentAction: {
@@ -284,7 +284,7 @@ describe('<UrgentAction />', () => {
             const props = {
                 ...defaultProps,
                 loading: false,
-                step: 'message',
+                step: 'message-send',
                 data: {
                     UrgentAction: {
                         story: [
