@@ -19,7 +19,7 @@ import MessageSend from './messageSend/MessageSend';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
-import SendMail from './messageView/SendMail';
+import SendMail from './messageSend/SendMail';
 import LoadingScreen from '../themes/LoadingScreen';
 import Stepper from '../themes/Stepper';
 import RegisterButton from './register/RegisterButton';

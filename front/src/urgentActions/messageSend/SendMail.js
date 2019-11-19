@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import get from 'lodash.get';
 
 import MailTo from '../../themes/MailTo';
-import { templateToBodyText } from './templateToBodyText';
+import { templateToBodyText } from '../messageView/templateToBodyText';
 import { isCorrectEmail } from '../../themes/Input';
 import { routeMatch } from '../../propTypes';
 import { withSessionData } from '../../DataContext';
