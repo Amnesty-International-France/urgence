@@ -18,14 +18,6 @@ const styles = {
         color: white,
         backgroundColor: yellow,
     },
-    '@media (min-width: 1024px)': {
-        '& .page': {
-            padding: '10vh 10vw',
-        },
-        '& .link': {
-            textAlign: 'center',
-        },
-    },
     '& h1': {
         textTransform: 'uppercase',
         fontFamily: 'Amnesty Trade Gothic Condensed',
@@ -58,6 +50,22 @@ const styles = {
         padding: '5px 15px',
         marginTop: '-30px',
         height: '60px',
+        '& a': {
+            width: '100%',
+        },
+    },
+    '@media (min-width: 1024px)': {
+        '& .page': {
+            padding: '10vh 10vw',
+        },
+        '& .link': {
+            textAlign: 'center',
+        },
+        '& .actions': {
+            '& a': {
+                width: 'fit-content',
+            },
+        },
     },
 };
 

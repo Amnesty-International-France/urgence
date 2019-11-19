@@ -14,7 +14,7 @@ import LegalInformation from '../LegalInformation';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '16px',
+    fontSize: '0.8em',
     display: 'flex',
     minHeight: '100%',
     flexDirection: 'column',
@@ -23,23 +23,26 @@ const styles = {
     padding: '135px 20px 20px 20px',
     color: black,
     backgroundColor: white,
-    '@media (max-width: 1024px)': {
-        marginBottom: 40,
-    },
     '& .action': {
         margin: '1em 0',
-        '@media (min-width: 1024px)': {
-            display: 'flex',
+        '& a': {
+            width: '100%',
         },
-    },
-    '@media (max-width: 350px)': {
-        fontSize: '0.8em',
-    },
-    '@media (min-width: 1024px)': {
-        padding: '10vh 10vw',
     },
     '& .form-step': {
         margin: '5px 0px 10px 0px',
+    },
+    '@media (min-width: 350px)': {
+        fontSize: '16px',
+    },
+    '@media (min-width: 1024px)': {
+        padding: '10vh 10vw',
+        '& .action': {
+            display: 'flex',
+            '& a': {
+                width: 'fit-content',
+            },
+        },
     },
 };
 
