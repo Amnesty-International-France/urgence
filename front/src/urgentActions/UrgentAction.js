@@ -7,21 +7,22 @@ import PropTypes from 'prop-types';
 import get from 'lodash.get';
 import glamorous from 'glamorous';
 
+import { routeMatch } from '../propTypes';
 import { DataProvider } from '../DataContext';
+import LoadingScreen from '../themes/LoadingScreen';
+import Stepper from '../themes/Stepper';
 import SEO from '../SEO';
 import Story from './story/Story';
 import Act from './Act';
 import ThankStep from './ThankStep';
 import Share from './share/Share';
 import ANALYTICS_CATEGORIES from '../analytics/categories';
-import MessageView from './message-view/MessageView';
-import MessageSend from './message-send/MessageSend';
-import { routeMatch } from '../propTypes';
+import MessageView from './messageView/MessageView';
+import ToMessageSendButton from './messageView/ToMessageSendButton';
+import MessageSend from './messageSend/MessageSend';
+import SendMail from './messageSend/SendMail';
 import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
-import SendMail from './message-view/SendMail';
-import LoadingScreen from '../themes/LoadingScreen';
-import Stepper from '../themes/Stepper';
 import RegisterButton from './register/RegisterButton';
 import Register from './register/Register';
 
@@ -183,7 +184,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
-                    <ToUrgentActionPageLink
+                    <ToMessageSendButton
                         label={buttonView}
                         step={step}
                         pageName="message-send"
