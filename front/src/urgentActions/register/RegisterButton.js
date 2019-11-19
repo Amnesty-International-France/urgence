@@ -44,12 +44,7 @@ export const RegisterButton = ({
 
 RegisterButton.propTypes = {
     auId: PropTypes.string.isRequired,
-    civility: PropTypes.string.isRequired,
-    firstname: PropTypes.string.isRequired,
-    lastname: PropTypes.string.isRequired,
-    formValues: PropTypes.array,
-    email: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
+    formValues: PropTypes.object,
     setRegistered: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     buttonText: PropTypes.string.isRequired,
