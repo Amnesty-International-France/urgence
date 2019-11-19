@@ -4,6 +4,7 @@ import glamorous from 'glamorous';
 import get from 'lodash.get';
 import { compose } from 'recompose';
 import classnames from 'classnames';
+import Paper from '@material-ui/core/Paper';
 
 import RichText from '../../themes/RichText';
 import LongText from '../../themes/LongText';
@@ -72,15 +73,17 @@ export const RegisterActivist = ({ data, gdprRegister, action, className, ...pro
     const text = get(data, 'text');
     return (
         <div className={classnames('register', className)}>
-            <div className="header">
-                <h1>
-                    <LongText text={title} />
-                </h1>
-                {text && <RichText html={text} />}
-            </div>
-            <div className="form-step">
-                <Form {...props} />
-            </div>
+            <Paper className="page" elevation={4} square>
+                <div className="header">
+                    <h1>
+                        <LongText text={title} />
+                    </h1>
+                    {text && <RichText html={text} />}
+                </div>
+                <div className="form-step">
+                    <Form {...props} />
+                </div>
+            </Paper>
             <div className="action">
                 {action(isDisabled(props), { firstname, lastname, phone, email })}
             </div>
