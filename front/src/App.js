@@ -20,7 +20,7 @@ export const styles = {
         width: '100vw',
     },
     '& .page': {
-        padding: '60px 15px 20px',
+        padding: '60px 15px',
     },
 };
 
