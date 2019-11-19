@@ -11,7 +11,7 @@ import { white } from '../themes/colors';
 import { RichText } from './RichText';
 
 const alertStyles = {
-    color: white,
+    color: `${white} !important`,
 };
 
 const styles = {
@@ -34,13 +34,13 @@ const Alert = ({ classes, message }) => {
 
     return (
         <Snackbar
-            anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
             open={open}
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
             message={<RichText html={message} style={alertStyles} />}
-            TransitionComponent={props => <Slide {...props} direction="down" />}
+            TransitionComponent={props => <Slide {...props} direction="up" />}
             action={
                 <FontAwesomeIcon
                     icon={faTimes}
