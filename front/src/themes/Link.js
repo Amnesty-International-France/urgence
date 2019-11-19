@@ -7,7 +7,7 @@ import { routeMatch } from '../propTypes';
 import { withRouter } from 'react-router';
 import trackEvent from '../analytics/trackEvent';
 
-import { black, yellow, white } from './colors';
+import { black, white } from './colors';
 
 export const styles = {
     display: 'block',
