@@ -14,11 +14,12 @@ import Act from './Act';
 import ThankStep from './ThankStep';
 import Share from './share/Share';
 import ANALYTICS_CATEGORIES from '../analytics/categories';
-import Message from './message/Message';
+import MessageView from './message-view/MessageView';
+import MessageSend from './message-send/MessageSend';
 import { routeMatch } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
-import SendMail from './message/SendMail';
+import SendMail from './message-view/SendMail';
 import LoadingScreen from '../themes/LoadingScreen';
 import Stepper from '../themes/Stepper';
 import RegisterButton from './register/RegisterButton';
@@ -84,7 +85,10 @@ const query = gql`
                 button
             }
             message {
-                text
+                text_view
+                text_send
+                button_view
+                button_send
                 object_indication
                 message_template {
                     value
@@ -155,9 +159,9 @@ export const UrgentAction = ({ history, slug, step, data }) => {
                         <ToUrgentActionPageLink
                             label={callToAction.button}
                             step={step}
-                            pageName="message"
+                            pageName="message-view"
                             analyticsCategory={ANALYTICS_CATEGORIES.ACT}
-                            buttonName="ShowMail"
+                            buttonName="OpenMessageView"
                         />
                     ) : null
                 }
@@ -165,24 +169,50 @@ export const UrgentAction = ({ history, slug, step, data }) => {
         );
     }
 
-    if (step === 'message') {
-        const text = get(data, 'UrgentAction.message.text');
+    if (step === 'message-view') {
+        const text = get(data, 'UrgentAction.message.text_view');
         const objectIndication = get(data, 'UrgentAction.message.object_indication');
         const messageTemplate = get(data, 'UrgentAction.message.message_template');
-        const gdprMessage = get(data, 'GdprMessage.content');
-        const id = get(data, 'UrgentAction.id');
-        const recipient = get(data, 'UrgentAction.message.recipient');
+        const buttonView = get(data, 'UrgentAction.message.button_view', 'Suivant');
 
         return (
-            <Message
+            <MessageView
                 text={text}
                 objectIndication={objectIndication}
+                messageTemplate={messageTemplate}
+                step={step}
+                analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
+                action={
+                    <ToUrgentActionPageLink
+                        label={buttonView}
+                        step={step}
+                        pageName="message-send"
+                        analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
+                        buttonName="OpenMessageSend"
+                    />
+                }
+            />
+        );
+    }
+
+    if (step === 'message-send') {
+        const id = get(data, 'UrgentAction.id');
+        const text = get(data, 'UrgentAction.message.text_send');
+        const messageTemplate = get(data, 'UrgentAction.message.message_template');
+        const recipient = get(data, 'UrgentAction.message.recipient');
+        const buttonSend = get(data, 'UrgentAction.message.button_send', "J'envoie");
+        const gdprMessage = get(data, 'GdprMessage.content');
+
+        return (
+            <MessageSend
+                text={text}
                 messageTemplate={messageTemplate}
                 gdprMessage={gdprMessage}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
                     <SendMail
+                        label={buttonSend}
                         step={step}
                         recipient={recipient}
                         messageTemplate={messageTemplate}

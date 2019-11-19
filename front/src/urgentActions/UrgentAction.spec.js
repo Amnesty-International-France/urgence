@@ -5,7 +5,8 @@ import { Redirect } from 'react-router-dom';
 import { renderUrgentActionWithData, UrgentAction } from './UrgentAction';
 import Story from './story/Story';
 import Act from './Act';
-import Message from './message/Message';
+import MessageView from './message-view/MessageView';
+import MessageSend from './message-send/MessageSend';
 import Share from './share/Share';
 import Register from './register/Register';
 import ThankStep from './ThankStep';
@@ -134,11 +135,11 @@ describe('<UrgentAction />', () => {
         });
     });
 
-    describe('Message Step', () => {
-        it('should display the "message"', () => {
+    describe('Message View Step', () => {
+        it('should display the "message view"', () => {
             const props = {
                 ...defaultProps,
-                step: 'message',
+                step: 'message-view',
                 data: {
                     ...defaultProps.data,
                     UrgentAction: {
@@ -148,15 +149,13 @@ describe('<UrgentAction />', () => {
                             },
                         ],
                         message: {
-                            text: 'text',
+                            text_view: 'text view',
+                            button_view: 'button view',
                             object_indication: 'object indication',
                             message_template: [
                                 { value: 'first message' },
                                 { value: 'second message' },
                             ],
-                            recipient: {
-                                mail: 'mail',
-                            },
                         },
                     },
                 },
@@ -164,20 +163,20 @@ describe('<UrgentAction />', () => {
 
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
-            const message = renderedComponent.find(Message);
+            const message = renderedComponent.find(MessageView);
             expect(message.length).toBe(1);
 
             expect(message.prop('objectIndication')).toBe('object indication');
-            expect(message.prop('text')).toBe('text');
+            expect(message.prop('text')).toBe('text view');
             expect(message.prop('messageTemplate').length).toBe(2);
             expect(message.prop('messageTemplate')[0].value).toBe('first message');
             expect(message.prop('messageTemplate')[1].value).toBe('second message');
         });
 
-        it('should display the "sendMail" button', () => {
+        it('should display the "next" button', () => {
             const props = {
                 ...defaultProps,
-                step: 'message',
+                step: 'message-view',
                 data: {
                     ...defaultProps.data,
                     UrgentAction: {
@@ -187,8 +186,43 @@ describe('<UrgentAction />', () => {
                             },
                         ],
                         message: {
-                            text: 'text',
-                            object_indication: 'object indication',
+                            text_view: 'text view',
+                            button_view: 'button view',
+                            message_template: [
+                                { value: 'first message' },
+                                { value: 'second message' },
+                            ],
+                        },
+                    },
+                },
+            };
+
+            const renderedComponent = shallow(<UrgentAction {...props} />);
+
+            const message = renderedComponent.find(MessageView);
+            expect(message.length).toBe(1);
+
+            const sendMail = message.prop('action');
+            expect(sendMail.props.label).toBe('button view');
+        });
+    });
+
+    describe('Message Send Step', () => {
+        it('should display the "message send"', () => {
+            const props = {
+                ...defaultProps,
+                step: 'message-send',
+                data: {
+                    ...defaultProps.data,
+                    UrgentAction: {
+                        story: [
+                            {
+                                ...defaultStep,
+                            },
+                        ],
+                        message: {
+                            text_send: 'text send',
+                            button_send: 'button send',
                             message_template: [
                                 { value: 'first message' },
                                 { value: 'second message' },
@@ -203,10 +237,46 @@ describe('<UrgentAction />', () => {
 
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
-            const message = renderedComponent.find(Message);
+            const message = renderedComponent.find(MessageSend);
+            expect(message.length).toBe(1);
+
+            expect(message.prop('text')).toBe('text send');
+        });
+
+        it('should display the "sendMail" button', () => {
+            const props = {
+                ...defaultProps,
+                step: 'message-send',
+                data: {
+                    ...defaultProps.data,
+                    UrgentAction: {
+                        story: [
+                            {
+                                ...defaultStep,
+                            },
+                        ],
+                        message: {
+                            text_send: 'text send',
+                            button_send: 'button send',
+                            message_template: [
+                                { value: 'first message' },
+                                { value: 'second message' },
+                            ],
+                            recipient: {
+                                mail: 'mail',
+                            },
+                        },
+                    },
+                },
+            };
+
+            const renderedComponent = shallow(<UrgentAction {...props} />);
+
+            const message = renderedComponent.find(MessageSend);
             expect(message.length).toBe(1);
 
             const sendMail = message.prop('action');
+            expect(sendMail.props.label).toBe('button send');
             expect(sendMail.props.recipient).toEqual({ mail: 'mail' });
         });
 
@@ -214,7 +284,7 @@ describe('<UrgentAction />', () => {
             const props = {
                 ...defaultProps,
                 loading: false,
-                step: 'message',
+                step: 'message-send',
                 data: {
                     UrgentAction: {
                         story: [
@@ -223,8 +293,8 @@ describe('<UrgentAction />', () => {
                             },
                         ],
                         message: {
-                            text: 'text',
-                            object_indication: 'object indication',
+                            text_send: 'text send',
+                            button_send: 'button send',
                             message_template: [
                                 { value: 'first message' },
                                 { value: 'second message' },
@@ -244,7 +314,7 @@ describe('<UrgentAction />', () => {
 
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
-            const message = renderedComponent.find(Message);
+            const message = renderedComponent.find(MessageSend);
             expect(message.length).toBe(1);
 
             const gdpr = message.prop('gdprMessage');

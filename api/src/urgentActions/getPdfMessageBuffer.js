@@ -19,6 +19,7 @@ export const getPdfMessageBuffer = async (
 ) =>
     new Promise((resolve, reject) => {
         const recipientAddress = get(urgentAction, 'message.recipient.postal_address', '');
+        const messageTemplate = get(urgentAction, 'message.message_template', '');
         const date = format(new Date(), 'DD MMMM YYYY', { locale: frLocale });
 
         const urgentActionLetter = nunjucks.render(path.join(__dirname, './letter.html'), {
@@ -28,7 +29,7 @@ export const getPdfMessageBuffer = async (
             firstname,
             lastname,
             subject,
-            urgentAction,
+            messageTemplate,
             emitterAddressMain,
             emitterAddressMore,
             emitterPostalCode,

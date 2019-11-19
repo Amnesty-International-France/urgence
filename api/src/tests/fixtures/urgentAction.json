@@ -33,7 +33,10 @@
         "button": "Voir l'email"
     },
     "message": {
-        "text": "Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email.",
+        "text_view": "Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email.",
+        "text_send": "Compléter le formulaire suivant pour envoyer le message.",
+        "button_view": "Suivant",
+        "button_send": "J'envoie",
         "object_indication": "Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.",
         "message_template": [
             {

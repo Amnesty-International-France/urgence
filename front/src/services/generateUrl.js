@@ -10,8 +10,10 @@ export default (name, params = {}) => {
             return `/ua/${params.slug}/story/${params.page || 0}`;
         case 'act':
             return `/ua/${params.slug}/act`;
-        case 'message':
-            return `/ua/${params.slug}/message`;
+        case 'message-view':
+            return `/ua/${params.slug}/message-view`;
+        case 'message-send':
+            return `/ua/${params.slug}/message-send`;
         case 'thanks':
             return `/ua/${params.slug}/thanks`;
         case 'register':

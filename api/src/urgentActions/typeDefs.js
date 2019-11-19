@@ -94,14 +94,20 @@ export default gql`
     }
 
     type Message {
-        text: String!
+        text_view: String
+        text_send: String
+        button_view: String
+        button_send: String
         object_indication: String
         message_template: [MessageTemplate]
         recipient: Recipient
     }
 
     input MessageInput {
-        text: String!
+        text_view: String!
+        text_send: String!
+        button_view: String!
+        button_send: String!
         object_indication: String
         message_template: [MessageTemplateInput]
         recipient: RecipientInput

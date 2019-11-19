@@ -1,6 +1,7 @@
 export const STORY = 0;
 export const CALL_TO_ACTION = 1;
-export const MESSAGE = 2;
+export const MESSAGE_VIEW = 2;
+export const MESSAGE_SEND = 2;
 export const ADDRESS = 2;
 export const REGISTER = 3;
 export const SHARE = 3;

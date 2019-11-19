@@ -11,7 +11,6 @@ import LetterView from './LetterView';
 import { withYellowLogo } from '../../themes/ThemeContext';
 import RichText from '../../themes/RichText';
 import { withSessionData } from '../../DataContext';
-import LegalInformation from '../LegalInformation';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -19,19 +18,13 @@ const styles = {
     display: 'flex',
     minHeight: '100%',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     width: '100%',
-    padding: '100px 20px 20px 20px',
+    padding: '135px 20px 20px 20px',
     color: black,
     backgroundColor: white,
     '@media (max-width: 1024px)': {
         marginBottom: 40,
-    },
-    '& .action': {
-        margin: '1em 0',
-        '@media (min-width: 1024px)': {
-            display: 'flex',
-        },
     },
     '@media (max-width: 350px)': {
         fontSize: '0.8em',
@@ -39,8 +32,11 @@ const styles = {
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
     },
-    '& .importantText': {
-        fontWeight: 'bold',
+    '& .action': {
+        margin: '1em 0',
+        '@media (min-width: 1024px)': {
+            display: 'flex',
+        },
     },
     '& .letter': {
         border: 'solid 1px',
@@ -87,45 +83,37 @@ const styles = {
     },
 };
 
-export const Message = ({ text, messageTemplate, gdprMessage, action, className, ...props }) => {
+export const MessageView = ({ className, text, messageTemplate, action, ...props }) => {
     if (!messageTemplate || !messageTemplate.length) {
         return <p className="error">Cette action urgente n&#39;existe plus.</p>;
     }
 
     return (
-        <div className={classnames('message', className)}>
-            <RichText className="message" html={text} />
+        <div className={classnames('message-view', className)}>
+            <div className="text">
+                <RichText html={text} />
+            </div>
             <div className="formStep">
                 <Form {...props} />
             </div>
             <LetterView messageTemplate={messageTemplate} />
             <div className="action">{action}</div>
-            <LegalInformation content={gdprMessage} />
         </div>
     );
 };
 
-Message.propTypes = {
-    messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
-    email: PropTypes.string,
-    text: PropTypes.string.isRequired,
-    objectIndication: PropTypes.string.isRequired,
+MessageView.propTypes = {
     className: PropTypes.string,
-    setEmail: PropTypes.func.isRequired,
-    setObject: PropTypes.func.isRequired,
-    setCivility: PropTypes.func.isRequired,
-    setFirstname: PropTypes.func.isRequired,
-    setLastname: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired,
+    messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
+    objectIndication: PropTypes.string.isRequired,
     object: PropTypes.string,
-    civility: PropTypes.string,
-    firstname: PropTypes.string,
-    lastname: PropTypes.string,
-    gdprMessage: PropTypes.string,
+    setObject: PropTypes.func.isRequired,
     action: PropTypes.node.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
 };
 
-const WithStylesMessage = glamorous(Message)(styles);
+const WithStylesMessageView = glamorous(MessageView)(styles);
 
-export default compose(withYellowLogo, withSessionData)(WithStylesMessage);
+export default compose(withYellowLogo, withSessionData)(WithStylesMessageView);

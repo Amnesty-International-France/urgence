@@ -18,7 +18,8 @@ import { LETTER_ACTIVATED } from '../flags';
 
 import StoryTemplateInput from './StoryTemplateInput';
 import CallToActionInput from './CallToActionInput';
-import MessageInput from './MessageInput';
+import MessageViewInput from './message/MessageViewInput';
+import MessageSendInput from './message/MessageSendInput';
 import ThanksInput from './ThanksInput';
 import ShareInput from './ShareInput';
 import RegisterInput from './RegisterInput';
@@ -42,16 +43,10 @@ const styles = {
         '&.call-to-action': {
             backgroundColor: yellow[50],
         },
-        '&.message': {
+        '&.message-view, &.message-send, &.letter': {
             backgroundColor: red[50],
         },
-        '&.letter': {
-            backgroundColor: red[50],
-        },
-        '&.share': {
-            backgroundColor: teal[50],
-        },
-        '&.register': {
+        '&.share, &.register': {
             backgroundColor: teal[50],
         },
         '&.thank-you': {
@@ -144,9 +139,14 @@ const Form = ({ classes, record }) => {
                 <CallToActionInput source="call_to_action" />
             </div>
 
-            <div className={`${classes.form} message`}>
-                <h2>Message</h2>
-                <MessageInput source="message" />
+            <div className={`${classes.form} message-view`}>
+                <h2>Message View</h2>
+                <MessageViewInput source="message" />
+            </div>
+
+            <div className={`${classes.form} message-send`}>
+                <h2>Message Send</h2>
+                <MessageSendInput source="message" />
             </div>
 
             {LETTER_ACTIVATED && (

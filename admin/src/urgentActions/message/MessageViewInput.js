@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import {
     addField,
+    minLength,
+    maxLength,
     required,
     FormDataConsumer,
     email,
@@ -17,17 +19,15 @@ import Avatar from '@material-ui/core/Avatar';
 import classNames from 'classnames';
 import isEmail from 'validator/lib/isEmail';
 
-import { root, preview, messageFormScreenPreview } from './styles';
-import { get as getScreenIndex, MESSAGE } from './screenIndex';
+import { root, preview, messageFormScreenPreview } from '../styles';
+import { get as getScreenIndex, MESSAGE_VIEW } from '../screenIndex';
 import ParagraphTemplateInput from './ParagraphTemplateInput';
-import RichTextInput from '../form/RichTextInput';
-import FrontPreview from './FrontPreview';
+import RichTextInput from '../../form/RichTextInput';
+import FrontPreview from '../FrontPreview';
 
-import Message from '../../../front/src/urgentActions/message/Message';
-import Link from '../../../front/src/themes/Link';
-import SimpleParagraphFormIterator from './SimpleParagraphFormIterator';
-
-import { LETTER_ACTIVATED } from '../flags';
+import MessageView from '../../../../front/src/urgentActions/message-view/MessageView';
+import Link from '../../../../front/src/themes/Link';
+import SimpleParagraphFormIterator from '../SimpleParagraphFormIterator';
 
 const styles = theme => ({
     ...root,
@@ -47,16 +47,18 @@ export const validateEmailsList = text =>
         ? 'Must contain only emails separated by a comma.'
         : null;
 
-export const MessageInput = ({ classes, source }) => (
-    <div className={classNames(classes.root, { [classes.bordered]: LETTER_ACTIVATED })}>
+export const MessageSendInput = ({ classes, source }) => (
+    <div className={classNames(classes.root, classes.bordered)}>
         <FormDataConsumer>
             {({ formData }) => {
                 const data = formData[source];
+                const displayPreview =
+                    data && data.message_template && data.message_template.length > 0;
 
                 return (
                     <Fragment>
                         <Avatar className={classes.avatar}>
-                            {getScreenIndex(MESSAGE, formData)}
+                            {getScreenIndex(MESSAGE_VIEW, formData)}
                         </Avatar>
                         <Card className={classes.card}>
                             <CardContent className={classes.content}>
@@ -65,7 +67,7 @@ export const MessageInput = ({ classes, source }) => (
                                         fullWidth
                                         multiline
                                         label="Message Tip"
-                                        source={`${source}.text`}
+                                        source={`${source}.text_view`}
                                         defaultValue="Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email."
                                     />
                                     <RichTextInput
@@ -106,24 +108,32 @@ export const MessageInput = ({ classes, source }) => (
                                             <ParagraphTemplateInput source="" />
                                         </SimpleParagraphFormIterator>
                                     </ArrayInput>
+                                    <TextInput
+                                        source={`${source}.button_view`}
+                                        label="Button"
+                                        defaultValue="Suivant"
+                                        validate={[required(), minLength(3), maxLength(25)]}
+                                    />
                                 </div>
                             </CardContent>
                         </Card>
-                        <FrontPreview className={classes.preview}>
-                            {data && (
-                                <Message
-                                    text={data.text || ''}
+                        {displayPreview ? (
+                            <FrontPreview className={classes.preview}>
+                                <MessageView
+                                    text={data.text_view || ''}
                                     messageTemplate={data.message_template}
                                     objectIndication={data.object_indication || ''}
-                                    action={<Link to="#" label="J'envoie" />}
+                                    action={<Link to="#" label="Suivant" />}
                                     setEmail={() => {}}
                                     setObject={() => {}}
                                     setCivility={() => {}}
                                     setFirstname={() => {}}
                                     setLastname={() => {}}
                                 />
-                            )}
-                        </FrontPreview>
+                            </FrontPreview>
+                        ) : (
+                            <p>You should write a message to see this preview</p>
+                        )}
                     </Fragment>
                 );
             }}
@@ -131,9 +141,9 @@ export const MessageInput = ({ classes, source }) => (
     </div>
 );
 
-MessageInput.propTypes = {
+MessageSendInput.propTypes = {
     classes: PropTypes.object,
     source: PropTypes.string,
 };
 
-export default addField(withStyles(styles)(MessageInput));
+export default addField(withStyles(styles)(MessageSendInput));

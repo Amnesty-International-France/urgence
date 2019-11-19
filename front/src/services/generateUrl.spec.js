@@ -25,8 +25,12 @@ describe('generateUrl', () => {
         expect(generateUrl('act', { slug: 'ua-slug' })).toBe('/ua/ua-slug/act');
     });
 
-    it('should generate url for ua/slug/message', () => {
-        expect(generateUrl('message', { slug: 'ua-slug' })).toBe('/ua/ua-slug/message');
+    it('should generate url for ua/slug/message-view', () => {
+        expect(generateUrl('message-view', { slug: 'ua-slug' })).toBe('/ua/ua-slug/message-view');
+    });
+
+    it('should generate url for ua/slug/message-send', () => {
+        expect(generateUrl('message-send', { slug: 'ua-slug' })).toBe('/ua/ua-slug/message-send');
     });
 
     it('should generate url for ua/slug/thanks', () => {

@@ -6,7 +6,8 @@ import homePageFactory from './pages/home';
 import errorPageFactory from './pages/error';
 import storyPageFactory from './pages/story';
 import actPageFactory from './pages/act';
-import messagePageFactory from './pages/message';
+import messageViewPageFactory from './pages/messageView';
+import messageSendPageFactory from './pages/messageSend';
 import registerPageFactory from './pages/register';
 import sharePageFactory from './pages/share';
 import thanksEndPageFactory from './pages/thanksEnd';
@@ -15,7 +16,8 @@ const homePage = homePageFactory(driver);
 const errorPage = errorPageFactory(driver);
 const storyPage = storyPageFactory(driver);
 const actPage = actPageFactory(driver);
-const messagePage = messagePageFactory(driver);
+const messageViewPage = messageViewPageFactory(driver);
+const messageSendPage = messageSendPageFactory(driver);
 const registerPage = registerPageFactory(driver);
 const sharePage = sharePageFactory(driver);
 const thanksEndPage = thanksEndPageFactory(driver);
@@ -33,7 +35,7 @@ describe('Urgent Action', () => {
     });
 
     describe('app', () => {
-        it('should display story', async () => {
+        it('should display the story step', async () => {
             await storyPage.navigate(urgentAction.slug, 0);
 
             const text = await storyPage.getActiveText();
@@ -56,7 +58,7 @@ describe('Urgent Action', () => {
             await storyPage.lastStep();
         });
 
-        it('should display act step', async () => {
+        it.skip('should display the act step', async () => {
             await actPage.navigate(urgentAction.slug);
 
             const title = await actPage.getTitle();
@@ -69,12 +71,18 @@ describe('Urgent Action', () => {
 
             await actPage.next();
 
-            await messagePage.isLoaded();
+            await messageViewPage.isLoaded();
         });
 
-        it('should display message steps', async () => {
-            await messagePage.navigate(urgentAction.slug, 0);
-            const messages = await messagePage.getMessages();
+        it.skip('should display the message view step', async () => {
+            await messageViewPage.navigate(urgentAction.slug);
+
+            const text = await messageViewPage.getText();
+            expect(text).toBe(
+                "Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email.",
+            );
+
+            const messages = await messageViewPage.getMessages();
             expect(messages[0]).toBe(
                 'Dear Minister,\nI am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.',
             );
@@ -87,32 +95,42 @@ describe('Urgent Action', () => {
                 'They were doing nothing wrong. They are being investigated on suspicion of "membership of an armed terrorist organization", a baseless and ridiculous accusation.',
             );
 
-            await messagePage.isLoaded();
-
-            const indication = await messagePage.getIndication();
+            const indication = await messageViewPage.getIndication();
             expect(indication).toBe(
                 'Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.',
             );
 
-            await messagePage.enterObjectText('My subject');
+            expect(await messageViewPage.isButtonDisabled()).toBe(true);
+            await messageViewPage.enterObjectText('My subject');
+            expect(await messageViewPage.isButtonDisabled()).toBe(false);
 
-            expect(await messagePage.isButtonDisabled()).toBe(true);
-            await messagePage.enterEmailText('super@man.fr');
-            await messagePage.chooseCivility();
-            await messagePage.enterFirstnameText('My');
-            await messagePage.enterLastnameText('name');
-            expect(await messagePage.isButtonDisabled()).toBe(false);
+            await messageViewPage.clickButton();
+            await messageSendPage.isLoaded();
+        });
 
-            const legalInformation = await messagePage.getLegalInformation();
+        it.skip('should display the message send step', async () => {
+            await messageSendPage.navigate(urgentAction.slug);
+
+            const text = await messageSendPage.getText();
+            expect(text).toBe('Compléter le formulaire suivant pour envoyer le message.');
+
+            expect(await messageSendPage.isButtonDisabled()).toBe(true);
+            await messageSendPage.chooseCivility();
+            await messageSendPage.enterFirstnameText('My');
+            await messageSendPage.enterLastnameText('name');
+            await messageSendPage.enterEmailText('super@man.fr');
+            expect(await messageSendPage.isButtonDisabled()).toBe(false);
+
+            const legalInformation = await messageSendPage.getLegalInformation();
             expect(legalInformation).toBe(
                 'Vos données personnelles sont traitées par Amnesty International France.',
             );
 
-            await messagePage.clickButton();
+            await messageSendPage.clickButton();
             await registerPage.isLoaded();
         });
 
-        it('should display register step', async () => {
+        it.skip('should display the register step', async () => {
             await registerPage.navigate(urgentAction.slug);
 
             const title = await registerPage.getTitle();
@@ -131,7 +149,7 @@ describe('Urgent Action', () => {
             await thanksEndPage.isLoaded();
         });
 
-        it('should display share step', async () => {
+        it('should display the share step', async () => {
             await sharePage.navigate(urgentAction.slug);
 
             const title = await sharePage.getTitle();
@@ -141,7 +159,7 @@ describe('Urgent Action', () => {
             expect(text).toBe("Continuons d'agir en partageant cette histoire.");
         });
 
-        it('should display thanks-end step', async () => {
+        it('should display the thanks-end step', async () => {
             await thanksEndPage.navigate(urgentAction.slug);
 
             const title = await thanksEndPage.getTitle();
