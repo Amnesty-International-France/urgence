@@ -9,7 +9,7 @@ import { yellow, white, black } from '../themes/colors';
 import { withBlackLogo } from '../themes/ThemeContext';
 
 const styles = {
-    '& .page': {
+    '& .paper': {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -56,7 +56,7 @@ const styles = {
         },
     },
     '@media (min-width: 1024px)': {
-        '& .page': {
+        '& .paper': {
             padding: '10vh 10vw',
         },
         '& .link': {
@@ -72,7 +72,7 @@ const styles = {
 
 export const TransitionScreen = ({ className, actions, title, message }) => (
     <div className={className}>
-        <Paper className="page" elevation={4} square>
+        <Paper className="paper" elevation={4} square>
             <div>
                 <h1>
                     <LongText text={title} />

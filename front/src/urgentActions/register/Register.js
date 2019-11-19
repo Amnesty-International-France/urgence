@@ -25,9 +25,11 @@ const styles = {
     justifyContent: 'flex-start',
     minHeight: '100%',
     width: '100%',
-    padding: '135px 20px 20px 20px',
-    color: black,
-    backgroundColor: white,
+    '& .paper': {
+        color: black,
+        backgroundColor: white,
+        padding: '135px 20px 20px 20px',
+    },
     '& .header': {
         margin: '1em 0',
     },
@@ -60,7 +62,9 @@ const styles = {
         fontSize: '16px',
     },
     '@media (min-width: 1024px)': {
-        padding: '10vh 10vw',
+        '&.paper': {
+            padding: '10vh 10vw',
+        },
         '& .action': {
             display: 'flex',
             '& a': {
@@ -81,7 +85,7 @@ export const RegisterActivist = ({ data, gdprRegister, action, className, ...pro
     const text = get(data, 'text');
     return (
         <div className={classnames('register', className)}>
-            <Paper elevation={4} square>
+            <Paper className="paper" elevation={4} square>
                 <div className="header">
                     <h1>
                         <LongText text={title} />

@@ -21,9 +21,11 @@ const styles = {
     justifyContent: 'flex-start',
     minHeight: '100%',
     width: '100%',
-    padding: '135px 20px 20px 20px',
-    color: black,
-    backgroundColor: white,
+    '& .paper': {
+        color: black,
+        backgroundColor: white,
+        padding: '135px 20px 20px 20px',
+    },
     '& .action': {
         margin: '1em 0',
         '& a': {
@@ -37,7 +39,9 @@ const styles = {
         fontSize: '16px',
     },
     '@media (min-width: 1024px)': {
-        padding: '10vh 10vw',
+        '&.paper': {
+            padding: '10vh 10vw',
+        },
         '& .action': {
             display: 'flex',
             '& a': {
@@ -61,7 +65,7 @@ export const MessageSend = ({
 
     return (
         <div className={classnames('message-send', className)}>
-            <Paper elevation={4} square>
+            <Paper className="paper" elevation={4} square>
                 <div className="text">
                     <RichText html={text} />
                 </div>
