@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { compose } from 'recompose';
 import classnames from 'classnames';
+import Paper from '@material-ui/core/Paper';
 
 import { white, black } from '../../themes/colors';
 
@@ -60,12 +61,14 @@ export const MessageSend = ({
 
     return (
         <div className={classnames('message-send', className)}>
-            <div className="text">
-                <RichText html={text} />
-            </div>
-            <div className="form-step">
-                <Form {...props} />
-            </div>
+            <Paper className="page" elevation={4} square>
+                <div className="text">
+                    <RichText html={text} />
+                </div>
+                <div className="form-step">
+                    <Form {...props} />
+                </div>
+            </Paper>
             <div className="action">{action}</div>
             <LegalInformation content={gdprMessage} />
         </div>

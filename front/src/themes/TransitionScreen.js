@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import Paper from '@material-ui/core/Paper';
+
 import RichText from '../themes/RichText';
 import LongText from '../themes/LongText';
 import { yellow, white, black } from '../themes/colors';
 import { withBlackLogo } from '../themes/ThemeContext';
-import Paper from '@material-ui/core/Paper';
 
 const styles = {
     '& .page': {
@@ -71,7 +72,7 @@ const styles = {
 
 export const TransitionScreen = ({ className, actions, title, message }) => (
     <div className={className}>
-        <Paper className="page" elevation={4} square={true}>
+        <Paper className="page" elevation={4} square>
             <div>
                 <h1>
                     <LongText text={title} />
