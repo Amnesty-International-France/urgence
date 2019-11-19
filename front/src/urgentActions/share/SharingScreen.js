@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import classnames from 'classnames';
+import Paper from '@material-ui/core/Paper';
 
 import RichText from '../../themes/RichText';
 import LongText from '../../themes/LongText';
@@ -10,19 +11,17 @@ import { withYellowLogo } from '../../themes/ThemeContext';
 import Share from '../../themes/Sharing/ShareForm';
 
 const styles = {
+    fontFamily: 'Amnesty Trade Gothic LT',
+    fontSize: '0.8em',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     minHeight: '100%',
     width: '100%',
-    padding: '135px 20px 20px 20px',
-    color: black,
-    backgroundColor: white,
-    '@media (min-width: 1024px)': {
-        padding: '10vh 10vw',
-        '& .link': {
-            textAlign: 'center',
-        },
+    '& .paper': {
+        color: black,
+        backgroundColor: white,
+        padding: '135px 20px 20px 20px',
     },
     '& .header': {
         margin: '1em 0',
@@ -43,6 +42,17 @@ const styles = {
             boxDecorationBreak: 'clone',
         },
     },
+    '@media (min-width: 350px)': {
+        fontSize: '16px',
+    },
+    '@media (min-width: 1024px)': {
+        '&.paper': {
+            padding: '10vh 10vw',
+        },
+        '& .link': {
+            textAlign: 'center',
+        },
+    },
 };
 
 export const SharingScreen = ({
@@ -56,21 +66,23 @@ export const SharingScreen = ({
     analyticsCategory,
 }) => (
     <div className={classnames('share', className)}>
-        <div className="header">
-            <h1>
-                <LongText text={title} />
-            </h1>
-            {message && <RichText html={message} />}
-        </div>
-        {share && (
-            <Share
-                {...share}
-                slug={slug}
-                step={step}
-                link={link}
-                analyticsCategory={analyticsCategory}
-            />
-        )}
+        <Paper className="paper" elevation={4} square>
+            <div className="header">
+                <h1>
+                    <LongText text={title} />
+                </h1>
+                {message && <RichText html={message} />}
+            </div>
+            {share && (
+                <Share
+                    {...share}
+                    slug={slug}
+                    step={step}
+                    link={link}
+                    analyticsCategory={analyticsCategory}
+                />
+            )}
+        </Paper>
     </div>
 );
 
