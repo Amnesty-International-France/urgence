@@ -78,7 +78,7 @@ const styles = {
         fontStyle: 'italic',
         fontSize: '14px',
     },
-    '& .formStep': {
+    '& .form-step': {
         margin: '5px 0px 10px 0px',
     },
 };
@@ -93,7 +93,7 @@ export const MessageView = ({ className, text, messageTemplate, action, ...props
             <div className="text">
                 <RichText html={text} />
             </div>
-            <div className="formStep">
+            <div className="form-step">
                 <Form {...props} />
             </div>
             <LetterView messageTemplate={messageTemplate} />

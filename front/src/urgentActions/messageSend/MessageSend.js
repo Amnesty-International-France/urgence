@@ -38,7 +38,7 @@ const styles = {
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
     },
-    '& .formStep': {
+    '& .form-step': {
         margin: '5px 0px 10px 0px',
     },
 };
@@ -60,7 +60,7 @@ export const MessageSend = ({
             <div className="text">
                 <RichText html={text} />
             </div>
-            <div className="formStep">
+            <div className="form-step">
                 <Form {...props} />
             </div>
             <div className="action">{action}</div>

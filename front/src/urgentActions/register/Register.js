@@ -50,7 +50,7 @@ const styles = {
             display: 'flex',
         },
     },
-    '& .formStep': {
+    '& .form-step': {
         margin: '5px 0px 10px 0px',
     },
     '@media (max-width: 350px)': {
@@ -78,7 +78,7 @@ export const RegisterActivist = ({ data, gdprRegister, action, className, ...pro
                 </h1>
                 {text && <RichText html={text} />}
             </div>
-            <div className="formStep">
+            <div className="form-step">
                 <Form {...props} />
             </div>
             <div className="action">
