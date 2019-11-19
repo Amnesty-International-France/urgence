@@ -12,7 +12,7 @@ const styles = {
     '& .step': {
         height: '4px',
         width: '30px',
-        margin: '0px 5px',
+        margin: '0px 3px',
     },
     '& .done': {
         backgroundColor: black,
@@ -21,7 +21,9 @@ const styles = {
         backgroundColor: darkGrey,
     },
     '@media (min-width: 350px)': {
-        width: '50px',
+        '& .step': {
+            width: '50px',
+        },
     },
 };
 
