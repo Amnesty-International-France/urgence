@@ -10,8 +10,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     '& .step': {
-        height: 5,
-        width: 30,
+        height: '4px',
+        width: '50px',
         margin: '0px 5px',
     },
     '& .done': {
