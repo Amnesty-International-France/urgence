@@ -7,36 +7,39 @@ import { routeMatch } from '../propTypes';
 import { withRouter } from 'react-router';
 import trackEvent from '../analytics/trackEvent';
 
-import { black, white } from './colors';
+import { black, white, grey, textColorForBackgroundColor } from './colors';
 
 export const styles = {
-    display: 'block',
-    '@media (min-width: 1024px)': {
-        display: 'inline-block',
-    },
-    backgroundColor: black,
-    color: white,
-    boxShadow:
-        '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
-    padding: '0 0.5em',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     fontFamily: 'Amnesty Trade Gothic Condensed',
     fontWeight: 'bold',
-    fontSize: 27,
-    lineHeight: '40px',
-    height: 40,
+    fontSize: '27px',
+    padding: '0 1em',
+    lineHeight: '42px',
+    minWidth: '42px',
+    width: '100%',
+    height: '42px',
     textDecoration: 'none',
     textTransform: 'uppercase',
     textAlign: 'center',
-    transition: 'opacity 0.25s ease',
-    userSelect: 'none',
+    boxShadow:
+        '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
     cursor: 'pointer',
+    userSelect: 'none',
+    backgroundColor: black,
+    color: textColorForBackgroundColor('black'),
+    WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+    transition: 'background-color 0.25s ease',
     '&.disabled': {
-        opacity: 0.25,
+        backgroundColor: grey,
         pointerEvents: 'none',
     },
     '&.white': {
         display: 'flex',
         backgroundColor: white,
+        color: textColorForBackgroundColor('white'),
         fontFamily: 'Amnesty Trade Gothic LT',
         fontSize: 16,
         textTransform: 'none',
