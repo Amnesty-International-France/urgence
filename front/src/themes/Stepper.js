@@ -11,7 +11,7 @@ const styles = {
     justifyContent: 'center',
     '& .step': {
         height: '4px',
-        width: '50px',
+        width: '30px',
         margin: '0px 5px',
     },
     '& .done': {
@@ -19,6 +19,9 @@ const styles = {
     },
     '& .todo': {
         backgroundColor: darkGrey,
+    },
+    '@media (min-width: 350px)': {
+        width: '50px',
     },
 };
 
