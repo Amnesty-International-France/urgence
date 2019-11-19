@@ -4,7 +4,10 @@ import { Labeled } from 'react-admin';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-const toolbar = [[{ size: ['small', 'normal', 'large'] }, 'bold', 'italic', 'underline', 'link']];
+const toolbar = [
+    [{ size: ['small', 'normal', 'large'] }, 'bold', 'italic', 'underline', 'link'],
+    [{ color: [] }, { background: [] }],
+];
 
 const styles = {
     fullwidth: {
