@@ -17,9 +17,9 @@ const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '0.8em',
     display: 'flex',
-    minHeight: '100%',
     flexDirection: 'column',
     justifyContent: 'flex-start',
+    minHeight: '100%',
     width: '100%',
     padding: '135px 20px 20px 20px',
     color: black,
@@ -61,7 +61,7 @@ export const MessageSend = ({
 
     return (
         <div className={classnames('message-send', className)}>
-            <Paper className="page" elevation={4} square>
+            <Paper elevation={4} square>
                 <div className="text">
                     <RichText html={text} />
                 </div>

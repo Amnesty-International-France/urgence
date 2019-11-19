@@ -18,9 +18,11 @@ import Form from './Form';
 import LegalInformation from '../LegalInformation';
 
 const styles = {
+    fontFamily: 'Amnesty Trade Gothic LT',
+    fontSize: '0.8em',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-start',
     minHeight: '100%',
     width: '100%',
     padding: '135px 20px 20px 20px',
@@ -47,18 +49,24 @@ const styles = {
     },
     '& .action': {
         margin: '1em 0',
-        '@media (min-width: 1024px)': {
-            display: 'flex',
+        '& a': {
+            width: '100%',
         },
     },
     '& .form-step': {
         margin: '5px 0px 10px 0px',
     },
-    '@media (max-width: 350px)': {
-        fontSize: '0.8em',
+    '@media (min-width: 350px)': {
+        fontSize: '16px',
     },
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',
+        '& .action': {
+            display: 'flex',
+            '& a': {
+                width: 'fit-content',
+            },
+        },
     },
 };
 
@@ -73,7 +81,7 @@ export const RegisterActivist = ({ data, gdprRegister, action, className, ...pro
     const text = get(data, 'text');
     return (
         <div className={classnames('register', className)}>
-            <Paper className="page" elevation={4} square>
+            <Paper elevation={4} square>
                 <div className="header">
                     <h1>
                         <LongText text={title} />
