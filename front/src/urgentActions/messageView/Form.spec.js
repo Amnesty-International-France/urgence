@@ -36,6 +36,6 @@ describe('Form', () => {
         const richText = wrapper.find(RichText);
 
         expect(richText.length).toBe(1);
-        expect(richText.at(0).prop('className')).toBe('objectIndication');
+        expect(richText.at(0).prop('className')).toBe('object-indication');
     });
 });
