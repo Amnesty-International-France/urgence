@@ -7,7 +7,7 @@ import { routeMatch } from '../propTypes';
 import { withRouter } from 'react-router';
 import trackEvent from '../analytics/trackEvent';
 
-import { black, white, grey, textColorForBackgroundColor } from './colors';
+import { black, white, grey } from './colors';
 
 export const styles = {
     display: 'flex',
@@ -29,7 +29,7 @@ export const styles = {
     cursor: 'pointer',
     userSelect: 'none',
     backgroundColor: black,
-    color: textColorForBackgroundColor('black'),
+    color: white,
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
     transition: 'background-color 0.25s ease',
     '&.disabled': {
@@ -39,7 +39,7 @@ export const styles = {
     '&.white': {
         display: 'flex',
         backgroundColor: white,
-        color: textColorForBackgroundColor('white'),
+        color: black,
         fontFamily: 'Amnesty Trade Gothic LT',
         fontSize: 16,
         textTransform: 'none',

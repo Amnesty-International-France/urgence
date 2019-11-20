@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { yellow, grey, textColorForBackgroundColor } from './colors';
+import { black, yellow, grey } from './colors';
 
 import glamorous from 'glamorous';
 
@@ -16,7 +16,7 @@ const IconButtonContainer = glamorous.div({
     cursor: 'pointer',
     userSelect: 'none',
     backgroundColor: yellow,
-    color: textColorForBackgroundColor('yellow'),
+    color: black,
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
     transition: 'background-color 0.25s ease',
     '&:disabled': {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
-import { yellow, textColorForBackgroundColor } from './colors';
+import { black, yellow } from './colors';
 
 const StyledButton = glamorous.button({
     display: 'flex',
@@ -24,7 +24,7 @@ const StyledButton = glamorous.button({
     cursor: 'pointer',
     userSelect: 'none',
     backgroundColor: yellow,
-    color: textColorForBackgroundColor('yellow'),
+    color: black,
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
     transition: 'background-color 0.25s ease',
     '&:disabled': {
