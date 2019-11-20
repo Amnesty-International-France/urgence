@@ -20,18 +20,17 @@ const Form = ({ objectIndication, object, analyticsCategory, step, setObject }) 
                 step={step}
                 label="Objet de l'e-mail *"
             />
-            <RichText className="objectIndication" html={objectIndication} />
+            <RichText className="object-indication" html={objectIndication} />
         </Fragment>
     );
 };
 
 Form.propTypes = {
-    className: PropTypes.string,
+    analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
     objectIndication: PropTypes.string,
     object: PropTypes.string,
     setObject: PropTypes.func.isRequired,
-    analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
 };
 
 export default Form;

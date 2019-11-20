@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Input, { isCorrectEmail } from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';
+import RichText from '../../themes/RichText';
 
 const Form = ({
     analyticsCategory,
@@ -11,6 +12,7 @@ const Form = ({
     firstname,
     lastname,
     email,
+    phoneIndication,
     phone,
     setCivility,
     setFirstname,
@@ -82,6 +84,7 @@ const Form = ({
                 step={step}
                 label="Votre adresse e-mail *"
             />
+            <RichText className="phone-indication" html={phoneIndication} />;
             <Input
                 className="phone"
                 type="phone"
@@ -98,19 +101,19 @@ const Form = ({
 };
 
 Form.propTypes = {
-    className: PropTypes.string,
+    analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
     civility: PropTypes.string,
     firstname: PropTypes.string,
     lastname: PropTypes.string,
     email: PropTypes.string,
+    phoneIndication: PropTypes.string,
     phone: PropTypes.string,
     setCivility: PropTypes.func.isRequired,
     setFirstname: PropTypes.func.isRequired,
     setLastname: PropTypes.func.isRequired,
     setEmail: PropTypes.func.isRequired,
     setPhone: PropTypes.func.isRequired,
-    analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
 };
 
 Form.defaultProps = {};

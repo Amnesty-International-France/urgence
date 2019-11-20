@@ -74,7 +74,7 @@ const styles = {
     '& .pleinEnd': {
         paddingTop: '10px',
     },
-    '& .objectIndication': {
+    '& .object-indication': {
         fontStyle: 'italic',
         fontSize: '14px',
     },

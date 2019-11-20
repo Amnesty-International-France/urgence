@@ -115,6 +115,7 @@ const query = gql`
             register {
                 title
                 text
+                phone_indication
                 button
             }
             end_thank {

@@ -81,17 +81,16 @@ export const Form = ({
 };
 
 Form.propTypes = {
-    className: PropTypes.string,
-    email: PropTypes.string,
+    analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
     civility: PropTypes.string,
     firstname: PropTypes.string,
     lastname: PropTypes.string,
-    setEmail: PropTypes.func.isRequired,
+    email: PropTypes.string,
     setCivility: PropTypes.func.isRequired,
     setFirstname: PropTypes.func.isRequired,
     setLastname: PropTypes.func.isRequired,
-    analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
+    setEmail: PropTypes.func.isRequired,
 };
 
 export default Form;
