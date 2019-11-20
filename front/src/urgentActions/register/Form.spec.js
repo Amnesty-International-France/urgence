@@ -30,14 +30,14 @@ describe('Form', () => {
         expect(inputs.at(0).prop('className')).toBe('firstname');
         expect(inputs.at(0).prop('label')).toBe(`Votre prénom *`);
 
-        expect(inputs.at(0).prop('className')).toBe('lastname');
-        expect(inputs.at(0).prop('label')).toBe(`Votre nom *`);
+        expect(inputs.at(1).prop('className')).toBe('lastname');
+        expect(inputs.at(1).prop('label')).toBe(`Votre nom *`);
 
-        expect(inputs.at(0).prop('className')).toBe('email');
-        expect(inputs.at(0).prop('label')).toBe(`Votre adresse e-mail *`);
+        expect(inputs.at(2).prop('className')).toBe('email');
+        expect(inputs.at(2).prop('label')).toBe(`Votre adresse e-mail *`);
 
-        expect(inputs.at(0).prop('className')).toBe('phone');
-        expect(inputs.at(0).prop('label')).toBe(`Votre téléphone mobile *`);
+        expect(inputs.at(3).prop('className')).toBe('phone');
+        expect(inputs.at(3).prop('label')).toBe(`Votre téléphone mobile *`);
     });
 
     it('display a radio button', () => {
