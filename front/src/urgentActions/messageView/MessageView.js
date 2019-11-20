@@ -27,9 +27,6 @@ const styles = {
         padding: '135px 20px 20px 20px',
     },
     '& .action': {
-        fontFamily: 'Amnesty Trade Gothic Condensed',
-        fontWeight: 'bold',
-        fontSize: '26px',
         position: 'relative',
         display: 'flex',
         alignItems: 'center',

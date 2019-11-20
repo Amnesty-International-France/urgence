@@ -15,7 +15,7 @@ export const styles = {
     alignItems: 'center',
     fontFamily: 'Amnesty Trade Gothic Condensed',
     fontWeight: 'bold',
-    fontSize: '27px',
+    fontSize: '26px',
     padding: '0 1em',
     lineHeight: '42px',
     minWidth: '42px',

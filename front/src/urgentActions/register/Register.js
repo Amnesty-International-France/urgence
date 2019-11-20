@@ -50,9 +50,6 @@ const styles = {
         },
     },
     '& .action': {
-        fontFamily: 'Amnesty Trade Gothic Condensed',
-        fontWeight: 'bold',
-        fontSize: '26px',
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
