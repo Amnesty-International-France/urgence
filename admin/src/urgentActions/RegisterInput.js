@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { addField, FormDataConsumer, LongTextInput, TextInput, required } from 'react-admin';
+import { addField, FormDataConsumer, TextInput, required } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { root, registerFormScreenPreview } from './styles';
 import { get as getScreenIndex, REGISTER } from './screenIndex';
 import FrontPreview, { noop } from './FrontPreview';
+import RichTextInput from '../../form/RichTextInput';
 
 import Register from '../../../front/src/urgentActions/register/Register';
 import Link from '../../../front/src/themes/Link';
@@ -21,8 +22,9 @@ const styles = () => ({
     },
 });
 
-const defaultTitle = 'Merci pour votre action';
-const defaultMessage = `L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !`;
+const defaultTitle = 'Restez Informé·e des prochaines actions urgentes';
+const defaultText = `L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !`;
+const defaultPhoneIndication = `Inscrivez votre numéro de mobile pour recevoir les alertes SMS`;
 const defaultButton = `Je m'inscris`;
 
 export const RegisterInput = ({ classes, source }) => {
@@ -37,17 +39,22 @@ export const RegisterInput = ({ classes, source }) => {
                         <Card className={classes.card}>
                             <CardContent className={classes.content}>
                                 <div className={classes.formContainer}>
-                                    <LongTextInput
+                                    <RichTextInput
                                         source={`${source}.title`}
                                         label="Title"
                                         defaultValue={defaultTitle}
                                         validate={[required()]}
                                     />
-                                    <LongTextInput
+                                    <RichTextInput
                                         source={`${source}.text`}
                                         label="Text"
-                                        defaultValue={defaultMessage}
+                                        defaultValue={defaultText}
                                         validate={[required()]}
+                                    />
+                                    <RichTextInput
+                                        source={`${source}.phone_indication`}
+                                        label="Phone Indication"
+                                        defaultValue={defaultPhoneIndication}
                                     />
                                     <TextInput
                                         source={`${source}.button`}
