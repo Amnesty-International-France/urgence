@@ -7,25 +7,17 @@ import RadioButton from '../../themes/RadioButton';
 const Form = ({
     analyticsCategory,
     step,
-    email,
-    phone,
     civility,
     firstname,
     lastname,
-    setEmail,
-    setPhone,
+    email,
+    phone,
     setCivility,
     setFirstname,
     setLastname,
+    setEmail,
+    setPhone,
 }) => {
-    const handleChangeEmail = event => {
-        setEmail(event.target.value);
-    };
-
-    const handleChangePhone = event => {
-        setPhone(event.target.value);
-    };
-
     const handleChangeCivility = event => {
         setCivility(event.target.value);
     };
@@ -38,30 +30,16 @@ const Form = ({
         setLastname(event.target.value);
     };
 
+    const handleChangeEmail = event => {
+        setEmail(event.target.value);
+    };
+
+    const handleChangePhone = event => {
+        setPhone(event.target.value);
+    };
+
     return (
         <Fragment>
-            <Input
-                className="email"
-                type="email"
-                value={email}
-                onChange={handleChangeEmail}
-                error={!isCorrectEmail(email)}
-                autoComplete="email"
-                analyticsCategory={analyticsCategory}
-                step={step}
-                label="Votre adresse e-mail *"
-            />
-            <Input
-                className="phone"
-                type="phone"
-                value={phone}
-                onChange={handleChangePhone}
-                error={!phone}
-                autoComplete="phone"
-                analyticsCategory={analyticsCategory}
-                step={step}
-                label="Votre téléphone mobile *"
-            />
             <RadioButton
                 value={civility}
                 name="civility"
@@ -93,22 +71,44 @@ const Form = ({
                 autoComplete="family-name"
                 label="Votre nom *"
             />
+            <Input
+                className="email"
+                type="email"
+                value={email}
+                onChange={handleChangeEmail}
+                error={!isCorrectEmail(email)}
+                autoComplete="email"
+                analyticsCategory={analyticsCategory}
+                step={step}
+                label="Votre adresse e-mail *"
+            />
+            <Input
+                className="phone"
+                type="phone"
+                value={phone}
+                onChange={handleChangePhone}
+                error={!phone}
+                autoComplete="phone"
+                analyticsCategory={analyticsCategory}
+                step={step}
+                label="Votre téléphone mobile *"
+            />
         </Fragment>
     );
 };
 
 Form.propTypes = {
     className: PropTypes.string,
-    email: PropTypes.string,
-    phone: PropTypes.string,
     civility: PropTypes.string,
     firstname: PropTypes.string,
     lastname: PropTypes.string,
-    setEmail: PropTypes.func.isRequired,
-    setPhone: PropTypes.func.isRequired,
+    email: PropTypes.string,
+    phone: PropTypes.string,
     setCivility: PropTypes.func.isRequired,
     setFirstname: PropTypes.func.isRequired,
     setLastname: PropTypes.func.isRequired,
+    setEmail: PropTypes.func.isRequired,
+    setPhone: PropTypes.func.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
 };
