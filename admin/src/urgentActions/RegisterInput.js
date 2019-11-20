@@ -22,7 +22,7 @@ const styles = () => ({
     },
 });
 
-const defaultTitle = 'Restez Informé·e des prochaines actions urgentes';
+const defaultTitle = 'Restez Informé·e';
 const defaultText = `L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !`;
 const defaultPhoneIndication = `Inscrivez votre numéro de mobile pour recevoir les alertes SMS`;
 const defaultButton = `Je m'inscris`;
