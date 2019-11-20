@@ -11,18 +11,25 @@ export class ThemeProvider extends Component {
     state = {
         backgroundColor: lightGrey,
         changeBackgroundColor: ({ backgroundColor }) => {
-            this.setState({ backgroundColor });
+            this.setState({
+                backgroundColor,
+            });
         },
         logoColor: black,
         logoBackgroundColor: yellow,
         changeLogoColor: ({ logoColor, logoBackgroundColor }) => {
-            this.setState({ logoColor, logoBackgroundColor });
+            this.setState({
+                logoColor,
+                logoBackgroundColor,
+            });
         },
     };
 
     theme = createMuiTheme({
         palette: {
-            primary: { 500: white },
+            primary: {
+                500: white,
+            },
         },
     });
 
@@ -45,11 +52,29 @@ export const withThemeContext = BaseComponent => props => (
     <ThemeConsumer>{context => <BaseComponent context={context} {...props} />}</ThemeConsumer>
 );
 
+export const withLightGreyBackground = compose(
+    withThemeContext,
+    lifecycle({
+        componentDidMount() {
+            this.props.context.changeLogoColor({ backgroundColor: lightGrey });
+        },
+    }),
+);
+
+export const withYellowBackground = compose(
+    withThemeContext,
+    lifecycle({
+        componentDidMount() {
+            this.props.context.changeLogoColor({ backgroundColor: yellow });
+        },
+    }),
+);
+
 export const withBlackLogo = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
-            this.props.context.changeLogoColor({ color: white, backgroundColor: black });
+            this.props.context.changeLogoColor({ logoColor: white, logoBackgroundColor: black });
         },
     }),
 );
@@ -58,7 +83,7 @@ export const withYellowLogo = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
-            this.props.context.changeLogoColor({ color: black, backgroundColor: yellow });
+            this.props.context.changeLogoColor({ logoColor: black, logoBackgroundColor: yellow });
         },
     }),
 );
