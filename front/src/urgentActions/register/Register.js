@@ -49,6 +49,9 @@ const styles = {
             boxDecorationBreak: 'clone',
         },
     },
+    '& .phone-indication': {
+        margin: '5px 0',
+    },
     '& .action': {
         position: 'relative',
         display: 'flex',
