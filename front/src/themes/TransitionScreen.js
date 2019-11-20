@@ -9,6 +9,7 @@ import { yellow, white, black } from '../themes/colors';
 import { withBlackLogo } from '../themes/ThemeContext';
 
 const styles = {
+    padding: '60px 15px 20px',
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',

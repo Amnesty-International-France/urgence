@@ -19,39 +19,30 @@ export const styles = {
     '&': {
         width: '100vw',
     },
-    '& .page': {
-        padding: '60px 15px',
-    },
 };
 
 const App = ({ className, client }) => (
     <ApolloProvider client={client}>
         <ThemeProvider>
             <Div100Vh className={className}>
-                <div className="page">
-                    <AppBackground />
-                    <AppLogo />
-                    <DesktopAlert />
-                    <Router>
-                        <Switch>
-                            <Route
-                                exact
-                                path={generateUrl('home')}
-                                component={withTracker(HomePage)}
-                            />
-                            <Route
-                                exact
-                                path={generateUrl('error')}
-                                component={withTracker(ErrorPage)}
-                            />
-                            <Route
-                                path="/ua/:slug/:step?/:page?"
-                                component={withTracker(UrgentAction)}
-                            />
-                            <Redirect from="*" to={generateUrl('error')} />
-                        </Switch>
-                    </Router>
-                </div>
+                <AppBackground />
+                <AppLogo />
+                <DesktopAlert />
+                <Router>
+                    <Switch>
+                        <Route exact path={generateUrl('home')} component={withTracker(HomePage)} />
+                        <Route
+                            exact
+                            path={generateUrl('error')}
+                            component={withTracker(ErrorPage)}
+                        />
+                        <Route
+                            path="/ua/:slug/:step?/:page?"
+                            component={withTracker(UrgentAction)}
+                        />
+                        <Redirect from="*" to={generateUrl('error')} />
+                    </Switch>
+                </Router>
             </Div100Vh>
         </ThemeProvider>
     </ApolloProvider>

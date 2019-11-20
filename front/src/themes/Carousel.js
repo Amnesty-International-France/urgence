@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import Swiper from 'swiper/dist/js/swiper';
+import Swiper from 'swiper';
 import classnames from 'classnames';
-import 'swiper/dist/css/swiper.css';
+import 'swiper/css/swiper.css';
 
 import IconButton from './IconButton';
 
@@ -14,8 +14,8 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        padding: '5px 15px',
-        marginTop: '-30px',
+        padding: '5px 50px',
+        marginTop: '-50px',
         height: '60px',
         zIndex: '100',
     },
