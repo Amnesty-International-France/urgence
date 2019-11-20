@@ -8,6 +8,7 @@ import { withBlackLogo } from '../themes/ThemeContext';
 import Paper from '@material-ui/core/Paper';
 
 const styles = {
+    padding: '60px 15px 20px',
     '& .page': {
         display: 'flex',
         flexDirection: 'column',

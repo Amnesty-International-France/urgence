@@ -1,15 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import get from 'lodash.get';
+import Paper from '@material-ui/core/Paper';
 
 import { white, black } from '../../themes/colors';
 import RichText from '../../themes/RichText';
 
 const styles = {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    width: '100%',
+    padding: '60px 15px 20px',
+    backgroundColor: 'transparent',
+    height: '95vh',
+    '& .page': {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        width: '100%',
+    },
     '& .step': {
         flex: '1 0 0',
         display: 'flex',
@@ -65,13 +72,27 @@ const styles = {
     },
 };
 
-export const StoryCover = ({ className, content }) => (
+export const StoryCover = ({ className, content, step }) => (
     <div className={className}>
-        <div className="step">
-            <div className="content">
-                <RichText html={content} />
+        <Paper
+            className="page"
+            style={{
+                ...{
+                    backgroundImage: `url(${get(step, 'medium.src', null)})`,
+                    backgroundPosition: 'top',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                },
+            }}
+            elevation={6}
+            square
+        >
+            <div className="step">
+                <div className="content">
+                    <RichText html={content} />
+                </div>
             </div>
-        </div>
+        </Paper>
     </div>
 );
 

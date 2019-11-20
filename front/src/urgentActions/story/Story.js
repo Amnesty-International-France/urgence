@@ -23,7 +23,6 @@ import StoryCover from './StoryCover';
 import StoryStep, { getLogoColorForStep } from './StoryStep';
 
 const styles = {
-    height: '80vh',
     '& .icon': {
         cursor: 'pointer',
     },
@@ -97,7 +96,7 @@ export class Story extends Component {
         const [cover, ...restStory] = story;
 
         return (
-            <Paper className={className} elevation={4} square={true}>
+            <div className={className}>
                 {total > 0 && (
                     <Carousel
                         initialSlide={current}
@@ -111,11 +110,14 @@ export class Story extends Component {
                     >
                         {() => (
                             <Fragment>
-                                <StorySlide index={0} step={cover}>
-                                    {storyCoverProps => <StoryCover {...storyCoverProps} />}
+                                <StorySlide step={cover}>
+                                    {storyCoverProps => (
+                                        <StoryCover {...storyCoverProps} step={cover} />
+                                    )}
                                 </StorySlide>
+
                                 {restStory.map((step, index) => (
-                                    <StorySlide key={index + 1} index={index + 1} step={step}>
+                                    <StorySlide key={index + 1} step={step}>
                                         {storyStepProps => <StoryStep {...storyStepProps} />}
                                     </StorySlide>
                                 ))}
@@ -124,7 +126,7 @@ export class Story extends Component {
                         )}
                     </Carousel>
                 )}
-            </Paper>
+            </div>
         );
     }
 }

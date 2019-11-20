@@ -3,14 +3,12 @@ import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import { black } from '../../themes/colors';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const styles = {
     height: '100%',
-    backgroundColor: black,
     '& .story-step': {
         flex: '1 0 0',
     },
@@ -30,20 +28,9 @@ const styles = {
     },
 };
 
-export const StorySlide = ({ children, className, index, step }) => {
-    const src = get(step, 'medium.src', null);
-
+export const StorySlide = ({ children, className, step }) => {
     return (
         <div
-            style={{
-                ...(index === 0 &&
-                    src && {
-                        backgroundImage: `url(${src})`,
-                        backgroundPosition: 'top',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundSize: 'cover',
-                    }),
-            }}
             className={classnames(className, {
                 'swiper-slide': true,
                 'with-bottom-media': get(step, 'displayOptions.mediumPosition') === 'bottom',
@@ -58,7 +45,6 @@ StorySlide.propTypes = {
     children: PropTypes.func.isRequired,
     className: PropTypes.string,
     step: PropTypes.object.isRequired,
-    index: PropTypes.number.isRequired,
 };
 
 export default glamorous(StorySlide)(styles);
