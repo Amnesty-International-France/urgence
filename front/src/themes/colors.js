@@ -9,9 +9,6 @@ export const grey = '#ddd';
 export const lightGrey = '#f2f2f2';
 export const darkGrey = '#b7b7b7';
 
-export const textColorForBackgroundColor = bgColor =>
-    [black, pink].includes(colors[bgColor]) ? white : black;
-
 export const colors = {
     transparent,
     black,

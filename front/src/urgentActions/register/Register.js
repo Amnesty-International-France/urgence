@@ -4,6 +4,7 @@ import glamorous from 'glamorous';
 import get from 'lodash.get';
 import { compose } from 'recompose';
 import classnames from 'classnames';
+import Paper from '@material-ui/core/Paper';
 
 import RichText from '../../themes/RichText';
 import LongText from '../../themes/LongText';
@@ -17,14 +18,18 @@ import Form from './Form';
 import LegalInformation from '../LegalInformation';
 
 const styles = {
+    fontFamily: 'Amnesty Trade Gothic LT',
+    fontSize: '0.8em',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-start',
     minHeight: '100%',
     width: '100%',
-    padding: '135px 20px 20px 20px',
-    color: black,
-    backgroundColor: white,
+    '& .paper': {
+        color: black,
+        backgroundColor: white,
+        padding: '135px 20px 20px 20px',
+    },
     '& .header': {
         margin: '1em 0',
     },
@@ -45,19 +50,32 @@ const styles = {
         },
     },
     '& .action': {
-        margin: '1em 0',
-        '@media (min-width: 1024px)': {
-            display: 'flex',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '5px 15px',
+        marginTop: '-30px',
+        height: '60px',
+        '& a': {
+            width: '100%',
         },
     },
-    '& .formStep': {
+    '& .form-step': {
         margin: '5px 0px 10px 0px',
     },
-    '@media (max-width: 350px)': {
-        fontSize: '0.8em',
+    '@media (min-width: 350px)': {
+        fontSize: '16px',
     },
     '@media (min-width: 1024px)': {
-        padding: '10vh 10vw',
+        '&.paper': {
+            padding: '10vh 10vw',
+        },
+        '& .action': {
+            '& a': {
+                width: 'fit-content',
+            },
+        },
     },
 };
 
@@ -72,15 +90,17 @@ export const RegisterActivist = ({ data, gdprRegister, action, className, ...pro
     const text = get(data, 'text');
     return (
         <div className={classnames('register', className)}>
-            <div className="header">
-                <h1>
-                    <LongText text={title} />
-                </h1>
-                {text && <RichText html={text} />}
-            </div>
-            <div className="formStep">
-                <Form {...props} />
-            </div>
+            <Paper className="paper" elevation={6} square>
+                <div className="header">
+                    <h1>
+                        <LongText text={title} />
+                    </h1>
+                    {text && <RichText html={text} />}
+                </div>
+                <div className="form-step">
+                    <Form {...props} />
+                </div>
+            </Paper>
             <div className="action">
                 {action(isDisabled(props), { firstname, lastname, phone, email })}
             </div>

@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import Paper from '@material-ui/core/Paper';
+
 import RichText from '../themes/RichText';
 import LongText from '../themes/LongText';
 import { yellow, white, black } from '../themes/colors';
 import { withBlackLogo } from '../themes/ThemeContext';
-import Paper from '@material-ui/core/Paper';
 
 const styles = {
     padding: '60px 15px 20px',
-    '& .page': {
+    '& .paper': {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -18,14 +19,6 @@ const styles = {
         padding: '100px 20px 40px 20px',
         color: white,
         backgroundColor: yellow,
-    },
-    '@media (min-width: 1024px)': {
-        '& .page': {
-            padding: '10vh 10vw',
-        },
-        '& .link': {
-            textAlign: 'center',
-        },
     },
     '& h1': {
         textTransform: 'uppercase',
@@ -59,12 +52,28 @@ const styles = {
         padding: '5px 15px',
         marginTop: '-30px',
         height: '60px',
+        '& a': {
+            width: '100%',
+        },
+    },
+    '@media (min-width: 1024px)': {
+        '& .paper': {
+            padding: '10vh 10vw',
+        },
+        '& .link': {
+            textAlign: 'center',
+        },
+        '& .actions': {
+            '& a': {
+                width: 'fit-content',
+            },
+        },
     },
 };
 
 export const TransitionScreen = ({ className, actions, title, message }) => (
     <div className={className}>
-        <Paper className="page" elevation={4} square={true}>
+        <Paper className="paper" elevation={4} square>
             <div>
                 <h1>
                     <LongText text={title} />

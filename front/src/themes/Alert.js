@@ -7,12 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import MobileDetect from 'mobile-detect';
 
-import { white } from '../themes/colors';
 import { RichText } from './RichText';
-
-const alertStyles = {
-    color: white,
-};
 
 const styles = {
     icon: {
@@ -34,13 +29,13 @@ const Alert = ({ classes, message }) => {
 
     return (
         <Snackbar
-            anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
             open={open}
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
-            message={<RichText html={message} style={alertStyles} />}
-            TransitionComponent={props => <Slide {...props} direction="down" />}
+            message={<RichText html={message} />}
+            TransitionComponent={props => <Slide {...props} direction="up" />}
             action={
                 <FontAwesomeIcon
                     icon={faTimes}

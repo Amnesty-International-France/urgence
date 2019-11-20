@@ -4,7 +4,10 @@ import { Labeled } from 'react-admin';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-const toolbar = [[{ size: ['small', 'normal', 'large'] }, 'bold', 'italic', 'underline', 'link']];
+const toolbarOptions = [
+    [{ size: ['small', 'normal', 'large'] }, 'bold', 'italic', 'underline', 'link'],
+    [{ color: [] }, { background: [] }],
+];
 
 const styles = {
     fullwidth: {
@@ -14,7 +17,7 @@ const styles = {
 
 const SettingsContentInput = ({ classes, label, ...rest }) => (
     <Labeled label={label} className={classes.fullwidth}>
-        <RichTextInput toolbar={toolbar} {...rest} />
+        <RichTextInput toolbar={toolbarOptions} {...rest} />
     </Labeled>
 );
 
