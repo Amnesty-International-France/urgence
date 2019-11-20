@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { black, yellow, grey } from './colors';
+import { black, yellow, grey, darkGrey } from './colors';
 
 import glamorous from 'glamorous';
 
@@ -21,6 +21,8 @@ const IconButtonContainer = glamorous.div({
     transition: 'background-color 0.25s ease',
     '&:disabled': {
         backgroundColor: grey,
+        color: darkGrey,
+        pointerEvents: 'none',
     },
 });
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
-import { black, yellow } from './colors';
+import { black, yellow, grey, darkGrey } from './colors';
 
 const StyledButton = glamorous.button({
     display: 'flex',
@@ -28,7 +28,9 @@ const StyledButton = glamorous.button({
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
     transition: 'background-color 0.25s ease',
     '&:disabled': {
-        backgroundColor: 'grey',
+        backgroundColor: grey,
+        color: darkGrey,
+        pointerEvents: 'none',
     },
 });
 

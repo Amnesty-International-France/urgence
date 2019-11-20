@@ -7,7 +7,7 @@ import { routeMatch } from '../propTypes';
 import { withRouter } from 'react-router';
 import trackEvent from '../analytics/trackEvent';
 
-import { black, white, grey } from './colors';
+import { black, white, grey, darkGrey } from './colors';
 
 export const styles = {
     display: 'flex',
@@ -34,6 +34,7 @@ export const styles = {
     transition: 'background-color 0.25s ease',
     '&.disabled': {
         backgroundColor: grey,
+        color: darkGrey,
         pointerEvents: 'none',
     },
     '&.white': {
