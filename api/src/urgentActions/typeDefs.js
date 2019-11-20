@@ -131,13 +131,15 @@ export default gql`
     type Register {
         title: String
         text: String
+        phone_indication: String
         button: String
     }
 
     input RegisterInput {
-        title: String
-        text: String
-        button: String
+        title: String!
+        text: String!
+        phone_indication: String
+        button: String!
     }
 
     type Thanks {
