@@ -70,7 +70,7 @@ export const MessageSend = ({
 
     return (
         <div className={classnames('message-send', className)}>
-            <Paper className="paper" elevation={4} square>
+            <Paper className="paper" elevation={6} square>
                 <div className="text">
                     <RichText html={text} />
                 </div>

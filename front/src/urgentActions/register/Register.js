@@ -90,7 +90,7 @@ export const RegisterActivist = ({ data, gdprRegister, action, className, ...pro
     const text = get(data, 'text');
     return (
         <div className={classnames('register', className)}>
-            <Paper className="paper" elevation={4} square>
+            <Paper className="paper" elevation={6} square>
                 <div className="header">
                     <h1>
                         <LongText text={title} />

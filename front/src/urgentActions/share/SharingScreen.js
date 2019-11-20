@@ -66,7 +66,7 @@ export const SharingScreen = ({
     analyticsCategory,
 }) => (
     <div className={classnames('share', className)}>
-        <Paper className="paper" elevation={4} square>
+        <Paper className="paper" elevation={6} square>
             <div className="header">
                 <h1>
                     <LongText text={title} />

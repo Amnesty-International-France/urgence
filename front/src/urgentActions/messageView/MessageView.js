@@ -103,7 +103,7 @@ export const MessageView = ({ className, text, messageTemplate, action, ...props
 
     return (
         <div className={classnames('message-view', className)}>
-            <Paper className="paper" elevation={4} square>
+            <Paper className="paper" elevation={6} square>
                 <div className="text">
                     <RichText html={text} />
                 </div>
