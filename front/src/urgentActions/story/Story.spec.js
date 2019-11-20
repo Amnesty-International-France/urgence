@@ -85,25 +85,6 @@ describe('<Story />', () => {
         expect(children[1][1].props.step).toEqual(props.story[2]);
     });
 
-    it('pass index props to carousel children', () => {
-        const props = {
-            ...defaultProps,
-            story: [
-                { ...defaultStep, id: '1', content: 'Cover' },
-                { ...defaultStep, id: '2', content: 'Hello' },
-                { ...defaultStep, id: '3', content: 'World' },
-            ],
-        };
-
-        const wrapper = shallow(<Story {...props} />);
-        const carousel = wrapper.find(Carousel);
-        const renderProp = carousel.prop('children')();
-        const children = renderProp.props.children;
-        expect(children[0].props.index).toEqual(0);
-        expect(children[1][0].props.index).toEqual(1);
-        expect(children[1][1].props.index).toEqual(2);
-    });
-
     describe('After Switching Slide', () => {
         it('should update logo color in context', () => {
             const props = {
