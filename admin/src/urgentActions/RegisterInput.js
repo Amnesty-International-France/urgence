@@ -10,7 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { root, registerFormScreenPreview } from './styles';
 import { get as getScreenIndex, REGISTER } from './screenIndex';
 import FrontPreview, { noop } from './FrontPreview';
-import RichTextInput from '../../form/RichTextInput';
+import RichTextInput from '../form/RichTextInput';
 
 import Register from '../../../front/src/urgentActions/register/Register';
 import Link from '../../../front/src/themes/Link';
