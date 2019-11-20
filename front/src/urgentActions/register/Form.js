@@ -84,7 +84,7 @@ const Form = ({
                 step={step}
                 label="Votre adresse e-mail *"
             />
-            <RichText className="phone-indication" html={phoneIndication} />;
+            <RichText className="phone-indication" html={phoneIndication} />
             <Input
                 className="phone"
                 type="phone"
