@@ -50,7 +50,16 @@ const styles = {
         },
     },
     '& .action': {
-        margin: '1em 0',
+        fontFamily: 'Amnesty Trade Gothic Condensed',
+        fontWeight: 'bold',
+        fontSize: '26px',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '5px 15px',
+        marginTop: '-30px',
+        height: '60px',
         '& a': {
             width: '100%',
         },
@@ -66,7 +75,6 @@ const styles = {
             padding: '10vh 10vw',
         },
         '& .action': {
-            display: 'flex',
             '& a': {
                 width: 'fit-content',
             },
