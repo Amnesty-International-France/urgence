@@ -3,19 +3,20 @@ import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { lifecycle, compose } from 'recompose';
 
-import { black, yellow, white } from './colors';
+import { black, white, yellow, lightGrey } from './colors';
 
 const { Consumer, Provider } = createContext();
 
 export class ThemeProvider extends Component {
     state = {
-        color: black,
-        backgroundColor: yellow,
-        changeLogoColor: ({ color, backgroundColor }) => {
-            this.setState({
-                color,
-                backgroundColor,
-            });
+        backgroundColor: lightGrey,
+        changeBackgroundColor: ({ backgroundColor }) => {
+            this.setState({ backgroundColor });
+        },
+        logoColor: black,
+        logoBackgroundColor: yellow,
+        changeLogoColor: ({ logoColor, logoBackgroundColor }) => {
+            this.setState({ logoColor, logoBackgroundColor });
         },
     };
 
