@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { compose } from 'recompose';
 import classnames from 'classnames';
+import Paper from '@material-ui/core/Paper';
 
 import { white, black } from '../../themes/colors';
 
@@ -14,32 +15,44 @@ import LegalInformation from '../LegalInformation';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '16px',
+    fontSize: '0.8em',
     display: 'flex',
-    minHeight: '100%',
     flexDirection: 'column',
     justifyContent: 'flex-start',
+    minHeight: '100%',
     width: '100%',
-    padding: '135px 20px 20px 20px',
-    color: black,
-    backgroundColor: white,
-    '@media (max-width: 1024px)': {
-        marginBottom: 40,
+    '& .paper': {
+        color: black,
+        backgroundColor: white,
+        padding: '135px 20px 20px 20px',
     },
     '& .action': {
-        margin: '1em 0',
-        '@media (min-width: 1024px)': {
-            display: 'flex',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '5px 15px',
+        marginTop: '-30px',
+        height: '60px',
+        '& a': {
+            width: '100%',
         },
-    },
-    '@media (max-width: 350px)': {
-        fontSize: '0.8em',
-    },
-    '@media (min-width: 1024px)': {
-        padding: '10vh 10vw',
     },
     '& .form-step': {
         margin: '5px 0px 10px 0px',
+    },
+    '@media (min-width: 350px)': {
+        fontSize: '16px',
+    },
+    '@media (min-width: 1024px)': {
+        '&.paper': {
+            padding: '10vh 10vw',
+        },
+        '& .action': {
+            '& a': {
+                width: 'fit-content',
+            },
+        },
     },
 };
 
@@ -57,12 +70,14 @@ export const MessageSend = ({
 
     return (
         <div className={classnames('message-send', className)}>
-            <div className="text">
-                <RichText html={text} />
-            </div>
-            <div className="form-step">
-                <Form {...props} />
-            </div>
+            <Paper className="paper" elevation={6} square>
+                <div className="text">
+                    <RichText html={text} />
+                </div>
+                <div className="form-step">
+                    <Form {...props} />
+                </div>
+            </Paper>
             <div className="action">{action}</div>
             <LegalInformation content={gdprMessage} />
         </div>

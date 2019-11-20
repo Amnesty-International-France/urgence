@@ -11,8 +11,8 @@ const styles = {
     justifyContent: 'center',
     '& .step': {
         height: '4px',
-        width: '50px',
-        margin: '0px 5px',
+        width: '30px',
+        margin: '0px 3px',
     },
     '& .done': {
         backgroundColor: black,
@@ -20,14 +20,20 @@ const styles = {
     '& .todo': {
         backgroundColor: darkGrey,
     },
+    '@media (min-width: 350px)': {
+        '& .step': {
+            width: '50px',
+        },
+    },
 };
 
 const steps = {
     story: 0,
     act: 1,
-    message: 2,
-    share: 3,
-    register: 3,
+    'message-view': 2,
+    'message-send': 3,
+    share: 4,
+    register: 4,
 };
 
 const Stepper = ({ className, data, step, page }) => {
