@@ -56,7 +56,7 @@ export const withLightGreyBackground = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
-            this.props.context.changeLogoColor({ backgroundColor: lightGrey });
+            this.props.context.changeBackgroundColor({ backgroundColor: lightGrey });
         },
     }),
 );
@@ -65,7 +65,7 @@ export const withYellowBackground = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
-            this.props.context.changeLogoColor({ backgroundColor: yellow });
+            this.props.context.changeBackgroundColor({ backgroundColor: yellow });
         },
     }),
 );
