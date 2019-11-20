@@ -10,7 +10,7 @@ import RichText from '../../themes/RichText';
 import LongText from '../../themes/LongText';
 import { isCorrectEmail } from '../../themes/Input';
 import { white, black } from '../../themes/colors';
-import { withYellowLogo } from '../../themes/ThemeContext';
+import { withYellowLogo, withYellowBackground } from '../../themes/ThemeContext';
 
 import { withSessionData } from '../../DataContext';
 
@@ -141,4 +141,8 @@ RegisterActivist.propTypes = {
 
 const WithStylesRegisterActivist = glamorous(RegisterActivist)(styles);
 
-export default compose(withYellowLogo, withSessionData)(WithStylesRegisterActivist);
+export default compose(
+    withYellowLogo,
+    withYellowBackground,
+    withSessionData,
+)(WithStylesRegisterActivist);
