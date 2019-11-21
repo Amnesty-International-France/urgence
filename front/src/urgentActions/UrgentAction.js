@@ -13,7 +13,6 @@ import LoadingScreen from '../themes/LoadingScreen';
 import Stepper from '../themes/Stepper';
 import SEO from '../SEO';
 import Story from './story/Story';
-import Act from './Act';
 import ThankStep from './ThankStep';
 import Share from './share/Share';
 import ANALYTICS_CATEGORIES from '../analytics/categories';
@@ -22,7 +21,6 @@ import ToMessageSendButton from './messageView/ToMessageSendButton';
 import MessageSend from './messageSend/MessageSend';
 import SendMail from './messageSend/SendMail';
 import generateUrl from '../services/generateUrl';
-import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import RegisterButton from './register/RegisterButton';
 import Register from './register/Register';
 
@@ -147,28 +145,9 @@ export const UrgentAction = ({ history, slug, step, data }) => {
         return <Redirect to={generateUrl('story', { slug })} />;
     }
 
-    if (step === 'story') {
-        return <Story story={story} />;
-    }
-
-    if (step === 'act') {
+    if (step === 'story' || step === 'act') {
         const callToAction = get(data, 'UrgentAction.call_to_action');
-        return (
-            <Act
-                data={callToAction}
-                actions={() =>
-                    callToAction && callToAction.button ? (
-                        <ToUrgentActionPageLink
-                            label={callToAction.button}
-                            step={step}
-                            pageName="message-view"
-                            analyticsCategory={ANALYTICS_CATEGORIES.ACT}
-                            buttonName="OpenMessageView"
-                        />
-                    ) : null
-                }
-            />
-        );
+        return <Story story={story} step={step} callToAction={callToAction} />;
     }
 
     if (step === 'message-view') {

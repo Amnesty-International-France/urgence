@@ -6,7 +6,6 @@ import Paper from '@material-ui/core/Paper';
 import RichText from '../themes/RichText';
 import LongText from '../themes/LongText';
 import { yellow, white, black } from '../themes/colors';
-import { withBlackLogo } from '../themes/ThemeContext';
 
 const styles = {
     padding: '60px 15px 20px',
@@ -98,4 +97,4 @@ TransitionScreen.defaultProps = {
     message: '',
 };
 
-export default glamorous(withBlackLogo(TransitionScreen))(styles);
+export default glamorous(TransitionScreen)(styles);
