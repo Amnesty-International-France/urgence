@@ -20,15 +20,16 @@ import LegalInformation from '../LegalInformation';
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '0.8em',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    minHeight: '100%',
-    width: '100%',
+    padding: '60px 15px 20px',
     '& .paper': {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        minHeight: '100%',
+        width: '100%',
+        padding: '135px 20px 20px 20px',
         color: black,
         backgroundColor: white,
-        padding: '135px 20px 20px 20px',
     },
     '& .header': {
         margin: '1em 0',
@@ -48,6 +49,9 @@ const styles = {
             boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
             boxDecorationBreak: 'clone',
         },
+    },
+    '& .phone-indication': {
+        margin: '5px 0',
     },
     '& .action': {
         position: 'relative',
@@ -85,9 +89,11 @@ const isDisabled = props => {
 };
 
 export const RegisterActivist = ({ data, gdprRegister, action, className, ...props }) => {
-    const title = get(data, 'title');
     const { firstname, lastname, phone, email } = props;
+    const title = get(data, 'title');
     const text = get(data, 'text');
+    const phoneIndication = get(data, 'phone_indication');
+
     return (
         <div className={classnames('register', className)}>
             <Paper className="paper" elevation={6} square>
@@ -98,7 +104,7 @@ export const RegisterActivist = ({ data, gdprRegister, action, className, ...pro
                     {text && <RichText html={text} />}
                 </div>
                 <div className="form-step">
-                    <Form {...props} />
+                    <Form phoneIndication={phoneIndication} {...props} />
                 </div>
             </Paper>
             <div className="action">
@@ -113,21 +119,23 @@ RegisterActivist.propTypes = {
     className: PropTypes.string,
     data: PropTypes.shape({
         text: PropTypes.string.isRequired,
+        phone_indication: PropTypes.string,
         button: PropTypes.string.isRequired,
     }),
     gdprRegister: PropTypes.string,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
     civility: PropTypes.string,
-    email: PropTypes.string,
-    phone: PropTypes.string,
     firstname: PropTypes.string,
     lastname: PropTypes.string,
+    email: PropTypes.string,
+    phoneIndication: PropTypes.string,
+    phone: PropTypes.string,
     setCivility: PropTypes.func.isRequired,
-    setEmail: PropTypes.func.isRequired,
-    setPhone: PropTypes.func.isRequired,
     setFirstname: PropTypes.func.isRequired,
     setLastname: PropTypes.func.isRequired,
+    setEmail: PropTypes.func.isRequired,
+    setPhone: PropTypes.func.isRequired,
     action: PropTypes.func.isRequired,
 };
 

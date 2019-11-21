@@ -3,29 +3,23 @@ import PropTypes from 'prop-types';
 
 import Input, { isCorrectEmail } from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';
+import RichText from '../../themes/RichText';
 
 const Form = ({
     analyticsCategory,
     step,
-    email,
-    phone,
     civility,
     firstname,
     lastname,
-    setEmail,
-    setPhone,
+    email,
+    phoneIndication,
+    phone,
     setCivility,
     setFirstname,
     setLastname,
+    setEmail,
+    setPhone,
 }) => {
-    const handleChangeEmail = event => {
-        setEmail(event.target.value);
-    };
-
-    const handleChangePhone = event => {
-        setPhone(event.target.value);
-    };
-
     const handleChangeCivility = event => {
         setCivility(event.target.value);
     };
@@ -38,30 +32,16 @@ const Form = ({
         setLastname(event.target.value);
     };
 
+    const handleChangeEmail = event => {
+        setEmail(event.target.value);
+    };
+
+    const handleChangePhone = event => {
+        setPhone(event.target.value);
+    };
+
     return (
         <Fragment>
-            <Input
-                className="email"
-                type="email"
-                value={email}
-                onChange={handleChangeEmail}
-                error={!isCorrectEmail(email)}
-                autoComplete="email"
-                analyticsCategory={analyticsCategory}
-                step={step}
-                label="Votre adresse e-mail *"
-            />
-            <Input
-                className="phone"
-                type="phone"
-                value={phone}
-                onChange={handleChangePhone}
-                error={!phone}
-                autoComplete="phone"
-                analyticsCategory={analyticsCategory}
-                step={step}
-                label="Votre téléphone mobile *"
-            />
             <RadioButton
                 value={civility}
                 name="civility"
@@ -93,24 +73,47 @@ const Form = ({
                 autoComplete="family-name"
                 label="Votre nom *"
             />
+            <Input
+                className="email"
+                type="email"
+                value={email}
+                onChange={handleChangeEmail}
+                error={!isCorrectEmail(email)}
+                autoComplete="email"
+                analyticsCategory={analyticsCategory}
+                step={step}
+                label="Votre adresse e-mail *"
+            />
+            <RichText className="phone-indication" html={phoneIndication} />
+            <Input
+                className="phone"
+                type="phone"
+                value={phone}
+                onChange={handleChangePhone}
+                error={!phone}
+                autoComplete="phone"
+                analyticsCategory={analyticsCategory}
+                step={step}
+                label="Votre téléphone mobile *"
+            />
         </Fragment>
     );
 };
 
 Form.propTypes = {
-    className: PropTypes.string,
-    email: PropTypes.string,
-    phone: PropTypes.string,
+    analyticsCategory: PropTypes.string,
+    step: PropTypes.string,
     civility: PropTypes.string,
     firstname: PropTypes.string,
     lastname: PropTypes.string,
-    setEmail: PropTypes.func.isRequired,
-    setPhone: PropTypes.func.isRequired,
+    email: PropTypes.string,
+    phoneIndication: PropTypes.string,
+    phone: PropTypes.string,
     setCivility: PropTypes.func.isRequired,
     setFirstname: PropTypes.func.isRequired,
     setLastname: PropTypes.func.isRequired,
-    analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
+    setEmail: PropTypes.func.isRequired,
+    setPhone: PropTypes.func.isRequired,
 };
 
 Form.defaultProps = {};
