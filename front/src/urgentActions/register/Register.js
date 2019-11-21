@@ -20,15 +20,16 @@ import LegalInformation from '../LegalInformation';
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '0.8em',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    minHeight: '100%',
-    width: '100%',
+    padding: '60px 15px 20px',
     '& .paper': {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        minHeight: '100%',
+        width: '100%',
+        padding: '135px 20px 20px 20px',
         color: black,
         backgroundColor: white,
-        padding: '135px 20px 20px 20px',
     },
     '& .header': {
         margin: '1em 0',
