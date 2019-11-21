@@ -16,8 +16,8 @@ const styles = {
 export const AppLogo = ({ className, context }) => (
     <div className={className}>
         <AmnestyLogo
-            fill0={context.backgroundColor}
-            fill1={context.color}
+            fill0={context.logoBackgroundColor}
+            fill1={context.logoColor}
             width="122"
             height="49"
         />
@@ -27,8 +27,9 @@ export const AppLogo = ({ className, context }) => (
 AppLogo.propTypes = {
     className: PropTypes.string,
     context: PropTypes.shape({
-        color: PropTypes.string,
         backgroundColor: PropTypes.string,
+        logoColor: PropTypes.string,
+        logoBackgroundColor: PropTypes.string,
     }).isRequired,
 };
 

@@ -3,25 +3,33 @@ import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { lifecycle, compose } from 'recompose';
 
-import { black, yellow, white } from './colors';
+import { black, white, yellow, lightGrey } from './colors';
 
 const { Consumer, Provider } = createContext();
 
 export class ThemeProvider extends Component {
     state = {
-        color: black,
-        backgroundColor: yellow,
-        changeLogoColor: ({ color, backgroundColor }) => {
+        backgroundColor: lightGrey,
+        changeBackgroundColor: ({ backgroundColor }) => {
             this.setState({
-                color,
                 backgroundColor,
+            });
+        },
+        logoColor: black,
+        logoBackgroundColor: yellow,
+        changeLogoColor: ({ logoColor, logoBackgroundColor }) => {
+            this.setState({
+                logoColor,
+                logoBackgroundColor,
             });
         },
     };
 
     theme = createMuiTheme({
         palette: {
-            primary: { 500: white },
+            primary: {
+                500: white,
+            },
         },
     });
 
@@ -44,11 +52,29 @@ export const withThemeContext = BaseComponent => props => (
     <ThemeConsumer>{context => <BaseComponent context={context} {...props} />}</ThemeConsumer>
 );
 
+export const withLightGreyBackground = compose(
+    withThemeContext,
+    lifecycle({
+        componentDidMount() {
+            this.props.context.changeBackgroundColor({ backgroundColor: lightGrey });
+        },
+    }),
+);
+
+export const withYellowBackground = compose(
+    withThemeContext,
+    lifecycle({
+        componentDidMount() {
+            this.props.context.changeBackgroundColor({ backgroundColor: yellow });
+        },
+    }),
+);
+
 export const withBlackLogo = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
-            this.props.context.changeLogoColor({ color: white, backgroundColor: black });
+            this.props.context.changeLogoColor({ logoColor: white, logoBackgroundColor: black });
         },
     }),
 );
@@ -57,7 +83,7 @@ export const withYellowLogo = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
-            this.props.context.changeLogoColor({ color: black, backgroundColor: yellow });
+            this.props.context.changeLogoColor({ logoColor: black, logoBackgroundColor: yellow });
         },
     }),
 );

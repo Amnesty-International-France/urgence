@@ -13,8 +13,8 @@ describe('<AppLogo />', () => {
         const props = {
             ...defaultProps,
             context: {
-                color: 'blue',
-                backgroundColor: 'red',
+                logoColor: 'blue',
+                logoBackgroundColor: 'red',
             },
         };
 

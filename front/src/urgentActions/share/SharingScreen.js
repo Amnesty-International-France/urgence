@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { compose } from 'recompose';
 import classnames from 'classnames';
 import Paper from '@material-ui/core/Paper';
 
 import RichText from '../../themes/RichText';
 import LongText from '../../themes/LongText';
 import { white, black } from '../../themes/colors';
-import { withYellowLogo } from '../../themes/ThemeContext';
+import { withYellowLogo, withYellowBackground } from '../../themes/ThemeContext';
 import Share from '../../themes/Sharing/ShareForm';
 
 const styles = {
@@ -104,4 +105,6 @@ SharingScreen.defaultProps = {
     share: {},
 };
 
-export default glamorous(withYellowLogo(SharingScreen))(styles);
+const WithStylesSharingScreen = glamorous(SharingScreen)(styles);
+
+export default compose(withYellowLogo, withYellowBackground)(WithStylesSharingScreen);

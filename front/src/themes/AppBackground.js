@@ -2,39 +2,51 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
-import { lightGrey } from './colors';
+import { withThemeContext } from './ThemeContext';
 
-const styles = {
-    '& .rectangle': {
+const Rectangle = glamorous.div(
+    {
         zIndex: -1,
         position: 'fixed',
         top: 0,
         left: 0,
         width: '100vw',
         height: '30vh',
-        background: lightGrey,
     },
-    '& .triangle': {
+    ({ color }) => ({
+        backgroundColor: color,
+    }),
+);
+
+const Triangle = glamorous.div(
+    {
         zIndex: -1,
         position: 'fixed',
         top: '30vh',
         left: 0,
         width: 0,
         height: 0,
-        borderTop: `50vh solid ${lightGrey}`,
         borderRight: '100vw solid transparent',
     },
-};
+    ({ color }) => ({
+        borderTop: `50vh solid ${color}`,
+    }),
+);
 
-export const AppBackground = ({ className }) => (
+export const AppBackground = ({ className, context }) => (
     <div className={className}>
-        <div className="rectangle" />
-        <div className="triangle" />
+        <Rectangle color={context.backgroundColor} />
+        <Triangle color={context.backgroundColor} />
     </div>
 );
 
 AppBackground.propTypes = {
     className: PropTypes.string,
+    context: PropTypes.shape({
+        backgroundColor: PropTypes.string,
+        logoColor: PropTypes.string,
+        logoBackgroundColor: PropTypes.string,
+    }).isRequired,
 };
 
-export default glamorous(AppBackground)(styles);
+export default withThemeContext(AppBackground);
