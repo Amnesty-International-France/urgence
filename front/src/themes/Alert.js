@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import MobileDetect from 'mobile-detect';
+import { white } from './colors';
 
 import { RichText } from './RichText';
 
@@ -34,7 +35,7 @@ const Alert = ({ classes, message }) => {
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
-            message={<RichText html={message} />}
+            message={<RichText html={message} style={{ color: white }} />}
             TransitionComponent={props => <Slide {...props} direction="up" />}
             action={
                 <FontAwesomeIcon
