@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Swiper from 'swiper';
+import Swiper from 'swiper/js/swiper.js';
 
 import { Carousel } from './Carousel';
 
