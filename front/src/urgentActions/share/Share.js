@@ -1,31 +1,98 @@
-import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import glamorous from 'glamorous';
+import { compose } from 'recompose';
+import { Paper } from '@material-ui/core';
+import get from 'lodash.get';
 
-import SharingScreen from './SharingScreen';
+import RichText from '../../themes/RichText';
+import LongText from '../../themes/LongText';
+import { white, black } from '../../themes/colors';
+import { withYellowLogo, withYellowBackground } from '../../themes/ThemeContext';
+import ShareForm from '../../themes/Sharing/ShareForm';
 
 import generateUrl from '../../services/generateUrl';
 
-const Share = ({ slug, step, data, analyticsCategory }) => {
+const styles = {
+    fontFamily: 'Amnesty Trade Gothic LT',
+    fontSize: '0.8em',
+    padding: '60px 15px 20px',
+    '& .paper': {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        minHeight: '100%',
+        width: '100%',
+        padding: '135px 20px 20px 20px',
+        color: black,
+        backgroundColor: white,
+    },
+    '& .header': {
+        margin: '1em 0',
+    },
+    '& h1': {
+        textTransform: 'uppercase',
+        fontFamily: 'Amnesty Trade Gothic Condensed',
+        fontSize: '36px',
+        lineHeight: '54px',
+        fontWeight: 'bold',
+        margin: '1.5rem 12px',
+        width: 'calc(100% - 24px)',
+        '> span': {
+            color: white,
+            backgroundColor: black,
+            padding: '6px 0',
+            boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
+            boxDecorationBreak: 'clone',
+        },
+    },
+    '@media (min-width: 350px)': {
+        fontSize: '16px',
+    },
+    '@media (min-width: 1024px)': {
+        '&.paper': {
+            padding: '10vh 10vw',
+        },
+        '& .link': {
+            textAlign: 'center',
+        },
+    },
+};
+const getLinkFromSlug = slug => `${global.origin}${generateUrl('ua', { slug })}`;
+
+const Share = ({ className, slug, step, data, analyticsCategory }) => {
     const title = get(data, 'title');
     const text = get(data, 'text');
     const share = get(data, 'share');
 
-    const sharingLink = `${global.origin}${generateUrl('ua', { slug })}`;
+    const link = getLinkFromSlug(slug);
+
     return (
-        <SharingScreen
-            slug={slug}
-            step={step}
-            title={title}
-            message={text}
-            share={share}
-            link={sharingLink}
-            analyticsCategory={analyticsCategory}
-        />
+        <div className={classnames('share', className)}>
+            <Paper className="paper" elevation={6} square>
+                <div className="header">
+                    <h1>
+                        <LongText text={title} />
+                    </h1>
+                    {text && <RichText html={text} />}
+                </div>
+                {share && (
+                    <ShareForm
+                        {...share}
+                        slug={slug}
+                        step={step}
+                        link={link}
+                        analyticsCategory={analyticsCategory}
+                    />
+                )}
+            </Paper>
+        </div>
     );
 };
 
 Share.propTypes = {
+    className: PropTypes.string,
     slug: PropTypes.string.isRequired,
     step: PropTypes.string,
     data: PropTypes.shape({
@@ -34,12 +101,17 @@ Share.propTypes = {
         share: PropTypes.object,
     }),
     analyticsCategory: PropTypes.string,
-    actions: PropTypes.func,
 };
 
 Share.defaultProps = {
-    actions: () => {},
     slug: 'new-ua',
+    data: {
+        title: '',
+        text: '',
+        share: {},
+    },
 };
 
-export default Share;
+const WithStylesShare = glamorous(Share)(styles);
+
+export default compose(withYellowLogo, withYellowBackground)(WithStylesShare);
