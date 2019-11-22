@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import RichText from '../../themes/RichText';
 import { StoryStepPropType } from '../../propTypes';
 import { black, white } from '../../themes/colors';
+import { withYellowLogo } from '../../themes/ThemeContext';
 
 const styles = {
     padding: '60px 15px 20px',
@@ -58,9 +59,12 @@ export const StoryStep = ({ className, content }) => (
         </Paper>
     </div>
 );
+
 StoryStep.propTypes = {
     className: PropTypes.string,
     ...StoryStepPropType,
 };
 
-export default glamorous(StoryStep)(styles);
+const WithStylesStoryStep = glamorous(StoryStep)(styles);
+
+export default withYellowLogo(WithStylesStoryStep);

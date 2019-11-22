@@ -13,7 +13,7 @@ import ANALYTICS_CATEGORIES from '../../analytics/categories';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { black, yellow, white } from '../../themes/colors';
+import { black } from '../../themes/colors';
 import { withThemeContext } from '../../themes/ThemeContext';
 import Carousel from '../../themes/Carousel';
 import { StoryStepPropType, routeMatch } from '../../propTypes';
@@ -32,7 +32,6 @@ const styles = {
 export class Story extends Component {
     afterChange = page => {
         const {
-            context,
             match: {
                 params: { slug, page: currentPage },
             },
@@ -48,18 +47,15 @@ export class Story extends Component {
             return;
         }
 
-        context.changeLogoColor({ logoColor: black, logoBackgroundColor: yellow });
         history.push(generateUrl('story', { slug, page }));
     };
 
     afterLastChange = () => {
         const {
-            context,
             match: { params },
             history,
         } = this.props;
 
-        context.changeLogoColor({ logoColor: white, logoBackgroundColor: black });
         history.push(generateUrl('act', params));
     };
 

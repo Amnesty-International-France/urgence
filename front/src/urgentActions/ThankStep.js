@@ -1,8 +1,8 @@
 import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withBlackLogo } from '../themes/ThemeContext';
 
+import { withBlackLogo } from '../themes/ThemeContext';
 import TransitionScreen from '../themes/TransitionScreen';
 
 export const ThankStep = ({ data, actions }) => {
