@@ -70,7 +70,7 @@ export class Story extends Component {
         } = this.props;
 
         const total = story ? story.length : 0;
-        const current = page ? parseInt(page, 10) : total;
+        const current = page != null ? parseInt(page, 10) : total;
 
         if (!story || story.length === 0 || current > total) {
             return <Redirect to={generateUrl('error')} />;
