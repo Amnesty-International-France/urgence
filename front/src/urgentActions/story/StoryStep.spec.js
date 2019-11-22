@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { StoryStep, getLogoColorForStep } from './StoryStep';
+import { StoryStep } from './StoryStep';
 import { white, black } from '../../themes/colors';
 
 describe('<StoryStep />', () => {
@@ -19,46 +19,5 @@ describe('<StoryStep />', () => {
         const wrapper = shallow(<StoryStep {...props} />);
         const richText = wrapper.find('RichText');
         expect(richText.prop('html')).toBe('<p>Hello world!</p>');
-    });
-
-    describe('getLogoColorForStep', () => {
-        it('should return white if there is a top medium', () => {
-            const step = {
-                medium: {},
-                displayOptions: {
-                    mediumPosition: 'top',
-                },
-            };
-
-            expect(getLogoColorForStep(step)).toBe(white);
-        });
-
-        it('should return black for yellow and white, white otherwise', () => {
-            const test = (backgroundColor, expectedLogoColor) => {
-                const step = {
-                    medium: {},
-                    displayOptions: {
-                        backgroundColor,
-                    },
-                };
-
-                expect(getLogoColorForStep(step)).toBe(expectedLogoColor);
-            };
-
-            test('yellow', black);
-            test('pink', white);
-            test('orange', white);
-            test('white', black);
-            test('black', white);
-        });
-
-        it('should render correctly even if no displayOptions is passed', () => {
-            const step = {
-                medium: {},
-                displayOptions: null,
-            };
-
-            getLogoColorForStep(step);
-        });
     });
 });

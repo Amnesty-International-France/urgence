@@ -53,12 +53,6 @@ export class Carousel extends Component {
     };
 
     slide = () => {
-        const { current, total } = this.props;
-
-        if (current === total) {
-            this.props.afterLastChange();
-            return;
-        }
         this.swiper.slideNext();
     };
 
@@ -76,17 +70,19 @@ export class Carousel extends Component {
                 <div className="swiper-container" ref={this.initContainer}>
                     <div className="swiper-wrapper">{children()}</div>
                 </div>
-                <div className="swiper-controls">
-                    <IconButton
-                        className={classnames({
-                            'next-arrow': current !== total,
-                            'last-arrow': current === total,
-                        })}
-                        onClick={this.slide}
-                    >
-                        {icon}
-                    </IconButton>
-                </div>
+                {current < total + 1 && (
+                    <div className="swiper-controls">
+                        <IconButton
+                            className={classnames({
+                                'next-arrow': current !== total,
+                                'last-arrow': current === total,
+                            })}
+                            onClick={this.slide}
+                        >
+                            {icon}
+                        </IconButton>
+                    </div>
+                )}
             </div>
         );
     }
@@ -100,7 +96,6 @@ Carousel.propTypes = {
     icon: PropTypes.element.isRequired,
     className: PropTypes.string.isRequired,
     afterChange: PropTypes.func,
-    afterLastChange: PropTypes.func,
 };
 
 export default glamorous(Carousel)(styles);

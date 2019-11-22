@@ -39,7 +39,7 @@ Certificates are managed on staging by [certbot](https://github.com/certbot/cert
 To renew the certificate, you should:
 
 1. Stop the running server: `cd amnesty/current && make stop-staging`
-2. Run the renew command `./certbot-auto renew`
+2. Run the renew command `certbot-auto renew`
 3. Restart the server: `cd amnesty/current && make start-staging`
 
 ## Debugging E2E tests

@@ -44,7 +44,7 @@ export const StorySlide = ({ children, className, step }) => {
 StorySlide.propTypes = {
     children: PropTypes.func.isRequired,
     className: PropTypes.string,
-    step: PropTypes.object.isRequired,
+    step: PropTypes.object,
 };
 
 export default glamorous(StorySlide)(styles);

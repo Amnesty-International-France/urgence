@@ -1,4 +1,3 @@
-import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
@@ -6,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 
 import RichText from '../../themes/RichText';
 import { StoryStepPropType } from '../../propTypes';
-import { colors, black, white, yellow } from '../../themes/colors';
+import { black, white } from '../../themes/colors';
 
 const styles = {
     padding: '60px 15px 20px',
@@ -48,23 +47,6 @@ const styles = {
     },
 };
 
-export const getLogoColorForStep = step => {
-    if (!step) {
-        return white;
-    }
-
-    const backgroundColor = colors[get(step, 'displayOptions.backgroundColor')];
-    if (step.medium && get(step, 'displayOptions.mediumPosition') === 'top') {
-        return white;
-    }
-
-    if (backgroundColor === yellow || backgroundColor === white) {
-        return black;
-    }
-
-    return white;
-};
-
 export const StoryStep = ({ className, content }) => (
     <div className={className}>
         <Paper className="page" elevation={6} square>
@@ -76,6 +58,7 @@ export const StoryStep = ({ className, content }) => (
         </Paper>
     </div>
 );
+
 StoryStep.propTypes = {
     className: PropTypes.string,
     ...StoryStepPropType,

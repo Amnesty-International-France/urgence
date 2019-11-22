@@ -22,7 +22,8 @@ const registerPage = registerPageFactory(driver);
 const sharePage = sharePageFactory(driver);
 const thanksEndPage = thanksEndPageFactory(driver);
 
-describe('Urgent Action', () => {
+// TODO: activate e2e tests
+describe.skip('Urgent Action', () => {
     let urgentAction;
 
     beforeAll(async () => {
@@ -58,7 +59,7 @@ describe('Urgent Action', () => {
             await storyPage.lastStep();
         });
 
-        it.skip('should display the act step', async () => {
+        it('should display the act step', async () => {
             await actPage.navigate(urgentAction.slug);
 
             const title = await actPage.getTitle();
@@ -74,7 +75,7 @@ describe('Urgent Action', () => {
             await messageViewPage.isLoaded();
         });
 
-        it.skip('should display the message view step', async () => {
+        it('should display the message view step', async () => {
             await messageViewPage.navigate(urgentAction.slug);
 
             const text = await messageViewPage.getText();
@@ -108,7 +109,7 @@ describe('Urgent Action', () => {
             await messageSendPage.isLoaded();
         });
 
-        it.skip('should display the message send step', async () => {
+        it('should display the message send step', async () => {
             await messageSendPage.navigate(urgentAction.slug);
 
             const text = await messageSendPage.getText();
@@ -130,7 +131,7 @@ describe('Urgent Action', () => {
             await registerPage.isLoaded();
         });
 
-        it.skip('should display the register step', async () => {
+        it('should display the register step', async () => {
             await registerPage.navigate(urgentAction.slug);
 
             const title = await registerPage.getTitle();

@@ -6,26 +6,33 @@ import { Redirect } from 'react-router-dom';
 import { compose } from 'recompose';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import Act from '../Act';
+import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
+import ANALYTICS_CATEGORIES from '../../analytics/categories';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { black } from '../../themes/colors';
+import { black, white, yellow } from '../../themes/colors';
 import { withThemeContext } from '../../themes/ThemeContext';
 import Carousel from '../../themes/Carousel';
 import { StoryStepPropType, routeMatch } from '../../propTypes';
 import generateUrl from '../../services/generateUrl';
 
 import StorySlide from './StorySlide';
-import StorySlidePlaceholder from './StorySlidePlaceholder';
 import StoryCover from './StoryCover';
-import StoryStep, { getLogoColorForStep } from './StoryStep';
+import StoryStep from './StoryStep';
 
 const styles = {
     '& .icon': {
         cursor: 'pointer',
     },
 };
+
+export const getLogoColorForStoryStep = step =>
+    step === 'story'
+        ? { logoColor: black, logoBackgroundColor: yellow }
+        : { logoColor: white, logoBackgroundColor: black };
 
 export class Story extends Component {
     afterChange = page => {
@@ -42,53 +49,51 @@ export class Story extends Component {
             this.afterLastChange();
             return;
         }
+
         if (!story[page]) {
             return;
         }
-        context.changeLogoColor(getLogoColorForStep(story[page]));
+
+        context.changeLogoColor(getLogoColorForStoryStep('story'));
         history.push(generateUrl('story', { slug, page }));
     };
 
     afterLastChange = () => {
         const {
+            context,
             match: { params },
             history,
         } = this.props;
 
+        context.changeLogoColor(getLogoColorForStoryStep('act'));
         history.push(generateUrl('act', params));
     };
 
-    componentDidUpdate(prevProps) {
+    componentDidMount() {
         const {
-            story,
-            match: {
-                params: { page },
-            },
             context,
+            match: {
+                params: { step },
+            },
         } = this.props;
 
-        if (!story[page]) {
-            return;
-        }
-
-        if ((!prevProps.story && story) || prevProps.match.params.page !== page) {
-            context.changeLogoColor(getLogoColorForStep(story[page]));
-        }
+        context.changeLogoColor(getLogoColorForStoryStep(step));
     }
 
     render() {
         const {
             className,
             story,
+            callToAction,
             match: {
                 params: { page },
             },
         } = this.props;
 
         const total = story ? story.length : 0;
-        const current = parseInt(page, 10);
+        const current = page != null ? parseInt(page, 10) : total;
 
-        if (!story || story.length === 0 || current > total - 1) {
+        if (!story || story.length === 0 || current > total) {
             return <Redirect to={generateUrl('error')} />;
         }
 
@@ -120,7 +125,26 @@ export class Story extends Component {
                                         {storyStepProps => <StoryStep {...storyStepProps} />}
                                     </StorySlide>
                                 ))}
-                                <StorySlidePlaceholder />
+
+                                <StorySlide>
+                                    {storyProps => (
+                                        <Act
+                                            {...storyProps}
+                                            data={callToAction}
+                                            actions={() =>
+                                                callToAction && callToAction.button ? (
+                                                    <ToUrgentActionPageLink
+                                                        label={callToAction.button}
+                                                        step="act"
+                                                        pageName="message-view"
+                                                        analyticsCategory={ANALYTICS_CATEGORIES.ACT}
+                                                        buttonName="OpenMessageView"
+                                                    />
+                                                ) : null
+                                            }
+                                        />
+                                    )}
+                                </StorySlide>
                             </Fragment>
                         )}
                     </Carousel>
@@ -140,6 +164,7 @@ Story.propTypes = {
         push: PropTypes.func.isRequired,
     }).isRequired,
     match: routeMatch,
+    callToAction: PropTypes.object,
 };
 
 export const WithStylesStory = glamorous(Story)(styles);

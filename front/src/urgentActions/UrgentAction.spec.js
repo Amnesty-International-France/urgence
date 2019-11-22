@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 
 import { renderUrgentActionWithData, UrgentAction } from './UrgentAction';
 import Story from './story/Story';
-import Act from './Act';
 import MessageView from './messageView/MessageView';
 import MessageSend from './messageSend/MessageSend';
 import Share from './share/Share';
@@ -105,10 +104,8 @@ describe('<UrgentAction />', () => {
                 },
             ]);
         });
-    });
 
-    describe('Act Step', () => {
-        it('should display the "title" and the "message"', () => {
+        it('should display the "act"', () => {
             const props = {
                 step: 'act',
                 loading: false,
@@ -127,9 +124,9 @@ describe('<UrgentAction />', () => {
                 },
             };
             const renderedComponent = shallow(<UrgentAction {...props} />);
-            expect(renderedComponent.find(Act).length).toBe(1);
+            expect(renderedComponent.find(Story).length).toBe(1);
 
-            const data = renderedComponent.prop('data');
+            const data = renderedComponent.prop('callToAction');
             expect(data.title).toBe('Call To Action');
             expect(data.message).toBe('My Message');
         });

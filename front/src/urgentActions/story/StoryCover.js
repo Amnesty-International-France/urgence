@@ -99,6 +99,7 @@ export const StoryCover = ({ className, content, step }) => (
 StoryCover.propTypes = {
     className: PropTypes.string,
     content: PropTypes.string.isRequired,
+    step: PropTypes.object.isRequired,
 };
 
 export default glamorous(StoryCover)(styles);

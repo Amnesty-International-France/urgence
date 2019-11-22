@@ -2,16 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Redirect } from 'react-router-dom';
 
-import { Story } from './Story';
+import { black, white, yellow } from '../../themes/colors';
 import Carousel from '../../themes/Carousel';
+import { Story, getLogoColorForStoryStep } from './Story';
 
 const defaultStep = {
     id: '1',
     content: '',
-    displayOptions: {
-        mediumPosition: 'bottom',
-        backgroundColor: 'red',
-    },
 };
 
 jest.mock('react-router-dom');
@@ -85,14 +82,14 @@ describe('<Story />', () => {
         expect(children[1][1].props.step).toEqual(props.story[2]);
     });
 
-    describe('After Switching Slide', () => {
-        it('should update logo color in context', () => {
+    describe('Navigate in Story', () => {
+        it('should update logo color in context after changing story to story', () => {
             const props = {
                 ...defaultProps,
                 story: [
-                    { ...defaultStep, id: 1, displayOptions: { backgroundColor: 'white' } },
-                    { ...defaultStep, id: 2, displayOptions: { backgroundColor: 'black' } },
-                    { ...defaultStep, id: 3, displayOptions: { backgroundColor: 'black' } },
+                    { ...defaultStep, id: 1 },
+                    { ...defaultStep, id: 2 },
+                    { ...defaultStep, id: 3 },
                 ],
                 context: {
                     changeLogoColor: jest.fn(),
@@ -105,67 +102,53 @@ describe('<Story />', () => {
 
             afterChange(1);
 
-            expect(props.context.changeLogoColor).toHaveBeenCalledWith('#fff');
+            expect(props.context.changeLogoColor).toHaveBeenCalledWith({
+                logoColor: black,
+                logoBackgroundColor: yellow,
+            });
+        });
+
+        it('should update logo color in context after changing story to act', () => {
+            const props = {
+                ...defaultProps,
+                story: [
+                    { ...defaultStep, id: 1 },
+                    { ...defaultStep, id: 2 },
+                    { ...defaultStep, id: 3 },
+                ],
+                context: {
+                    changeLogoColor: jest.fn(),
+                },
+            };
+
+            const wrapper = shallow(<Story {...props} />);
+            const carousel = wrapper.find(Carousel);
+            const afterChange = carousel.prop('afterChange');
+
+            afterChange(4);
+
+            expect(props.context.changeLogoColor).toHaveBeenCalledWith({
+                logoColor: white,
+                logoBackgroundColor: black,
+            });
         });
     });
 
-    it('should set correct logo color when receiving a new story', () => {
-        const props = {
-            ...defaultProps,
-            match: {
-                params: {
-                    page: 0,
-                },
-            },
-            context: {
-                changeLogoColor: jest.fn(),
-            },
-            story: null,
-        };
+    describe('getLogoColorForStoryStep', () => {
+        it('should return black/yellow in "story"', () => {
+            const step = 'story';
 
-        const wrapper = shallow(<Story {...props} />);
-        wrapper.setProps({
-            ...props,
-            story: [
-                {
-                    ...defaultStep,
-                    displayOptions: {
-                        backgroundColor: 'yellow',
-                    },
-                },
-            ],
+            const result = getLogoColorForStoryStep(step);
+            expect(result.logoColor).toBe(black);
+            expect(result.logoBackgroundColor).toBe(yellow);
         });
 
-        expect(props.context.changeLogoColor).toHaveBeenCalledWith('#000');
-    });
+        it('should return white/black in "act"', () => {
+            const step = 'act';
 
-    it('should set correct logo color when current page number change', () => {
-        const props = {
-            ...defaultProps,
-            match: {
-                params: {
-                    page: 0,
-                },
-            },
-            story: [
-                { ...defaultStep, id: 1, displayOptions: { backgroundColor: 'white' } },
-                { ...defaultStep, id: 2, displayOptions: { backgroundColor: 'yellow' } },
-            ],
-            context: {
-                changeLogoColor: jest.fn(),
-            },
-        };
-
-        const wrapper = shallow(<Story {...props} />);
-        wrapper.setProps({
-            ...props,
-            match: {
-                params: {
-                    page: 1,
-                },
-            },
+            const result = getLogoColorForStoryStep(step);
+            expect(result.logoColor).toBe(white);
+            expect(result.logoBackgroundColor).toBe(black);
         });
-
-        expect(props.context.changeLogoColor).toHaveBeenCalledWith('#000');
     });
 });
