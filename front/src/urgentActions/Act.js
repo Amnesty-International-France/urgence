@@ -2,7 +2,6 @@ import get from 'lodash.get';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withBlackLogo } from '../themes/ThemeContext';
 import TransitionScreen from '../themes/TransitionScreen';
 
 const Act = ({ data, actions }) => (
@@ -21,4 +20,4 @@ Act.defaultProps = {
     actions: () => {},
 };
 
-export default withBlackLogo(Act);
+export default Act;

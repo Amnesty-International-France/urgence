@@ -13,7 +13,7 @@ import ANALYTICS_CATEGORIES from '../../analytics/categories';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { black } from '../../themes/colors';
+import { black, white, yellow } from '../../themes/colors';
 import { withThemeContext } from '../../themes/ThemeContext';
 import Carousel from '../../themes/Carousel';
 import { StoryStepPropType, routeMatch } from '../../propTypes';
@@ -29,9 +29,15 @@ const styles = {
     },
 };
 
+export const getLogoColorForStoryStep = step =>
+    step === 'story'
+        ? { logoColor: black, logoBackgroundColor: yellow }
+        : { logoColor: white, logoBackgroundColor: black };
+
 export class Story extends Component {
     afterChange = page => {
         const {
+            context,
             match: {
                 params: { slug, page: currentPage },
             },
@@ -43,30 +49,45 @@ export class Story extends Component {
             this.afterLastChange();
             return;
         }
+
         if (!story[page]) {
             return;
         }
 
+        context.changeLogoColor(getLogoColorForStoryStep('story'));
         history.push(generateUrl('story', { slug, page }));
     };
 
     afterLastChange = () => {
         const {
+            context,
             match: { params },
             history,
         } = this.props;
 
+        context.changeLogoColor(getLogoColorForStoryStep('act'));
         history.push(generateUrl('act', params));
     };
+
+    componentDidMount() {
+        const {
+            context,
+            match: {
+                params: { step },
+            },
+        } = this.props;
+
+        context.changeLogoColor(getLogoColorForStoryStep(step));
+    }
 
     render() {
         const {
             className,
             story,
+            callToAction,
             match: {
                 params: { page },
             },
-            callToAction,
         } = this.props;
 
         const total = story ? story.length : 0;
