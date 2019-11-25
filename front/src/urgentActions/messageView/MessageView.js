@@ -40,6 +40,9 @@ const styles = {
             width: '100%',
         },
     },
+    '& .text': {
+        margin: '1em 0',
+    },
     '& .letter': {
         border: 'solid 1px',
         borderColor: 'rgba(0, 0, 0, 0.20)',

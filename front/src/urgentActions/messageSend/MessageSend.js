@@ -40,6 +40,9 @@ const styles = {
             width: '100%',
         },
     },
+    '& .text': {
+        margin: '1em 0',
+    },
     '& .form-step': {
         margin: '5px 0px 10px 0px',
     },
