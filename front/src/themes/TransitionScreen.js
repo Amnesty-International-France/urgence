@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 
 import RichText from '../themes/RichText';
 import LongText from '../themes/LongText';
-import { yellow, white, black } from '../themes/colors';
+import { yellow, black } from '../themes/colors';
 
 const styles = {
     padding: '60px 15px 20px',
@@ -16,29 +16,18 @@ const styles = {
         minHeight: '100%',
         width: '100%',
         padding: '100px 20px 40px 20px',
-        color: white,
         backgroundColor: yellow,
     },
     '& h1': {
-        textTransform: 'uppercase',
         fontFamily: 'Amnesty Trade Gothic Condensed',
         fontSize: '36px',
-        lineHeight: '54px',
-        fontWeight: 'bold',
-        margin: '1.5rem 12px',
-        width: 'calc(100% - 24px)',
-        '> span': {
-            color: white,
-            backgroundColor: black,
-            padding: '6px 0',
-            boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
-            boxDecorationBreak: 'clone',
-        },
+        color: black,
+        textTransform: 'uppercase',
     },
     '& .rich-text': {
-        color: black,
         fontFamily: 'Amnesty Trade Gothic LT',
         fontSize: '16px',
+        color: black,
     },
     '& .actions': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
