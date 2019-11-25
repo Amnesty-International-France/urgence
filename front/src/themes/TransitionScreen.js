@@ -32,6 +32,9 @@ const styles = {
     '& .rich-text': {
         color: black,
     },
+    '& .text': {
+        margin: '0.5em 0',
+    },
     '& .actions': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
         fontWeight: 'bold',
@@ -70,7 +73,11 @@ export const TransitionScreen = ({ className, actions, title, message }) => (
                 <h1>
                     <LongText text={title} />
                 </h1>
-                {message && <RichText html={message} />}
+                {message && (
+                    <div className="text">
+                        <RichText html={message} />
+                    </div>
+                )}
             </div>
         </Paper>
         <div className="actions">{actions()}</div>

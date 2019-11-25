@@ -11,15 +11,18 @@ import generateUrl from '../../services/generateUrl';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '0.7em',
+    fontSize: '18px',
     '& .header': {
-        margin: '1em 0',
+        margin: '0.5em 0',
     },
     '& h1': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
         fontSize: '30px',
         lineHeight: '30px',
         textTransform: 'uppercase',
+    },
+    '& .text': {
+        margin: '0.5em 0',
     },
     '@media (min-width: 350px)': {
         fontSize: '16px',
@@ -48,7 +51,11 @@ const Share = ({ className, slug, step, data, analyticsCategory }) => {
                 <h1>
                     <LongText text={title} />
                 </h1>
-                {text && <RichText html={text} />}
+                {text && (
+                    <div className="text">
+                        <RichText html={text} />
+                    </div>
+                )}
             </div>
             <ShareForm
                 {...share}
