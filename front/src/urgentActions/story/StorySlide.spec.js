@@ -26,8 +26,5 @@ describe('<StorySlide />', () => {
         expect(defaultProps.children).toHaveBeenCalledWith({
             content: 'I am content',
         });
-
-        const myChild = storyStep.find('.my-child');
-        expect(myChild.length).toBe(1);
     });
 });
