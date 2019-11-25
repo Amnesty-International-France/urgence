@@ -60,7 +60,10 @@ export class Input extends Component {
         } = this.props;
         const { showError, showValid } = this.state;
 
-        if (!noValidate) this.showValidState(!error);
+        if (!noValidate) {
+            this.showValidState(!error);
+        }
+
         return (
             <div className={className}>
                 <TextField

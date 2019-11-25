@@ -1,6 +1,5 @@
-import classnames from 'classnames';
-import get from 'lodash.get';
 import React from 'react';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
@@ -12,34 +11,13 @@ const styles = {
     '& .story-step': {
         flex: '1 0 0',
     },
-    '& .slide.with-bottom-media .bottom': {
-        position: 'absolute',
-        bottom: 0,
-        height: 50,
-        width: '100vw',
-        '@media (max-aspect-ratio: 1/1)': {
-            color: '#fff !important',
-            backgroundColor: 'transparent !important',
-            background: 'linear-gradient(#0000, #000f)',
-            '& svg': {
-                fill: '#fff !important',
-            },
-        },
-    },
 };
 
-export const StorySlide = ({ children, className, step }) => {
-    return (
-        <div
-            className={classnames(className, {
-                'swiper-slide': true,
-                'with-bottom-media': get(step, 'displayOptions.mediumPosition') === 'bottom',
-            })}
-        >
-            <div className="story-step">{children({ ...step })}</div>
-        </div>
-    );
-};
+export const StorySlide = ({ children, className, step }) => (
+    <div className={classnames(className, 'swiper-slide')}>
+        <div className="story-step">{children({ ...step })}</div>
+    </div>
+);
 
 StorySlide.propTypes = {
     children: PropTypes.func.isRequired,

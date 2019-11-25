@@ -27,7 +27,7 @@ const StyledButton = glamorous.button({
     color: black,
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
     transition: 'background-color 0.25s ease',
-    '&:disabled': {
+    ':disabled': {
         backgroundColor: grey,
         color: darkGrey,
         pointerEvents: 'none',

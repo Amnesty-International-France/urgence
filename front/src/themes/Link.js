@@ -32,20 +32,20 @@ export const styles = {
     color: white,
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
     transition: 'background-color 0.25s ease',
-    '&.disabled': {
+    '.disabled': {
         backgroundColor: grey,
         color: darkGrey,
         pointerEvents: 'none',
     },
-    '&.white': {
+    '.white': {
         display: 'flex',
         backgroundColor: white,
         color: black,
         fontFamily: 'Amnesty Trade Gothic LT',
-        fontSize: 16,
+        fontSize: '18px',
         textTransform: 'none',
         fontWeight: 'initial',
-        paddingLeft: 55,
+        paddingLeft: '55px',
         textAlign: 'left',
     },
 };
@@ -83,6 +83,7 @@ export class Link extends Component {
             },
             whiteLink,
         } = this.props;
+
         return (
             <RouterLink
                 to={to}

@@ -19,39 +19,25 @@ import LegalInformation from '../LegalInformation';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '0.8em',
+    fontSize: '18px',
     padding: '60px 15px 20px',
+    height: '95vh',
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         minHeight: '100%',
         width: '100%',
-        padding: '135px 20px 20px 20px',
+        padding: '100px 20px 20px 20px',
         color: black,
         backgroundColor: white,
     },
-    '& .header': {
-        margin: '1em 0',
-    },
     '& h1': {
-        textTransform: 'uppercase',
         fontFamily: 'Amnesty Trade Gothic Condensed',
-        fontSize: '36px',
-        lineHeight: '54px',
-        fontWeight: 'bold',
-        margin: '1.5rem 12px',
-        width: 'calc(100% - 24px)',
-        '> span': {
-            color: white,
-            backgroundColor: black,
-            padding: '6px 0',
-            boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
-            boxDecorationBreak: 'clone',
-        },
-    },
-    '& .phone-indication': {
-        margin: '5px 0',
+        fontSize: '30px',
+        color: black,
+        textTransform: 'uppercase',
+        lineHeight: '30px',
     },
     '& .action': {
         position: 'relative',
@@ -65,13 +51,11 @@ const styles = {
             width: '100%',
         },
     },
-    '& .form-step': {
-        margin: '5px 0px 10px 0px',
-    },
-    '@media (min-width: 350px)': {
-        fontSize: '16px',
+    '& .text, .form-step, .phone-indication': {
+        margin: '1em 0',
     },
     '@media (min-width: 1024px)': {
+        fontSize: '24px',
         '&.paper': {
             padding: '10vh 10vw',
         },
@@ -101,7 +85,11 @@ export const RegisterActivist = ({ data, gdprRegister, action, className, ...pro
                     <h1>
                         <LongText text={title} />
                     </h1>
-                    {text && <RichText html={text} />}
+                    {text && (
+                        <div className="text">
+                            <RichText html={text} />
+                        </div>
+                    )}
                 </div>
                 <div className="form-step">
                     <Form phoneIndication={phoneIndication} {...props} />

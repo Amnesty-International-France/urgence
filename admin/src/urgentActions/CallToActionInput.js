@@ -15,7 +15,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 
-import { root, transitionScreenPreview } from './styles';
+import { root, actScreenPreview } from './styles';
 import { get as getScreenIndex, CALL_TO_ACTION } from './screenIndex';
 import RichTextInput from '../form/RichTextInput';
 import FrontPreview, { noop } from './FrontPreview';
@@ -26,7 +26,7 @@ import Link from '../../../front/src/themes/Link';
 const styles = {
     ...root,
     preview: {
-        ...transitionScreenPreview,
+        ...actScreenPreview,
     },
 };
 

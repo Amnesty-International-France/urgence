@@ -15,15 +15,16 @@ import { withSessionData } from '../../DataContext';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '0.8em',
+    fontSize: '18px',
     padding: '60px 15px 20px',
+    height: '95vh',
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         minHeight: '100%',
         width: '100%',
-        padding: '135px 20px 20px 20px',
+        padding: '100px 20px 20px 20px',
         color: black,
         backgroundColor: white,
     },
@@ -38,6 +39,9 @@ const styles = {
         '& a': {
             width: '100%',
         },
+    },
+    '& .text, .form-step': {
+        margin: '1em 0',
     },
     '& .letter': {
         border: 'solid 1px',
@@ -79,13 +83,8 @@ const styles = {
         fontStyle: 'italic',
         fontSize: '14px',
     },
-    '& .form-step': {
-        margin: '5px 0px 10px 0px',
-    },
-    '@media (min-width: 350px)': {
-        fontSize: '16px',
-    },
     '@media (min-width: 1024px)': {
+        fontSize: '24px',
         '&.paper': {
             padding: '10vh 10vw',
         },

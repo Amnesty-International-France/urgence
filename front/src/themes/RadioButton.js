@@ -13,7 +13,7 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    padding: '20px 0',
+    padding: '15px 0',
     maxWidth: '400px',
     alignItems: 'center',
     '& .label': {

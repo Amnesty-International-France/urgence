@@ -6,7 +6,10 @@ import { black } from '../themes/colors';
 const defaultStyle = {
     color: black,
     fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '16px',
+    fontSize: '18px',
+    '@media (min-width: 1024px)': {
+        fontSize: '18px !important',
+    },
 };
 
 export const RichText = ({ className, html, style }) => (

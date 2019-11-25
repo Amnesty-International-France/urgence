@@ -1,4 +1,4 @@
-import { pink } from '../../../front/src/themes/colors';
+import { white, pink } from '../../../front/src/themes/colors';
 
 export const root = {
     root: {
@@ -33,48 +33,93 @@ export const preview = {
     margin: 16,
     overflow: 'auto',
     fontFamily: "'Amnesty Trade Gothic', 'Arial', sans-serif",
+    backgroundColor: white,
 };
 
-export const sharingScreenPreview = {
+export const storyScreenPreview = {
     ...preview,
-    '& > div': {
-        width: 'calc(100% - 40px)',
-        padding: '135px 20px 20px 20px',
+    '& .story-step > div': {
+        height: 'calc(600px - 80px) !important',
+        width: 'calc(100% - 30px)',
     },
 };
 
-export const transitionScreenPreview = {
+export const actScreenPreview = {
     ...preview,
-    '& > div': {
-        maxHeight: 'calc(100% - 120px)',
-        height: 'calc(100% - 120px)',
-        width: 'calc(100% - 40px)',
-        padding: '0px 20px 0px 20px',
+    '& .act': {
+        height: 'calc(600px - 110px) !important',
+        width: 'calc(100% - 30px)',
+        '& .paper': {
+            width: 'calc(100% - 40px)',
+            padding: '0px 20px',
+        },
+        '& .actions': {
+            '& a': {
+                width: '100%',
+            },
+        },
     },
 };
 
 export const messageFormScreenPreview = {
     ...preview,
-    '& > div': {
-        width: 'calc(100% - 40px)',
-        padding: '135px 20px 20px 20px',
-    },
-    '& .action': {
-        '& a': {
-            width: '100%',
+    '& .message-send, .message-view': {
+        height: 'calc(600px - 110px) !important',
+        width: 'calc(100% - 30px)',
+        '& .paper': {
+            width: 'calc(100% - 40px)',
+            padding: '100px 20px 20px 20px',
+        },
+        '& .action': {
+            '& a': {
+                width: '100%',
+            },
         },
     },
 };
 
 export const registerFormScreenPreview = {
     ...preview,
-    '& > div': {
-        width: 'calc(100% - 40px)',
-        padding: '135px 20px 20px 20px',
+    '& .register': {
+        height: 'calc(600px - 110px) !important',
+        width: 'calc(100% - 30px)',
+        '& .paper': {
+            width: 'calc(100% - 40px)',
+            padding: '100px 20px 20px 20px',
+        },
+        '& .action': {
+            '& a': {
+                width: '100%',
+            },
+        },
     },
-    '& .action': {
-        '& a': {
-            width: '100%',
+};
+
+export const sharingScreenPreview = {
+    ...preview,
+    '& .share': {
+        height: 'calc(600px - 110px) !important',
+        width: 'calc(100% - 30px)',
+        '& .paper': {
+            width: 'calc(100% - 40px)',
+            padding: '100px 20px 20px 20px',
+        },
+    },
+};
+
+export const thanksEndScreenPreview = {
+    ...preview,
+    '& .thank': {
+        height: 'calc(600px - 80px) !important',
+        width: 'calc(100% - 30px)',
+        '& .paper': {
+            width: 'calc(100% - 40px)',
+            padding: '0px 20px',
+        },
+        '& .actions': {
+            '& a': {
+                width: '100%',
+            },
         },
     },
 };

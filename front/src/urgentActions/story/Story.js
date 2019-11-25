@@ -115,9 +115,7 @@ export class Story extends Component {
                         {() => (
                             <Fragment>
                                 <StorySlide step={cover}>
-                                    {storyCoverProps => (
-                                        <StoryCover {...storyCoverProps} step={cover} />
-                                    )}
+                                    {storyCoverProps => <StoryCover {...storyCoverProps} />}
                                 </StorySlide>
 
                                 {restStory.map((step, index) => (

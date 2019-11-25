@@ -7,7 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 
-import { root, preview } from './styles';
+import { root, storyScreenPreview } from './styles';
 import MediumInput from './MediumInput';
 import FrontPreview from './FrontPreview';
 import RichTextInput from '../form/RichTextInput';
@@ -20,24 +20,13 @@ import StoryCover from '../../../front/src/urgentActions/story/StoryCover';
 const styles = {
     ...root,
     preview: {
-        ...preview,
-        '& .rich-text': {
-            '@media (min-width: 1024px)': {
-                fontSize: '16px !important',
-            },
-        },
-        '& .story-step > div': {
-            padding: '0px !important',
-        },
-        '& .step': {
-            padding: '100px 20px !important',
-            '@media (min-aspect-ratio: 1/1)': {
-                padding: '100px 20px !important',
-            },
-        },
+        ...storyScreenPreview,
         '@media (min-width: 1024px)': {
+            '& .rich-text': {
+                fontSize: '18px !important',
+            },
             '& .rich-text > p': {
-                fontSize: '16px !important',
+                fontSize: '18px !important',
             },
             '& .ql-size-large': {
                 padding: '4px 0 !important',
@@ -55,10 +44,6 @@ const styles = {
 
 const defaultFormData = {
     content: null,
-    displayOptions: {
-        backgroundColor: null,
-        mediumPosition: null,
-    },
     medium: null,
 };
 
