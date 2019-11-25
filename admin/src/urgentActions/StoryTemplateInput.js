@@ -44,10 +44,6 @@ const styles = {
 
 const defaultFormData = {
     content: null,
-    displayOptions: {
-        backgroundColor: null,
-        mediumPosition: null,
-    },
     medium: null,
 };
 

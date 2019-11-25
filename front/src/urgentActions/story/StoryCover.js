@@ -67,13 +67,13 @@ const styles = {
     },
 };
 
-export const StoryCover = ({ className, content, step }) => (
+export const StoryCover = ({ className, content, medium }) => (
     <div className={className}>
         <Paper
             className="page"
             style={{
                 ...{
-                    backgroundImage: `url(${get(step, 'medium.src', null)})`,
+                    backgroundImage: `url(${get(medium, 'src', '')})`,
                     backgroundPosition: 'top',
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',
@@ -94,7 +94,9 @@ export const StoryCover = ({ className, content, step }) => (
 StoryCover.propTypes = {
     className: PropTypes.string,
     content: PropTypes.string.isRequired,
-    step: PropTypes.object.isRequired,
+    medium: PropTypes.shape({
+        src: PropTypes.string.isRequired,
+    }),
 };
 
 export default glamorous(StoryCover)(styles);
