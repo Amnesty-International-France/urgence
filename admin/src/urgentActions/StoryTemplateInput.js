@@ -85,7 +85,11 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
                             step={{ ...defaultFormData, ...formData.story[index] }}
                         >
                             {props =>
-                                index === 0 ? <StoryCover {...props} /> : <StoryStep {...props} />
+                                index === 0 ? (
+                                    <StoryCover {...props} className="cover" />
+                                ) : (
+                                    <StoryStep {...props} />
+                                )
                             }
                         </StorySlide>
                     </FrontPreview>

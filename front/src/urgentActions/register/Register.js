@@ -51,7 +51,10 @@ const styles = {
             width: '100%',
         },
     },
-    '& .text, .form-step, .phone-indication': {
+    '& .text, .phone-indication': {
+        margin: '0.5em 0',
+    },
+    '& .form-step': {
         margin: '1em 0',
     },
     '@media (min-width: 1024px)': {

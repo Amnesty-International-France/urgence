@@ -12,13 +12,12 @@ const styles = {
     fontSize: '18px',
     padding: '60px 15px 20px',
     height: '95vh',
-    '& .page': {
+    '& .paper': {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         height: '100%',
         width: '100%',
-        padding: '0px 20px',
         color: black,
         backgroundColor: white,
     },
@@ -26,6 +25,7 @@ const styles = {
         flex: '1 0 0',
         display: 'flex',
         flexDirection: 'column',
+        padding: '0px 20px',
     },
     '& .content': {
         display: 'flex',
@@ -48,7 +48,7 @@ const styles = {
 
 export const StoryStep = ({ className, content }) => (
     <div className={className}>
-        <Paper className="page" elevation={6} square>
+        <Paper className="paper" elevation={6} square>
             <div className="step">
                 <div className="content">
                     <RichText html={content} />

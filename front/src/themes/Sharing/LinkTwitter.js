@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+
 import ShareLink from './ShareLink';
 
 export const LinkTwitter = ({ slug, step, text, action, analyticsCategory }) => (
@@ -11,12 +12,12 @@ export const LinkTwitter = ({ slug, step, text, action, analyticsCategory }) => 
         target="twitter"
         title="Partage Twitter"
         icon={faTwitter}
-        text="Envoyer le tweet"
         action={action}
         customClass="twitter-share-button"
         inLine
         analyticsCategory={analyticsCategory}
         buttonName="Tweeter"
+        backgroundColor="#4CAAEA"
     />
 );
 

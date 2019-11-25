@@ -40,7 +40,10 @@ const styles = {
             width: '100%',
         },
     },
-    '& .text, .form-step': {
+    '& .text:': {
+        margin: '0.5em 0',
+    },
+    '& .form-step': {
         margin: '1em 0',
     },
     '& .letter': {
@@ -49,7 +52,7 @@ const styles = {
         boxShadow:
             '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
         color: black,
-        padding: '1em 0 0 0',
+        padding: '0.5em 0',
         margin: '1em 0',
     },
     '& .content': {
@@ -104,9 +107,11 @@ export const MessageView = ({ className, text, messageTemplate, action, ...props
     return (
         <div className={classnames('message-view', className)}>
             <Paper className="paper" elevation={6} square>
-                <div className="text">
-                    <RichText html={text} />
-                </div>
+                {text && (
+                    <div className="text">
+                        <RichText html={text} />
+                    </div>
+                )}
                 <div className="form-step">
                     <Form {...props} />
                 </div>

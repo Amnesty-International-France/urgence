@@ -33,8 +33,6 @@ const steps = {
     act: 1,
     'message-view': 2,
     'message-send': 3,
-    share: 4,
-    register: 4,
 };
 
 const Stepper = ({ className, data, step, page }) => {

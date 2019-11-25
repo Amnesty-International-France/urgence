@@ -40,7 +40,10 @@ const styles = {
             width: '100%',
         },
     },
-    '& .text, .form-step': {
+    '& .text:': {
+        margin: '0.5em 0',
+    },
+    '& .form-step': {
         margin: '1em 0',
     },
     '@media (min-width: 1024px)': {
@@ -71,9 +74,11 @@ export const MessageSend = ({
     return (
         <div className={classnames('message-send', className)}>
             <Paper className="paper" elevation={6} square>
-                <div className="text">
-                    <RichText html={text} />
-                </div>
+                {text && (
+                    <div className="text">
+                        <RichText html={text} />
+                    </div>
+                )}
                 <div className="form-step">
                     <Form {...props} />
                 </div>

@@ -171,12 +171,7 @@ storiesOf('Thanks', module)
             <ThemeProvider>
                 <Div100Vh>
                     <AppLogo />
-                    <ThankStep
-                        data={data}
-                        actions={() => (
-                            <Link to="#" label={data.button} onClick={action('Link clicked')} />
-                        )}
-                    />
+                    <ThankStep data={data} />
                 </Div100Vh>
             </ThemeProvider>
         );

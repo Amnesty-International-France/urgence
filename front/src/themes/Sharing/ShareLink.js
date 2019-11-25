@@ -2,62 +2,13 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import SvgIcon from '@material-ui/core/SvgIcon';
+
 import trackEvent from '../../analytics/trackEvent';
-import Button from '@material-ui/core/Button';
 import { secureUseEffect } from '../../hooks/secureHooks';
 
-import { black } from '../colors';
-
-const styles = {
-    root: {
-        textDecoration: 'none',
-        color: black,
-        fontFamily: 'Amnesty Trade Gothic LT',
-        fontSize: 16,
-        textTransform: 'none',
-        alignSelf: 'start',
-        padding: 10,
-        marginRight: 20,
-    },
-    inLine: {
-        textDecoration: 'none',
-        color: black,
-        fontFamily: 'Amnesty Trade Gothic LT',
-        fontSize: 16,
-        textTransform: 'none',
-        alignSelf: 'start',
-        marginLeft: 25,
-    },
-    inLineButton: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    button: {
-        textDecoration: 'none',
-        color: black,
-        fontFamily: 'Amnesty Trade Gothic LT',
-        fontSize: 16,
-        textTransform: 'none',
-        alignSelf: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        textAlign: 'center',
-        lineHeight: '15px',
-    },
-    inLineIcon: {
-        marginRight: 10,
-    },
-    icon: {
-        alignSelf: 'center',
-    },
-};
-
 export const ShareLink = ({
-    classes,
     slug,
     step,
     action,
@@ -66,11 +17,11 @@ export const ShareLink = ({
     title,
     text,
     icon,
-    inLine,
     customClass,
     customScript,
     analyticsCategory,
     buttonName,
+    backgroundColor,
 }) => {
     secureUseEffect(() => {
         trackEvent(analyticsCategory, 'Display', 'button', buttonName, slug, step, {
@@ -81,28 +32,28 @@ export const ShareLink = ({
     return (
         <Fragment>
             {customScript}
-            <Button
-                className={classnames(inLine ? classes.inLine : classes.root, `${customClass}`)}
+            <IconButton
+                className={classnames(`${customClass}`)}
+                style={{ color: '#fff', backgroundColor }}
+                size="medium"
                 href={href}
                 target={target}
                 title={title}
+                label={text}
                 onClick={event => {
-                    if (action) action(event);
+                    if (action) {
+                        action(event);
+                    }
                     trackEvent(analyticsCategory, 'Click', 'button', buttonName, slug, step, {
                         disabled: 'active',
                         label: title,
                     });
                 }}
             >
-                <div className={inLine ? classes.inLineButton : classes.button}>
-                    <FontAwesomeIcon
-                        icon={icon}
-                        size="2x"
-                        className={inLine ? classes.inLineIcon : classes.icon}
-                    />
-                    <span>{text}</span>
-                </div>
-            </Button>
+                <SvgIcon>
+                    <FontAwesomeIcon icon={icon} size="2x" />
+                </SvgIcon>
+            </IconButton>
         </Fragment>
     );
 };
@@ -116,12 +67,11 @@ ShareLink.propTypes = {
     icon: PropTypes.object.isRequired,
     text: PropTypes.string,
     action: PropTypes.func,
-    classes: PropTypes.object,
-    inLine: PropTypes.bool,
     customClass: PropTypes.string,
     customScript: PropTypes.element,
     analyticsCategory: PropTypes.string,
     buttonName: PropTypes.string,
+    backgroundColor: PropTypes.string,
 };
 
 ShareLink.defaultProps = {
@@ -132,4 +82,4 @@ ShareLink.defaultProps = {
     customScript: null,
 };
 
-export default withStyles(styles)(ShareLink);
+export default ShareLink;

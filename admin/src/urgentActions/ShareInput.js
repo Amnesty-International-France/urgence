@@ -20,7 +20,7 @@ import { get as getScreenIndex, SHARE } from './screenIndex';
 import RichTextInput from '../form/RichTextInput';
 import FrontPreview from './FrontPreview';
 
-import Share from '../../../front/src/urgentActions/share/Share';
+import ShareStep from '../../../front/src/urgentActions/share/ShareStep';
 
 const styles = theme => ({
     ...root,
@@ -29,6 +29,9 @@ const styles = theme => ({
     },
     preview: {
         ...sharingScreenPreview,
+        '& .url': {
+            width: '230px !important',
+        },
     },
 });
 
@@ -100,7 +103,7 @@ export const ShareInput = ({ classes, source }) => {
                             </CardContent>
                         </Card>
                         <FrontPreview className={classes.preview}>
-                            <Share data={formData[source]} slug={formData.slug} />
+                            <ShareStep data={formData[source]} slug={formData.slug} />
                         </FrontPreview>
                     </Fragment>
                 )}
