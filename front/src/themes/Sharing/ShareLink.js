@@ -2,8 +2,9 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import trackEvent from '../../analytics/trackEvent';
 import Fab from '@material-ui/core/Fab';
+
+import trackEvent from '../../analytics/trackEvent';
 import { secureUseEffect } from '../../hooks/secureHooks';
 
 export const ShareLink = ({
