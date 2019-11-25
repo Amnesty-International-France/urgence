@@ -9,6 +9,7 @@ import get from 'lodash.get';
 import RichText from '../themes/RichText';
 import LongText from '../themes/LongText';
 import { withBlackLogo, withYellowBackground } from '../themes/ThemeContext';
+import Share from './share/Share';
 
 const styles = {
     padding: '60px 15px 20px',
@@ -20,6 +21,10 @@ const styles = {
         width: '100%',
         padding: '80px 20px 20px 20px',
     },
+    '& .paper-share': {
+        marginTop: '20px',
+        padding: '20px',
+    },
     '& h1': {
         textTransform: 'uppercase',
         fontFamily: 'Amnesty Trade Gothic Condensed',
@@ -27,9 +32,10 @@ const styles = {
     },
 };
 
-export const ThankStep = ({ className, data }) => {
+export const ThankStep = ({ className, data, slug, step, dataShare, analyticsCategory }) => {
     const title = get(data, 'title');
     const text = get(data, 'text');
+
     return (
         <div className={classnames(className, 'thank')}>
             <Paper className="paper" elevation={4} square>
@@ -39,6 +45,14 @@ export const ThankStep = ({ className, data }) => {
                     </h1>
                     {text && <RichText html={text} />}
                 </div>
+            </Paper>
+            <Paper className="paper paper-share" elevation={6} square>
+                <Share
+                    slug={slug}
+                    step={step}
+                    data={dataShare}
+                    analyticsCategory={analyticsCategory}
+                />
             </Paper>
         </div>
     );

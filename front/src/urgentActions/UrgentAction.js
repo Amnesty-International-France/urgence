@@ -14,7 +14,7 @@ import Stepper from '../themes/Stepper';
 import SEO from '../SEO';
 import Story from './story/Story';
 import ThankStep from './ThankStep';
-import Share from './share/Share';
+import ShareStep from './ShareStep';
 import ANALYTICS_CATEGORIES from '../analytics/categories';
 import MessageView from './messageView/MessageView';
 import ToMessageSendButton from './messageView/ToMessageSendButton';
@@ -212,7 +212,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
         const emailThank = get(data, 'UrgentAction.email_thank');
 
         return (
-            <Share
+            <ShareStep
                 slug={slug}
                 step={step}
                 data={emailThank}
@@ -246,7 +246,17 @@ export const UrgentAction = ({ history, slug, step, data }) => {
 
     if (step === 'thanks-end') {
         const thankEnd = get(data, 'UrgentAction.end_thank');
-        return <ThankStep data={thankEnd} />;
+        const emailThank = get(data, 'UrgentAction.email_thank');
+
+        return (
+            <ThankStep
+                data={thankEnd}
+                slug={slug}
+                step={step}
+                dataShare={emailThank}
+                analyticsCategory={ANALYTICS_CATEGORIES.SHARE}
+            />
+        );
     }
 };
 

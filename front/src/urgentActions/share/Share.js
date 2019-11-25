@@ -1,33 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 import glamorous from 'glamorous';
-import { compose } from 'recompose';
-import { Paper } from '@material-ui/core';
 import get from 'lodash.get';
 
 import RichText from '../../themes/RichText';
 import LongText from '../../themes/LongText';
-import { white, black } from '../../themes/colors';
-import { withBlackLogo, withYellowBackground } from '../../themes/ThemeContext';
 import ShareForm from '../../themes/Sharing/ShareForm';
 
 import generateUrl from '../../services/generateUrl';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '0.8em',
-    padding: '60px 15px 20px',
-    '& .paper': {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        minHeight: '100%',
-        width: '100%',
-        padding: '80px 20px 20px 20px',
-        color: black,
-        backgroundColor: white,
-    },
+    fontSize: '0.7em',
     '& .header': {
         margin: '1em 0',
     },
@@ -59,24 +43,20 @@ const Share = ({ className, slug, step, data, analyticsCategory }) => {
     const link = getLinkFromSlug(slug);
 
     return (
-        <div className={classnames('share', className)}>
-            <Paper className="paper" elevation={6} square>
-                <div className="header">
-                    <h1>
-                        <LongText text={title} />
-                    </h1>
-                    {text && <RichText html={text} />}
-                </div>
-                {share && (
-                    <ShareForm
-                        {...share}
-                        slug={slug}
-                        step={step}
-                        link={link}
-                        analyticsCategory={analyticsCategory}
-                    />
-                )}
-            </Paper>
+        <div className={className}>
+            <div className="header">
+                <h1>
+                    <LongText text={title} />
+                </h1>
+                {text && <RichText html={text} />}
+            </div>
+            <ShareForm
+                {...share}
+                slug={slug}
+                step={step}
+                link={link}
+                analyticsCategory={analyticsCategory}
+            />
         </div>
     );
 };
@@ -102,6 +82,4 @@ Share.defaultProps = {
     },
 };
 
-const WithStylesShare = glamorous(Share)(styles);
-
-export default compose(withBlackLogo, withYellowBackground)(WithStylesShare);
+export default glamorous(Share)(styles);
