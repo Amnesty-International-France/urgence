@@ -12,10 +12,9 @@ import Avatar from '@material-ui/core/Avatar';
 import { root, thanksEndScreenPreview } from './styles';
 import { get as getScreenIndex, CONTINUE, THANKS } from './screenIndex';
 import RichTextInput from '../form/RichTextInput';
-import FrontPreview, { noop } from './FrontPreview';
+import FrontPreview from './FrontPreview';
 
 import ThankStep from '../../../front/src/urgentActions/ThankStep';
-import Link from '../../../front/src/themes/Link';
 
 const styles = {
     ...root,
