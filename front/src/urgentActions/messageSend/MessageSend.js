@@ -24,7 +24,7 @@ const styles = {
         justifyContent: 'flex-start',
         minHeight: '100%',
         width: '100%',
-        padding: '135px 20px 20px 20px',
+        padding: '100px 20px 20px 20px',
         color: black,
         backgroundColor: white,
     },
@@ -45,7 +45,7 @@ const styles = {
     },
     '@media (min-width: 1024px)': {
         fontSize: '24px',
-        '&.paper': {
+        '& .paper': {
             padding: '10vh 10vw',
         },
         '& .action': {

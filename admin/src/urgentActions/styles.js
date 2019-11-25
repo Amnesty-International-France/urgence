@@ -44,29 +44,27 @@ export const storyScreenPreview = {
     },
 };
 
-export const sharingScreenPreview = {
+export const actScreenPreview = {
     ...preview,
-    '& > div': {
-        width: 'calc(100% - 40px)',
-        padding: '135px 20px 20px 20px',
-    },
-};
-
-export const transitionScreenPreview = {
-    ...preview,
-    '& > div': {
-        maxHeight: 'calc(100% - 120px)',
-        height: 'calc(100% - 120px)',
-        width: 'calc(100% - 40px)',
-        padding: '0px 20px 0px 20px',
+    '& .act': {
+        height: 'calc(600px - 110px) !important',
+        width: 'calc(100% - 30px)',
+        '& .paper': {
+            width: 'calc(100% - 40px)',
+            padding: '0px 20px',
+        },
     },
 };
 
 export const messageFormScreenPreview = {
     ...preview,
-    '& > div': {
-        width: 'calc(100% - 40px)',
-        padding: '135px 20px 20px 20px',
+    '& .message-send, .message-view': {
+        height: 'calc(600px - 110px) !important',
+        width: 'calc(100% - 30px)',
+        '& .paper': {
+            width: 'calc(100% - 40px)',
+            padding: '100px 20px 20px 20px',
+        },
     },
     '& .action': {
         '& a': {
@@ -77,13 +75,41 @@ export const messageFormScreenPreview = {
 
 export const registerFormScreenPreview = {
     ...preview,
-    '& > div': {
-        width: 'calc(100% - 40px)',
-        padding: '135px 20px 20px 20px',
+    '& .register': {
+        height: 'calc(600px - 110px) !important',
+        width: 'calc(100% - 30px)',
+        '& .paper': {
+            width: 'calc(100% - 40px)',
+            padding: '100px 20px 20px 20px',
+        },
     },
     '& .action': {
         '& a': {
             width: '100%',
+        },
+    },
+};
+
+export const sharingScreenPreview = {
+    ...preview,
+    '& .share': {
+        height: 'calc(600px - 110px) !important',
+        width: 'calc(100% - 30px)',
+        '& .paper': {
+            width: 'calc(100% - 40px)',
+            padding: '100px 20px 20px 20px',
+        },
+    },
+};
+
+export const thanksEndScreenPreview = {
+    ...preview,
+    '& .thank': {
+        height: 'calc(600px - 80px) !important',
+        width: 'calc(100% - 30px)',
+        '& .paper': {
+            width: 'calc(100% - 40px)',
+            padding: '0px 20px',
         },
     },
 };

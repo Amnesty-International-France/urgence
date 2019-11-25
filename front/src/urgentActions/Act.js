@@ -5,7 +5,12 @@ import PropTypes from 'prop-types';
 import TransitionScreen from '../themes/TransitionScreen';
 
 const Act = ({ data, actions }) => (
-    <TransitionScreen actions={actions} title={get(data, 'title')} message={get(data, 'message')} />
+    <TransitionScreen
+        className="act"
+        actions={actions}
+        title={get(data, 'title')}
+        message={get(data, 'message')}
+    />
 );
 
 Act.propTypes = {

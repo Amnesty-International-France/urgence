@@ -8,7 +8,7 @@ import TransitionScreen from '../themes/TransitionScreen';
 export const ThankStep = ({ data, actions }) => {
     const title = get(data, 'title');
     const text = get(data, 'text');
-    return <TransitionScreen actions={actions} title={title} message={text} />;
+    return <TransitionScreen className="thank" actions={actions} title={title} message={text} />;
 };
 
 ThankStep.propTypes = {

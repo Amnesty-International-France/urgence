@@ -28,12 +28,12 @@ const styles = {
         justifyContent: 'flex-start',
         minHeight: '100%',
         width: '100%',
-        padding: '135px 20px 20px 20px',
+        padding: '100px 20px 20px 20px',
         color: black,
         backgroundColor: white,
     },
     '& .header': {
-        margin: '1em 0',
+        marginBottom: '1em',
     },
     '& h1': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
