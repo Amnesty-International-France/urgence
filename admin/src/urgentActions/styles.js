@@ -1,4 +1,4 @@
-import { pink } from '../../../front/src/themes/colors';
+import { white, pink } from '../../../front/src/themes/colors';
 
 export const root = {
     root: {
@@ -33,6 +33,14 @@ export const preview = {
     margin: 16,
     overflow: 'auto',
     fontFamily: "'Amnesty Trade Gothic', 'Arial', sans-serif",
+    backgroundColor: white,
+};
+
+export const storyScreenPreview = {
+    ...preview,
+    '& .story-step > div': {
+        height: 'calc(600px - 80px) !important',
+    },
 };
 
 export const sharingScreenPreview = {
