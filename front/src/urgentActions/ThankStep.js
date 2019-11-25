@@ -35,6 +35,7 @@ const styles = {
 export const ThankStep = ({ className, data, slug, step, dataShare, analyticsCategory }) => {
     const title = get(data, 'title');
     const text = get(data, 'text');
+
     return (
         <div className={classnames('thank', className)}>
             <Paper className="paper" elevation={6} square>
