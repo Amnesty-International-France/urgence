@@ -53,6 +53,11 @@ export const actScreenPreview = {
             width: 'calc(100% - 40px)',
             padding: '0px 20px',
         },
+        '& .actions': {
+            '& a': {
+                width: '100%',
+            },
+        },
     },
 };
 
@@ -65,10 +70,10 @@ export const messageFormScreenPreview = {
             width: 'calc(100% - 40px)',
             padding: '100px 20px 20px 20px',
         },
-    },
-    '& .action': {
-        '& a': {
-            width: '100%',
+        '& .action': {
+            '& a': {
+                width: '100%',
+            },
         },
     },
 };
@@ -82,10 +87,10 @@ export const registerFormScreenPreview = {
             width: 'calc(100% - 40px)',
             padding: '100px 20px 20px 20px',
         },
-    },
-    '& .action': {
-        '& a': {
-            width: '100%',
+        '& .action': {
+            '& a': {
+                width: '100%',
+            },
         },
     },
 };
@@ -110,6 +115,11 @@ export const thanksEndScreenPreview = {
         '& .paper': {
             width: 'calc(100% - 40px)',
             padding: '0px 20px',
+        },
+        '& .actions': {
+            '& a': {
+                width: '100%',
+            },
         },
     },
 };
