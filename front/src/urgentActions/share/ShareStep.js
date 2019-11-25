@@ -4,19 +4,20 @@ import glamorous from 'glamorous';
 import { compose } from 'recompose';
 import { Paper } from '@material-ui/core';
 
-import { withBlackLogo, withYellowBackground } from '../themes/ThemeContext';
-import { white, black } from '../themes/colors';
-import Share from './share/Share';
+import { withBlackLogo, withYellowBackground } from '../../themes/ThemeContext';
+import { white, black } from '../../themes/colors';
+import Share from './Share';
 
 const styles = {
     padding: '60px 15px 20px',
+    height: '95vh',
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         minHeight: '100%',
         width: '100%',
-        padding: '80px 20px 20px 20px',
+        padding: '100px 20px 20px 20px',
         color: black,
         backgroundColor: white,
     },

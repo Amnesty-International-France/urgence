@@ -14,7 +14,7 @@ import Stepper from '../themes/Stepper';
 import SEO from '../SEO';
 import Story from './story/Story';
 import ThankStep from './ThankStep';
-import ShareStep from './ShareStep';
+import ShareStep from './share/ShareStep';
 import ANALYTICS_CATEGORIES from '../analytics/categories';
 import MessageView from './messageView/MessageView';
 import ToMessageSendButton from './messageView/ToMessageSendButton';
