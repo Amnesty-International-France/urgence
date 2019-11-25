@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
@@ -55,7 +56,7 @@ export const CopyToClipboard = ({ classes, slug, step, url, action, analyticsCat
     >
         <CopyToClipboardButton textToCopy={url}>
             <div className={classes.inLine}>
-                <span className={classes.url}>{url}</span>
+                <span className={classnames('url', classes.url)}>{url}</span>
                 <FontAwesomeIcon icon={faLink} size="2x" className={classes.icon} />
             </div>
         </CopyToClipboardButton>
