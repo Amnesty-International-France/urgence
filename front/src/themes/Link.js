@@ -32,12 +32,12 @@ export const styles = {
     color: white,
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
     transition: 'background-color 0.25s ease',
-    '& .disabled': {
+    '.disabled': {
         backgroundColor: grey,
         color: darkGrey,
         pointerEvents: 'none',
     },
-    '& .white': {
+    '.white': {
         display: 'flex',
         backgroundColor: white,
         color: black,
@@ -83,6 +83,7 @@ export class Link extends Component {
             },
             whiteLink,
         } = this.props;
+
         return (
             <RouterLink
                 to={to}
