@@ -21,12 +21,6 @@ const styles = {
     ...root,
     preview: {
         ...storyScreenPreview,
-        '& .step': {
-            padding: '100px 20px !important',
-            '@media (min-aspect-ratio: 1/1)': {
-                padding: '100px 20px !important',
-            },
-        },
         '@media (min-width: 1024px)': {
             '& .rich-text': {
                 fontSize: '18px !important',

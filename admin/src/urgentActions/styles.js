@@ -40,6 +40,7 @@ export const storyScreenPreview = {
     ...preview,
     '& .story-step > div': {
         height: 'calc(600px - 80px) !important',
+        width: 'calc(100% - 30px)',
     },
 };
 
