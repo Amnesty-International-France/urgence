@@ -2,12 +2,12 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import trackEvent from '../../analytics/trackEvent';
 import Fab from '@material-ui/core/Fab';
+
+import trackEvent from '../../analytics/trackEvent';
 import { secureUseEffect } from '../../hooks/secureHooks';
 
 export const ShareLink = ({
-    classes,
     slug,
     step,
     action,
@@ -16,7 +16,6 @@ export const ShareLink = ({
     title,
     text,
     icon,
-    inLine,
     customClass,
     customScript,
     analyticsCategory,
@@ -35,7 +34,7 @@ export const ShareLink = ({
             <Fab
                 color={'secondary'}
                 style={{ backgroundColor }}
-                className={classnames(inLine ? classes.inLine : classes.root, `${customClass}`)}
+                className={classnames(`${customClass}`)}
                 href={href}
                 size="medium"
                 target={target}
@@ -48,12 +47,8 @@ export const ShareLink = ({
                     });
                 }}
             >
-                <div className={inLine ? classes.inLineButton : classes.button}>
-                    <FontAwesomeIcon
-                        icon={icon}
-                        size="2x"
-                        className={inLine ? classes.inLineIcon : classes.icon}
-                    />
+                <div>
+                    <FontAwesomeIcon icon={icon} size="2x" />
                     <span>{text}</span>
                 </div>
             </Fab>
@@ -70,8 +65,6 @@ ShareLink.propTypes = {
     icon: PropTypes.object.isRequired,
     text: PropTypes.string,
     action: PropTypes.func,
-    classes: PropTypes.object,
-    inLine: PropTypes.bool,
     customClass: PropTypes.string,
     customScript: PropTypes.element,
     analyticsCategory: PropTypes.string,

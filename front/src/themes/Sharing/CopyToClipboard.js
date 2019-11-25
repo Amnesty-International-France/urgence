@@ -56,7 +56,7 @@ export const CopyToClipboard = ({ classes, slug, step, url, action, analyticsCat
         <CopyToClipboardButton textToCopy={url}>
             <div className={classes.inLine}>
                 <span className={classes.url}>{url}</span>
-                <FontAwesomeIcon icon={faLink} size="2x" className={classes.icon} />{' '}
+                <FontAwesomeIcon icon={faLink} size="2x" className={classes.icon} />
             </div>
         </CopyToClipboardButton>
     </Button>
