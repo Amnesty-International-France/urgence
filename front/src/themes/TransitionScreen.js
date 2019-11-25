@@ -20,9 +20,10 @@ const styles = {
     },
     '& h1': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
-        fontSize: '36px',
+        fontSize: '30px',
         color: black,
         textTransform: 'uppercase',
+        lineHeight: '30px',
     },
     '& .rich-text': {
         fontFamily: 'Amnesty Trade Gothic LT',
