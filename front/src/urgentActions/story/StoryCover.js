@@ -10,17 +10,17 @@ import RichText from '../../themes/RichText';
 const styles = {
     padding: '60px 15px 20px',
     height: '95vh',
-    '& .page': {
+    '& .paper': {
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
         width: '100%',
-        paddingBottom: '80px',
     },
     '& .step': {
         flex: '1 0 0',
         display: 'flex',
         flexDirection: 'row',
+        paddingBottom: '80px',
     },
     '& .content': {
         display: 'flex',
@@ -70,7 +70,7 @@ const styles = {
 export const StoryCover = ({ className, content, medium }) => (
     <div className={className}>
         <Paper
-            className="page"
+            className="paper"
             style={{
                 ...{
                     backgroundImage: `url(${get(medium, 'src', '')})`,
