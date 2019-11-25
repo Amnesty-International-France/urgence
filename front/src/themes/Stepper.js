@@ -13,6 +13,7 @@ const styles = {
         height: '4px',
         width: '30px',
         margin: '0px 3px',
+        transition: 'background-color 0.25s ease',
     },
     '& .done': {
         backgroundColor: black,
