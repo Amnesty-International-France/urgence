@@ -32,18 +32,12 @@ const styles = {
         color: black,
         backgroundColor: white,
     },
-    '& .header': {
-        marginBottom: '1em',
-    },
     '& h1': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
         fontSize: '30px',
         color: black,
         textTransform: 'uppercase',
         lineHeight: '30px',
-    },
-    '& .phone-indication': {
-        margin: '5px 0',
     },
     '& .action': {
         position: 'relative',
@@ -57,8 +51,8 @@ const styles = {
             width: '100%',
         },
     },
-    '& .form-step': {
-        margin: '5px 0px 10px 0px',
+    '& .text, .form-step, .phone-indication': {
+        margin: '1em 0',
     },
     '@media (min-width: 1024px)': {
         fontSize: '24px',
@@ -91,7 +85,11 @@ export const RegisterActivist = ({ data, gdprRegister, action, className, ...pro
                     <h1>
                         <LongText text={title} />
                     </h1>
-                    {text && <RichText html={text} />}
+                    {text && (
+                        <div className="text">
+                            <RichText html={text} />
+                        </div>
+                    )}
                 </div>
                 <div className="form-step">
                     <Form phoneIndication={phoneIndication} {...props} />

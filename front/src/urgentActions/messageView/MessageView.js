@@ -40,7 +40,7 @@ const styles = {
             width: '100%',
         },
     },
-    '& .text': {
+    '& .text, .form-step': {
         margin: '1em 0',
     },
     '& .letter': {
@@ -82,9 +82,6 @@ const styles = {
     '& .object-indication': {
         fontStyle: 'italic',
         fontSize: '14px',
-    },
-    '& .form-step': {
-        margin: '5px 0px 10px 0px',
     },
     '@media (min-width: 1024px)': {
         fontSize: '24px',
