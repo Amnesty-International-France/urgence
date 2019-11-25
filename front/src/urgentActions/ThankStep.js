@@ -27,7 +27,7 @@ const styles = {
     },
 };
 
-export const ThankStep = ({ className, data, actions }) => {
+export const ThankStep = ({ className, data }) => {
     const title = get(data, 'title');
     const text = get(data, 'text');
     return (
@@ -40,7 +40,6 @@ export const ThankStep = ({ className, data, actions }) => {
                     {text && <RichText html={text} />}
                 </div>
             </Paper>
-            <div className="actions">{actions()}</div>
         </div>
     );
 };
@@ -51,12 +50,9 @@ ThankStep.propTypes = {
         title: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
     }),
-    actions: PropTypes.func,
 };
 
-ThankStep.defaultProps = {
-    actions: () => {},
-};
+ThankStep.defaultProps = {};
 
 const withStyleThankStep = glamorous(ThankStep)(styles);
 export default compose(withBlackLogo, withYellowBackground)(withStyleThankStep);

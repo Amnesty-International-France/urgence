@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ShareLink from './ShareLink';
-import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 
 export const LinkFacebook = ({ slug, step, url, action, analyticsCategory }) => (
     <ShareLink
@@ -9,11 +9,12 @@ export const LinkFacebook = ({ slug, step, url, action, analyticsCategory }) => 
         step={step}
         href={`fb-messenger://share/?link=${url}`}
         target="facebook"
-        title="Partage Messenger"
-        icon={faFacebookMessenger}
+        title="Partage Facebook"
+        icon={faFacebookF}
         action={action}
         analyticsCategory={analyticsCategory}
         buttonName="Messenger"
+        backgroundColor="#6C82B1"
     />
 );
 

@@ -51,11 +51,12 @@ export const CopyToClipboard = ({ classes, slug, step, url, action, analyticsCat
                 label: 'Copy to clipboard',
             });
         }}
+        variant="outlined"
     >
         <CopyToClipboardButton textToCopy={url}>
             <div className={classes.inLine}>
-                <FontAwesomeIcon icon={faLink} size="2x" className={classes.icon} />{' '}
                 <span className={classes.url}>{url}</span>
+                <FontAwesomeIcon icon={faLink} size="2x" className={classes.icon} />{' '}
             </div>
         </CopyToClipboardButton>
     </Button>

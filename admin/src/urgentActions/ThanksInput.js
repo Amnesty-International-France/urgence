@@ -66,18 +66,7 @@ export const ThanksInput = ({ classes, source, final }) => {
                             </CardContent>
                         </Card>
                         <FrontPreview className={classes.preview}>
-                            <ThankStep
-                                data={formData[source]}
-                                actions={() =>
-                                    !final && formData[source] && formData[source].button ? (
-                                        <Link
-                                            to="#"
-                                            label={formData[source].button}
-                                            onClick={noop}
-                                        />
-                                    ) : null
-                                }
-                            />
+                            <ThankStep data={formData[source]} />
                         </FrontPreview>
                     </Fragment>
                 )}

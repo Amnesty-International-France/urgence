@@ -2,59 +2,9 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
 import trackEvent from '../../analytics/trackEvent';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import { secureUseEffect } from '../../hooks/secureHooks';
-
-import { black } from '../colors';
-
-const styles = {
-    root: {
-        textDecoration: 'none',
-        color: black,
-        fontFamily: 'Amnesty Trade Gothic LT',
-        fontSize: 16,
-        textTransform: 'none',
-        alignSelf: 'start',
-        padding: 10,
-        marginRight: 20,
-    },
-    inLine: {
-        textDecoration: 'none',
-        color: black,
-        fontFamily: 'Amnesty Trade Gothic LT',
-        fontSize: 16,
-        textTransform: 'none',
-        alignSelf: 'start',
-        marginLeft: 25,
-    },
-    inLineButton: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    button: {
-        textDecoration: 'none',
-        color: black,
-        fontFamily: 'Amnesty Trade Gothic LT',
-        fontSize: 16,
-        textTransform: 'none',
-        alignSelf: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        textAlign: 'center',
-        lineHeight: '15px',
-    },
-    inLineIcon: {
-        marginRight: 10,
-    },
-    icon: {
-        alignSelf: 'center',
-    },
-};
 
 export const ShareLink = ({
     classes,
@@ -71,6 +21,7 @@ export const ShareLink = ({
     customScript,
     analyticsCategory,
     buttonName,
+    backgroundColor,
 }) => {
     secureUseEffect(() => {
         trackEvent(analyticsCategory, 'Display', 'button', buttonName, slug, step, {
@@ -81,9 +32,12 @@ export const ShareLink = ({
     return (
         <Fragment>
             {customScript}
-            <Button
+            <Fab
+                color={'secondary'}
+                style={{ backgroundColor }}
                 className={classnames(inLine ? classes.inLine : classes.root, `${customClass}`)}
                 href={href}
+                size="medium"
                 target={target}
                 title={title}
                 onClick={event => {
@@ -102,7 +56,7 @@ export const ShareLink = ({
                     />
                     <span>{text}</span>
                 </div>
-            </Button>
+            </Fab>
         </Fragment>
     );
 };
@@ -122,6 +76,7 @@ ShareLink.propTypes = {
     customScript: PropTypes.element,
     analyticsCategory: PropTypes.string,
     buttonName: PropTypes.string,
+    backgroundColor: PropTypes.string,
 };
 
 ShareLink.defaultProps = {
@@ -132,4 +87,4 @@ ShareLink.defaultProps = {
     customScript: null,
 };
 
-export default withStyles(styles)(ShareLink);
+export default ShareLink;

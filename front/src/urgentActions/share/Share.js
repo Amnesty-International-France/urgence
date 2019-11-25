@@ -9,7 +9,7 @@ import get from 'lodash.get';
 import RichText from '../../themes/RichText';
 import LongText from '../../themes/LongText';
 import { white, black } from '../../themes/colors';
-import { withYellowLogo, withYellowBackground } from '../../themes/ThemeContext';
+import { withBlackLogo, withYellowBackground } from '../../themes/ThemeContext';
 import ShareForm from '../../themes/Sharing/ShareForm';
 
 import generateUrl from '../../services/generateUrl';
@@ -24,7 +24,7 @@ const styles = {
         justifyContent: 'flex-start',
         minHeight: '100%',
         width: '100%',
-        padding: '135px 20px 20px 20px',
+        padding: '80px 20px 20px 20px',
         color: black,
         backgroundColor: white,
     },
@@ -104,4 +104,4 @@ Share.defaultProps = {
 
 const WithStylesShare = glamorous(Share)(styles);
 
-export default compose(withYellowLogo, withYellowBackground)(WithStylesShare);
+export default compose(withBlackLogo, withYellowBackground)(WithStylesShare);
