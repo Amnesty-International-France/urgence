@@ -17,7 +17,7 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'center',
         height: '100%',
-        width: 'calc(100% - 40px)',
+        width: '100%',
         padding: '0px 20px',
         color: black,
         backgroundColor: white,
