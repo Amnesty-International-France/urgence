@@ -47,8 +47,8 @@ export const storyScreenPreview = {
 export const actScreenPreview = {
     ...preview,
     '& .act': {
-        height: 'calc(600px - 110px) !important',
-        width: 'calc(100% - 30px)',
+        height: 'calc(600px - 80px) !important',
+        width: 'calc(100% - 30px) !important',
         '& .paper': {
             width: 'calc(100% - 40px)',
             padding: '0px 20px',
