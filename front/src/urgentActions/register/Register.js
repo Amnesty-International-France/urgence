@@ -19,7 +19,7 @@ import LegalInformation from '../LegalInformation';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '0.8em',
+    fontSize: '18px',
     padding: '60px 15px 20px',
     '& .paper': {
         display: 'flex',
@@ -59,10 +59,8 @@ const styles = {
     '& .form-step': {
         margin: '5px 0px 10px 0px',
     },
-    '@media (min-width: 350px)': {
-        fontSize: '16px',
-    },
     '@media (min-width: 1024px)': {
+        fontSize: '24px',
         '&.paper': {
             padding: '10vh 10vw',
         },

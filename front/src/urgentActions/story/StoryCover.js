@@ -28,16 +28,16 @@ const styles = {
         },
     },
     '& .content': {
-        flex: '1 0 0',
         display: 'flex',
+        flex: '1 0 0',
         alignItems: 'flex-end',
     },
     '& .rich-text > p': {
-        textTransform: 'uppercase',
         fontFamily: 'Amnesty Trade Gothic Condensed',
+        textTransform: 'uppercase',
         margin: '0 12px',
         width: 'calc(100% - 24px)',
-        fontSize: '16px',
+        fontSize: '18px',
         '@media (min-width: 1024px)': {
             fontSize: '24px',
         },

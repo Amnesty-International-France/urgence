@@ -21,11 +21,6 @@ const styles = {
     ...root,
     preview: {
         ...storyScreenPreview,
-        '& .rich-text': {
-            '@media (min-width: 1024px)': {
-                fontSize: '16px !important',
-            },
-        },
         '& .step': {
             padding: '100px 20px !important',
             '@media (min-aspect-ratio: 1/1)': {
@@ -33,8 +28,11 @@ const styles = {
             },
         },
         '@media (min-width: 1024px)': {
+            '& .rich-text': {
+                fontSize: '18px !important',
+            },
             '& .rich-text > p': {
-                fontSize: '16px !important',
+                fontSize: '18px !important',
             },
             '& .ql-size-large': {
                 padding: '4px 0 !important',

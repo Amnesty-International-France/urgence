@@ -10,7 +10,7 @@ import Input from '../themes/Input';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '16px',
+    fontSize: '18px',
     display: 'flex',
     minHeight: '100%',
     flexDirection: 'column',
@@ -221,9 +221,4 @@ AddressStep.propTypes = {
     step: PropTypes.string,
 };
 
-export default glamorous(
-    compose(
-        withYellowLogo,
-        withSessionData,
-    )(AddressStep),
-)(styles);
+export default glamorous(compose(withYellowLogo, withSessionData)(AddressStep))(styles);

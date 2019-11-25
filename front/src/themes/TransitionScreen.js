@@ -8,6 +8,8 @@ import LongText from '../themes/LongText';
 import { yellow, black } from '../themes/colors';
 
 const styles = {
+    fontFamily: 'Amnesty Trade Gothic LT',
+    fontSize: '18px',
     padding: '60px 15px 20px',
     '& .paper': {
         display: 'flex',
@@ -26,8 +28,6 @@ const styles = {
         lineHeight: '30px',
     },
     '& .rich-text': {
-        fontFamily: 'Amnesty Trade Gothic LT',
-        fontSize: '16px',
         color: black,
     },
     '& .actions': {
@@ -46,6 +46,7 @@ const styles = {
         },
     },
     '@media (min-width: 1024px)': {
+        fontSize: '24px',
         '& .paper': {
             padding: '10vh 10vw',
         },
