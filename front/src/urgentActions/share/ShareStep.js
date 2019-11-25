@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { compose } from 'recompose';
@@ -23,15 +24,13 @@ const styles = {
     },
 };
 
-const ShareStep = ({ className, slug, step, data, analyticsCategory }) => {
-    return (
-        <div className={className}>
-            <Paper className="paper" elevation={6} square>
-                <Share slug={slug} step={step} data={data} analyticsCategory={analyticsCategory} />
-            </Paper>
-        </div>
-    );
-};
+const ShareStep = ({ className, slug, step, data, analyticsCategory }) => (
+    <div className={classnames('share', className)}>
+        <Paper className="paper" elevation={6} square>
+            <Share slug={slug} step={step} data={data} analyticsCategory={analyticsCategory} />
+        </Paper>
+    </div>
+);
 
 ShareStep.propTypes = {
     className: PropTypes.string,

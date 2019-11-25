@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ShareLink from './ShareLink';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+
+import ShareLink from './ShareLink';
 
 export const LinkWhatsapp = ({ slug, step, text, action, analyticsCategory }) => (
     <ShareLink
@@ -14,6 +15,7 @@ export const LinkWhatsapp = ({ slug, step, text, action, analyticsCategory }) =>
         action={action}
         analyticsCategory={analyticsCategory}
         buttonName="Whatsapp"
+        backgroundColor="#81e878"
     />
 );
 

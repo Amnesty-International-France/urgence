@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
-import LinkTwitter from './LinkTwitter';
 import LinkFacebook from './LinkFacebook';
+import LinkTwitter from './LinkTwitter';
+import LinkWhatsapp from './LinkWhatsapp';
 import CopyToClipboard from './CopyToClipboard';
 import { black } from '../colors';
 
@@ -14,44 +15,28 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     color: black,
-    paddingBottom: '20px',
-    '& .share': {
+    '& .share-block': {
         textAlign: 'center',
-        paddingBottom: '10px',
+        padding: '0.5em 0',
     },
     '& .share-text': {
-        paddingBottom: '20px',
+        padding: '0.5em 0',
     },
-    '& .list': {
-        display: 'flex',
-        marginLeft: 25,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-    },
-    '& .link': {
-        display: 'flex',
-    },
-    '& .content': {
-        fontSize: 12,
-        fontFamily: 'Amnesty Trade Gothic LT',
-        alignSelf: 'center',
-        marginBottom: 10,
-    },
-    '& .icon': {
-        height: 30,
-        marginRight: 10,
-    },
-    '& .links': {
+    '& .share-links': {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
+        margin: '0.5em 0',
+        '& a': {
+            margin: '0 0.5em',
+        },
     },
 };
 
 export const ShareForm = ({ className, slug, step, link, twitter_message, analyticsCategory }) => {
     return (
         <div className={className}>
-            <div className="share">
+            <div className="share-block">
                 <div className="share-text">Partagez l&apos;URL avec vos proches</div>
                 <CopyToClipboard
                     slug={slug}
@@ -60,20 +45,25 @@ export const ShareForm = ({ className, slug, step, link, twitter_message, analyt
                     analyticsCategory={analyticsCategory}
                 />
             </div>
-            <div className="share">
+            <div className="share-block">
                 <div>Ou utilisez vos réseaux sociaux favoris</div>
-                <div className="links">
+                <div className="share-links">
                     <LinkFacebook
                         slug={slug}
                         step={step}
                         url={encodeURIComponent(link)}
                         analyticsCategory={analyticsCategory}
                     />
-
                     <LinkTwitter
                         slug={slug}
                         step={step}
                         text={encodeURIComponent(twitter_message)}
+                        analyticsCategory={analyticsCategory}
+                    />
+                    <LinkWhatsapp
+                        slug={slug}
+                        step={step}
+                        text={encodeURIComponent(link)}
                         analyticsCategory={analyticsCategory}
                     />
                 </div>

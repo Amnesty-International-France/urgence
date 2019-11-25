@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+
 import ShareLink from './ShareLink';
 
 export const LinkTwitter = ({ slug, step, text, action, analyticsCategory }) => (

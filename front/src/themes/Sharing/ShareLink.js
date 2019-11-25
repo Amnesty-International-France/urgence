@@ -2,7 +2,8 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import Fab from '@material-ui/core/Fab';
+import IconButton from '@material-ui/core/IconButton';
+import SvgIcon from '@material-ui/core/SvgIcon';
 
 import trackEvent from '../../analytics/trackEvent';
 import { secureUseEffect } from '../../hooks/secureHooks';
@@ -31,27 +32,28 @@ export const ShareLink = ({
     return (
         <Fragment>
             {customScript}
-            <Fab
-                color={'secondary'}
-                style={{ backgroundColor }}
+            <IconButton
                 className={classnames(`${customClass}`)}
-                href={href}
+                style={{ color: '#fff', backgroundColor }}
                 size="medium"
+                href={href}
                 target={target}
                 title={title}
+                label={text}
                 onClick={event => {
-                    if (action) action(event);
+                    if (action) {
+                        action(event);
+                    }
                     trackEvent(analyticsCategory, 'Click', 'button', buttonName, slug, step, {
                         disabled: 'active',
                         label: title,
                     });
                 }}
             >
-                <div>
+                <SvgIcon>
                     <FontAwesomeIcon icon={icon} size="2x" />
-                    <span>{text}</span>
-                </div>
-            </Fab>
+                </SvgIcon>
+            </IconButton>
         </Fragment>
     );
 };
