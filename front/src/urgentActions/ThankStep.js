@@ -35,10 +35,9 @@ const styles = {
 export const ThankStep = ({ className, data, slug, step, dataShare, analyticsCategory }) => {
     const title = get(data, 'title');
     const text = get(data, 'text');
-
     return (
-        <div className={classnames(className, 'thank')}>
-            <Paper className="paper" elevation={4} square>
+        <div className={classnames('thank', className)}>
+            <Paper className="paper" elevation={6} square>
                 <div>
                     <h1>
                         <LongText text={title} />
@@ -77,4 +76,5 @@ ThankStep.propTypes = {
 ThankStep.defaultProps = {};
 
 const withStyleThankStep = glamorous(ThankStep)(styles);
+
 export default compose(withBlackLogo, withYellowBackground)(withStyleThankStep);
