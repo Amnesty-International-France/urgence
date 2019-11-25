@@ -11,13 +11,15 @@ const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
     padding: '60px 15px 20px',
+    height: '95vh',
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        minHeight: '100%',
+        height: '100%',
         width: '100%',
-        padding: '100px 20px 40px 20px',
+        padding: '0px 20px',
+        color: black,
         backgroundColor: yellow,
     },
     '& h1': {

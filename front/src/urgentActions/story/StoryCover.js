@@ -9,7 +9,6 @@ import RichText from '../../themes/RichText';
 
 const styles = {
     padding: '60px 15px 20px',
-    backgroundColor: 'transparent',
     height: '95vh',
     '& .page': {
         display: 'flex',
