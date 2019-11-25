@@ -64,6 +64,14 @@ ThankStep.propTypes = {
         title: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
     }),
+    slug: PropTypes.string.isRequired,
+    step: PropTypes.string,
+    dataShare: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired,
+        share: PropTypes.object,
+    }),
+    analyticsCategory: PropTypes.string,
 };
 
 ThankStep.defaultProps = {};
