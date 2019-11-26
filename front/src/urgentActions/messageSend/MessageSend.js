@@ -17,7 +17,7 @@ const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
     padding: '60px 15px 20px',
-    height: '95vh',
+    height: 'calc(100vh - 30px)',
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
