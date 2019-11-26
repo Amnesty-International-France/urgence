@@ -28,9 +28,6 @@ const styles = theme => ({
     },
 });
 
-const disableSharing = (record, source) =>
-    !record || !record[source] || !record[source].share || !record[source].share.active_twitter;
-
 const defaultTitle = 'Se battre. Encore. Et Encore.';
 const defaultText =
     "Continuons d'agir pour augmenter les chances de victoire ! Allons plus loin dans ce combat grace aux réseaux sociaux.";
@@ -67,7 +64,7 @@ export const ShareInput = ({ classes, source }) => {
                                         defaultValue={defaultTweet}
                                         rows="2"
                                         rowsMax="10"
-                                        disabled={disableSharing(formData, source)}
+                                        validate={[required()]}
                                     />
                                     <LongTextInput
                                         source={`${source}.share.message`}
@@ -75,6 +72,7 @@ export const ShareInput = ({ classes, source }) => {
                                         defaultValue={defaultMessage}
                                         rows="2"
                                         rowsMax="10"
+                                        validate={[required()]}
                                     />
                                 </div>
                             </CardContent>
