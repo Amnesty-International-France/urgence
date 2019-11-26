@@ -23,23 +23,18 @@ const styles = {
 
 export class Carousel extends Component {
     componentDidMount() {
-        const { initialSlide, afterChange, total } = this.props;
+        const { initialSlide, afterChange, afterLastChange } = this.props;
         const swiper = new Swiper(this.container, {
             initialSlide,
             direction: 'horizontal',
             on: {
-                slideChange: function() {
+                slideChange: () => {
                     if (!swiper) {
                         return;
                     }
-                    afterChange(swiper.activeIndex);
-                },
-                touchEnd: function() {
-                    if (
-                        swiper &&
-                        swiper.activeIndex + 1 === total &&
-                        swiper.swipeDirection === 'next'
-                    ) {
+                    if (swiper.isEnd) {
+                        afterLastChange();
+                    } else {
                         afterChange(swiper.activeIndex);
                     }
                 },
@@ -96,6 +91,7 @@ Carousel.propTypes = {
     icon: PropTypes.element.isRequired,
     className: PropTypes.string.isRequired,
     afterChange: PropTypes.func,
+    afterLastChange: PropTypes.func,
 };
 
 export default glamorous(Carousel)(styles);
