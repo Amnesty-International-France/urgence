@@ -2,14 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import {
-    addField,
-    required,
-    FormDataConsumer,
-    TextInput,
-    LongTextInput,
-    BooleanInput,
-} from 'react-admin';
+import { addField, required, FormDataConsumer, LongTextInput } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -41,9 +34,8 @@ const disableSharing = (record, source) =>
 const defaultTitle = 'Se battre. Encore. Et Encore.';
 const defaultText =
     "Continuons d'agir pour augmenter les chances de victoire ! Allons plus loin dans ce combat grace aux réseaux sociaux.";
-const defaultTweetTitle = 'Interpeller la cible sur Twitter';
 const defaultTweet = `@cible, respectez les droits humains !`;
-const defaultMessage = `J'ai agi avec Amnesty France!`;
+const defaultMessage = `J'ai agi avec Amnesty France !`;
 
 export const ShareInput = ({ classes, source }) => {
     return (
@@ -69,29 +61,14 @@ export const ShareInput = ({ classes, source }) => {
                                         defaultValue={defaultText}
                                         validate={[required()]}
                                     />
-                                    <BooleanInput
-                                        source={`${source}.share.active_twitter`}
-                                        defaultValue={true}
-                                        label="Activate twitter"
+                                    <LongTextInput
+                                        source={`${source}.share.twitter_message`}
+                                        label="Tweet message"
+                                        defaultValue={defaultTweet}
+                                        rows="2"
+                                        rowsMax="10"
+                                        disabled={disableSharing(formData, source)}
                                     />
-                                    {!disableSharing(formData, source) && (
-                                        <TextInput
-                                            source={`${source}.share.twitter_title`}
-                                            label="Tweet title"
-                                            defaultValue={defaultTweetTitle}
-                                            disabled={disableSharing(formData, source)}
-                                        />
-                                    )}
-                                    {!disableSharing(formData, source) && (
-                                        <LongTextInput
-                                            source={`${source}.share.twitter_message`}
-                                            label="Tweet message"
-                                            defaultValue={defaultTweet}
-                                            rows="2"
-                                            rowsMax="10"
-                                            disabled={disableSharing(formData, source)}
-                                        />
-                                    )}
                                     <LongTextInput
                                         source={`${source}.share.message`}
                                         label="Sharing message"

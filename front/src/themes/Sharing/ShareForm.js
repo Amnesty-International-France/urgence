@@ -33,7 +33,15 @@ const styles = {
     },
 };
 
-export const ShareForm = ({ className, slug, step, link, twitter_message, analyticsCategory }) => {
+export const ShareForm = ({
+    className,
+    slug,
+    step,
+    link,
+    message,
+    twitter_message,
+    analyticsCategory,
+}) => {
     return (
         <div className={className}>
             <div className="share-block">
@@ -57,13 +65,13 @@ export const ShareForm = ({ className, slug, step, link, twitter_message, analyt
                     <LinkTwitter
                         slug={slug}
                         step={step}
-                        text={encodeURIComponent(twitter_message)}
+                        text={`${twitter_message} - ${encodeURIComponent(link)}`}
                         analyticsCategory={analyticsCategory}
                     />
                     <LinkWhatsapp
                         slug={slug}
                         step={step}
-                        text={encodeURIComponent(link)}
+                        text={`${message} - ${encodeURIComponent(link)}`}
                         analyticsCategory={analyticsCategory}
                     />
                 </div>
@@ -80,7 +88,6 @@ ShareForm.propTypes = {
     registered: PropTypes.string,
     active_twitter: PropTypes.bool,
     twitter_message: PropTypes.string,
-    twitter_title: PropTypes.string,
     analyticsCategory: PropTypes.string,
     className: PropTypes.string,
 };

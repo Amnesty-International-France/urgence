@@ -6,6 +6,7 @@ import ShareLink from './ShareLink';
 
 export const LinkTwitter = ({ slug, step, text, action, analyticsCategory }) => (
     <ShareLink
+        customClass="twitter-share-button"
         slug={slug}
         step={step}
         href={`https://twitter.com/intent/tweet?text=${text}`}
@@ -13,8 +14,6 @@ export const LinkTwitter = ({ slug, step, text, action, analyticsCategory }) => 
         title="Partage Twitter"
         icon={faTwitter}
         action={action}
-        customClass="twitter-share-button"
-        inLine
         analyticsCategory={analyticsCategory}
         buttonName="Tweeter"
         backgroundColor="#4CAAEA"
