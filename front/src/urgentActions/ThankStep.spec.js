@@ -1,49 +1,47 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import Paper from '@material-ui/core/Paper';
+
+import LongText from '../themes/LongText';
+import RichText from '../themes/RichText';
 import { ThankStep } from './ThankStep';
-import TransitionScreen from '../themes/TransitionScreen';
+import Share from './share/Share';
 
 describe('<ThankStep />', () => {
     const defaultProps = {
         className: '',
         data: {
             title: 'Thank you!',
+            text: 'Envoyez une lettre ou partagez cette histoire.',
         },
     };
 
-    it('should render a <TransitionScreen />', () => {
-        const props = {
-            ...defaultProps,
-            data: {
-                title: 'Merci !',
-                text: 'Envoyez une lettre ou partagez cette histoire.',
-            },
-            actions: () => <p className="customAction">Some actions...</p>,
-        };
+    it('should display two <Paper />', () => {
+        const wrapper = shallow(<ThankStep {...defaultProps} />);
 
-        const wrapper = shallow(<ThankStep {...props} />);
-        const transitionScreen = wrapper.find(TransitionScreen);
-        expect(transitionScreen.length).toEqual(1);
+        const paper = wrapper.find(Paper);
+        expect(paper.length).toBe(2);
     });
 
-    it('should pass props to <TransitionScreen />', () => {
-        const props = {
-            ...defaultProps,
-            data: {
-                title: 'Merci !',
-                text: 'Envoyez une lettre ou partagez cette histoire.',
-            },
-            actions: () => 'Some actions...',
-        };
+    it('should display a <LongText />', () => {
+        const wrapper = shallow(<ThankStep {...defaultProps} />);
 
-        const wrapper = shallow(<ThankStep {...props} />);
-        const transitionScreen = wrapper.find(TransitionScreen);
+        const text = wrapper.find(LongText);
+        expect(text.length).toBe(1);
+    });
 
-        expect(transitionScreen.prop('title')).toEqual('Merci !');
-        expect(transitionScreen.prop('message')).toEqual(
-            'Envoyez une lettre ou partagez cette histoire.',
-        );
-        expect(transitionScreen.prop('actions')()).toEqual('Some actions...');
+    it('should display a <RichText />', () => {
+        const wrapper = shallow(<ThankStep {...defaultProps} />);
+
+        const text = wrapper.find(RichText);
+        expect(text.length).toBe(1);
+    });
+
+    it('should display a <ShareForm />', () => {
+        const wrapper = shallow(<ThankStep {...defaultProps} />);
+
+        const text = wrapper.find(Share);
+        expect(text.length).toBe(1);
     });
 });

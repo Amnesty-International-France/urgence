@@ -17,7 +17,7 @@ const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
     padding: '60px 15px 20px',
-    height: '95vh',
+    height: 'calc(100vh - 30px)',
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
@@ -125,7 +125,11 @@ export const MessageView = ({ className, text, messageTemplate, action, ...props
 MessageView.propTypes = {
     className: PropTypes.string,
     text: PropTypes.string.isRequired,
-    messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
+    messageTemplate: PropTypes.arrayOf(
+        PropTypes.shape({
+            value: PropTypes.string.isRequired,
+        }),
+    ),
     objectIndication: PropTypes.string.isRequired,
     object: PropTypes.string,
     setObject: PropTypes.func.isRequired,

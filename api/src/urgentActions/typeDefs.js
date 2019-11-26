@@ -115,17 +115,13 @@ export default gql`
 
     type Share {
         message: String
-        active_twitter: Boolean
         twitter_message: String
-        twitter_title: String
     }
 
     input ShareInput {
         active: Boolean
         message: String
-        active_twitter: Boolean
         twitter_message: String
-        twitter_title: String
     }
 
     type Register {
