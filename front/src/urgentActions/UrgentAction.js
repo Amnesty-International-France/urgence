@@ -105,9 +105,7 @@ const query = gql`
                 button
                 share {
                     message
-                    active_twitter
                     twitter_message
-                    twitter_title
                 }
             }
             register {
