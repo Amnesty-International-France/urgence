@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import Share from './Share';
 import RichText from '../../themes/RichText';
@@ -19,23 +19,23 @@ describe('<Share />', () => {
     };
 
     it('should display a <LongText />', () => {
-        const wrapper = shallow(<Share {...defaultProps} />);
+        const wrapper = mount(<Share {...defaultProps} />);
 
         const text = wrapper.find(LongText);
         expect(text.length).toBe(1);
     });
 
     it('should display a <RichText />', () => {
-        const wrapper = shallow(<Share {...defaultProps} />);
+        const wrapper = mount(<Share {...defaultProps} />);
 
         const text = wrapper.find(RichText);
         expect(text.length).toBe(1);
     });
 
     it('should display a <ShareForm />', () => {
-        const wrapper = shallow(<Share {...defaultProps} />);
+        const wrapper = mount(<Share {...defaultProps} />);
 
         const shareForm = wrapper.find(ShareForm);
-        expect(shareForm.length).toEqual(1);
+        expect(shareForm.length).toBe(1);
     });
 });
