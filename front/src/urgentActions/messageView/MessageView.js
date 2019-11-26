@@ -125,7 +125,11 @@ export const MessageView = ({ className, text, messageTemplate, action, ...props
 MessageView.propTypes = {
     className: PropTypes.string,
     text: PropTypes.string.isRequired,
-    messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
+    messageTemplate: PropTypes.arrayOf(
+        PropTypes.shape({
+            value: PropTypes.string.isRequired,
+        }),
+    ),
     objectIndication: PropTypes.string.isRequired,
     object: PropTypes.string,
     setObject: PropTypes.func.isRequired,

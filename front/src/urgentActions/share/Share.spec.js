@@ -2,47 +2,40 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Share from './Share';
-import SharingScreen from './SharingScreen';
+import RichText from '../../themes/RichText';
+import LongText from '../../themes/LongText';
+import ShareForm from '../../themes/Sharing/ShareForm';
 
 describe('<Share />', () => {
     const defaultProps = {
         className: '',
         data: {
-            title: 'Thank you!',
+            title: 'Merci !',
+            text: 'Envoyez le lien à vos potes.',
+            share: {
+                message: 'Some data...',
+            },
         },
     };
 
-    it('should render a <SharingScreen />', () => {
-        const props = {
-            ...defaultProps,
-            data: {
-                title: 'Merci !',
-                text: 'Envoyez le lien à vos potes.',
-            },
-            share: { message: 'Some data...' },
-            actions: () => <p className="customAction">Some actions...</p>,
-        };
+    it('should display a <LongText />', () => {
+        const wrapper = shallow(<Share {...defaultProps} />);
 
-        const wrapper = shallow(<Share {...props} />);
-        const sharingScreen = wrapper.find(SharingScreen);
-        expect(sharingScreen.length).toEqual(1);
+        const text = wrapper.find(LongText);
+        expect(text.length).toBe(1);
     });
 
-    it('should pass props to <SharingScreen />', () => {
-        const props = {
-            ...defaultProps,
-            data: {
-                title: 'Merci !',
-                text: 'Envoyez le lien à vos potes.',
-                share: { message: 'Some data...' },
-            },
-        };
+    it('should display a <RichText />', () => {
+        const wrapper = shallow(<Share {...defaultProps} />);
 
-        const wrapper = shallow(<Share {...props} />);
-        const sharingScreen = wrapper.find(SharingScreen);
+        const text = wrapper.find(RichText);
+        expect(text.length).toBe(1);
+    });
 
-        expect(sharingScreen.prop('title')).toEqual('Merci !');
-        expect(sharingScreen.prop('message')).toEqual('Envoyez le lien à vos potes.');
-        expect(sharingScreen.prop('share')).toEqual({ message: 'Some data...' });
+    it('should display a <ShareForm />', () => {
+        const wrapper = shallow(<Share {...defaultProps} />);
+
+        const shareForm = wrapper.find(ShareForm);
+        expect(shareForm.length).toEqual(1);
     });
 });

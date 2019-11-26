@@ -9,7 +9,7 @@ import Form from './Form';
 describe('MessageView', () => {
     const defaultStep = [{ value: 'one' }, { value: 'two' }, { value: 'three' }];
     const defaultProps = {
-        text_view: 'text',
+        text: 'text',
         button_view: 'button',
         objectIndication: 'object indication',
         messageTemplate: defaultStep,
@@ -36,21 +36,21 @@ describe('MessageView', () => {
         test([defaultStep], false);
     });
 
-    it('display a letter', () => {
+    it('should display a <LetterView />', () => {
         const wrapper = shallow(<MessageView {...defaultProps} />);
 
         const letter = wrapper.find(LetterView);
         expect(letter.length).toBe(1);
     });
 
-    it('display a form', () => {
+    it('should display a <Form />', () => {
         const wrapper = shallow(<MessageView {...defaultProps} />);
 
         const form = wrapper.find(Form);
         expect(form.length).toBe(1);
     });
 
-    it('display a rich text', () => {
+    it('should display a <RichText />', () => {
         const wrapper = shallow(<MessageView {...defaultProps} />);
 
         const text = wrapper.find(RichText);

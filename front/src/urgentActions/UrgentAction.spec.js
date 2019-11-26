@@ -6,7 +6,7 @@ import { renderUrgentActionWithData, UrgentAction } from './UrgentAction';
 import Story from './story/Story';
 import MessageView from './messageView/MessageView';
 import MessageSend from './messageSend/MessageSend';
-import Share from './share/Share';
+import ShareStep from './share/ShareStep';
 import Register from './register/Register';
 import ThankStep from './ThankStep';
 
@@ -410,7 +410,7 @@ describe('<UrgentAction />', () => {
 
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
-            const share = renderedComponent.find(Share);
+            const share = renderedComponent.find(ShareStep);
             expect(share.length).toBe(1);
 
             const data = share.prop('data');

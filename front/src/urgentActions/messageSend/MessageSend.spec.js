@@ -9,8 +9,7 @@ import Form from './Form';
 describe('MessageSend', () => {
     const defaultStep = [{ value: 'one' }, { value: 'two' }, { value: 'three' }];
     const defaultProps = {
-        text_send: 'text',
-        button_send: 'button',
+        text: 'text',
         messageTemplate: defaultStep,
         recipient: {
             mail: 'mail',
@@ -35,21 +34,21 @@ describe('MessageSend', () => {
         test([defaultStep], false);
     });
 
-    it('display legal information', () => {
+    it('should display <LegalInformation />', () => {
         const wrapper = shallow(<MessageSend {...defaultProps} />);
 
         const legalInformation = wrapper.find(LegalInformation);
         expect(legalInformation.length).toBe(1);
     });
 
-    it('display a form', () => {
+    it('should display a <Form />', () => {
         const wrapper = shallow(<MessageSend {...defaultProps} />);
 
         const form = wrapper.find(Form);
         expect(form.length).toBe(1);
     });
 
-    it('display a rich text', () => {
+    it('should display a <RichText />', () => {
         const wrapper = shallow(<MessageSend {...defaultProps} />);
 
         const text = wrapper.find(RichText);
