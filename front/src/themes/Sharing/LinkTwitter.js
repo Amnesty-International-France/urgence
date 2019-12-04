@@ -16,7 +16,7 @@ export const LinkTwitter = ({ slug, step, text, action, analyticsCategory }) => 
         action={action}
         analyticsCategory={analyticsCategory}
         buttonName="Tweeter"
-        backgroundColor="#4CAAEA"
+        backgroundColor="#4caaea"
     />
 );
 
