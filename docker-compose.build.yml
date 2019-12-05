@@ -21,10 +21,10 @@ services:
             - .:/app
         environment:
             NODE_ENV: production
-            PUBLIC_URL: https://rapide.amnesty.fr/admin
+            PUBLIC_URL: https://urgent.amnesty.fr/admin
             REACT_APP_NODE_ENV: production
-            REACT_APP_API_URL: https://rapide.amnesty.fr/api
-            REACT_APP_FRONT_BASE_URL: https://rapide.amnesty.fr
+            REACT_APP_API_URL: https://urgent.amnesty.fr/api
+            REACT_APP_FRONT_BASE_URL: https://urgent.amnesty.fr
         working_dir: /app/admin
 
     admin_dev:
@@ -63,7 +63,7 @@ services:
             NODE_ENV: production
             BABEL_ENV: production
             REACT_APP_NODE_ENV: production
-            REACT_APP_API_URL: https://rapide.amnesty.fr/api
+            REACT_APP_API_URL: https://urgent.amnesty.fr/api
             REACT_APP_GA: UA-5960278-37
             REACT_APP_FB: '364255110870457'
         working_dir: /app
