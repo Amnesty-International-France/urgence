@@ -53,4 +53,14 @@ describe('<RichTextInput />', () => {
         expect(toolbar[1][0]).toEqual({ color: [] });
         expect(toolbar[1][1]).toEqual({ background: [] });
     });
+
+    it('should allow links', () => {
+        const props = { ...defaultProps };
+        const wrapper = shallow(<RichTextInput {...props} />);
+
+        const editor = wrapper.find(BaseRichTextInput);
+        const toolbar = editor.prop('toolbar');
+
+        expect(toolbar[2][0]).toEqual('link');
+    });
 });

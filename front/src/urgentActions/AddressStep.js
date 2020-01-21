@@ -10,7 +10,7 @@ import Input from '../themes/Input';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '18px',
+    fontSize: '0.8em',
     display: 'flex',
     minHeight: '100%',
     flexDirection: 'column',
@@ -28,8 +28,8 @@ const styles = {
         display: 'flex',
         margin: '1em 0',
     },
-    '@media (max-width: 350px)': {
-        fontSize: '0.8em',
+    '@media (min-width: 350px)': {
+        fontSize: '18px',
     },
     '@media (min-width: 1024px)': {
         padding: '10vh 10vw',

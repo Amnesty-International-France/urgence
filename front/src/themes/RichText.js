@@ -7,7 +7,7 @@ const defaultStyle = {
     color: black,
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
-    '@media (min-width: 1024px)': {
+    '@media (minWidth: 1024px)': {
         fontSize: '18px !important',
     },
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
-import { withStyles } from '@material-ui/core/styles';
+import glamorous from 'glamorous';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import MobileDetect from 'mobile-detect';
@@ -10,7 +10,7 @@ import MobileDetect from 'mobile-detect';
 import { RichText } from './RichText';
 
 const styles = {
-    icon: {
+    '& .alert-icon': {
         cursor: 'pointer',
     },
 };
@@ -20,7 +20,7 @@ const isOnDesktop = () => {
     return !md.mobile();
 };
 
-const Alert = ({ classes, message }) => {
+const Alert = ({ className, message }) => {
     const [open, setOpen] = useState(isOnDesktop());
 
     const handleClose = () => {
@@ -29,6 +29,7 @@ const Alert = ({ classes, message }) => {
 
     return (
         <Snackbar
+            className={className}
             anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
             open={open}
             ContentProps={{
@@ -40,7 +41,7 @@ const Alert = ({ classes, message }) => {
                 <FontAwesomeIcon
                     icon={faTimes}
                     size="1x"
-                    className={classes.icon}
+                    className="alert-icon"
                     onClick={handleClose}
                 />
             }
@@ -49,8 +50,8 @@ const Alert = ({ classes, message }) => {
 };
 
 Alert.propTypes = {
-    classes: PropTypes.object.isRequired,
+    className: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(Alert);
+export default glamorous(Alert)(styles);
