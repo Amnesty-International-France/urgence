@@ -49,13 +49,15 @@ export const SendMail = ({
             });
     };
 
+    const body = templateToBodyText(messageTemplate, civility, firstname, lastname);
+
     return (
         <MailTo
             disabled={!isCorrectEmail(email) || !object || !civility || !firstname || !lastname}
             label={label}
             recipient={recipient}
             subject={object}
-            body={templateToBodyText(messageTemplate, civility, firstname, lastname)}
+            body={body}
             afterMail={handleAfterMail}
             analyticsCategory={analyticsCategory}
             match={match}
