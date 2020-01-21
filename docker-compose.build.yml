@@ -8,10 +8,10 @@ services:
             - .:/app
         environment:
             NODE_ENV: production
-            PUBLIC_URL: http://amnesty.marmelab.com/admin
+            PUBLIC_URL: https://amnesty.marmelab.com/admin
             REACT_APP_NODE_ENV: production
-            REACT_APP_API_URL: http://amnesty.marmelab.com/api
-            REACT_APP_FRONT_BASE_URL: http://amnesty.marmelab.com
+            REACT_APP_API_URL: https://amnesty.marmelab.com/api
+            REACT_APP_FRONT_BASE_URL: https://amnesty.marmelab.com
         working_dir: /app/admin
 
     admin_prod:
@@ -49,7 +49,7 @@ services:
             NODE_ENV: production
             BABEL_ENV: staging
             REACT_APP_NODE_ENV: production
-            REACT_APP_API_URL: http://amnesty.marmelab.com/api
+            REACT_APP_API_URL: https://amnesty.marmelab.com/api
             REACT_APP_GA: UA-136476291-1
             REACT_APP_FB: '2252258794861771'
         working_dir: /app
