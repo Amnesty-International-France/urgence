@@ -1,18 +1,25 @@
 version: '3'
 
 services:
+    maildev:
+        image: djfarrelly/maildev
+        expose:
+            - '25'
+        ports:
+            - '1080:80'
+
     api:
-        command: 'yarn run start'
+        command: 'yarn run start-dev'
         environment:
             - ADMIN_USERNAME=admin
             - ADMIN_PASSWORD=password
-            - NODE_ENV=development
-            - CORS_ALLOWED_ORIGIN="http://localhost"
-            - JWT_SECRET_KEY="dev"
+            - JWT_SECRET_KEY=foobarS3CR3T!
             - SMTP_HOST=maildev
             - SMTP_PORT=25
-            - SMTP_USER
             - SMTP_IGNORE_TLS=true
+            - SMTP_USER=
+            - API_PREFIX_URL=
+            - PM2_HOME=.pm2
             - SF_BASE_URL
             - SF_API_VERSION
             - SF_CONSUMER_KEY
@@ -20,13 +27,8 @@ services:
             - SF_USERNAME
             - SF_PASSWORD
             - SF_SECURITY_TOKEN
-
-    maildev:
-        image: djfarrelly/maildev
-        expose:
-            - '25'
         ports:
-            - '1080:80'
+            - '4000:4000'
 
     nginx:
         image: nginx
@@ -42,13 +44,13 @@ services:
 
     db:
         volumes:
-            - amnesty-postgres-data:/var/lib/postgresql/data/
+            - amnesty-postgres-data:/var/lib/postgresql/data
+        user: '${UID}:${GID}'
         environment:
             - POSTGRES_USER=amnesty
             - POSTGRES_PASSWORD=amnesty
             - POSTGRES_DB=reaction-rapide
-        ports:
-            - '5432:5432'
+            - PGDATA=/var/lib/postgresql/data/amnesty
 
 volumes:
     amnesty-postgres-data: {}

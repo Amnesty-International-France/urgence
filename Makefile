@@ -47,16 +47,14 @@ start-prod:
 stop-prod:
 	$(DOCKER_COMPOSE_PROD) down
 
-run-nginx-dev:
+start-nginx: build-front build-admin
 	${DOCKER_COMPOSE_DEV_NGINX} up --force-recreate
 
-stop-nginx-dev:
+stop-nginx:
 	${DOCKER_COMPOSE_DEV_NGINX} down
 
-log-nginx-dev:
+log-nginx:
 	${DOCKER_COMPOSE_DEV_NGINX} logs -f
-
-nginx-dev: build-dev run-nginx-dev
 
 connect-api:
 	$(DOCKER_COMPOSE) exec api bash
@@ -193,5 +191,3 @@ endif
 
 build-api:
 	$(DOCKER_COMPOSE) run --rm --no-deps api yarn run build
-
-build-dev: build-front-dev build-admin-dev

@@ -22,7 +22,7 @@ module.exports = shipit => {
             key: path.join(__dirname, 'var/deploy-prod.key'),
             deployTo: '/home/amnesty',
             keepReleases: 50,
-            servers: 'amnesty@rapide.amnesty.fr',
+            servers: 'amnesty@urgent.amnesty.fr',
             strict: false,
         },
     });
