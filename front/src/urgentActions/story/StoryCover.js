@@ -8,19 +8,18 @@ import { white, black } from '../../themes/colors';
 import RichText from '../../themes/RichText';
 
 const styles = {
-    padding: '60px 15px 20px',
-    height: 'calc(100vh - 30px)',
+    position: 'relative',
+    margin: '60px 15px 15px',
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
-        height: '100%',
-        width: '100%',
+        minHeight: '70vh',
     },
     '& .step': {
-        flex: '1 0 0',
         display: 'flex',
+        flex: '1 0 0',
         flexDirection: 'row',
-        paddingBottom: '80px',
+        margin: '90px 0px 60px',
     },
     '& .content': {
         display: 'flex',
