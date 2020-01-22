@@ -14,8 +14,10 @@ import AppLogo from './themes/AppLogo';
 import AppBackground from './themes/AppBackground';
 import { ThemeProvider } from './themes/ThemeContext';
 import DesktopAlert from './themes/DesktopAlert';
+import { white } from './themes/colors';
 
 export const styles = {
+    backgroundColor: white,
     '&': {
         width: '100vw',
     },
