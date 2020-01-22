@@ -10,12 +10,13 @@ import IconButton from './IconButton';
 const styles = {
     height: '100%',
     '& .swiper-controls': {
-        position: 'relative',
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        padding: '5px 50px',
-        marginTop: '-50px',
+        padding: '5px',
         height: '60px',
         zIndex: '100',
     },
