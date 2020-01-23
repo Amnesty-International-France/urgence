@@ -27,7 +27,7 @@ const Alert = ({ className, message }) => {
         setOpen(false);
     };
 
-    return (
+    return open ? (
         <Snackbar
             className={className}
             anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
@@ -46,7 +46,7 @@ const Alert = ({ className, message }) => {
                 />
             }
         />
-    );
+    ) : null;
 };
 
 Alert.propTypes = {
