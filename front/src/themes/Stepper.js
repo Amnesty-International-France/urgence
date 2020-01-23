@@ -9,9 +9,10 @@ import { black, darkGrey } from './colors';
 const styles = {
     display: 'flex',
     justifyContent: 'center',
+    margin: '0px 15px',
     '& .step': {
         height: '4px',
-        width: '30px',
+        maxWidth: '60px',
         margin: '0px 3px',
         transition: 'background-color 0.25s ease',
     },
@@ -20,11 +21,6 @@ const styles = {
     },
     '& .todo': {
         backgroundColor: darkGrey,
-    },
-    '@media (min-width: 350px)': {
-        '& .step': {
-            width: '50px',
-        },
     },
 };
 
@@ -46,11 +42,12 @@ const Stepper = ({ className, data, step, page }) => {
     const total = story.length + 3;
 
     const stepStates = Array.from({ length: total }, (_, i) => (i < current ? 'done' : 'todo'));
+    const stepStyle = { width: `calc(${100 / total}% - 6px)` };
 
     return (
         <div className={className}>
             {stepStates.map((stepState, i) => (
-                <div key={i} className={classNames('step', stepState)} />
+                <div key={i} className={classNames('step', stepState)} style={stepStyle} />
             ))}
         </div>
     );
