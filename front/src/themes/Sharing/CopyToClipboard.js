@@ -17,11 +17,13 @@ const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: 16,
     textTransform: 'none',
+    maxWidth: '100%',
     '& .inline': {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        overflow: 'hidden',
     },
     '& .icon': {
         alignSelf: 'center',
@@ -33,6 +35,7 @@ const styles = {
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
+        textTransform: 'lowercase',
         '@media (min-width: 1024px)': {
             maxWidth: '100%',
         },

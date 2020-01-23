@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons';
 
 import ShareLink from './ShareLink';
 
@@ -10,12 +10,12 @@ export const LinkFacebook = ({ slug, step, url, action, analyticsCategory }) => 
         step={step}
         href={`fb-messenger://share/?link=${url}`}
         target="facebook"
-        title="Partage Facebook"
-        icon={faFacebookF}
+        title="Partage Facebook Messenger"
+        icon={faFacebookMessenger}
         action={action}
         analyticsCategory={analyticsCategory}
         buttonName="Messenger"
-        backgroundColor="#4267b2"
+        backgroundColor="#017efe"
     />
 );
 
