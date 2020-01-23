@@ -11,8 +11,18 @@ describe('App', () => {
         client = getApolloClientMock();
     });
 
-    it('renders without crashing', () => {
+    it('should render without crashing', () => {
         const rendered = shallow(<App client={client} />);
         expect(rendered).toBeTruthy();
+    });
+
+    it('should change the root class', () => {
+        const spy = jest.spyOn(document, 'getElementById');
+
+        shallow(<App client={client} />);
+
+        expect(spy).toHaveBeenCalledWith('root');
+
+        spy.mockRestore();
     });
 });
