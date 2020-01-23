@@ -14,7 +14,7 @@ import AppLogo from './themes/AppLogo';
 import AppBackground from './themes/AppBackground';
 import { ThemeProvider } from './themes/ThemeContext';
 import DesktopAlert from './themes/DesktopAlert';
-import ScrollToTop from './themes/ScrollToTop';
+import RouterScrollToTop from './themes/RouterScrollToTop';
 
 export const styles = {
     '&': {
@@ -36,7 +36,7 @@ const App = ({ className, client }) => {
                     <DesktopAlert />
                     <Router>
                         <Fragment>
-                            <ScrollToTop />
+                            <RouterScrollToTop />
                             <Switch>
                                 <Route
                                     exact
