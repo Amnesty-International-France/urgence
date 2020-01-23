@@ -15,7 +15,7 @@ export const LinkFacebook = ({ slug, step, url, action, analyticsCategory }) => 
         action={action}
         analyticsCategory={analyticsCategory}
         buttonName="Messenger"
-        backgroundColor="#4267b2"
+        backgroundColor="#017efe"
     />
 );
 
