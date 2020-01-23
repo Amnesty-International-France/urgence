@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ApolloProvider } from 'react-apollo';
 import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
@@ -14,41 +14,49 @@ import AppLogo from './themes/AppLogo';
 import AppBackground from './themes/AppBackground';
 import { ThemeProvider } from './themes/ThemeContext';
 import DesktopAlert from './themes/DesktopAlert';
-import { white } from './themes/colors';
 
 export const styles = {
-    backgroundColor: white,
     '&': {
         width: '100vw',
     },
 };
 
-const App = ({ className, client }) => (
-    <ApolloProvider client={client}>
-        <ThemeProvider>
-            <Div100Vh className={className}>
-                <AppBackground />
-                <AppLogo />
-                <DesktopAlert />
-                <Router>
-                    <Switch>
-                        <Route exact path={generateUrl('home')} component={withTracker(HomePage)} />
-                        <Route
-                            exact
-                            path={generateUrl('error')}
-                            component={withTracker(ErrorPage)}
-                        />
-                        <Route
-                            path="/ua/:slug/:step?/:page?"
-                            component={withTracker(UrgentAction)}
-                        />
-                        <Redirect from="*" to={generateUrl('error')} />
-                    </Switch>
-                </Router>
-            </Div100Vh>
-        </ThemeProvider>
-    </ApolloProvider>
-);
+const App = ({ className, client }) => {
+    useEffect(() => {
+        document.getElementById('root').className = 'loaded';
+    });
+
+    return (
+        <ApolloProvider client={client}>
+            <ThemeProvider>
+                <Div100Vh className={className}>
+                    <AppBackground />
+                    <AppLogo />
+                    <DesktopAlert />
+                    <Router>
+                        <Switch>
+                            <Route
+                                exact
+                                path={generateUrl('home')}
+                                component={withTracker(HomePage)}
+                            />
+                            <Route
+                                exact
+                                path={generateUrl('error')}
+                                component={withTracker(ErrorPage)}
+                            />
+                            <Route
+                                path="/ua/:slug/:step?/:page?"
+                                component={withTracker(UrgentAction)}
+                            />
+                            <Redirect from="*" to={generateUrl('error')} />
+                        </Switch>
+                    </Router>
+                </Div100Vh>
+            </ThemeProvider>
+        </ApolloProvider>
+    );
+};
 
 App.propTypes = {
     className: PropTypes.string.isRequired,
