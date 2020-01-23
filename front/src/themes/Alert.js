@@ -16,7 +16,7 @@ const styles = {
 };
 
 const isOnDesktop = () => {
-    const md = new MobileDetect(window.navigator.userAgent);
+    const md = new MobileDetect(global.navigator.userAgent);
     return !md.mobile();
 };
 
