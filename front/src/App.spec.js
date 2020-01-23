@@ -1,6 +1,6 @@
 import React from 'react';
 import App from './App';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import getApolloClientMock from '../testUtils/getApolloClientMock';
 
@@ -17,12 +17,16 @@ describe('App', () => {
     });
 
     it('should change the root class', () => {
-        const spy = jest.spyOn(document, 'getElementById');
+        global.document = {
+            getElementById: () => {},
+        };
 
-        shallow(<App client={client} />);
+        jest.spyOn(global.document, 'getElementById').mockImplementation(() => ({
+            className: 'loading',
+        }));
 
-        expect(spy).toHaveBeenCalledWith('root');
+        mount(<App client={client} />);
 
-        spy.mockRestore();
+        expect(global.document.getElementById).toHaveBeenCalled();
     });
 });
