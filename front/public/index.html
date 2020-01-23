@@ -27,7 +27,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #000000;
+            background: #000;
             position: absolute;
             top: 0;
             bottom: 0;
@@ -35,11 +35,15 @@
             left: 0;
             z-index: -2;
         }
+        #root.loaded {
+            background: #fff;
+        }
+
     </style>
 </head>
 
 <body>
-    <div id="root">
+    <div id="root" class="loading">
         <img src="%PUBLIC_URL%/candle.svg" width="133" />
     </div>
     <!--
