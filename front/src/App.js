@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ApolloProvider } from 'react-apollo';
 import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
@@ -14,6 +14,7 @@ import AppLogo from './themes/AppLogo';
 import AppBackground from './themes/AppBackground';
 import { ThemeProvider } from './themes/ThemeContext';
 import DesktopAlert from './themes/DesktopAlert';
+import ScrollToTop from './themes/ScrollToTop';
 
 export const styles = {
     '&': {
@@ -34,23 +35,26 @@ const App = ({ className, client }) => {
                     <AppLogo />
                     <DesktopAlert />
                     <Router>
-                        <Switch>
-                            <Route
-                                exact
-                                path={generateUrl('home')}
-                                component={withTracker(HomePage)}
-                            />
-                            <Route
-                                exact
-                                path={generateUrl('error')}
-                                component={withTracker(ErrorPage)}
-                            />
-                            <Route
-                                path="/ua/:slug/:step?/:page?"
-                                component={withTracker(UrgentAction)}
-                            />
-                            <Redirect from="*" to={generateUrl('error')} />
-                        </Switch>
+                        <Fragment>
+                            <ScrollToTop />
+                            <Switch>
+                                <Route
+                                    exact
+                                    path={generateUrl('home')}
+                                    component={withTracker(HomePage)}
+                                />
+                                <Route
+                                    exact
+                                    path={generateUrl('error')}
+                                    component={withTracker(ErrorPage)}
+                                />
+                                <Route
+                                    path="/ua/:slug/:step?/:page?"
+                                    component={withTracker(UrgentAction)}
+                                />
+                                <Redirect from="*" to={generateUrl('error')} />
+                            </Switch>
+                        </Fragment>
                     </Router>
                 </Div100Vh>
             </ThemeProvider>
