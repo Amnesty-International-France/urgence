@@ -10,17 +10,23 @@ import { yellow, black } from '../themes/colors';
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
-    padding: '60px 15px 20px',
-    height: 'calc(100vh - 30px)',
+    margin: '60px 15px 15px',
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        height: '100%',
-        width: '100%',
-        padding: '0px 20px',
+        minHeight: '300px',
         color: black,
         backgroundColor: yellow,
+        '@media (min-width: 1024px)': {
+            height: '85vh',
+        },
+    },
+    '& .step': {
+        margin: '100px 20px 60px',
+        '@media (min-width: 350px)': {
+            margin: '160px 20px 80px',
+        },
     },
     '& h1': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
@@ -52,9 +58,6 @@ const styles = {
     },
     '@media (min-width: 1024px)': {
         fontSize: '24px',
-        '& .paper': {
-            padding: '10vh 10vw',
-        },
         '& .link': {
             textAlign: 'center',
         },
@@ -69,7 +72,7 @@ const styles = {
 export const TransitionScreen = ({ className, actions, title, message }) => (
     <div className={className}>
         <Paper className="paper" elevation={4} square>
-            <div>
+            <div className="step">
                 <h1>
                     <LongText text={title} />
                 </h1>

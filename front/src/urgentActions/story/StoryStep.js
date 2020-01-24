@@ -8,24 +8,24 @@ import { StoryStepPropType } from '../../propTypes';
 import { black, white } from '../../themes/colors';
 
 const styles = {
-    fontFamily: 'Amnesty Trade Gothic LT',
-    fontSize: '18px',
-    padding: '60px 15px 20px',
-    height: 'calc(100vh - 30px)',
+    position: 'relative',
+    margin: '60px 15px 15px',
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        height: '100%',
-        width: '100%',
+        minHeight: '300px',
         color: black,
         backgroundColor: white,
+        '@media (min-width: 1024px)': {
+            height: '85vh',
+        },
     },
     '& .step': {
-        flex: '1 0 0',
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '0px 20px',
+        margin: '100px 20px 60px',
+        '@media (min-width: 350px)': {
+            margin: '160px 20px 80px',
+        },
     },
     '& .content': {
         display: 'flex',

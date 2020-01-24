@@ -8,19 +8,22 @@ import { white, black } from '../../themes/colors';
 import RichText from '../../themes/RichText';
 
 const styles = {
-    padding: '60px 15px 20px',
-    height: 'calc(100vh - 30px)',
+    position: 'relative',
+    margin: '60px 15px 15px',
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
-        height: '100%',
-        width: '100%',
+        justifyContent: 'flex-end',
+        minHeight: '300px',
+        '@media (min-width: 1024px)': {
+            height: '85vh',
+        },
     },
     '& .step': {
-        flex: '1 0 0',
-        display: 'flex',
-        flexDirection: 'row',
-        paddingBottom: '80px',
+        margin: '100px 20px 60px',
+        '@media (min-width: 350px)': {
+            margin: '260px 20px 80px',
+        },
     },
     '& .content': {
         display: 'flex',
