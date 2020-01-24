@@ -13,13 +13,14 @@ const styles = {
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
+        justifyContent: 'flex-end',
         minHeight: '70vh',
+        '@media (min-width: 1024px)': {
+            height: '85vh',
+        },
     },
     '& .step': {
-        display: 'flex',
-        flex: '1 0 0',
-        flexDirection: 'row',
-        margin: '90px 0px 60px',
+        margin: '160px 20px 90px',
     },
     '& .content': {
         display: 'flex',

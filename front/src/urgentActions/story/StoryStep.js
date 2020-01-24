@@ -14,15 +14,15 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+        minHeight: '70vh',
         color: black,
         backgroundColor: white,
-        minHeight: '70vh',
+        '@media (min-width: 1024px)': {
+            height: '85vh',
+        },
     },
     '& .step': {
-        display: 'flex',
-        flex: '1 0 0',
-        flexDirection: 'column',
-        margin: '90px 20px 20px',
+        margin: '160px 20px 90px',
     },
     '& .content': {
         display: 'flex',
