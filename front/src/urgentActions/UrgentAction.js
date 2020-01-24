@@ -267,9 +267,9 @@ UrgentAction.propTypes = {
 
 const StepperContainer = glamorous.div({
     position: 'absolute',
-    top: 20,
-    left: 0,
-    width: '100vw',
+    top: '20px',
+    left: '0px',
+    right: '0px',
 });
 
 export const renderUrgentActionWithData = (history, slug, step, page) => ({
