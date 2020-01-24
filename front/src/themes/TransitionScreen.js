@@ -23,9 +23,9 @@ const styles = {
         },
     },
     '& .step': {
-        margin: '120px 20px 60px',
+        margin: '100px 20px 60px',
         '@media (min-width: 350px)': {
-            margin: '160px 20px 90px',
+            margin: '160px 20px 80px',
         },
     },
     '& h1': {
