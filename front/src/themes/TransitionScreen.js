@@ -15,7 +15,7 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        minHeight: '70vh',
+        minHeight: '300px',
         color: black,
         backgroundColor: yellow,
         '@media (min-width: 1024px)': {
@@ -23,7 +23,10 @@ const styles = {
         },
     },
     '& .step': {
-        margin: '160px 20px 90px',
+        margin: '120px 20px 60px',
+        '@media (min-width: 350px)': {
+            margin: '160px 20px 90px',
+        },
     },
     '& h1': {
         fontFamily: 'Amnesty Trade Gothic Condensed',

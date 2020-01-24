@@ -14,13 +14,16 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
-        minHeight: '70vh',
+        minHeight: '300px',
         '@media (min-width: 1024px)': {
             height: '85vh',
         },
     },
     '& .step': {
-        margin: '160px 20px 90px',
+        margin: '120px 20px 60px',
+        '@media (min-width: 350px)': {
+            margin: '160px 20px 90px',
+        },
     },
     '& .content': {
         display: 'flex',
