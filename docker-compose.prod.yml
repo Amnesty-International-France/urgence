@@ -6,9 +6,9 @@ services:
         environment:
             - NODE_ENV=staging
             - POSTGRES_PASSWORD
-            - CORS_ALLOWED_ORIGIN="https://urgent.amnesty.fr"
+            - CORS_ALLOWED_ORIGIN="https://rapide.amnesty.fr"
             - UPLOAD_DIR=/app/uploads
-            - UPLOAD_URL=https://urgent.amnesty.fr/api/static
+            - UPLOAD_URL=https://rapide.amnesty.fr/api/static
             - SMTP_HOST
             - SMTP_USER
             - SMTP_PASSWORD
