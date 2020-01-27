@@ -31,7 +31,7 @@ services:
             - '443:443'
         volumes:
             - .:/app
-            - ./var/nginx/staging.conf:/etc/nginx/conf.d/default.conf
+            - ./var/nginx/prod.conf:/etc/nginx/conf.d/default.conf
             - /home/amnesty/uploads:/app/uploads
             - /etc/letsencrypt/live/rapide.amnesty.fr/fullchain.pem:/etc/nginx/conf.d/selfsigned.crt
             - /etc/letsencrypt/live/rapide.amnesty.fr/privkey.pem:/etc/nginx/conf.d/selfsigned.key
