@@ -41,11 +41,17 @@ start-staging:
 stop-staging:
 	$(DOCKER_COMPOSE_STAGING) down
 
+logs-staging:
+	$(DOCKER_COMPOSE_STAGING) logs -f
+
 start-prod:
 	$(DOCKER_COMPOSE_PROD) up -d
 
 stop-prod:
 	$(DOCKER_COMPOSE_PROD) down
+
+logs-prod:
+	$(DOCKER_COMPOSE_PROD) logs -f
 
 start-nginx: build-front build-admin
 	${DOCKER_COMPOSE_DEV_NGINX} up --force-recreate
