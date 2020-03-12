@@ -81,10 +81,9 @@ export const MessageSendInput = ({ classes, source }) => (
                                         <Fragment>
                                             <TextInput
                                                 fullWidth
-                                                type="email"
                                                 label="Mail To"
                                                 source={`${source}.recipient.mail`}
-                                                validate={validateRecipientEmail}
+                                                validate={validateEmailsList}
                                             />
                                             <TextInput
                                                 fullWidth
