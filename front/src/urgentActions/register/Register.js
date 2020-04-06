@@ -76,7 +76,7 @@ const isDisabled = props => {
 };
 
 export const RegisterActivist = ({ data, gdprRegister, action, className, ...props }) => {
-    const { firstname, lastname, phone, email } = props;
+    const { firstname, lastname, phone, email, civility } = props;
     const title = get(data, 'title');
     const text = get(data, 'text');
     const phoneIndication = get(data, 'phone_indication');
@@ -99,7 +99,7 @@ export const RegisterActivist = ({ data, gdprRegister, action, className, ...pro
                 </div>
             </Paper>
             <div className="action">
-                {action(isDisabled(props), { firstname, lastname, phone, email })}
+                {action(isDisabled(props), { firstname, lastname, phone, email, civility })}
             </div>
             <LegalInformation content={gdprRegister} />
         </div>

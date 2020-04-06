@@ -80,8 +80,19 @@ export const addCampaignMember = async (
     return { status, body };
 };
 
-export const register = async (access_token, { firstname, lastname, email, phone }) => {
+const civilityMap = {
+    'M.': 'M',
+    'Mme.': 'MME',
+    Autre: '',
+};
+
+export const register = async (access_token, { firstname, lastname, email, phone, civility }) => {
     const url = `${QUERY_BASE_URL}/sobjects/Contact`;
+
+    const civility = '';
+    if(civilityMap[civility]){
+        civility = civilityMap[civility];
+    };
 
     const response = await fetch(url, {
         method: 'POST',
@@ -92,6 +103,7 @@ export const register = async (access_token, { firstname, lastname, email, phone
         },
         body: JSON.stringify({
             Actions_urgentes_via_le_smartphone__c: true,
+            Salutation: civility,
             LastName: lastname,
             FirstName: firstname,
             EMAIL: email,

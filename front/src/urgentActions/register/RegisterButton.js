@@ -14,9 +14,9 @@ export const RegisterButton = ({
     setRegistered,
     formValues,
 }) => {
-    const { firstname, lastname, phone, email } = formValues;
+    const { firstname, lastname, phone, email, civility } = formValues;
     const register = () => {
-        return registerContact({ email, phone, firstname, lastname }).then(result => {
+        return registerContact({ email, phone, firstname, lastname, civility }).then(result => {
             if (result.errors && result.errors.length) {
                 // eslint-disable-next-line no-console
                 console.log(

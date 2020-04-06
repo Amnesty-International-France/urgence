@@ -36,11 +36,11 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
     return { firstname, lastname, email, registered: contactBody.registered };
 };
 
-export const registerContact = async ({ firstname, lastname, email, phone }) => {
+export const registerContact = async ({ firstname, lastname, email, phone, civility }) => {
     const { body: authBody } = await authenticate();
     const accessToken = authBody ? authBody.access_token : null;
 
-    await register(accessToken, { firstname, lastname, email, phone });
+    await register(accessToken, { civility, firstname, lastname, email, phone });
 
-    return { firstname, lastname, email, registered: true };
+    return { firstname, lastname, email, civility, registered: true };
 };

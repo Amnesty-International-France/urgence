@@ -174,6 +174,7 @@ export default gql`
         lastname: String!
         email: String!
         phone: String
+        civility: String
     }
 
     type CampaignMember {
