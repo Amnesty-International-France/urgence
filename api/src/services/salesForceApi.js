@@ -17,6 +17,14 @@ const AUTHENTICATE_URL = `${baseUrl}/oauth2/token?grant_type=password&client_id=
 const QUERY_BASE_URL = `${baseUrl}/data/${version}`;
 
 export const authenticate = async () => {
+    console.log('Authentication request', {
+        url: AUTHENTICATE_URL,
+        method: 'POST',
+        headers: {
+            Accept: JSON_TYPE,
+        },
+    });
+
     const response = await fetch(AUTHENTICATE_URL, {
         method: 'POST',
         headers: {
@@ -25,6 +33,8 @@ export const authenticate = async () => {
     });
     const status = response.status;
     const body = await response.json();
+
+    console.log('Authentication response', { status, body });
 
     if (status >= 400) {
         throw new Error(`Error authenticating to SalesForce: ${body.error_description}`);
@@ -42,6 +52,28 @@ export const addCampaignMember = async (
     { firstname, lastname, email },
 ) => {
     const url = `${QUERY_BASE_URL}/sobjects/CampaignMember`;
+
+    console.log('addCampaignMember request', {
+        url,
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+            'Content-Type': JSON_TYPE,
+        },
+        body: JSON.stringify({
+            Tech_Email__c: email,
+            Tech_FirstName__c: firstname,
+            Tech_LastName__c: lastname,
+            Tech_CodeOrigine__c: origin_code,
+            Type_de_participation__c: 'Smartphone',
+            Actions_effectuees__c: 'Email',
+            Status: 'a participé',
+            Campaign: {
+                Code__c: campaign_code,
+            },
+        }),
+    });
 
     const response = await fetch(url, {
         method: 'POST',
@@ -67,7 +99,7 @@ export const addCampaignMember = async (
     const status = response.status;
     const body = await response.json();
 
-    console.log('Add campaign member', status, body);
+    console.log('addCampaignMember response', { status, body });
 
     if (status >= 400 && !isMemberAlreadyAddedError(body)) {
         throw new Error(
@@ -90,9 +122,27 @@ export const register = async (access_token, { firstname, lastname, email, phone
     const url = `${QUERY_BASE_URL}/sobjects/Contact`;
 
     const civility = '';
-    if(civilityMap[civility]){
+    if (civilityMap[civility]) {
         civility = civilityMap[civility];
-    };
+    }
+
+    console.log('register request', {
+        url,
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+            'Content-Type': JSON_TYPE,
+        },
+        body: JSON.stringify({
+            Actions_urgentes_via_le_smartphone__c: true,
+            Salutation: civility,
+            LastName: lastname,
+            FirstName: firstname,
+            EMAIL: email,
+            MobilePhone: phone,
+        }),
+    });
 
     const response = await fetch(url, {
         method: 'POST',
@@ -114,7 +164,7 @@ export const register = async (access_token, { firstname, lastname, email, phone
     const status = response.status;
     const body = await response.json();
 
-    console.log('Register', status, body);
+    console.log('register response', status, body);
 
     if (status >= 400) {
         throw new Error(
@@ -130,6 +180,15 @@ export const register = async (access_token, { firstname, lastname, email, phone
 export const getContactByEmail = async (access_token, email) => {
     const url = `${QUERY_BASE_URL}/query?q=SELECT+Actions_urgentes_via_le_smartphone__c+from+contact+where+email='${email}'`;
 
+    console.log('getContactByEmail request', {
+        url,
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+        },
+    });
+
     const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -141,6 +200,8 @@ export const getContactByEmail = async (access_token, email) => {
     const status = response.status;
     const body = await response.json();
 
+    console.log('getContactByEmail response', (status, body));
+
     if (status >= 400) {
         return new Error(
             `Error while quering contacts from SalesForce: ${body
@@ -148,8 +209,6 @@ export const getContactByEmail = async (access_token, email) => {
                 .join(', ')}`,
         );
     }
-
-    console.log('getContactByEmail', status, body);
 
     const contacts = body.records || [];
     const registered = contacts.some(record => !!record.Actions_urgentes_via_le_smartphone__c);
