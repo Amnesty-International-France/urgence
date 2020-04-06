@@ -121,9 +121,9 @@ const civilityMap = {
 export const register = async (access_token, { firstname, lastname, email, phone, civility }) => {
     const url = `${QUERY_BASE_URL}/sobjects/Contact`;
 
-    const civility = '';
+    let salesForcecivility = '';
     if (civilityMap[civility]) {
-        civility = civilityMap[civility];
+        salesForcecivility = civilityMap[civility];
     }
 
     console.log('register request', {
@@ -136,7 +136,7 @@ export const register = async (access_token, { firstname, lastname, email, phone
         },
         body: JSON.stringify({
             Actions_urgentes_via_le_smartphone__c: true,
-            Salutation: civility,
+            Salutation: salesForcecivility,
             LastName: lastname,
             FirstName: firstname,
             EMAIL: email,
@@ -153,7 +153,7 @@ export const register = async (access_token, { firstname, lastname, email, phone
         },
         body: JSON.stringify({
             Actions_urgentes_via_le_smartphone__c: true,
-            Salutation: civility,
+            Salutation: salesForcecivility,
             LastName: lastname,
             FirstName: firstname,
             EMAIL: email,
