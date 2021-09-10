@@ -1,4 +1,4 @@
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 
 import config from '../../../config';
@@ -19,12 +19,10 @@ const options = {
             };
         }
 
-        const isAuthenticated = await loginByToken(null, { token });
+        const isAuthenticated = await loginByToken(token);
 
         if (!isAuthenticated) {
-            return {
-                user: null,
-            };
+            throw new AuthenticationError('You must be logged in');
         }
 
         const decodedToken = jwt.decode(token);

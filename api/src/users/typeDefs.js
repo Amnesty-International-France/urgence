@@ -15,6 +15,6 @@ export default gql`
 
     extend type Query {
         login(username: String!, password: String!): Token
-        loginByToken(token: TokenInput!): Token
+        loginByToken(token: TokenInput!): Boolean
     }
 `;

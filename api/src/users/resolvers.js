@@ -40,16 +40,14 @@ export const login = async (_, { username, password }) => {
     return { token };
 };
 
-export const loginByToken = async (_, { token }) => {
+export const loginByToken = async token => {
     const [userToken] = await getUserTokenByToken(token);
 
     if (!userToken || !userToken.token) {
-        throw new Error('Invalid credentials.');
+        return false;
     }
 
-    return {
-        token: userToken.token,
-    };
+    return true;
 };
 
 export default {
