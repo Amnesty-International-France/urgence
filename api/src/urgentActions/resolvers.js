@@ -37,7 +37,7 @@ export default {
     },
     Mutation: {
         createUrgentAction: async (_, urgentAction, context) => {
-            if (!context || !context.user || !context.user.role === 'admin') {
+            if (!context || !context.user || context.user.role !== 'admin') {
                 return null;
             }
 
@@ -45,7 +45,7 @@ export default {
             return createUrgentAction(preparedUa);
         },
         updateUrgentAction: async (_, urgentAction, context) => {
-            if (!context || !context.user || !context.user.role === 'admin') {
+            if (!context || !context.user || context.user.role !== 'admin') {
                 return null;
             }
 
@@ -53,7 +53,7 @@ export default {
             return updateUrgentAction(urgentAction.id, preparedUa);
         },
         deleteUrgentAction: (_, id, context) => {
-            if (!context || !context.user || !context.user.role === 'admin') {
+            if (!context || !context.user || context.user.role !== 'admin') {
                 return null;
             }
 
