@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode';
 
-import { createToken, login } from "./resolvers";
+import { createToken, login } from './resolvers';
 
 describe('Users Resolvers', () => {
     describe('createToken', () => {
@@ -18,8 +18,8 @@ describe('Users Resolvers', () => {
     });
 
     describe('login', () => {
-        it('should return the signed token passing it the "admin" role in case of success', () => {
-            const { token } = login(null, {
+        it('should return the signed token passing it the "admin" role in case of success', async () => {
+            const { token } = await login(null, {
                 username: 'admin',
                 password: 'password',
             });
@@ -28,9 +28,9 @@ describe('Users Resolvers', () => {
             expect(decodedToken.role).toBe('admin');
         });
 
-        it("should throw an error if user credentials don't match those in configuration", () => {
+        it("should throw an error if user credentials don't match those in configuration", async () => {
             try {
-                login(null, {
+                await login(null, {
                     username: 'foo',
                     password: 'bar',
                 });

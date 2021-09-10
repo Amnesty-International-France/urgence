@@ -5,7 +5,7 @@ import config from '../../../config';
 
 import { createUserToken, getUserTokenByToken, removeUserOldTokenByLogin } from './repository';
 
-export const createToken = (user, now = new Date()) => {
+export const createToken = async (user, now = new Date()) => {
     const expiration = addHours(now, config.admin.authentication.sessionDuration).toISOString();
 
     const token = jwt.sign(
@@ -15,15 +15,20 @@ export const createToken = (user, now = new Date()) => {
         },
         config.admin.authentication.jwtSecret,
     );
-    removeUserOldTokenByLogin(user.login).catch(error => {
+
+    try {
+        await removeUserOldTokenByLogin(user.login);
+    } catch (error) {
         console.error('cleaning tokens failed');
         console.error(error);
-    });
-    createUserToken({ login: user.login, token, expireDate: expiration });
+    }
+
+    await createUserToken({ login: user.login, token, expireDate: expiration });
+
     return token;
 };
 
-export const login = (_, { username, password }) => {
+export const login = async (_, { username, password }) => {
     if (
         username !== config.admin.authentication.username ||
         password !== config.admin.authentication.password
@@ -31,7 +36,8 @@ export const login = (_, { username, password }) => {
         throw new Error('Invalid credentials.');
     }
 
-    return { token: createToken({ login: username, role: 'admin' }) };
+    const token = await createToken({ login: username, role: 'admin' });
+    return { token };
 };
 
 export const loginByToken = async (_, { token }) => {
