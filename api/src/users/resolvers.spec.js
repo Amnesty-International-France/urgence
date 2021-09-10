@@ -4,16 +4,16 @@ import { createToken, login } from './resolvers';
 
 describe('Users Resolvers', () => {
     describe('createToken', () => {
-        it('should return a signed JWT token containing user data', () => {
-            const token = createToken({ role: 'admin' });
+        it('should return a signed JWT token containing user data', async () => {
+            const token = await createToken({ login: 'admin', role: 'admin' });
             const decodedToken = jwtDecode(token);
             expect(decodedToken.role).toBe('admin');
         });
 
         it('should correctly set expiration date', () => {
-            const token = createToken({ role: 'admin' }, new Date('2017-01-01'));
+            const token = createToken({ login: 'admin', role: 'admin' }, new Date('2032-01-01'));
             const decodedToken = jwtDecode(token);
-            expect(decodedToken.expiration).toBe('2017-01-01T06:00:00.000Z');
+            expect(decodedToken.expiration).toBe('2032-01-01T06:00:00.000Z');
         });
     });
 

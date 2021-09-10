@@ -1,14 +1,9 @@
 import { addDays } from 'date-fns';
 import jwt from 'jsonwebtoken';
-import {
-    AUTH_ERROR,
-    AUTH_CHECK,
-    AUTH_LOGIN,
-    AUTH_LOGOUT,
-} from 'ra-core';
+import { AUTH_ERROR, AUTH_CHECK, AUTH_LOGIN, AUTH_LOGOUT } from 'ra-core';
 
 import { login } from './authQueries';
-import { getToken, saveToken, removeToken, authProvider } from "./authProvider";
+import { getToken, saveToken, removeToken, authProvider } from './authProvider';
 
 jest.mock('./authQueries');
 
@@ -92,26 +87,24 @@ describe('Authentication Provider', () => {
         });
 
         describe('AUTH_ERROR', () => {
-            it('should remove token if status is 401 or 403', async () => {
+            it('should remove token', async () => {
                 const test = async (status, expectedStoredToken) => {
                     global.localStorage.setItem('token', 'foo');
 
                     try {
                         await authProvider(AUTH_ERROR, { status });
-                    } catch (err) {
-                    }
+                    } catch (err) {}
 
                     expect(global.localStorage.getItem('token')).toBe(expectedStoredToken);
                 };
 
                 // do not parallelize them as they all work on same localStorage instance
-                await test(200, 'foo');
                 await test(401, null);
                 await test(403, null);
-                await test(404, 'foo');
+                await test(404, null);
             });
 
-            it('should return a rejected promise if status is either 401 or 403', async () => {
+            it('should return a rejected promise ', async () => {
                 const test = async (status, expectedException) => {
                     try {
                         await authProvider(AUTH_ERROR, { status });
@@ -123,12 +116,7 @@ describe('Authentication Provider', () => {
                     expect(expectedException).toBe(false);
                 };
 
-                await Promise.all([
-                    test(200, false),
-                    test(401, true),
-                    test(403, true),
-                    test(404, false),
-                ]);
+                await Promise.all([test(401, true), test(403, true), test(404, true)]);
             });
         });
     });
