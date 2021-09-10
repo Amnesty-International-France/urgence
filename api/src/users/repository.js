@@ -35,14 +35,29 @@ export const getUserTokens = async ({ perPage, page, sortField, sortOrder }) =>
 
 export const getUserToken = async id => query(userTokenCrudQueries.selectOne(id));
 
-export const getUserTokenByToken = async token =>
-    query(userTokenCrudQueries.selectOneBySlug(token));
+// export const getUserTokenByToken = async token =>
+//     query(userTokenCrudQueries.selectOneBySlug(token));
 
-export const getUserTokenByLogin = async login =>
-    query(userTokenCrudQueries.selectOneBySlug(login));
+// export const getUserTokenByLogin = async login =>
+//     query(userTokenCrudQueries.selectOneBySlug(login));
 
-export const createUserToken = async (login, token, expire_date) =>
-    query(userTokenCrudQueries.insertOne({ login, token, expire_date }));
+// export const createUserToken = async (login, token, expire_date) =>
+//     query(userTokenCrudQueries.insertOne({ login, token, expire_date }));
+
+export const getUserTokenByToken = async token => {
+    const sql = `SELECT * from user_token where token = $token;`;
+    return query(sql, { token });
+};
+
+export const getUserTokenByLogin = async login => {
+    const sql = `SELECT * from user_token where login = $login;`;
+    return query(sql, { login });
+};
+
+export const createUserToken = async ({ login, token, expireDate }) => {
+    const sql = `INSERT INTO user_token (login, token, expire_date) values ($login, $token, $expireDate);`;
+    return query(sql, { login, token, expireDate });
+};
 
 export const updateUserToken = async (id, login, token, expire_date = new Date()) =>
     query(
