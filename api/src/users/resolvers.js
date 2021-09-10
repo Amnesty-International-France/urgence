@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import config from '../../../config';
 
-import { createUserToken } from './repository';
+import { createUserToken, getUserTokenByToken } from './repository';
 
 export const createToken = (user, now = new Date()) => {
     const expiration = addHours(now, config.admin.authentication.sessionDuration).toISOString();
@@ -31,8 +31,21 @@ export const login = (_, { username, password }) => {
     return { token: createToken({ login: username, role: 'admin' }) };
 };
 
+export const loginByToken = async (_, { token }) => {
+    const [userToken] = await getUserTokenByToken(token);
+
+    if (!userToken || !userToken.token) {
+        throw new Error('Invalid credentials.');
+    }
+
+    return {
+        token: userToken.token,
+    };
+};
+
 export default {
     Query: {
         login,
+        loginByToken,
     },
 };
