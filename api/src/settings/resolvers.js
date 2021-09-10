@@ -18,21 +18,21 @@ export default {
     },
     Mutation: {
         createSetting: async (_, setting, context) => {
-            if (!context || !context.user || !context.user.roles.includes('admin')) {
+            if (!context || !context.user || !context.user.role === 'admin') {
                 return null;
             }
 
             return createSetting(setting);
         },
         updateSetting: async (_, { id, ...setting }, context) => {
-            if (!context || !context.user || !context.user.roles.includes('admin')) {
+            if (!context || !context.user || !context.user.role === 'admin') {
                 return null;
             }
 
             return updateSetting(id, setting);
         },
         deleteSetting: async (_, id, context) => {
-            if (!context || !context.user || !context.user.roles.includes('admin')) {
+            if (!context || !context.user || !context.user.role === 'admin') {
                 return null;
             }
 

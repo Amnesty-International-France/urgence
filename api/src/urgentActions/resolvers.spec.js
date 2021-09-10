@@ -111,7 +111,7 @@ describe('Urgent Actions Resolvers', () => {
                     {
                         user: {
                             login: 'adrien',
-                            roles: ['superstar'],
+                            role: 'superstar',
                         },
                     },
                 );
@@ -142,7 +142,7 @@ describe('Urgent Actions Resolvers', () => {
                     },
                     {
                         user: {
-                            roles: ['admin'],
+                            role: 'admin',
                         },
                     },
                 );
@@ -227,7 +227,7 @@ describe('Urgent Actions Resolvers', () => {
                     {
                         user: {
                             login: 'julien',
-                            roles: ['bg'],
+                            role: 'bg',
                         },
                     },
                 );
@@ -264,7 +264,7 @@ describe('Urgent Actions Resolvers', () => {
                     },
                     {
                         user: {
-                            roles: ['admin'],
+                            role: 'admin',
                         },
                     },
                 );
@@ -308,7 +308,7 @@ describe('Urgent Actions Resolvers', () => {
                 const result = await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id', {
                     user: {
                         login: 'julien',
-                        roles: ['bg'],
+                        role: 'bg',
                     },
                 });
 
@@ -318,7 +318,7 @@ describe('Urgent Actions Resolvers', () => {
             it('should remove urgent action with given id', async () => {
                 await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id', {
                     user: {
-                        roles: ['admin'],
+                        role: 'admin',
                     },
                 });
                 expect(removeUrgentAction).toHaveBeenCalledWith('id');

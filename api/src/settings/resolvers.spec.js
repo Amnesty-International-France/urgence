@@ -76,7 +76,7 @@ describe('Setting Resolvers', () => {
                     {
                         user: {
                             login: 'adrien',
-                            roles: ['illegal'],
+                            role: 'illegal',
                         },
                     },
                 );
@@ -94,7 +94,7 @@ describe('Setting Resolvers', () => {
                     {
                         user: {
                             login: 'julien',
-                            roles: ['admin'],
+                            role: 'admin',
                         },
                     },
                 );
@@ -128,7 +128,7 @@ describe('Setting Resolvers', () => {
                     {
                         user: {
                             login: 'adrien',
-                            roles: ['illegal'],
+                            role: 'illegal',
                         },
                     },
                 );
@@ -147,7 +147,7 @@ describe('Setting Resolvers', () => {
                     {
                         user: {
                             login: 'julien',
-                            roles: ['admin'],
+                            role: 'admin',
                         },
                     },
                 );
@@ -170,7 +170,7 @@ describe('Setting Resolvers', () => {
                 const result = await settingsResolver.Mutation.deleteSetting(null, 42, {
                     user: {
                         login: 'adrien',
-                        roles: ['illegal'],
+                        role: 'illegal',
                     },
                 });
 
@@ -181,7 +181,7 @@ describe('Setting Resolvers', () => {
                 await settingsResolver.Mutation.deleteSetting(null, 42, {
                     user: {
                         login: 'julien',
-                        roles: ['admin'],
+                        role: 'admin',
                     },
                 });
 
