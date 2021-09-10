@@ -20,9 +20,12 @@ const options = {
         const decodedToken = jwt.decode(token);
 
         // // Try to retrieve a user with the token
-        const user = 'adrien'; // getUser(token);
+        const user = {
+            login: 'adrien',
+            ...decodedToken,
+        }; // getUser(token);
 
-        return { user, ...decodedToken };
+        return { user };
     },
 };
 

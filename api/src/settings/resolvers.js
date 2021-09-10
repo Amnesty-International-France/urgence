@@ -17,8 +17,26 @@ export default {
         _allSettingsMeta: () => countSettings(),
     },
     Mutation: {
-        createSetting: async (_, setting) => createSetting(setting),
-        updateSetting: async (_, { id, ...setting }) => updateSetting(id, setting),
-        deleteSetting: async (_, id) => removeSetting(id),
+        createSetting: async (_, setting, context) => {
+            if (!context.user || !context.user.roles.includes('admin')) {
+                return null;
+            }
+
+            return createSetting(setting);
+        },
+        updateSetting: async (_, { id, ...setting }, context) => {
+            if (!context.user || !context.user.roles.includes('admin')) {
+                return null;
+            }
+
+            return updateSetting(id, setting);
+        },
+        deleteSetting: async (_, id, context) => {
+            if (!context.user || !context.user.roles.includes('admin')) {
+                return null;
+            }
+
+            return removeSetting(id);
+        },
     },
 };

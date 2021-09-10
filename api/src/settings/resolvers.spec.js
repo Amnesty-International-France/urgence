@@ -53,13 +53,50 @@ describe('Setting Resolvers', () => {
                 expect(countSettings).toHaveBeenCalled();
             });
         });
-
+    });
+    describe('Mutations', () => {
         describe('createSetting', () => {
-            it('should create an setting', async () => {
-                await settingsResolver.Mutation.createSetting(null, {
+            it('should not create a setting if user is not authenticated', async () => {
+                const result = await settingsResolver.Mutation.createSetting(null, {
                     type: 'rgpd',
                     content: 'Everything I do is legal.',
                 });
+
+                expect(result).toBe(null);
+            });
+
+            it('should not create a setting if user is not an admin', async () => {
+                const result = await settingsResolver.Mutation.createSetting(
+                    null,
+                    {
+                        type: 'rgpd',
+                        content: 'Everything I do is legal.',
+                    },
+                    {
+                        user: {
+                            login: 'adrien',
+                            roles: ['illegal'],
+                        },
+                    },
+                );
+
+                expect(result).toBe(null);
+            });
+
+            it('should create a setting', async () => {
+                await settingsResolver.Mutation.createSetting(
+                    null,
+                    {
+                        type: 'rgpd',
+                        content: 'Everything I do is legal.',
+                    },
+                    {
+                        user: {
+                            login: 'julien',
+                            roles: ['admin'],
+                        },
+                    },
+                );
 
                 expect(createSetting).toHaveBeenCalledWith({
                     type: 'rgpd',
@@ -68,9 +105,83 @@ describe('Setting Resolvers', () => {
             });
         });
 
+        describe('updateSetting', () => {
+            it('should not update a setting if user is not authenticated', async () => {
+                const result = await settingsResolver.Mutation.updateSetting(null, {
+                    id: 134,
+                    type: 'rgpd',
+                    content: 'Everything I do is legal.',
+                });
+
+                expect(result).toBe(null);
+            });
+
+            it('should not update a setting if user is not an admin', async () => {
+                const result = await settingsResolver.Mutation.updateSetting(
+                    null,
+                    {
+                        id: 134,
+                        type: 'rgpd',
+                        content: 'Everything I do is legal.',
+                    },
+                    {
+                        user: {
+                            login: 'adrien',
+                            roles: ['illegal'],
+                        },
+                    },
+                );
+
+                expect(result).toBe(null);
+            });
+
+            it('should update a setting', async () => {
+                await settingsResolver.Mutation.updateSetting(null, {
+                    id: 134,
+                    type: 'rgpd',
+                    content: 'Everything I do is legal.',
+                });
+
+                expect(updateSetting).toHaveBeenCalledWith(
+                    134,
+                    {
+                        type: 'rgpd',
+                        content: 'Everything I do is legal.',
+                    },
+                    {
+                        user: {
+                            login: 'julien',
+                            roles: ['admin'],
+                        },
+                    },
+                );
+            });
+        });
+
         describe('deleteSetting', () => {
-            it('should remove settings with given id', async () => {
-                await settingsResolver.Mutation.deleteSetting(null, 42);
+            it('should not remove a setting if user is not authenticated', async () => {
+                const result = settingsResolver.Mutation.deleteSetting(null, 42);
+
+                expect(result).toBe(null);
+            });
+
+            it('should not remove a setting if user is not an admin', async () => {
+                const result = await settingsResolver.Mutation.deleteSetting(null, 42, {
+                    user: {
+                        login: 'adrien',
+                        roles: ['illegal'],
+                    },
+                });
+
+                expect(result).toBe(null);
+            });
+            it('should remove setting with given id', async () => {
+                await settingsResolver.Mutation.deleteSetting(null, 42, {
+                    user: {
+                        login: 'julien',
+                        roles: ['admin'],
+                    },
+                });
                 expect(removeSetting).toHaveBeenCalledWith(42);
             });
         });
