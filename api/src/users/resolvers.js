@@ -15,7 +15,8 @@ export const createToken = (user, now = new Date()) => {
         },
         config.admin.authentication.jwtSecret,
     );
-    createUserToken({ login: user.login, token, expire_date: expiration });
+
+    createUserToken({ login: user.login, token, expireDate: expiration });
     return token;
 };
 
