@@ -1,4 +1,5 @@
 import { ApolloServer } from 'apollo-server-express';
+import jwt from 'jsonwebtoken';
 
 import config from '../../../config';
 import typeDefs from './typeDefs';
@@ -7,6 +8,22 @@ import resolvers from './resolvers';
 const options = {
     typeDefs,
     resolvers,
+    context: ({ req }) => {
+        const token = req.headers.authorization || '';
+
+        if (!token) {
+            return {
+                user: null,
+            };
+        }
+
+        const decodedToken = jwt.decode(token);
+
+        // // Try to retrieve a user with the token
+        const user = 'adrien'; // getUser(token);
+
+        return { user, ...decodedToken };
+    },
 };
 
 if (config.env !== 'production') {
