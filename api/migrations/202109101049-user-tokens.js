@@ -8,6 +8,9 @@ exports.up = function(db, cb) {
             token text NOT NULL,
             expire_date date NOT NULL
         );
+
+        ALTER TABLE ONLY user_token
+          ADD CONSTRAINT user_token_pkey PRIMARY KEY (id);
   `;
 
     db.runSql(sql, cb);
