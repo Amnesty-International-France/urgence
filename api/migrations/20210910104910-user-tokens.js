@@ -6,7 +6,7 @@ exports.up = function(db, cb) {
             id uuid NOT NULL DEFAULT uuid_generate_v4(),
             login text NOT NULL,
             token text NOT NULL,
-            expire_date date NOT NULL
+            expire_date timestamp NOT NULL
         );
 
         ALTER TABLE ONLY user_token

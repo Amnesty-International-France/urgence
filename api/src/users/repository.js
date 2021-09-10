@@ -45,8 +45,8 @@ export const getUserToken = async id => query(userTokenCrudQueries.selectOne(id)
 //     query(userTokenCrudQueries.insertOne({ login, token, expire_date }));
 
 export const getUserTokenByToken = async token => {
-    const sql = `SELECT * from user_token where token = $token;`;
-    return query(sql, { token });
+    const sql = `SELECT * from user_token where token = $token AND expire_date::timestamp >= $today::timestamp;`;
+    return query(sql, { token, today: new Date().toISOString() });
 };
 
 export const getUserTokenByLogin = async login => {
@@ -71,4 +71,7 @@ export const removeUserToken = async id => query(userTokenCrudQueries.removeOne(
 
 export const removeUserTokenByToken = async token => query(userTokenCrudQueries.remove({ token }));
 
-export const removeUserTokenByLogin = async login => query(userTokenCrudQueries.remove({ login }));
+export const removeUserOldTokenByLogin = async login => {
+    const sql = `DELETE FROM user_token WHERE login=$login AND expire_date::timestamp < $today::timestamp;`;
+    return query(sql, { login, today: new Date().toISOString() });
+};

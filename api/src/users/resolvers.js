@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import config from '../../../config';
 
-import { createUserToken, getUserTokenByToken } from './repository';
+import { createUserToken, getUserTokenByToken, removeUserOldTokenByLogin } from './repository';
 
 export const createToken = (user, now = new Date()) => {
     const expiration = addHours(now, config.admin.authentication.sessionDuration).toISOString();
@@ -15,7 +15,10 @@ export const createToken = (user, now = new Date()) => {
         },
         config.admin.authentication.jwtSecret,
     );
-
+    removeUserOldTokenByLogin(user.login).catch(error => {
+        console.error('cleaning tokens failed');
+        console.error(error);
+    });
     createUserToken({ login: user.login, token, expireDate: expiration });
     return token;
 };
