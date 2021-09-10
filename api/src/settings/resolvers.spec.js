@@ -136,15 +136,10 @@ describe('Setting Resolvers', () => {
             });
 
             it('should update a setting', async () => {
-                await settingsResolver.Mutation.updateSetting(null, {
-                    id: 134,
-                    type: 'rgpd',
-                    content: 'Everything I do is legal.',
-                });
-
-                expect(updateSetting).toHaveBeenCalledWith(
-                    134,
+                await settingsResolver.Mutation.updateSetting(
+                    null,
                     {
+                        id: 134,
                         type: 'rgpd',
                         content: 'Everything I do is legal.',
                     },
@@ -155,12 +150,17 @@ describe('Setting Resolvers', () => {
                         },
                     },
                 );
+
+                expect(updateSetting).toHaveBeenCalledWith(134, {
+                    type: 'rgpd',
+                    content: 'Everything I do is legal.',
+                });
             });
         });
 
         describe('deleteSetting', () => {
             it('should not remove a setting if user is not authenticated', async () => {
-                const result = settingsResolver.Mutation.deleteSetting(null, 42);
+                const result = await settingsResolver.Mutation.deleteSetting(null, 42);
 
                 expect(result).toBe(null);
             });
@@ -175,6 +175,7 @@ describe('Setting Resolvers', () => {
 
                 expect(result).toBe(null);
             });
+
             it('should remove setting with given id', async () => {
                 await settingsResolver.Mutation.deleteSetting(null, 42, {
                     user: {
@@ -182,6 +183,7 @@ describe('Setting Resolvers', () => {
                         roles: ['admin'],
                     },
                 });
+
                 expect(removeSetting).toHaveBeenCalledWith(42);
             });
         });
