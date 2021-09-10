@@ -15,7 +15,7 @@ export const createToken = (user, now = new Date()) => {
         },
         config.admin.authentication.jwtSecret,
     );
-    createUserToken({ user, token, expire_date: expiration });
+    createUserToken({ login: user.login, token, expire_date: expiration });
     return token;
 };
 
@@ -27,7 +27,7 @@ export const login = (_, { username, password }) => {
         throw new Error('Invalid credentials.');
     }
 
-    return { token: createToken({ role: 'admin' }) };
+    return { token: createToken({ login: username, role: 'admin' }) };
 };
 
 export default {

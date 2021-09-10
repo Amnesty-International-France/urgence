@@ -4,9 +4,9 @@ exports.up = function(db, cb) {
     const sql = `
         CREATE TABLE user_token (
             id uuid NOT NULL DEFAULT uuid_generate_v4(),
-            user text NOT NULL,
+            login text NOT NULL,
             token text NOT NULL,
-            expire_date date NOT NULL,
+            expire_date date NOT NULL
         );
   `;
 

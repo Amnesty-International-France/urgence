@@ -3,7 +3,7 @@ import { crud, selectOne, remove } from 'co-postgres-queries';
 import query from '../db/client';
 
 const table = 'user_token';
-const columns = ['id', 'user', 'token', 'expire_date'];
+const columns = ['id', 'login', 'token', 'expire_date'];
 
 const userTokenCrudQueries = {
     ...crud({
@@ -16,9 +16,9 @@ const userTokenCrudQueries = {
         primaryKey: 'token',
         returnCols: columns,
     }),
-    selectOneByUser: selectOne({
+    selectOneByLogin: selectOne({
         table,
-        primaryKey: 'user',
+        primaryKey: 'login',
         returnCols: columns,
     }),
 };
@@ -38,15 +38,16 @@ export const getUserToken = async id => query(userTokenCrudQueries.selectOne(id)
 export const getUserTokenByToken = async token =>
     query(userTokenCrudQueries.selectOneBySlug(token));
 
-export const getUserTokenByUser = async user => query(userTokenCrudQueries.selectOneBySlug(user));
+export const getUserTokenByLogin = async login =>
+    query(userTokenCrudQueries.selectOneBySlug(login));
 
-export const createUserToken = async (user, token, expire_date) =>
-    query(userTokenCrudQueries.insertOne({ user, token, expire_date }));
+export const createUserToken = async (login, token, expire_date) =>
+    query(userTokenCrudQueries.insertOne({ login, token, expire_date }));
 
-export const updateUserToken = async (id, user, token, expire_date = new Date()) =>
+export const updateUserToken = async (id, login, token, expire_date = new Date()) =>
     query(
         userTokenCrudQueries.updateOne(id, {
-            user,
+            login,
             token,
             expire_date,
         }),
@@ -55,4 +56,4 @@ export const removeUserToken = async id => query(userTokenCrudQueries.removeOne(
 
 export const removeUserTokenByToken = async token => query(userTokenCrudQueries.remove({ token }));
 
-export const removeUserTokenByUser = async user => query(userTokenCrudQueries.remove({ user }));
+export const removeUserTokenByLogin = async login => query(userTokenCrudQueries.remove({ login }));
