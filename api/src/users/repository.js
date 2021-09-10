@@ -1,5 +1,3 @@
-import { crud, selectOne, remove } from 'co-postgres-queries';
-
 import query from '../db/client';
 
 const table = 'user_token';
