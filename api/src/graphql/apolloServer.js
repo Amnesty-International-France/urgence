@@ -5,10 +5,12 @@ import config from '../../../config';
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
 
+import { loginByToken } from '../users/resolvers';
+
 const options = {
     typeDefs,
     resolvers,
-    context: ({ req }) => {
+    context: async ({ req }) => {
         const token = req.headers.authorization || '';
 
         if (!token) {
@@ -17,15 +19,22 @@ const options = {
             };
         }
 
+        const isAuthenticated = await loginByToken(null, { token });
+
+        if (!isAuthenticated) {
+            return {
+                user: null,
+            };
+        }
+
         const decodedToken = jwt.decode(token);
 
-        // // Try to retrieve a user with the token
-        const user = {
-            login: 'adrien',
-            ...decodedToken,
-        }; // getUser(token);
-
-        return { user };
+        return {
+            user: {
+                ...decodedToken,
+                token,
+            },
+        };
     },
 };
 
