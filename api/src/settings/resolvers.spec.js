@@ -5,6 +5,7 @@ import {
     getSettings,
     countSettings,
     createSetting,
+    updateSetting,
     removeSetting,
 } from './repository';
 
