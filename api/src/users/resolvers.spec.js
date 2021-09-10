@@ -10,8 +10,11 @@ describe('Users Resolvers', () => {
             expect(decodedToken.role).toBe('admin');
         });
 
-        it('should correctly set expiration date', () => {
-            const token = createToken({ login: 'admin', role: 'admin' }, new Date('2032-01-01'));
+        it('should correctly set expiration date', async () => {
+            const token = await createToken(
+                { login: 'admin', role: 'admin' },
+                new Date('2032-01-01'),
+            );
             const decodedToken = jwtDecode(token);
             expect(decodedToken.expiration).toBe('2032-01-01T06:00:00.000Z');
         });
