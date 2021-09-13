@@ -9,7 +9,12 @@ export default gql`
         token: String!
     }
 
+    input TokenInput {
+        token: String!
+    }
+
     extend type Query {
         login(username: String!, password: String!): Token
+        loginByToken(token: TokenInput!): Boolean
     }
 `;

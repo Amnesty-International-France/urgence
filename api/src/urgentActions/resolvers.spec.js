@@ -62,11 +62,12 @@ describe('Urgent Actions Resolvers', () => {
                 });
             });
         });
+    });
 
+    describe('Mutations', () => {
         describe('createUrgentAction', () => {
-            it('should create given urgent action', async () => {
-                uploadImageFromStory.mockImplementation(() => 'uploadedStory');
-                await UrgentActionsResolver.Mutation.createUrgentAction(null, {
+            it('should not create given urgent action if user is not authenticated', async () => {
+                const result = await UrgentActionsResolver.Mutation.createUrgentAction(null, {
                     title: 'test',
                     slug: 'test',
                     story: [
@@ -83,6 +84,68 @@ describe('Urgent Actions Resolvers', () => {
                         },
                     ],
                 });
+
+                expect(result).toBe(null);
+            });
+
+            it('should not create given urgent action if user is not an admin', async () => {
+                const result = await UrgentActionsResolver.Mutation.createUrgentAction(
+                    null,
+                    {
+                        title: 'test',
+                        slug: 'test',
+                        story: [
+                            {
+                                content: 'this is a test',
+                                displayOptions: {
+                                    position: 'top',
+                                    backgroundColor: 'FFFF00',
+                                },
+                                medium: {
+                                    src: 'picture.gif',
+                                    title: 'a picture',
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        user: {
+                            login: 'adrien',
+                            role: 'superstar',
+                        },
+                    },
+                );
+
+                expect(result).toBe(null);
+            });
+
+            it('should create given urgent action', async () => {
+                uploadImageFromStory.mockImplementation(() => 'uploadedStory');
+                await UrgentActionsResolver.Mutation.createUrgentAction(
+                    null,
+                    {
+                        title: 'test',
+                        slug: 'test',
+                        story: [
+                            {
+                                content: 'this is a test',
+                                displayOptions: {
+                                    position: 'top',
+                                    backgroundColor: 'FFFF00',
+                                },
+                                medium: {
+                                    src: 'picture.gif',
+                                    title: 'a picture',
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        user: {
+                            role: 'admin',
+                        },
+                    },
+                );
 
                 expect(uploadImageFromStory).toHaveBeenCalledWith([
                     {
@@ -107,9 +170,8 @@ describe('Urgent Actions Resolvers', () => {
         });
 
         describe('updateUrgentAction', () => {
-            it('should update urgent action with given id with remaining data', async () => {
-                uploadImageFromStory.mockImplementation(() => 'uploadedStory');
-                await UrgentActionsResolver.Mutation.updateUrgentAction(null, {
+            it('should not update urgent action if user is not authenticated', async () => {
+                const result = await UrgentActionsResolver.Mutation.updateUrgentAction(null, {
                     id: 'id',
                     title: 'test',
                     slug: 'test',
@@ -132,6 +194,80 @@ describe('Urgent Actions Resolvers', () => {
                     register: 'register',
                     end_thank: 'end_thank',
                 });
+
+                expect(result).toBe(null);
+            });
+
+            it('should not update urgent action if user is not an admin', async () => {
+                const result = await UrgentActionsResolver.Mutation.updateUrgentAction(
+                    null,
+                    {
+                        id: 'id',
+                        title: 'test',
+                        slug: 'test',
+                        story: [
+                            {
+                                content: 'this is a test',
+                                displayOptions: {
+                                    position: 'top',
+                                    backgroundColor: 'FFFF00',
+                                },
+                                medium: {
+                                    src: 'picture.gif',
+                                    title: 'a picture',
+                                },
+                            },
+                        ],
+                        call_to_action: 'call_to_action',
+                        message: 'message',
+                        email_thank: 'email_thank',
+                        register: 'register',
+                        end_thank: 'end_thank',
+                    },
+                    {
+                        user: {
+                            login: 'julien',
+                            role: 'bg',
+                        },
+                    },
+                );
+
+                expect(result).toBe(null);
+            });
+
+            it('should update urgent action with given id with remaining data', async () => {
+                uploadImageFromStory.mockImplementation(() => 'uploadedStory');
+                await UrgentActionsResolver.Mutation.updateUrgentAction(
+                    null,
+                    {
+                        id: 'id',
+                        title: 'test',
+                        slug: 'test',
+                        story: [
+                            {
+                                content: 'this is a test',
+                                displayOptions: {
+                                    position: 'top',
+                                    backgroundColor: 'FFFF00',
+                                },
+                                medium: {
+                                    src: 'picture.gif',
+                                    title: 'a picture',
+                                },
+                            },
+                        ],
+                        call_to_action: 'call_to_action',
+                        message: 'message',
+                        email_thank: 'email_thank',
+                        register: 'register',
+                        end_thank: 'end_thank',
+                    },
+                    {
+                        user: {
+                            role: 'admin',
+                        },
+                    },
+                );
 
                 expect(uploadImageFromStory).toHaveBeenCalledWith([
                     {
@@ -162,8 +298,29 @@ describe('Urgent Actions Resolvers', () => {
         });
 
         describe('deleteUrgentAction', () => {
+            it('should not remove urgent action if user is not authenticated', async () => {
+                const result = await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id');
+
+                expect(result).toBe(null);
+            });
+
+            it('should not remove urgent action if user is not an admin', async () => {
+                const result = await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id', {
+                    user: {
+                        login: 'julien',
+                        role: 'bg',
+                    },
+                });
+
+                expect(result).toBe(null);
+            });
+
             it('should remove urgent action with given id', async () => {
-                await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id');
+                await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id', {
+                    user: {
+                        role: 'admin',
+                    },
+                });
                 expect(removeUrgentAction).toHaveBeenCalledWith('id');
             });
         });

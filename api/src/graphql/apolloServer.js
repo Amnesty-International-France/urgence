@@ -1,12 +1,39 @@
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, AuthenticationError } from 'apollo-server-express';
+import jwt from 'jsonwebtoken';
 
 import config from '../../../config';
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
 
+import { loginByToken } from '../users/resolvers';
+
 const options = {
     typeDefs,
     resolvers,
+    context: async ({ req }) => {
+        const token = req.headers.authorization || '';
+
+        if (!token) {
+            return {
+                user: null,
+            };
+        }
+
+        const isAuthenticated = await loginByToken(token);
+
+        if (!isAuthenticated) {
+            throw new AuthenticationError('You must be logged in');
+        }
+
+        const decodedToken = jwt.decode(token);
+
+        return {
+            user: {
+                ...decodedToken,
+                token,
+            },
+        };
+    },
 };
 
 if (config.env !== 'production') {

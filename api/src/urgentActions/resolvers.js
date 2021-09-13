@@ -36,16 +36,34 @@ export default {
         _allUrgentActionsMeta: () => countUrgentActions(),
     },
     Mutation: {
-        createUrgentAction: async (_, urgentAction) => {
+        createUrgentAction: async (_, urgentAction, context) => {
+            if (!context || !context.user || context.user.role !== 'admin') {
+                return null;
+            }
+
             const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
             return createUrgentAction(preparedUa);
         },
-        updateUrgentAction: async (_, urgentAction) => {
+        updateUrgentAction: async (_, urgentAction, context) => {
+            if (!context || !context.user || context.user.role !== 'admin') {
+                return null;
+            }
+
             const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
             return updateUrgentAction(urgentAction.id, preparedUa);
         },
-        deleteUrgentAction: (_, id) => removeUrgentAction(id),
-        addCampaignMember: (_, { id, member }) => addCampaignMember(id, member),
-        registerContact: (_, { member }) => registerContact(member),
+        deleteUrgentAction: (_, id, context) => {
+            if (!context || !context.user || context.user.role !== 'admin') {
+                return null;
+            }
+
+            return removeUrgentAction(id);
+        },
+        addCampaignMember: (_, { id, member }) => {
+            return addCampaignMember(id, member);
+        },
+        registerContact: (_, { member }) => {
+            return registerContact(member);
+        },
     },
 };

@@ -4,6 +4,7 @@
     "private": true,
     "dependencies": {
         "apollo-boost": "~0.4.4",
+        "apollo-link-context": "~1.0.20",
         "apollo-upload-client": "~11.0.0",
         "autoprefixer": "~7.1.6",
         "babel-core": "~6.26.0",
