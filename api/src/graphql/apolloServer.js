@@ -34,9 +34,12 @@ const options = {
             },
         };
     },
+    introspection: false,
+    playground: false,
 };
 
 if (config.env !== 'production') {
+    options.introspection = true;
     options.playground = {
         endpoint: `${process.env.REACT_APP_API_URL}/graphql`,
         settings: {
