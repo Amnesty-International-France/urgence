@@ -2,10 +2,9 @@ import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 
 import config from '../../../config';
-import typeDefs from './typeDefs';
-import resolvers from './resolvers';
-
 import { loginByToken } from '../users/resolvers';
+import resolvers from './resolvers';
+import typeDefs from './typeDefs';
 
 const options = {
     typeDefs,
@@ -34,12 +33,10 @@ const options = {
             },
         };
     },
-    introspection: false,
     playground: false,
 };
 
 if (config.env !== 'production') {
-    options.introspection = true;
     options.playground = {
         endpoint: `${process.env.REACT_APP_API_URL}/graphql`,
         settings: {
