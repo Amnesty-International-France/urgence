@@ -46,6 +46,12 @@ const styles = {
     '& .form-step': {
         margin: '1em 0',
     },
+    '& .label-step': {
+        margin: '1em 0',
+        '& span': {
+            fontWeight: 'bold',
+        },
+    },
     '& .letter': {
         border: 'solid 1px',
         borderColor: 'rgba(0, 0, 0, 0.20)',
@@ -107,14 +113,21 @@ export const MessageView = ({ className, text, messageTemplate, action, ...props
     return (
         <div className={classnames('message-view', className)}>
             <Paper className="paper" elevation={6} square>
+                <div className="form-step">
+                    <p className="label-step">
+                        <span>Étape 1:</span> saisir l&#39;objet de l&#39;email
+                    </p>
+                    <Form {...props} />
+                </div>
+
+                <p className="label-step">
+                    <span>Étape 2:</span> envoyer l&#39;email
+                </p>
                 {text && (
                     <div className="text">
                         <RichText html={text} />
                     </div>
                 )}
-                <div className="form-step">
-                    <Form {...props} />
-                </div>
                 <LetterView messageTemplate={messageTemplate} />
             </Paper>
             <div className="action">{action}</div>

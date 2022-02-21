@@ -11,6 +11,7 @@ const Form = ({ objectIndication, object, analyticsCategory, step, setObject }) 
 
     return (
         <Fragment>
+            <RichText className="object-indication" html={objectIndication} />
             <Input
                 className="object"
                 value={object}
@@ -20,7 +21,6 @@ const Form = ({ objectIndication, object, analyticsCategory, step, setObject }) 
                 step={step}
                 label="Objet de l'e-mail *"
             />
-            <RichText className="object-indication" html={objectIndication} />
         </Fragment>
     );
 };
