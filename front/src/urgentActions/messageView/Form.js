@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Input from '../../themes/Input';
 import RichText from '../../themes/RichText';
 
-const Form = ({ objectIndication, object, analyticsCategory, step, setObject }) => {
+const Form = ({ objectIndication, objectExample, object, analyticsCategory, step, setObject }) => {
     const handleChangeObject = event => {
         setObject(event.target.value);
     };
@@ -20,6 +20,7 @@ const Form = ({ objectIndication, object, analyticsCategory, step, setObject }) 
                 analyticsCategory={analyticsCategory}
                 step={step}
                 label="Objet de l'e-mail *"
+                placeholder={objectExample}
             />
         </Fragment>
     );
@@ -29,6 +30,7 @@ Form.propTypes = {
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
     objectIndication: PropTypes.string,
+    objectExample: PropTypes.string,
     object: PropTypes.string,
     setObject: PropTypes.func.isRequired,
 };

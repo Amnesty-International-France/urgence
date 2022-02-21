@@ -38,6 +38,7 @@
         "button_view": "Suivant",
         "button_send": "J'envoie",
         "object_indication": "Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.",
+        "object_example": "Exemple d'objet",
         "message_template": [
             {
                 "value": "Dear Minister,\nI am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month."

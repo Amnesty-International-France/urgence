@@ -77,6 +77,11 @@ export const MessageSendInput = ({ classes, source }) => (
                                         source={`${source}.object_indication`}
                                         defaultValue="Indiquez par exemple que vous souhaitez parler de cette situation inacceptable."
                                     />
+                                    <TextInput
+                                        fullWidth
+                                        label="Object Example"
+                                        source={`${source}.object_example`}
+                                    />
                                     <Labeled label="Recipient">
                                         <Fragment>
                                             <TextInput
@@ -116,12 +121,13 @@ export const MessageSendInput = ({ classes, source }) => (
                                 </div>
                             </CardContent>
                         </Card>
-                        {displayPreview ? (
+                        {displayPreview ? console.log(data) || (
                             <FrontPreview className={classes.preview}>
                                 <MessageView
                                     text={data.text_view || ''}
                                     messageTemplate={data.message_template}
                                     objectIndication={data.object_indication || ''}
+                                    objectExample={data.object_example || ''}
                                     action={<Link to="#" label="Suivant" />}
                                     setEmail={() => {}}
                                     setObject={() => {}}

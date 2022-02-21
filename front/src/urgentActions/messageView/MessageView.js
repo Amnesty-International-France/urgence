@@ -91,6 +91,7 @@ const styles = {
     '& .object-indication': {
         fontStyle: 'italic',
         fontSize: '14px',
+        margin: '0.5em 0',
     },
     '@media (min-width: 1024px)': {
         fontSize: '24px',
@@ -144,6 +145,7 @@ MessageView.propTypes = {
         }),
     ),
     objectIndication: PropTypes.string.isRequired,
+    objectExample: PropTypes.string,
     object: PropTypes.string,
     setObject: PropTypes.func.isRequired,
     action: PropTypes.node.isRequired,

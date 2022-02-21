@@ -9,6 +9,7 @@ export const defaultData = {
     },
     message_template: [],
     object_indication: '',
+    object_example: '',
     email_thank: {
         title: '',
         text: '',

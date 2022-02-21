@@ -99,6 +99,7 @@ export default gql`
         button_view: String
         button_send: String
         object_indication: String
+        object_example: String
         message_template: [MessageTemplate]
         recipient: Recipient
     }
@@ -109,6 +110,7 @@ export default gql`
         button_view: String!
         button_send: String!
         object_indication: String
+        object_example: String
         message_template: [MessageTemplateInput]
         recipient: RecipientInput
     }
