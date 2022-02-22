@@ -170,6 +170,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
                         step={step}
                         pageName="message-send"
                         analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
+                        objectExample={objectExample}
                         buttonName="OpenMessageSend"
                     />
                 }
@@ -184,6 +185,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
         const recipient = get(data, 'UrgentAction.message.recipient');
         const buttonSend = get(data, 'UrgentAction.message.button_send', "J'envoie");
         const gdprMessage = get(data, 'GdprMessage.content');
+  
 
         return (
             <MessageSend

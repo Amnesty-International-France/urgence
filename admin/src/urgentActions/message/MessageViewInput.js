@@ -78,9 +78,8 @@ export const MessageSendInput = ({ classes, source }) => (
                                         defaultValue="Indiquez par exemple que vous souhaitez parler de cette situation inacceptable."
                                     />
                                     <TextInput
-                                        fullWidth
-                                        label="Object Example"
                                         source={`${source}.object_example`}
+                                        label="Object Example"
                                     />
                                     <Labeled label="Recipient">
                                         <Fragment>
@@ -121,21 +120,22 @@ export const MessageSendInput = ({ classes, source }) => (
                                 </div>
                             </CardContent>
                         </Card>
-                        {displayPreview ? console.log(data) || (
-                            <FrontPreview className={classes.preview}>
-                                <MessageView
-                                    text={data.text_view || ''}
-                                    messageTemplate={data.message_template}
-                                    objectIndication={data.object_indication || ''}
-                                    objectExample={data.object_example || ''}
-                                    action={<Link to="#" label="Suivant" />}
-                                    setEmail={() => {}}
-                                    setObject={() => {}}
-                                    setCivility={() => {}}
-                                    setFirstname={() => {}}
-                                    setLastname={() => {}}
-                                />
-                            </FrontPreview>
+                        {displayPreview ? ((
+                                <FrontPreview className={classes.preview}>
+                                    <MessageView
+                                        text={data.text_view || ''}
+                                        messageTemplate={data.message_template}
+                                        objectIndication={data.object_indication || ''}
+                                        objectExample={data.object_example || ''}
+                                        action={<Link to="#" label="Suivant" />}
+                                        setEmail={() => {}}
+                                        setObject={() => {}}
+                                        setCivility={() => {}}
+                                        setFirstname={() => {}}
+                                        setLastname={() => {}}
+                                    />
+                                </FrontPreview>
+                            )
                         ) : (
                             <p>You should write a message to see this preview</p>
                         )}
