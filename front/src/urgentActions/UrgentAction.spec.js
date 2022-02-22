@@ -149,6 +149,7 @@ describe('<UrgentAction />', () => {
                             text_view: 'text view',
                             button_view: 'button view',
                             object_indication: 'object indication',
+                            object_example: 'object example',
                             message_template: [
                                 { value: 'first message' },
                                 { value: 'second message' },
@@ -164,6 +165,7 @@ describe('<UrgentAction />', () => {
             expect(message.length).toBe(1);
 
             expect(message.prop('objectIndication')).toBe('object indication');
+            expect(message.prop('objectExample')).toBe('object example');
             expect(message.prop('text')).toBe('text view');
             expect(message.prop('messageTemplate').length).toBe(2);
             expect(message.prop('messageTemplate')[0].value).toBe('first message');

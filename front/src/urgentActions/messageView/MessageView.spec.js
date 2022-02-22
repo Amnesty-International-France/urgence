@@ -12,6 +12,7 @@ describe('MessageView', () => {
         text: 'text',
         button_view: 'button',
         objectIndication: 'object indication',
+        objectExample: 'object example',
         messageTemplate: defaultStep,
         recipient: {
             mail: 'mail',

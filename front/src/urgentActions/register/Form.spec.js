@@ -12,6 +12,7 @@ describe('Form', () => {
     const defaultProps = {
         messageTemplate: defaultStep,
         objectIndication: 'object indication',
+        objectExample: 'object example',
         loading: false,
         match: { params: {} },
         history: { push: () => null },
