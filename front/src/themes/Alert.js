@@ -32,6 +32,7 @@ const Alert = ({ className, message }) => {
             className={className}
             anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
             open={open}
+            onClose={handleClose}
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
