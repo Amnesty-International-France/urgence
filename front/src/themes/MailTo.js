@@ -39,11 +39,11 @@ export class MailTo extends Component {
     }
 
     openMailer = dest => {
-        const windowRef = global.open(dest, 'mailto');
-        windowRef.focus();
+        window.open(dest, 'mailto');
+        window.focus();
         setTimeout(function() {
-            if (!windowRef.document.hasFocus()) {
-                windowRef.close();
+            if (!window.document.hasFocus()) {
+                window.close();
             }
         }, 500);
     };
