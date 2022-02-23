@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-import { Input, isCorrectEmail } from './Input';
+import { Input, isCorrectEmail, isCorrectPhone } from './Input';
 
 describe('<Input />', () => {
     it('should render an Input with correct value and label', () => {
@@ -64,5 +64,37 @@ describe('isCorrectEmail', () => {
         const text = 'abel@chemoul.com';
 
         expect(isCorrectEmail(text)).toBe(true);
+    });
+
+    it('should return true if correct phone', () => {
+        const phone = '0600000000';
+        const phone2 = '0700000000';
+        const phone3 = '+33600000000';
+        const phone4 = '+33700000000';
+        const phone5 = '0033600000000';
+        const phone6 = '0033700000000';
+
+        expect(isCorrectPhone(phone)).toBe(true);
+        expect(isCorrectPhone(phone2)).toBe(true);
+        expect(isCorrectPhone(phone3)).toBe(true);
+        expect(isCorrectPhone(phone4)).toBe(true);
+        expect(isCorrectPhone(phone5)).toBe(true);
+        expect(isCorrectPhone(phone6)).toBe(true);
+    });
+
+    it('should return false if incorrect phone', () => {
+        const phone = '600000000';
+        const phone2 = '0900000000';
+        const phone3 = '+33800000000';
+        const phone4 = '+330000000';
+        const phone5 = '1033600000000';
+        const phone6 = '0300000000';
+
+        expect(isCorrectPhone(phone)).toBe(false);
+        expect(isCorrectPhone(phone2)).toBe(false);
+        expect(isCorrectPhone(phone3)).toBe(false);
+        expect(isCorrectPhone(phone4)).toBe(false);
+        expect(isCorrectPhone(phone5)).toBe(false);
+        expect(isCorrectPhone(phone6)).toBe(false);
     });
 });
