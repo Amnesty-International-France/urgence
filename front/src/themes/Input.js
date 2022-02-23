@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+
 import { TextField } from '@material-ui/core';
 import { routeMatch } from '../propTypes';
 import { withRouter } from 'react-router';
 
-import trackEvent from '../analytics/trackEvent';
 import CheckAdornment from './CheckAdornment';
+import trackEvent from '../analytics/trackEvent';
 
 const styles = {
     '& .textfield': {
@@ -24,6 +25,11 @@ const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9
 
 export const isCorrectEmail = email => {
     return re.test(email);
+};
+
+const regexPhone = /^(?:(?:\+|00)33|0)\s*[6-7](?:[\s.-]*\d{2}){4}$/;
+export const isCorrectPhone = phoneNumber => {
+    return regexPhone.test(phoneNumber);
 };
 
 export class Input extends Component {
@@ -46,16 +52,17 @@ export class Input extends Component {
 
     render() {
         const {
-            className,
-            label,
-            value,
-            onChange,
-            error,
-            noValidate,
             analyticsCategory,
+            className,
+            error,
+            helperText,
+            label,
             match: { params: slug },
-            step,
+            noValidate,
+            onChange,
             staticContext,
+            step,
+            value,
             ...otherProps
         } = this.props;
         const { showError, showValid } = this.state;
@@ -73,6 +80,7 @@ export class Input extends Component {
                     label={label}
                     value={value}
                     error={showError && error}
+                    helperText={error ? helperText : ''}
                     InputProps={{
                         endAdornment: <CheckAdornment isValid={showValid} />,
                     }}
@@ -101,16 +109,17 @@ export class Input extends Component {
 }
 
 Input.propTypes = {
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func,
-    error: PropTypes.bool,
-    noValidate: PropTypes.bool,
-    className: PropTypes.string,
-    label: PropTypes.string.isRequired,
     analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
+    className: PropTypes.string,
+    error: PropTypes.bool,
+    helperText: PropTypes.string,
+    label: PropTypes.string.isRequired,
     match: routeMatch,
+    noValidate: PropTypes.bool,
+    onChange: PropTypes.func,
     staticContext: PropTypes.object,
+    step: PropTypes.string,
+    value: PropTypes.string.isRequired,
 };
 
 export default glamorous(withRouter(Input))(styles);

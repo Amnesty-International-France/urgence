@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import Input, { isCorrectEmail } from '../../themes/Input';
+import Input, { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';
 import RichText from '../../themes/RichText';
 
@@ -90,11 +90,12 @@ const Form = ({
                 type="phone"
                 value={phone}
                 onChange={handleChangePhone}
-                error={!phone}
+                error={!isCorrectPhone(phone)}
                 autoComplete="phone"
                 analyticsCategory={analyticsCategory}
                 step={step}
                 label="Votre téléphone mobile *"
+                helperText="(+33) 6 XX XX XX XX"
             />
         </Fragment>
     );
