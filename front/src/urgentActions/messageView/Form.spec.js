@@ -28,7 +28,6 @@ describe('Form', () => {
         expect(inputs.length).toBe(1);
 
         expect(inputs.at(0).prop('className')).toBe('object');
-        expect(inputs.at(0).prop('label')).toBe(`Objet de l'e-mail *`);
     });
 
     it('display a rich text for object indication', () => {
