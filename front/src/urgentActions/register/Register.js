@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 
 import RichText from '../../themes/RichText';
 import LongText from '../../themes/LongText';
-import { isCorrectEmail } from '../../themes/Input';
+import { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
 import { white, black } from '../../themes/colors';
 import { withYellowLogo, withYellowBackground } from '../../themes/ThemeContext';
 
@@ -72,7 +72,7 @@ const styles = {
 
 const isDisabled = props => {
     const { firstname, lastname, phone, email } = props;
-    return !firstname || !lastname || !phone || !isCorrectEmail(email);
+    return !firstname || !lastname || !isCorrectPhone(phone) || !isCorrectEmail(email);
 };
 
 export const RegisterActivist = ({ data, gdprRegister, action, className, ...props }) => {
