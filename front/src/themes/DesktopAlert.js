@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -15,10 +15,19 @@ const query = gql`
 `;
 
 const DesktopAlert = () => {
+    const [show, setShow] = React.useState(false);
+
+    useEffect(() => {
+        const url = window.location.href;
+        if (url.includes('/story/0')) {
+            setShow(true);
+        }
+    });
+
     return (
         <Query query={query}>
             {({ data, loading, error }) => {
-                if (loading || error) {
+                if (loading || error || !show) {
                     return null;
                 }
                 return <Alert message={data.SettingByType.content} />;
