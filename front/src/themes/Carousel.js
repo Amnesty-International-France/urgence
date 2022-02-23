@@ -11,7 +11,6 @@ import 'swiper/css/swiper.css';
 import { black } from './colors';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import StoryTouch from '../urgentActions/story/StoryTouch';
 import MobileDetect from 'mobile-detect';
 
 const styles = {
@@ -49,21 +48,45 @@ export const Carousel = ({
     const [swiper, setSwiper] = useState(null);
     const [container, setContainer] = useState(null);
 
-    useEffect(() => {
-        initSwiper();
-        return () => {
-            if (swiper) {
-                setTimeout(() => {
-                    swiper.destroy();
-                }, 500);
+    const slideNext = () => {
+        swiper.slideNext();
+    };
+
+    const slidePrevious = () => {
+        swiper.slidePrev();
+    };
+    const handleSwiperClick = swipper =>
+        function(event) {
+            if (!container) return;
+            const containerRect = container.getBoundingClientRect();
+            const containerWidth = containerRect.width;
+            const containerLeft = containerRect.left;
+            const clickX = event.clientX;
+            const hasClickTheLeftSide = clickX < containerLeft + containerWidth * 0.3;
+            if (hasClickTheLeftSide) {
+                swipper.slidePrev();
+            } else {
+                swipper.slideNext();
             }
         };
-    }, [container]);
 
     const isOnMobile = () => {
         const md = new MobileDetect(global.navigator.userAgent);
         return md.mobile();
     };
+    useEffect(() => {
+        initSwiper();
+        return () => {
+            if (swiper) {
+                setTimeout(() => {
+                    if (isOnMobile) {
+                        document.removeEventListener('click', handleSwiperClick(swiper), false);
+                    }
+                    swiper.destroy();
+                }, 500);
+            }
+        };
+    }, [container]);
 
     const initSwiper = () => {
         const swiper = new Swiper(container, {
@@ -82,27 +105,20 @@ export const Carousel = ({
                 },
             },
         });
+        if (isOnMobile) {
+            document.addEventListener('click', handleSwiperClick(swiper), false);
+        }
         setSwiper(swiper);
-    };
-
-    const slideNext = () => {
-        swiper.slideNext();
-    };
-
-    const slidePrevious = () => {
-        swiper.slidePrev();
     };
 
     return (
         <div className={className}>
-            {current < total + 1 && isOnMobile() && (
-                <StoryTouch slideNext={slideNext} slidePrevious={slidePrevious} />
-            )}
             <div className="swiper-container" ref={setContainer}>
                 <div className="swiper-wrapper">{children()}</div>
             </div>
-            {current < total + 1 && (
-                <Fragment>
+
+            <Fragment>
+                {current != total + 1 && (
                     <div className={classnames('swiper-controls right')}>
                         <IconButton
                             className={classnames({
@@ -114,18 +130,18 @@ export const Carousel = ({
                             <FontAwesomeIcon icon={faArrowRight} color={black} className="icon" />
                         </IconButton>
                     </div>
-                    {current != 1 && (
-                        <div className={classnames('swiper-controls left')}>
-                            <IconButton
-                                className={classnames('left transparent previous-arrow')}
-                                onClick={slidePrevious}
-                            >
-                                <FontAwesomeIcon icon={faArrowLeft} className="icon" />
-                            </IconButton>
-                        </div>
-                    )}
-                </Fragment>
-            )}
+                )}
+                {current != 1 && (
+                    <div className={classnames('swiper-controls left')}>
+                        <IconButton
+                            className={classnames('left transparent previous-arrow')}
+                            onClick={slidePrevious}
+                        >
+                            <FontAwesomeIcon icon={faArrowLeft} className="icon" />
+                        </IconButton>
+                    </div>
+                )}
+            </Fragment>
         </div>
     );
 };
