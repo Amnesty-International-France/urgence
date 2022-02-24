@@ -85,13 +85,11 @@ services:
             - '3000:3000'
 
     nginx:
-        image: nginx
+        image: nginx:1.21
         ports:
             - '80:80'
         volumes:
-            - ./var/uploads:/app/uploads
-            - ./var/nginx/image.conf:/etc/nginx/conf.d/default.conf
+            - ./var/uploads:/usr/share/nginx/html
         command: [sh, -c, "chmod -R o+X /app; nginx -g 'daemon off;'"]
-
 volumes:
     amnesty-postgres-data: {}
