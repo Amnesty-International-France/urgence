@@ -19,7 +19,6 @@ const Form = ({ objectIndication, objectExample, object, analyticsCategory, step
                 error={!object}
                 analyticsCategory={analyticsCategory}
                 step={step}
-                label="Objet de l'e-mail *"
                 placeholder={objectExample}
             />
         </Fragment>
