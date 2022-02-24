@@ -44,7 +44,6 @@ export const validateMedium = (value, record, _, key) => {
         .split('.')
         .slice(0, -1)
         .join('.');
-        console.log(mediumKey);
     const titleKey = `${mediumKey}.title`;
     const srcKey = `${mediumKey}.src`;
     const title = get(record, titleKey);
