@@ -221,3 +221,48 @@ export const getContactByEmail = async (access_token, email) => {
         },
     };
 };
+
+export const getCodeOrigineByCampaignCode = async (access_token, campaign_code) => {
+    const url = `${QUERY_BASE_URL}/query?q=SELECT+id+from+Codec+where+Name='${campaign_code}'`;
+
+    console.log('getCodeOrigineByCampaignCode request', {
+        url,
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+        },
+    });
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+        },
+    });
+
+    const status = response.status;
+    const body = await response.json();
+
+    console.log('getCodeOrigineByCampaignCode response', (status, body));
+
+    if (status >= 400) {
+        return new Error(
+            `Error while quering contacts from SalesForce: ${body
+                .map(({ message }) => message)
+                .join(', ')}`,
+        );
+    }
+
+    const contacts = body.records || [];
+    const registered = contacts.some(record => !!record.Actions_urgentes_via_le_smartphone__c);
+
+    return {
+        status,
+        body: {
+            contacts,
+            registered,
+        },
+    };
+};
