@@ -23,6 +23,7 @@ const prepareUrgentActionForDatabase = async urgentAction => {
         end_thank: JSON.stringify(urgentAction.end_thank),
         call_to_action: JSON.stringify(urgentAction.call_to_action),
         register: JSON.stringify(urgentAction.register),
+        social_metadata: JSON.stringify(urgentAction.social_metadata),
     };
 };
 

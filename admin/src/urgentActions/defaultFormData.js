@@ -22,6 +22,9 @@ export const defaultData = {
         text: '',
         button: '',
     },
+    social_metadata: {
+        title: '',
+    }
 };
 
 export const defaultStory = {

@@ -9,10 +9,12 @@ import {
     SimpleForm,
     FormDataConsumer,
     required,
+    Labeled,
+    TextInput,
 } from 'react-admin';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-import { teal, blue, red, yellow, green, grey, orange } from '@material-ui/core/colors';
+import { teal, blue, red, yellow, green, grey, orange, purple } from '@material-ui/core/colors';
 
 import { LETTER_ACTIVATED } from '../flags';
 
@@ -26,6 +28,7 @@ import RegisterInput from './RegisterInput';
 import LetterInput from './LetterInput';
 
 import StoryStepFormIterator from './StoryStepFormIterator';
+import MediumInput from './MediumInput';
 
 const styles = {
     form: {
@@ -36,6 +39,9 @@ const styles = {
             paddingTop: '1rem',
             fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
             color: grey[600],
+        },
+        '&.social-metadata': {
+            backgroundColor: purple[50],
         },
         '&.story': {
             backgroundColor: blue[50],
@@ -123,6 +129,15 @@ const Form = ({ classes, record }) => {
                         return <LongTextInput source="slug" disabled />;
                     }}
                 </FormDataConsumer>
+            </div>
+
+            <div className={`${classes.form} social-metadata`}>
+                <h2>Social Metadata</h2>
+                <Fragment>
+                    <TextInput source="social_metadata.title" fullWidth label="Title" />
+                    <TextInput source="social_metadata.description" fullWidth label="Description" />
+                    <MediumInput source="social_metadata.medium" label="Cover" />
+                </Fragment>
             </div>
 
             <div className={`${classes.form} story`}>

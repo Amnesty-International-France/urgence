@@ -119,6 +119,14 @@ const query = gql`
                 title
                 text
             }
+            social_metadata {
+                title
+                description
+                medium {
+                    src
+                    title
+                }
+            }
         }
         GdprMessage: SettingByType(type: "gdpr-message") {
             id

@@ -154,6 +154,18 @@ export default gql`
         share: ShareInput
     }
 
+    type SocialMetadata {
+        title: String
+        description: String
+        medium: Medium
+    }
+
+    input SocialMetadataInput {
+        title: String
+        description: String
+        medium: MediumInput
+    }
+
     type UrgentAction {
         id: ID!
         title: String!
@@ -169,6 +181,7 @@ export default gql`
         email_thank: Thanks
         end_thank: Thanks
         register: Register
+        social_metadata: SocialMetadata
     }
 
     input CampaignMemberInput {
@@ -216,6 +229,7 @@ export default gql`
             email_thank: ThankInput
             end_thank: ThankInput
             register: RegisterInput
+            social_metadata: SocialMetadataInput
         ): UrgentAction
         updateUrgentAction(
             id: ID!
@@ -230,6 +244,7 @@ export default gql`
             email_thank: ThankInput
             end_thank: ThankInput
             register: RegisterInput
+            social_metadata: SocialMetadataInput
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
         addCampaignMember(id: ID!, member: CampaignMemberInput!): CampaignMember!
