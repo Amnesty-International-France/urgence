@@ -16,7 +16,7 @@ export const secureUseState = defaultValue => {
     try {
         return useState(defaultValue);
     } catch (error) {
-        console.log("useState doesn't work through admin preview", error.message);
+        // console.log("useState doesn't work through admin preview", error.message);
         return [false, () => true];
     }
 };
@@ -25,7 +25,7 @@ export const secureUseEffect = action => {
     try {
         return useEffect(action);
     } catch (error) {
-        console.log("useEffect doesn't work through admin preview", error.message);
+        // console.log("useEffect doesn't work through admin preview", error.message);
         return [false, () => true];
     }
 };

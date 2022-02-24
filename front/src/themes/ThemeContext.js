@@ -26,6 +26,9 @@ export class ThemeProvider extends Component {
     };
 
     theme = createMuiTheme({
+        typography: {
+            useNextVariants: true,
+        },
         palette: {
             primary: {
                 500: white,
