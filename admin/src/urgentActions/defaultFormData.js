@@ -24,6 +24,8 @@ export const defaultData = {
     },
     social_metadata: {
         title: '',
+        description: '',
+        medium: null
     }
 };
 

@@ -76,6 +76,7 @@ const autoFocusProps = { autoFocus: true };
 const Form = ({ classes, record }) => {
     const [emptyCode, setEmptyCode] = useState(!record.campaign_code);
 
+    console.log(record)
     const handleTextFieldChange = e => {
         setEmptyCode(e.target.value === '');
     };

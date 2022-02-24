@@ -49,7 +49,6 @@ export const validateMedium = (value, record, _, key) => {
     const srcKey = `${mediumKey}.src`;
     const title = get(record, titleKey);
     const src = get(record, srcKey);
-    console.log(title, src);
 
     if (value && value.rawFile && value.rawFile.size > maxSize.value) {
         return `File size can't exceed ${maxSize.label}`;

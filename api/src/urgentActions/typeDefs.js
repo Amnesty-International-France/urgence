@@ -45,6 +45,16 @@ export default gql`
         src: Uploadable!
     }
 
+    type MediumSocial {
+        title: String
+        src: Uploadable
+    }
+
+    input MediumSocialInput {
+        title: String
+        src: Uploadable
+    }
+
     type DisplayOptions {
         mediumPosition: Position!
         backgroundColor: Color!
@@ -91,6 +101,18 @@ export default gql`
 
     input MessageTemplateInput {
         value: String!
+    }
+
+    type SocialMetadata {
+        title: String
+        medium: MediumSocial
+        description: String
+    }
+
+    input SocialMetadataInput {
+        title: String
+        description: String
+        medium: MediumSocialInput
     }
 
     type Message {
@@ -152,18 +174,6 @@ export default gql`
         text: String
         button: String
         share: ShareInput
-    }
-
-    type SocialMetadata {
-        title: String
-        description: String
-        medium: Medium
-    }
-
-    input SocialMetadataInput {
-        title: String
-        description: String
-        medium: MediumInput
     }
 
     type UrgentAction {
