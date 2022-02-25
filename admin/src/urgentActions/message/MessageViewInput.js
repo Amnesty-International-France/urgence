@@ -47,16 +47,13 @@ export const validateEmailsList = text =>
         ? 'Must contain only emails separated by a comma.'
         : null;
 
-const getMailToLength = (recipient, subject, body) => {
-    return `mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
-        subject,
-    )}&body=${encodeURIComponent(body)}`
+const getMailToHeaderLength = (recipient, subject, body) => {
+    return `mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(subject)}`
         .concat(recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '')
         .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '').length;
 };
 
 export const MessageSendInput = ({ classes, source }) => {
-    const [mailToLength, setMailToLength] = React.useState(0);
     return (
         <div className={classNames(classes.root, classes.bordered)}>
             <FormDataConsumer>
@@ -65,13 +62,10 @@ export const MessageSendInput = ({ classes, source }) => {
                     const displayPreview =
                         data && data.message_template && data.message_template.length > 0;
 
-                    const mailToLengthTmp = getMailToLength(
+                    const mailToHeaderLength = getMailToHeaderLength(
                         data.recipient,
                         data.object_example,
-                        data.message_template[0].value,
                     );
-                    setMailToLength(mailToLengthTmp);
-                    console.log('yolo', mailToLength)
 
                     return (
                         <Fragment>
@@ -105,6 +99,7 @@ export const MessageSendInput = ({ classes, source }) => {
                                                     source={`${source}.text_view`}
                                                     defaultValue="Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email."
                                                 />
+
                                                 <ArrayInput
                                                     label="Content"
                                                     source={`${source}.message_template`}
@@ -115,8 +110,9 @@ export const MessageSendInput = ({ classes, source }) => {
                                                     >
                                                         <ParagraphTemplateInput
                                                             source=""
-                                                            count={mailToLength}
+                                                            headerCount={mailToHeaderLength}
                                                             limit={2000}
+                                                            dataMessageTemplate={data.message_template}
                                                         />
                                                     </SimpleParagraphFormIterator>
                                                 </ArrayInput>

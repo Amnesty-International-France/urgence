@@ -3,37 +3,33 @@ import PropTypes from 'prop-types';
 
 import { addField, LongTextInput } from 'react-admin';
 
-export const ParagraphTemplateInput = ({ source, count, limit }) => {
-    const [helperText, setHelperText] = React.useState('');
-    const [error, setError] = React.useState(false);
+export const ParagraphTemplateInput = ({ source, headerCount, limit, dataMessageTemplate }) => {
+    const [mailToLength, setMailToLength] = React.useState(0);
 
     useEffect(() => {
-        if (count > limit) {
-            setHelperText(
-                `${count}/${limit}: You have reached the recommanded limit for mailTo function.`,
-            );
-            setError(true);
-        } else {
-            setHelperText(`${count}/${limit}`);
-            setError(false);
-        }
-    }, [count, limit]);
+        const messageLength = dataMessageTemplate[0].value.length;
+        setMailToLength(messageLength + headerCount);
+    }, [headerCount, dataMessageTemplate]);
+
+    const updateMailToLenght = (event) => {
+        const messageLength = event.target.value.length;
+        setMailToLength(messageLength + headerCount);
+    }
     return (
-        <Fragment>
-            <LongTextInput
-                source={`${source}value`}
-                error={error}
-                label=""
-                helperText={helperText}
-            />
-        </Fragment>
+        <LongTextInput
+            source={`${source}value`}
+            label=""
+            helperText={`${mailToLength}/${limit} We recommend not to exceed for mailTo function.`}
+            onChange={updateMailToLenght}
+        />
     );
 };
 
 ParagraphTemplateInput.propTypes = {
     source: PropTypes.string.isRequired,
-    cout: PropTypes.number,
+    headerCount: PropTypes.number,
     limit: PropTypes.number,
+    dataMessageTemplate: PropTypes.object,
 };
 
 export default addField(ParagraphTemplateInput);
