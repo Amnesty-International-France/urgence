@@ -26,3 +26,5 @@ var/
 
 ## Admin
 /admin/build
+
+.envrc
