@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { StoryStep } from './StoryStep';
-import { white, black } from '../../themes/colors';
 
 describe('<StoryStep />', () => {
     const defaultProps = {

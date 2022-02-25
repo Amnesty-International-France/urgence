@@ -48,10 +48,11 @@ const isMemberAlreadyAddedError = errors =>
 
 export const addCampaignMember = async (
     access_token,
-    { campaign_code, origin_code },
+    { campaign_code },
     { firstname, lastname, email },
 ) => {
     const url = `${QUERY_BASE_URL}/sobjects/CampaignMember`;
+    const origin_code = await getOriginCodeByCampaignCode(access_token, campaign_code);
 
     console.log('addCampaignMember request', {
         url,
@@ -200,8 +201,6 @@ export const getContactByEmail = async (access_token, email) => {
     const status = response.status;
     const body = await response.json();
 
-    console.log('getContactByEmail response', (status, body));
-
     if (status >= 400) {
         return new Error(
             `Error while quering contacts from SalesForce: ${body
@@ -220,4 +219,42 @@ export const getContactByEmail = async (access_token, email) => {
             registered,
         },
     };
+};
+
+export const getOriginCodeByCampaignCode = async (access_token, campaign_code) => {
+    const url = `${QUERY_BASE_URL}/query?q=select+Code_origine__r.Name+from+Campaign+where+Name='${campaign_code}'`;
+
+    console.log('getCodeOrigineByCampaignCode request', {
+        url,
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+        },
+    });
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+        },
+    });
+
+    const status = response.status;
+    const body = await response.json();
+
+    console.log('getCodeOrigineByCampaignCode response', (status, body));
+
+    if (status >= 400) {
+        return new Error(
+            `Error while quering contacts from SalesForce: ${body
+                .map(({ message }) => message)
+                .join(', ')}`,
+        );
+    }
+
+    const originCode = body.records && body.records[0].Code_origine__r.Name;
+
+    return originCode;
 };

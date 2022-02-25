@@ -24,6 +24,11 @@ const IconButtonContainer = glamorous.div({
         color: darkGrey,
         pointerEvents: 'none',
     },
+    '&.transparent': {
+        backgroundColor: 'transparent',
+        color: darkGrey,
+        boxShadow: 'none',
+    },
 });
 
 const IconButton = ({ className, children, onClick, onMouseEnter, onMouseLeave }) => (

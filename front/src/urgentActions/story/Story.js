@@ -4,8 +4,6 @@ import glamorous from 'glamorous';
 import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { compose } from 'recompose';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Act from '../Act';
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
 import ANALYTICS_CATEGORIES from '../../analytics/categories';
@@ -15,10 +13,10 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { black, white, yellow } from '../../themes/colors';
 import { withThemeContext } from '../../themes/ThemeContext';
-import Carousel from '../../themes/Carousel';
 import { StoryStepPropType, routeMatch } from '../../propTypes';
-import generateUrl from '../../services/generateUrl';
 
+import Carousel from '../../themes/Carousel';
+import generateUrl from '../../services/generateUrl';
 import StorySlide from './StorySlide';
 import StoryCover from './StoryCover';
 import StoryStep from './StoryStep';
@@ -33,7 +31,6 @@ export const getLogoColorForStoryStep = step =>
     step === 'story'
         ? { logoColor: black, logoBackgroundColor: yellow }
         : { logoColor: white, logoBackgroundColor: black };
-
 export class Story extends Component {
     afterChange = page => {
         const {
@@ -108,9 +105,6 @@ export class Story extends Component {
                         total={total}
                         afterChange={this.afterChange}
                         afterLastChange={this.afterLastChange}
-                        icon={
-                            <FontAwesomeIcon icon={faArrowRight} color={black} className="icon" />
-                        }
                     >
                         {() => (
                             <Fragment>
