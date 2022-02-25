@@ -222,7 +222,7 @@ export const getContactByEmail = async (access_token, email) => {
 };
 
 export const getOriginCodeByCampaignCode = async (access_token, campaign_code) => {
-    const url = `${QUERY_BASE_URL}/query?q=select+Code_origine__c+from+Campaign+where+Name='${campaign_code}'`;
+    const url = `${QUERY_BASE_URL}/query?q=select+Code_origine__r.Name+from+Campaign+where+Name='${campaign_code}'`;
 
     console.log('getCodeOrigineByCampaignCode request', {
         url,
@@ -254,7 +254,7 @@ export const getOriginCodeByCampaignCode = async (access_token, campaign_code) =
         );
     }
 
-    const originCode = body.records && body.records[0].Code_origine__c;
+    const originCode = body.records && body.records[0].Code_origine__r.Name;
 
     return originCode;
 };
