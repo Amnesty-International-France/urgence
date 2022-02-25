@@ -15,6 +15,7 @@ export const createUrgentAction = async ({ story, message, ...urgentAction } = {
         email_thank: {},
         register: {},
         end_thank: {},
+        social_metadata: {},
     };
 
     return insertUrgentAction({

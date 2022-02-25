@@ -165,6 +165,7 @@ describe('Urgent Actions Resolvers', () => {
                     title: 'test',
                     slug: 'test',
                     story: '"uploadedStory"',
+                    social_metadata: "{}"
                 });
             });
         });
@@ -293,6 +294,7 @@ describe('Urgent Actions Resolvers', () => {
                     email_thank: '"email_thank"',
                     register: '"register"',
                     end_thank: '"end_thank"',
+                    social_metadata: "{}",
                 });
             });
         });

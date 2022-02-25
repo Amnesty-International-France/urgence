@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
-const SEO = ({ title, description, url, siteName, lang, extraMeta, keywords }) => {
+const SEO = ({ socialMetadata, lang, url, siteName }) => {
+    const title = socialMetadata.title || 'Action urgente';
+    const description = socialMetadata.description || 'Action urgente';
     const meta = [
         {
             name: `description`,
@@ -28,9 +30,10 @@ const SEO = ({ title, description, url, siteName, lang, extraMeta, keywords }) =
             property: `og:site_name`,
             content: siteName,
         },
+
         {
             name: `twitter:card`,
-            content: `summary`,
+            content: `summary_large_image`,
         },
         {
             name: `twitter:title`,
@@ -40,14 +43,25 @@ const SEO = ({ title, description, url, siteName, lang, extraMeta, keywords }) =
             name: `twitter:description`,
             content: description,
         },
-        ...(keywords.length > 0
-            ? {
-                  name: `keywords`,
-                  content: keywords.join(`, `),
-              }
-            : []),
-        ...extraMeta,
+
+        {
+            name: `twitter:url`,
+            content: url,
+        },
     ];
+
+    if (socialMetadata.medium && socialMetadata.medium.src) {
+        meta.push(
+            {
+                name: `twitter:image`,
+                content: 'socialMetadata.medium.src',
+            },
+            {
+                property: `og:image`,
+                content: socialMetadata.medium.src,
+            },
+        );
+    }
 
     return (
         <Helmet
@@ -65,18 +79,13 @@ SEO.defaultProps = {
     siteName: 'Réaction Rapide',
     url: global.origin,
     lang: `fr`,
-    extraMeta: [],
-    keywords: [],
 };
 
 SEO.propTypes = {
     siteName: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     lang: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    extraMeta: PropTypes.arrayOf(PropTypes.object),
-    keywords: PropTypes.arrayOf(PropTypes.string),
+    socialMetadata: PropTypes.any,
 };
 
 export default SEO;

@@ -68,5 +68,10 @@
     "end_thank": {
         "title": "Merci de votre aide !",
         "text": "Nous comptons sur vous pour la prochaine action urgente."
+    },
+    "social_metadata": {
+        "title": "Title metadata",
+        "description": "Description metadata",
+        "medium": {}
     }
 }

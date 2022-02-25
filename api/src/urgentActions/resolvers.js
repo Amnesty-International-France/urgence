@@ -11,9 +11,11 @@ import {
 import { addCampaignMember, registerContact } from './campaignMember';
 
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
+import { uploadImageFromSocialMetadata } from '../services/uploadImageFromSocialMetadata';
 
 const prepareUrgentActionForDatabase = async urgentAction => {
     const uploadedStory = await uploadImageFromStory(urgentAction.story);
+    const uploadedSocialMetadata = await uploadImageFromSocialMetadata(urgentAction.social_metadata);
 
     return {
         ...urgentAction,
@@ -23,6 +25,7 @@ const prepareUrgentActionForDatabase = async urgentAction => {
         end_thank: JSON.stringify(urgentAction.end_thank),
         call_to_action: JSON.stringify(urgentAction.call_to_action),
         register: JSON.stringify(urgentAction.register),
+        social_metadata: JSON.stringify(uploadedSocialMetadata),
     };
 };
 

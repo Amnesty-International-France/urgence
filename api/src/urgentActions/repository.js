@@ -18,6 +18,7 @@ const columns = [
     'end_thank',
     'creation_date',
     'last_edition_date',
+    'social_metadata',
 ];
 
 const urgentActionCrudQueries = {

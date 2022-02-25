@@ -24,42 +24,6 @@ import generateUrl from '../services/generateUrl';
 import RegisterButton from './register/RegisterButton';
 import Register from './register/Register';
 
-const seoPropsFromStory = story => {
-    if (!story || story.length === 0) {
-        return null;
-    }
-    const storyCover = story[0];
-    const description = storyCover.content;
-    const image = get(storyCover, 'medium.src');
-    const alt = get(storyCover, 'medium.title');
-
-    const extraMeta = image
-        ? [
-              {
-                  property: 'og:image',
-                  content: image,
-              },
-              {
-                  property: 'og:image:alt',
-                  content: alt,
-              },
-              {
-                  property: 'twitter:image',
-                  content: image,
-              },
-              {
-                  property: 'twitter:image:alt',
-                  content: alt,
-              },
-          ]
-        : [];
-
-    return {
-        description,
-        extraMeta,
-    };
-};
-
 const query = gql`
     query urgentActionBySlug($slug: String!) {
         UrgentAction: UrgentActionBySlug(slug: $slug) {
@@ -118,6 +82,14 @@ const query = gql`
             end_thank {
                 title
                 text
+            }
+            social_metadata {
+                title
+                description
+                medium {
+                    src
+                    title
+                }
             }
         }
         GdprMessage: SettingByType(type: "gdpr-message") {
@@ -185,7 +157,6 @@ export const UrgentAction = ({ history, slug, step, data }) => {
         const recipient = get(data, 'UrgentAction.message.recipient');
         const buttonSend = get(data, 'UrgentAction.message.button_send', "J'envoie");
         const gdprMessage = get(data, 'GdprMessage.content');
-  
 
         return (
             <MessageSend
@@ -293,14 +264,14 @@ export const renderUrgentActionWithData = (history, slug, step, page) => ({
         return <LoadingScreen />;
     }
 
-    const seoProps = seoPropsFromStory(get(data, 'UrgentAction.story'));
+    const socialMetadata = get(data, 'UrgentAction.social_metadata');
 
     return (
         <Fragment>
             <StepperContainer>
                 <Stepper data={data} step={step} page={page} />
             </StepperContainer>
-            {seoProps && <SEO title={get(data, 'UrgentAction.title')} {...seoProps} />}
+            {socialMetadata && <SEO socialMetadata={socialMetadata} />}
             <UrgentAction history={history} slug={slug} step={step} data={data} />
         </Fragment>
     );

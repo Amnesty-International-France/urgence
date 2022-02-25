@@ -47,7 +47,7 @@ const styles = {
 
 const ErrorPage = ({ className, title, description }) => (
     <Fragment>
-        <SEO title={title} description={description} />
+        <SEO socialMetadata={{ title, description }} />
         <div className={className}>
             <AmnestyCandle className="candle" />
             <p className="error">{description}</p>
