@@ -64,7 +64,7 @@ ThankStep.propTypes = {
         title: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
     }),
-    slug: PropTypes.string,
+    slug: PropTypes.string.isRequired,
     step: PropTypes.string,
     dataShare: PropTypes.shape({
         title: PropTypes.string.isRequired,
