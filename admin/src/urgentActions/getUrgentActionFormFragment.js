@@ -76,7 +76,6 @@ const autoFocusProps = { autoFocus: true };
 const Form = ({ classes, record }) => {
     const [emptyCode, setEmptyCode] = useState(!record.campaign_code);
 
-    console.log(record)
     const handleTextFieldChange = e => {
         setEmptyCode(e.target.value === '');
     };
@@ -135,7 +134,17 @@ const Form = ({ classes, record }) => {
             <div className={`${classes.form} social-metadata`}>
                 <h2>Social Metadata</h2>
                 <Fragment>
-                    <TextInput source="social_metadata.title" fullWidth label="Title" />
+                    <FormDataConsumer>
+                        {({ formData }) => {
+                            formData.social_metadata.title = formData.social_metadata.title
+                                ? formData.social_metadata.title
+                                : formData.title;
+                            return (
+                                <TextInput source="social_metadata.title" fullWidth label="Title" />
+                            );
+                        }}
+                    </FormDataConsumer>
+
                     <TextInput source="social_metadata.description" fullWidth label="Description" />
                     <MediumInput source="social_metadata.medium" label="Cover" />
                 </Fragment>
