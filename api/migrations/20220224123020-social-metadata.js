@@ -10,7 +10,7 @@ exports.up = function(db, cb) {
 
 exports.down = function(db, cb) {
     const sql = `
-        ALTER TABLE urgent_action DROP COLUMN message;
+        ALTER TABLE urgent_action DROP COLUMN social_metadata;
   `;
 
     db.runSql(sql, cb);
