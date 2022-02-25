@@ -74,7 +74,7 @@ export const addCampaignMember = async (
             Type_de_participation__c: 'Smartphone',
             Actions_effectuees__c: 'Email',
             Status: 'a participé',
-            Salutation: salesForcecivility,
+            Tech_Salutation__c: salesForcecivility,
             Campaign: {
                 Code__c: campaign_code,
             },
@@ -96,7 +96,7 @@ export const addCampaignMember = async (
             Type_de_participation__c: 'Smartphone',
             Actions_effectuees__c: 'Email',
             Status: 'a participé',
-            Salutation: salesForcecivility,
+            Tech_Salutation__c: salesForcecivility,
             Campaign: {
                 Code__c: campaign_code,
             },
