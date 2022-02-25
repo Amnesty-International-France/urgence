@@ -47,111 +47,133 @@ export const validateEmailsList = text =>
         ? 'Must contain only emails separated by a comma.'
         : null;
 
-export const MessageSendInput = ({ classes, source }) => (
-    <div className={classNames(classes.root, classes.bordered)}>
-        <FormDataConsumer>
-            {({ formData }) => {
-                const data = formData[source];
-                const displayPreview =
-                    data && data.message_template && data.message_template.length > 0;
+const getMailToHeaderLength = (recipient, subject, body) => {
+    return `mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(subject)}`
+        .concat(recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '')
+        .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '').length;
+};
 
-                return (
-                    <Fragment>
-                        <Avatar className={classes.avatar}>
-                            {getScreenIndex(MESSAGE_VIEW, formData)}
-                        </Avatar>
-                        <Card className={classes.card}>
-                            <CardContent className={classes.content}>
-                                <div className={classes.formContainer}>
-                                    <Labeled label="Object">
-                                        <Fragment>
-                                            <RichTextInput
-                                                fullWidth
-                                                multiline
-                                                label="Tip"
-                                                source={`${source}.object_indication`}
-                                                defaultValue="Indiquez par exemple que vous souhaitez parler de cette situation inacceptable."
-                                            />
-                                            <TextInput
-                                                source={`${source}.object_example`}
-                                                label="Example"
-                                            />
-                                        </Fragment>
-                                    </Labeled>
-                                    <Labeled label="Message">
-                                        <Fragment>
-                                            <RichTextInput
-                                                fullWidth
-                                                multiline
-                                                label="Tip"
-                                                source={`${source}.text_view`}
-                                                defaultValue="Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email."
-                                            />
-                                            <ArrayInput
-                                                label="Content"
-                                                source={`${source}.message_template`}
-                                            >
-                                                <SimpleParagraphFormIterator>
-                                                    <ParagraphTemplateInput source="" />
-                                                </SimpleParagraphFormIterator>
-                                            </ArrayInput>
-                                        </Fragment>
-                                    </Labeled>
-                                    <Labeled label="Recipient">
-                                        <Fragment>
-                                            <TextInput
-                                                fullWidth
-                                                label="Mail To"
-                                                source={`${source}.recipient.mail`}
-                                                validate={validateEmailsList}
-                                            />
-                                            <TextInput
-                                                fullWidth
-                                                label="Copies To"
-                                                source={`${source}.recipient.copies_to`}
-                                                validate={validateEmailsList}
-                                            />
-                                            <TextInput
-                                                fullWidth
-                                                label="CCI"
-                                                source={`${source}.recipient.cci`}
-                                                validate={validateEmailsList}
-                                            />
-                                        </Fragment>
-                                    </Labeled>
-                                    <TextInput
-                                        source={`${source}.button_view`}
-                                        label="Button"
-                                        defaultValue="Suivant"
-                                        validate={[required(), minLength(3), maxLength(25)]}
+export const MessageSendInput = ({ classes, source }) => {
+    return (
+        <div className={classNames(classes.root, classes.bordered)}>
+            <FormDataConsumer>
+                {({ formData }) => {
+                    const data = formData[source];
+                    const displayPreview =
+                        data && data.message_template && data.message_template.length > 0;
+
+                    const mailToHeaderLength = getMailToHeaderLength(
+                        data.recipient,
+                        data.object_example,
+                    );
+
+                    return (
+                        <Fragment>
+                            <Avatar className={classes.avatar}>
+                                {getScreenIndex(MESSAGE_VIEW, formData)}
+                            </Avatar>
+                            <Card className={classes.card}>
+                                <CardContent className={classes.content}>
+                                    <div className={classes.formContainer}>
+                                        <Labeled label="Object">
+                                            <Fragment>
+                                                <RichTextInput
+                                                    fullWidth
+                                                    multiline
+                                                    label="Tip"
+                                                    source={`${source}.object_indication`}
+                                                    defaultValue="Indiquez par exemple que vous souhaitez parler de cette situation inacceptable."
+                                                />
+                                                <TextInput
+                                                    source={`${source}.object_example`}
+                                                    label="Example"
+                                                />
+                                            </Fragment>
+                                        </Labeled>
+                                        <Labeled label="Message">
+                                            <Fragment>
+                                                <RichTextInput
+                                                    fullWidth
+                                                    multiline
+                                                    label="Tip"
+                                                    source={`${source}.text_view`}
+                                                    defaultValue="Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email."
+                                                />
+
+                                                <ArrayInput
+                                                    label="Content"
+                                                    source={`${source}.message_template`}
+                                                >
+                                                    <SimpleParagraphFormIterator
+                                                        disableAdd
+                                                        disableRemove
+                                                    >
+                                                        <ParagraphTemplateInput
+                                                            source=""
+                                                            headerCount={mailToHeaderLength}
+                                                            limit={2000}
+                                                            dataMessageTemplate={data.message_template}
+                                                        />
+                                                    </SimpleParagraphFormIterator>
+                                                </ArrayInput>
+                                            </Fragment>
+                                        </Labeled>
+                                        <Labeled label="Recipient">
+                                            <Fragment>
+                                                <TextInput
+                                                    fullWidth
+                                                    label="Mail To"
+                                                    source={`${source}.recipient.mail`}
+                                                    validate={validateEmailsList}
+                                                />
+                                                <TextInput
+                                                    fullWidth
+                                                    label="Copies To"
+                                                    source={`${source}.recipient.copies_to`}
+                                                    validate={validateEmailsList}
+                                                />
+                                                <TextInput
+                                                    fullWidth
+                                                    label="CCI"
+                                                    source={`${source}.recipient.cci`}
+                                                    validate={validateEmailsList}
+                                                />
+                                            </Fragment>
+                                        </Labeled>
+                                        <TextInput
+                                            source={`${source}.button_view`}
+                                            label="Button"
+                                            defaultValue="Suivant"
+                                            validate={[required(), minLength(3), maxLength(25)]}
+                                        />
+                                    </div>
+                                </CardContent>
+                            </Card>
+                            {displayPreview ? (
+                                <FrontPreview className={classes.preview}>
+                                    <MessageView
+                                        text={data.text_view || ''}
+                                        messageTemplate={data.message_template}
+                                        objectIndication={data.object_indication || ''}
+                                        objectExample={data.object_example || ''}
+                                        action={<Link to="#" label="Suivant" />}
+                                        setEmail={() => {}}
+                                        setObject={() => {}}
+                                        setCivility={() => {}}
+                                        setFirstname={() => {}}
+                                        setLastname={() => {}}
                                     />
-                                </div>
-                            </CardContent>
-                        </Card>
-                        {displayPreview ? (
-                            <FrontPreview className={classes.preview}>
-                                <MessageView
-                                    text={data.text_view || ''}
-                                    messageTemplate={data.message_template}
-                                    objectIndication={data.object_indication || ''}
-                                    objectExample={data.object_example || ''}
-                                    action={<Link to="#" label="Suivant" />}
-                                    setEmail={() => {}}
-                                    setObject={() => {}}
-                                    setCivility={() => {}}
-                                    setFirstname={() => {}}
-                                    setLastname={() => {}}
-                                />
-                            </FrontPreview>
-                        ) : (
-                            <p>You should write a message to see this preview</p>
-                        )}
-                    </Fragment>
-                );
-            }}
-        </FormDataConsumer>
-    </div>
-);
+                                </FrontPreview>
+                            ) : (
+                                <p>You should write a message to see this preview</p>
+                            )}
+                        </Fragment>
+                    );
+                }}
+            </FormDataConsumer>
+        </div>
+    );
+};
 
 MessageSendInput.propTypes = {
     classes: PropTypes.object,
