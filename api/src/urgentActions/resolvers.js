@@ -11,15 +11,21 @@ import {
 import { addCampaignMember, registerContact } from './campaignMember';
 
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
-import { uploadImageFromSocialMetadata } from '../services/uploadImageFromSocialMetadata';
+import { getOriginCodeByCampaignCode, authenticate } from '../services/salesForceApi';
 
 const prepareUrgentActionForDatabase = async urgentAction => {
     const uploadedStory = await uploadImageFromStory(urgentAction.story);
-    const uploadedSocialMetadata = await uploadImageFromSocialMetadata(urgentAction.social_metadata);
+    const uploadedSocialMetadata = await uploadImageFromSocialMetadata(
+        urgentAction.social_metadata,
+    );
+    const { body: authBody } = await authenticate();
+    const accessToken = authBody ? authBody.access_token : null;
+    const originCode = await getOriginCodeByCampaignCode(accessToken, urgentAction.campaign_code);
 
     return {
         ...urgentAction,
         story: JSON.stringify(uploadedStory),
+        origin_code: originCode,
         message: JSON.stringify(urgentAction.message),
         email_thank: JSON.stringify(urgentAction.email_thank),
         end_thank: JSON.stringify(urgentAction.end_thank),

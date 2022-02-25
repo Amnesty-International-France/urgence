@@ -103,13 +103,6 @@ const Form = ({ classes, record }) => {
                         />
                     </Grid>
                     <Grid item xs>
-                        <LongTextInput
-                            source="origin_code"
-                            label="Origin Code"
-                            defaultValue="AU_WEBAPP"
-                        />
-                    </Grid>
-                    <Grid item xs>
                         <SelectInput
                             source="is_default"
                             label="Set As Default"
