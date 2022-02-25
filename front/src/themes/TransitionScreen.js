@@ -96,8 +96,9 @@ export const TransitionScreen = ({ className, actions, title, message, progress 
     const textToHtml = str => (str ? str.replace(/(?:\r\n|\r|\n)/g, '<br/>') : '');
     const [displayProgress, setDisplayProgress] = React.useState(false);
     useEffect(() => {
-        if (!progress || !progress.objective || !progress.message) {
+        if (!progress || progress.display == false || !progress.objective || !progress.message) {
             setDisplayProgress(false);
+            return;
         }
         setDisplayProgress(true);
     }, [progress]);
