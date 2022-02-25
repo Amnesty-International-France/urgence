@@ -48,10 +48,11 @@ const isMemberAlreadyAddedError = errors =>
 
 export const addCampaignMember = async (
     access_token,
-    { campaign_code, origin_code },
+    { campaign_code },
     { firstname, lastname, email },
 ) => {
     const url = `${QUERY_BASE_URL}/sobjects/CampaignMember`;
+    const origin_code = await getOriginCodeByCampaignCode(access_token, campaign_code);
 
     console.log('addCampaignMember request', {
         url,
@@ -200,8 +201,6 @@ export const getContactByEmail = async (access_token, email) => {
     const status = response.status;
     const body = await response.json();
 
-    console.log('getContactByEmail response', (status, body));
-
     if (status >= 400) {
         return new Error(
             `Error while quering contacts from SalesForce: ${body
@@ -222,8 +221,8 @@ export const getContactByEmail = async (access_token, email) => {
     };
 };
 
-export const getCodeOrigineByCampaignCode = async (access_token, campaign_code) => {
-    const url = `${QUERY_BASE_URL}/query?q=SELECT+id+from+Codec+where+Name='${campaign_code}'`;
+export const getOriginCodeByCampaignCode = async (access_token, campaign_code) => {
+    const url = `${QUERY_BASE_URL}/query?q=select+Code_origine__c+from+Campaign+where+Name='${campaign_code}'`;
 
     console.log('getCodeOrigineByCampaignCode request', {
         url,
@@ -255,14 +254,7 @@ export const getCodeOrigineByCampaignCode = async (access_token, campaign_code) 
         );
     }
 
-    const contacts = body.records || [];
-    const registered = contacts.some(record => !!record.Actions_urgentes_via_le_smartphone__c);
+    const originCode = body.records && body.records[0].Code_origine__c;
 
-    return {
-        status,
-        body: {
-            contacts,
-            registered,
-        },
-    };
+    return originCode;
 };
