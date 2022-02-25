@@ -7,6 +7,10 @@ import RichText from '../themes/RichText';
 import LongText from '../themes/LongText';
 import { yellow, black } from '../themes/colors';
 
+import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { useEffect } from 'react';
+
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
@@ -20,6 +24,25 @@ const styles = {
         backgroundColor: yellow,
         '@media (min-width: 1024px)': {
             height: '85vh',
+        },
+    },
+    '& .progress': {
+        marginBottom: '60px',
+        display: 'flex',
+        justifyContent: 'center',
+        '@media (min-width: 350px)': {
+            marginBottom: '80px',
+        },
+
+        '& .progressChart': {
+            width: '250px',
+            height: '250px',
+        },
+        '& .progressChartContent': {
+            fontSize: 18,
+            paddingLeft: '25px',
+            paddingRight: '25px',
+            textAlign: 'center',
         },
     },
     '& .step': {
@@ -70,13 +93,38 @@ const styles = {
 };
 
 export const TransitionScreen = ({ className, actions, title, message, progress }) => {
+    const textToHtml = str => (str ? str.replace(/(?:\r\n|\r|\n)/g, '<br/>') : '');
+    const [displayProgress, setDisplayProgress] = React.useState(false);
+    useEffect(() => {
+        if (!progress || !progress.objective || !progress.message) {
+            setDisplayProgress(false);
+        }
+        setDisplayProgress(true);
+    }, [progress]);
+    
     return (
         <div className={className}>
             <Paper className="paper" elevation={4} square>
                 <div className="step">
-                    {progress && progress.display && (
+                    {displayProgress && (
                         <div className="progress">
-                            <span>{progress.message}</span>
+                            <div className="progressChart">
+                                <CircularProgressbarWithChildren
+                                    value={66}
+                                    maxValue={progress.objective}
+                                    styles={buildStyles({
+                                        pathColor: '#ef8200',
+                                        strokeLinecap: 'butt',
+                                    })}
+                                >
+                                    <div
+                                        className="progressChartContent"
+                                        dangerouslySetInnerHTML={{
+                                            __html: textToHtml(progress.message),
+                                        }}
+                                    ></div>
+                                </CircularProgressbarWithChildren>
+                            </div>
                         </div>
                     )}
                     <h1>
