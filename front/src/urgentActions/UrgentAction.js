@@ -46,6 +46,12 @@ const query = gql`
                 title
                 message
                 button
+                progress {
+                    display
+                    objective
+                    display_threshold
+                    message
+                }
             }
             message {
                 text_view
@@ -118,6 +124,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
 
     if (step === 'story' || step === 'act') {
         const callToAction = get(data, 'UrgentAction.call_to_action');
+        console.log(callToAction)
         return <Story story={story} step={step} callToAction={callToAction} />;
     }
 

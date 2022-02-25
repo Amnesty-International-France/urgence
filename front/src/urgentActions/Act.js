@@ -10,6 +10,7 @@ const Act = ({ data, actions }) => (
         actions={actions}
         title={get(data, 'title')}
         message={get(data, 'message')}
+        progress={get(data, 'progress')}
     />
 );
 

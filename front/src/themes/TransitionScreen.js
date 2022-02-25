@@ -69,29 +69,37 @@ const styles = {
     },
 };
 
-export const TransitionScreen = ({ className, actions, title, message }) => (
-    <div className={className}>
-        <Paper className="paper" elevation={4} square>
-            <div className="step">
-                <h1>
-                    <LongText text={title} />
-                </h1>
-                {message && (
-                    <div className="text">
-                        <RichText html={message} />
-                    </div>
-                )}
-            </div>
-        </Paper>
-        <div className="actions">{actions()}</div>
-    </div>
-);
+export const TransitionScreen = ({ className, actions, title, message, progress }) => {
+    return (
+        <div className={className}>
+            <Paper className="paper" elevation={4} square>
+                <div className="step">
+                    {progress && progress.display && (
+                        <div className="progress">
+                            <span>{progress.message}</span>
+                        </div>
+                    )}
+                    <h1>
+                        <LongText text={title} />
+                    </h1>
+                    {message && (
+                        <div className="text">
+                            <RichText html={message} />
+                        </div>
+                    )}
+                </div>
+            </Paper>
+            <div className="actions">{actions()}</div>
+        </div>
+    );
+};
 
 TransitionScreen.propTypes = {
     className: PropTypes.string.isRequired,
     actions: PropTypes.func,
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
+    progress: PropTypes.any,
 };
 
 TransitionScreen.defaultProps = {

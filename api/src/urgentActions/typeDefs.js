@@ -67,16 +67,32 @@ export default gql`
         color: Color
     }
 
+    type Progress {
+        display: Boolean
+        objective: Int
+        display_threshold: Int
+        message: String
+    }
+
+    input ProgressInput {
+        display: Boolean
+        objective: Int
+        display_threshold: Int
+        message: String
+    }
+
     type CallToAction {
         title: String
         message: String
         button: String
+        progress: Progress
     }
 
     input CallToActionInput {
         title: String
         message: String
         button: String
+        progress: ProgressInput
     }
 
     type Recipient {

@@ -87,6 +87,7 @@ export class Story extends Component {
             },
         } = this.props;
 
+        console.log('caaaaallllTOACTION', callToAction)
         const total = story ? story.length : 0;
         const current = page != null ? parseInt(page, 10) : total;
 
