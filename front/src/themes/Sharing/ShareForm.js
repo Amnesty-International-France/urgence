@@ -45,7 +45,7 @@ export const ShareForm = ({
     return (
         <div className={className}>
             <div className="share-block">
-                <div className="share-text">Partagez l&apos;URL avec vos proches</div>
+                <div className="share-text">Partagez l&apos;action avec vos proches</div>
                 <CopyToClipboard
                     slug={slug}
                     step={step}

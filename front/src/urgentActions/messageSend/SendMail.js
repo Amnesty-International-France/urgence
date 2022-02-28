@@ -10,7 +10,7 @@ import { isCorrectEmail } from '../../themes/Input';
 import { routeMatch } from '../../propTypes';
 import { withSessionData } from '../../DataContext';
 
-import { addCampaignMember } from '../../services/api';
+import { addCampaignMember, addResponseCount } from '../../services/api';
 
 export const SendMail = ({
     messageTemplate,
@@ -30,6 +30,8 @@ export const SendMail = ({
     setRegistered,
 }) => {
     const handleAfterMail = () => {
+        addResponseCount(auId);
+
         let isRegistered = registered;
         return addCampaignMember(auId, { email, firstname, lastname, civility })
             .then(result => {

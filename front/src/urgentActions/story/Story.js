@@ -82,12 +82,12 @@ export class Story extends Component {
             className,
             story,
             callToAction,
+            responseCount,
             match: {
                 params: { page },
             },
         } = this.props;
 
-        console.log('caaaaallllTOACTION', callToAction)
         const total = story ? story.length : 0;
         const current = page != null ? parseInt(page, 10) : total;
 
@@ -123,7 +123,10 @@ export class Story extends Component {
                                     {storyProps => (
                                         <Act
                                             {...storyProps}
-                                            data={callToAction}
+                                            data={{
+                                                ...callToAction,
+                                                response_count: responseCount,
+                                            }}
                                             actions={() =>
                                                 callToAction && callToAction.button ? (
                                                     <ToUrgentActionPageLink
@@ -158,6 +161,7 @@ Story.propTypes = {
     }).isRequired,
     match: routeMatch,
     callToAction: PropTypes.object,
+    responseCount: PropTypes.number,
 };
 
 export const WithStylesStory = glamorous(Story)(styles);

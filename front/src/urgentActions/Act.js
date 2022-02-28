@@ -11,6 +11,7 @@ const Act = ({ data, actions }) => (
         title={get(data, 'title')}
         message={get(data, 'message')}
         progress={get(data, 'progress')}
+        responseCount={get(data, 'response_count')}
     />
 );
 

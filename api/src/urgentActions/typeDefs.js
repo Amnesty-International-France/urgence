@@ -208,6 +208,7 @@ export default gql`
         end_thank: Thanks
         register: Register
         social_metadata: SocialMetadata
+        response_count: Int
     }
 
     input CampaignMemberInput {
@@ -256,6 +257,7 @@ export default gql`
             end_thank: ThankInput
             register: RegisterInput
             social_metadata: SocialMetadataInput
+            response_count: Int
         ): UrgentAction
         updateUrgentAction(
             id: ID!
@@ -271,9 +273,11 @@ export default gql`
             end_thank: ThankInput
             register: RegisterInput
             social_metadata: SocialMetadataInput
+            response_count: Int
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
         addCampaignMember(id: ID!, member: CampaignMemberInput!): CampaignMember!
         registerContact(member: CampaignMemberInput!): CampaignMember!
+        addResponseCount(id: ID!): UrgentAction!
     }
 `;

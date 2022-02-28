@@ -9,7 +9,7 @@ import { yellow, black } from '../themes/colors';
 
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { useEffect } from 'react';
+import { secureUseEffect, secureUseState } from '../hooks/secureHooks';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -92,17 +92,35 @@ const styles = {
     },
 };
 
-export const TransitionScreen = ({ className, actions, title, message, progress }) => {
-    const textToHtml = str => (str ? str.replace(/(?:\r\n|\r|\n)/g, '<br/>') : '');
-    const [displayProgress, setDisplayProgress] = React.useState(false);
-    useEffect(() => {
-        if (!progress || progress.display == false || !progress.objective || !progress.message) {
-            setDisplayProgress(false);
+export const TransitionScreen = ({
+    className,
+    actions,
+    title,
+    message,
+    progress,
+    responseCount,
+}) => {
+    const [displayProgress, setDisplayProgress] = secureUseState(true);
+    secureUseEffect(() => {
+        if (
+            !progress ||
+            progress.display == false ||
+            !progress.objective ||
+            !progress.message ||
+            !responseCount
+        ) {
+            setDisplayProgress(true);
             return;
         }
         setDisplayProgress(true);
     }, [progress]);
-    
+
+    const textToHtml = str => (str ? str.replace(/(?:\r\n|\r|\n)/g, '<br/>') : '');
+    const formatText = text => {
+        text = text.replace('{{count}}', responseCount);
+        text = text.replace('{{objective}}', progress.objective);
+        return text;
+    };
     return (
         <div className={className}>
             <Paper className="paper" elevation={4} square>
@@ -111,7 +129,7 @@ export const TransitionScreen = ({ className, actions, title, message, progress 
                         <div className="progress">
                             <div className="progressChart">
                                 <CircularProgressbarWithChildren
-                                    value={66}
+                                    value={responseCount}
                                     maxValue={progress.objective}
                                     styles={buildStyles({
                                         pathColor: '#ef8200',
@@ -121,7 +139,7 @@ export const TransitionScreen = ({ className, actions, title, message, progress 
                                     <div
                                         className="progressChartContent"
                                         dangerouslySetInnerHTML={{
-                                            __html: textToHtml(progress.message),
+                                            __html: textToHtml(formatText(progress.message)),
                                         }}
                                     ></div>
                                 </CircularProgressbarWithChildren>
@@ -149,6 +167,7 @@ TransitionScreen.propTypes = {
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     progress: PropTypes.any,
+    responseCount: PropTypes.number,
 };
 
 TransitionScreen.defaultProps = {
