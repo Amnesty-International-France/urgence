@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TextInput, ImageInput, Labeled } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import get from 'lodash.get';
-
+import { Field } from 'redux-form';
 import { ImagePreview } from '../form/ImagePreview';
 
 const styles = {
@@ -80,7 +80,7 @@ export const MediumInput = ({ label, classes, source, record }) => (
                         dropZone: classes.dropZone,
                     }}
                 >
-                    <ImagePreview />
+                    <Field name={`${source}.crop`} component={ImagePreview} />
                 </ImageInput>
             </div>
             <div className={classes.titleWrapper}>
