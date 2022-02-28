@@ -4,12 +4,24 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 
+import jwtDecode from 'jwt-decode';
+import { isFuture } from 'date-fns';
+
 export const graphqlClientOptions = {
     uri: `${process.env.REACT_APP_API_URL}/graphql`,
 };
 
 const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem('token');
+    if (token) {
+        const { expiration } = jwtDecode(token);
+        if (!isFuture(expiration)) {
+            global.localStorage.removeItem('token');
+            window.location.reload();
+            return;
+        }
+    }
+
     return {
         headers: {
             ...headers,
