@@ -8,7 +8,7 @@ import {
     register,
 } from '../services/salesForceApi';
 
-export const addCampaignMember = async (id, { firstname, lastname, email }) => {
+export const addCampaignMember = async (id, { firstname, lastname, email, civility }) => {
     if (!isUUID(id)) {
         return new Error(`Invalid UUID format: ${id}`);
     }
@@ -19,7 +19,7 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
     }
 
     if (!urgentAction.campaign_code) {
-        return { firstname, lastname, email };
+        return { firstname, lastname, email, civility };
     }
 
     const { body: authBody } = await authenticate();
@@ -29,6 +29,7 @@ export const addCampaignMember = async (id, { firstname, lastname, email }) => {
         firstname,
         lastname,
         email,
+        civility,
     });
 
     const { body: contactBody } = await getContactByEmail(authBody.access_token, email);

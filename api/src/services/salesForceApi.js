@@ -49,10 +49,14 @@ const isMemberAlreadyAddedError = errors =>
 export const addCampaignMember = async (
     access_token,
     { campaign_code },
-    { firstname, lastname, email },
+    { firstname, lastname, email, civility },
 ) => {
     const url = `${QUERY_BASE_URL}/sobjects/CampaignMember`;
     const origin_code = await getOriginCodeByCampaignCode(access_token, campaign_code);
+    let salesForcecivility = '';
+    if (civilityMap[civility]) {
+        salesForcecivility = civilityMap[civility];
+    }
 
     console.log('addCampaignMember request', {
         url,
@@ -70,6 +74,7 @@ export const addCampaignMember = async (
             Type_de_participation__c: 'Smartphone',
             Actions_effectuees__c: 'Email',
             Status: 'a participé',
+            Tech_Salutation__c: salesForcecivility,
             Campaign: {
                 Code__c: campaign_code,
             },
@@ -91,6 +96,7 @@ export const addCampaignMember = async (
             Type_de_participation__c: 'Smartphone',
             Actions_effectuees__c: 'Email',
             Status: 'a participé',
+            Tech_Salutation__c: salesForcecivility,
             Campaign: {
                 Code__c: campaign_code,
             },

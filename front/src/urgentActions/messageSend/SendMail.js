@@ -31,7 +31,7 @@ export const SendMail = ({
 }) => {
     const handleAfterMail = () => {
         let isRegistered = registered;
-        return addCampaignMember(auId, { email, firstname, lastname })
+        return addCampaignMember(auId, { email, firstname, lastname, civility })
             .then(result => {
                 if (result.errors && result.errors.length) {
                     // eslint-disable-next-line no-console

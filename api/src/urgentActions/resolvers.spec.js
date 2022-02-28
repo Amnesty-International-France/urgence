@@ -121,6 +121,14 @@ describe('Urgent Actions Resolvers', () => {
 
             it('should create given urgent action', async () => {
                 uploadImageFromStory.mockImplementation(() => 'uploadedStory');
+
+                const authResponse = {
+                    status: 200,
+                    body: {
+                        access_token: 'psjgf-dfgersdf-sf486sf-sdf',
+                    },
+                };
+                authenticate.mockReturnValue(authResponse);
                 await UrgentActionsResolver.Mutation.createUrgentAction(
                     null,
                     {
@@ -165,7 +173,7 @@ describe('Urgent Actions Resolvers', () => {
                     title: 'test',
                     slug: 'test',
                     story: '"uploadedStory"',
-                    social_metadata: "{}"
+                    social_metadata: '{}',
                 });
             });
         });
@@ -238,6 +246,14 @@ describe('Urgent Actions Resolvers', () => {
 
             it('should update urgent action with given id with remaining data', async () => {
                 uploadImageFromStory.mockImplementation(() => 'uploadedStory');
+
+                const authResponse = {
+                    status: 200,
+                    body: {
+                        access_token: 'psjgf-dfgersdf-sf486sf-sdf',
+                    },
+                };
+                authenticate.mockReturnValue(authResponse);
                 await UrgentActionsResolver.Mutation.updateUrgentAction(
                     null,
                     {
@@ -294,7 +310,7 @@ describe('Urgent Actions Resolvers', () => {
                     email_thank: '"email_thank"',
                     register: '"register"',
                     end_thank: '"end_thank"',
-                    social_metadata: "{}",
+                    social_metadata: '{}',
                 });
             });
         });
