@@ -12,6 +12,7 @@ import { addCampaignMember, registerContact } from './campaignMember';
 
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
 import { getOriginCodeByCampaignCode, authenticate } from '../services/salesForceApi';
+import { uploadImageFromSocialMetadata } from '../services/uploadImageFromSocialMetadata';
 
 const prepareUrgentActionForDatabase = async urgentAction => {
     const uploadedStory = await uploadImageFromStory(urgentAction.story);
