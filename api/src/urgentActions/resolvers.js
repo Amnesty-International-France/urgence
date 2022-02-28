@@ -75,5 +75,10 @@ export default {
         registerContact: (_, { member }) => {
             return registerContact(member);
         },
+        addResponseCount: async (_, { id }) => {
+            const urgentAction = await getUrgentAction(id);
+            const response_count = urgentAction.response_count + 1;
+            return updateUrgentAction(urgentAction.id, {response_count});
+        },
     },
 };

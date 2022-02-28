@@ -79,7 +79,7 @@ export const Carousel = ({
         return () => {
             if (swiper) {
                 setTimeout(() => {
-                    if (isOnMobile) {
+                    if (isOnMobile()) {
                         document.removeEventListener('click', handleSwiperClick(swiper), false);
                     }
                     swiper.destroy();
@@ -105,7 +105,8 @@ export const Carousel = ({
                 },
             },
         });
-        if (isOnMobile) {
+
+        if (isOnMobile()) {
             document.addEventListener('click', handleSwiperClick(swiper), false);
         }
         setSwiper(swiper);

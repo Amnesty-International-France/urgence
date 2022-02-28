@@ -9,6 +9,9 @@ import {
     FormDataConsumer,
     LongTextInput,
     TextInput,
+    BooleanInput,
+    Labeled,
+    NumberInput,
 } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -60,6 +63,31 @@ export const CallToActionInput = ({ classes, source }) => (
                                     defaultValue="Voir l'email"
                                     validate={[required(), minLength(3), maxLength(25)]}
                                 />
+                                <Labeled label="Progress">
+                                    <Fragment>
+                                        <BooleanInput
+                                            label="Display progress"
+                                            source={`${source}.progress.display`}
+                                        />
+                                        <NumberInput
+                                            label="Objective"
+                                            source={`${source}.progress.objective`}
+                                            step={1}
+                                            defaultValue={500}
+                                        />
+                                        <NumberInput
+                                            label="Display threshold"
+                                            source={`${source}.progress.display_threshold`}
+                                            step={1}
+                                            defaultValue={5}
+                                        />
+                                        <RichTextInput
+                                            source={`${source}.progress.message`}
+                                            label="Message"
+                                            defaultValue="Déjà {{count}} participations sur un objectif de {{objective}}"
+                                        />
+                                    </Fragment>
+                                </Labeled>
                             </div>
                         </CardContent>
                     </Card>
