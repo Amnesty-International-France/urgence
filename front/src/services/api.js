@@ -45,3 +45,26 @@ export const registerContact = member =>
             'content-type': 'application/json',
         },
     }).then(res => res.json());
+
+const addResponseCountQuery = `
+    mutation AddResponseCount($id: ID!) {
+        addResponseCount(id: $id) {
+            id
+        }
+    }
+`;
+
+export const addResponseCount = id =>
+    fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
+        method: 'POST',
+        body: JSON.stringify({
+            operationName: 'AddResponseCount',
+            query: addResponseCountQuery,
+            variables: {
+                id,
+            },
+        }),
+        headers: {
+            'content-type': 'application/json',
+        },
+    }).then(res => res.json());

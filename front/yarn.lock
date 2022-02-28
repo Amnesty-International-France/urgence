@@ -7880,6 +7880,11 @@ react-art@^16.2.0:
     prop-types "^15.6.2"
     scheduler "^0.17.0"
 
+react-circular-progressbar@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-circular-progressbar/-/react-circular-progressbar-2.0.4.tgz#5b04a9cf6be8c522c180e4e99ec6db63677335b0"
+  integrity sha512-OfX0ThSxRYEVGaQSt0DlXfyl5w4DbXHsXetyeivmoQrh9xA9bzVPHNf8aAhOIiwiaxX2WYWpLDB3gcpsDJ9oww==
+
 react-css-property-operations@^15.4.1:
   version "15.4.1"
   resolved "https://registry.yarnpkg.com/react-css-property-operations/-/react-css-property-operations-15.4.1.tgz#4c0e305df4cc35f0f5fd2d65a79214c8b012db35"

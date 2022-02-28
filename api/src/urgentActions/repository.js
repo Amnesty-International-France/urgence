@@ -19,6 +19,7 @@ const columns = [
     'creation_date',
     'last_edition_date',
     'social_metadata',
+    'response_count',
 ];
 
 const urgentActionCrudQueries = {

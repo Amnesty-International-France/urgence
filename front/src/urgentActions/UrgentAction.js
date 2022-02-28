@@ -46,6 +46,12 @@ const query = gql`
                 title
                 message
                 button
+                progress {
+                    display
+                    objective
+                    display_threshold
+                    message
+                }
             }
             message {
                 text_view
@@ -91,6 +97,7 @@ const query = gql`
                     title
                 }
             }
+            response_count
         }
         GdprMessage: SettingByType(type: "gdpr-message") {
             id
@@ -118,7 +125,15 @@ export const UrgentAction = ({ history, slug, step, data }) => {
 
     if (step === 'story' || step === 'act') {
         const callToAction = get(data, 'UrgentAction.call_to_action');
-        return <Story story={story} step={step} callToAction={callToAction} />;
+        const responseCount = get(data, 'UrgentAction.response_count');
+        return (
+            <Story
+                story={story}
+                step={step}
+                callToAction={callToAction}
+                responseCount={responseCount}
+            />
+        );
     }
 
     if (step === 'message-view') {

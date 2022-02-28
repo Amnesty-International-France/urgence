@@ -16,6 +16,7 @@ export const createUrgentAction = async ({ story, message, ...urgentAction } = {
         register: {},
         end_thank: {},
         social_metadata: {},
+        response_count: 0,
     };
 
     return insertUrgentAction({

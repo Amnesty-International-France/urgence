@@ -26,7 +26,8 @@ export const defaultData = {
         title: '',
         description: '',
         medium: null
-    }
+    },
+    response_count: 0,
 };
 
 export const defaultStory = {

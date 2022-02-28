@@ -67,16 +67,32 @@ export default gql`
         color: Color
     }
 
+    type Progress {
+        display: Boolean
+        objective: Int
+        display_threshold: Int
+        message: String
+    }
+
+    input ProgressInput {
+        display: Boolean
+        objective: Int
+        display_threshold: Int
+        message: String
+    }
+
     type CallToAction {
         title: String
         message: String
         button: String
+        progress: Progress
     }
 
     input CallToActionInput {
         title: String
         message: String
         button: String
+        progress: ProgressInput
     }
 
     type Recipient {
@@ -192,6 +208,7 @@ export default gql`
         end_thank: Thanks
         register: Register
         social_metadata: SocialMetadata
+        response_count: Int
     }
 
     input CampaignMemberInput {
@@ -240,6 +257,7 @@ export default gql`
             end_thank: ThankInput
             register: RegisterInput
             social_metadata: SocialMetadataInput
+            response_count: Int
         ): UrgentAction
         updateUrgentAction(
             id: ID!
@@ -255,9 +273,11 @@ export default gql`
             end_thank: ThankInput
             register: RegisterInput
             social_metadata: SocialMetadataInput
+            response_count: Int
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
         addCampaignMember(id: ID!, member: CampaignMemberInput!): CampaignMember!
         registerContact(member: CampaignMemberInput!): CampaignMember!
+        addResponseCount(id: ID!): UrgentAction!
     }
 `;
