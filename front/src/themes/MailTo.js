@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { Component } from 'react';
 import MobileDetect from 'mobile-detect';
 import PropTypes from 'prop-types';
@@ -39,6 +40,10 @@ export class MailTo extends Component {
     }
 
     openMailer = dest => {
+        console.log('window', window);
+        console.log('dest', dest);
+        console.log(`window.open("${dest}", 'mailto')`);
+
         window.open(dest, 'mailto');
         window.focus();
         setTimeout(function() {

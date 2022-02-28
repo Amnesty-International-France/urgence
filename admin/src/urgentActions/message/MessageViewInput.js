@@ -48,9 +48,16 @@ export const validateEmailsList = text =>
         : null;
 
 const getMailToHeaderLength = (recipient, subject, body) => {
-    return `mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(subject)}`
-        .concat(recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '')
-        .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '').length;
+    return `mailto:${encodeURIComponent(
+        recipient ? recipient.mail : '',
+    )}?subject=${encodeURIComponent(subject)}`
+        .concat(
+            recipient && recipient.copies_to
+                ? `&cc=${encodeURIComponent(recipient.copies_to)}`
+                : '',
+        )
+        .concat(recipient && recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '')
+        .length;
 };
 
 export const MessageSendInput = ({ classes, source }) => {
@@ -62,10 +69,9 @@ export const MessageSendInput = ({ classes, source }) => {
                     const displayPreview =
                         data && data.message_template && data.message_template.length > 0;
 
-                    const mailToHeaderLength = getMailToHeaderLength(
-                        data.recipient,
-                        data.object_example,
-                    );
+                    const mailToHeaderLength = data
+                        ? getMailToHeaderLength(data.recipient, data.object_example)
+                        : 0;
 
                     return (
                         <Fragment>
@@ -112,7 +118,9 @@ export const MessageSendInput = ({ classes, source }) => {
                                                             source=""
                                                             headerCount={mailToHeaderLength}
                                                             limit={2000}
-                                                            dataMessageTemplate={data.message_template}
+                                                            dataMessageTemplate={
+                                                                data && data.message_template
+                                                            }
                                                         />
                                                     </SimpleParagraphFormIterator>
                                                 </ArrayInput>
