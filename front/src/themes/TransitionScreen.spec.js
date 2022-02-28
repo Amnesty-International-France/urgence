@@ -16,6 +16,7 @@ describe('<TransitionScreen />', () => {
             objective: 100,
             message: '<p>Vous avez déjà envoyé <strong>10</strong></p>',
         },
+        responseCount: 10,
     };
 
     it('should display given title, text and actions', () => {

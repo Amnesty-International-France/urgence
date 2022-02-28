@@ -100,7 +100,7 @@ export const TransitionScreen = ({
     progress,
     responseCount,
 }) => {
-    const [displayProgress, setDisplayProgress] = secureUseState(true);
+    const [displayProgress, setDisplayProgress] = secureUseState(false);
     secureUseEffect(() => {
         if (
             !progress ||
@@ -109,7 +109,7 @@ export const TransitionScreen = ({
             !progress.message ||
             !responseCount
         ) {
-            setDisplayProgress(true);
+            setDisplayProgress(false);
             return;
         }
         setDisplayProgress(true);
@@ -117,6 +117,9 @@ export const TransitionScreen = ({
 
     const textToHtml = str => (str ? str.replace(/(?:\r\n|\r|\n)/g, '<br/>') : '');
     const formatText = text => {
+        if (!text) {
+            return '';
+        }
         text = text.replace('{{count}}', responseCount);
         text = text.replace('{{objective}}', progress.objective);
         return text;
