@@ -129,6 +129,9 @@ const Form = ({ classes, record }) => {
                 <Fragment>
                     <FormDataConsumer>
                         {({ formData }) => {
+                            if (!formData.social_metadata) {
+                                formData.social_metadata = {};
+                            }
                             formData.social_metadata.title = formData.social_metadata.title
                                 ? formData.social_metadata.title
                                 : formData.title;
