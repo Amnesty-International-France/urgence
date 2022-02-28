@@ -38,11 +38,29 @@ export default gql`
     type Medium {
         title: String!
         src: Uploadable!
+        crop: Crop
     }
 
     input MediumInput {
         title: String!
         src: Uploadable!
+        crop: CropInput
+    }
+
+    type Crop {
+        unit: String
+        x: Float
+        y: Float
+        width: Float
+        height: Float
+    }
+
+    input CropInput {
+        unit: String
+        x: Float
+        y: Float
+        width: Float
+        height: Float
     }
 
     type MediumSocial {
