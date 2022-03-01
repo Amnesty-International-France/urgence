@@ -5,6 +5,7 @@ import Share from './Share';
 import RichText from '../../themes/RichText';
 import LongText from '../../themes/LongText';
 import ShareForm from '../../themes/Sharing/ShareForm';
+import LinkTelegram from '../../themes/Sharing/LinkTelegram';
 
 describe('<Share />', () => {
     const defaultProps = {
@@ -14,6 +15,10 @@ describe('<Share />', () => {
             text: 'Envoyez le lien à vos potes.',
             share: {
                 message: 'Some data...',
+            },
+            telegram: {
+                message: 'Test',
+                url: 'http://test.com',
             },
         },
     };
@@ -29,7 +34,7 @@ describe('<Share />', () => {
         const wrapper = mount(<Share {...defaultProps} />);
 
         const text = wrapper.find(RichText);
-        expect(text.length).toBe(1);
+        expect(text.length).toBeGreaterThan(1);
     });
 
     it('should display a <ShareForm />', () => {
@@ -37,5 +42,20 @@ describe('<Share />', () => {
 
         const shareForm = wrapper.find(ShareForm);
         expect(shareForm.length).toBe(1);
+    });
+
+    it('should display a <LinkTelegram />', () => {
+        const wrapper = mount(<Share {...defaultProps} />);
+
+        const linkTelegram = wrapper.find(LinkTelegram);
+        expect(linkTelegram.length).toBe(1);
+    });
+
+    it('should not display a <LinkTelegram /> if no link', () => {
+        defaultProps.data.telegram = {};
+        const wrapper = mount(<Share {...defaultProps} />);
+
+        const linkTelegram = wrapper.find(LinkTelegram);
+        expect(linkTelegram.length).toBe(0);
     });
 });

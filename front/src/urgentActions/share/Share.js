@@ -8,12 +8,16 @@ import LongText from '../../themes/LongText';
 import ShareForm from '../../themes/Sharing/ShareForm';
 
 import generateUrl from '../../services/generateUrl';
+import LinkTelegram from '../../themes/Sharing/LinkTelegram';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
     '& .header': {
         margin: '0.5em 0',
+    },
+    '& .telegram': {
+        margin: '1em 0',
     },
     '& h1': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
@@ -23,6 +27,9 @@ const styles = {
     },
     '& .text': {
         margin: '0.5em 0',
+    },
+    '& .link': {
+        textAlign: 'center',
     },
     '@media (min-width: 350px)': {
         fontSize: '16px',
@@ -42,6 +49,7 @@ const Share = ({ className, slug, step, data, analyticsCategory }) => {
     const title = get(data, 'title');
     const text = get(data, 'text');
     const share = get(data, 'share');
+    const telegram = get(data, 'telegram');
 
     const link = getLinkFromSlug(slug);
 
@@ -64,6 +72,32 @@ const Share = ({ className, slug, step, data, analyticsCategory }) => {
                 link={link}
                 analyticsCategory={analyticsCategory}
             />
+            {telegram && telegram.url && telegram.message && (
+                <div className="telegram">
+                    <hr
+                        style={{
+                            color: '#c4c4c4',
+                            backgroundColor: '#c4c4c4',
+                            border: 'none',
+                            height: 2,
+                            marginBottom: '1rem',
+                        }}
+                    />
+                    <div className="text">
+                        <RichText html={telegram.message} />
+                    </div>
+                    <div className="link">
+                        <LinkTelegram
+                            slug={slug}
+                            step={step}
+                            url={telegram.url}
+                            target="telegram"
+                            text={`${encodeURIComponent(telegram.url)}`}
+                            analyticsCategory={analyticsCategory}
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
