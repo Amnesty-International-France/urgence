@@ -71,32 +71,33 @@ const styles = {
 };
 const lastUrlParam = /\/([^\/]*$)/;
 
-export const StoryCover = ({ className, content, medium }) => (
-    <div className={className}>
-        <Paper
-            className="paper"
-            style={{
-                ...{
-                    backgroundImage: `url(${get(medium, 'src', '').replace(
-                        lastUrlParam,
-                        '/crop-$1',
-                    )})`,
-                    backgroundPosition: 'top',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                },
-            }}
-            elevation={6}
-            square
-        >
-            <div className="step">
-                <div className="content">
-                    <RichText html={content} />
+export const StoryCover = ({ className, content, medium }) => {
+    const src = get(medium, 'src');
+    const cropSrc = typeof src === 'string' ? src.replace(lastUrlParam, '/crop-$1') : '';
+    return (
+        <div className={className}>
+            <Paper
+                className="paper"
+                style={{
+                    ...{
+                        backgroundImage: `url(${cropSrc})`,
+                        backgroundPosition: 'top',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                    },
+                }}
+                elevation={6}
+                square
+            >
+                <div className="step">
+                    <div className="content">
+                        <RichText html={content} />
+                    </div>
                 </div>
-            </div>
-        </Paper>
-    </div>
-);
+            </Paper>
+        </div>
+    );
+};
 
 StoryCover.propTypes = {
     className: PropTypes.string,
