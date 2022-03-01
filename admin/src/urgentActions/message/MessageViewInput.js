@@ -88,7 +88,7 @@ export const MessageSendInput = ({ classes, source }) => {
                                                     multiline
                                                     label="Tip"
                                                     source={`${source}.object_indication`}
-                                                    defaultValue="Indiquez par exemple que vous souhaitez parler de cette situation inacceptable."
+                                                    defaultValue="Nous vous en proposons un mais vous pouvez le personnaliser"
                                                 />
                                                 <TextInput
                                                     source={`${source}.object_example`}
@@ -103,7 +103,7 @@ export const MessageSendInput = ({ classes, source }) => {
                                                     multiline
                                                     label="Tip"
                                                     source={`${source}.text_view`}
-                                                    defaultValue="Parce que les messages uniques ont plus d'impact nous vous invitons à personnaliser l'objet de l'email."
+                                                    defaultValue="Voici un modèle de message que nous vous proposons d'envoyer. Vous pourrez bien sûr le personnaliser depuis votre boîte email."
                                                 />
 
                                                 <ArrayInput
@@ -111,7 +111,7 @@ export const MessageSendInput = ({ classes, source }) => {
                                                     source={`${source}.message_template`}
                                                 >
                                                     <SimpleParagraphFormIterator
-                                                        disableAdd
+                                                        disableAdd={data && data.message_template && data.message_template.length > 0}
                                                         disableRemove
                                                     >
                                                         <ParagraphTemplateInput
