@@ -8,15 +8,14 @@ export const ImagePreview = ({ record, ...rest }) => {
         croppable,
     } = rest;
     const src = (record.rawFile && record.rawFile.preview) || record;
-    const [crop, setCrop] = useState(value || {});
+    const [crop, setCrop] = useState(value || { unit: '%' });
     return croppable ? (
         <ReactCrop
             src={src}
             crop={crop}
-            onChange={newCrop => {
-                setCrop(newCrop);
-                console.log('onChange', value);
-                onChange(newCrop);
+            onChange={(_, percentCrop) => {
+                setCrop(percentCrop);
+                onChange(percentCrop);
             }}
         ></ReactCrop>
     ) : (
