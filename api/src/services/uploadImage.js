@@ -20,9 +20,13 @@ export const uploadImage = async (upload, crop) => {
     const lastUrlParam = /\/([^\/]*$)/;
     if (typeof upload === 'string') {
         url = upload;
+        console.log({ url });
+        console.log(upload.match(lastUrlParam)[1]);
         const filename = upload.match(lastUrlParam)[1];
-        path = `${config.uploadPath}/${filename}`;
-        cropPath = `${config.uploadPath}/crop-${filename}`;
+        console.log({ filename });
+        path = `${config.uploadDir}/${filename}`;
+        cropPath = `${config.uploadDir}/crop-${filename}`;
+        console.log(`${path} ${cropPath}`);
     } else {
         const rawFile = await upload.rawFile;
         if (!rawFile.stream) {
