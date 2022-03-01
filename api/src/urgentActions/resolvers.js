@@ -21,7 +21,12 @@ const prepareUrgentActionForDatabase = async urgentAction => {
     );
     const { body: authBody } = await authenticate();
     const accessToken = authBody ? authBody.access_token : null;
-    const originCode = await getOriginCodeByCampaignCode(accessToken, urgentAction.campaign_code);
+    let originCode;
+    try {
+        originCode = await getOriginCodeByCampaignCode(accessToken, urgentAction.campaign_code);
+    } catch (error) {
+        originCode = 'AU_WEBAPP';
+    }
 
     return {
         ...urgentAction,
@@ -78,7 +83,7 @@ export default {
         addResponseCount: async (_, { id }) => {
             const urgentAction = await getUrgentAction(id);
             const response_count = urgentAction.response_count + 1;
-            return updateUrgentAction(urgentAction.id, {response_count});
+            return updateUrgentAction(urgentAction.id, { response_count });
         },
     },
 };
