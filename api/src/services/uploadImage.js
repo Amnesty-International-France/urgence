@@ -16,40 +16,44 @@ export const uploadImage = async (upload, crop) => {
         return null;
     }
 
+    let path, cropPath, url;
+    const lastUrlParam = /\/([^\/]*$)/;
     if (typeof upload === 'string') {
-        return upload;
+        url = upload;
+        const filename = upload.match(lastUrlParam)[1];
+        path = `${config.uploadPath}/${filename}`;
+        cropPath = `${config.uploadPath}/crop-${filename}`;
+    } else {
+        const rawFile = await upload.rawFile;
+        if (!rawFile.stream) {
+            throw new Error('Upload failed please retry');
+        }
+        const { filename } = rawFile;
+        const stream = rawFile.createReadStream();
+
+        const savedFileName = getSavedFileName(filename);
+        path = `${config.uploadDir}/${savedFileName}`;
+        cropPath = `${config.uploadDir}/crop-${savedFileName}`;
+        url = `${config.uploadUrl}/${savedFileName}`;
+        const optimiseFile = sharp()
+            .resize(1920)
+            .jpeg();
+
+        await new Promise((resolve, reject) =>
+            stream
+                .on('error', error => {
+                    if (stream.truncated) {
+                        // Delete the truncated file
+                        fs.unlinkSync(path);
+                    }
+                    reject(error);
+                })
+                .pipe(optimiseFile)
+                .pipe(fs.createWriteStream(path))
+                .on('error', reject)
+                .on('finish', () => resolve()),
+        );
     }
-
-    const rawFile = await upload.rawFile;
-    if (!rawFile.stream) {
-        throw new Error('Upload failed please retry');
-    }
-    const { filename } = rawFile;
-    const stream = rawFile.createReadStream();
-
-    const savedFileName = getSavedFileName(filename);
-    const path = `${config.uploadDir}/${savedFileName}`;
-    const cropPath = `${config.uploadDir}/crop-${savedFileName}`;
-    const url = `${config.uploadUrl}/${savedFileName}`;
-    const optimiseFile = sharp()
-        .resize(1920)
-        .jpeg();
-
-    await new Promise((resolve, reject) =>
-        stream
-            .on('error', error => {
-                if (stream.truncated) {
-                    // Delete the truncated file
-                    fs.unlinkSync(path);
-                }
-                reject(error);
-            })
-            .pipe(optimiseFile)
-            .pipe(fs.createWriteStream(path))
-            .on('error', reject)
-            .on('finish', () => resolve()),
-    );
-
     if (crop) {
         await sharp(path)
             .metadata()
