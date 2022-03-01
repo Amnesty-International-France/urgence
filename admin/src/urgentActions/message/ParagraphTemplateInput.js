@@ -7,6 +7,9 @@ export const ParagraphTemplateInput = ({ source, headerCount, limit, dataMessage
     const [mailToLength, setMailToLength] = React.useState(0);
 
     useEffect(() => {
+        if (!dataMessageTemplate || !dataMessageTemplate[0] || !dataMessageTemplate[0].value) {
+            return;
+        }
         const messageLength = dataMessageTemplate[0].value.length;
         setMailToLength(messageLength + headerCount);
     }, [headerCount, dataMessageTemplate]);
