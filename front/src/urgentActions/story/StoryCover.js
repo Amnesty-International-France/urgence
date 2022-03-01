@@ -69,6 +69,7 @@ const styles = {
         },
     },
 };
+const lastUrlParam = /\/([^\/]*$)/;
 
 export const StoryCover = ({ className, content, medium }) => (
     <div className={className}>
@@ -76,7 +77,10 @@ export const StoryCover = ({ className, content, medium }) => (
             className="paper"
             style={{
                 ...{
-                    backgroundImage: `url(${get(medium, 'src', '')})`,
+                    backgroundImage: `url(${get(medium, 'src', '').replace(
+                        lastUrlParam,
+                        '/crop-$1',
+                    )})`,
                     backgroundPosition: 'top',
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',
