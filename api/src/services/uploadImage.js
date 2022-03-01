@@ -11,7 +11,7 @@ export const getSavedFileName = () => {
     return `${id}.jpeg`;
 };
 
-export const uploadImage = async upload => {
+export const uploadImage = async (upload, crop) => {
     if (!upload) {
         return null;
     }
@@ -29,12 +29,13 @@ export const uploadImage = async upload => {
 
     const savedFileName = getSavedFileName(filename);
     const path = `${config.uploadDir}/${savedFileName}`;
+    const cropPath = `${config.uploadDir}/crop-${savedFileName}`;
     const url = `${config.uploadUrl}/${savedFileName}`;
     const optimiseFile = sharp()
         .resize(1920)
         .jpeg();
 
-    return new Promise((resolve, reject) =>
+    await new Promise((resolve, reject) =>
         stream
             .on('error', error => {
                 if (stream.truncated) {
@@ -46,6 +47,22 @@ export const uploadImage = async upload => {
             .pipe(optimiseFile)
             .pipe(fs.createWriteStream(path))
             .on('error', reject)
-            .on('finish', () => resolve(url)),
+            .on('finish', () => resolve()),
     );
+
+    if (crop) {
+        await sharp(path)
+            .metadata()
+            .then(({ width, height }) => {
+                const { x, y, width: cropWidthPercent, height: cropHeightPercent } = crop;
+                const cropX = Math.floor((x * width) / 100);
+                const cropY = Math.floor((y * height) / 100);
+                const cropWidth = Math.floor((width * cropWidthPercent) / 100);
+                const cropHeight = Math.floor((height * cropHeightPercent) / 100);
+                sharp(path)
+                    .extract({ left: cropX, top: cropY, width: cropWidth, height: cropHeight })
+                    .toFile(cropPath);
+            });
+    }
+    return url;
 };
