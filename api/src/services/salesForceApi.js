@@ -52,7 +52,12 @@ export const addCampaignMember = async (
     { firstname, lastname, email, civility },
 ) => {
     const url = `${QUERY_BASE_URL}/sobjects/CampaignMember`;
-    const origin_code = await getOriginCodeByCampaignCode(access_token, campaign_code);
+    let origin_code = 'AU_WEBAPP';
+    try {
+        origin_code = await getOriginCodeByCampaignCode(access_token, campaign_code);
+    } catch (error) {
+        console.error('Error getting origin code, fallback to default one (AU_WEBAPP)');
+    }
     let salesForcecivility = '';
     if (civilityMap[civility]) {
         salesForcecivility = civilityMap[civility];
@@ -248,10 +253,8 @@ export const getOriginCodeByCampaignCode = async (access_token, campaign_code) =
     });
 
     const status = response.status;
+
     const body = await response.json();
-
-    console.log('getCodeOrigineByCampaignCode response', (status, body));
-
     if (status >= 400) {
         return new Error(
             `Error while quering contacts from SalesForce: ${body
@@ -260,7 +263,7 @@ export const getOriginCodeByCampaignCode = async (access_token, campaign_code) =
         );
     }
 
-    const originCode = body.records && body.records[0].Code_origine__r.Name;
+    const originCode = body.records[0].Code_origine__r.Name;
 
     return originCode;
 };
