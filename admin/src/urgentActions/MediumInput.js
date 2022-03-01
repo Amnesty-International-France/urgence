@@ -59,7 +59,7 @@ export const validateMedium = (value, record, _, key) => {
     return 'You need to specify both src and title for medium or none of them';
 };
 
-export const MediumInput = ({ label, classes, source, record }) => (
+export const MediumInput = ({ label, classes, source, record, croppable = false }) => (
     <Labeled label={label || 'Medium'}>
         <div className={classes.root}>
             <div className={classes.imageWrapper}>
@@ -80,7 +80,7 @@ export const MediumInput = ({ label, classes, source, record }) => (
                         dropZone: classes.dropZone,
                     }}
                 >
-                    <Field name={`${source}.crop`} component={ImagePreview} />
+                    <Field name={`${source}.crop`} component={ImagePreview} props={{ croppable }} />
                 </ImageInput>
             </div>
             <div className={classes.titleWrapper}>

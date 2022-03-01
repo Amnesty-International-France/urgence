@@ -50,7 +50,7 @@ const defaultFormData = {
 const StoryCoverInput = ({ source }) => (
     <Fragment>
         <RichTextInput source={`${source}content`} label="Text *" isRequired />
-        <MediumInput source={`${source}medium`} label="Cover" />
+        <MediumInput source={`${source}medium`} label="Cover" croppable />
     </Fragment>
 );
 
