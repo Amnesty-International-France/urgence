@@ -54,7 +54,7 @@ const SEO = ({ socialMetadata, lang, url, siteName }) => {
         meta.push(
             {
                 name: `twitter:image`,
-                content: 'socialMetadata.medium.src',
+                content: socialMetadata.medium.src,
             },
             {
                 property: `og:image`,

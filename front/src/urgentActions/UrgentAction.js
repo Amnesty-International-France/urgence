@@ -78,6 +78,10 @@ const query = gql`
                     message
                     twitter_message
                 }
+                telegram {
+                    url
+                    message
+                }
             }
             register {
                 title

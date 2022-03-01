@@ -2,7 +2,14 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import { addField, required, FormDataConsumer, LongTextInput } from 'react-admin';
+import {
+    addField,
+    required,
+    FormDataConsumer,
+    LongTextInput,
+    Labeled,
+    TextInput,
+} from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -74,6 +81,18 @@ export const ShareInput = ({ classes, source }) => {
                                         rowsMax="10"
                                         validate={[required()]}
                                     />
+                                    <Labeled label="Telegram">
+                                        <Fragment>
+                                            <TextInput
+                                                source={`${source}.telegram.url`}
+                                                label="Lien telegram"
+                                            />
+                                            <RichTextInput
+                                                source={`${source}.telegram.message`}
+                                                label="Message telegram"
+                                            />
+                                        </Fragment>
+                                    </Labeled>
                                 </div>
                             </CardContent>
                         </Card>

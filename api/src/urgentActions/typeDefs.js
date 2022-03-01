@@ -178,18 +178,40 @@ export default gql`
         button: String!
     }
 
-    type Thanks {
+    type Telegram {
+        url: String,
+        message: String
+    }
+
+    input TelegramInput {
+        url: String,  
+        message: String
+    }
+
+    type EmailThanks {
         title: String
         text: String
         button: String
         share: Share
+        telegram: Telegram
     }
 
-    input ThankInput {
+    input EmailThankInput {
         title: String
         text: String
         button: String
         share: ShareInput
+        telegram: TelegramInput
+    }
+
+    type EndThanks {
+        title: String
+        text: String
+    }
+
+    input EndThankInput {
+        title: String
+        text: String
     }
 
     type UrgentAction {
@@ -204,8 +226,8 @@ export default gql`
         message: Message
         creation_date: DATE
         last_edition_date: DATE
-        email_thank: Thanks
-        end_thank: Thanks
+        email_thank: EmailThanks
+        end_thank: EndThanks
         register: Register
         social_metadata: SocialMetadata
         response_count: Int
@@ -253,8 +275,8 @@ export default gql`
             story: [StoryStepInput]
             call_to_action: CallToActionInput
             message: MessageInput
-            email_thank: ThankInput
-            end_thank: ThankInput
+            email_thank: EmailThankInput
+            end_thank: EndThankInput
             register: RegisterInput
             social_metadata: SocialMetadataInput
             response_count: Int
@@ -269,8 +291,8 @@ export default gql`
             story: [StoryStepInput]
             call_to_action: CallToActionInput
             message: MessageInput
-            email_thank: ThankInput
-            end_thank: ThankInput
+            email_thank: EmailThankInput
+            end_thank: EndThankInput
             register: RegisterInput
             social_metadata: SocialMetadataInput
             response_count: Int
