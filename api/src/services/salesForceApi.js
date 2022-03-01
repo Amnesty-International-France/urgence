@@ -52,7 +52,12 @@ export const addCampaignMember = async (
     { firstname, lastname, email, civility },
 ) => {
     const url = `${QUERY_BASE_URL}/sobjects/CampaignMember`;
-    const origin_code = await getOriginCodeByCampaignCode(access_token, campaign_code);
+    let origin_code = 'AU_WEBAPP';
+    try {
+        origin_code = await getOriginCodeByCampaignCode(access_token, campaign_code);
+    } catch {
+        console.error('Error getting origin code, fallback to default one (AU_WEBAPP)');
+    }
     let salesForcecivility = '';
     if (civilityMap[civility]) {
         salesForcecivility = civilityMap[civility];
