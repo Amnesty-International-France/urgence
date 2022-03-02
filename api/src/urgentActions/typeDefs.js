@@ -40,13 +40,13 @@ export default gql`
     type MediumDesktop {
         title: String!
         src: Uploadable!
-        crop: Crop
+        crop: CropDesktop
     }
 
     input MediumDesktopInput {
         title: String!
         src: Uploadable!
-        crop: CropInput
+        crop: CropDesktopInput
     }
 
     type Medium {
@@ -61,6 +61,21 @@ export default gql`
         crop: CropInput
     }
 
+    type CropDesktop {
+        unit: String
+        x: Float
+        y: Float
+        width: Float
+        height: Float
+    }
+
+    input CropDesktopInput {
+        unit: String
+        x: Float
+        y: Float
+        width: Float
+        height: Float
+    }
     type Crop {
         unit: String
         x: Float

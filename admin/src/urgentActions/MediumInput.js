@@ -50,36 +50,42 @@ export const validateMedium = (value, record, _, key) => {
     return 'You need to specify both src and title for medium or none of them';
 };
 
-export const MediumInput = ({ label, classes, source, record, croppable = false }) => (
-    <Labeled label={label || 'Medium'}>
-        <div className={classes.root}>
-            <div className={classes.imageWrapper}>
-                <ImageInput
-                    source={`${source}.src`}
-                    record={record}
-                    label=""
-                    placeholder={<p>Drop a picture to upload, or click to select it</p>}
-                    accept="image/*"
-                    validate={validateMedium}
-                    classes={{
-                        dropZone: classes.dropZone,
-                    }}
-                >
-                    <Field name={`${source}.crop`} component={ImagePreview} props={{ croppable }} />
-                </ImageInput>
+export const MediumInput = ({ label, classes, source, record, croppable = false }) => {
+    return (
+        <Labeled label={label || 'Medium'}>
+            <div className={classes.root}>
+                <div className={classes.imageWrapper}>
+                    <ImageInput
+                        source={`${source}.src`}
+                        record={record}
+                        label=""
+                        placeholder={<p>Drop a picture to upload, or click to select it</p>}
+                        accept="image/*"
+                        validate={validateMedium}
+                        classes={{
+                            dropZone: classes.dropZone,
+                        }}
+                    >
+                        <Field
+                            name={`${source}.crop`}
+                            component={ImagePreview}
+                            props={{ croppable }}
+                        />
+                    </ImageInput>
+                </div>
+                <div className={classes.titleWrapper}>
+                    <TextInput
+                        validate={validateMedium}
+                        fullWidth
+                        source={`${source}.title`}
+                        label="Alternate text"
+                    />
+                    <br />
+                </div>
             </div>
-            <div className={classes.titleWrapper}>
-                <TextInput
-                    validate={validateMedium}
-                    fullWidth
-                    source={`${source}.title`}
-                    label="Alternate text"
-                />
-                <br />
-            </div>
-        </div>
-    </Labeled>
-);
+        </Labeled>
+    );
+};
 
 MediumInput.propTypes = {
     classes: PropTypes.object,
