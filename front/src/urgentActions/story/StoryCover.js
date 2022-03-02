@@ -70,7 +70,7 @@ const styles = {
         },
     },
 };
-const lastUrlParam = /\/([^\/]*$)/;
+const lastUrlParam = /\/([^/]*$)/;
 
 export const StoryCover = ({ className, content, medium, mediumDesktop, isMobile }) => {
     const isOnMobile = () => {
