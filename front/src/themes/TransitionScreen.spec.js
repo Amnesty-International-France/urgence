@@ -17,6 +17,8 @@ describe('<TransitionScreen />', () => {
             message: '<p>Vous avez déjà envoyé <strong>10</strong></p>',
         },
         responseCount: 10,
+        match: { params: { slug: 'my-slug' } },
+        interpelationMode: 'email',
     };
 
     it('should display given title, text and actions', () => {
