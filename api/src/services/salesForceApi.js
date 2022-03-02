@@ -190,7 +190,7 @@ export const register = async (access_token, { firstname, lastname, email, phone
 };
 
 export const getContactByEmail = async (access_token, email) => {
-    const url = `${QUERY_BASE_URL}/query?q=SELECT+Actions_urgentes_via_le_smartphone__c+from+contact+where+email='${email}'`;
+    const url = `${QUERY_BASE_URL}/query?q=SELECT+Actions_urgentes_via_le_smartphone__c+from+contact+where+email='${encodeURIComponent(email)}'`;
 
     console.log('getContactByEmail request', {
         url,
@@ -211,6 +211,8 @@ export const getContactByEmail = async (access_token, email) => {
 
     const status = response.status;
     const body = await response.json();
+
+    console.log('getContactByEmail response', status, body);
 
     if (status >= 400) {
         return new Error(

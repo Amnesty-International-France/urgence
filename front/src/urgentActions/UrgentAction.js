@@ -246,14 +246,12 @@ export const UrgentAction = ({ history, slug, step, data }) => {
 
     if (step === 'thanks-end') {
         const thankEnd = get(data, 'UrgentAction.end_thank');
-        const emailThank = get(data, 'UrgentAction.email_thank');
 
         return (
             <ThankStep
                 data={thankEnd}
                 slug={slug}
                 step={step}
-                dataShare={emailThank}
                 analyticsCategory={ANALYTICS_CATEGORIES.SHARE}
             />
         );
