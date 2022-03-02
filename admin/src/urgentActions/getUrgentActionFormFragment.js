@@ -9,7 +9,6 @@ import {
     SimpleForm,
     FormDataConsumer,
     required,
-    Labeled,
     TextInput,
 } from 'react-admin';
 import Grid from '@material-ui/core/Grid';

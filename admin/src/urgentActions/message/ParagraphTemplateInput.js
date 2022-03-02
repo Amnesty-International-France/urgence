@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { addField, LongTextInput } from 'react-admin';
@@ -14,10 +14,10 @@ export const ParagraphTemplateInput = ({ source, headerCount, limit, dataMessage
         setMailToLength(messageLength + headerCount);
     }, [headerCount, dataMessageTemplate]);
 
-    const updateMailToLenght = (event) => {
+    const updateMailToLenght = event => {
         const messageLength = event.target.value.length;
         setMailToLength(messageLength + headerCount);
-    }
+    };
     return (
         <LongTextInput
             source={`${source}value`}
