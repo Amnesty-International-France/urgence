@@ -26,13 +26,27 @@ export default gql`
     type StoryStep {
         content: String!
         medium: Medium
+        mediumDesktop: MediumDesktop
         displayOptions: DisplayOptions
     }
 
     input StoryStepInput {
         content: String!
         medium: MediumInput
+        mediumDesktop: MediumDesktopInput
         displayOptions: DisplayOptionsInput
+    }
+
+    type MediumDesktop {
+        title: String!
+        src: Uploadable!
+        crop: Crop
+    }
+
+    input MediumDesktopInput {
+        title: String!
+        src: Uploadable!
+        crop: CropInput
     }
 
     type Medium {

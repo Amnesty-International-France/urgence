@@ -46,6 +46,16 @@ const query = gql`
                         height
                     }
                 }
+                mediumDesktop {
+                    src
+                    title
+                    crop {
+                        x
+                        y
+                        width
+                        height
+                    }
+                }
                 content
             }
             call_to_action {

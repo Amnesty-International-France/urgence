@@ -22,4 +22,4 @@ services:
         volumes:
             - '/etc/passwd:/etc/passwd:ro'
         ports:
-            - '5432'
+            - '5432:5432'
