@@ -14,6 +14,8 @@ import LinkTwitter from './Sharing/LinkTwitter';
 import generateUrl from '../services/generateUrl';
 import { withRouter } from 'react-router';
 import { routeMatch } from '../propTypes';
+import { withSessionData } from '../DataContext';
+import { compose } from 'recompose';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -102,6 +104,7 @@ const styles = {
 };
 
 export const TransitionScreen = ({
+    registered,
     className,
     actions,
     title,
@@ -144,6 +147,8 @@ export const TransitionScreen = ({
         twitterAction.hashtags && (twitterText += `&hashtags=${twitterAction.hashtags}`);
         return twitterText;
     };
+
+    const urlToRedirect = registered ? 'share' : 'register';
     return (
         <div className={className}>
             <Paper className="paper" elevation={4} square>
@@ -182,7 +187,7 @@ export const TransitionScreen = ({
                         <div className="social-media">
                             <LinkTwitter
                                 text={getTwitterText()}
-                                action={() => history.push(generateUrl('thanks-end', slug ))}
+                                action={() => history.push(generateUrl(urlToRedirect, slug))}
                             />
                         </div>
                     )}
@@ -194,6 +199,7 @@ export const TransitionScreen = ({
 };
 
 TransitionScreen.propTypes = {
+    data: PropTypes.any,
     className: PropTypes.string.isRequired,
     actions: PropTypes.func,
     title: PropTypes.string.isRequired,
@@ -203,6 +209,7 @@ TransitionScreen.propTypes = {
     interpelationMode: PropTypes.string,
     history: PropTypes.any,
     match: routeMatch,
+    registered: PropTypes.any,
     twitterAction: PropTypes.shape({
         title: PropTypes.string,
         message: PropTypes.string,
@@ -217,4 +224,4 @@ TransitionScreen.defaultProps = {
     message: '',
 };
 
-export default glamorous(withRouter(TransitionScreen))(styles);
+export default glamorous(compose(withSessionData, withRouter)(TransitionScreen))(styles);
