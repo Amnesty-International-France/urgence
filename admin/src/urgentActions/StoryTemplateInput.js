@@ -87,7 +87,7 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
                         >
                             {props =>
                                 index === 0 ? (
-                                    <StoryCover {...props} className="cover" />
+                                    <StoryCover {...props} className="cover" isMobile />
                                 ) : (
                                     <StoryStep {...props} />
                                 )

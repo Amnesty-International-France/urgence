@@ -72,12 +72,12 @@ const styles = {
 };
 const lastUrlParam = /\/([^\/]*$)/;
 
-export const StoryCover = ({ className, content, medium, mediumDesktop }) => {
+export const StoryCover = ({ className, content, medium, mediumDesktop, isMobile }) => {
     const isOnMobile = () => {
         const md = new MobileDetect(global.navigator.userAgent);
         return md.mobile();
     };
-    const src = get(isOnMobile() || !mediumDesktop ? medium : mediumDesktop, 'src');
+    const src = get(isMobile || isOnMobile() || !mediumDesktop ? medium : mediumDesktop, 'src');
     const cropSrc = typeof src === 'string' ? src.replace(lastUrlParam, '/crop-$1') : '';
     return (
         <div className={className}>
@@ -110,6 +110,10 @@ StoryCover.propTypes = {
     medium: PropTypes.shape({
         src: PropTypes.string.isRequired,
     }),
+    mediumDesktop: PropTypes.shape({
+        src: PropTypes.string.isRequired,
+    }),
+    isMobile: PropTypes.bool,
 };
 
 export default glamorous(StoryCover)(styles);
