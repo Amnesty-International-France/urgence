@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 
 import { LETTER_ACTIVATED } from '../flags';
 
-import {
-    addField,
-    required,
-    FormDataConsumer,
-    LongTextInput,
-    TextInput,
-    Labeled,
-} from 'react-admin';
+import { addField, required, FormDataConsumer, LongTextInput } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
