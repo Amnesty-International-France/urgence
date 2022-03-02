@@ -7,7 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 
-import { root, storyScreenPreview } from './styles';
+import { root, storyScreenPreview, storyScreenPreviewDesktop } from './styles';
 import MediumInput from './MediumInput';
 import FrontPreview from './FrontPreview';
 import RichTextInput from '../form/RichTextInput';
@@ -21,6 +21,27 @@ const styles = {
     ...root,
     preview: {
         ...storyScreenPreview,
+        '@media (min-width: 1024px)': {
+            '& .rich-text': {
+                fontSize: '18px !important',
+            },
+            '& .rich-text > p': {
+                fontSize: '18px !important',
+            },
+            '& .ql-size-large': {
+                padding: '4px 0 !important',
+                fontSize: '26px !important',
+                lineHeight: '39px !important',
+            },
+            '& .ql-size-huge': {
+                padding: '6px 0 !important',
+                fontSize: '36px !important',
+                lineHeight: '54px !important',
+            },
+        },
+    },
+    previewDesktop: {
+        ...storyScreenPreviewDesktop,
         '@media (min-width: 1024px)': {
             '& .rich-text': {
                 fontSize: '18px !important',
@@ -80,20 +101,36 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
                             </div>
                         </CardContent>
                     </Card>
-                    <FrontPreview className={classes.preview}>
-                        <StorySlide
-                            index={index}
-                            step={{ ...defaultFormData, ...formData.story[index] }}
-                        >
-                            {props =>
-                                index === 0 ? (
-                                    <StoryCover {...props} className="cover" isMobile />
-                                ) : (
-                                    <StoryStep {...props} />
-                                )
-                            }
-                        </StorySlide>
-                    </FrontPreview>
+                    <div>
+                        <FrontPreview className={classes.preview}>
+                            <StorySlide
+                                index={index}
+                                step={{ ...defaultFormData, ...formData.story[index] }}
+                            >
+                                {props =>
+                                    index === 0 ? (
+                                        <StoryCover {...props} className="cover" isMobile />
+                                    ) : (
+                                        <StoryStep {...props} />
+                                    )
+                                }
+                            </StorySlide>
+                        </FrontPreview>
+                        <FrontPreview className={classes.previewDesktop}>
+                            <StorySlide
+                                index={index}
+                                step={{ ...defaultFormData, ...formData.story[index] }}
+                            >
+                                {props =>
+                                    index === 0 ? (
+                                        <StoryCover {...props} className="cover" />
+                                    ) : (
+                                        <StoryStep {...props} />
+                                    )
+                                }
+                            </StorySlide>
+                        </FrontPreview>
+                    </div>
                 </Fragment>
             )}
         </FormDataConsumer>

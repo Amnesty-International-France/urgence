@@ -36,12 +36,23 @@ export const preview = {
     backgroundColor: white,
 };
 
+export const previewDesktop = {
+    ...preview,
+    height: 600,
+    width: 1088,
+};
+
 export const storyScreenPreview = {
     ...preview,
     '& .story-step > div': {
         height: 'calc(600px - 80px) !important',
         width: 'calc(100% - 30px)',
     },
+};
+
+export const storyScreenPreviewDesktop = {
+    ...storyScreenPreview,
+    ...previewDesktop,
 };
 
 export const actScreenPreview = {
