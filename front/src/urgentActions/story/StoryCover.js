@@ -77,7 +77,7 @@ export const StoryCover = ({ className, content, medium, mediumDesktop }) => {
         const md = new MobileDetect(global.navigator.userAgent);
         return md.mobile();
     };
-    const src = get(isOnMobile() ? medium : mediumDesktop, 'src');
+    const src = get(isOnMobile() || !mediumDesktop ? medium : mediumDesktop, 'src');
     const cropSrc = typeof src === 'string' ? src.replace(lastUrlParam, '/crop-$1') : '';
     return (
         <div className={className}>
