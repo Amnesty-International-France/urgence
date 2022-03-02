@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 
 import { white, black } from '../../themes/colors';
 import RichText from '../../themes/RichText';
+import MobileDetect from 'mobile-detect';
 
 const styles = {
     position: 'relative',
@@ -71,8 +72,12 @@ const styles = {
 };
 const lastUrlParam = /\/([^\/]*$)/;
 
-export const StoryCover = ({ className, content, medium }) => {
-    const src = get(medium, 'src');
+export const StoryCover = ({ className, content, medium, mediumDesktop }) => {
+    const isOnMobile = () => {
+        const md = new MobileDetect(global.navigator.userAgent);
+        return md.mobile();
+    };
+    const src = get(isOnMobile() ? medium : mediumDesktop, 'src');
     const cropSrc = typeof src === 'string' ? src.replace(lastUrlParam, '/crop-$1') : '';
     return (
         <div className={className}>
