@@ -52,6 +52,13 @@ const query = gql`
                     display_threshold
                     message
                 }
+                interpelation_mode
+                twitter_action {
+                    title
+                    message
+                    hashtags
+                    url
+                }
             }
             message {
                 text_view

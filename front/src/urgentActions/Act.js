@@ -12,6 +12,8 @@ const Act = ({ data, actions }) => (
         message={get(data, 'message')}
         progress={get(data, 'progress')}
         responseCount={get(data, 'response_count')}
+        interpelationMode={get(data, 'interpelation_mode')}
+        twitterAction={get(data, 'twitter_action')}
     />
 );
 
