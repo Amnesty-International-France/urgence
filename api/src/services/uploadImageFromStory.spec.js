@@ -9,29 +9,24 @@ describe('uploadImageFromStory', () => {
             { medium: { src: 'first medium src' } },
             { medium: { src: 'second medium src' } },
         ]);
-        expect(uploadImage).toHaveBeenCalledWith('first medium src');
-        expect(uploadImage).toHaveBeenCalledWith('second medium src');
+        expect(uploadImage).toHaveBeenCalledWith('first medium src', undefined);
+        expect(uploadImage).toHaveBeenCalledWith('second medium src', undefined);
     });
 
     it('should replace medium.src by uploadImage result', async () => {
         uploadImage.mockImplementation(() => 'uploaded src');
-        expect(await uploadImageFromStory([
-            { medium: { src: 'first medium src' } },
-            { medium: { src: 'second medium src' } },
-        ])).toEqual([
-            { medium: { src: 'uploaded src' } },
-            { medium: { src: 'uploaded src' } },
-        ]);
+        expect(
+            await uploadImageFromStory([
+                { medium: { src: 'first medium src' } },
+                { medium: { src: 'second medium src' } },
+            ]),
+        ).toEqual([{ medium: { src: 'uploaded src' } }, { medium: { src: 'uploaded src' } }]);
     });
 
     it('should call uploadImage with undefined for storystep with no medium and do not change the story item', async () => {
         uploadImage.mockImplementation(v => v);
-        expect(await uploadImageFromStory([
-            { no: 'medium' },
-        ])).toEqual([
-            { no: 'medium' },
-        ]);
+        expect(await uploadImageFromStory([{ no: 'medium' }])).toEqual([{ no: 'medium' }]);
 
-        expect(uploadImage).toHaveBeenCalledWith(undefined);
+        expect(uploadImage).toHaveBeenCalledWith(undefined, undefined);
     });
 });

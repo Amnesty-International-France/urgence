@@ -6,12 +6,19 @@ import { ImagePreview } from './ImagePreview';
 
 describe('ImagePreview', () => {
     it('should render ImageField with record props from props.record', () => {
-        const wrapper = shallow(<ImagePreview record="imageUrl" />);
+        const wrapper = shallow(
+            <ImagePreview record="imageUrl" input={{ value: undefined, onChange: undefined }} />,
+        );
         expect(wrapper.find(ImageField).prop('record')).toEqual({ src: 'imageUrl' });
     });
 
     it('should render ImageField with record props from props.record.rawFile.preview', () => {
-        const wrapper = shallow(<ImagePreview record={{ rawFile: { preview: 'imageUrl' } }} />);
+        const wrapper = shallow(
+            <ImagePreview
+                record={{ rawFile: { preview: 'imageUrl' } }}
+                input={{ value: undefined, onChange: undefined }}
+            />,
+        );
         expect(wrapper.find(ImageField).prop('record')).toEqual({ src: 'imageUrl' });
     });
 });

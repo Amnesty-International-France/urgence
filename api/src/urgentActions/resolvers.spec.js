@@ -10,9 +10,11 @@ import {
 } from './repository';
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
 import { authenticate, addCampaignMember, getContactByEmail } from '../services/salesForceApi';
+import { uploadImageDesktopFromStory } from '../services/uploadImageDesktopFromStory';
 
 jest.mock('./repository');
 jest.mock('../services/uploadImageFromStory');
+jest.mock('../services/uploadImageDesktopFromStory');
 jest.mock('../services/salesForceApi');
 
 describe('Urgent Actions Resolvers', () => {
@@ -121,6 +123,7 @@ describe('Urgent Actions Resolvers', () => {
 
             it('should create given urgent action', async () => {
                 uploadImageFromStory.mockImplementation(() => 'uploadedStory');
+                uploadImageDesktopFromStory.mockImplementation(() => 'uploadedDesktopStory');
 
                 const authResponse = {
                     status: 200,
@@ -168,11 +171,12 @@ describe('Urgent Actions Resolvers', () => {
                         },
                     },
                 ]);
+                expect(uploadImageDesktopFromStory).toHaveBeenCalled();
 
                 expect(createUrgentAction).toHaveBeenCalledWith({
                     title: 'test',
                     slug: 'test',
-                    story: '"uploadedStory"',
+                    story: '"uploadedDesktopStory"',
                     social_metadata: '{}',
                 });
             });
@@ -246,6 +250,7 @@ describe('Urgent Actions Resolvers', () => {
 
             it('should update urgent action with given id with remaining data', async () => {
                 uploadImageFromStory.mockImplementation(() => 'uploadedStory');
+                uploadImageDesktopFromStory.mockImplementation(() => 'uploadedDesktopStory');
 
                 const authResponse = {
                     status: 200,
@@ -300,11 +305,12 @@ describe('Urgent Actions Resolvers', () => {
                     },
                 ]);
 
+                expect(uploadImageDesktopFromStory).toHaveBeenCalled();
                 expect(updateUrgentAction).toHaveBeenCalledWith('id', {
                     id: 'id',
                     title: 'test',
                     slug: 'test',
-                    story: '"uploadedStory"',
+                    story: '"uploadedDesktopStory"',
                     call_to_action: '"call_to_action"',
                     message: '"message"',
                     email_thank: '"email_thank"',

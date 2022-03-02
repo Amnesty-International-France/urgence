@@ -9,8 +9,8 @@ describe('uploadImageFromStory', () => {
             { mediumDesktop: { src: 'first mediumDesktop src' } },
             { mediumDesktop: { src: 'second mediumDesktop src' } },
         ]);
-        expect(uploadImage).toHaveBeenCalledWith('first mediumDesktop src');
-        expect(uploadImage).toHaveBeenCalledWith('second mediumDesktop src');
+        expect(uploadImage).toHaveBeenCalledWith('first mediumDesktop src', undefined);
+        expect(uploadImage).toHaveBeenCalledWith('second mediumDesktop src', undefined);
     });
 
     it('should replace mediumDesktop.src by uploadImage result', async () => {
@@ -32,6 +32,6 @@ describe('uploadImageFromStory', () => {
             { no: 'mediumDesktop' },
         ]);
 
-        expect(uploadImage).toHaveBeenCalledWith(undefined);
+        expect(uploadImage).toHaveBeenCalledWith(undefined, undefined);
     });
 });
