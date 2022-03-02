@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 
 import { white, black } from '../../themes/colors';
 import RichText from '../../themes/RichText';
+import MobileDetect from 'mobile-detect';
 
 const styles = {
     position: 'relative',
@@ -69,30 +70,39 @@ const styles = {
         },
     },
 };
+const lastUrlParam = /\/([^\/]*$)/;
 
-export const StoryCover = ({ className, content, medium }) => (
-    <div className={className}>
-        <Paper
-            className="paper"
-            style={{
-                ...{
-                    backgroundImage: `url(${get(medium, 'src', '')})`,
-                    backgroundPosition: 'top',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                },
-            }}
-            elevation={6}
-            square
-        >
-            <div className="step">
-                <div className="content">
-                    <RichText html={content} />
+export const StoryCover = ({ className, content, medium, mediumDesktop, isMobile }) => {
+    const isOnMobile = () => {
+        const md = new MobileDetect(global.navigator.userAgent);
+        return md.mobile();
+    };
+    const src = get(isMobile || isOnMobile() || !mediumDesktop ? medium : mediumDesktop, 'src');
+    const cropSrc = typeof src === 'string' ? src.replace(lastUrlParam, '/crop-$1') : '';
+    return (
+        <div className={className}>
+            <Paper
+                className="paper"
+                style={{
+                    ...{
+                        backgroundImage: `url(${cropSrc})`,
+                        backgroundPosition: 'top',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                    },
+                }}
+                elevation={6}
+                square
+            >
+                <div className="step">
+                    <div className="content">
+                        <RichText html={content} />
+                    </div>
                 </div>
-            </div>
-        </Paper>
-    </div>
-);
+            </Paper>
+        </div>
+    );
+};
 
 StoryCover.propTypes = {
     className: PropTypes.string,
@@ -100,6 +110,10 @@ StoryCover.propTypes = {
     medium: PropTypes.shape({
         src: PropTypes.string.isRequired,
     }),
+    mediumDesktop: PropTypes.shape({
+        src: PropTypes.string.isRequired,
+    }),
+    isMobile: PropTypes.bool,
 };
 
 export default glamorous(StoryCover)(styles);

@@ -39,6 +39,22 @@ const query = gql`
                 medium {
                     src
                     title
+                    crop {
+                        x
+                        y
+                        width
+                        height
+                    }
+                }
+                mediumDesktop {
+                    src
+                    title
+                    crop {
+                        x
+                        y
+                        width
+                        height
+                    }
                 }
                 content
             }

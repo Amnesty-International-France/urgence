@@ -26,23 +26,70 @@ export default gql`
     type StoryStep {
         content: String!
         medium: Medium
+        mediumDesktop: MediumDesktop
         displayOptions: DisplayOptions
     }
 
     input StoryStepInput {
         content: String!
         medium: MediumInput
+        mediumDesktop: MediumDesktopInput
         displayOptions: DisplayOptionsInput
+    }
+
+    type MediumDesktop {
+        title: String!
+        src: Uploadable!
+        crop: CropDesktop
+    }
+
+    input MediumDesktopInput {
+        title: String!
+        src: Uploadable!
+        crop: CropDesktopInput
     }
 
     type Medium {
         title: String!
         src: Uploadable!
+        crop: Crop
     }
 
     input MediumInput {
         title: String!
         src: Uploadable!
+        crop: CropInput
+    }
+
+    type CropDesktop {
+        unit: String
+        x: Float
+        y: Float
+        width: Float
+        height: Float
+    }
+
+    input CropDesktopInput {
+        unit: String
+        x: Float
+        y: Float
+        width: Float
+        height: Float
+    }
+    type Crop {
+        unit: String
+        x: Float
+        y: Float
+        width: Float
+        height: Float
+    }
+
+    input CropInput {
+        unit: String
+        x: Float
+        y: Float
+        width: Float
+        height: Float
     }
 
     type MediumSocial {

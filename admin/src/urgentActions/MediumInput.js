@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TextInput, ImageInput, Labeled } from 'react-admin';
 import { withStyles } from '@material-ui/core/styles';
 import get from 'lodash.get';
-
+import { Field } from 'redux-form';
 import { ImagePreview } from '../form/ImagePreview';
 
 const styles = {
@@ -34,11 +34,6 @@ const styles = {
     },
 };
 
-const maxSize = {
-    value: 2097152,
-    label: '2 Mo',
-};
-
 export const validateMedium = (value, record, _, key) => {
     const mediumKey = key
         .split('.')
@@ -49,52 +44,48 @@ export const validateMedium = (value, record, _, key) => {
     const title = get(record, titleKey);
     const src = get(record, srcKey);
 
-    if (value && value.rawFile && value.rawFile.size > maxSize.value) {
-        return `File size can't exceed ${maxSize.label}`;
-    }
-
     if ((title && src) || (!title && !src)) {
         return undefined;
     }
     return 'You need to specify both src and title for medium or none of them';
 };
 
-export const MediumInput = ({ label, classes, source, record }) => (
-    <Labeled label={label || 'Medium'}>
-        <div className={classes.root}>
-            <div className={classes.imageWrapper}>
-                <ImageInput
-                    source={`${source}.src`}
-                    record={record}
-                    label=""
-                    placeholder={
-                        <p>
-                            Drop a picture to upload, or click to select it
-                            <br />
-                            (max size {maxSize.label})
-                        </p>
-                    }
-                    accept="image/*"
-                    validate={validateMedium}
-                    classes={{
-                        dropZone: classes.dropZone,
-                    }}
-                >
-                    <ImagePreview />
-                </ImageInput>
+export const MediumInput = ({ label, classes, source, record, croppable = false }) => {
+    return (
+        <Labeled label={label || 'Medium'}>
+            <div className={classes.root}>
+                <div className={classes.imageWrapper}>
+                    <ImageInput
+                        source={`${source}.src`}
+                        record={record}
+                        label=""
+                        placeholder={<p>Drop a picture to upload, or click to select it</p>}
+                        accept="image/*"
+                        validate={validateMedium}
+                        classes={{
+                            dropZone: classes.dropZone,
+                        }}
+                    >
+                        <Field
+                            name={`${source}.crop`}
+                            component={ImagePreview}
+                            props={{ croppable }}
+                        />
+                    </ImageInput>
+                </div>
+                <div className={classes.titleWrapper}>
+                    <TextInput
+                        validate={validateMedium}
+                        fullWidth
+                        source={`${source}.title`}
+                        label="Alternate text"
+                    />
+                    <br />
+                </div>
             </div>
-            <div className={classes.titleWrapper}>
-                <TextInput
-                    validate={validateMedium}
-                    fullWidth
-                    source={`${source}.title`}
-                    label="Alternate text"
-                />
-                <br />
-            </div>
-        </div>
-    </Labeled>
-);
+        </Labeled>
+    );
+};
 
 MediumInput.propTypes = {
     classes: PropTypes.object,

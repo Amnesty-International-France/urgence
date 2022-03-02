@@ -1,46 +1,72 @@
 import fs from 'fs';
 import shortid from 'shortid';
 import path from 'path';
+import sharp from 'sharp';
 
 import config from '../../../config';
 
-export const getSavedFileName = filename => {
-    const extension = path.extname(filename);
+export const getSavedFileName = () => {
     const id = shortid.generate();
 
-    return `${id}${extension}`;
-}
+    return `${id}.jpeg`;
+};
 
-export const uploadImage = async upload => {
+export const uploadImage = async (upload, crop) => {
     if (!upload) {
         return null;
     }
 
+    let path, cropPath, url;
+    const lastUrlParam = /\/([^\/]*$)/;
     if (typeof upload === 'string') {
-        return upload;
+        url = upload;
+        const filename = upload.match(lastUrlParam)[1];
+        path = `${config.uploadDir}/${filename}`;
+        cropPath = `${config.uploadDir}/crop-${filename}`;
+    } else {
+        const rawFile = await upload.rawFile;
+        if (!rawFile.stream) {
+            throw new Error('Upload failed please retry');
+        }
+        const { filename } = rawFile;
+        const stream = rawFile.createReadStream();
+
+        const savedFileName = getSavedFileName(filename);
+        path = `${config.uploadDir}/${savedFileName}`;
+        cropPath = `${config.uploadDir}/crop-${savedFileName}`;
+        url = `${config.uploadUrl}/${savedFileName}`;
+        const optimiseFile = sharp()
+            .resize(1920)
+            .jpeg();
+
+        await new Promise((resolve, reject) =>
+            stream
+                .on('error', error => {
+                    if (stream.truncated) {
+                        // Delete the truncated file
+                        fs.unlinkSync(path);
+                    }
+                    reject(error);
+                })
+                .pipe(optimiseFile)
+                .pipe(fs.createWriteStream(path))
+                .on('error', reject)
+                .on('finish', () => resolve()),
+        );
     }
-
-    const rawFile = await upload.rawFile;
-    if (!rawFile.stream) {
-        throw new Error('Upload failed please retry');
+    if (crop) {
+        await sharp(path)
+            .metadata()
+            .then(({ width, height }) => {
+                const { x, y, width: cropWidthPercent, height: cropHeightPercent } = crop;
+                const cropX = Math.floor((x * width) / 100);
+                const cropY = Math.floor((y * height) / 100);
+                const cropWidth = Math.floor((width * cropWidthPercent) / 100);
+                const cropHeight = Math.floor((height * cropHeightPercent) / 100);
+                sharp(path)
+                    .extract({ left: cropX, top: cropY, width: cropWidth, height: cropHeight })
+                    .toFile(cropPath);
+            });
     }
-    const { stream, filename } = rawFile;
-
-    const savedFileName = getSavedFileName(filename);
-    const path = `${config.uploadDir}/${savedFileName}`;
-    const url = `${config.uploadUrl}/${savedFileName}`;
-
-    return new Promise((resolve, reject) =>
-        stream
-            .on('error', error => {
-                if (stream.truncated) {
-                    // Delete the truncated file
-                    fs.unlinkSync(path);
-                }
-                reject(error);
-            })
-            .pipe(fs.createWriteStream(path))
-            .on('error', reject)
-            .on('finish', () => resolve(url))
-    );
-}
+    return url;
+};
