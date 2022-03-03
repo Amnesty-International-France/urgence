@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import get from 'lodash.get';
@@ -7,7 +7,6 @@ import Paper from '@material-ui/core/Paper';
 import { white, black } from '../../themes/colors';
 import RichText from '../../themes/RichText';
 import MobileDetect from 'mobile-detect';
-import { secureUseEffect, secureUseState } from '../../hooks/secureHooks';
 
 const styles = {
     position: 'relative',
@@ -70,23 +69,6 @@ const styles = {
             padding: '12px 0',
         },
     },
-};
-const checkIfImageExists = url => {
-    return new Promise(resolve => {
-        const img = new Image();
-        img.src = url;
-
-        if (img.complete) {
-            resolve(true);
-        } else {
-            img.onload = () => {
-                resolve(true);
-            };
-            img.onerror = () => {
-                resolve(false);
-            };
-        }
-    });
 };
 const isOnMobile = () => {
     const md = new MobileDetect(global.navigator.userAgent);
