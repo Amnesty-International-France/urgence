@@ -16,7 +16,7 @@ import { withRouter } from 'react-router';
 import { routeMatch } from '../propTypes';
 import { withSessionData } from '../DataContext';
 import { compose } from 'recompose';
-import { addCampaignMemberTwitter } from '../services/api';
+import { addCampaignMemberTwitter, addResponseCount } from '../services/api';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -151,6 +151,7 @@ export const TransitionScreen = ({
     };
 
     const addTwitterMember = () => {
+        addResponseCount(auId);
         return addCampaignMemberTwitter(auId)
             .then(result => {
                 if (result.errors && result.errors.length) {
