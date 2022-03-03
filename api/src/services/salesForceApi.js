@@ -131,7 +131,12 @@ const civilityMap = {
     Autre: '',
 };
 
-export const register = async (access_token, { firstname, lastname, email, phone, civility }) => {
+export const register = async (
+    access_token,
+    { firstname, lastname, email, phone, civility, originCode },
+) => {
+    const origineCodeId = await getOriginCodeId(access_token, originCode);
+
     const url = `${QUERY_BASE_URL}/sobjects/Contact`;
 
     let salesForcecivility = '';
@@ -154,6 +159,7 @@ export const register = async (access_token, { firstname, lastname, email, phone
             FirstName: firstname,
             EMAIL: email,
             MobilePhone: phone,
+            Origine__c: origineCodeId,
         }),
     });
 
@@ -171,6 +177,7 @@ export const register = async (access_token, { firstname, lastname, email, phone
             FirstName: firstname,
             EMAIL: email,
             MobilePhone: phone,
+            Origine__c: origineCodeId,
         }),
     });
 
@@ -191,7 +198,9 @@ export const register = async (access_token, { firstname, lastname, email, phone
 };
 
 export const getContactByEmail = async (access_token, email) => {
-    const url = `${QUERY_BASE_URL}/query?q=SELECT+Actions_urgentes_via_le_smartphone__c+from+contact+where+email='${encodeURIComponent(email)}'`;
+    const url = `${QUERY_BASE_URL}/query?q=SELECT+Actions_urgentes_via_le_smartphone__c+from+contact+where+email='${encodeURIComponent(
+        email,
+    )}'`;
 
     console.log('getContactByEmail request', {
         url,
@@ -246,7 +255,6 @@ export const getOriginCodeByCampaignCode = async (access_token, campaign_code) =
             Accept: JSON_TYPE,
         },
     });
-
     const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -254,7 +262,6 @@ export const getOriginCodeByCampaignCode = async (access_token, campaign_code) =
             Accept: JSON_TYPE,
         },
     });
-
     const status = response.status;
 
     const body = await response.json();
@@ -269,4 +276,31 @@ export const getOriginCodeByCampaignCode = async (access_token, campaign_code) =
     const originCode = body.records[0].Code_origine__r.Name;
 
     return originCode;
+};
+
+export const getOriginCodeId = async (access_token, code) => {
+    const url = `${QUERY_BASE_URL}/query?q=SELECT+Id+FROM+Code__c+WHERE+Code__c='${code}'`;
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+            'Content-Type': JSON_TYPE,
+        },
+    });
+
+    const status = response.status;
+    const body = await response.json();
+
+    console.log('register response', status, body);
+
+    if (status >= 400) {
+        throw new Error(
+            `Error while registering contact into SalesForce: ${body
+                .map(({ message }) => message)
+                .join(', ')}`,
+        );
+    }
+
+    return body.records[0] && body.records[0].Id;
 };

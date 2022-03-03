@@ -82,8 +82,8 @@ export default {
         addCampaignMemberTwitter: (_, { id }) => {
             return addCampaignMemberTwitter(id);
         },
-        registerContact: (_, { member }) => {
-            return registerContact(member);
+        registerContact: (_, { id, member }) => {
+            return registerContact(id, member);
         },
         addResponseCount: async (_, { id }) => {
             const urgentAction = await getUrgentAction(id);
