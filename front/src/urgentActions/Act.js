@@ -14,6 +14,7 @@ const Act = ({ data, actions }) => (
         responseCount={get(data, 'response_count')}
         interpelationMode={get(data, 'interpelation_mode')}
         twitterAction={get(data, 'twitter_action')}
+        auId={get(data, 'auId')}
     />
 );
 

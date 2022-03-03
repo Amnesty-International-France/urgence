@@ -313,6 +313,10 @@ export default gql`
         registered: Boolean
     }
 
+    type CampaignMemberTwitter {
+        success: Boolean
+    }
+
     extend type Query {
         UrgentAction(id: ID!): UrgentAction
         UrgentActionBySlug(slug: String!): UrgentAction
@@ -364,6 +368,7 @@ export default gql`
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
         addCampaignMember(id: ID!, member: CampaignMemberInput!): CampaignMember!
+        addCampaignMemberTwitter(id: ID!): CampaignMemberTwitter!
         registerContact(member: CampaignMemberInput!): CampaignMember!
         addResponseCount(id: ID!): UrgentAction!
     }

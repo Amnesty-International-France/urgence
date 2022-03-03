@@ -86,6 +86,7 @@ export class Story extends Component {
             match: {
                 params: { page },
             },
+            auId,
         } = this.props;
 
         const total = story ? story.length : 0;
@@ -126,6 +127,7 @@ export class Story extends Component {
                                             data={{
                                                 ...callToAction,
                                                 response_count: responseCount,
+                                                auId
                                             }}
                                             actions={() =>
                                                 callToAction && callToAction.button ? (
@@ -162,6 +164,7 @@ Story.propTypes = {
     match: routeMatch,
     callToAction: PropTypes.object,
     responseCount: PropTypes.number,
+    auId: PropTypes.number,
 };
 
 export const WithStylesStory = glamorous(Story)(styles);

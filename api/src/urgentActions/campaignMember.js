@@ -37,6 +37,31 @@ export const addCampaignMember = async (id, { firstname, lastname, email, civili
     return { firstname, lastname, email, registered: contactBody.registered };
 };
 
+export const addCampaignMemberTwitter = async id => {
+    if (!isUUID(id)) {
+        return new Error(`Invalid UUID format: ${id}`);
+    }
+
+    const urgentAction = await getUrgentAction(id);
+    if (!urgentAction) {
+        return new Error('Not Found');
+    }
+
+    const { body: authBody } = await authenticate();
+    const accessToken = authBody ? authBody.access_token : null;
+
+    await addCampaignMemberIntoSalesForce(
+        accessToken,
+        urgentAction,
+        {
+            lastname: 'TWITTERAU',
+        },
+        'Twitter',
+    );
+
+    return { succes: true };
+};
+
 export const registerContact = async ({ firstname, lastname, email, phone, civility }) => {
     const { body: authBody } = await authenticate();
     const accessToken = authBody ? authBody.access_token : null;
