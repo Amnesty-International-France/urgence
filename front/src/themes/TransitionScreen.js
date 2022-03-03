@@ -144,6 +144,10 @@ export const TransitionScreen = ({
     };
 
     const getTwitterText = () => {
+        if (!twitterAction) {
+            return '';
+        }
+        
         let twitterText = `${twitterAction.title} - ${twitterAction.message}`;
         twitterAction.url && (twitterText += `&url=${encodeURIComponent(twitterAction.url)}`);
         twitterAction.hashtags && (twitterText += `&hashtags=${twitterAction.hashtags}`);
