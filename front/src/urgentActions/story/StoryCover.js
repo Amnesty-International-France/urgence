@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import get from 'lodash.get';
@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import { white, black } from '../../themes/colors';
 import RichText from '../../themes/RichText';
 import MobileDetect from 'mobile-detect';
+import { secureUseEffect, secureUseState } from '../../hooks/secureHooks';
 
 const styles = {
     position: 'relative',
@@ -70,22 +71,41 @@ const styles = {
         },
     },
 };
-const lastUrlParam = /\/([^/]*$)/;
+const checkIfImageExists = url => {
+    return new Promise(resolve => {
+        const img = new Image();
+        img.src = url;
 
+        if (img.complete) {
+            resolve(true);
+        } else {
+            img.onload = () => {
+                resolve(true);
+            };
+            img.onerror = () => {
+                resolve(false);
+            };
+        }
+    });
+};
+const isOnMobile = () => {
+    const md = new MobileDetect(global.navigator.userAgent);
+    return md.mobile();
+};
 export const StoryCover = ({ className, content, medium, mediumDesktop, isMobile }) => {
-    const isOnMobile = () => {
-        const md = new MobileDetect(global.navigator.userAgent);
-        return md.mobile();
-    };
-    const src = get(isMobile || isOnMobile() || !mediumDesktop ? medium : mediumDesktop, 'src');
-    const cropSrc = typeof src === 'string' ? src.replace(lastUrlParam, '/crop-$1') : '';
+    const currentMedium = isMobile || isOnMobile() || !mediumDesktop ? medium : mediumDesktop;
+    const src = get(currentMedium, 'src');
+    const imageSrc = typeof src === 'string' ? src : '';
+    const lastUrlParam = /\/([^/]*$)/;
+    const croppedImageSrc = imageSrc.replace(lastUrlParam, '/crop-$1');
+
     return (
         <div className={className}>
             <Paper
                 className="paper"
                 style={{
                     ...{
-                        backgroundImage: `url(${cropSrc})`,
+                        backgroundImage: `url(${croppedImageSrc}), url(${imageSrc})`,
                         backgroundPosition: 'top',
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
