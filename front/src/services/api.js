@@ -23,6 +23,29 @@ export const addCampaignMember = (urgentActionId, member) =>
         },
     }).then(res => res.json());
 
+const addCampaignMemberTwitterQuery = `
+    mutation AddCampaignMemberTwitter($id: ID!) {
+        addCampaignMemberTwitter(id: $id) {
+            success
+        }
+    }
+`;
+
+export const addCampaignMemberTwitter = urgentActionId =>
+    fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
+        method: 'POST',
+        body: JSON.stringify({
+            operationName: 'AddCampaignMemberTwitter',
+            query: addCampaignMemberTwitterQuery,
+            variables: {
+                id: urgentActionId,
+            },
+        }),
+        headers: {
+            'content-type': 'application/json',
+        },
+    }).then(res => res.json());
+
 const registerContactQuery = `
     mutation RegisterContact($member: CampaignMemberInput!) {
         registerContact(member: $member) {

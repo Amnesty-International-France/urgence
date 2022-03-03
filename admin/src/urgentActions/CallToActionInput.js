@@ -112,6 +112,7 @@ export const CallToActionInput = ({ classes, source }) => (
                                                 source={`${source}.progress.message`}
                                                 label="Message"
                                                 defaultValue="Déjà {{count}} participations sur un objectif de {{objective}}"
+                                                helperText="Déjà {{count}} participations sur un objectif de {{objective}}"
                                             />
                                         </Fragment>
                                     </Labeled>

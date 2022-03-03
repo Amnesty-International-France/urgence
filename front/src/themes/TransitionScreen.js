@@ -16,6 +16,7 @@ import { withRouter } from 'react-router';
 import { routeMatch } from '../propTypes';
 import { withSessionData } from '../DataContext';
 import { compose } from 'recompose';
+import { addCampaignMemberTwitter } from '../services/api';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -115,6 +116,7 @@ export const TransitionScreen = ({
     interpelationMode,
     twitterAction,
     match: { params: slug },
+    auId,
 }) => {
     const [displayProgress, setDisplayProgress] = secureUseState(false);
     secureUseEffect(() => {
@@ -146,6 +148,23 @@ export const TransitionScreen = ({
         twitterAction.url && (twitterText += `&url=${encodeURIComponent(twitterAction.url)}`);
         twitterAction.hashtags && (twitterText += `&hashtags=${twitterAction.hashtags}`);
         return twitterText;
+    };
+
+    const addTwitterMember = () => {
+        return addCampaignMemberTwitter(auId)
+            .then(result => {
+                if (result.errors && result.errors.length) {
+                    // eslint-disable-next-line no-console
+                    console.log(
+                        'Failed adding campaign member twitter',
+                        result.errors.map(error => `- ${error.message}`).join('\n'),
+                    );
+                }
+            })
+            .catch(() => {})
+            .then(() => {
+                history.push(generateUrl(urlToRedirect, slug));
+            });
     };
 
     const urlToRedirect = registered ? 'share' : 'register';
@@ -185,10 +204,7 @@ export const TransitionScreen = ({
 
                     {interpelationMode === 'rs' && (
                         <div className="social-media">
-                            <LinkTwitter
-                                text={getTwitterText()}
-                                action={() => history.push(generateUrl(urlToRedirect, slug))}
-                            />
+                            <LinkTwitter text={getTwitterText()} action={addTwitterMember} />
                         </div>
                     )}
                 </div>
@@ -216,6 +232,7 @@ TransitionScreen.propTypes = {
         hashtags: PropTypes.string,
         url: PropTypes.string,
     }),
+    auId: PropTypes.number,
 };
 
 TransitionScreen.defaultProps = {

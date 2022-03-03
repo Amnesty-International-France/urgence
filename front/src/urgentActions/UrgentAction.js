@@ -153,12 +153,14 @@ export const UrgentAction = ({ history, slug, step, data }) => {
     if (step === 'story' || step === 'act') {
         const callToAction = get(data, 'UrgentAction.call_to_action');
         const responseCount = get(data, 'UrgentAction.response_count');
+        const id = get(data, 'UrgentAction.id');
         return (
             <Story
                 story={story}
                 step={step}
                 callToAction={callToAction}
                 responseCount={responseCount}
+                auId={id}
             />
         );
     }

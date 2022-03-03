@@ -50,6 +50,7 @@ export const addCampaignMember = async (
     access_token,
     { campaign_code },
     { firstname, lastname, email, civility },
+    type = 'Email',
 ) => {
     const url = `${QUERY_BASE_URL}/sobjects/CampaignMember`;
     let origin_code = 'AU_WEBAPP';
@@ -77,7 +78,7 @@ export const addCampaignMember = async (
             Tech_LastName__c: lastname,
             Tech_CodeOrigine__c: origin_code,
             Type_de_participation__c: 'Smartphone',
-            Actions_effectuees__c: 'Email',
+            Actions_effectuees__c: type,
             Status: 'a participé',
             Tech_Salutation__c: salesForcecivility,
             Campaign: {
@@ -99,7 +100,7 @@ export const addCampaignMember = async (
             Tech_LastName__c: lastname,
             Tech_CodeOrigine__c: origin_code,
             Type_de_participation__c: 'Smartphone',
-            Actions_effectuees__c: 'Email',
+            Actions_effectuees__c: type,
             Status: 'a participé',
             Tech_Salutation__c: salesForcecivility,
             Campaign: {

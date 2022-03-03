@@ -8,7 +8,7 @@ import {
     updateUrgentAction,
     removeUrgentAction,
 } from './repository';
-import { addCampaignMember, registerContact } from './campaignMember';
+import { addCampaignMember, addCampaignMemberTwitter, registerContact } from './campaignMember';
 
 import { uploadImageFromStory } from '../services/uploadImageFromStory';
 import { getOriginCodeByCampaignCode, authenticate } from '../services/salesForceApi';
@@ -78,6 +78,9 @@ export default {
         },
         addCampaignMember: (_, { id, member }) => {
             return addCampaignMember(id, member);
+        },
+        addCampaignMemberTwitter: (_, { id }) => {
+            return addCampaignMemberTwitter(id);
         },
         registerContact: (_, { member }) => {
             return registerContact(member);
