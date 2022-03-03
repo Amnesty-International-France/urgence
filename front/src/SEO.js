@@ -33,7 +33,7 @@ const SEO = ({ socialMetadata, lang, url, siteName }) => {
 
         {
             name: `twitter:card`,
-            content: `summary_large_image`,
+            content: `summary`,
         },
         {
             name: `twitter:title`,
