@@ -70,22 +70,24 @@ const styles = {
         },
     },
 };
-const lastUrlParam = /\/([^/]*$)/;
-
+const isOnMobile = () => {
+    const md = new MobileDetect(global.navigator.userAgent);
+    return md.mobile();
+};
 export const StoryCover = ({ className, content, medium, mediumDesktop, isMobile }) => {
-    const isOnMobile = () => {
-        const md = new MobileDetect(global.navigator.userAgent);
-        return md.mobile();
-    };
-    const src = get(isMobile || isOnMobile() || !mediumDesktop ? medium : mediumDesktop, 'src');
-    const cropSrc = typeof src === 'string' ? src.replace(lastUrlParam, '/crop-$1') : '';
+    const currentMedium = isMobile || isOnMobile() || !mediumDesktop ? medium : mediumDesktop;
+    const src = get(currentMedium, 'src');
+    const imageSrc = typeof src === 'string' ? src : '';
+    const lastUrlParam = /\/([^/]*$)/;
+    const croppedImageSrc = imageSrc.replace(lastUrlParam, '/crop-$1');
+
     return (
         <div className={className}>
             <Paper
                 className="paper"
                 style={{
                     ...{
-                        backgroundImage: `url(${cropSrc})`,
+                        backgroundImage: `url(${croppedImageSrc}), url(${imageSrc})`,
                         backgroundPosition: 'top',
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
