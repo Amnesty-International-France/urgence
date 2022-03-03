@@ -68,6 +68,13 @@ const query = gql`
                     display_threshold
                     message
                 }
+                interpelation_mode
+                twitter_action {
+                    title
+                    message
+                    hashtags
+                    url
+                }
             }
             message {
                 text_view
@@ -255,14 +262,12 @@ export const UrgentAction = ({ history, slug, step, data }) => {
 
     if (step === 'thanks-end') {
         const thankEnd = get(data, 'UrgentAction.end_thank');
-        const emailThank = get(data, 'UrgentAction.email_thank');
 
         return (
             <ThankStep
                 data={thankEnd}
                 slug={slug}
                 step={step}
-                dataShare={emailThank}
                 analyticsCategory={ANALYTICS_CATEGORIES.SHARE}
             />
         );

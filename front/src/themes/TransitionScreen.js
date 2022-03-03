@@ -10,6 +10,12 @@ import { yellow, black } from '../themes/colors';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { secureUseEffect, secureUseState } from '../hooks/secureHooks';
+import LinkTwitter from './Sharing/LinkTwitter';
+import generateUrl from '../services/generateUrl';
+import { withRouter } from 'react-router';
+import { routeMatch } from '../propTypes';
+import { withSessionData } from '../DataContext';
+import { compose } from 'recompose';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -64,6 +70,11 @@ const styles = {
     '& .text': {
         margin: '0.5em 0',
     },
+    '& .social-media': {
+        marginTop: '1rem',
+        display: 'flex',
+        justifyContent: 'center',
+    },
     '& .actions': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
         fontWeight: 'bold',
@@ -93,12 +104,17 @@ const styles = {
 };
 
 export const TransitionScreen = ({
+    registered,
     className,
     actions,
     title,
     message,
     progress,
     responseCount,
+    history,
+    interpelationMode,
+    twitterAction,
+    match: { params: slug },
 }) => {
     const [displayProgress, setDisplayProgress] = secureUseState(false);
     secureUseEffect(() => {
@@ -124,6 +140,15 @@ export const TransitionScreen = ({
         text = text.replace('{{objective}}', progress.objective);
         return text;
     };
+
+    const getTwitterText = () => {
+        let twitterText = `${twitterAction.title} - ${twitterAction.message}`;
+        twitterAction.url && (twitterText += `&url=${encodeURIComponent(twitterAction.url)}`);
+        twitterAction.hashtags && (twitterText += `&hashtags=${twitterAction.hashtags}`);
+        return twitterText;
+    };
+
+    const urlToRedirect = registered ? 'share' : 'register';
     return (
         <div className={className}>
             <Paper className="paper" elevation={4} square>
@@ -157,20 +182,40 @@ export const TransitionScreen = ({
                             <RichText html={message} />
                         </div>
                     )}
+
+                    {interpelationMode === 'rs' && (
+                        <div className="social-media">
+                            <LinkTwitter
+                                text={getTwitterText()}
+                                action={() => history.push(generateUrl(urlToRedirect, slug))}
+                            />
+                        </div>
+                    )}
                 </div>
             </Paper>
-            <div className="actions">{actions()}</div>
+            {interpelationMode === 'email' && <div className="actions">{actions()}</div>}
         </div>
     );
 };
 
 TransitionScreen.propTypes = {
+    data: PropTypes.any,
     className: PropTypes.string.isRequired,
     actions: PropTypes.func,
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     progress: PropTypes.any,
     responseCount: PropTypes.number,
+    interpelationMode: PropTypes.string,
+    history: PropTypes.any,
+    match: routeMatch,
+    registered: PropTypes.any,
+    twitterAction: PropTypes.shape({
+        title: PropTypes.string,
+        message: PropTypes.string,
+        hashtags: PropTypes.string,
+        url: PropTypes.string,
+    }),
 };
 
 TransitionScreen.defaultProps = {
@@ -179,4 +224,4 @@ TransitionScreen.defaultProps = {
     message: '',
 };
 
-export default glamorous(TransitionScreen)(styles);
+export default glamorous(compose(withSessionData, withRouter)(TransitionScreen))(styles);

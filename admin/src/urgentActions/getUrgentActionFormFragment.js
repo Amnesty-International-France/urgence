@@ -72,6 +72,15 @@ const generateSlug = (title = '') =>
 
 const autoFocusProps = { autoFocus: true };
 
+const isSocialMediaAction = (record, source) => {
+    return (
+        record &&
+        record[source] &&
+        record[source].interpelation_mode &&
+        record[source].interpelation_mode === 'rs'
+    );
+};
+
 const Form = ({ classes, record }) => {
     const [emptyCode, setEmptyCode] = useState(!record.campaign_code);
 
@@ -159,22 +168,32 @@ const Form = ({ classes, record }) => {
                 <CallToActionInput source="call_to_action" />
             </div>
 
-            <div className={`${classes.form} message-view`}>
-                <h2>Message View</h2>
-                <MessageViewInput source="message" />
-            </div>
+            <FormDataConsumer>
+                {({ formData }) => {
+                    if (!isSocialMediaAction(formData, 'call_to_action')) {
+                        return (
+                            <Fragment>
+                                <div className={`${classes.form} message-view`}>
+                                    <h2>Message View</h2>
+                                    <MessageViewInput source="message" />
+                                </div>
 
-            <div className={`${classes.form} message-send`}>
-                <h2>Message Send</h2>
-                <MessageSendInput source="message" />
-            </div>
+                                <div className={`${classes.form} message-send`}>
+                                    <h2>Message Send</h2>
+                                    <MessageSendInput source="message" />
+                                </div>
 
-            {LETTER_ACTIVATED && (
-                <div className={`${classes.form} letter`}>
-                    <h2>Letter</h2>
-                    <LetterInput source="recipient" />
-                </div>
-            )}
+                                {LETTER_ACTIVATED && (
+                                    <div className={`${classes.form} letter`}>
+                                        <h2>Letter</h2>
+                                        <LetterInput source="recipient" />
+                                    </div>
+                                )}
+                            </Fragment>
+                        );
+                    }
+                }}
+            </FormDataConsumer>
 
             <div className={`${classes.form} share`}>
                 <h2>Share (only for members already registered)</h2>

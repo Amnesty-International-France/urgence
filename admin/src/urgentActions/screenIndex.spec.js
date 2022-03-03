@@ -17,25 +17,31 @@ describe('screenIndex.get', () => {
     });
 
     it("should return the amount of story steps + the step index if it's other steps", () => {
-        let index = get(CALL_TO_ACTION, { story: [1, 2] });
+        const formdata = {
+            call_to_action: {
+                interpelation_mode: 'email',
+            },
+            story: [1, 2],
+        };
+        let index = get(CALL_TO_ACTION, formdata);
         expect(index).toEqual(3);
 
-        index = get(MESSAGE_VIEW, { story: [1, 2] });
+        index = get(MESSAGE_VIEW, formdata);
         expect(index).toEqual(4);
 
-        index = get(MESSAGE_SEND, { story: [1, 2] });
+        index = get(MESSAGE_SEND, formdata);
         expect(index).toEqual(4);
 
-        index = get(ADDRESS, { story: [1, 2] });
+        index = get(ADDRESS, formdata);
         expect(index).toEqual(4);
 
-        index = get(REGISTER, { story: [1, 2] });
+        index = get(REGISTER, formdata);
         expect(index).toEqual(5);
 
-        index = get(SHARE, { story: [1, 2] });
+        index = get(SHARE, formdata);
         expect(index).toEqual(5);
 
-        index = get(THANKS, { story: [1, 2] });
+        index = get(THANKS, formdata);
         expect(index).toEqual(6);
     });
 });

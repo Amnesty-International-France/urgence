@@ -128,11 +128,27 @@ export default gql`
         message: String
     }
 
+    type TwitterAction {
+        title: String
+        message: String
+        hashtags: String
+        url: String
+    }
+
+    input TwitterActionInput {
+        title: String
+        message: String
+        hashtags: String
+        url: String
+    }
+
     type CallToAction {
         title: String
         message: String
         button: String
         progress: Progress
+        interpelation_mode: String
+        twitter_action: TwitterAction
     }
 
     input CallToActionInput {
@@ -140,6 +156,8 @@ export default gql`
         message: String
         button: String
         progress: ProgressInput
+        interpelation_mode: String
+        twitter_action: TwitterActionInput
     }
 
     type Recipient {
