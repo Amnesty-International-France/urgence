@@ -382,7 +382,7 @@ export default gql`
         addCampaignMember(id: ID!, member: CampaignMemberInput!): CampaignMember!
         addCampaignMemberTwitter(
             id: ID!
-            member: CampaignMemberInputTwitter!
+            member: CampaignMemberTwitterInput!
         ): CampaignMemberTwitter!
         registerContact(id: ID, member: CampaignMemberInput!): CampaignMember!
         addResponseCount(id: ID!): UrgentAction!

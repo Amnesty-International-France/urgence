@@ -163,7 +163,7 @@ export const TransitionScreen = ({
 
     const addTwitterMember = () => {
         addResponseCount(auId);
-        if (registered) {
+        if (registered || (firstname && lastname)) {
             return addCampaignMemberTwitter(auId, {
                 firstname,
                 lastname,
