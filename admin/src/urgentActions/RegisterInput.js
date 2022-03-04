@@ -53,12 +53,12 @@ export const RegisterInput = ({ classes, source }) => {
                                     />
                                     <RichTextInput
                                         source={`${source}.phone_indication`}
-                                        label="Phone Indication"
+                                        label="Consignes inscription"
                                         defaultValue={defaultPhoneIndication}
                                     />
                                     <TextInput
                                         source={`${source}.button`}
-                                        label="Button"
+                                        label="Bouton"
                                         defaultValue={defaultButton}
                                         validate={[required()]}
                                     />

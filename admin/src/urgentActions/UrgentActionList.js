@@ -30,7 +30,8 @@ export default props => (
                         source="last_edition_date"
                     />
                     <BooleanField source="is_default" label="Set As Default" />
-                    <TextField source="response_count" />
+                    <TextField source="response_count" label="Compteur participation"/>
+                    <TextField source="call_to_action.interpelation_mode" label="Type participation"/>
                     <EditButton />
                     <PreviewLink />
                     <PreviewLetter />
