@@ -26,6 +26,13 @@ const config = convict({
             doc:
                 'All API routes are served under `/api` prefix in all environments, except in dev where it is served from root.',
         },
+        metadata: {
+            format: String,
+            default: '/metadata',
+            env: 'API_METADATA_URL',
+            doc:
+                'All metadata routes are served under `/metadata` prefix in all environments, except in dev where it is served from root.',
+        },
     },
     port: {
         format: 'port',
