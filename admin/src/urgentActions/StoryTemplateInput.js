@@ -105,7 +105,10 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
                         <FrontPreview className={classes.preview}>
                             <StorySlide
                                 index={index}
-                                step={{ ...defaultFormData, ...formData.story[index] }}
+                                step={{
+                                    ...defaultFormData,
+                                    ...formData.story[index],
+                                }}
                             >
                                 {props =>
                                     index === 0 ? (
@@ -119,7 +122,10 @@ export const StoryTemplateInput = ({ classes, source, index }) => (
                         <FrontPreview className={classes.previewDesktop}>
                             <StorySlide
                                 index={index}
-                                step={{ ...defaultFormData, ...formData.story[index] }}
+                                step={{
+                                    ...defaultFormData,
+                                    ...formData.story[index],
+                                }}
                             >
                                 {props =>
                                     index === 0 ? (

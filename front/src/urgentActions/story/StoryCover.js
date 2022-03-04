@@ -76,7 +76,7 @@ const isOnMobile = () => {
 };
 export const StoryCover = ({ className, content, medium, mediumDesktop, isMobile }) => {
     const currentMedium = isMobile || isOnMobile() || !mediumDesktop ? medium : mediumDesktop;
-    const src = get(currentMedium, 'src');
+    const src = get(currentMedium, 'src.rawFile.preview') || get(currentMedium, 'src');
     const imageSrc = typeof src === 'string' ? src : '';
     const lastUrlParam = /\/([^/]*$)/;
     const croppedImageSrc = imageSrc.replace(lastUrlParam, '/crop-$1');

@@ -244,12 +244,12 @@ export default gql`
     }
 
     type Telegram {
-        url: String,
+        url: String
         message: String
     }
 
     input TelegramInput {
-        url: String,  
+        url: String
         message: String
     }
 
@@ -369,7 +369,7 @@ export default gql`
         deleteUrgentAction(id: ID!): UrgentAction
         addCampaignMember(id: ID!, member: CampaignMemberInput!): CampaignMember!
         addCampaignMemberTwitter(id: ID!): CampaignMemberTwitter!
-        registerContact(member: CampaignMemberInput!): CampaignMember!
+        registerContact(id: ID, member: CampaignMemberInput!): CampaignMember!
         addResponseCount(id: ID!): UrgentAction!
     }
 `;

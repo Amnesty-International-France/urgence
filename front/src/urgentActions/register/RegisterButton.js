@@ -13,20 +13,23 @@ export const RegisterButton = ({
     step,
     setRegistered,
     formValues,
+    auId,
 }) => {
     const { firstname, lastname, phone, email, civility } = formValues;
     const register = () => {
-        return registerContact({ email, phone, firstname, lastname, civility }).then(result => {
-            if (result.errors && result.errors.length) {
-                // eslint-disable-next-line no-console
-                console.log(
-                    'Failed registering campaign member',
-                    result.errors.map(error => `- ${error.message}`).join('\n'),
-                );
-            }
-            const isRegistered = get(result, 'data.registerContact.registered', false);
-            setRegistered(isRegistered ? 'true' : 'false');
-        });
+        return registerContact(auId, { email, phone, firstname, lastname, civility }).then(
+            result => {
+                if (result.errors && result.errors.length) {
+                    // eslint-disable-next-line no-console
+                    console.log(
+                        'Failed registering campaign member',
+                        result.errors.map(error => `- ${error.message}`).join('\n'),
+                    );
+                }
+                const isRegistered = get(result, 'data.registerContact.registered', false);
+                setRegistered(isRegistered ? 'true' : 'false');
+            },
+        );
     };
 
     return (

@@ -62,11 +62,20 @@ export const addCampaignMemberTwitter = async id => {
     return { succes: true };
 };
 
-export const registerContact = async ({ firstname, lastname, email, phone, civility }) => {
+export const registerContact = async (id, { firstname, lastname, email, phone, civility }) => {
     const { body: authBody } = await authenticate();
     const accessToken = authBody ? authBody.access_token : null;
 
-    await register(accessToken, { civility, firstname, lastname, email, phone });
+    const urgentAction = await getUrgentAction(id);
+
+    await register(accessToken, {
+        civility,
+        firstname,
+        lastname,
+        email,
+        phone,
+        originCode: urgentAction.origin_code,
+    });
 
     return { firstname, lastname, email, civility, registered: true };
 };
