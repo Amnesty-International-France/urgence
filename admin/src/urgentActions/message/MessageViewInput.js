@@ -86,13 +86,13 @@ export const MessageSendInput = ({ classes, source }) => {
                                                 <RichTextInput
                                                     fullWidth
                                                     multiline
-                                                    label="Tip"
+                                                    label="Introduction étape 1 (objet)"
                                                     source={`${source}.object_indication`}
                                                     defaultValue="Nous vous en proposons un mais vous pouvez le personnaliser"
                                                 />
                                                 <TextInput
                                                     source={`${source}.object_example`}
-                                                    label="Example"
+                                                    label="Exemple"
                                                 />
                                             </Fragment>
                                         </Labeled>
@@ -101,13 +101,13 @@ export const MessageSendInput = ({ classes, source }) => {
                                                 <RichTextInput
                                                     fullWidth
                                                     multiline
-                                                    label="Tip"
+                                                    label="Introduction étape 2 (message)"
                                                     source={`${source}.text_view`}
                                                     defaultValue="Voici un modèle de message que nous vous proposons d'envoyer. Vous pourrez bien sûr le personnaliser depuis votre boîte email."
                                                 />
 
                                                 <ArrayInput
-                                                    label="Content"
+                                                    label="Corps du mail"
                                                     source={`${source}.message_template`}
                                                 >
                                                     <SimpleParagraphFormIterator
@@ -126,7 +126,7 @@ export const MessageSendInput = ({ classes, source }) => {
                                                 </ArrayInput>
                                             </Fragment>
                                         </Labeled>
-                                        <Labeled label="Recipient">
+                                        <Labeled label="Destinataires">
                                             <Fragment>
                                                 <TextInput
                                                     fullWidth
@@ -150,7 +150,7 @@ export const MessageSendInput = ({ classes, source }) => {
                                         </Labeled>
                                         <TextInput
                                             source={`${source}.button_view`}
-                                            label="Button"
+                                            label="Bouton"
                                             defaultValue="Suivant"
                                             validate={[required(), minLength(3), maxLength(25)]}
                                         />

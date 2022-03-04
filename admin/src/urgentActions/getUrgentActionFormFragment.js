@@ -95,7 +95,7 @@ const Form = ({ classes, record }) => {
                     <Grid item xs>
                         <LongTextInput
                             source="campaign_code"
-                            label="Campaign Code"
+                            label="Code Campagne"
                             onChange={handleTextFieldChange}
                             helperText={
                                 emptyCode ? (
@@ -113,7 +113,7 @@ const Form = ({ classes, record }) => {
                     <Grid item xs>
                         <SelectInput
                             source="is_default"
-                            label="Set As Default"
+                            label="Afficher par défaut"
                             defaultValue={false}
                             style={{ width: '100%' }}
                             choices={[
@@ -123,7 +123,7 @@ const Form = ({ classes, record }) => {
                         />
                     </Grid>
                 </Grid>
-                <LongTextInput source="title" validate={required()} />
+                <LongTextInput label="Titre" source="title" validate={required()} />
                 <FormDataConsumer>
                     {({ formData }) => {
                         formData.slug = generateSlug(formData.title);
@@ -133,7 +133,7 @@ const Form = ({ classes, record }) => {
             </div>
 
             <div className={`${classes.form} social-metadata`}>
-                <h2>Social Metadata</h2>
+                <h2>Métadonnées Réseaux sociaux</h2>
                 <Fragment>
                     <FormDataConsumer>
                         {({ formData }) => {

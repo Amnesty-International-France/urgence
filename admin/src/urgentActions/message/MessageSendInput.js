@@ -48,13 +48,13 @@ export const MessageSendInput = ({ classes, source }) => (
                                     <RichTextInput
                                         fullWidth
                                         multiline
-                                        label="Message Send Tip"
+                                        label="Consigne écran"
                                         source={`${source}.text_send`}
                                         defaultValue="Complétez ce formulaire pour envoyer ce message."
                                     />
                                     <TextInput
                                         source={`${source}.button_send`}
-                                        label="Button"
+                                        label="Bouton"
                                         defaultValue="Voir l'email"
                                         validate={[required(), minLength(3), maxLength(25)]}
                                     />

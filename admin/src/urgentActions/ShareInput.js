@@ -61,13 +61,13 @@ export const ShareInput = ({ classes, source }) => {
                                     />
                                     <RichTextInput
                                         source={`${source}.text`}
-                                        label="Text"
+                                        label="Contenu"
                                         defaultValue={defaultText}
                                         validate={[required()]}
                                     />
                                     <LongTextInput
                                         source={`${source}.share.twitter_message`}
-                                        label="Tweet message"
+                                        label="Message du post twitter"
                                         defaultValue={defaultTweet}
                                         rows="2"
                                         rowsMax="10"
@@ -75,21 +75,21 @@ export const ShareInput = ({ classes, source }) => {
                                     />
                                     <LongTextInput
                                         source={`${source}.share.message`}
-                                        label="Sharing message"
+                                        label="Message de partage WhatsApp"
                                         defaultValue={defaultMessage}
                                         rows="2"
                                         rowsMax="10"
                                         validate={[required()]}
                                     />
-                                    <Labeled label="Telegram">
+                                    <Labeled label="Activer communauté Telegram">
                                         <Fragment>
                                             <TextInput
                                                 source={`${source}.telegram.url`}
-                                                label="Lien telegram"
+                                                label="Lien canal Telegram"
                                             />
                                             <RichTextInput
                                                 source={`${source}.telegram.message`}
-                                                label="Message telegram"
+                                                label="Message"
                                             />
                                         </Fragment>
                                     </Labeled>

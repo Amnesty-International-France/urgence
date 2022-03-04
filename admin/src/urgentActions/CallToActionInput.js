@@ -85,28 +85,30 @@ export const CallToActionInput = ({ classes, source }) => (
                                     {!isSocialMediaAction(formData, source) && (
                                         <TextInput
                                             source={`${source}.button`}
-                                            label="Button"
+                                            label="Bouton"
                                             defaultValue="Voir l'email"
                                             validate={[required(), minLength(3), maxLength(25)]}
                                         />
                                     )}
-                                    <Labeled label="Progress">
+                                    <Labeled label="Participation">
                                         <Fragment>
                                             <BooleanInput
-                                                label="Display progress"
+                                                label="Affichage compteur participations"
                                                 source={`${source}.progress.display`}
                                             />
                                             <NumberInput
-                                                label="Objective"
+                                                label="Objectif"
                                                 source={`${source}.progress.objective`}
                                                 step={1}
                                                 defaultValue={500}
+                                                fullWidth
                                             />
                                             <NumberInput
-                                                label="Display threshold"
+                                                label="Affichage compteur : nombre de participations minimum"
                                                 source={`${source}.progress.display_threshold`}
                                                 step={1}
                                                 defaultValue={5}
+                                                fullWidth
                                             />
                                             <RichTextInput
                                                 source={`${source}.progress.message`}
