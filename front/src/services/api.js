@@ -24,14 +24,14 @@ export const addCampaignMember = (urgentActionId, member) =>
     }).then(res => res.json());
 
 const addCampaignMemberTwitterQuery = `
-    mutation AddCampaignMemberTwitter($id: ID!) {
-        addCampaignMemberTwitter(id: $id) {
+    mutation AddCampaignMemberTwitter($id: ID!, $member: CampaignMemberTwitterInput!) {
+        addCampaignMemberTwitter(id: $id, member: $member) {
             success
         }
     }
 `;
 
-export const addCampaignMemberTwitter = urgentActionId =>
+export const addCampaignMemberTwitter = (urgentActionId, member) =>
     fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
         method: 'POST',
         body: JSON.stringify({
@@ -39,6 +39,7 @@ export const addCampaignMemberTwitter = urgentActionId =>
             query: addCampaignMemberTwitterQuery,
             variables: {
                 id: urgentActionId,
+                member,
             },
         }),
         headers: {
