@@ -79,8 +79,8 @@ export default {
         addCampaignMember: (_, { id, member }) => {
             return addCampaignMember(id, member);
         },
-        addCampaignMemberTwitter: (_, { id }) => {
-            return addCampaignMemberTwitter(id);
+        addCampaignMemberTwitter: (_, { id, member }) => {
+            return addCampaignMemberTwitter(id, member);
         },
         registerContact: (_, { id, member }) => {
             return registerContact(id, member);
