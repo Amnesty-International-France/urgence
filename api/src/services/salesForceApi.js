@@ -77,9 +77,9 @@ export const addCampaignMember = async (
             Tech_FirstName__c: firstname,
             Tech_LastName__c: lastname,
             Tech_CodeOrigine__c: origin_code,
-            Type_de_participation__c: 'Smartphone',
+            Type_de_participation__c: type === 'Tweet' ? 'Twitter' : 'Smartphone',
             Actions_effectuees__c: type,
-            Status: 'a participé',
+            Status: 'A participé',
             Tech_Salutation__c: salesForcecivility,
             Campaign: {
                 Code__c: campaign_code,

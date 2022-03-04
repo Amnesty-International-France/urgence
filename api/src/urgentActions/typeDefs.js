@@ -314,7 +314,19 @@ export default gql`
     }
 
     type CampaignMemberTwitter {
-        success: Boolean
+        firstname: String!
+        lastname: String!
+        email: String!
+        phone: String
+        civility: String
+    }
+
+    input CampaignMemberTwitterInput {
+        firstname: String!
+        lastname: String!
+        email: String!
+        phone: String
+        civility: String
     }
 
     extend type Query {
@@ -368,7 +380,10 @@ export default gql`
         ): UrgentAction
         deleteUrgentAction(id: ID!): UrgentAction
         addCampaignMember(id: ID!, member: CampaignMemberInput!): CampaignMember!
-        addCampaignMemberTwitter(id: ID!): CampaignMemberTwitter!
+        addCampaignMemberTwitter(
+            id: ID!
+            member: CampaignMemberTwitterInput!
+        ): CampaignMemberTwitter!
         registerContact(id: ID, member: CampaignMemberInput!): CampaignMember!
         addResponseCount(id: ID!): UrgentAction!
     }

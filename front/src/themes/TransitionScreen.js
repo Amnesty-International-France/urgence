@@ -17,6 +17,7 @@ import { routeMatch } from '../propTypes';
 import { withSessionData } from '../DataContext';
 import { compose } from 'recompose';
 import { addCampaignMemberTwitter, addResponseCount } from '../services/api';
+import permanentData from '../data/permanentData';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -119,6 +120,12 @@ export const TransitionScreen = ({
     auId,
 }) => {
     const [displayProgress, setDisplayProgress] = secureUseState(false);
+    const firstname = permanentData.getFirstname();
+    const lastname = permanentData.getLastname();
+    const email = permanentData.getEmail();
+    const civility = permanentData.getCivility();
+    const phone = permanentData.getPhone();
+
     secureUseEffect(() => {
         if (
             !progress ||
@@ -147,7 +154,7 @@ export const TransitionScreen = ({
         if (!twitterAction) {
             return '';
         }
-        
+
         let twitterText = `${twitterAction.title} - ${twitterAction.message}`;
         twitterAction.url && (twitterText += `&url=${encodeURIComponent(twitterAction.url)}`);
         twitterAction.hashtags && (twitterText += `&hashtags=${twitterAction.hashtags}`);
@@ -156,20 +163,26 @@ export const TransitionScreen = ({
 
     const addTwitterMember = () => {
         addResponseCount(auId);
-        return addCampaignMemberTwitter(auId)
-            .then(result => {
-                if (result.errors && result.errors.length) {
-                    // eslint-disable-next-line no-console
-                    console.log(
-                        'Failed adding campaign member twitter',
-                        result.errors.map(error => `- ${error.message}`).join('\n'),
-                    );
-                }
+        if (registered || (firstname && lastname)) {
+            addCampaignMemberTwitter(auId, {
+                firstname,
+                lastname,
+                email,
+                civility,
+                phone,
             })
-            .catch(() => {})
-            .then(() => {
-                history.push(generateUrl(urlToRedirect, slug));
-            });
+                .then(result => {
+                    if (result.errors && result.errors.length) {
+                        // eslint-disable-next-line no-console
+                        console.log(
+                            'Failed adding campaign member twitter',
+                            result.errors.map(error => `- ${error.message}`).join('\n'),
+                        );
+                    }
+                })
+                .catch(() => {});
+        }
+        history.push(generateUrl(urlToRedirect, slug));
     };
 
     const urlToRedirect = registered ? 'share' : 'register';

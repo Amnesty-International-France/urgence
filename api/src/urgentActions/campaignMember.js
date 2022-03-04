@@ -37,7 +37,7 @@ export const addCampaignMember = async (id, { firstname, lastname, email, civili
     return { firstname, lastname, email, registered: contactBody.registered };
 };
 
-export const addCampaignMemberTwitter = async id => {
+export const addCampaignMemberTwitter = async (id, { firstname, lastname, email, civility }) => {
     if (!isUUID(id)) {
         return new Error(`Invalid UUID format: ${id}`);
     }
@@ -53,10 +53,8 @@ export const addCampaignMemberTwitter = async id => {
     await addCampaignMemberIntoSalesForce(
         accessToken,
         urgentAction,
-        {
-            lastname: 'TWITTERAU',
-        },
-        'Twitter',
+        { firstname, lastname, email: email || '', civility },
+        'Tweet',
     );
 
     return { succes: true };
