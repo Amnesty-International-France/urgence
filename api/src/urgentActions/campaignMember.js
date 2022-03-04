@@ -54,7 +54,7 @@ export const addCampaignMemberTwitter = async (id, { firstname, lastname, email,
         accessToken,
         urgentAction,
         { firstname, lastname, email: email || '', civility },
-        'Twitter',
+        'Tweet',
     );
 
     return { succes: true };

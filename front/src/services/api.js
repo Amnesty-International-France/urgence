@@ -26,7 +26,8 @@ export const addCampaignMember = (urgentActionId, member) =>
 const addCampaignMemberTwitterQuery = `
     mutation AddCampaignMemberTwitter($id: ID!, $member: CampaignMemberTwitterInput!) {
         addCampaignMemberTwitter(id: $id, member: $member) {
-            success
+            firstname
+            lastname
         }
     }
 `;
