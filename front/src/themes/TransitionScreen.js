@@ -119,6 +119,7 @@ export const TransitionScreen = ({
     auId,
 }) => {
     const [displayProgress, setDisplayProgress] = secureUseState(false);
+    export const getToken = () => global.localStorage.getItem('token');
     secureUseEffect(() => {
         if (
             !progress ||
@@ -147,7 +148,7 @@ export const TransitionScreen = ({
         if (!twitterAction) {
             return '';
         }
-        
+
         let twitterText = `${twitterAction.title} - ${twitterAction.message}`;
         twitterAction.url && (twitterText += `&url=${encodeURIComponent(twitterAction.url)}`);
         twitterAction.hashtags && (twitterText += `&hashtags=${twitterAction.hashtags}`);
@@ -156,20 +157,20 @@ export const TransitionScreen = ({
 
     const addTwitterMember = () => {
         addResponseCount(auId);
-        return addCampaignMemberTwitter(auId)
-            .then(result => {
-                if (result.errors && result.errors.length) {
-                    // eslint-disable-next-line no-console
-                    console.log(
-                        'Failed adding campaign member twitter',
-                        result.errors.map(error => `- ${error.message}`).join('\n'),
-                    );
-                }
-            })
-            .catch(() => {})
-            .then(() => {
-                history.push(generateUrl(urlToRedirect, slug));
-            });
+        if (registered) {
+            return addCampaignMemberTwitter(auId)
+                .then(result => {
+                    if (result.errors && result.errors.length) {
+                        // eslint-disable-next-line no-console
+                        console.log(
+                            'Failed adding campaign member twitter',
+                            result.errors.map(error => `- ${error.message}`).join('\n'),
+                        );
+                    }
+                })
+                .catch(() => {});
+        }
+        history.push(generateUrl(urlToRedirect, slug));
     };
 
     const urlToRedirect = registered ? 'share' : 'register';
