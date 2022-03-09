@@ -23,8 +23,8 @@ install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE) run --rm --no-deps front yarn install
 
 install-staging:
-	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api yarn install --production
-	$(DOCKER_COMPOSE) run --rm --no-deps api yarn install --production
+	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api bash -c "yarn config set unsafe-perm true && yarn install --production"
+	$(DOCKER_COMPOSE) run --rm --no-deps api bash -c "yarn config set unsafe-perm true && yarn install --production"
 
 start: ## Start the project with docker. Usage `make start`.
 	$(DOCKER_COMPOSE) up --force-recreate -d
