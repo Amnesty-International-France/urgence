@@ -21,10 +21,11 @@ const prepareUrgentActionForDatabase = async urgentAction => {
     const uploadedSocialMetadata = await uploadImageFromSocialMetadata(
         urgentAction.social_metadata,
     );
-    const { body: authBody } = await authenticate();
-    const accessToken = authBody ? authBody.access_token : null;
     let originCode;
     try {
+        const { body: authBody } = await authenticate();
+        const accessToken = authBody ? authBody.access_token : null;
+        
         originCode = await getOriginCodeByCampaignCode(accessToken, urgentAction.campaign_code);
     } catch (error) {
         originCode = 'AU_WEBAPP';
