@@ -38,7 +38,7 @@
     "scripts": {
         "start-dev": "pm2 startOrRestart --no-daemon pm2/development.json",
         "start": "pm2 startOrRestart --no-daemon pm2/production.json",
-        "build": "npx babel src/ --out-dir dist/ && cp src/urgentActions/*.html dist/urgentActions/",
+        "build": "npx babel-cli src/ --out-dir dist/ && cp src/urgentActions/*.html dist/urgentActions/",
         "test": "jest --ci --forceExit",
         "test-watch": "jest --watch"
     },
