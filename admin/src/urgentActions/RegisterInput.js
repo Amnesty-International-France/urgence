@@ -22,8 +22,8 @@ const styles = () => ({
     },
 });
 
-const defaultTitle = 'Restez Informé·e';
-const defaultText = `L'expérience vous a plu ? Inscrivez-vous pour recevoir les actions urgentes suivantes !`;
+const defaultTitle = `Merci ! On compte sur vous pour nos prochaines actions !`;
+const defaultText = `Vous aimeriez aider d'autres personnes ? Inscrivez-vous pour recevoir nos prochaines Actions Urgentes. <br/> On vous en envoie 1 à 2 par mois.`;
 const defaultPhoneIndication = `Inscrivez votre numéro de mobile pour recevoir les alertes SMS`;
 const defaultButton = `Je m'inscris`;
 

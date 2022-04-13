@@ -16,7 +16,7 @@ describe('<ThanksInput />', () => {
         },
     };
 
-    it('should set title by default to "Merci pour votre action."', () => {
+    it('should set title by default to "Bienvenue !"', () => {
         const props = { ...defaultProps };
         const renderProp = shallow(<ThanksInput {...props} final />)
             .find(FormDataConsumer)
@@ -26,7 +26,7 @@ describe('<ThanksInput />', () => {
         const wrapper = shallow(<symbol {...symbol.props} />);
 
         expect(wrapper.find('[label="Title"]').prop('defaultValue')).toBe(
-            'Merci pour votre action.',
+            'Bienvenue !',
         );
     });
 });

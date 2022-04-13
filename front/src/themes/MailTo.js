@@ -10,7 +10,8 @@ import trackEvent from '../analytics/trackEvent';
 import { styles } from './Link';
 
 export const buildMailDest = (recipient, subject, body) => {
-    return `mailto:${encodeURIComponent(recipient.mail)}?subject=${encodeURIComponent(
+    const mail = recipient.mail || 'example@mail.com';
+    return `mailto:${encodeURIComponent(mail)}?subject=${encodeURIComponent(
         subject,
     )}&body=${encodeURIComponent(body)}`
         .concat(recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '')

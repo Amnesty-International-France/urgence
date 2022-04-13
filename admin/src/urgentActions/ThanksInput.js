@@ -26,7 +26,7 @@ const styles = {
 export const ThanksInput = ({ classes, source, final }) => {
     const defaultValues = final
         ? {
-              title: 'Merci pour votre action.',
+              title: 'Bienvenue !',
               text: LETTER_ACTIVATED
                   ? "La lettre vous a été envoyée sur votre boîte e-mail. Poursuivez votre action en l'envoyant par La Poste."
                   : 'Nous comptons sur vous pour la prochaine action urgente.',
