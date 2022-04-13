@@ -72,7 +72,7 @@ export const CallToActionInput = ({ classes, source }) => (
                                     <LongTextInput
                                         source={`${source}.title`}
                                         label="Title"
-                                        defaultValue="Vous avez plus de pouvoir que vous ne le pensez !"
+                                        defaultValue="On passe à l'action !"
                                         validate={[required()]}
                                         multiline
                                     />

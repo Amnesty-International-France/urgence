@@ -117,6 +117,11 @@ DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "/app/var/wait-for-it.sh -h db
 	--migrations-dir=migrations \
 	-e api
 
+DB_MIGRATE_NGINX = $(DOCKER_COMPOSE_DEV_NGINX) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
+	--config=database.js \
+	--migrations-dir=migrations \
+	-e api
+
 DB_MIGRATE_TEST = $(DOCKER_COMPOSE_TEST) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
 	--config=database.js \
 	--migrations-dir=migrations \
@@ -146,6 +151,9 @@ migration-new: ## make migration-new MIGRATION_TITLE=whatever-title
 
 migration-down: ## make migration-down NB_MIGRATIONS=2
 	$(DB_MIGRATE) down -c ${NB_MIGRATIONS}"
+
+migration-nginx:
+	$(DB_MIGRATE_NGINX) up"
 
 migration-test:
 	$(DB_MIGRATE_TEST) up"

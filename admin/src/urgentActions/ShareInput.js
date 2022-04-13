@@ -35,9 +35,8 @@ const styles = theme => ({
     },
 });
 
-const defaultTitle = 'Se battre. Encore. Et Encore.';
-const defaultText =
-    "Continuons d'agir pour augmenter les chances de victoire ! Allons plus loin dans ce combat grace aux réseaux sociaux.";
+const defaultTitle = 'Merci pour votre action ! Et maintenant ?';
+const defaultText = `Un message, c'est bien. Des dizaines, c'est encore mieux.<br/><b>Et si 5 de vos amis faisaient comme vous ?</b>`;
 const defaultTweet = `@cible, respectez les droits humains !`;
 const defaultMessage = `J'ai agi avec Amnesty France !`;
 
@@ -69,7 +68,7 @@ export const ShareInput = ({ classes, source }) => {
                                         source={`${source}.share.twitter_message`}
                                         label="Message du post twitter"
                                         defaultValue={defaultTweet}
-                                        rows="2"
+                                        rows="1"
                                         rowsMax="10"
                                         validate={[required()]}
                                     />
@@ -77,7 +76,7 @@ export const ShareInput = ({ classes, source }) => {
                                         source={`${source}.share.message`}
                                         label="Message de partage WhatsApp"
                                         defaultValue={defaultMessage}
-                                        rows="2"
+                                        rows="1"
                                         rowsMax="10"
                                         validate={[required()]}
                                     />

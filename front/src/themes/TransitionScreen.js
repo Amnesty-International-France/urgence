@@ -132,7 +132,9 @@ export const TransitionScreen = ({
             progress.display == false ||
             !progress.objective ||
             !progress.message ||
-            !responseCount
+            !responseCount ||
+            !responseCount < progress.display_threshold
+
         ) {
             setDisplayProgress(false);
             return;

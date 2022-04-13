@@ -91,6 +91,7 @@ export const MessageSendInput = ({ classes, source }) => {
                                                     defaultValue="Nous vous en proposons un mais vous pouvez le personnaliser"
                                                 />
                                                 <TextInput
+                                                    fullWidth
                                                     source={`${source}.object_example`}
                                                     label="Exemple"
                                                 />
@@ -103,7 +104,7 @@ export const MessageSendInput = ({ classes, source }) => {
                                                     multiline
                                                     label="Introduction étape 2 (message)"
                                                     source={`${source}.text_view`}
-                                                    defaultValue="Voici un modèle de message que nous vous proposons d'envoyer. Vous pourrez bien sûr le personnaliser depuis votre boîte email."
+                                                    defaultValue="Voici un modèle de message que nous vous proposons d'envoyer. Vous pourrez bien sûr le personnaliser depuis votre boite mail."
                                                 />
 
                                                 <ArrayInput
@@ -111,7 +112,11 @@ export const MessageSendInput = ({ classes, source }) => {
                                                     source={`${source}.message_template`}
                                                 >
                                                     <SimpleParagraphFormIterator
-                                                        disableAdd={data && data.message_template && data.message_template.length > 0}
+                                                        disableAdd={
+                                                            data &&
+                                                            data.message_template &&
+                                                            data.message_template.length > 0
+                                                        }
                                                         disableRemove
                                                     >
                                                         <ParagraphTemplateInput
