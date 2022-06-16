@@ -38,7 +38,7 @@ const urgentActions = [
       }
     ]),
     call_to_action:
-      "<p>Nous vous proposons d'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>",
+      '"<p>Nous vous proposons d\'écrire au chef du pouvoir judiciaire Ayatollah Sadegh Lanjani.</p>"',
     message_template: JSON.stringify([
       {
         value: `Dear Minister,\nI am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.`
@@ -58,7 +58,7 @@ const urgentActions = [
   }
 ];
 
-const columns = ["title", "story", "call_to_action", "message_template"];
+const columns = ["title", "story", "call_to_action", "message"];
 const batchInsertQuery = batchInsert.default({
   table: "urgent_action",
   writableCols: columns,

@@ -1,7 +1,7 @@
-import jwtDecode from 'jwt-decode';
 import { isFuture } from 'date-fns';
+import jwtDecode from 'jwt-decode';
 
-import { AUTH_ERROR, AUTH_CHECK, AUTH_LOGIN, AUTH_LOGOUT } from 'ra-core';
+import { AUTH_CHECK, AUTH_ERROR, AUTH_LOGIN, AUTH_LOGOUT } from 'ra-core';
 
 import { login } from './authQueries';
 
@@ -33,9 +33,12 @@ export const authProvider = (type, params) => {
             return Promise.resolve();
 
         case AUTH_ERROR:
-            removeToken();
-            return Promise.reject('Session has expired.');
-
+            const status = params.status;
+            if (status === 401 || status === 403) {
+                removeToken();
+                return Promise.reject('Session has expired.');
+            }
+            return Promise.resolve();
         default:
             return Promise.resolve();
     }
