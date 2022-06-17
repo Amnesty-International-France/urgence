@@ -1,8 +1,10 @@
+import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
 import { useEffect, useState } from 'react';
 import { Admin, DataProvider, ListGuesser, Resource } from 'react-admin';
 import { authProvider } from './authentication/authProvider';
+import CustomLoginPage from './authentication/CustomLoginPage';
 
 const App = () => {
     const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
@@ -13,11 +15,27 @@ const App = () => {
     }, []);
 
     if (!dataProvider) {
-        return <CircularProgress />;
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    height: '100vh',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <CircularProgress />
+            </Box>
+        );
     }
 
     return (
-        <Admin dataProvider={dataProvider} authProvider={authProvider}>
+        <Admin
+            dataProvider={dataProvider}
+            authProvider={authProvider}
+            loginPage={CustomLoginPage}
+            requireAuth
+        >
             <Resource name="Urgent Actions" list={ListGuesser} />
         </Admin>
     );
