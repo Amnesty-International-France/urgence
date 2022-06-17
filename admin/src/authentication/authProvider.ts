@@ -1,8 +1,8 @@
-import { gql } from '@apollo/client';
+import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
 import { isFuture, parseISO } from 'date-fns';
 import jwtDecode from 'jwt-decode';
 import { AuthProvider } from 'react-admin';
-import { client } from '../dataProvider';
+import { httpLink } from '../dataProvider';
 
 export const getToken = () => global.localStorage.getItem('token');
 export const saveToken = (token: string) => global.localStorage.setItem('token', token);
@@ -24,7 +24,7 @@ export const authProvider: AuthProvider = {
     login: async ({ username, password }: LoginInfo) => {
         const {
             data: { login },
-        } = await client.query({
+        } = await new ApolloClient({ link: httpLink, cache: new InMemoryCache() }).query({
             query: gql`{
           login(username: "${username}", password: "${password}") {
               token

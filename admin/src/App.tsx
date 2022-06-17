@@ -12,7 +12,7 @@ import { theme } from './theme';
 const App = () => {
     const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
     useEffect(() => {
-        buildGraphQLProvider({ client }).then(graphQlDataProvider =>
+        buildGraphQLProvider({ client }).then((graphQlDataProvider) =>
             setDataProvider(() => graphQlDataProvider),
         );
     }, []);
@@ -41,11 +41,6 @@ const App = () => {
             loginPage={CustomLoginPage}
             requireAuth
         >
-            {/* <Resource
-                name="UrgentAction"
-                list={ListGuesser}
-                options={{ label: 'Urgent Actions' }}
-            /> */}
             <Resource {...settings} />
         </Admin>
     );
