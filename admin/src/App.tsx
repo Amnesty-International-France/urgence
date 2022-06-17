@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Admin, DataProvider, ListGuesser, Resource } from 'react-admin';
 import { authProvider } from './authentication/authProvider';
 import CustomLoginPage from './authentication/CustomLoginPage';
+import { theme } from './theme';
 
 const App = () => {
     const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
@@ -31,6 +32,7 @@ const App = () => {
 
     return (
         <Admin
+            theme={theme}
             dataProvider={dataProvider}
             authProvider={authProvider}
             loginPage={CustomLoginPage}
