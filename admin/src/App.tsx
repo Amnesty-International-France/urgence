@@ -2,17 +2,19 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
 import { useEffect, useState } from 'react';
-import { Admin, DataProvider, ListGuesser, Resource } from 'react-admin';
+import { Admin, DataProvider, Resource } from 'react-admin';
 import { authProvider } from './authentication/authProvider';
 import CustomLoginPage from './authentication/CustomLoginPage';
+import { client } from './dataProvider';
+import settings from './settings';
 import { theme } from './theme';
 
 const App = () => {
     const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
     useEffect(() => {
-        buildGraphQLProvider({
-            clientOptions: { uri: 'http://localhost:4000/graphql' },
-        }).then(graphQlDataProvider => setDataProvider(() => graphQlDataProvider));
+        buildGraphQLProvider({ client }).then(graphQlDataProvider =>
+            setDataProvider(() => graphQlDataProvider),
+        );
     }, []);
 
     if (!dataProvider) {
@@ -33,12 +35,18 @@ const App = () => {
     return (
         <Admin
             theme={theme}
+            title="Réaction rapide"
             dataProvider={dataProvider}
             authProvider={authProvider}
             loginPage={CustomLoginPage}
             requireAuth
         >
-            <Resource name="Urgent Actions" list={ListGuesser} />
+            {/* <Resource
+                name="UrgentAction"
+                list={ListGuesser}
+                options={{ label: 'Urgent Actions' }}
+            /> */}
+            <Resource {...settings} />
         </Admin>
     );
 };
