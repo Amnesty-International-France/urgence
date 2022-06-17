@@ -1,16 +1,12 @@
 import fetch from 'isomorphic-unfetch';
 
-import { salesforce } from '../../../config';
+import config from '../../../config';
+import { CampaignMember } from '../urgentActions/campaignMember';
 
-const {
-    baseUrl,
-    version,
-    consumerKey,
-    consumerSecret,
-    username,
-    password,
-    securityToken,
-} = salesforce;
+const salesforce = config.salesforce;
+
+const { baseUrl, version, consumerKey, consumerSecret, username, password, securityToken } =
+    salesforce;
 
 const JSON_TYPE = 'application/json';
 const AUTHENTICATE_URL = `${baseUrl}/oauth2/token?grant_type=password&client_id=${consumerKey}&client_secret=${consumerSecret}&username=${username}&password=${password}${securityToken}`;
@@ -43,13 +39,13 @@ export const authenticate = async () => {
     return { status, body };
 };
 
-const isMemberAlreadyAddedError = errors =>
+const isMemberAlreadyAddedError = (errors: { errorCode: string }[]) =>
     errors.every(({ errorCode }) => errorCode === 'DUPLICATE_VALUE');
 
 export const addCampaignMember = async (
-    access_token,
-    { campaign_code },
-    { firstname, lastname, email, civility },
+    access_token: string,
+    { campaign_code }: { campaign_code: string },
+    { firstname, lastname, email, civility }: CampaignMember,
     type = 'Email',
 ) => {
     const url = `${QUERY_BASE_URL}/sobjects/CampaignMember`;
@@ -110,7 +106,7 @@ export const addCampaignMember = async (
     });
 
     const status = response.status;
-    const body = await response.json();
+    const body = (await response.json()) as { message: string; errorCode: string }[];
 
     console.log('addCampaignMember response', { status, body });
 
@@ -132,8 +128,8 @@ const civilityMap = {
 };
 
 export const register = async (
-    access_token,
-    { firstname, lastname, email, phone, civility, originCode },
+    access_token: string,
+    { firstname, lastname, email, phone, civility, originCode }: CampaignMember,
 ) => {
     const origineCodeId = await getOriginCodeId(access_token, originCode);
 
@@ -182,7 +178,7 @@ export const register = async (
     });
 
     const status = response.status;
-    const body = await response.json();
+    const body = (await response.json()) as { message: string; errorCode: string }[];
 
     console.log('register response', status, body);
 
@@ -197,7 +193,7 @@ export const register = async (
     return { status, body };
 };
 
-export const getContactByEmail = async (access_token, email) => {
+export const getContactByEmail = async (access_token: string, email: string) => {
     const url = `${QUERY_BASE_URL}/query?q=SELECT+Actions_urgentes_via_le_smartphone__c+from+contact+where+email='${encodeURIComponent(
         email,
     )}'`;
@@ -220,20 +216,23 @@ export const getContactByEmail = async (access_token, email) => {
     });
 
     const status = response.status;
-    const body = await response.json();
+    const body = (await response.json()) as {
+        records: { Actions_urgentes_via_le_smartphone__c: boolean }[];
+    };
 
     console.log('getContactByEmail response', status, body);
 
     if (status >= 400) {
         return new Error(
             `Error while quering contacts from SalesForce: ${body
+                // @ts-ignore
                 .map(({ message }) => message)
                 .join(', ')}`,
         );
     }
 
     const contacts = body.records || [];
-    const registered = contacts.some(record => !!record.Actions_urgentes_via_le_smartphone__c);
+    const registered = contacts.some((record) => !!record.Actions_urgentes_via_le_smartphone__c);
 
     return {
         status,
@@ -244,7 +243,7 @@ export const getContactByEmail = async (access_token, email) => {
     };
 };
 
-export const getOriginCodeByCampaignCode = async (access_token, campaign_code) => {
+export const getOriginCodeByCampaignCode = async (access_token: string, campaign_code: string) => {
     const url = `${QUERY_BASE_URL}/query?q=select+Code_origine__r.Name+from+Campaign+where+Name='${campaign_code}'`;
 
     console.log('getCodeOrigineByCampaignCode request', {
@@ -264,10 +263,11 @@ export const getOriginCodeByCampaignCode = async (access_token, campaign_code) =
     });
     const status = response.status;
 
-    const body = await response.json();
+    const body = (await response.json()) as { records: [{ Code_origine__r: { Name: string } }] };
     if (status >= 400) {
-        return new Error(
+        throw new Error(
             `Error while quering contacts from SalesForce: ${body
+                // @ts-ignore
                 .map(({ message }) => message)
                 .join(', ')}`,
         );
@@ -278,7 +278,7 @@ export const getOriginCodeByCampaignCode = async (access_token, campaign_code) =
     return originCode;
 };
 
-export const getOriginCodeId = async (access_token, code) => {
+export const getOriginCodeId = async (access_token: string, code: string) => {
     const url = `${QUERY_BASE_URL}/query?q=SELECT+Id+FROM+Code__c+WHERE+Code__c='${code}'`;
     const response = await fetch(url, {
         method: 'GET',
@@ -290,13 +290,14 @@ export const getOriginCodeId = async (access_token, code) => {
     });
 
     const status = response.status;
-    const body = await response.json();
+    const body = (await response.json()) as { records: [{ Id: string }?] };
 
     console.log('register response', status, body);
 
     if (status >= 400) {
         throw new Error(
             `Error while registering contact into SalesForce: ${body
+                // @ts-ignore
                 .map(({ message }) => message)
                 .join(', ')}`,
         );

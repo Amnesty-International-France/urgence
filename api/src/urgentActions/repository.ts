@@ -1,11 +1,64 @@
+import { Color } from 'sharp';
+import { Upload } from 'graphql-upload';
+
 import knex from '../db/client';
+import { Crop } from '../services/uploadImage';
 
 const table = 'urgent_action';
 const client = knex(table);
 
+type Position = {
+    x: number;
+    y: number;
+};
+type Link = {
+    label: String;
+    url: String;
+};
+
 export type SocialMetadata = {
     title: string;
-    message: string;
+    description: string;
+    medium: {
+        src: string;
+    };
+};
+
+type Medium = {
+    title: string;
+    src: Upload;
+    crop?: Crop;
+};
+
+type CropDesktop = {
+    unit: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+};
+
+type MediumDesktop = {
+    title: string;
+    src: Upload;
+    crop?: CropDesktop;
+};
+
+type DisplayOptions = {
+    mediumPosition: Position;
+    backgroundColor: Color;
+    color?: Color;
+};
+
+type Share = { message: string; twitter_message: string };
+
+type Telegram = { url: string; message: string };
+
+type StoryStep = {
+    content: String;
+    medium?: Medium;
+    mediumDesktop?: MediumDesktop;
+    displayOptions?: DisplayOptions;
 };
 
 export type UrgentActionDb = {
@@ -28,12 +81,27 @@ export type UrgentActionDb = {
 };
 
 export type UrgentAction = UrgentActionDb & {
+    // TODO
     id?: string;
-    story: string[];
+    story: StoryStep[];
     social_metadata: SocialMetadata;
+    email_thank: {
+        title: string;
+        text: string;
+        button: string;
+        share: Share;
+        telegram: Telegram;
+    };
     message: {
-        message_template: { value: string }[];
+        text_view: string;
+        text_send: string;
+        button_view: string;
+        button_send: string;
+        object_indication: string;
+        object_example: string;
+        message_template: { value: string }[]; // TODO
         recipient: {
+            // TODO
             postal_address: string;
         };
     };

@@ -1,19 +1,25 @@
 'use strict';
 
-const config = require('../../config');
+const config = require('../../config').default;
 
-exports.up = function(db, cb) {
-    return db.runSql(`
+exports.up = function (db, cb) {
+    return db.runSql(
+        `
     UPDATE urgent_action SET story=(REPLACE(story::TEXT, 'src":"', 'src":"${config.uploadUrl}/'))::JSON
-    `, cb);
+    `,
+        cb,
+    );
 };
 
-exports.down = function(db) {
-  return db.runSql(`
+exports.down = function (db) {
+    return db.runSql(
+        `
   UPDATE urgent_action SET story=(REPLACE(story::TEXT, 'src":"${config.uploadUrl}/', 'src":"'))::JSON
-  `, cb);
+  `,
+        cb,
+    );
 };
 
 exports._meta = {
-  "version": 1
+    version: 1,
 };

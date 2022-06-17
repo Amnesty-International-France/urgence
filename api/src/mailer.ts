@@ -2,10 +2,12 @@ import pick from 'lodash.pick';
 import omit from 'lodash.omit';
 import { createTransport } from 'nodemailer';
 
-import { mailer, mailer as mailerConfig } from '../../config';
+import conf from '../../config';
 import { Options } from 'nodemailer/lib/mailer';
 
-let config: { auth?: typeof mailerConfig.smtp.auth } & (
+const mailerConfig = conf.mailer;
+
+const config: { auth?: typeof mailerConfig.smtp.auth } & (
     | Pick<typeof mailerConfig.smtp, 'service'>
     | Omit<typeof mailerConfig.smtp, 'service' | 'auth'>
 ) =

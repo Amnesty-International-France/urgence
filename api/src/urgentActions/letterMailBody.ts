@@ -1,7 +1,8 @@
 import path from 'path';
 import nunjucks from 'nunjucks';
+import { UrgentAction } from './repository';
 
-export const letterMailBodyAsText = ({ urgentAction }) => `Bonjour,
+export const letterMailBodyAsText = ({ urgentAction }: { urgentAction: UrgentAction }) => `Bonjour,
 
 Voici votre lettre pour l'Action Urgente "${urgentAction.title}".
 
@@ -31,10 +32,10 @@ L'équipe Réaction Rapide
 Amnesty International France
 `;
 
-export const letterMailBodyAsHtml = params =>
+export const letterMailBodyAsHtml = (params: { urgentAction: UrgentAction }) =>
     nunjucks.render(path.join(__dirname, './letterMailBody.html'), params);
 
-export const getLetterMailBody = params => ({
+export const getLetterMailBody = (params: { urgentAction: UrgentAction }) => ({
     text: letterMailBodyAsText(params),
     html: letterMailBodyAsHtml(params),
 });

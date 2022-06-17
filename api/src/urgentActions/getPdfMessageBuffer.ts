@@ -8,15 +8,15 @@ import { UrgentAction } from './repository';
 
 export const getPdfMessageBuffer = async (
     urgentAction: UrgentAction,
-    subject: string,
-    civility: string,
-    firstname: string,
-    lastname: string,
-    emitterAddressMain: string,
-    emitterAddressMore: string,
-    emitterPostalCode: string,
-    emitterCity: string,
-    emitterCountry: string,
+    subject?: string,
+    civility?: string,
+    firstname?: string,
+    lastname?: string,
+    emitterAddressMain?: string,
+    emitterAddressMore?: string,
+    emitterPostalCode?: string,
+    emitterCity?: string,
+    emitterCountry?: string,
 ) =>
     new Promise<Buffer>((resolve, reject) => {
         const recipientAddress = get(

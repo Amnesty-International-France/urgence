@@ -36,6 +36,7 @@ const options: Config = {
 };
 
 if (config.env !== 'production') {
+    // @ts-ignore
     options.playground = {
         endpoint: `${process.env.REACT_APP_API_URL}/graphql`,
         settings: {

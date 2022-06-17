@@ -1,7 +1,7 @@
-const config = require('../config');
+const config = require('../config').default;
 
 module.exports = {
-    "api": {
+    api: {
         driver: 'pg',
         ...config.db,
     },

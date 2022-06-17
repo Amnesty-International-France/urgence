@@ -1,4 +1,4 @@
-const convict = require('convict');
+import convict from 'convict';
 
 const config = convict({
     env: {
@@ -192,4 +192,4 @@ const config = convict({
 // Perform validation
 config.validate({ allowed: 'strict' });
 
-module.exports = config.getProperties();
+export default config.getProperties();

@@ -6,7 +6,10 @@ import { uploadImage } from './uploadImage';
 export const uploadImageFromSocialMetadata = async (
     socialMetadata: Partial<SocialMetadata> = {},
 ) => {
-    const image = path(['medium', 'src'], socialMetadata);
+    const image = path<string>(['medium', 'src'], socialMetadata);
+    if (!image) {
+        throw new Error('Image not found');
+    }
     const src = await uploadImage(image);
 
     return src ? assocPath(['medium', 'src'], src, socialMetadata) : socialMetadata;

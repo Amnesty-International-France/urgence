@@ -10,7 +10,7 @@ describe('uploadImage', () => {
 
     describe('getSavedFileName', () => {
         it('should generate filename with random id and keep the extension', () => {
-            expect(getSavedFileName('image.jpeg')).toBe('random_id.jpeg');
+            expect(getSavedFileName()).toBe('random_id.jpeg');
         });
     });
 });

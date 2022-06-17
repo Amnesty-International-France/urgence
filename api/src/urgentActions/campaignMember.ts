@@ -8,7 +8,19 @@ import {
     register,
 } from '../services/salesForceApi';
 
-export const addCampaignMember = async (id, { firstname, lastname, email, civility }) => {
+export type CampaignMember = {
+    civility: 'M.' | 'Mme.' | 'Autre';
+    firstname: string;
+    lastname: string;
+    email: string;
+    phone: string;
+    originCode: string;
+};
+
+export const addCampaignMember = async (
+    id: string,
+    { firstname, lastname, email, civility }: CampaignMember,
+) => {
     if (!isUUID(id)) {
         return new Error(`Invalid UUID format: ${id}`);
     }
@@ -37,7 +49,10 @@ export const addCampaignMember = async (id, { firstname, lastname, email, civili
     return { firstname, lastname, email, registered: contactBody.registered };
 };
 
-export const addCampaignMemberTwitter = async (id, { firstname, lastname, email, civility }) => {
+export const addCampaignMemberTwitter = async (
+    id: string,
+    { firstname, lastname, email, civility }: CampaignMember,
+) => {
     if (!isUUID(id)) {
         return new Error(`Invalid UUID format: ${id}`);
     }
@@ -60,7 +75,10 @@ export const addCampaignMemberTwitter = async (id, { firstname, lastname, email,
     return { succes: true };
 };
 
-export const registerContact = async (id, { firstname, lastname, email, phone, civility }) => {
+export const registerContact = async (
+    id: string,
+    { firstname, lastname, email, phone, civility }: CampaignMember,
+) => {
     const { body: authBody } = await authenticate();
     const accessToken = authBody ? authBody.access_token : null;
 
