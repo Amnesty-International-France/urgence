@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { isFuture } from 'date-fns';
+import { isFuture, parseISO } from 'date-fns';
 import jwtDecode from 'jwt-decode';
 import { AuthProvider } from 'react-admin';
 import { client } from '../dataProvider';
@@ -16,7 +16,7 @@ export type LoginInfo = {
 export type Token = {
     login: string;
     role: string;
-    expiration: Date;
+    expiration: string;
     iat: number;
 };
 
@@ -45,7 +45,7 @@ export const authProvider: AuthProvider = {
         }
 
         const { expiration } = jwtDecode<Token>(token);
-        if (!isFuture(expiration)) {
+        if (!isFuture(parseISO(expiration))) {
             return Promise.reject('Session has expired.');
         }
 
