@@ -1,15 +1,15 @@
-import { ApolloServer, AuthenticationError } from 'apollo-server-express';
-import jwt from 'jsonwebtoken';
-
+import { ApolloServer, AuthenticationError, Config } from 'apollo-server-express';
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import { Request } from 'express';
 import config from '../../../config';
 import { loginByToken } from '../users/resolvers';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
 
-const options = {
+const options: Config = {
     typeDefs,
     resolvers,
-    context: async ({ req }) => {
+    context: async ({ req }: { req: Request }) => {
         const token = req.headers.authorization || '';
 
         if (!token) {
@@ -24,7 +24,7 @@ const options = {
             throw new AuthenticationError('You must be logged in');
         }
 
-        const decodedToken = jwt.decode(token);
+        const decodedToken = jwt.decode(token) as JwtPayload;
 
         return {
             user: {
@@ -33,7 +33,6 @@ const options = {
             },
         };
     },
-    playground: false,
 };
 
 if (config.env !== 'production') {

@@ -4,15 +4,16 @@ import { getMetaDataTemplateBySlug } from './urgentActions/metadata';
 
 import urgentActionsRouter from './urgentActions/router';
 
-const router = new Router();
+const router = Router();
 
 router.use(bodyParser.json());
 router.use('/urgent-actions', urgentActionsRouter);
 
 router.get(/metadata/, async (req, res, next) => {
     const url = req.url;
-    const regex = /\/ua\/([^\/]+)/
-    const slug = url.match(regex)[1];
+    const regex = /\/ua\/([^\/]+)/;
+    const urlMatch = url.match(regex);
+    const slug = urlMatch ? urlMatch[1] : '';
     const metadata = await getMetaDataTemplateBySlug(slug);
 
     return res.send(metadata);

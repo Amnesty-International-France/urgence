@@ -1,4 +1,4 @@
-import lolex from 'lolex';
+import fakeTimers from '@sinonjs/fake-timers';
 import pdf from 'html-pdf';
 
 import { createUrgentAction } from '../tests/fixtureLoader';
@@ -12,9 +12,9 @@ describe('getPdfMessageBuffer', () => {
         },
     };
 
-    let clock;
+    let clock: fakeTimers.InstalledClock;
     beforeEach(() => {
-        clock = lolex.install({ now: new Date('2018-05-14 12:00:00') });
+        clock = fakeTimers.install({ now: new Date('2018-05-14 12:00:00') });
     });
 
     it('should display all chosen paragraphs', async () => {
@@ -27,8 +27,7 @@ describe('getPdfMessageBuffer', () => {
                 message_template: [
                     { value: 'Dear Minister,' },
                     {
-                        value:
-                            'I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.',
+                        value: 'I am appalled to hear about the detention of the second Amnesty International Turkey leader within the space of a month.',
                     },
                 ],
             },

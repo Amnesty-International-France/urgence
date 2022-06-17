@@ -5,7 +5,9 @@ import config from '../../../config';
 
 import { createUserToken, getUserTokenByToken, removeUserOldTokenByLogin } from './repository';
 
-export const createToken = async (user, now = new Date()) => {
+export type AuthenticatedUser = { login: string; role: string };
+
+export const createToken = async (user: AuthenticatedUser, now = new Date()) => {
     const expiration = addHours(now, config.admin.authentication.sessionDuration).toISOString();
 
     const token = jwt.sign(
@@ -23,12 +25,15 @@ export const createToken = async (user, now = new Date()) => {
         console.error(error);
     }
 
-    await createUserToken({ login: user.login, token, expireDate: expiration });
+    await createUserToken({ login: user.login, token, expire_date: expiration });
 
     return token;
 };
 
-export const login = async (_, { username, password }) => {
+export const login = async (
+    _: unknown,
+    { username, password }: { username: string; password: string },
+) => {
     if (
         username !== config.admin.authentication.username ||
         password !== config.admin.authentication.password
@@ -40,7 +45,7 @@ export const login = async (_, { username, password }) => {
     return { token };
 };
 
-export const loginByToken = async token => {
+export const loginByToken = async (token: string) => {
     const [userToken] = await getUserTokenByToken(token);
 
     if (!userToken || !userToken.token) {

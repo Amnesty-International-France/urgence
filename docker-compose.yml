@@ -2,7 +2,7 @@ version: '3'
 
 services:
     api:
-        image: node:9
+        image: node:18
         working_dir: /app/api
         volumes:
             - '.:/app'

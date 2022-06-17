@@ -2,7 +2,7 @@ version: '3'
 
 services:
     test:
-        image: node:9
+        image: node:18
         command: 'yarn run test'
         working_dir: /app
         volumes:

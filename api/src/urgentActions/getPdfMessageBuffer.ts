@@ -4,22 +4,27 @@ import frLocale from 'date-fns/locale/fr';
 import pdf from 'html-pdf';
 import nunjucks from 'nunjucks';
 import get from 'lodash.get';
+import { UrgentAction } from './repository';
 
 export const getPdfMessageBuffer = async (
-    urgentAction,
-    subject,
-    civility,
-    firstname,
-    lastname,
-    emitterAddressMain,
-    emitterAddressMore,
-    emitterPostalCode,
-    emitterCity,
-    emitterCountry,
+    urgentAction: UrgentAction,
+    subject: string,
+    civility: string,
+    firstname: string,
+    lastname: string,
+    emitterAddressMain: string,
+    emitterAddressMore: string,
+    emitterPostalCode: string,
+    emitterCity: string,
+    emitterCountry: string,
 ) =>
-    new Promise((resolve, reject) => {
-        const recipientAddress = get(urgentAction, 'message.recipient.postal_address', '');
-        const messageTemplate = get(urgentAction, 'message.message_template', '');
+    new Promise<Buffer>((resolve, reject) => {
+        const recipientAddress = get(
+            urgentAction,
+            'message.recipient.postal_address',
+            '',
+        ) as string;
+        const messageTemplate = get(urgentAction, 'message.message_template', '') as string;
         const date = format(new Date(), 'DD MMMM YYYY', { locale: frLocale });
 
         const urgentActionLetter = nunjucks.render(path.join(__dirname, './letter.html'), {

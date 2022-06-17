@@ -2,7 +2,7 @@ version: '3'
 
 services:
     admin_staging:
-        image: node:9
+        image: node:18
         command: 'yarn run build'
         volumes:
             - .:/app
@@ -15,7 +15,7 @@ services:
         working_dir: /app/admin
 
     admin_prod:
-        image: node:9
+        image: node:18
         command: 'yarn run build'
         volumes:
             - .:/app
@@ -28,7 +28,7 @@ services:
         working_dir: /app/admin
 
     admin_dev:
-        image: node:9
+        image: node:18
         command: 'yarn run build'
         volumes:
             - .:/app
@@ -41,7 +41,7 @@ services:
         working_dir: /app/admin
 
     front_staging:
-        image: node:9
+        image: node:18
         command: 'yarn run build-web'
         volumes:
             - ./front:/app
@@ -55,7 +55,7 @@ services:
         working_dir: /app
 
     front_prod:
-        image: node:9
+        image: node:18
         command: 'yarn run build-web'
         volumes:
             - ./front:/app
@@ -69,7 +69,7 @@ services:
         working_dir: /app
 
     front_dev:
-        image: node:9
+        image: node:18
         command: 'yarn run build-web'
         volumes:
             - ./front:/app
@@ -83,7 +83,7 @@ services:
         working_dir: /app
 
     storybook:
-        image: node:9
+        image: node:18
         command: 'yarn run build-storybook'
         volumes:
             - ./front:/app

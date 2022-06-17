@@ -1,21 +1,27 @@
+import { addCampaignMember, addCampaignMemberTwitter, registerContact } from './campaignMember';
 import {
-    getUrgentAction,
-    getUrgentActionBySlug,
-    getDefaultUrgentAction,
-    getUrgentActions,
     countUrgentActions,
     createUrgentAction,
-    updateUrgentAction,
+    getDefaultUrgentAction,
+    getUrgentAction,
+    getUrgentActionBySlug,
+    getUrgentActions,
     removeUrgentAction,
+    updateUrgentAction,
+    UrgentAction,
+    UrgentActionDb,
 } from './repository';
-import { addCampaignMember, addCampaignMemberTwitter, registerContact } from './campaignMember';
 
-import { uploadImageFromStory } from '../services/uploadImageFromStory';
-import { getOriginCodeByCampaignCode, authenticate } from '../services/salesForceApi';
+import { Context } from 'apollo-server-core';
+import { authenticate, getOriginCodeByCampaignCode } from '../services/salesForceApi';
 import { uploadImageDesktopFromStory } from '../services/uploadImageDesktopFromStory';
 import { uploadImageFromSocialMetadata } from '../services/uploadImageFromSocialMetadata';
+import { uploadImageFromStory } from '../services/uploadImageFromStory';
+import { AuthenticatedUser } from '../users/resolvers';
 
-const prepareUrgentActionForDatabase = async urgentAction => {
+const prepareUrgentActionForDatabase = async (
+    urgentAction: UrgentAction,
+): Promise<UrgentActionDb> => {
     let uploadedStory = await uploadImageFromStory(urgentAction.story);
     uploadedStory = await uploadImageDesktopFromStory(uploadedStory);
     const uploadedSocialMetadata = await uploadImageFromSocialMetadata(
@@ -25,7 +31,7 @@ const prepareUrgentActionForDatabase = async urgentAction => {
     try {
         const { body: authBody } = await authenticate();
         const accessToken = authBody ? authBody.access_token : null;
-        
+
         originCode = await getOriginCodeByCampaignCode(accessToken, urgentAction.campaign_code);
     } catch (error) {
         originCode = 'AU_WEBAPP';
@@ -46,15 +52,31 @@ const prepareUrgentActionForDatabase = async urgentAction => {
 
 export default {
     Query: {
-        allUrgentActions: (_, { perPage, page, sortField, sortOrder }) =>
-            getUrgentActions({ perPage, page, sortField, sortOrder }),
-        UrgentAction: (_, { id }) => getUrgentAction(id),
-        UrgentActionBySlug: (_, { slug }) => getUrgentActionBySlug(slug),
+        allUrgentActions: (
+            _: never,
+            {
+                perPage,
+                page,
+                sortField,
+                sortOrder,
+            }: {
+                perPage: number;
+                page: number;
+                sortField: string;
+                sortOrder: 'ASC' | 'DESC';
+            },
+        ) => getUrgentActions({ perPage, page, sortField, sortOrder }),
+        UrgentAction: (_, { id }: { id: string }) => getUrgentAction(id),
+        UrgentActionBySlug: (_, { slug }: { slug: string }) => getUrgentActionBySlug(slug),
         DefaultUrgentAction: () => getDefaultUrgentAction(),
         _allUrgentActionsMeta: () => countUrgentActions(),
     },
     Mutation: {
-        createUrgentAction: async (_, urgentAction, context) => {
+        createUrgentAction: async (
+            _: never,
+            urgentAction: UrgentAction,
+            context: Context<{ user: AuthenticatedUser }>,
+        ) => {
             if (!context || !context.user || context.user.role !== 'admin') {
                 return null;
             }
@@ -62,7 +84,11 @@ export default {
             const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
             return createUrgentAction(preparedUa);
         },
-        updateUrgentAction: async (_, urgentAction, context) => {
+        updateUrgentAction: async (
+            _: never,
+            urgentAction: UrgentAction,
+            context: Context<{ user: AuthenticatedUser }>,
+        ) => {
             if (!context || !context.user || context.user.role !== 'admin') {
                 return null;
             }
@@ -70,14 +96,18 @@ export default {
             const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
             return updateUrgentAction(urgentAction.id, preparedUa);
         },
-        deleteUrgentAction: (_, id, context) => {
+        deleteUrgentAction: (
+            _: never,
+            id: string,
+            context: Context<{ user: AuthenticatedUser }>,
+        ) => {
             if (!context || !context.user || context.user.role !== 'admin') {
                 return null;
             }
 
             return removeUrgentAction(id);
         },
-        addCampaignMember: (_, { id, member }) => {
+        addCampaignMember: (_: never, { id, member }) => {
             return addCampaignMember(id, member);
         },
         addCampaignMemberTwitter: (_, { id, member }) => {

@@ -18,9 +18,14 @@ app.use(
 
 app.use(config.api.prefixUrl, router);
 
-apolloServer.applyMiddleware({
-    app,
-});
+const startApollo = async () => {
+    await apolloServer.start();
+    apolloServer.applyMiddleware({
+        app,
+    });
+};
+
+startApollo();
 
 app.use(errorHandler);
 

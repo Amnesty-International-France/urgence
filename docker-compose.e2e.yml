@@ -27,7 +27,7 @@ services:
             - 5900:5900
 
     test-e2e:
-        image: node:9
+        image: node:18
         links:
             - hub
             - front
@@ -43,7 +43,7 @@ services:
         working_dir: /app
 
     front:
-        image: node:9
+        image: node:18
         command: 'yarn run start-web'
         volumes:
             - '.:/app'

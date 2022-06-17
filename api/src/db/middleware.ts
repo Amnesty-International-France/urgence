@@ -1,5 +1,7 @@
 const getClient = require('./client');
 
+// useful ?
+
 module.exports = async (req, res, next) => {
     let client;
 

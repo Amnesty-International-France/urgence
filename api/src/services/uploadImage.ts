@@ -11,7 +11,7 @@ export const getSavedFileName = () => {
     return `${id}.jpeg`;
 };
 
-export const uploadImage = async (upload, crop) => {
+export const uploadImage = async (upload, crop?) => {
     if (!upload) {
         return null;
     }
@@ -35,13 +35,11 @@ export const uploadImage = async (upload, crop) => {
         path = `${config.uploadDir}/${savedFileName}`;
         cropPath = `${config.uploadDir}/crop-${savedFileName}`;
         url = `${config.uploadUrl}/${savedFileName}`;
-        const optimiseFile = sharp()
-            .resize(1920)
-            .jpeg();
+        const optimiseFile = sharp().resize(1920).jpeg();
 
         await new Promise((resolve, reject) =>
             stream
-                .on('error', error => {
+                .on('error', (error) => {
                     if (stream.truncated) {
                         // Delete the truncated file
                         fs.unlinkSync(path);

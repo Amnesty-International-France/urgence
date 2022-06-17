@@ -6,7 +6,19 @@ import { getPdfMessageBuffer } from './getPdfMessageBuffer';
 import { sendMail } from '../mailer';
 import { getLetterMailBody } from './letterMailBody';
 
-const urgentActionsRouter = new Router();
+const urgentActionsRouter = Router();
+
+export type PdfQuery = {
+    civility: string;
+    firstname: string;
+    lastname: string;
+    subject: string;
+    addressMain: string;
+    addressMore: string;
+    postalCode: string;
+    city: string;
+    country: string;
+};
 
 urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
     const { id } = req.params;
@@ -25,7 +37,7 @@ urgentActionsRouter.get('/:id.pdf', async (req, res, next) => {
         postalCode,
         city,
         country,
-    } = req.query;
+    } = req.query as PdfQuery;
 
     const urgentAction = await getUrgentAction(id);
 
@@ -90,9 +102,16 @@ urgentActionsRouter.post('/:id/send', async (req, res, next) => {
             country,
         );
 
-        await sendMail(email, 'On y est presque !', getLetterMailBody({ urgentAction }), {
-            filename: 'letter.pdf',
-            content: pdfBuffer,
+        await sendMail({
+            to: email,
+            subject: 'On y est presque !',
+            ...getLetterMailBody({ urgentAction }),
+            attachments: [
+                {
+                    filename: 'letter.pdf',
+                    content: pdfBuffer,
+                },
+            ],
         });
     } catch (err) {
         return next(err);

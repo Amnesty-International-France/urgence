@@ -1,6 +1,7 @@
-const config = require('../../config');
+import { ErrorRequestHandler } from 'express';
+import config from '../../config';
 
-module.exports = (err, req, res, next) => {
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     if (res.headersSent) {
         return next(err);
     }
@@ -8,3 +9,5 @@ module.exports = (err, req, res, next) => {
     const message = config.env === 'production' ? 'An error occured.' : `<pre>${err.stack}</pre>`;
     return res.status(err.status || 500).send(message);
 };
+
+export default errorHandler;
