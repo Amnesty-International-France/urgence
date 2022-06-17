@@ -4,10 +4,10 @@ import frLocale from 'date-fns/locale/fr';
 import pdf from 'html-pdf';
 import nunjucks from 'nunjucks';
 import get from 'lodash.get';
-import { UrgentAction } from './repository';
+import { UrgentActionDb } from './repository';
 
 export const getPdfMessageBuffer = async (
-    urgentAction: UrgentAction,
+    urgentAction: UrgentActionDb,
     subject?: string,
     civility?: string,
     firstname?: string,

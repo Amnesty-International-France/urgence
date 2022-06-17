@@ -3,9 +3,7 @@ import { Upload } from 'graphql-upload';
 
 import knex from '../db/client';
 import { Crop } from '../services/uploadImage';
-
-const table = 'urgent_action';
-const client = knex(table);
+import { Pagination } from '../types';
 
 type Position = {
     x: number;
@@ -80,9 +78,22 @@ export type UrgentActionDb = {
     response_count: number;
 };
 
-export type UrgentAction = UrgentActionDb & {
+export type UrgentAction = {
     // TODO
-    id?: string;
+    id: string;
+    title: string;
+    slug: string;
+    is_default: boolean;
+    campaign_code: string;
+    origin_code: string;
+
+    call_to_action: string; // TODO Verify if this is a string or a Object
+    register: string; // TODO Verify if this is a string or a Object
+    end_thank: string; // TODO Verify if this is a string or a Object
+    creation_date: string; // TODO Verify if this is a string or a Object
+    last_edition_date?: string; // TODO Verify if this is a string or a Object
+    response_count: number;
+
     story: StoryStep[];
     social_metadata: SocialMetadata;
     email_thank: {
@@ -107,21 +118,11 @@ export type UrgentAction = UrgentActionDb & {
     };
 };
 
-export const getUrgentActions = async ({
-    perPage,
-    page,
-    sortField,
-    sortOrder,
-}: {
-    perPage: number;
-    page: number;
-    sortField: string;
-    sortOrder: 'ASC' | 'DESC';
-}) =>
-    client
-        .select('*')
-        .from(table)
-        .paginate({ perPage, currentPage: page * perPage, sortField, sortOrder });
+const table = 'urgent_action';
+const client = knex<UrgentActionDb>(table);
+
+export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }: Pagination) =>
+    client.select('*').paginate({ perPage, currentPage: page * perPage, sortField, sortOrder });
 
 export const countUrgentActions = async () => client.count('*').first();
 
@@ -133,13 +134,13 @@ export const getDefaultUrgentAction = async () =>
 export const getUrgentActionBySlug = async (slug: string) =>
     client.select('*').where({ slug }).first();
 
-export const createUrgentAction = async (urgentAction: UrgentActionDb) =>
-    client.insert(urgentAction).returning('*');
+export const createUrgentAction = async (urgentAction: Omit<UrgentActionDb, 'id'>) =>
+    client.insert(urgentAction).returning('*').first();
 
 export const updateUrgentAction = async (
     id: string,
-    urgentAction: UrgentActionDb,
+    urgentAction: Partial<UrgentActionDb>,
     last_edition_date = new Date(),
-) => client.update(urgentAction).where({ id }).returning('*');
+) => client.update(urgentAction).where({ id }).returning('*').first();
 
 export const removeUrgentAction = async (id: string) => client.where({ id }).delete();

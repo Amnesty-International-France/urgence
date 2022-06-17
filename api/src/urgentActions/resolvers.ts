@@ -1,4 +1,9 @@
-import { addCampaignMember, addCampaignMemberTwitter, registerContact } from './campaignMember';
+import {
+    addCampaignMember,
+    addCampaignMemberTwitter,
+    CampaignMember,
+    registerContact,
+} from './campaignMember';
 import {
     countUrgentActions,
     createUrgentAction,
@@ -66,8 +71,8 @@ export default {
                 sortOrder: 'ASC' | 'DESC';
             },
         ) => getUrgentActions({ perPage, page, sortField, sortOrder }),
-        UrgentAction: (_, { id }: { id: string }) => getUrgentAction(id),
-        UrgentActionBySlug: (_, { slug }: { slug: string }) => getUrgentActionBySlug(slug),
+        UrgentAction: (_: never, { id }: { id: string }) => getUrgentAction(id),
+        UrgentActionBySlug: (_: never, { slug }: { slug: string }) => getUrgentActionBySlug(slug),
         DefaultUrgentAction: () => getDefaultUrgentAction(),
         _allUrgentActionsMeta: () => countUrgentActions(),
     },
@@ -107,17 +112,23 @@ export default {
 
             return removeUrgentAction(id);
         },
-        addCampaignMember: (_: never, { id, member }) => {
+        addCampaignMember: (_: never, { id, member }: { id: string; member: CampaignMember }) => {
             return addCampaignMember(id, member);
         },
-        addCampaignMemberTwitter: (_, { id, member }) => {
+        addCampaignMemberTwitter: (
+            _: never,
+            { id, member }: { id: string; member: CampaignMember },
+        ) => {
             return addCampaignMemberTwitter(id, member);
         },
-        registerContact: (_, { id, member }) => {
+        registerContact: (_: never, { id, member }: { id: string; member: CampaignMember }) => {
             return registerContact(id, member);
         },
-        addResponseCount: async (_, { id }) => {
+        addResponseCount: async (_: never, { id }: { id: string }) => {
             const urgentAction = await getUrgentAction(id);
+            if (!urgentAction) {
+                throw new Error('Urgent action not found');
+            }
             const response_count = urgentAction.response_count + 1;
             return updateUrgentAction(urgentAction.id, { response_count });
         },

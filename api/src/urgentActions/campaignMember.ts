@@ -13,8 +13,8 @@ export type CampaignMember = {
     firstname: string;
     lastname: string;
     email: string;
-    phone: string;
-    originCode: string;
+    phone?: string;
+    originCode?: string;
 };
 
 export const addCampaignMember = async (
@@ -83,6 +83,10 @@ export const registerContact = async (
     const accessToken = authBody ? authBody.access_token : null;
 
     const urgentAction = await getUrgentAction(id);
+
+    if (!urgentAction) {
+        return new Error('Urgent Action Not Found');
+    }
 
     await register(accessToken, {
         civility,

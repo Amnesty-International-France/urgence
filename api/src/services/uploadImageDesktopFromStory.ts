@@ -1,8 +1,9 @@
 import { path, assocPath } from 'ramda';
+import { UrgentAction } from '../urgentActions/repository';
 
 import { Crop, uploadImage } from './uploadImage';
 
-export const uploadImageDesktopFromStory = async (story: string[] = []) => {
+export const uploadImageDesktopFromStory = async (story: UrgentAction['story'] = []) => {
     const images = story.map((storyStep) => {
         return {
             src: path<string>(['mediumDesktop', 'src'], storyStep),

@@ -131,7 +131,7 @@ export const register = async (
     access_token: string,
     { firstname, lastname, email, phone, civility, originCode }: CampaignMember,
 ) => {
-    const origineCodeId = await getOriginCodeId(access_token, originCode);
+    const origineCodeId = await getOriginCodeId(access_token, originCode as string);
 
     const url = `${QUERY_BASE_URL}/sobjects/Contact`;
 
@@ -223,7 +223,7 @@ export const getContactByEmail = async (access_token: string, email: string) => 
     console.log('getContactByEmail response', status, body);
 
     if (status >= 400) {
-        return new Error(
+        throw new Error(
             `Error while quering contacts from SalesForce: ${body
                 // @ts-ignore
                 .map(({ message }) => message)

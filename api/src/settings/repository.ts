@@ -1,48 +1,30 @@
-import { crud, selectOne } from 'co-postgres-queries';
+import knex from '../db/client';
+import { Pagination } from '../types';
 
-import query from '../db/client';
-
-const table = 'settings';
-const columns = ['id', 'created_on', 'updated_on', 'type', 'content'];
-
-const settingsCrudQueries = {
-    ...crud({
-        table,
-        writableCols: columns,
-        returnCols: columns,
-    }),
-    selectOneByType: selectOne({
-        table,
-        primaryKey: 'type',
-        returnCols: columns,
-    }),
+export type Setting = {
+    id?: string;
+    created_on: string;
+    updated_on: string;
+    type: string;
+    content: string;
 };
 
-export const getSetting = async id => query(settingsCrudQueries.selectOne(id));
+const table = 'settings';
+const client = knex<Setting>(table);
 
-export const getSettingByType = async type => query(settingsCrudQueries.selectOneByType(type));
+export const getSetting = async (id: string) => client.select('*').where({ id }).first();
 
-export const getSettings = async ({ perPage, page, sortField, sortOrder }) =>
-    query(
-        settingsCrudQueries.select({
-            limit: perPage,
-            offset: page * perPage,
-            sort: sortField,
-            sortDir: sortOrder,
-        }),
-    );
+export const getSettingByType = async (type: string) => client.select('*').where({ type });
 
-export const countSettings = async () => query(settingsCrudQueries.countAll());
+export const getSettings = async ({ perPage, page, sortField, sortOrder }: Pagination) =>
+    client.select('*').paginate({ perPage, currentPage: page * perPage, sortField, sortOrder });
 
-export const createSetting = async setting => query(settingsCrudQueries.insertOne(setting));
+export const countSettings = async () => client.count('*').first();
 
-export const updateSetting = async (id, setting) =>
-    query(
-        settingsCrudQueries.updateOne(id, {
-            id,
-            ...setting,
-            updated_on: new Date(),
-        }),
-    );
+export const createSetting = async (setting: Setting) =>
+    client.insert(setting).returning('*').first();
 
-export const removeSetting = async id => query(settingsCrudQueries.removeOne(id));
+export const updateSetting = async (id: string, setting: Partial<Setting>) =>
+    client.update(setting).where({ id }).returning('*').first();
+
+export const removeSetting = async (id: string) => client.where({ id }).del();
