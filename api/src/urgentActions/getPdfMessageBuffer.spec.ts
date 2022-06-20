@@ -5,6 +5,8 @@ import { createUrgentAction } from '../tests/fixtureLoader';
 import { getPdfMessageBuffer } from './getPdfMessageBuffer';
 import { UrgentAction } from './repository';
 
+const pdfSpy = jest.spyOn(pdf, 'create');
+
 describe('getPdfMessageBuffer', () => {
     const defaultUrgentAction = {
         message: {
@@ -19,8 +21,6 @@ describe('getPdfMessageBuffer', () => {
     });
 
     it('should display all chosen paragraphs', async () => {
-        const pdfSpy = jest.spyOn(pdf, 'create');
-
         const urgentAction = {
             ...defaultUrgentAction,
             message: {
@@ -34,7 +34,7 @@ describe('getPdfMessageBuffer', () => {
             },
         } as UrgentAction;
 
-        await getPdfMessageBuffer(urgentAction);
+        await getPdfMessageBuffer(urgentAction, '', '', '', '', '', '', '', '', '');
 
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('<p>Dear Minister,</p>');
@@ -44,26 +44,31 @@ describe('getPdfMessageBuffer', () => {
     });
 
     it('should display given subject', async () => {
-        const pdfSpy = jest.spyOn(pdf, 'create');
+        const urgentAction = (await createUrgentAction()) as UrgentAction[];
 
-        const urgentAction = (await createUrgentAction()) as UrgentAction;
-
-        await getPdfMessageBuffer(urgentAction, 'Asking for a fair trial');
+        await getPdfMessageBuffer(
+            urgentAction[0],
+            'Asking for a fair trial',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        );
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('Asking for a fair trial');
     });
 
     it('should display passed fullname', async () => {
-        const pdfSpy = jest.spyOn(pdf, 'create');
-
-        await getPdfMessageBuffer(defaultUrgentAction, '', 'M.', 'John', 'Doe');
+        await getPdfMessageBuffer(defaultUrgentAction, '', 'M.', 'John', 'Doe', '', '', '', '', '');
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('<p class="fullname">John Doe</p>');
     });
 
     it('should display emitter postal address', async () => {
-        const pdfSpy = jest.spyOn(pdf, 'create');
-
         const urgentAction = {
             ...defaultUrgentAction,
             message: {
@@ -93,8 +98,6 @@ describe('getPdfMessageBuffer', () => {
     });
 
     it('should prefix address with fullname', async () => {
-        const pdfSpy = jest.spyOn(pdf, 'create');
-
         const urgentAction = { ...defaultUrgentAction };
         await getPdfMessageBuffer(
             urgentAction,
@@ -114,8 +117,6 @@ describe('getPdfMessageBuffer', () => {
     });
 
     it('should display recipient postal address', async () => {
-        const pdfSpy = jest.spyOn(pdf, 'create');
-
         const urgentAction = {
             ...defaultUrgentAction,
             message: {
@@ -125,23 +126,20 @@ describe('getPdfMessageBuffer', () => {
             },
         } as UrgentAction;
 
-        await getPdfMessageBuffer(urgentAction);
+        await getPdfMessageBuffer(urgentAction, '', '', '', '', '', '', '', '', '');
         const renderedLetter = pdfSpy.mock.calls[0][0];
+
         expect(renderedLetter).toContain('2 Kaplan Street');
     });
 
     it('should display current date', async () => {
-        const pdfSpy = jest.spyOn(pdf, 'create');
-
-        await getPdfMessageBuffer(defaultUrgentAction);
+        await getPdfMessageBuffer(defaultUrgentAction, '', '', '', '', '', '', '', '', '');
 
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('Le 14 mai 2018');
     });
 
     it('should respect line breaks in message template texts', async () => {
-        const pdfSpy = jest.spyOn(pdf, 'create');
-
         const urgentAction = {
             ...defaultUrgentAction,
             message: {
@@ -149,7 +147,7 @@ describe('getPdfMessageBuffer', () => {
             },
         } as UrgentAction;
 
-        await getPdfMessageBuffer(urgentAction);
+        await getPdfMessageBuffer(urgentAction, '', '', '', '', '', '', '', '', '');
         const renderedLetter = pdfSpy.mock.calls[0][0];
         expect(renderedLetter).toContain('Dear Minister,<br />');
     });
@@ -158,5 +156,6 @@ describe('getPdfMessageBuffer', () => {
         if (clock) {
             clock.uninstall();
         }
+        pdfSpy.mockClear();
     });
 });

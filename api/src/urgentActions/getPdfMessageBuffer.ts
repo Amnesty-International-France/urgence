@@ -8,15 +8,15 @@ import { UrgentAction } from './repository';
 
 export const getPdfMessageBuffer = async (
     urgentAction: UrgentAction,
-    subject?: string,
-    civility?: string,
-    firstname?: string,
-    lastname?: string,
-    emitterAddressMain?: string,
-    emitterAddressMore?: string,
-    emitterPostalCode?: string,
-    emitterCity?: string,
-    emitterCountry?: string,
+    subject: string,
+    civility: string,
+    firstname: string,
+    lastname: string,
+    emitterAddressMain: string,
+    emitterAddressMore: string,
+    emitterPostalCode: string,
+    emitterCity: string,
+    emitterCountry: string,
 ) =>
     new Promise<Buffer>((resolve, reject) => {
         const recipientAddress = get(
@@ -25,7 +25,7 @@ export const getPdfMessageBuffer = async (
             '',
         ) as string;
         const messageTemplate = get(urgentAction, 'message.message_template', '') as string;
-        const date = format(new Date(), 'DD MMMM YYYY', { locale: frLocale });
+        const date = format(new Date(), 'dd MMMM yyyy', { locale: frLocale });
 
         const urgentActionLetter = nunjucks.render(path.join(__dirname, './letter.html'), {
             date,

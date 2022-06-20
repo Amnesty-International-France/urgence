@@ -6,6 +6,9 @@ import { sendMail } from './mailer';
 jest.mock('nodemailer');
 
 describe('Mailer', () => {
+    afterEach(() => {
+        sendMailSpy.mockClear();
+    });
     describe('sendMail', () => {
         it('should send email from Amnesty address', async () => {
             await sendMail({});

@@ -1,6 +1,5 @@
 export UID=$(shell id -u)
 export GID=$(shell id -g)
-
 default: help
 
 help: ## SOS? Usage make help (default).
@@ -68,8 +67,8 @@ connect-api:
 #### TESTS ####
 
 test: ## Run all tests. Usage `make test`.
-	make test-e2e
 	make test-unit
+	make test-e2e
 
 test-unit: ## Run the unit tests. Usage `make test-unit`.
 	$(DOCKER_COMPOSE_TEST) up --force-recreate -d db

@@ -44,8 +44,8 @@
         "start-dev": "pm2 startOrRestart --interpreter --no-daemon pm2/development.json",
         "start": "pm2 startOrRestart --no-daemon pm2/production.json",
         "build": "babel -x .ts src/ --out-dir dist/ && cp src/urgentActions/*.html dist/urgentActions/",
-        "test": "jest --ci --forceExit",
-        "test-watch": "jest --watch",
+        "test": "jest --ci --forceExit --silent false",
+        "test-watch": "jest --silent false --watch",
         "watch-dev": "babel-node -x .ts -- src/index.ts"
     },
     "devDependencies": {

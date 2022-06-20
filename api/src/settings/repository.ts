@@ -1,4 +1,4 @@
-import knex from '../db/client';
+import client from '../db/knex';
 import { Pagination } from '../types';
 
 export type Setting = {
@@ -10,21 +10,24 @@ export type Setting = {
 };
 
 const table = 'settings';
-const client = knex<Setting>(table);
+export const getSetting = async (id: number) =>
+    client.select('*').from<Setting>(table).where({ id }).first();
 
-export const getSetting = async (id: number) => client.select('*').where({ id }).first();
-
-export const getSettingByType = async (type: string) => client.select('*').where({ type });
+export const getSettingByType = async (type: string) =>
+    client.select('*').from<Setting>(table).where({ type });
 
 export const getSettings = async ({ perPage, page, sortField, sortOrder }: Pagination) =>
-    client.select('*').paginate({ perPage, currentPage: page * perPage, sortField, sortOrder });
+    client
+        .select('*')
+        .from<Setting>(table)
+        .paginate({ perPage, currentPage: page * perPage, sortField, sortOrder });
 
-export const countSettings = async () => client.count('*').first();
+export const countSettings = async () => client.count('*').from<Setting>(table).first();
 
 export const createSetting = async (setting: Pick<Setting, 'content' | 'type'>) =>
-    client.insert(setting).returning('*').first();
+    client<Setting>(table).insert(setting).returning('*').first();
 
 export const updateSetting = async (id: number, setting: Partial<Setting>) =>
-    client.update(setting).where({ id }).returning('*').first();
+    client<Setting>(table).update(setting).where({ id }).returning('*').first();
 
-export const removeSetting = async (id: number) => client.where({ id }).del();
+export const removeSetting = async (id: number) => client<Setting>(table).where({ id }).del();

@@ -3,6 +3,7 @@ version: '3'
 services:
     admin_staging:
         image: node:18
+        user: '${UID}:${GID}'
         command: 'yarn run build'
         volumes:
             - .:/app
@@ -16,6 +17,7 @@ services:
 
     admin_prod:
         image: node:18
+        user: '${UID}:${GID}'
         command: 'yarn run build'
         volumes:
             - .:/app
@@ -29,6 +31,7 @@ services:
 
     admin_dev:
         image: node:18
+        user: '${UID}:${GID}'
         command: 'yarn run build'
         volumes:
             - .:/app
@@ -42,6 +45,7 @@ services:
 
     front_staging:
         image: node:18
+        user: '${UID}:${GID}'
         command: 'yarn run build-web'
         volumes:
             - ./front:/app
@@ -56,6 +60,7 @@ services:
 
     front_prod:
         image: node:18
+        user: '${UID}:${GID}'
         command: 'yarn run build-web'
         volumes:
             - ./front:/app
@@ -70,6 +75,7 @@ services:
 
     front_dev:
         image: node:18
+        user: '${UID}:${GID}'
         command: 'yarn run build-web'
         volumes:
             - ./front:/app
@@ -84,6 +90,7 @@ services:
 
     storybook:
         image: node:18
+        user: '${UID}:${GID}'
         command: 'yarn run build-storybook'
         volumes:
             - ./front:/app

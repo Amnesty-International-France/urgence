@@ -28,6 +28,12 @@ const authenticate = jest.mocked(authenticateOriginal, true);
 const getContactByEmail = jest.mocked(getContactByEmailOriginal, true);
 
 describe('Urgent Actions Resolvers', () => {
+    afterEach(() => {
+        uploadImageFromStory.mockClear();
+        uploadImageDesktopFromStory.mockClear();
+        authenticate.mockClear();
+        getContactByEmail.mockClear();
+    });
     describe('Queries', () => {
         describe('UrgentAction', () => {
             it('should query the urgent action that corresponds to the provided id', async () => {
@@ -537,16 +543,16 @@ describe('Urgent Actions Resolvers', () => {
                     null,
                     params,
                 );
-                // @ts-ignore
+                if (response instanceof Error) {
+                    throw response;
+                }
                 expect(response.email).toEqual('jean.bon@gmail.com');
-                // @ts-ignore
                 expect(response.firstname).toEqual('Jean');
-                // @ts-ignore
                 expect(response.lastname).toEqual('Bon');
-                // @ts-ignore
                 expect(response.registered).toEqual(false);
 
-                expect(addCampaignMember).toHaveBeenCalledWith('psjgf-dfgersdf-sf486sf-sdf', ua, {
+                expect(addCampaignMember).toHaveBeenCalledWith('psjgf-dfgersdf-sf486sf-sdf', await ua, {
+                    civility: 'Autre',
                     email: 'jean.bon@gmail.com',
                     firstname: 'Jean',
                     lastname: 'Bon',

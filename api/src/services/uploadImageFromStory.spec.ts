@@ -7,6 +7,9 @@ jest.mock('./uploadImage');
 const uploadImage = jest.mocked(uploadImageOriginal, true);
 
 describe('uploadImageFromStory', () => {
+    afterEach(() => {
+        uploadImage.mockClear();
+    });
     it('should call uploadImage with all medium.src', async () => {
         await uploadImageFromStory([
             { medium: { src: 'first medium src' } } as StoryStep,

@@ -1,7 +1,7 @@
 import { Color } from 'sharp';
 import { Upload } from 'graphql-upload';
 
-import knex, { parseJsonFromRow, parseJsonFromRows } from '../db/client';
+import client, { parseJsonFromRow, parseJsonFromRows } from '../db/knex';
 import { Crop } from '../services/uploadImage';
 import { Pagination } from '../types';
 
@@ -120,22 +120,23 @@ export type UrgentAction = {
 };
 
 const table = 'urgent_action';
-const client = knex<UrgentActionDb>(table);
 
 export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }: Pagination) =>
     client
         .select('*')
+        .from<UrgentActionDb>(table)
         .paginate({ perPage, currentPage: page * perPage, sortField, sortOrder })
         .then((row) => ({
             ...row,
             data: parseJsonFromRows<UrgentAction>(row.data),
         }));
 
-export const countUrgentActions = async () => client.count('*').first();
+export const countUrgentActions = async () => client.count('*').from(table).first();
 
 export const getUrgentAction = async (id: string) =>
     client
         .select('*')
+        .from<UrgentActionDb>(table)
         .where({ id })
         .first()
         .then((row) => parseJsonFromRow<UrgentAction>(row));
@@ -150,27 +151,28 @@ export const getDefaultUrgentAction = async () =>
 export const getUrgentActionBySlug = async (slug: string) =>
     client
         .select('*')
+        .from<UrgentActionDb>(table)
         .where({ slug })
         .first()
         .then((row) => parseJsonFromRow<UrgentAction>(row));
 
 export const createUrgentAction = async (urgentAction: Omit<UrgentActionDb, 'id'>) =>
-    client
+    client<UrgentActionDb>(table)
         .insert(urgentAction)
         .returning('*')
-        .first()
-        .then((row) => parseJsonFromRow<UrgentAction>(row));
+        .then((row) => parseJsonFromRows<UrgentAction>(row));
 
 export const updateUrgentAction = async (
     id: string,
     urgentAction: Partial<UrgentActionDb>,
     last_edition_date = new Date(),
 ) =>
-    client
+    client<UrgentActionDb>(table)
         .update(urgentAction)
         .where({ id })
         .returning('*')
         .first()
         .then((row) => parseJsonFromRow<UrgentAction>(row));
 
-export const removeUrgentAction = async (id: string) => client.where({ id }).delete();
+export const removeUrgentAction = async (id: string) =>
+    client<UrgentActionDb>(table).where({ id }).delete();

@@ -6,6 +6,9 @@ jest.mock('./uploadImage');
 const uploadImage = jest.mocked(uploadImageOriginal, true);
 
 describe('uploadImageFromSocialMetadata', () => {
+    beforeEach(() => {
+        uploadImage.mockClear();
+    });
     it('should call uploadImage with all medium.src', async () => {
         await uploadImageFromSocialMetadata({ medium: { src: 'first medium src' } });
         expect(uploadImage).toHaveBeenCalledWith('first medium src');
@@ -18,11 +21,11 @@ describe('uploadImageFromSocialMetadata', () => {
         ).toEqual({ medium: { src: 'uploaded src' } });
     });
 
-    it('should call uploadImage with undefined for social metadata  with no medium and do not change the social metadata item', async () => {
+    it('should not call uploadImage with undefined for social metadata  with no medium, but should return the same social metadata item', async () => {
         // @ts-ignore
         uploadImage.mockImplementation((v) => v);
         // @ts-ignore
         expect(await uploadImageFromSocialMetadata({ no: 'medium' })).toEqual({ no: 'medium' });
-        expect(uploadImage).toHaveBeenCalledWith(undefined);
+        expect(uploadImage).not.toHaveBeenCalled();
     });
 });

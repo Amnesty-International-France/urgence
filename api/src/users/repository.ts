@@ -1,4 +1,4 @@
-import client from '../db/client';
+import client from '../db/knex';
 
 const table = 'user_token';
 
@@ -11,7 +11,6 @@ export type User = {
 };
 
 export const getUserTokenByToken = async (token: string) => {
-    const sql = `SELECT * from ${table} where token = $token AND expire_date::timestamp >= $today::timestamp;`;
     return client
         .select('*')
         .from<User>(table)
@@ -36,8 +35,8 @@ export const createUserToken = async ({
 };
 
 export const removeUserOldTokenByLogin = async (login: string) => {
-    return client(table)
+    return client<User>(table)
         .where({ login })
-        .andWhere('expire_date::timestamp', '<', `${new Date().toISOString()}::timestamp`)
+        .andWhere('expire_date', '<', `${new Date().toISOString()}`)
         .del();
 };

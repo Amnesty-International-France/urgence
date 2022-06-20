@@ -8,7 +8,7 @@ export const uploadImageFromSocialMetadata = async (
 ) => {
     const image = path<string>(['medium', 'src'], socialMetadata);
     if (!image) {
-        throw new Error('Image not found');
+        return socialMetadata;
     }
     const src = await uploadImage(image);
 

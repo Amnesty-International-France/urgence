@@ -1,4 +1,4 @@
-const query = require('../db/client');
+import knex from '../db/knex';
 
 import { createUrgentAction as insertUrgentAction } from '../urgentActions/repository';
 import { createSetting as insertSetting, Setting } from '../settings/repository';
@@ -40,6 +40,6 @@ export const createSetting = async (setting: Partial<Setting>) => {
 };
 
 export const truncateAll = async () => {
-    await query('TRUNCATE urgent_action');
-    await query('TRUNCATE settings');
+    await knex.raw('TRUNCATE urgent_action');
+    await knex.raw('TRUNCATE settings');
 };

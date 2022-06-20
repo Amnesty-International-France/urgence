@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Urgent Actions Router POST /urgent-actions/\${id}/send should send email to correct recipient with attached PDF 1`] = `
-Object {
-  "html": "<p>Bonjour,</p>
+"<p>Bonjour,</p>
 
 <p>Voici votre lettre pour l'Action Urgente
     <em>Commutation of William Montgomery&#39;s sentence</em>.</p>
@@ -40,35 +39,5 @@ Object {
     L'équipe Réaction Rapide
     <br /> Amnesty International France
 </p>
-",
-  "text": "Bonjour,
-
-Voici votre lettre pour l'Action Urgente \\"Commutation of William Montgomery's sentence\\".
-
-Il ne vous reste plus que quelques étapes :
-
-- l'imprimer
-- la signer en **votre nom**
-- l'affranchir
-- la poster au plus vite
-
-Ce courrier est à adresser à :
-
-undefined
-
-**Astuce :** saviez-vous que vous pouvez acheter et imprimer vos timbres en ligne ?
-
-Votre action est importante. Votre lettre ajoutée avec celles de milliers de personnes peut faire changer les choses !
-
-Sur le terrain, les chercheurs d'Amnesty International suivent la situation, nous vous informerons de toute évolution constatée.
-
-Merci pour votre soutien et votre engagement !
-
-Solidairement,
-
---
-L'équipe Réaction Rapide
-Amnesty International France
-",
-}
+"
 `;

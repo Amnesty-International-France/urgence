@@ -15,6 +15,10 @@ const getPdfMessageBuffer = jest.mocked(getPdfMessageBufferOriginal, true);
 const sendMail = jest.mocked(sendMailOriginal, true);
 
 describe('Urgent Actions Router', () => {
+    beforeEach(() => {
+        getPdfMessageBuffer.mockClear();
+        sendMail.mockClear();
+    });
     describe('GET /urgent-actions/${id}.pdf', () => {
         beforeEach(() => {
             getPdfMessageBuffer.mockImplementation(async () => Buffer.from('PDF'));
@@ -34,13 +38,13 @@ describe('Urgent Actions Router', () => {
         });
 
         it('should return a 200 response if urgent action exists', async () => {
-            const urgentAction = (await createUrgentAction()) as UrgentAction;
+            const urgentAction = ((await createUrgentAction()) as UrgentAction[])[0];
             const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
             expect(response.status).toBe(200);
         });
 
         it('should return a PDF with correct subject and fullname', async () => {
-            const urgentAction = (await createUrgentAction()) as UrgentAction;
+            const urgentAction = ((await createUrgentAction()) as UrgentAction[])[0];
 
             await request(app).get(
                 `/urgent-actions/${urgentAction.id}.pdf?${stringify({
@@ -88,13 +92,13 @@ describe('Urgent Actions Router', () => {
         });
 
         it('should return a 200 response if urgent action exists', async () => {
-            const urgentAction = (await createUrgentAction()) as UrgentAction;
+            const urgentAction = ((await createUrgentAction()) as UrgentAction[])[0];
             const response = await request(app).post(`/urgent-actions/${urgentAction.id}/send`);
             expect(response.status).toBe(200);
         });
 
         it('should generate PDF with correct subject and fullname', async () => {
-            const urgentAction = (await createUrgentAction()) as UrgentAction;
+            const urgentAction = ((await createUrgentAction()) as UrgentAction[])[0];
 
             await request(app).post(`/urgent-actions/${urgentAction.id}/send`).send({
                 subject: 'Custom Subject',
@@ -110,9 +114,10 @@ describe('Urgent Actions Router', () => {
         });
 
         it('should send email to correct recipient with attached PDF', async () => {
-            getPdfMessageBuffer.mockImplementation(async () => Buffer.from('PDF Buffer'));
+            // @ts-ignore
+            getPdfMessageBuffer.mockImplementation(async () => 'PDF Buffer');
 
-            const urgentAction = (await createUrgentAction()) as UrgentAction;
+            const urgentAction = ((await createUrgentAction()) as UrgentAction[])[0];
 
             await request(app)
                 .post(`/urgent-actions/${urgentAction.id}/send`)
@@ -133,7 +138,7 @@ describe('Urgent Actions Router', () => {
                 throw new Error('Unable to send email.');
             });
 
-            const urgentAction = (await createUrgentAction()) as UrgentAction;
+            const urgentAction = ((await createUrgentAction()) as UrgentAction[])[0];
 
             const response = await request(app)
                 .post(`/urgent-actions/${urgentAction.id}/send`)
