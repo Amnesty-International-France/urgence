@@ -14,17 +14,17 @@ import {
 
 export default {
     Query: {
-        Setting: (_: never, { id }: { id: string }) => getSetting(id),
-        SettingByType: (_: never, { type }: { type: string }) => getSettingByType(type),
-        allSettings: (_: never, { perPage, page, sortField, sortOrder }: Pagination) =>
+        Setting: (_: null, { id }: { id: number }) => getSetting(id),
+        SettingByType: (_: null, { type }: { type: string }) => getSettingByType(type),
+        allSettings: (_: null, { perPage, page, sortField, sortOrder }: Pagination) =>
             getSettings({ perPage, page, sortField, sortOrder }),
         _allSettingsMeta: () => countSettings(),
     },
     Mutation: {
         createSetting: async (
-            _: never,
-            setting: Setting,
-            context: Context<{ user: AuthenticatedUser }>,
+            _: null,
+            setting: Pick<Setting, 'type' | 'content'>,
+            context?: Context<{ user: AuthenticatedUser }>,
         ) => {
             if (!context || !context.user || context.user.role !== 'admin') {
                 return null;
@@ -33,9 +33,9 @@ export default {
             return createSetting(setting);
         },
         updateSetting: async (
-            _: never,
-            { id, ...setting }: Setting,
-            context: Context<{ user: AuthenticatedUser }>,
+            _: null,
+            { id, ...setting }: Pick<Setting, 'id' | 'type' | 'content'>,
+            context?: Context<{ user: AuthenticatedUser }>,
         ) => {
             if (!context || !context.user || context.user.role !== 'admin') {
                 return null;
@@ -46,9 +46,9 @@ export default {
             return updateSetting(id, setting);
         },
         deleteSetting: async (
-            _: never,
-            id: string,
-            context: Context<{ user: AuthenticatedUser }>,
+            _: null,
+            id: number,
+            context?: Context<{ user: AuthenticatedUser }>,
         ) => {
             if (!context || !context.user || context.user.role !== 'admin') {
                 return null;

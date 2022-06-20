@@ -24,7 +24,7 @@ export type SocialMetadata = {
 
 type Medium = {
     title: string;
-    src: Upload;
+    src: string;
     crop?: Crop;
 };
 
@@ -38,21 +38,22 @@ type CropDesktop = {
 
 type MediumDesktop = {
     title: string;
-    src: Upload;
+    src: string;
     crop?: CropDesktop;
 };
 
 type DisplayOptions = {
-    mediumPosition: Position;
-    backgroundColor: Color;
+    mediumPosition?: Position;
+    backgroundColor?: Color;
     color?: Color;
+    position?: string;
 };
 
 type Share = { message: string; twitter_message: string };
 
 type Telegram = { url: string; message: string };
 
-type StoryStep = {
+export type StoryStep = {
     content: String;
     medium?: Medium;
     mediumDesktop?: MediumDesktop;

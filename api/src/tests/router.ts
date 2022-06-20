@@ -4,7 +4,7 @@ import { createUrgentAction, createSetting, truncateAll } from './fixtureLoader'
 import urgentAction from './fixtures/urgentAction.json';
 import settings from './fixtures/settings.json';
 
-export const testRouter = new Router();
+export const testRouter = Router();
 
 testRouter.get('/createUrgentAction', async (req, res) => {
     const result = await createUrgentAction(urgentAction);
@@ -12,7 +12,7 @@ testRouter.get('/createUrgentAction', async (req, res) => {
 });
 
 testRouter.get('/createSettings', async (req, res) => {
-    settings.map(async setting => {
+    settings.map(async (setting) => {
         await createSetting(setting);
     });
     res.send({ done: true });

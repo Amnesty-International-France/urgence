@@ -3,6 +3,7 @@ import pdf from 'html-pdf';
 
 import { createUrgentAction } from '../tests/fixtureLoader';
 import { getPdfMessageBuffer } from './getPdfMessageBuffer';
+import { UrgentAction } from './repository';
 
 describe('getPdfMessageBuffer', () => {
     const defaultUrgentAction = {
@@ -10,7 +11,7 @@ describe('getPdfMessageBuffer', () => {
             recipient: {},
             message_template: [],
         },
-    };
+    } as unknown as UrgentAction;
 
     let clock: fakeTimers.InstalledClock;
     beforeEach(() => {
@@ -31,7 +32,7 @@ describe('getPdfMessageBuffer', () => {
                     },
                 ],
             },
-        };
+        } as UrgentAction;
 
         await getPdfMessageBuffer(urgentAction);
 
@@ -45,7 +46,7 @@ describe('getPdfMessageBuffer', () => {
     it('should display given subject', async () => {
         const pdfSpy = jest.spyOn(pdf, 'create');
 
-        const urgentAction = await createUrgentAction();
+        const urgentAction = (await createUrgentAction()) as UrgentAction;
 
         await getPdfMessageBuffer(urgentAction, 'Asking for a fair trial');
         const renderedLetter = pdfSpy.mock.calls[0][0];
@@ -70,7 +71,7 @@ describe('getPdfMessageBuffer', () => {
                     postal_address: 'Aryeh Deri\n2 Kaplan Street',
                 },
             },
-        };
+        } as UrgentAction;
 
         await getPdfMessageBuffer(
             urgentAction,
@@ -122,7 +123,7 @@ describe('getPdfMessageBuffer', () => {
                     postal_address: 'Aryeh Deri\n2 Kaplan Street',
                 },
             },
-        };
+        } as UrgentAction;
 
         await getPdfMessageBuffer(urgentAction);
         const renderedLetter = pdfSpy.mock.calls[0][0];
@@ -146,7 +147,7 @@ describe('getPdfMessageBuffer', () => {
             message: {
                 message_template: [{ value: 'Dear Minister,\n\nBla bla bla' }],
             },
-        };
+        } as UrgentAction;
 
         await getPdfMessageBuffer(urgentAction);
         const renderedLetter = pdfSpy.mock.calls[0][0];

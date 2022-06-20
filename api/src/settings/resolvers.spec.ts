@@ -37,13 +37,13 @@ describe('Setting Resolvers', () => {
                     perPage: 10,
                     page: 1,
                     sortField: 'id',
-                    sortOrder: 'asc',
+                    sortOrder: 'ASC',
                 });
                 expect(getSettings).toHaveBeenCalledWith({
                     perPage: 10,
                     page: 1,
                     sortField: 'id',
-                    sortOrder: 'asc',
+                    sortOrder: 'ASC',
                 });
             });
         });

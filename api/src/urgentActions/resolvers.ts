@@ -58,7 +58,7 @@ const prepareUrgentActionForDatabase = async (
 export default {
     Query: {
         allUrgentActions: (
-            _: never,
+            _: null,
             {
                 perPage,
                 page,
@@ -71,16 +71,16 @@ export default {
                 sortOrder: 'ASC' | 'DESC';
             },
         ) => getUrgentActions({ perPage, page, sortField, sortOrder }),
-        UrgentAction: (_: never, { id }: { id: string }) => getUrgentAction(id),
-        UrgentActionBySlug: (_: never, { slug }: { slug: string }) => getUrgentActionBySlug(slug),
+        UrgentAction: (_: null, { id }: { id: string }) => getUrgentAction(id),
+        UrgentActionBySlug: (_: null, { slug }: { slug: string }) => getUrgentActionBySlug(slug),
         DefaultUrgentAction: () => getDefaultUrgentAction(),
         _allUrgentActionsMeta: () => countUrgentActions(),
     },
     Mutation: {
         createUrgentAction: async (
-            _: never,
+            _: null,
             urgentAction: UrgentAction,
-            context: Context<{ user: AuthenticatedUser }>,
+            context?: Context<{ user: AuthenticatedUser }>,
         ) => {
             if (!context || !context.user || context.user.role !== 'admin') {
                 return null;
@@ -90,9 +90,9 @@ export default {
             return createUrgentAction(preparedUa);
         },
         updateUrgentAction: async (
-            _: never,
+            _: null,
             urgentAction: UrgentAction,
-            context: Context<{ user: AuthenticatedUser }>,
+            context?: Context<{ user: AuthenticatedUser }>,
         ) => {
             if (!context || !context.user || context.user.role !== 'admin') {
                 return null;
@@ -102,9 +102,9 @@ export default {
             return updateUrgentAction(urgentAction.id, preparedUa);
         },
         deleteUrgentAction: (
-            _: never,
+            _: null,
             id: string,
-            context: Context<{ user: AuthenticatedUser }>,
+            context?: Context<{ user: AuthenticatedUser }>,
         ) => {
             if (!context || !context.user || context.user.role !== 'admin') {
                 return null;
@@ -112,19 +112,19 @@ export default {
 
             return removeUrgentAction(id);
         },
-        addCampaignMember: (_: never, { id, member }: { id: string; member: CampaignMember }) => {
+        addCampaignMember: (_: null, { id, member }: { id: string; member: CampaignMember }) => {
             return addCampaignMember(id, member);
         },
         addCampaignMemberTwitter: (
-            _: never,
+            _: null,
             { id, member }: { id: string; member: CampaignMember },
         ) => {
             return addCampaignMemberTwitter(id, member);
         },
-        registerContact: (_: never, { id, member }: { id: string; member: CampaignMember }) => {
+        registerContact: (_: null, { id, member }: { id: string; member: CampaignMember }) => {
             return registerContact(id, member);
         },
-        addResponseCount: async (_: never, { id }: { id: string }) => {
+        addResponseCount: async (_: null, { id }: { id: string }) => {
             const urgentAction = await getUrgentAction(id);
             if (!urgentAction) {
                 throw new Error('Urgent action not found');

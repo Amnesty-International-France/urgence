@@ -12,9 +12,7 @@ const client = knex({
 
 attachPaginate();
 
-export const parseJsonFromRow = <T>(
-    row: { [property in keyof T]: any } | undefined,
-): T | undefined => {
+export const parseJsonFromRow = <T>(row: { [property in keyof T]: any } | undefined) => {
     if (row == null) {
         return undefined;
     }
@@ -22,7 +20,6 @@ export const parseJsonFromRow = <T>(
         try {
             acc[key] = JSON.parse(row[key]);
         } catch (e) {
-            // @ts-ignore
             acc[key] = row[key];
         }
         return acc;

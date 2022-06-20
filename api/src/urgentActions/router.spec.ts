@@ -1,18 +1,23 @@
+import { jest } from '@jest/globals';
 import { stringify } from 'qs';
 import request from 'supertest';
 
-import { sendMail } from '../mailer';
+import { sendMail as sendMailOriginal } from '../mailer';
 import app from '../server';
 import { createUrgentAction, truncateAll } from '../tests/fixtureLoader';
-import { getPdfMessageBuffer } from './getPdfMessageBuffer';
+import { getPdfMessageBuffer as getPdfMessageBufferOriginal } from './getPdfMessageBuffer';
+import { UrgentAction } from './repository';
 
 jest.mock('../mailer');
 jest.mock('./getPdfMessageBuffer');
 
+const getPdfMessageBuffer = jest.mocked(getPdfMessageBufferOriginal, true);
+const sendMail = jest.mocked(sendMailOriginal, true);
+
 describe('Urgent Actions Router', () => {
     describe('GET /urgent-actions/${id}.pdf', () => {
         beforeEach(() => {
-            getPdfMessageBuffer.mockImplementation(() => 'PDF');
+            getPdfMessageBuffer.mockImplementation(async () => Buffer.from('PDF'));
         });
 
         it('should return a 400 if an invalid UUID is passed as id', async () => {
@@ -29,13 +34,13 @@ describe('Urgent Actions Router', () => {
         });
 
         it('should return a 200 response if urgent action exists', async () => {
-            const urgentAction = await createUrgentAction();
+            const urgentAction = (await createUrgentAction()) as UrgentAction;
             const response = await request(app).get(`/urgent-actions/${urgentAction.id}.pdf`);
             expect(response.status).toBe(200);
         });
 
         it('should return a PDF with correct subject and fullname', async () => {
-            const urgentAction = await createUrgentAction();
+            const urgentAction = (await createUrgentAction()) as UrgentAction;
 
             await request(app).get(
                 `/urgent-actions/${urgentAction.id}.pdf?${stringify({
@@ -83,22 +88,20 @@ describe('Urgent Actions Router', () => {
         });
 
         it('should return a 200 response if urgent action exists', async () => {
-            const urgentAction = await createUrgentAction();
+            const urgentAction = (await createUrgentAction()) as UrgentAction;
             const response = await request(app).post(`/urgent-actions/${urgentAction.id}/send`);
             expect(response.status).toBe(200);
         });
 
         it('should generate PDF with correct subject and fullname', async () => {
-            const urgentAction = await createUrgentAction();
+            const urgentAction = (await createUrgentAction()) as UrgentAction;
 
-            await request(app)
-                .post(`/urgent-actions/${urgentAction.id}/send`)
-                .send({
-                    subject: 'Custom Subject',
-                    civility: 'Civility',
-                    firstname: 'Firstname',
-                    lastname: 'Lastname',
-                });
+            await request(app).post(`/urgent-actions/${urgentAction.id}/send`).send({
+                subject: 'Custom Subject',
+                civility: 'Civility',
+                firstname: 'Firstname',
+                lastname: 'Lastname',
+            });
 
             expect(getPdfMessageBuffer.mock.calls[0][1]).toBe('Custom Subject');
             expect(getPdfMessageBuffer.mock.calls[0][2]).toBe('Civility');
@@ -107,19 +110,19 @@ describe('Urgent Actions Router', () => {
         });
 
         it('should send email to correct recipient with attached PDF', async () => {
-            getPdfMessageBuffer.mockImplementation(() => 'PDF Buffer');
+            getPdfMessageBuffer.mockImplementation(async () => Buffer.from('PDF Buffer'));
 
-            const urgentAction = await createUrgentAction();
+            const urgentAction = (await createUrgentAction()) as UrgentAction;
 
             await request(app)
                 .post(`/urgent-actions/${urgentAction.id}/send`)
                 .send({ email: 'thiery@marmelab.com' });
 
-            const [recipient, subject, body, attachment] = sendMail.mock.calls[0];
+            const [{ to: recipient, subject, html, attachments }] = sendMail.mock.calls[0];
             expect(recipient).toBe('thiery@marmelab.com');
             expect(subject).toBe('On y est presque !');
-            expect(body).toMatchSnapshot();
-            expect(attachment).toEqual({
+            expect(html).toMatchSnapshot();
+            expect(attachments && attachments[0]).toEqual({
                 filename: 'letter.pdf',
                 content: 'PDF Buffer',
             });
@@ -130,7 +133,7 @@ describe('Urgent Actions Router', () => {
                 throw new Error('Unable to send email.');
             });
 
-            const urgentAction = await createUrgentAction();
+            const urgentAction = (await createUrgentAction()) as UrgentAction;
 
             const response = await request(app)
                 .post(`/urgent-actions/${urgentAction.id}/send`)

@@ -2,10 +2,11 @@ import { getSavedFileName } from './uploadImage';
 import shortid from 'shortid';
 
 jest.mock('shortid');
+const mock = jest.mocked(shortid, true);
 
 describe('uploadImage', () => {
     beforeEach(() => {
-        shortid.generate.mockImplementation(() => 'random_id');
+        mock.generate.mockImplementation(() => 'random_id');
     });
 
     describe('getSavedFileName', () => {

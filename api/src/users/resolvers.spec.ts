@@ -1,12 +1,12 @@
 import jwtDecode from 'jwt-decode';
 
-import { createToken, login } from './resolvers';
+import { AuthenticatedUser, createToken, login } from './resolvers';
 
 describe('Users Resolvers', () => {
     describe('createToken', () => {
         it('should return a signed JWT token containing user data', async () => {
             const token = await createToken({ login: 'admin', role: 'admin' });
-            const decodedToken = jwtDecode(token);
+            const decodedToken = jwtDecode<AuthenticatedUser>(token);
             expect(decodedToken.role).toBe('admin');
         });
 
@@ -15,7 +15,7 @@ describe('Users Resolvers', () => {
                 { login: 'admin', role: 'admin' },
                 new Date('2032-01-01'),
             );
-            const decodedToken = jwtDecode(token);
+            const decodedToken = jwtDecode<AuthenticatedUser>(token);
             expect(decodedToken.expiration).toBe('2032-01-01T06:00:00.000Z');
         });
     });
@@ -27,7 +27,7 @@ describe('Users Resolvers', () => {
                 password: 'password',
             });
 
-            const decodedToken = jwtDecode(token);
+            const decodedToken = jwtDecode<AuthenticatedUser>(token);
             expect(decodedToken.role).toBe('admin');
         });
 
@@ -37,7 +37,7 @@ describe('Users Resolvers', () => {
                     username: 'foo',
                     password: 'bar',
                 });
-            } catch (err) {
+            } catch (err: any) {
                 expect(err.message).toBe('Invalid credentials.');
                 return;
             }

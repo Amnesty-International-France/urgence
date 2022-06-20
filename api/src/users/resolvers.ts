@@ -5,7 +5,7 @@ import config from '../../../config/index.cjs';
 
 import { createUserToken, getUserTokenByToken, removeUserOldTokenByLogin } from './repository';
 
-export type AuthenticatedUser = { login: string; role: string };
+export type AuthenticatedUser = { login: string; role: string; expiration?: string };
 
 export const createToken = async (user: AuthenticatedUser, now = new Date()) => {
     const expiration = addHours(now, config.admin.authentication.sessionDuration).toISOString();

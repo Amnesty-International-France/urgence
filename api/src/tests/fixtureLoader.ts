@@ -1,9 +1,9 @@
 const query = require('../db/client');
 
 import { createUrgentAction as insertUrgentAction } from '../urgentActions/repository';
-import { createSetting as insertSetting } from '../settings/repository';
+import { createSetting as insertSetting, Setting } from '../settings/repository';
 
-export const createUrgentAction = async ({ story, message, ...urgentAction } = {}) => {
+export const createUrgentAction = async ({ story, message, ...urgentAction }: any = {}) => {
     const defaultUrgentAction = {
         title: "Commutation of William Montgomery's sentence",
         slug: 'commutation-of-william-montgomerys-sentence',
@@ -27,7 +27,7 @@ export const createUrgentAction = async ({ story, message, ...urgentAction } = {
     });
 };
 
-export const createSetting = async setting => {
+export const createSetting = async (setting: Partial<Setting>) => {
     const defaultSetting = {
         type: 'my-type',
         content: '',
