@@ -66,11 +66,11 @@ const batchInsertQuery = batchInsert.default({
 })(urgentActions);
 
 client(batchInsertQuery)
-  .then(rows => {
+  .then((rows: any[]) => {
     console.log(`Success: ${rows.length} records have been inserted`);
     process.exit(0);
   })
-  .catch(err => {
+  .catch((err: any) => {
     console.error(err);
     process.exit(1);
   });

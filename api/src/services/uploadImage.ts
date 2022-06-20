@@ -3,7 +3,7 @@ import { FileUpload } from 'graphql-upload';
 import sharp from 'sharp';
 import shortid from 'shortid';
 
-import config from '../../../config';
+import config from '../../../config/index.cjs';
 
 export type Crop = {
     unit: string;

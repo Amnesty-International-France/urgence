@@ -2,7 +2,7 @@ import pick from 'lodash.pick';
 import omit from 'lodash.omit';
 import { createTransport } from 'nodemailer';
 
-import conf from '../../config';
+import conf from '../../config/index.cjs';
 import { Options } from 'nodemailer/lib/mailer';
 
 const mailerConfig = conf.mailer;

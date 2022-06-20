@@ -1,5 +1,5 @@
 import { ErrorRequestHandler } from 'express';
-import config from '../../config';
+import config from '../../config/index.cjs';
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     if (res.headersSent) {

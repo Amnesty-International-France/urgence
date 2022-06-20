@@ -1,13 +1,13 @@
-import path from 'path';
 import { format } from 'date-fns';
 import frLocale from 'date-fns/locale/fr';
 import pdf from 'html-pdf';
-import nunjucks from 'nunjucks';
 import get from 'lodash.get';
-import { UrgentActionDb } from './repository';
+import nunjucks from 'nunjucks';
+import path from 'path';
+import { UrgentAction } from './repository';
 
 export const getPdfMessageBuffer = async (
-    urgentAction: UrgentActionDb,
+    urgentAction: UrgentAction,
     subject?: string,
     civility?: string,
     firstname?: string,

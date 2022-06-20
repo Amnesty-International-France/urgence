@@ -1,7 +1,7 @@
 import { addHours } from 'date-fns';
 import jwt from 'jsonwebtoken';
 
-import config from '../../../config';
+import config from '../../../config/index.cjs';
 
 import { createUserToken, getUserTokenByToken, removeUserOldTokenByLogin } from './repository';
 

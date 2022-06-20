@@ -113,32 +113,32 @@ psql-e2e: ## Connect to the e2e database. Usage `make psql-e2e`.
 	$(DOCKER_COMPOSE_E2E) exec db sh -c "psql --host=localhost --username=amnesty reaction-rapide-e2e"
 
 DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
-	--config=database.js \
+	--config=database.cjs \
 	--migrations-dir=migrations \
 	-e api
 
 DB_MIGRATE_NGINX = $(DOCKER_COMPOSE_DEV_NGINX) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
-	--config=database.js \
+	--config=database.cjs \
 	--migrations-dir=migrations \
 	-e api
 
 DB_MIGRATE_TEST = $(DOCKER_COMPOSE_TEST) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
-	--config=database.js \
+	--config=database.cjs \
 	--migrations-dir=migrations \
 	-e api
 
 DB_MIGRATE_STAGING = $(DOCKER_COMPOSE_STAGING) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
-	--config=database.js \
+	--config=database.cjs \
 	--migrations-dir=migrations \
 	-e api
 
 DB_MIGRATE_PROD = $(DOCKER_COMPOSE_PROD) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
-	--config=database.js \
+	--config=database.cjs \
 	--migrations-dir=migrations \
 	-e api
 
 DB_MIGRATE_E2E = $(DOCKER_COMPOSE_E2E) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
-	--config=database.js \
+	--config=database.cjs \
 	--migrations-dir=migrations \
 	-e api
 

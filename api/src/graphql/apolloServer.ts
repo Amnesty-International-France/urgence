@@ -1,7 +1,7 @@
 import { ApolloServer, AuthenticationError, Config } from 'apollo-server-express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { Request } from 'express';
-import config from '../../../config';
+import config from '../../../config/index.cjs';
 import { loginByToken } from '../users/resolvers';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';

@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 
-import config from '../../config';
+import config from '../../config/index.cjs';
 import errorHandler from './errorHandler';
 import router from './router';
 import apolloServer from './graphql/apolloServer';

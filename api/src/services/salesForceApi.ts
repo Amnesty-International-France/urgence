@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 
-import config from '../../../config';
+import config from '../../../config/index.cjs';
 import { CampaignMember } from '../urgentActions/campaignMember';
 
 const salesforce = config.salesforce;

@@ -1,4 +1,4 @@
-const config = require('../config').default;
+const config = require('../config/index.cjs');
 
 module.exports = {
     api: {

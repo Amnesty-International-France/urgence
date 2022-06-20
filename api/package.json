@@ -2,6 +2,7 @@
     "name": "reaction-rapide-api",
     "version": "1.0.0",
     "main": "index.js",
+    "type": "commonjs",
     "private": true,
     "dependencies": {
         "@types/ramda": "^0.28.14",
@@ -40,9 +41,9 @@
         "validator": "~13.7.0"
     },
     "scripts": {
-        "start-dev": "pm2 startOrRestart --no-daemon pm2/development.json",
+        "start-dev": "pm2 startOrRestart --interpreter --no-daemon pm2/development.json",
         "start": "pm2 startOrRestart --no-daemon pm2/production.json",
-        "build": "babel src/ --out-dir dist/ && cp src/urgentActions/*.html dist/urgentActions/",
+        "build": "babel -x .ts src/ --out-dir dist/ && cp src/urgentActions/*.html dist/urgentActions/",
         "test": "jest --ci --forceExit",
         "test-watch": "jest --watch",
         "watch-dev": "babel-node -x .ts -- src/index.ts"

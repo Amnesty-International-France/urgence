@@ -1,6 +1,6 @@
 'use strict';
 
-const config = require('../../config').default;
+const config = require('../../config/index.cjs');
 
 exports.up = function (db, cb) {
     return db.runSql(
