@@ -8,6 +8,7 @@ import CustomLoginPage from './authentication/CustomLoginPage';
 import { client } from './dataProvider';
 import settings from './settings';
 import { theme } from './theme';
+import urgentActions from './urgentActions';
 
 const App = () => {
     const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
@@ -41,6 +42,7 @@ const App = () => {
             loginPage={CustomLoginPage}
             requireAuth
         >
+            <Resource {...urgentActions} />
             <Resource {...settings} />
         </Admin>
     );
