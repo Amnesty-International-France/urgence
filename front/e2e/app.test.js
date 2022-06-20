@@ -26,7 +26,7 @@ const thanksEndPage = thanksEndPageFactory(driver);
 describe.skip('Urgent Action', () => {
     let urgentAction;
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         urgentAction = await fetch('http://api:4000/test/createUrgentAction').then(r => r.json());
         await fetch('http://api:4000/test/createSettings').then(r => r.json());
     });
