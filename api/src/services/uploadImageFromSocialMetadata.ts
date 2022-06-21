@@ -1,12 +1,12 @@
 import { path, assocPath } from 'ramda';
 import { SocialMetadata } from '../urgentActions/repository';
 
-import { uploadImage } from './uploadImage';
+import { ImageUpload, uploadImage } from './uploadImage';
 
 export const uploadImageFromSocialMetadata = async (
     socialMetadata: Partial<SocialMetadata> = {},
 ) => {
-    const image = path<string>(['medium', 'src'], socialMetadata);
+    const image = path<ImageUpload>(['medium', 'src'], socialMetadata);
     if (!image) {
         return socialMetadata;
     }

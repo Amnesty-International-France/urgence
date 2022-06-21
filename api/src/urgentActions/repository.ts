@@ -2,7 +2,7 @@ import { Color } from 'sharp';
 import { Upload } from 'graphql-upload';
 
 import client, { parseJsonFromRow, parseJsonFromRows } from '../db/knex';
-import { Crop } from '../services/uploadImage';
+import { Crop, ImageUpload } from '../services/uploadImage';
 import { Pagination } from '../types';
 
 type Position = {
@@ -18,13 +18,13 @@ export type SocialMetadata = {
     title: string;
     description: string;
     medium: {
-        src: string;
+        src: ImageUpload;
     };
 };
 
 type Medium = {
     title: string;
-    src: string;
+    src: ImageUpload;
     crop?: Crop;
 };
 
@@ -38,7 +38,7 @@ type CropDesktop = {
 
 type MediumDesktop = {
     title: string;
-    src: string;
+    src: ImageUpload;
     crop?: CropDesktop;
 };
 

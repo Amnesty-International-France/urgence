@@ -1,5 +1,6 @@
+import { raw } from 'express';
 import fs from 'fs';
-import { FileUpload } from 'graphql-upload';
+import { FileUpload, Upload } from 'graphql-upload';
 import sharp from 'sharp';
 import shortid from 'shortid';
 
@@ -19,10 +20,9 @@ export const getSavedFileName = () => {
     return `${id}.jpeg`;
 };
 
-export const uploadImage = async (
-    upload: string | { rawFile: Promise<FileUpload> }, // TODO Check this
-    crop?: Crop,
-) => {
+export type ImageUpload = string | { rawFile: Promise<Upload> };
+
+export const uploadImage = async (upload: string | { rawFile: Promise<Upload> }, crop?: Crop) => {
     if (!upload) {
         return null;
     }
@@ -42,8 +42,9 @@ export const uploadImage = async (
         cropPath = `${config.uploadDir}/crop-${filename}`;
     } else {
         const rawFile = await upload.rawFile;
-
-        const stream = rawFile.createReadStream();
+        const stream = rawFile.file
+            ? rawFile.file.createReadStream()
+            : (await rawFile.promise).createReadStream();
         const savedFileName = getSavedFileName();
         path = `${config.uploadDir}/${savedFileName}`;
         cropPath = `${config.uploadDir}/crop-${savedFileName}`;
