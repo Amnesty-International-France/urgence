@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { BooleanInput, required, TextInput, useRecordContext } from 'react-admin';
 import { useFormContext } from 'react-hook-form';
 import slugify from 'slugify';
+import { MediumInput } from './MediumInput';
 
 const generateSlug = (title = '') =>
     slugify(title, {
@@ -39,7 +40,7 @@ export const UrgentActionsForm = () => {
                     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
                     color: grey[600],
                 },
-                '& div.MuiBox-root': {
+                '& > div.MuiBox-root': {
                     padding: '0 1em 1em 1em',
                 },
             }}
@@ -85,7 +86,9 @@ export const UrgentActionsForm = () => {
             </Box>
             <Box sx={{ backgroundColor: purple[50] }}>
                 <h2>Métadonnées Réseaux sociaux</h2>
+                <TextInput source="social_metadata.title" fullWidth label="Title" />
                 <TextInput source="social_metadata.description" fullWidth label="Description" />
+                <MediumInput source="social_metadata.medium" label="Cover" />
             </Box>
         </Box>
     );
