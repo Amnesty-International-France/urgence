@@ -1,0 +1,45 @@
+import knex from '../db/knex';
+
+import { createUrgentAction as insertUrgentAction } from '../urgentActions/repository';
+import { createSetting as insertSetting, Setting } from '../settings/repository';
+
+export const createUrgentAction = async ({ story, message, ...urgentAction }: any = {}) => {
+    const defaultUrgentAction = {
+        title: "Commutation of William Montgomery's sentence",
+        slug: 'commutation-of-william-montgomerys-sentence',
+        story: [],
+        call_to_action: {},
+        message: {
+            message_template: [],
+        },
+        email_thank: {},
+        register: {},
+        end_thank: {},
+        social_metadata: {},
+        response_count: 0,
+    };
+
+    return insertUrgentAction({
+        ...defaultUrgentAction,
+        ...urgentAction,
+        story: JSON.stringify(story),
+        message: JSON.stringify(message),
+    });
+};
+
+export const createSetting = async (setting: Partial<Setting>) => {
+    const defaultSetting = {
+        type: 'my-type',
+        content: '',
+    };
+
+    return insertSetting({
+        ...defaultSetting,
+        ...setting,
+    });
+};
+
+export const truncateAll = async () => {
+    await knex.raw('TRUNCATE urgent_action');
+    await knex.raw('TRUNCATE settings');
+};
