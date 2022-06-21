@@ -551,12 +551,16 @@ describe('Urgent Actions Resolvers', () => {
                 expect(response.lastname).toEqual('Bon');
                 expect(response.registered).toEqual(false);
 
-                expect(addCampaignMember).toHaveBeenCalledWith('psjgf-dfgersdf-sf486sf-sdf', await ua, {
-                    civility: 'Autre',
-                    email: 'jean.bon@gmail.com',
-                    firstname: 'Jean',
-                    lastname: 'Bon',
-                });
+                expect(addCampaignMember).toHaveBeenCalledWith(
+                    'psjgf-dfgersdf-sf486sf-sdf',
+                    await ua,
+                    {
+                        civility: 'Autre',
+                        email: 'jean.bon@gmail.com',
+                        firstname: 'Jean',
+                        lastname: 'Bon',
+                    },
+                );
                 expect(getContactByEmail).toHaveBeenCalledWith(
                     'psjgf-dfgersdf-sf486sf-sdf',
                     'jean.bon@gmail.com',

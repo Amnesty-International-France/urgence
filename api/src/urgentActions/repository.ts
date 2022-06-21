@@ -129,7 +129,8 @@ export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }: 
         .then((row) => ({
             ...row,
             data: parseJsonFromRows<UrgentAction>(row.data),
-        }));
+        }))
+        .then((row) => row.data);
 
 export const countUrgentActions = async () => client.count('*').from(table).first();
 
