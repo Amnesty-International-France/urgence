@@ -44,10 +44,10 @@ describe('getPdfMessageBuffer', () => {
     });
 
     it('should display given subject', async () => {
-        const urgentAction = (await createUrgentAction()) as UrgentAction[];
+        const urgentAction = (await createUrgentAction()) as UrgentAction;
 
         await getPdfMessageBuffer(
-            urgentAction[0],
+            urgentAction,
             'Asking for a fair trial',
             '',
             '',

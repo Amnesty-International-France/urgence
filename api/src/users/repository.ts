@@ -31,7 +31,10 @@ export const createUserToken = async ({
     token: string;
     expire_date: string;
 }) => {
-    return client<User>(table).insert({ login, token, expire_date }).returning('*');
+    return client<User>(table)
+        .insert({ login, token, expire_date })
+        .returning('*')
+        .then((rows) => rows[0]);
 };
 
 export const removeUserOldTokenByLogin = async (login: string) => {

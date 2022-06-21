@@ -145,6 +145,7 @@ export const getUrgentAction = async (id: string) =>
 export const getDefaultUrgentAction = async () =>
     client
         .select('*')
+        .from<UrgentActionDb>(table)
         .where({ is_default: true })
         .first()
         .then((row) => parseJsonFromRow<UrgentAction>(row));
@@ -161,7 +162,8 @@ export const createUrgentAction = async (urgentAction: Omit<UrgentActionDb, 'id'
     client<UrgentActionDb>(table)
         .insert(urgentAction)
         .returning('*')
-        .then((row) => parseJsonFromRows<UrgentAction>(row));
+        .then((rows) => rows[0])
+        .then((row) => parseJsonFromRow<UrgentAction>(row));
 
 export const updateUrgentAction = async (
     id: string,
@@ -172,7 +174,7 @@ export const updateUrgentAction = async (
         .update(urgentAction)
         .where({ id })
         .returning('*')
-        .first()
+        .then((rows) => rows[0])
         .then((row) => parseJsonFromRow<UrgentAction>(row));
 
 export const removeUrgentAction = async (id: string) =>

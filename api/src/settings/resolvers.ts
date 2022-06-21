@@ -30,7 +30,7 @@ export default {
                 return null;
             }
 
-            return createSetting(setting);
+            return createSetting(setting)
         },
         updateSetting: async (
             _: null,
