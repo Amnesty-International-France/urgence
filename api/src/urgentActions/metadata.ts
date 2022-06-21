@@ -1,7 +1,6 @@
 import { getUrgentActionBySlug } from './repository';
 
 export const getMetaDataTemplateBySlug = async (slug?: string) => {
-    console.log('getMetaDataTemplateBySlug');
     if (!slug) {
         return null;
     }

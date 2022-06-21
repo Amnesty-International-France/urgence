@@ -5,7 +5,6 @@ import { UrgentAction } from '../urgentActions/repository';
 import { Crop, ImageUpload, uploadImage } from './uploadImage';
 
 export const uploadImageFromStory = async (story: UrgentAction['story'] = []) => {
-    console.log(story);
     const images = story.map((storyStep) => {
         return {
             src: path<ImageUpload>(['medium', 'src'], storyStep),
