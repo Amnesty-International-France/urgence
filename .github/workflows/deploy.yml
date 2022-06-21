@@ -1,0 +1,118 @@
+name: 🚀 Checks
+on:
+    push:
+        branches:
+            - master
+    pull_request: {}
+permissions:
+    actions: write
+    contents: write
+
+jobs:
+    lint:
+        name: ⬣ ESLint
+        runs-on: ubuntu-latest
+        steps:
+            - name: 🛑 Cancel Previous Runs
+              uses: styfle/cancel-workflow-action@0.9.1
+
+            - name: ⬇️ Checkout repo
+              uses: actions/checkout@v3
+
+            - name: ⎔ Setup node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+
+            - name: 📥 Download deps
+              uses: bahmutov/npm-install@v1
+
+            - name: 🔬 Lint
+              uses: wearerequired/lint-action@v2
+              with:
+                  eslint: true
+                  prettier: true
+
+    typecheck:
+        name: ʦ TypeScript
+        runs-on: ubuntu-latest
+        steps:
+            - name: 🛑 Cancel Previous Runs
+              uses: styfle/cancel-workflow-action@0.9.1
+
+            - name: ⬇️ Checkout repo
+              uses: actions/checkout@v3
+
+            - name: ⎔ Setup node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+
+            - name: 📥 Download deps
+              uses: bahmutov/npm-install@v1
+
+            - name: 🔎 Type check
+              run: make typecheck
+
+    test:
+        name: 🧪 Test
+        runs-on: ubuntu-latest
+        steps:
+            - name: 🛑 Cancel Previous Runs
+              uses: styfle/cancel-workflow-action@0.9.1
+
+            - name: ⬇️ Checkout repo
+              uses: actions/checkout@v3
+
+            - name: ⎔ Setup node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+
+            - name: 📥 Download deps
+              uses: bahmutov/npm-install@v1
+
+            - name: 🔎 Type check
+              run: make test-unit
+
+    test-e2e:
+        name: 🔗 Test e2e
+        runs-on: ubuntu-latest
+        steps:
+            - name: 🛑 Cancel Previous Runs
+              uses: styfle/cancel-workflow-action@0.9.1
+
+            - name: ⬇️ Checkout repo
+              uses: actions/checkout@v3
+
+            - name: ⎔ Setup node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+
+            - name: 📥 Download deps
+              uses: bahmutov/npm-install@v1
+
+            - name: 🔎 Type check
+              run: make test-e2e
+
+    build:
+        name: 🛠️ Build
+        runs-on: ubuntu-latest
+        steps:
+            - name: 🛑 Cancel Previous Runs
+              uses: styfle/cancel-workflow-action@0.9.1
+
+            - name: ⬇️ Checkout repo
+              uses: actions/checkout@v3
+
+            - name: ⎔ Setup node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+
+            - name: 📥 Download deps
+              uses: bahmutov/npm-install@v1
+
+            - name: 🛠️ Build
+              run: make build
