@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import CssBaseline from '@mui/material/CssBaseline';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
 import { useEffect, useState } from 'react';
 import { Admin, DataProvider, Resource } from 'react-admin';
@@ -18,33 +19,34 @@ const App = () => {
         );
     }, []);
 
-    if (!dataProvider) {
-        return (
-            <Box
-                sx={{
-                    display: 'flex',
-                    height: '100vh',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-                <CircularProgress />
-            </Box>
-        );
-    }
-
     return (
-        <Admin
-            theme={theme}
-            title="Réaction rapide"
-            dataProvider={dataProvider}
-            authProvider={authProvider}
-            loginPage={CustomLoginPage}
-            requireAuth
-        >
-            <Resource {...urgentActions} />
-            <Resource {...settings} />
-        </Admin>
+        <>
+            <CssBaseline />
+            {dataProvider ? (
+                <Admin
+                    theme={theme}
+                    title="Réaction rapide"
+                    dataProvider={dataProvider}
+                    authProvider={authProvider}
+                    loginPage={CustomLoginPage}
+                    requireAuth
+                >
+                    <Resource {...urgentActions} />
+                    <Resource {...settings} />
+                </Admin>
+            ) : (
+                <Box
+                    sx={{
+                        display: 'flex',
+                        height: '100vh',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <CircularProgress />
+                </Box>
+            )}
+        </>
     );
 };
 
