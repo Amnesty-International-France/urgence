@@ -2,9 +2,10 @@
     "apps": [
         {
             "exec_interpreter": "./node_modules/.bin/babel-node",
+            "interpreter_args": "-x .ts --",
             "exec_mode": "fork",
             "name": "reaction-rapide",
-            "script": "dist/index.js",
+            "script": "./src/index.ts",
             "watch": ["src"]
         }
     ]

@@ -26,10 +26,10 @@ install-staging:
 	$(DOCKER_COMPOSE) run --rm --no-deps api bash -c "yarn config set unsafe-perm true && yarn install --production"
 
 start: ## Start the project with docker. Usage `make start`.
-	$(DOCKER_COMPOSE) up --force-recreate -d
+	$(DOCKER_COMPOSE_DEV_NGINX) up --force-recreate -d
 
 stop: ## Stop the project with docker. Usage `make stop`.
-	$(DOCKER_COMPOSE) down
+	$(DOCKER_COMPOSE_DEV_NGINX) down
 
 logs:
 	$(DOCKER_COMPOSE) logs -f

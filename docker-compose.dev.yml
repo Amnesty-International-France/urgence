@@ -29,7 +29,6 @@ services:
             - '1080:80'
 
     api:
-        user: '${UID}:${GID}'
         command: 'yarn run start-dev'
         environment:
             - ADMIN_USERNAME=admin
