@@ -4,17 +4,23 @@ import dateFormat from '../dateFormat';
 
 export const SettingsEdit = () => (
     <Edit>
-        <SimpleForm>
-            <Labeled sx={{ marginBottom: '1.5em' }}>
+        <SimpleForm
+            sx={{
+                '& .RaLabeled-label': {
+                    marginTop: '0.75rem',
+                },
+            }}
+        >
+            <Labeled>
                 <TextField source="id" />
             </Labeled>
-            <Labeled sx={{ marginBottom: '1.5em' }}>
+            <Labeled>
                 <DateField source="created_on" options={dateFormat} showTime />
             </Labeled>
-            <Labeled sx={{ marginBottom: '1.5em' }}>
+            <Labeled>
                 <DateField source="updated_on" options={dateFormat} showTime />
             </Labeled>
-            <Labeled sx={{ marginBottom: '1.5em' }}>
+            <Labeled>
                 <TextField source="type" />
             </Labeled>
             <RichTextInput source="content" validate={required()} />

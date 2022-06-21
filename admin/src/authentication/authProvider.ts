@@ -21,9 +21,13 @@ export type Token = {
 
 export const authProvider: AuthProvider = {
     login: async ({ username, password }: LoginInfo) => {
-        const { token } = await login(username, password);
-        saveToken(token);
-        return Promise.resolve();
+        try {
+            const { token } = await login(username, password);
+            saveToken(token);
+            return Promise.resolve();
+        } catch (error) {
+            return Promise.reject(error);
+        }
     },
     logout: () => {
         removeToken();
