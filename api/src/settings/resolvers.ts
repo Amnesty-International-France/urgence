@@ -30,7 +30,7 @@ export default {
                 return null;
             }
 
-            return createSetting(setting)
+            return createSetting(setting);
         },
         updateSetting: async (
             _: null,
@@ -47,7 +47,7 @@ export default {
         },
         deleteSetting: async (
             _: null,
-            id: number,
+            { id }: { id: number },
             context?: Context<{ user: AuthenticatedUser }>,
         ) => {
             if (!context || !context.user || context.user.role !== 'admin') {

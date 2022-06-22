@@ -103,7 +103,7 @@ export default {
         },
         deleteUrgentAction: (
             _: null,
-            id: string,
+            { id }: { id: string },
             context?: Context<{ user: AuthenticatedUser }>,
         ) => {
             if (!context || !context.user || context.user.role !== 'admin') {
