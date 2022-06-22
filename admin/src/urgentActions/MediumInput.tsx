@@ -1,23 +1,11 @@
 import Box from '@mui/material/Box';
-import { ImageInput, Labeled, TextInput } from 'react-admin';
+import { FormDataConsumer, ImageInput, Labeled, required, TextInput } from 'react-admin';
 import { ImagePreview } from './ImagePreview';
 
 type MediumInputProps = {
     source: string;
     label?: string;
 };
-
-// export const validateMedium = (value: any, allValues: any) => {
-//     console.log(value);
-//     console.log(allValues);
-//     const title = value;
-//     const src = allValues;
-
-//     if ((title && src) || (!title && !src)) {
-//         return undefined;
-//     }
-//     return 'You need to specify both an image and an alternate text for medium or none of them';
-// };
 
 export const MediumInput = ({ source, label }: MediumInputProps) => {
     return (
@@ -26,34 +14,57 @@ export const MediumInput = ({ source, label }: MediumInputProps) => {
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
+                    width: '25rem',
                 }}
             >
                 <ImageInput
-                    source={`${source}.src`}
+                    source={source}
                     placeholder={<p>Drop a picture to upload, or click to select it</p>}
                     accept="image/*"
                     label={false}
                     helperText={false}
-                    // validate={validateMedium}
                     sx={{
-                        backgroundColor: '#fff',
-                        marginBottom: '1rem',
+                        position: 'relative',
+                        '& .RaFileInput-dropZone': {
+                            height: '15rem',
+                        },
                         '& .previews': {
+                            position: 'absolute',
+                            top: 74,
                             textAlign: 'center',
+                            left: 15,
+                            right: 15,
                             '& > div': {
                                 float: 'none',
                             },
                         },
+                        '& .MuiFormHelperText-root': {
+                            marginLeft: '14px',
+                            marginRight: '14px',
+                            color: 'error.main',
+                        },
                     }}
                 >
-                    <ImagePreview source={source} />
+                    <ImagePreview source="src" />
                 </ImageInput>
-                <TextInput
-                    fullWidth
-                    source={`${source}.title`}
-                    label="Alternate text"
-                    // validate={validateMedium}
-                />
+                <FormDataConsumer>
+                    {({ formData }) => {
+                        const keys = source.split('.');
+                        const value = keys.reduce((obj, key) => obj[key], formData);
+                        return (
+                            value && (
+                                <TextInput
+                                    fullWidth
+                                    source={`${source}.title`}
+                                    label="Alternate text"
+                                    validate={required(
+                                        'You need to specify an alternate text for the image or remove it',
+                                    )}
+                                />
+                            )
+                        );
+                    }}
+                </FormDataConsumer>
             </Box>
         </Labeled>
     );
