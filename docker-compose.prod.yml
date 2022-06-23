@@ -23,6 +23,12 @@ services:
             - SF_SECURITY_TOKEN
         volumes:
             - /home/amnesty/uploads:/app/uploads
+        deploy:
+            restart_policy:
+                condition: unless-stopped
+                delay: 5s
+                max_attempts: 3
+                window: 120s
 
     nginx:
         image: nginx
@@ -39,6 +45,12 @@ services:
             [sh, -c, "chmod -R o+X /app; chmod -R o+r /app/admin/build/; nginx -g 'daemon off;'"]
         depends_on:
             - api
+        deploy:
+            restart_policy:
+                condition: unless-stopped
+                delay: 5s
+                max_attempts: 3
+                window: 120s
 
     db:
         environment:
@@ -47,3 +59,9 @@ services:
             - POSTGRES_DB=reaction-rapide
         volumes:
             - '~/data:/var/lib/postgresql/data/'
+        deploy:
+            restart_policy:
+                condition: unless-stopped
+                delay: 5s
+                max_attempts: 3
+                window: 120s

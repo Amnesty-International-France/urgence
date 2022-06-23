@@ -172,10 +172,10 @@ populate-db:
 #### DEPLOYMENT ####
 
 deploy-staging:
-	NODE_ENV=staging npx shipit staging deploy
+	NODE_ENV=staging node deploy.js
 
 deploy-prod:
-	NODE_ENV=production npx shipit production deploy
+	NODE_ENV=production node deploy.js
 
 build-storybook:
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps storybook
