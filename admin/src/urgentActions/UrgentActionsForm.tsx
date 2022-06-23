@@ -1,11 +1,12 @@
 import { alpha } from '@mui/material';
 import Box from '@mui/material/Box';
-import { blue, grey, orange, purple, yellow } from '@mui/material/colors';
+import { blue, grey, orange, purple, red, yellow } from '@mui/material/colors';
 import Grid from '@mui/material/Grid';
 import React, { useState } from 'react';
 import {
     ArrayInput,
     BooleanInput,
+    FormDataConsumer,
     required,
     SaveButton,
     SimpleFormIterator,
@@ -18,6 +19,8 @@ import { theme } from '../theme';
 import { CallToActionInput } from './CallToActionInput';
 import { CustomAddButton } from './CustomAddButton';
 import { MediumInput } from './MediumInput';
+import { MessageSendInput } from './MessageSendInput';
+import { MessageViewInput } from './MessageViewInput';
 import { StoryTemplateInput } from './StoryTemplateInput';
 
 const generateSlug = (title = '') =>
@@ -155,6 +158,22 @@ export const UrgentActionsForm = () => {
                 <h2>Call to action</h2>
                 <CallToActionInput />
             </Box>
+            <FormDataConsumer>
+                {({ formData }) => {
+                    return (
+                        <>
+                            <Box sx={{ backgroundColor: red[50] }}>
+                                <h2>Message View</h2>
+                                <MessageViewInput source="message" />
+                            </Box>
+                            <Box sx={{ backgroundColor: red[50] }}>
+                                <h2>Message Send</h2>
+                                <MessageSendInput source="message" />
+                            </Box>
+                        </>
+                    );
+                }}
+            </FormDataConsumer>
         </Box>
     );
 };
