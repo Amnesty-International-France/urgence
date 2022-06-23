@@ -10,6 +10,7 @@ permissions:
 
 jobs:
     lint:
+        if: ${{ false }} 
         name: ⬣ ESLint
         runs-on: ubuntu-latest
         steps:
@@ -34,6 +35,7 @@ jobs:
                   prettier: true
 
     typecheck:
+        if: ${{ false }} 
         name: ʦ TypeScript
         runs-on: ubuntu-latest
         steps:
