@@ -1,6 +1,6 @@
 import { alpha } from '@mui/material';
 import Box from '@mui/material/Box';
-import { blue, grey, orange, purple } from '@mui/material/colors';
+import { blue, grey, orange, purple, yellow } from '@mui/material/colors';
 import Grid from '@mui/material/Grid';
 import React, { useState } from 'react';
 import {
@@ -15,6 +15,7 @@ import {
 import { useFormContext } from 'react-hook-form';
 import slugify from 'slugify';
 import { theme } from '../theme';
+import { CallToActionInput } from './CallToActionInput';
 import { CustomAddButton } from './CustomAddButton';
 import { MediumInput } from './MediumInput';
 import { StoryTemplateInput } from './StoryTemplateInput';
@@ -146,10 +147,13 @@ export const UrgentActionsForm = () => {
                     }}
                 >
                     <SimpleFormIterator disableReordering addButton={<CustomAddButton />}>
-                        {/* <TextInput source="content" /> */}
                         <StoryTemplateInput />
                     </SimpleFormIterator>
                 </ArrayInput>
+            </Box>
+            <Box sx={{ backgroundColor: yellow[50] }}>
+                <h2>Call to action</h2>
+                <CallToActionInput />
             </Box>
         </Box>
     );
