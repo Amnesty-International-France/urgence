@@ -1,11 +1,23 @@
+import { alpha } from '@mui/material';
 import Box from '@mui/material/Box';
-import { grey, orange, purple } from '@mui/material/colors';
+import { blue, grey, orange, purple } from '@mui/material/colors';
 import Grid from '@mui/material/Grid';
 import React, { useState } from 'react';
-import { BooleanInput, required, TextInput, useRecordContext } from 'react-admin';
+import {
+    ArrayInput,
+    BooleanInput,
+    required,
+    SaveButton,
+    SimpleFormIterator,
+    TextInput,
+    useRecordContext,
+} from 'react-admin';
 import { useFormContext } from 'react-hook-form';
 import slugify from 'slugify';
+import { theme } from '../theme';
+import { CustomAddButton } from './CustomAddButton';
 import { MediumInput } from './MediumInput';
+import { StoryTemplateInput } from './StoryTemplateInput';
 
 const generateSlug = (title = '') =>
     slugify(title, {
@@ -45,6 +57,27 @@ export const UrgentActionsForm = () => {
                 },
             }}
         >
+            <SaveButton
+                sx={{
+                    position: 'absolute',
+                    right: '100px',
+                    top: '56px',
+                    backgroudColor: 'transparent',
+                    boxShadow: 'none',
+                    color: 'primary.main',
+                    padding: '4px 5px',
+                    '&.Mui-disabled': {
+                        backgroundColor: 'transparent',
+                    },
+                    '&:not(.Mui-disabled)': {
+                        backgroundColor: 'transparent',
+                    },
+                    '&:hover': {
+                        backgroundColor: alpha(theme.palette.primary.main, 0.04),
+                        boxShadow: 'none',
+                    },
+                }}
+            />
             <Box>
                 <Grid container spacing={3} alignItems="center">
                     <Grid item xs={12} sm={8}>
@@ -89,6 +122,34 @@ export const UrgentActionsForm = () => {
                 <TextInput source="social_metadata.title" fullWidth label="Title" />
                 <TextInput source="social_metadata.description" fullWidth label="Description" />
                 <MediumInput source="social_metadata.medium" label="Cover" />
+            </Box>
+            <Box sx={{ backgroundColor: blue[50] }}>
+                <h2>Story</h2>
+                <ArrayInput
+                    source="story"
+                    label={false}
+                    sx={{
+                        '& .RaSimpleFormIterator-indexContainer': {
+                            padding: 0,
+                        },
+                        '& .RaSimpleFormIterator-index': {
+                            borderRadius: '50%',
+                            color: '#fff',
+                            backgroundColor: 'primary.main',
+                            width: '40px',
+                            height: '40px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            fontSize: '1.25rem',
+                        },
+                    }}
+                >
+                    <SimpleFormIterator disableReordering addButton={<CustomAddButton />}>
+                        {/* <TextInput source="content" /> */}
+                        <StoryTemplateInput />
+                    </SimpleFormIterator>
+                </ArrayInput>
             </Box>
         </Box>
     );

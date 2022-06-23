@@ -27,6 +27,8 @@ export const MediumInput = ({ source, label }: MediumInputProps) => {
                         position: 'relative',
                         '& .RaFileInput-dropZone': {
                             height: '15rem',
+                            background: '#fafafa',
+                            color: 'rgba(0,0,0,0.3)',
                         },
                         '& .previews': {
                             position: 'absolute',
