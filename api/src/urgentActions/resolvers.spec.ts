@@ -386,29 +386,39 @@ describe('Urgent Actions Resolvers', () => {
 
         describe('deleteUrgentAction', () => {
             it('should not remove urgent action if user is not authenticated', async () => {
-                const result = await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id');
+                const result = await UrgentActionsResolver.Mutation.deleteUrgentAction(null, {
+                    id: 'id',
+                });
 
                 expect(result).toBe(null);
             });
 
             it('should not remove urgent action if user is not an admin', async () => {
-                const result = await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id', {
-                    user: {
-                        login: 'julien',
-                        role: 'bg',
+                const result = await UrgentActionsResolver.Mutation.deleteUrgentAction(
+                    null,
+                    { id: 'id' },
+                    {
+                        user: {
+                            login: 'julien',
+                            role: 'bg',
+                        },
                     },
-                });
+                );
 
                 expect(result).toBe(null);
             });
 
             it('should remove urgent action with given id', async () => {
-                await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id', {
-                    user: {
-                        login: 'azerty',
-                        role: 'admin',
+                await UrgentActionsResolver.Mutation.deleteUrgentAction(
+                    null,
+                    { id: 'id' },
+                    {
+                        user: {
+                            login: 'azerty',
+                            role: 'admin',
+                        },
                     },
-                });
+                );
                 expect(removeUrgentAction).toHaveBeenCalledWith('id');
             });
         });

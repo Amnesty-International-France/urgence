@@ -70,16 +70,15 @@ const deploy = async () => {
         console.log('Installing packages');
         await launch('Install', 'ssh', [
             ...ssh,
-            `'echo && cd ${config.deployTo}/releases/${version} && make install-staging'`,
+            `'echo && cd ${config.deployTo}/releases/${version} && make install-prod'`,
         ]).promise;
 
         console.log('===================');
         console.log('===================');
-
         console.log('Stopping old apps');
         await launch('Stop', 'ssh', [
             ...ssh,
-            `'cd ${config.deployTo}/current && make stop-${process.env.NODE_ENV}'`,
+            `'bash -c "cd ${config.deployTo}/current && make stop-${process.env.NODE_ENV}"'`,
         ]).promise;
 
         console.log('===================');
@@ -95,7 +94,7 @@ const deploy = async () => {
         console.log('Starting new apps');
         await launch('Start', 'ssh', [
             ...ssh,
-            `'cd ${config.deployTo}/current && make start-${process.env.NODE_ENV}'`,
+            `'bash -c "cd ${config.deployTo}/current && make start-${process.env.NODE_ENV}"'`,
         ]).promise;
 
         console.log('===================');

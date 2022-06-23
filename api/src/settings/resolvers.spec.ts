@@ -161,29 +161,37 @@ describe('Setting Resolvers', () => {
 
         describe('deleteSetting', () => {
             it('should not remove a setting if user is not authenticated', async () => {
-                const result = await settingsResolver.Mutation.deleteSetting(null, 42);
+                const result = await settingsResolver.Mutation.deleteSetting(null, { id: 42 });
 
                 expect(result).toBe(null);
             });
 
             it('should not remove a setting if user is not an admin', async () => {
-                const result = await settingsResolver.Mutation.deleteSetting(null, 42, {
-                    user: {
-                        login: 'adrien',
-                        role: 'illegal',
+                const result = await settingsResolver.Mutation.deleteSetting(
+                    null,
+                    { id: 42 },
+                    {
+                        user: {
+                            login: 'adrien',
+                            role: 'illegal',
+                        },
                     },
-                });
+                );
 
                 expect(result).toBe(null);
             });
 
             it('should remove setting with given id', async () => {
-                await settingsResolver.Mutation.deleteSetting(null, 42, {
-                    user: {
-                        login: 'julien',
-                        role: 'admin',
+                await settingsResolver.Mutation.deleteSetting(
+                    null,
+                    { id: 42 },
+                    {
+                        user: {
+                            login: 'julien',
+                            role: 'admin',
+                        },
                     },
-                });
+                );
 
                 expect(removeSetting).toHaveBeenCalledWith(42);
             });

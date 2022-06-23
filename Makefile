@@ -21,7 +21,7 @@ install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE) run --rm --no-deps admin yarn install
 	$(DOCKER_COMPOSE) run --rm --no-deps front yarn install
 
-install-staging:
+install-prod: ## Install all dependencies in production mode. Usage `make install-prod`.
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api bash -c "yarn config set unsafe-perm true && yarn install --production"
 	$(DOCKER_COMPOSE) run --rm --no-deps api bash -c "yarn config set unsafe-perm true && yarn install --production"
 
