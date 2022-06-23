@@ -39,15 +39,14 @@ const deploy = async () => {
         return { proc, promise };
     };
 
-    /*
     const { promise: exitAdmin } = launch('Admin', `make`, ['build-admin']);
     const { promise: exitApi } = launch('API  ', `make`, ['build-api']);
     const { promise: exitFront } = launch('Front', `make`, ['build-front']);
-    */
+
     //const { promise: exitStorybook } = launch('StoryBook', `make`, ['build-storybook']);
 
     try {
-        // await Promise.all([exitAdmin, exitApi, exitFront /*exitStorybook */]);
+        await Promise.all([exitAdmin, exitApi, exitFront /*exitStorybook */]);
 
         const ssh = ['-i', config.key, config.server];
         const version = new Date().toISOString().replaceAll(':', '-');
