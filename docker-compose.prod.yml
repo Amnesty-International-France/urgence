@@ -27,7 +27,6 @@ services:
             restart_policy:
                 condition: unless-stopped
                 delay: 5s
-                max_attempts: 3
                 window: 120s
 
     nginx:
@@ -49,7 +48,6 @@ services:
             restart_policy:
                 condition: unless-stopped
                 delay: 5s
-                max_attempts: 3
                 window: 120s
 
     db:
@@ -63,5 +61,4 @@ services:
             restart_policy:
                 condition: unless-stopped
                 delay: 5s
-                max_attempts: 3
                 window: 120s
