@@ -11,7 +11,7 @@ const rawConfig = {
     production: {
         deployTo: '/home/amnesty',
         server: 'amnesty@urgent.amnesty.fr',
-        key: process.env.KEY_FILE || '${HOME}/.ssh/amnesty-staging',
+        key: process.env.KEY_FILE || '${HOME}/.ssh/amnesty-prod',
     },
 };
 
