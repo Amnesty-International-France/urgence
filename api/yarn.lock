@@ -3580,6 +3580,11 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9, graceful-fs@^4.2.0, 
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
 
+graphql-rate-limit-directive@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/graphql-rate-limit-directive/-/graphql-rate-limit-directive-2.0.2.tgz#15a578f8f8c577eef527d9397a8f632235e0fe8c"
+  integrity sha512-Q4EvMv3xUt3woSMQMsHEJqm3K74JKd3JnIYr/YlSztkAp2pUNlVuI9AokB27qAc47OavWw1TUIXPau1ePPznew==
+
 graphql-tag@^2.11.0, graphql-tag@^2.12.6, graphql-tag@~2.12.6:
   version "2.12.6"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.12.6.tgz#d441a569c1d2537ef10ca3d1633b48725329b5f1"
@@ -5608,6 +5613,11 @@ range-parser@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
+
+rate-limiter-flexible@^2.3.7:
+  version "2.3.7"
+  resolved "https://registry.yarnpkg.com/rate-limiter-flexible/-/rate-limiter-flexible-2.3.7.tgz#c23e1f818a1575f1de1fd173437f4072125e1615"
+  integrity sha512-dmc+J/IffVBvHlqq5/XClsdLdkOdQV/tjrz00cwneHUbEDYVrf4aUDAyR4Jybcf2+Vpn4NwoVrnnAyt/D0ciWw==
 
 raw-body@2.5.1, raw-body@^2.2.0, raw-body@^2.4.1:
   version "2.5.1"

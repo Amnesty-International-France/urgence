@@ -5,10 +5,21 @@ import config from '../../../config/index.cjs';
 import { loginByToken } from '../users/resolvers';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+
+import { rateLimitDirective } from 'graphql-rate-limit-directive';
+
+const { rateLimitDirectiveTypeDefs, rateLimitDirectiveTransformer } = rateLimitDirective();
+
+const schema = rateLimitDirectiveTransformer(
+    makeExecutableSchema({
+        typeDefs: [rateLimitDirectiveTypeDefs, ...typeDefs],
+        resolvers,
+    }),
+);
 
 const options: Config = {
-    typeDefs,
-    resolvers,
+    schema: schema,
     context: async ({ req }: { req: Request }) => {
         const token = req.headers.authorization || '';
 
