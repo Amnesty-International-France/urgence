@@ -400,11 +400,6 @@ describe('Urgent Actions Resolvers', () => {
                         slug: 'test',
                         is_default: true,
                         story: [],
-                        call_to_action: 'call_to_action',
-                        message: 'message',
-                        email_thank: 'email_thank',
-                        register: 'register',
-                        end_thank: 'end_thank',
                     } as unknown as UrgentAction,
                     {
                         user: {
@@ -415,6 +410,24 @@ describe('Urgent Actions Resolvers', () => {
                 );
 
                 expect(removeDefaultToOther).toHaveBeenCalledWith('id');
+                await UrgentActionsResolver.Mutation.updateUrgentAction(
+                    null,
+                    {
+                        id: 'id2',
+                        title: 'test',
+                        slug: 'test',
+                        is_default: false,
+                        story: [],
+                    } as unknown as UrgentAction,
+                    {
+                        user: {
+                            login: 'azerty',
+                            role: 'admin',
+                        },
+                    },
+                );
+
+                expect(removeDefaultToOther).not.toHaveBeenCalledWith('id2');
             });
         });
 
