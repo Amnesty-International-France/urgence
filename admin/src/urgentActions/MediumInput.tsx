@@ -55,8 +55,8 @@ export const MediumInput = ({ source, label }: MediumInputProps) => {
 
                         const value = keys.reduce((obj, key) => {
                             // @ts-ignore
-                            if (obj[key]) return obj[key];
-                            return obj;
+                            if (obj && obj[key]) return obj[key];
+                            return null;
                         }, formData);
                         return (
                             value && (

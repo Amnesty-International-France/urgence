@@ -1,12 +1,12 @@
-import { ImageField } from 'react-admin';
+import { ImageField, RaRecord } from 'react-admin';
 
 type ImagePreviewProps = {
     source: string;
-    record?: any;
+    record?: RaRecord;
 };
 
 export const ImagePreview = ({ source, record }: ImagePreviewProps) => {
-    if (!record && !record.src) {
+    if (!record || !record.src) {
         return null;
     }
 
