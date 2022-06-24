@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import classnames from 'classnames';
 import { routeMatch } from '../propTypes';
-import { withRouter } from 'react-router';
 import trackEvent from '../analytics/trackEvent';
 
 import { black, white, grey, darkGrey } from './colors';
@@ -88,7 +87,7 @@ export class Link extends Component {
             <RouterLink
                 to={to}
                 className={classnames(className, { disabled: disabled, white: whiteLink })}
-                onClick={event => {
+                onClick={(event) => {
                     if (onClick) onClick(event);
                     trackEvent(analyticsCategory, 'Click', 'button', buttonName, slug, step, {
                         disabled: disabled ? 'disabled' : 'active',
@@ -119,4 +118,4 @@ Link.defaultProps = {
     whiteLink: false,
 };
 
-export default glamorous(withRouter(Link))(styles);
+export default styled(Link)(styles);

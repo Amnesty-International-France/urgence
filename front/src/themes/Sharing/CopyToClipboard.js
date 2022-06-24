@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import Button from '@material-ui/core/Button';
@@ -45,7 +45,7 @@ const styles = {
 export const CopyToClipboard = ({ className, slug, step, url, action, analyticsCategory }) => (
     <Button
         className={className}
-        onClick={event => {
+        onClick={(event) => {
             if (action) action(event);
             trackEvent(analyticsCategory, 'Click', 'button', 'CopyToClipboard', slug, step, {
                 disabled: false,
@@ -77,4 +77,4 @@ CopyToClipboard.defaultProps = {
     action: () => {},
 };
 
-export default glamorous(CopyToClipboard)(styles);
+export default styled(CopyToClipboard)(styles);

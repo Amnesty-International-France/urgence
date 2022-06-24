@@ -1,28 +1,27 @@
-import React, { Fragment } from 'react';
+import styled from '@emotion/styled';
 import gql from 'graphql-tag';
-import { withRouter } from 'react-router';
-import { Redirect } from 'react-router-dom';
-import { Query } from 'react-apollo';
-import PropTypes from 'prop-types';
 import get from 'lodash.get';
-import glamorous from 'glamorous';
+import PropTypes from 'prop-types';
+import { Fragment } from 'react';
+import { Query } from 'react-apollo';
+import { Navigate } from 'react-router';
 
-import { routeMatch } from '../propTypes';
+import ANALYTICS_CATEGORIES from '../analytics/categories';
 import { DataProvider } from '../DataContext';
+import { routeMatch } from '../propTypes';
+import SEO from '../SEO';
+import generateUrl from '../services/generateUrl';
 import LoadingScreen from '../themes/LoadingScreen';
 import Stepper from '../themes/Stepper';
-import SEO from '../SEO';
-import Story from './story/Story';
-import ThankStep from './ThankStep';
-import ShareStep from './share/ShareStep';
-import ANALYTICS_CATEGORIES from '../analytics/categories';
-import MessageView from './messageView/MessageView';
-import ToMessageSendButton from './messageView/ToMessageSendButton';
 import MessageSend from './messageSend/MessageSend';
 import SendMail from './messageSend/SendMail';
-import generateUrl from '../services/generateUrl';
-import RegisterButton from './register/RegisterButton';
+import MessageView from './messageView/MessageView';
+import ToMessageSendButton from './messageView/ToMessageSendButton';
 import Register from './register/Register';
+import RegisterButton from './register/RegisterButton';
+import ShareStep from './share/ShareStep';
+import Story from './story/Story';
+import ThankStep from './ThankStep';
 
 const query = gql`
     query urgentActionBySlug($slug: String!) {
@@ -143,11 +142,11 @@ export const UrgentAction = ({ history, slug, step, data }) => {
     const story = get(data, 'UrgentAction.story');
 
     if (!story || !story.length) {
-        return <Redirect to={generateUrl('home')} />;
+        return <Navigate to={generateUrl('home')} />;
     }
 
     if (!step) {
-        return <Redirect to={generateUrl('story', { slug })} />;
+        return <Navigate to={generateUrl('story', { slug })} />;
     }
 
     if (step === 'story' || step === 'act') {
@@ -285,41 +284,43 @@ UrgentAction.propTypes = {
     data: PropTypes.object,
 };
 
-const StepperContainer = glamorous.div({
+const StepperContainer = styled('div')({
     position: 'absolute',
     top: '20px',
     left: '0px',
     right: '0px',
 });
 
-export const renderUrgentActionWithData = (history, slug, step, page) => ({
-    /* eslint-disable react/prop-types */
-    data,
-    error,
-    loading,
-    /* eslint-enable react/prop-types */
-}) => {
-    if (error) {
-        console.error(error);
-        return <Redirect to={generateUrl('error')} />;
-    }
+export const renderUrgentActionWithData =
+    (history, slug, step, page) =>
+    ({
+        /* eslint-disable react/prop-types */
+        data,
+        error,
+        loading,
+        /* eslint-enable react/prop-types */
+    }) => {
+        if (error) {
+            console.error(error);
+            return <Navigate to={generateUrl('error')} />;
+        }
 
-    if (loading) {
-        return <LoadingScreen />;
-    }
+        if (loading) {
+            return <LoadingScreen />;
+        }
 
-    const socialMetadata = get(data, 'UrgentAction.social_metadata');
+        const socialMetadata = get(data, 'UrgentAction.social_metadata');
 
-    return (
-        <Fragment>
-            <StepperContainer>
-                <Stepper data={data} step={step} page={page} />
-            </StepperContainer>
-            {socialMetadata && <SEO socialMetadata={socialMetadata} />}
-            <UrgentAction history={history} slug={slug} step={step} data={data} />
-        </Fragment>
-    );
-};
+        return (
+            <Fragment>
+                <StepperContainer>
+                    <Stepper data={data} step={step} page={page} />
+                </StepperContainer>
+                {socialMetadata && <SEO socialMetadata={socialMetadata} />}
+                <UrgentAction history={history} slug={slug} step={step} data={data} />
+            </Fragment>
+        );
+    };
 
 export const UrgentActionWithData = ({
     history,
@@ -341,4 +342,4 @@ UrgentActionWithData.propTypes = {
     match: routeMatch,
 };
 
-export default withRouter(UrgentActionWithData);
+export default UrgentActionWithData;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import { InputAdornment } from '@material-ui/core';
 import { green } from './colors';
 
@@ -31,4 +31,4 @@ CheckAdornment.defaultProp = {
     isValid: true,
 };
 
-export default glamorous(CheckAdornment)(styles);
+export default styled(CheckAdornment)(styles);

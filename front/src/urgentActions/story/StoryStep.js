@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import Paper from '@material-ui/core/Paper';
 
 import RichText from '../../themes/RichText';
@@ -63,4 +63,4 @@ StoryStep.propTypes = {
     ...StoryStepPropType,
 };
 
-export default glamorous(StoryStep)(styles);
+export default styled(StoryStep)(styles);

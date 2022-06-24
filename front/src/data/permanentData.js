@@ -1,4 +1,4 @@
-export const permanentData = storage => ({
+export const permanentData = (storage) => ({
     getCivility: () => (storage && storage.getItem('amnesty_civility')) || '',
     setCivility(value) {
         storage && storage.setItem('amnesty_civility', value);

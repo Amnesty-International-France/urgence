@@ -21,7 +21,7 @@ export const addCampaignMember = (urgentActionId, member) =>
         headers: {
             'content-type': 'application/json',
         },
-    }).then(res => res.json());
+    }).then((res) => res.json());
 
 const addCampaignMemberTwitterQuery = `
     mutation AddCampaignMemberTwitter($id: ID!, $member: CampaignMemberTwitterInput!) {
@@ -46,7 +46,7 @@ export const addCampaignMemberTwitter = (urgentActionId, member) =>
         headers: {
             'content-type': 'application/json',
         },
-    }).then(res => res.json());
+    }).then((res) => res.json());
 
 const registerContactQuery = `
     mutation RegisterContact($id: ID, $member: CampaignMemberInput!) {
@@ -70,7 +70,7 @@ export const registerContact = (id, member) =>
         headers: {
             'content-type': 'application/json',
         },
-    }).then(res => res.json());
+    }).then((res) => res.json());
 
 const addResponseCountQuery = `
     mutation AddResponseCount($id: ID!) {
@@ -80,7 +80,7 @@ const addResponseCountQuery = `
     }
 `;
 
-export const addResponseCount = id =>
+export const addResponseCount = (id) =>
     fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
         method: 'POST',
         body: JSON.stringify({
@@ -93,4 +93,4 @@ export const addResponseCount = id =>
         headers: {
             'content-type': 'application/json',
         },
-    }).then(res => res.json());
+    }).then((res) => res.json());

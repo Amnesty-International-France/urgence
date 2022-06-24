@@ -75,7 +75,7 @@ services:
             - '9009:9009'
 
     front:
-        image: node:12
+        image: node:18
         user: '${UID}:${GID}'
         command: 'yarn run start-web'
         working_dir: /app/front
@@ -92,7 +92,7 @@ services:
             - REACT_APP_FB=2385476921667035
             - NODE_ENV=development
         ports:
-            - '3000:3000'
+            - '3001:3001'
 
     nginx:
         image: nginx:1.21

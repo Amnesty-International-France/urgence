@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
 import classnames from 'classnames';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import IconButton from './IconButton';
 import PropTypes from 'prop-types';
-import Swiper from 'swiper/js/swiper.js';
+import Swiper from 'swiper';
 
-import 'swiper/css/swiper.css';
+//import 'swiper/css/swiper.css'; Needed ?
 
 import { black } from './colors';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -55,8 +55,8 @@ export const Carousel = ({
     const slidePrevious = () => {
         !isOnMobile() && swiper.slidePrev();
     };
-    const handleSwiperClick = swipper =>
-        function(event) {
+    const handleSwiperClick = (swipper) =>
+        function (event) {
             if (!container) return;
             const containerRect = container.getBoundingClientRect();
             const containerWidth = containerRect.width;
@@ -156,4 +156,4 @@ Carousel.propTypes = {
     total: PropTypes.number,
 };
 
-export default glamorous(Carousel)(styles);
+export default styled(Carousel)(styles);

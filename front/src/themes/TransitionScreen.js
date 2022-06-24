@@ -1,23 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import Paper from '@material-ui/core/Paper';
+import PropTypes from 'prop-types';
 
-import RichText from '../themes/RichText';
+import { black, yellow } from '../themes/colors';
 import LongText from '../themes/LongText';
-import { yellow, black } from '../themes/colors';
+import RichText from '../themes/RichText';
 
-import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
+import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { secureUseEffect, secureUseState } from '../hooks/secureHooks';
-import LinkTwitter from './Sharing/LinkTwitter';
-import generateUrl from '../services/generateUrl';
-import { withRouter } from 'react-router';
-import { routeMatch } from '../propTypes';
-import { withSessionData } from '../DataContext';
 import { compose } from 'recompose';
-import { addCampaignMemberTwitter, addResponseCount } from '../services/api';
 import permanentData from '../data/permanentData';
+import { withSessionData } from '../DataContext';
+import { secureUseEffect, secureUseState } from '../hooks/secureHooks';
+import { routeMatch } from '../propTypes';
+import { addCampaignMemberTwitter, addResponseCount } from '../services/api';
+import generateUrl from '../services/generateUrl';
+import LinkTwitter from './Sharing/LinkTwitter';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -134,7 +132,6 @@ export const TransitionScreen = ({
             !progress.message ||
             !responseCount ||
             !responseCount < progress.display_threshold
-
         ) {
             setDisplayProgress(false);
             return;
@@ -142,8 +139,8 @@ export const TransitionScreen = ({
         setDisplayProgress(true);
     }, [progress]);
 
-    const textToHtml = str => (str ? str.replace(/(?:\r\n|\r|\n)/g, '<br/>') : '');
-    const formatText = text => {
+    const textToHtml = (str) => (str ? str.replace(/(?:\r\n|\r|\n)/g, '<br/>') : '');
+    const formatText = (text) => {
         if (!text) {
             return '';
         }
@@ -173,12 +170,12 @@ export const TransitionScreen = ({
                 civility,
                 phone,
             })
-                .then(result => {
+                .then((result) => {
                     if (result.errors && result.errors.length) {
                         // eslint-disable-next-line no-console
                         console.log(
                             'Failed adding campaign member twitter',
-                            result.errors.map(error => `- ${error.message}`).join('\n'),
+                            result.errors.map((error) => `- ${error.message}`).join('\n'),
                         );
                     }
                 })
@@ -261,4 +258,4 @@ TransitionScreen.defaultProps = {
     message: '',
 };
 
-export default glamorous(compose(withSessionData, withRouter)(TransitionScreen))(styles);
+export default styled(compose(withSessionData)(TransitionScreen))(styles);

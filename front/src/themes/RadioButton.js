@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import classnames from 'classnames';
 import { routeMatch } from '../propTypes';
-import { withRouter } from 'react-router';
 import trackEvent from '../analytics/trackEvent';
 
 const styles = {
@@ -64,9 +63,7 @@ export class RadioButton extends Component {
         return (
             <div className={className}>
                 {label && (
-                    <p className={classnames('label', { ['warning']: showError && error })}>
-                        {label}
-                    </p>
+                    <p className={classnames('label', { warning: showError && error })}>{label}</p>
                 )}
                 {choices.map((item, index) => {
                     return (
@@ -78,11 +75,11 @@ export class RadioButton extends Component {
                                 checked={value === item}
                                 id={index}
                                 className="circle"
-                                onChange={event => {
+                                onChange={(event) => {
                                     this.showErrorState();
                                     if (onChange) onChange(event);
                                 }}
-                                onBlur={event => {
+                                onBlur={(event) => {
                                     this.showErrorState();
                                     trackEvent(
                                         analyticsCategory,
@@ -97,7 +94,7 @@ export class RadioButton extends Component {
                                         },
                                     );
                                 }}
-                                onFocus={event => {
+                                onFocus={(event) => {
                                     trackEvent(
                                         analyticsCategory,
                                         'Click',
@@ -134,4 +131,4 @@ RadioButton.propTypes = {
     match: routeMatch,
 };
 
-export default glamorous(withRouter(RadioButton))(styles);
+export default styled(RadioButton)(styles);

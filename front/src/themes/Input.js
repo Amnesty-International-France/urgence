@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 
 import { TextField } from '@material-ui/core';
 import { routeMatch } from '../propTypes';
-import { withRouter } from 'react-router';
 
 import CheckAdornment from './CheckAdornment';
 import trackEvent from '../analytics/trackEvent';
@@ -21,14 +20,15 @@ const styles = {
     },
 };
 
-const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export const isCorrectEmail = email => {
+export const isCorrectEmail = (email) => {
     return re.test(email);
 };
 
 const regexPhone = /^(?:(?:\+|00)33|0)\s*[6-7](?:[\s.-]*\d{2}){4}$/;
-export const isCorrectPhone = phoneNumber => {
+export const isCorrectPhone = (phoneNumber) => {
     return regexPhone.test(phoneNumber);
 };
 
@@ -46,7 +46,7 @@ export class Input extends Component {
         if (!this.state.showError) this.setState({ showError: true });
     };
 
-    showValidState = value => {
+    showValidState = (value) => {
         if (this.state.showValid !== value) this.setState({ showValid: value });
     };
 
@@ -84,18 +84,18 @@ export class Input extends Component {
                     InputProps={{
                         endAdornment: <CheckAdornment isValid={showValid} />,
                     }}
-                    onChange={event => {
+                    onChange={(event) => {
                         if (onChange) onChange(event);
                         this.showErrorState();
                     }}
-                    onBlur={event => {
+                    onBlur={(event) => {
                         this.showErrorState();
                         trackEvent(analyticsCategory, 'Exit', 'field', label, slug, step, {
                             state: showValid ? 'valid' : error ? 'invalid' : 'null',
                             value: event.target.value,
                         });
                     }}
-                    onFocus={event => {
+                    onFocus={(event) => {
                         trackEvent(analyticsCategory, 'Enter', 'field', label, slug, step, {
                             state: showValid ? 'valid' : error ? 'invalid' : 'null',
                             value: event.target.value,
@@ -122,4 +122,4 @@ Input.propTypes = {
     value: PropTypes.string.isRequired,
 };
 
-export default glamorous(withRouter(Input))(styles);
+export default styled(Input)(styles);

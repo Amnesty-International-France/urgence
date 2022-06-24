@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import get from 'lodash.get';
 import { compose } from 'recompose';
 import classnames from 'classnames';
@@ -70,7 +70,7 @@ const styles = {
     },
 };
 
-const isDisabled = props => {
+const isDisabled = (props) => {
     const { firstname, lastname, phone, email } = props;
     return !firstname || !lastname || !isCorrectPhone(phone) || !isCorrectEmail(email);
 };
@@ -130,7 +130,7 @@ RegisterActivist.propTypes = {
     action: PropTypes.func.isRequired,
 };
 
-const WithStylesRegisterActivist = glamorous(RegisterActivist)(styles);
+const WithStylesRegisterActivist = styled(RegisterActivist)(styles);
 
 export default compose(
     withYellowLogo,

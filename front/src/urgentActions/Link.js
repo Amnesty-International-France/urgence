@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import { black } from '../themes/colors';
 
 const styles = {
@@ -33,4 +33,4 @@ Link.defaultProps = {
     color: black,
 };
 
-export default glamorous(Link)(styles);
+export default styled(Link)(styles);

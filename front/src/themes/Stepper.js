@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import get from 'lodash.get';
 import classNames from 'classnames';
 
@@ -60,4 +60,4 @@ Stepper.propTypes = {
     page: PropTypes.string,
 };
 
-export default glamorous(Stepper)(styles);
+export default styled(Stepper)(styles);

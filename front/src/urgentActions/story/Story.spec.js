@@ -30,7 +30,7 @@ describe('<Story />', () => {
     };
 
     it('should display a 404 message if story has no configured step', () => {
-        const test = story => {
+        const test = (story) => {
             const props = { ...defaultProps, story };
             const wrapper = shallow(<Story {...props} />);
 

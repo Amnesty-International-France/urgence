@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 
 import SEO from './SEO';
 import generateUrl from './services/generateUrl';
@@ -69,4 +69,4 @@ ErrorPage.defaultProps = {
     description: `Oups. Tout ne s'est pas passé comme prévu 🙈.`,
 };
 
-export default glamorous(withYellowLogo(ErrorPage))(styles);
+export default styled(withYellowLogo(ErrorPage))(styles);

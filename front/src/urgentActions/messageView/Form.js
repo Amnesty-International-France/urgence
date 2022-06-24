@@ -5,7 +5,7 @@ import Input from '../../themes/Input';
 import RichText from '../../themes/RichText';
 
 const Form = ({ objectIndication, objectExample, object, analyticsCategory, step, setObject }) => {
-    const handleChangeObject = event => {
+    const handleChangeObject = (event) => {
         setObject(event.target.value);
     };
 

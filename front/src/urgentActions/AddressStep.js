@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import classnames from 'classnames';
 
@@ -76,12 +76,12 @@ const styles = {
 };
 
 export class AddressStep extends Component {
-    setAddressMain = event => this.props.setAddressMain(event.target.value);
-    setAddressMore = event => this.props.setAddressMore(event.target.value);
-    setPostalCode = event => this.props.setPostalCode(event.target.value);
-    setCity = event => this.props.setCity(event.target.value);
-    setCountry = event => this.props.setCountry(event.target.value);
-    setEmail = event => this.props.setEmail(event.target.value);
+    setAddressMain = (event) => this.props.setAddressMain(event.target.value);
+    setAddressMore = (event) => this.props.setAddressMore(event.target.value);
+    setPostalCode = (event) => this.props.setPostalCode(event.target.value);
+    setCity = (event) => this.props.setCity(event.target.value);
+    setCountry = (event) => this.props.setCountry(event.target.value);
+    setEmail = (event) => this.props.setEmail(event.target.value);
 
     isDisabled = () => {
         const { addressMain, postalCode, city, country, email } = this.props;
@@ -221,4 +221,4 @@ AddressStep.propTypes = {
     step: PropTypes.string,
 };
 
-export default glamorous(compose(withYellowLogo, withSessionData)(AddressStep))(styles);
+export default styled(compose(withYellowLogo, withSessionData)(AddressStep))(styles);

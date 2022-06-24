@@ -162,8 +162,7 @@ storiesOf('Thanks', module)
     .add('Thanks Screen', () => {
         const data = {
             title: 'Se battre.\nEncore.\nEt Encore.',
-            text:
-                "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
+            text: "Pour aller plus loin, vous pouvez envoyer une lettre à l'ambassade d'Égypte ou partager cette histoire avec vos amis.",
             button: "Je continue d'agir",
         };
 
@@ -179,8 +178,7 @@ storiesOf('Thanks', module)
     .add('Thanks Screen Final', () => {
         const data = {
             title: 'Merci\npour votre\naction.',
-            text:
-                "La lettre vous a été envoyée sur votre boîte e-mail. Poursuivez votre action en l'envoyant par La Poste.",
+            text: "La lettre vous a été envoyée sur votre boîte e-mail. Poursuivez votre action en l'envoyant par La Poste.",
         };
 
         return (

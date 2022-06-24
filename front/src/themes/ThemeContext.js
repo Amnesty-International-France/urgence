@@ -1,6 +1,6 @@
 import React, { createContext, Component } from 'react';
 import PropTypes from 'prop-types';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import { lifecycle, compose } from 'recompose';
 
 import { black, white, yellow, lightGrey } from './colors';
@@ -25,7 +25,7 @@ export class ThemeProvider extends Component {
         },
     };
 
-    theme = createMuiTheme({
+    theme = createTheme({
         typography: {
             useNextVariants: true,
         },
@@ -51,9 +51,8 @@ ThemeProvider.propTypes = {
 
 export const ThemeConsumer = Consumer;
 
-export const withThemeContext = BaseComponent => props => (
-    <ThemeConsumer>{context => <BaseComponent context={context} {...props} />}</ThemeConsumer>
-);
+export const withThemeContext = (BaseComponent) => (props) =>
+    <ThemeConsumer>{(context) => <BaseComponent context={context} {...props} />}</ThemeConsumer>;
 
 export const withLightGreyBackground = compose(
     withThemeContext,

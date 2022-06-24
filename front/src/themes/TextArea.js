@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic',
@@ -23,4 +23,4 @@ TextArea.propTypes = {
     children: PropTypes.node,
 };
 
-export default glamorous(TextArea)(styles);
+export default styled(TextArea)(styles);

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 
 import AmnestyLogo from '../icons/AmnestyLogo';
 import { withThemeContext } from './ThemeContext';
@@ -33,4 +33,4 @@ AppLogo.propTypes = {
     }).isRequired,
 };
 
-export default glamorous(withThemeContext(AppLogo))(styles);
+export default styled(withThemeContext(AppLogo))(styles);

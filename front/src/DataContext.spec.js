@@ -25,7 +25,7 @@ describe('DataContext', () => {
     it('should initialize the context from data', () => {
         let contextTest = null;
 
-        const render = context => {
+        const render = (context) => {
             contextTest = { ...context };
             return <span>OK</span>;
         };
@@ -50,7 +50,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setObject" method to change the state "object"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setObject('new object');
             return <span>OK</span>;
         };
@@ -64,7 +64,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setCivility" method to change the state "civility"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setCivility('new civility');
             return <span>OK</span>;
         };
@@ -78,7 +78,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setFirstname" method to change the state "firstname"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setFirstname('new firstname');
             return <span>OK</span>;
         };
@@ -92,7 +92,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setLastname" method to change the state "lastname"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setLastname('new lastname');
             return <span>OK</span>;
         };
@@ -106,7 +106,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setAddressMain" method to change the state "addressMain"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setAddressMain('new addressMain');
             return <span>OK</span>;
         };
@@ -120,7 +120,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setAddressMore" method to change the state "addressMore"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setAddressMore('new addressMore');
             return <span>OK</span>;
         };
@@ -134,7 +134,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setPostalCode" method to change the state "postalCode"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setPostalCode('new postalCode');
             return <span>OK</span>;
         };
@@ -148,7 +148,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setCity" method to change the state "city"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setCity('new city');
             return <span>OK</span>;
         };
@@ -162,7 +162,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setCountry" method to change the state "country"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setCountry('new country');
             return <span>OK</span>;
         };
@@ -176,7 +176,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setPhone" method to change the state "phone"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setPhone('new phone');
             return <span>OK</span>;
         };
@@ -190,7 +190,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setEmail" method to change the state "email"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setEmail('new email');
             return <span>OK</span>;
         };
@@ -204,7 +204,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setRegistered" method to change the state "registered"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setRegistered('true');
             return <span>OK</span>;
         };
@@ -218,7 +218,7 @@ describe('DataContext', () => {
     });
 
     it('should have a "setRegistered" method with a default param to change the state "registered"', () => {
-        const render = context => {
+        const render = (context) => {
             context.setRegistered();
             return <span>OK</span>;
         };

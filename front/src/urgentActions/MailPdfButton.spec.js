@@ -36,8 +36,7 @@ describe('MailPdfButton', () => {
         expect(global.fetch).toHaveBeenCalledWith(
             'http://localhost:4000/urgent-actions/1223-df432-f8d3s/send',
             {
-                body:
-                    '{"subject":"object","civility":"civility","firstname":"firstname","lastname":"lastname","addressMain":"addressMain","addressMore":"addressMore","postalCode":"postalCode","city":"city","country":"country","email":"email"}',
+                body: '{"subject":"object","civility":"civility","firstname":"firstname","lastname":"lastname","addressMain":"addressMain","addressMore":"addressMore","postalCode":"postalCode","city":"city","country":"country","email":"email"}',
                 headers: {
                     'content-type': 'application/json',
                 },

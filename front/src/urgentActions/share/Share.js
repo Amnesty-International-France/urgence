@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import get from 'lodash.get';
 
 import RichText from '../../themes/RichText';
@@ -43,7 +43,7 @@ const styles = {
         },
     },
 };
-const getLinkFromSlug = slug => `${global.origin}${generateUrl('ua', { slug })}`;
+const getLinkFromSlug = (slug) => `${global.origin}${generateUrl('ua', { slug })}`;
 
 const Share = ({ className, slug, step, data, analyticsCategory }) => {
     const title = get(data, 'title');
@@ -123,4 +123,4 @@ Share.defaultProps = {
     },
 };
 
-export default glamorous(Share)(styles);
+export default styled(Share)(styles);

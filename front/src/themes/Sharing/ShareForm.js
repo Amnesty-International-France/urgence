@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 
 import LinkFacebook from './LinkFacebook';
 import LinkTwitter from './LinkTwitter';
@@ -98,4 +98,4 @@ ShareForm.defaultProps = {
     auId: '',
 };
 
-export default glamorous(withSessionData(ShareForm))(styles);
+export default styled(withSessionData(ShareForm))(styles);

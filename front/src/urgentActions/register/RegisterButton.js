@@ -18,12 +18,12 @@ export const RegisterButton = ({
     const { firstname, lastname, phone, email, civility } = formValues;
     const register = () => {
         return registerContact(auId, { email, phone, firstname, lastname, civility }).then(
-            result => {
+            (result) => {
                 if (result.errors && result.errors.length) {
                     // eslint-disable-next-line no-console
                     console.log(
                         'Failed registering campaign member',
-                        result.errors.map(error => `- ${error.message}`).join('\n'),
+                        result.errors.map((error) => `- ${error.message}`).join('\n'),
                     );
                 }
                 const isRegistered = get(result, 'data.registerContact.registered', false);

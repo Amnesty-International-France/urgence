@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
 import { compose } from 'recompose';
 import get from 'lodash.get';
 
@@ -34,12 +33,12 @@ export const SendMail = ({
 
         let isRegistered = registered;
         return addCampaignMember(auId, { email, firstname, lastname, civility })
-            .then(result => {
+            .then((result) => {
                 if (result.errors && result.errors.length) {
                     // eslint-disable-next-line no-console
                     console.log(
                         'Failed adding campaign member',
-                        result.errors.map(error => `- ${error.message}`).join('\n'),
+                        result.errors.map((error) => `- ${error.message}`).join('\n'),
                     );
                 }
                 isRegistered = get(result, 'data.addCampaignMember.registered', false);
@@ -98,4 +97,4 @@ SendMail.defaultProps = {
     onMailSent: () => {},
 };
 
-export default compose(withSessionData, withRouter)(SendMail);
+export default compose(withSessionData)(SendMail);

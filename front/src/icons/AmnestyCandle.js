@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AmnestyCandle = props => (
+const AmnestyCandle = (props) => (
     <svg
         xmlnsXlink="http://www.w3.org/1999/xlink"
         viewBox="0 0 42 42"

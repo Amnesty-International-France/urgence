@@ -1,8 +1,6 @@
-import React from 'react';
 import { shallow } from 'enzyme';
 
 import { AddressStep } from './AddressStep';
-import Input from '../themes/Input';
 
 describe('<AddressStep />', () => {
     const defaultProps = {
@@ -14,12 +12,12 @@ describe('<AddressStep />', () => {
         city: 'city value',
         country: 'country value',
         email: 'email value',
-        setAddressMain: () => { },
-        setAddressMore: () => { },
-        setPostalCode: () => { },
-        setCity: () => { },
-        setCountry: () => { },
-        setEmail: () => { },
+        setAddressMain: () => {},
+        setAddressMore: () => {},
+        setPostalCode: () => {},
+        setCity: () => {},
+        setCountry: () => {},
+        setEmail: () => {},
     };
 
     it('should put action result inside .action div', () => {

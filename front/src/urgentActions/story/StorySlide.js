@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -25,4 +25,4 @@ StorySlide.propTypes = {
     step: PropTypes.object,
 };
 
-export default glamorous(StorySlide)(styles);
+export default styled(StorySlide)(styles);

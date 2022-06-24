@@ -4,7 +4,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import { secureUseState, secureUseEffect } from '../hooks/secureHooks';
 
-const copy = textToCopy => {
+const copy = (textToCopy) => {
     const textField = document.createElement('textarea');
     textField.innerText = textToCopy;
     document.body.appendChild(textField);

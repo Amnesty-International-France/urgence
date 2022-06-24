@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 
 import { white } from '../../themes/colors';
 
@@ -31,7 +31,7 @@ const styles = {
     },
 };
 
-const StyledSpan = glamorous.span(styles);
+const StyledSpan = styled('span')(styles);
 
 const ShowButton = ({ showAllText, action }) => (
     <StyledSpan onClick={action}>

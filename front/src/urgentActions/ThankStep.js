@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import Paper from '@material-ui/core/Paper';
 import get from 'lodash.get';
 
@@ -76,6 +76,6 @@ ThankStep.propTypes = {
 
 ThankStep.defaultProps = {};
 
-const withStyleThankStep = glamorous(ThankStep)(styles);
+const withStyleThankStep = styled(ThankStep)(styles);
 
 export default compose(withBlackLogo, withYellowBackground)(withStyleThankStep);

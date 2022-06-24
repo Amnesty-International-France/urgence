@@ -1,13 +1,12 @@
-import React from 'react';
+import styled from '@emotion/styled';
 import gql from 'graphql-tag';
-import glamorous from 'glamorous';
-import { Redirect } from 'react-router-dom';
-import { Query } from 'react-apollo';
 import get from 'lodash.get';
+import { Query } from 'react-apollo';
+import { Navigate } from 'react-router-dom';
 
-import { withYellowLogo } from './themes/ThemeContext';
 import { white } from './themes/colors';
 import LoadingScreen from './themes/LoadingScreen';
+import { withYellowLogo } from './themes/ThemeContext';
 
 import generateUrl from './services/generateUrl';
 
@@ -46,7 +45,7 @@ const HomePage = () => (
         {({ data, error, loading }) => {
             if (error) {
                 console.error(error);
-                return <Redirect to={generateUrl('error')} />;
+                return <Navigate to={generateUrl('error')} />;
             }
 
             if (loading) {
@@ -54,7 +53,7 @@ const HomePage = () => (
             }
 
             const slug = get(data, 'UrgentAction.slug');
-            return <Redirect to={generateUrl('ua', { slug })} />;
+            return <Navigate to={generateUrl('ua', { slug })} />;
         }}
     </Query>
 );
@@ -63,4 +62,4 @@ HomePage.propTypes = {};
 
 HomePage.defaultProps = {};
 
-export default glamorous(withYellowLogo(HomePage))(styles);
+export default styled(withYellowLogo(HomePage))(styles);

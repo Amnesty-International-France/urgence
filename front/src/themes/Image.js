@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 
 export const Image = ({ className, src, title }) => {
     let actualSource = src;
@@ -24,7 +24,7 @@ Image.propTypes = {
     src: PropTypes.string.isRequired,
 };
 
-export default glamorous(Image)({
+export default styled(Image)({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     '& img': {

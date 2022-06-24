@@ -1,9 +1,5 @@
 import PropTypes from 'prop-types';
 
-export const UrgentActionPropType = {
-    story: PropTypes.arrayOf(PropTypes.shape(StoryStepPropType)),
-};
-
 export const StoryStepPropType = {
     medium: PropTypes.shape({
         title: PropTypes.string.isRequired,
@@ -19,3 +15,7 @@ export const StoryStepPropType = {
 export const routeMatch = PropTypes.shape({
     params: PropTypes.object.isRequired,
 });
+
+export const UrgentActionPropType = {
+    story: PropTypes.arrayOf(PropTypes.shape(StoryStepPropType)),
+};

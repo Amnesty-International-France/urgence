@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import classnames from 'classnames';
 import Paper from '@material-ui/core/Paper';
@@ -153,6 +153,6 @@ MessageView.propTypes = {
     step: PropTypes.string,
 };
 
-const WithStylesMessageView = glamorous(MessageView)(styles);
+const WithStylesMessageView = styled(MessageView)(styles);
 
 export default compose(withYellowLogo, withSessionData)(WithStylesMessageView);

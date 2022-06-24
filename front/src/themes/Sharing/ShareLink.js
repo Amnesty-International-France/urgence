@@ -40,7 +40,7 @@ export const ShareLink = ({
                 target={target}
                 title={title}
                 label={text}
-                onClick={event => {
+                onClick={(event) => {
                     if (action) {
                         action(event);
                     }

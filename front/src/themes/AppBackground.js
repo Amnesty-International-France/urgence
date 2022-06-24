@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 
 import { withThemeContext } from './ThemeContext';
 
-const Rectangle = glamorous.div(
+const Rectangle = styled('div')(
     {
         zIndex: -1,
         position: 'fixed',
@@ -18,7 +18,7 @@ const Rectangle = glamorous.div(
     }),
 );
 
-const Triangle = glamorous.div(
+const Triangle = styled('div')(
     {
         zIndex: -1,
         position: 'fixed',

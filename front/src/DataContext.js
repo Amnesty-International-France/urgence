@@ -34,57 +34,57 @@ export const DataProvider = ({ children }) => {
     const [email, setEmail] = useState(data.getEmail());
     const [registered, setRegistered] = useState(data.getRegistered());
 
-    const handleSetObject = newObject => {
+    const handleSetObject = (newObject) => {
         setMailObject(newObject);
         data.setMailObject(newObject);
     };
 
-    const handleSetCivility = newCivility => {
+    const handleSetCivility = (newCivility) => {
         setCivility(newCivility);
         data.setCivility(newCivility);
     };
 
-    const handleSetFirstname = newFirstname => {
+    const handleSetFirstname = (newFirstname) => {
         setFirstname(newFirstname);
         data.setFirstname(newFirstname);
     };
 
-    const handleSetLastname = newLastname => {
+    const handleSetLastname = (newLastname) => {
         setLastname(newLastname);
         data.setLastname(newLastname);
     };
 
-    const handleSetAddressMain = newAddressMain => {
+    const handleSetAddressMain = (newAddressMain) => {
         setAddressMain(newAddressMain);
         data.setAddressMain(newAddressMain);
     };
 
-    const handleSetAddressMore = newAddressMore => {
+    const handleSetAddressMore = (newAddressMore) => {
         setAddressMore(newAddressMore);
         data.setAddressMore(newAddressMore);
     };
 
-    const handleSetPostalCode = newPostalCode => {
+    const handleSetPostalCode = (newPostalCode) => {
         setPostalCode(newPostalCode);
         data.setPostalCode(newPostalCode);
     };
 
-    const handleSetCity = newCity => {
+    const handleSetCity = (newCity) => {
         setCity(newCity);
         data.setCity(newCity);
     };
 
-    const handleSetCountry = newCountry => {
+    const handleSetCountry = (newCountry) => {
         setCountry(newCountry);
         data.setCountry(newCountry);
     };
 
-    const handleSetPhone = newPhone => {
+    const handleSetPhone = (newPhone) => {
         setPhone(newPhone);
         data.setPhone(newPhone);
     };
 
-    const handleSetEmail = newEmail => {
+    const handleSetEmail = (newEmail) => {
         setEmail(newEmail);
         data.setEmail(newEmail);
     };
@@ -132,6 +132,5 @@ DataProvider.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-export const withSessionData = Component => props => (
-    <DataConsumer>{context => <Component {...props} {...context} />}</DataConsumer>
-);
+export const withSessionData = (Component) => (props) =>
+    <DataConsumer>{(context) => <Component {...props} {...context} />}</DataConsumer>;

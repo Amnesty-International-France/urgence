@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
 import { compose } from 'recompose';
 
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
@@ -80,7 +79,4 @@ MailPdfButton.propTypes = {
     step: PropTypes.string,
 };
 
-export default compose(
-    withSessionData,
-    withRouter,
-)(MailPdfButton);
+export default compose(withSessionData)(MailPdfButton);

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 
 import RichText from '../../themes/RichText';
 
@@ -15,7 +15,7 @@ MessageSection.propTypes = {
     content: PropTypes.string,
 };
 
-export default glamorous(MessageSection)({
+export default styled(MessageSection)({
     '& .rich-text, & > p': {
         fontFamily: 'Amnesty Trade Gothic',
         lineHeight: '1.5em',

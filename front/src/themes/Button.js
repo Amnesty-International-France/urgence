@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 
 import { black, yellow, grey, darkGrey } from './colors';
 
-const StyledButton = glamorous.button({
+const StyledButton = styled('button')({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

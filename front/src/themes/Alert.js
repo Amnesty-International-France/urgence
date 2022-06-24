@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import MobileDetect from 'mobile-detect';
@@ -37,7 +37,7 @@ const Alert = ({ className, message }) => {
                 'aria-describedby': 'message-id',
             }}
             message={<RichText html={message} />}
-            TransitionComponent={props => <Slide {...props} direction="up" />}
+            TransitionComponent={(props) => <Slide {...props} direction="up" />}
             action={
                 <FontAwesomeIcon
                     icon={faTimes}
@@ -55,4 +55,4 @@ Alert.propTypes = {
     message: PropTypes.string.isRequired,
 };
 
-export default glamorous(Alert)(styles);
+export default styled(Alert)(styles);

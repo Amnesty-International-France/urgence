@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { black, yellow, grey, darkGrey } from './colors';
 
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 
-const IconButtonContainer = glamorous.div({
+const IconButtonContainer = styled('div')({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import { Paper } from '@material-ui/core';
 
@@ -53,6 +53,6 @@ ShareStep.defaultProps = {
     },
 };
 
-const WithStylesShare = glamorous(ShareStep)(styles);
+const WithStylesShare = styled(ShareStep)(styles);
 
 export default compose(withBlackLogo, withYellowBackground)(WithStylesShare);

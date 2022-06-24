@@ -16,19 +16,19 @@ export const Form = ({
     setFirstname,
     setLastname,
 }) => {
-    const handleChangeCivility = event => {
+    const handleChangeCivility = (event) => {
         setCivility(event.target.value);
     };
 
-    const handleChangeFirstname = event => {
+    const handleChangeFirstname = (event) => {
         setFirstname(event.target.value);
     };
 
-    const handleChangeLastname = event => {
+    const handleChangeLastname = (event) => {
         setLastname(event.target.value);
     };
 
-    const handleChangeEmail = event => {
+    const handleChangeEmail = (event) => {
         setEmail(event.target.value);
     };
 

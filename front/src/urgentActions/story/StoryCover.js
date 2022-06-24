@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import get from 'lodash.get';
 import Paper from '@material-ui/core/Paper';
 
@@ -118,4 +118,4 @@ StoryCover.propTypes = {
     isMobile: PropTypes.bool,
 };
 
-export default glamorous(StoryCover)(styles);
+export default styled(StoryCover)(styles);

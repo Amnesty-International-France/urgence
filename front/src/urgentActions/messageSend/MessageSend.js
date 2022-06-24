@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import classnames from 'classnames';
 import Paper from '@material-ui/core/Paper';
@@ -107,6 +107,6 @@ MessageSend.propTypes = {
     step: PropTypes.string,
 };
 
-const WithStylesMessageSend = glamorous(MessageSend)(styles);
+const WithStylesMessageSend = styled(MessageSend)(styles);
 
 export default compose(withYellowLogo, withSessionData)(WithStylesMessageSend);

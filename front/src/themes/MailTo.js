@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import MobileDetect from 'mobile-detect';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import classnames from 'classnames';
 import { routeMatch } from '../propTypes';
 import trackEvent from '../analytics/trackEvent';
@@ -40,14 +40,14 @@ export class MailTo extends Component {
         });
     }
 
-    openMailer = dest => {
+    openMailer = (dest) => {
         console.log('window', window);
         console.log('dest', dest);
         console.log(`window.open("${dest}", 'mailto')`);
 
         window.open(dest, 'mailto');
         window.focus();
-        setTimeout(function() {
+        setTimeout(function () {
             if (!window.document.hasFocus()) {
                 window.close();
             }
@@ -79,7 +79,7 @@ export class MailTo extends Component {
         return (
             <a
                 className={classnames(className, { disabled })}
-                onClick={event => {
+                onClick={(event) => {
                     if (!isIphone) {
                         this.openMailer(dest);
                     }
@@ -117,4 +117,4 @@ MailTo.propTypes = {
     match: routeMatch,
 };
 
-export default glamorous(MailTo)(styles);
+export default styled(MailTo)(styles);

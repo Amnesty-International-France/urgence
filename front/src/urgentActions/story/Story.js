@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import styled from 'react-emotion';
 import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { compose } from 'recompose';
@@ -27,12 +27,12 @@ const styles = {
     },
 };
 
-export const getLogoColorForStoryStep = step =>
+export const getLogoColorForStoryStep = (step) =>
     step === 'story'
         ? { logoColor: black, logoBackgroundColor: yellow }
         : { logoColor: white, logoBackgroundColor: black };
 export class Story extends Component {
-    afterChange = page => {
+    afterChange = (page) => {
         const {
             context,
             match: {
@@ -111,23 +111,23 @@ export class Story extends Component {
                         {() => (
                             <Fragment>
                                 <StorySlide step={cover}>
-                                    {storyCoverProps => <StoryCover {...storyCoverProps} />}
+                                    {(storyCoverProps) => <StoryCover {...storyCoverProps} />}
                                 </StorySlide>
 
                                 {restStory.map((step, index) => (
                                     <StorySlide key={index + 1} step={step}>
-                                        {storyStepProps => <StoryStep {...storyStepProps} />}
+                                        {(storyStepProps) => <StoryStep {...storyStepProps} />}
                                     </StorySlide>
                                 ))}
 
                                 <StorySlide>
-                                    {storyProps => (
+                                    {(storyProps) => (
                                         <Act
                                             {...storyProps}
                                             data={{
                                                 ...callToAction,
                                                 response_count: responseCount,
-                                                auId
+                                                auId,
                                             }}
                                             actions={() =>
                                                 callToAction && callToAction.button ? (
@@ -167,6 +167,6 @@ Story.propTypes = {
     auId: PropTypes.number,
 };
 
-export const WithStylesStory = glamorous(Story)(styles);
+export const WithStylesStory = styled(Story)(styles);
 
 export default compose(withRouter, withThemeContext)(WithStylesStory);

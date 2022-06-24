@@ -7,7 +7,7 @@ import AmnestyLogo from './AmnestyLogo';
 import { black, yellow } from '../themes/colors';
 
 storiesOf('Icons', module)
-    .addDecorator(story => <div style={{ fontSize: 128 }}>{story()}</div>)
+    .addDecorator((story) => <div style={{ fontSize: 128 }}>{story()}</div>)
     .add('Amnesty Candle', () => <AmnestyCandle />)
     .add('Amnesty Logo Black', () => <AmnestyLogo fill0={black} fill1={yellow} />)
     .add('Amnesty Logo Yellow', () => <AmnestyLogo fill0={yellow} fill1={black} />);

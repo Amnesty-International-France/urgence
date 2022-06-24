@@ -62,7 +62,7 @@ describe('SendMail', () => {
     });
 
     describe('afterMail', () => {
-        it('should call afterMail with registered true when clicked', done => {
+        it('should call afterMail with registered true when clicked', (done) => {
             const addCampaignMemberResult = {
                 data: {
                     addCampaignMember: {
@@ -89,7 +89,7 @@ describe('SendMail', () => {
                 });
         });
 
-        it('should call afterMail with registered false when clicked', done => {
+        it('should call afterMail with registered false when clicked', (done) => {
             const addCampaignMemberResult = {
                 data: {
                     addCampaignMember: {
