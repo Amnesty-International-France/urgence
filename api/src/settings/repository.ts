@@ -20,7 +20,8 @@ export const getSettings = async ({ perPage, page, sortField, sortOrder }: Pagin
     client
         .select('*')
         .from<Setting>(table)
-        .paginate({ perPage, currentPage: page * perPage, sortField, sortOrder })
+        .orderBy(sortField, sortOrder)
+        .paginate({ perPage, currentPage: page * perPage })
         .then((row) => row.data);
 
 export const countSettings = async () => client.count('*').from<Setting>(table).first();

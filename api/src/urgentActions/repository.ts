@@ -125,7 +125,11 @@ export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }: 
     client
         .select('*')
         .from<UrgentActionDb>(table)
-        .paginate({ perPage, currentPage: page * perPage, sortField, sortOrder })
+        .orderBy(sortField, sortOrder)
+        .paginate({
+            perPage,
+            currentPage: page * perPage,
+        })
         .then((row) => ({
             ...row,
             data: parseJsonFromRows<UrgentAction>(row.data),
