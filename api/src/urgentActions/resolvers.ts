@@ -70,7 +70,12 @@ export default {
                 sortField: string;
                 sortOrder: 'ASC' | 'DESC';
             },
-        ) => getUrgentActions({ perPage, page, sortField, sortOrder }),
+        ) => {
+            if (!sortField) {
+                sortField = 'id';
+            }
+            return getUrgentActions({ perPage, page, sortField, sortOrder });
+        },
         UrgentAction: (_: null, { id }: { id: string }) => getUrgentAction(id),
         UrgentActionBySlug: (_: null, { slug }: { slug: string }) => getUrgentActionBySlug(slug),
         DefaultUrgentAction: () => getDefaultUrgentAction(),
