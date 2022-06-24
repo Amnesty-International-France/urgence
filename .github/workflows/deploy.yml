@@ -236,7 +236,7 @@ jobs:
                   working-directory: admin
 
             - name: 🕵️‍♂️ Installing ssh
-              run: mkdir ~/.ssh && cho $KEY >> ~/.ssh/amnesty-staging
+              run: mkdir ~/.ssh && echo $KEY >> ~/.ssh/amnesty-staging
               env:
                   DEV_ENV_FILE: ${{secrets.KEY}}
 
