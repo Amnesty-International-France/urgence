@@ -10,13 +10,13 @@ make install start
 
 You can now access different applications:
 
-* API: http://localhost:4000
-* Admin: http://localhost:5000
-* Front app: http://localhost:3000
+-   API: http://localhost:4000
+-   Admin: http://localhost:5000
+-   Front app: http://localhost:3000
 
 If you run the project in development, you can use:
 
-* Storybook: http://localhost:9009
+-   Storybook: http://localhost:9009
 
 ## Deployment
 
@@ -36,10 +36,12 @@ BRANCH=feature make deploy-staging
 
 Certificates are managed on staging by [certbot](https://github.com/certbot/certbot). The `certbot-auto` script is at the root level of the staging server.
 
+Certificates should be renewed automatically with cron
+
 To renew the certificate, you should:
 
 1. Stop the running server: `cd amnesty/current && make stop-staging`
-2. Run the renew command `certbot-auto renew`
+2. Run the renew command `sudo certbot renew`
 3. Restart the server: `cd amnesty/current && make start-staging`
 
 ## Debugging E2E tests

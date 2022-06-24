@@ -2,8 +2,7 @@ version: '3'
 
 services:
     admin:
-        image: node:11
-        user: '${UID}:${GID}'
+        image: node:18
         command: 'yarn run start'
         working_dir: /app/admin
         volumes:
@@ -63,7 +62,7 @@ services:
             - PGDATA=/var/lib/postgresql/data/amnesty
 
     storybook:
-        image: node:11
+        image: node:12
         user: '${UID}:${GID}'
         command: 'yarn run storybook'
         working_dir: /app
@@ -76,7 +75,7 @@ services:
             - '9009:9009'
 
     front:
-        image: node:11
+        image: node:12
         user: '${UID}:${GID}'
         command: 'yarn run start-web'
         working_dir: /app/front

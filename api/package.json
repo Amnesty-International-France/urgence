@@ -42,7 +42,7 @@
     },
     "scripts": {
         "start-dev": "pm2 startOrRestart --interpreter --no-daemon pm2/development.json",
-        "start": "pm2 startOrRestart --no-daemon pm2/production.json",
+        "start": "node dist/index.js",
         "build": "babel -x .ts src/ --out-dir dist/ && cp src/urgentActions/*.html dist/urgentActions/",
         "test": "jest --ci --forceExit --silent false",
         "test-watch": "jest --silent false --watch",
