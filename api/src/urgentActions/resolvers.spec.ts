@@ -8,6 +8,7 @@ import {
     updateUrgentAction,
     removeUrgentAction,
     UrgentAction,
+    removeDefaultToOther,
 } from './repository';
 import { uploadImageFromStory as uploadImageFromStoryOriginal } from '../services/uploadImageFromStory';
 import {
@@ -381,6 +382,52 @@ describe('Urgent Actions Resolvers', () => {
                     end_thank: '"end_thank"',
                     social_metadata: '{}',
                 });
+            });
+
+            it('should remove default to other is updated is default', async () => {
+                const authResponse = Promise.resolve({
+                    status: 200,
+                    body: {
+                        access_token: 'psjgf-dfgersdf-sf486sf-sdf',
+                    },
+                });
+                authenticate.mockReturnValue(authResponse);
+                await UrgentActionsResolver.Mutation.updateUrgentAction(
+                    null,
+                    {
+                        id: 'id',
+                        title: 'test',
+                        slug: 'test',
+                        is_default: true,
+                        story: [],
+                    } as unknown as UrgentAction,
+                    {
+                        user: {
+                            login: 'azerty',
+                            role: 'admin',
+                        },
+                    },
+                );
+
+                expect(removeDefaultToOther).toHaveBeenCalledWith('id');
+                await UrgentActionsResolver.Mutation.updateUrgentAction(
+                    null,
+                    {
+                        id: 'id2',
+                        title: 'test',
+                        slug: 'test',
+                        is_default: false,
+                        story: [],
+                    } as unknown as UrgentAction,
+                    {
+                        user: {
+                            login: 'azerty',
+                            role: 'admin',
+                        },
+                    },
+                );
+
+                expect(removeDefaultToOther).not.toHaveBeenCalledWith('id2');
             });
         });
 
