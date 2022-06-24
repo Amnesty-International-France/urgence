@@ -8,6 +8,7 @@ import {
     updateUrgentAction,
     removeUrgentAction,
     UrgentAction,
+    removeDefaultToOther,
 } from './repository';
 import { uploadImageFromStory as uploadImageFromStoryOriginal } from '../services/uploadImageFromStory';
 import {
@@ -381,6 +382,39 @@ describe('Urgent Actions Resolvers', () => {
                     end_thank: '"end_thank"',
                     social_metadata: '{}',
                 });
+            });
+
+            it('should remove default to other is updated is default', async () => {
+                const authResponse = Promise.resolve({
+                    status: 200,
+                    body: {
+                        access_token: 'psjgf-dfgersdf-sf486sf-sdf',
+                    },
+                });
+                authenticate.mockReturnValue(authResponse);
+                await UrgentActionsResolver.Mutation.updateUrgentAction(
+                    null,
+                    {
+                        id: 'id',
+                        title: 'test',
+                        slug: 'test',
+                        is_default: true,
+                        story: [],
+                        call_to_action: 'call_to_action',
+                        message: 'message',
+                        email_thank: 'email_thank',
+                        register: 'register',
+                        end_thank: 'end_thank',
+                    } as unknown as UrgentAction,
+                    {
+                        user: {
+                            login: 'azerty',
+                            role: 'admin',
+                        },
+                    },
+                );
+
+                expect(removeDefaultToOther).toHaveBeenCalledWith('id');
             });
         });
 

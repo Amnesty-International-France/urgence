@@ -11,6 +11,7 @@ import {
     getUrgentAction,
     getUrgentActionBySlug,
     getUrgentActions,
+    removeDefaultToOther,
     removeUrgentAction,
     updateUrgentAction,
     UrgentAction,
@@ -87,7 +88,11 @@ export default {
             }
 
             const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
-            return createUrgentAction(preparedUa);
+            const ua = await createUrgentAction(preparedUa);
+            if (ua && ua.is_default) {
+                removeDefaultToOther(ua.id);
+            }
+            return ua;
         },
         updateUrgentAction: async (
             _: null,
@@ -99,7 +104,11 @@ export default {
             }
 
             const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
-            return updateUrgentAction(urgentAction.id, preparedUa);
+            const ua = updateUrgentAction(urgentAction.id, preparedUa);
+            if (preparedUa.is_default) {
+                removeDefaultToOther(urgentAction.id);
+            }
+            return ua;
         },
         deleteUrgentAction: (
             _: null,
