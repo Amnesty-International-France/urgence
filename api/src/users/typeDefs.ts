@@ -14,7 +14,7 @@ export default gql`
     }
 
     extend type Query {
-        login(username: String!, password: String!): Token
+        login(username: String!, password: String!): Token @rateLimit(limit: 30, duration: 900)
         loginByToken(token: TokenInput!): Boolean
     }
 `;
