@@ -3,6 +3,7 @@ version: '3'
 services:
     admin:
         image: node:18
+        user: '${UID}:${GID}'
         command: 'yarn run start'
         working_dir: /app/admin
         volumes:

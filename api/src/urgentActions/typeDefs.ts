@@ -1,5 +1,6 @@
 import { gql } from 'apollo-server-express';
 
+// TODO : remove template_messageIds from MessageInput when a new version of ra-data-graphql-simple will be released
 export default gql`
     scalar Uploadable
 
@@ -215,6 +216,7 @@ export default gql`
         object_indication: String
         object_example: String
         message_template: [MessageTemplateInput]
+        message_templateIds: [ID]
         recipient: RecipientInput
     }
 

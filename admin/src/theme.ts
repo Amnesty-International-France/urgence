@@ -16,4 +16,17 @@ export const theme = {
             contrastText: '#000',
         },
     },
+    components: {
+        ...defaultTheme.components,
+        MuiTextField: {
+            defaultProps: {
+                variant: 'standard' as const,
+            },
+        },
+        MuiFormControl: {
+            defaultProps: {
+                variant: 'standard' as const,
+            },
+        },
+    },
 };
