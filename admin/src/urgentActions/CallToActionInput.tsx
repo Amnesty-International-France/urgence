@@ -13,12 +13,15 @@ import { Card } from './Card';
 import { FrontPreview } from './FrontPreview';
 import { ParticipationInput } from './ParticipationInput';
 import { CALL_TO_ACTION, getScreenIndex } from './screenIndex';
+import { FormData } from './UrgentActionsForm';
 
 export const CallToActionInput = () => {
     return (
         <Box sx={{ display: 'flex', alignItems: 'start' }}>
             <FormDataConsumer>
-                {({ formData }) => {
+                {({ formData }: { formData: FormData }) => {
+                    const storySteps = formData.story ? formData.story.length : 0;
+                    const interpelationMode = formData.call_to_action?.interpelation_mode;
                     return (
                         <Box sx={{ display: 'flex', alignItems: 'start', width: '100%' }}>
                             <Box
@@ -36,11 +39,7 @@ export const CallToActionInput = () => {
                                     fontSize: '1.25rem',
                                 }}
                             >
-                                {getScreenIndex(
-                                    CALL_TO_ACTION,
-                                    formData.story.length,
-                                    formData.call_to_action.interpelation_mode,
-                                )}
+                                {getScreenIndex(CALL_TO_ACTION, storySteps, interpelationMode)}
                             </Box>
                             <Card>
                                 <RadioButtonGroupInput
@@ -68,7 +67,7 @@ export const CallToActionInput = () => {
                                     defaultValue="Envoyez dès maintenant un e-mail pour interpeller le Responsable du pouvoir judiciaire."
                                     validate={required()}
                                 />
-                                {formData.call_to_action.interpelation_mode === 'email' && (
+                                {formData.call_to_action?.interpelation_mode === 'email' && (
                                     <TextInput
                                         source="call_to_action.button"
                                         label="Bouton"
@@ -77,7 +76,7 @@ export const CallToActionInput = () => {
                                     />
                                 )}
                                 <ParticipationInput source={'call_to_action.progress'} />
-                                {formData.call_to_action.interpelation_mode === 'rs' && (
+                                {formData.call_to_action?.interpelation_mode === 'rs' && (
                                     <Labeled label="Twitter Sharing">
                                         <>
                                             <TextInput

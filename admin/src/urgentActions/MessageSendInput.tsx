@@ -4,6 +4,7 @@ import { FormDataConsumer, maxLength, minLength, required, TextInput } from 'rea
 import { Card } from './Card';
 import { FrontPreview } from './FrontPreview';
 import { getScreenIndex, MESSAGE_SEND } from './screenIndex';
+import { FormData } from './UrgentActionsForm';
 
 type MessageSendInputProps = {
     source: string;
@@ -17,10 +18,13 @@ export const MessageSendInput = ({ source }: MessageSendInputProps) => (
         }}
     >
         <FormDataConsumer>
-            {({ formData }) => {
+            {({ formData }: { formData: FormData }) => {
+                //@ts-ignore
                 const data = formData[source];
                 const hasMessageTemplate =
                     data && data.message_template && data.message_template.length > 0;
+                const storySteps = formData.story ? formData.story.length : 0;
+                const interpelationMode = formData.call_to_action?.interpelation_mode;
 
                 return (
                     <Box sx={{ display: 'flex', alignItems: 'start', width: '100%' }}>
@@ -39,11 +43,7 @@ export const MessageSendInput = ({ source }: MessageSendInputProps) => (
                                 fontSize: '1.25rem',
                             }}
                         >
-                            {getScreenIndex(
-                                MESSAGE_SEND,
-                                formData.story.length,
-                                formData.call_to_action.interpelation_mode,
-                            )}
+                            {getScreenIndex(MESSAGE_SEND, storySteps, interpelationMode)}
                         </Box>
                         <Card>
                             <RichTextInput

@@ -15,6 +15,7 @@ import { Card } from './Card';
 import { FrontPreview } from './FrontPreview';
 import { ParagraphTemplateInput } from './ParagraphTemplateInput';
 import { getScreenIndex, MESSAGE_VIEW } from './screenIndex';
+import { FormData } from './UrgentActionsForm';
 
 type MessageViewInputProps = {
     source: string;
@@ -54,13 +55,16 @@ export const MessageViewInput = ({ source }: MessageViewInputProps) => {
             }}
         >
             <FormDataConsumer>
-                {({ formData }) => {
+                {({ formData }: { formData: FormData }) => {
+                    //@ts-ignore
                     const data = formData[source];
                     const hasMessageTemplate =
                         data && data.message_template && data.message_template.length > 0;
                     const mailToHeaderLength = data
                         ? getMailToHeaderLength(data.recipient, data.object_example)
                         : 0;
+                    const storySteps = formData.story ? formData.story.length : 0;
+                    const interpelationMode = formData.call_to_action?.interpelation_mode;
                     return (
                         <Box sx={{ display: 'flex', alignItems: 'start', width: '100%' }}>
                             <Box
@@ -78,11 +82,7 @@ export const MessageViewInput = ({ source }: MessageViewInputProps) => {
                                     fontSize: '1.25rem',
                                 }}
                             >
-                                {getScreenIndex(
-                                    MESSAGE_VIEW,
-                                    formData.story.length,
-                                    formData.call_to_action.interpelation_mode,
-                                )}
+                                {getScreenIndex(MESSAGE_VIEW, storySteps, interpelationMode)}
                             </Box>
                             <Card>
                                 <Labeled label="Object">

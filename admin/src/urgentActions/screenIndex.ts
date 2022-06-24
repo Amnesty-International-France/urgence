@@ -10,9 +10,9 @@ export const THANKS = 4;
 export const getScreenIndex = (
     step: number,
     storySteps: number,
-    interpelation_mode: 'email' | 'rs',
+    interpelation_mode: 'email' | 'rs' | undefined,
 ) => {
-    const callToActionMode = interpelation_mode === 'email' ? 0 : 1;
+    const callToActionMode = interpelation_mode === 'rs' ? 1 : 0;
 
     const stepWithStory = storySteps + step;
     return step > 1 ? stepWithStory - callToActionMode : stepWithStory;

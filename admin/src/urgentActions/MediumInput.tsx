@@ -50,9 +50,14 @@ export const MediumInput = ({ source, label }: MediumInputProps) => {
                     <ImagePreview source="src" />
                 </ImageInput>
                 <FormDataConsumer>
-                    {({ formData }) => {
+                    {({ formData }: { formData: FormData }) => {
                         const keys = source.split('.');
-                        const value = keys.reduce((obj, key) => obj[key], formData);
+
+                        const value = keys.reduce((obj, key) => {
+                            // @ts-ignore
+                            if (obj[key]) return obj[key];
+                            return obj;
+                        }, formData);
                         return (
                             value && (
                                 <TextInput
