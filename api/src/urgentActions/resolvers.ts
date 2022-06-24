@@ -95,7 +95,7 @@ export default {
             const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
             const ua = await createUrgentAction(preparedUa);
             if (ua && ua.is_default) {
-                removeDefaultToOther(ua.id);
+                await removeDefaultToOther(ua.id);
             }
             return ua;
         },
@@ -111,7 +111,7 @@ export default {
             const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
             const ua = updateUrgentAction(urgentAction.id, preparedUa);
             if (preparedUa.is_default) {
-                removeDefaultToOther(urgentAction.id);
+                await removeDefaultToOther(urgentAction.id);
             }
             return ua;
         },
