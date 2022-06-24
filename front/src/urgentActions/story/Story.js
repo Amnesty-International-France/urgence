@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import { withRouter } from 'react-router';
-import { Redirect } from 'react-router-dom';
+import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import Act from '../Act';
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
@@ -20,6 +18,7 @@ import generateUrl from '../../services/generateUrl';
 import StorySlide from './StorySlide';
 import StoryCover from './StoryCover';
 import StoryStep from './StoryStep';
+import { Navigate } from 'react-router';
 
 const styles = {
     '& .icon': {
@@ -93,7 +92,7 @@ export class Story extends Component {
         const current = page != null ? parseInt(page, 10) : total;
 
         if (!story || story.length === 0 || current > total) {
-            return <Redirect to={generateUrl('error')} />;
+            return <Navigate to={generateUrl('error')} />;
         }
 
         const [cover, ...restStory] = story;
@@ -169,4 +168,4 @@ Story.propTypes = {
 
 export const WithStylesStory = styled(Story)(styles);
 
-export default compose(withRouter, withThemeContext)(WithStylesStory);
+export default compose(withThemeContext)(WithStylesStory);

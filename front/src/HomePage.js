@@ -1,16 +1,14 @@
 import styled from '@emotion/styled';
 import gql from 'graphql-tag';
 import get from 'lodash.get';
-import { Query } from 'react-apollo';
+import { Query } from '@apollo/client/react/components';
 import { Navigate } from 'react-router-dom';
 
-import { white } from './themes/colors';
 import LoadingScreen from './themes/LoadingScreen';
-import { withYellowLogo } from './themes/ThemeContext';
 
 import generateUrl from './services/generateUrl';
 
-const styles = {
+const Div = styled.div`
     fontSize: 33,
     textAlign: 'center',
     display: 'flex',
@@ -28,7 +26,7 @@ const styles = {
         fill: white,
         fontSize: 133,
     },
-};
+`;
 
 const query = gql`
     {
@@ -49,7 +47,11 @@ const HomePage = () => (
             }
 
             if (loading) {
-                return <LoadingScreen />;
+                return (
+                    <Div>
+                        <LoadingScreen />
+                    </Div>
+                );
             }
 
             const slug = get(data, 'UrgentAction.slug');
@@ -62,4 +64,4 @@ HomePage.propTypes = {};
 
 HomePage.defaultProps = {};
 
-export default styled(withYellowLogo(HomePage))(styles);
+export default HomePage;

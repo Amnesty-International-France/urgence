@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
-import { ApolloClient } from 'apollo-boost';
+import { ApolloClient, ApolloProvider } from '@apollo/client';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { ApolloProvider } from 'react-apollo';
 import Div100Vh from 'react-div-100vh';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Analytics from './analytics/Analytics';
@@ -50,7 +49,7 @@ const App = ({ className, client }: { className?: string; client: ApolloClient<u
                                         element={<Analytics WrappedComponent={ErrorPage} />}
                                     />
                                     <Route
-                                        path="/ua/:slug/:step?/:page?"
+                                        path="/ua/:slug/:step?/:page?*"
                                         element={<Analytics WrappedComponent={UrgentAction} />}
                                     />
                                     <Route

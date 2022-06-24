@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import get from 'lodash.get';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
-import { Query } from 'react-apollo';
+import { Query } from '@apollo/client/react/components';
 import { Navigate } from 'react-router';
 
 import ANALYTICS_CATEGORIES from '../analytics/categories';
