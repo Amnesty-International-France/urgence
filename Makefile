@@ -21,7 +21,7 @@ install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE) run --rm --no-deps admin yarn install
 	$(DOCKER_COMPOSE) run --rm --no-deps front yarn install
 
-install-prod: ## Install all dependencies in production mode. Usage `make install-prod`.
+install-production: ## Install all dependencies in production mode. Usage `make install-prod`.
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api bash -c "yarn config set unsafe-perm true && yarn install --production"
 	$(DOCKER_COMPOSE) run --rm --no-deps api bash -c "yarn config set unsafe-perm true && yarn install --production"
 
@@ -43,13 +43,13 @@ stop-staging:
 logs-staging:
 	$(DOCKER_COMPOSE_STAGING) logs -f
 
-start-prod:
+start-production:
 	$(DOCKER_COMPOSE_PROD) up -d
 
-stop-prod:
+stop-production:
 	$(DOCKER_COMPOSE_PROD) down
 
-logs-prod:
+logs-production:
 	$(DOCKER_COMPOSE_PROD) logs -f
 
 start-nginx: build-front build-admin
@@ -160,7 +160,7 @@ migration-test:
 migration-staging:
 	$(DB_MIGRATE_STAGING) up"
 
-migration-prod:
+migration-production:
 	$(DB_MIGRATE_PROD) up"
 
 migration-e2e:
@@ -174,7 +174,7 @@ populate-db:
 deploy-staging:
 	NODE_ENV=staging node deploy.js
 
-deploy-prod:
+deploy-production:
 	NODE_ENV=production node deploy.js
 
 build-storybook:

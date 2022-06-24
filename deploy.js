@@ -70,7 +70,7 @@ const deploy = async () => {
         console.log('Installing packages');
         await launch('Install', 'ssh', [
             ...ssh,
-            `'echo && cd ${config.deployTo}/releases/${version} && make install-prod'`,
+            `'echo && cd ${config.deployTo}/releases/${version} && make install-production'`,
         ]).promise;
 
         console.log('===================');
