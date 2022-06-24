@@ -11,6 +11,7 @@ import {
     getUrgentAction,
     getUrgentActionBySlug,
     getUrgentActions,
+    removeDefaultToOther,
     removeUrgentAction,
     updateUrgentAction,
     UrgentAction,
@@ -70,7 +71,12 @@ export default {
                 sortField: string;
                 sortOrder: 'ASC' | 'DESC';
             },
-        ) => getUrgentActions({ perPage, page, sortField, sortOrder }),
+        ) => {
+            if (!sortField) {
+                sortField = 'id';
+            }
+            return getUrgentActions({ perPage, page, sortField, sortOrder });
+        },
         UrgentAction: (_: null, { id }: { id: string }) => getUrgentAction(id),
         UrgentActionBySlug: (_: null, { slug }: { slug: string }) => getUrgentActionBySlug(slug),
         DefaultUrgentAction: () => getDefaultUrgentAction(),
@@ -87,7 +93,11 @@ export default {
             }
 
             const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
-            return createUrgentAction(preparedUa);
+            const ua = await createUrgentAction(preparedUa);
+            if (ua && ua.is_default) {
+                removeDefaultToOther(ua.id);
+            }
+            return ua;
         },
         updateUrgentAction: async (
             _: null,
@@ -99,7 +109,11 @@ export default {
             }
 
             const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
-            return updateUrgentAction(urgentAction.id, preparedUa);
+            const ua = updateUrgentAction(urgentAction.id, preparedUa);
+            if (preparedUa.is_default) {
+                removeDefaultToOther(urgentAction.id);
+            }
+            return ua;
         },
         deleteUrgentAction: (
             _: null,

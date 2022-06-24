@@ -18,6 +18,7 @@
         "express": "~4.18.1",
         "express-graphql": "~0.12.0",
         "graphql": "~16.5.0",
+        "graphql-rate-limit-directive": "^2.0.2",
         "graphql-tag": "~2.12.6",
         "graphql-tools": "~8.2.12",
         "graphql-type-json": "~0.3.2",
@@ -36,13 +37,14 @@
         "pg": "~8.7.3",
         "pm2": "~5.2.0",
         "ramda": "~0.28.0",
+        "rate-limiter-flexible": "^2.3.7",
         "sharp": "0.30.6",
         "shortid": "~2.2.16",
         "validator": "~13.7.0"
     },
     "scripts": {
         "start-dev": "pm2 startOrRestart --interpreter --no-daemon pm2/development.json",
-        "start": "pm2 startOrRestart --no-daemon pm2/production.json",
+        "start": "node dist/index.js",
         "build": "babel -x .ts src/ --out-dir dist/ && cp src/urgentActions/*.html dist/urgentActions/",
         "test": "jest --ci --forceExit --silent false",
         "test-watch": "jest --silent false --watch",

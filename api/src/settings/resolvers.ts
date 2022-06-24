@@ -16,8 +16,12 @@ export default {
     Query: {
         Setting: (_: null, { id }: { id: number }) => getSetting(id),
         SettingByType: (_: null, { type }: { type: string }) => getSettingByType(type),
-        allSettings: (_: null, { perPage, page, sortField, sortOrder }: Pagination) =>
-            getSettings({ perPage, page, sortField, sortOrder }),
+        allSettings: (_: null, { perPage, page, sortField, sortOrder }: Pagination) => {
+            if (!sortField) {
+                sortField = 'id';
+            }
+            return getSettings({ perPage, page, sortField, sortOrder });
+        },
         _allSettingsMeta: () => countSettings(),
     },
     Mutation: {

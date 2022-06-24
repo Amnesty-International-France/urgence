@@ -8,6 +8,7 @@ import {
     updateUrgentAction,
     removeUrgentAction,
     UrgentAction,
+    removeDefaultToOther,
 } from './repository';
 import { uploadImageFromStory as uploadImageFromStoryOriginal } from '../services/uploadImageFromStory';
 import {
@@ -382,33 +383,89 @@ describe('Urgent Actions Resolvers', () => {
                     social_metadata: '{}',
                 });
             });
+
+            it('should remove default to other is updated is default', async () => {
+                const authResponse = Promise.resolve({
+                    status: 200,
+                    body: {
+                        access_token: 'psjgf-dfgersdf-sf486sf-sdf',
+                    },
+                });
+                authenticate.mockReturnValue(authResponse);
+                await UrgentActionsResolver.Mutation.updateUrgentAction(
+                    null,
+                    {
+                        id: 'id',
+                        title: 'test',
+                        slug: 'test',
+                        is_default: true,
+                        story: [],
+                    } as unknown as UrgentAction,
+                    {
+                        user: {
+                            login: 'azerty',
+                            role: 'admin',
+                        },
+                    },
+                );
+
+                expect(removeDefaultToOther).toHaveBeenCalledWith('id');
+                await UrgentActionsResolver.Mutation.updateUrgentAction(
+                    null,
+                    {
+                        id: 'id2',
+                        title: 'test',
+                        slug: 'test',
+                        is_default: false,
+                        story: [],
+                    } as unknown as UrgentAction,
+                    {
+                        user: {
+                            login: 'azerty',
+                            role: 'admin',
+                        },
+                    },
+                );
+
+                expect(removeDefaultToOther).not.toHaveBeenCalledWith('id2');
+            });
         });
 
         describe('deleteUrgentAction', () => {
             it('should not remove urgent action if user is not authenticated', async () => {
-                const result = await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id');
+                const result = await UrgentActionsResolver.Mutation.deleteUrgentAction(null, {
+                    id: 'id',
+                });
 
                 expect(result).toBe(null);
             });
 
             it('should not remove urgent action if user is not an admin', async () => {
-                const result = await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id', {
-                    user: {
-                        login: 'julien',
-                        role: 'bg',
+                const result = await UrgentActionsResolver.Mutation.deleteUrgentAction(
+                    null,
+                    { id: 'id' },
+                    {
+                        user: {
+                            login: 'julien',
+                            role: 'bg',
+                        },
                     },
-                });
+                );
 
                 expect(result).toBe(null);
             });
 
             it('should remove urgent action with given id', async () => {
-                await UrgentActionsResolver.Mutation.deleteUrgentAction(null, 'id', {
-                    user: {
-                        login: 'azerty',
-                        role: 'admin',
+                await UrgentActionsResolver.Mutation.deleteUrgentAction(
+                    null,
+                    { id: 'id' },
+                    {
+                        user: {
+                            login: 'azerty',
+                            role: 'admin',
+                        },
                     },
-                });
+                );
                 expect(removeUrgentAction).toHaveBeenCalledWith('id');
             });
         });

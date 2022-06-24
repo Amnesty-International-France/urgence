@@ -125,7 +125,11 @@ export const getUrgentActions = async ({ perPage, page, sortField, sortOrder }: 
     client
         .select('*')
         .from<UrgentActionDb>(table)
-        .paginate({ perPage, currentPage: page * perPage, sortField, sortOrder })
+        .orderBy(sortField, sortOrder)
+        .paginate({
+            perPage,
+            currentPage: page * perPage,
+        })
         .then((row) => ({
             ...row,
             data: parseJsonFromRows<UrgentAction>(row.data),
@@ -176,6 +180,13 @@ export const updateUrgentAction = async (
         .returning('*')
         .then((rows) => rows[0])
         .then((row) => parseJsonFromRow<UrgentAction>(row));
+
+export const removeDefaultToOther = async (id: string) => {
+    client<UrgentActionDb>(table)
+        .update({ is_default: false })
+        .where('is_default', '=', true)
+        .and.where('id', '<>', id);
+};
 
 export const removeUrgentAction = async (id: string) =>
     client<UrgentActionDb>(table).where({ id }).delete();

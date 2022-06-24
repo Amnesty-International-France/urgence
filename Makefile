@@ -7,13 +7,13 @@ help: ## SOS? Usage make help (default).
 
 #### STARTING ###
 
-DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
-DOCKER_COMPOSE_BUILD = docker-compose -p reaction-rapide-build -f docker-compose.build.yml
-DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
-DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
-DOCKER_COMPOSE_STAGING = docker-compose -p reaction-rapide-staging -f docker-compose.yml -f docker-compose.staging.yml
-DOCKER_COMPOSE_PROD = docker-compose -p reaction-rapide-prod -f docker-compose.yml -f docker-compose.prod.yml
-DOCKER_COMPOSE_DEV_NGINX = docker-compose -p reaction-rapide-dev-nginx -f docker-compose.yml -f docker-compose.dev-nginx.yml
+DOCKER_COMPOSE = docker compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
+DOCKER_COMPOSE_BUILD = docker compose -p reaction-rapide-build -f docker-compose.build.yml
+DOCKER_COMPOSE_TEST = docker compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
+DOCKER_COMPOSE_E2E = docker compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
+DOCKER_COMPOSE_STAGING = docker compose -p reaction-rapide-staging -f docker-compose.yml -f docker-compose.staging.yml
+DOCKER_COMPOSE_PROD = docker compose -p reaction-rapide-prod -f docker-compose.yml -f docker-compose.prod.yml
+DOCKER_COMPOSE_DEV_NGINX = docker compose -p reaction-rapide-dev-nginx -f docker-compose.yml -f docker-compose.dev-nginx.yml
 
 install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api yarn install
@@ -21,7 +21,7 @@ install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE) run --rm --no-deps admin yarn install
 	$(DOCKER_COMPOSE) run --rm --no-deps front yarn install
 
-install-staging:
+install-production: ## Install all dependencies in production mode. Usage `make install-prod`.
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api bash -c "yarn config set unsafe-perm true && yarn install --production"
 	$(DOCKER_COMPOSE) run --rm --no-deps api bash -c "yarn config set unsafe-perm true && yarn install --production"
 
@@ -43,13 +43,13 @@ stop-staging:
 logs-staging:
 	$(DOCKER_COMPOSE_STAGING) logs -f
 
-start-prod:
+start-production:
 	$(DOCKER_COMPOSE_PROD) up -d
 
-stop-prod:
+stop-production:
 	$(DOCKER_COMPOSE_PROD) down
 
-logs-prod:
+logs-production:
 	$(DOCKER_COMPOSE_PROD) logs -f
 
 start-nginx: build-front build-admin
@@ -160,7 +160,7 @@ migration-test:
 migration-staging:
 	$(DB_MIGRATE_STAGING) up"
 
-migration-prod:
+migration-production:
 	$(DB_MIGRATE_PROD) up"
 
 migration-e2e:
@@ -172,10 +172,10 @@ populate-db:
 #### DEPLOYMENT ####
 
 deploy-staging:
-	NODE_ENV=staging npx shipit staging deploy
+	NODE_ENV=staging node deploy.js
 
-deploy-prod:
-	NODE_ENV=production npx shipit production deploy
+deploy-production:
+	NODE_ENV=production node deploy.js
 
 build-storybook:
 	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps storybook

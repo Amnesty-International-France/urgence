@@ -21,7 +21,10 @@ if (!config.auth?.user) {
 
 const transporter = createTransport(config);
 transporter.verify((err) => {
-    throw err;
+    if (err) {
+        console.log(`Error with mailing : ${err}`);
+        throw err;
+    }
 });
 
 export const sendMail = async (options: Options) =>
