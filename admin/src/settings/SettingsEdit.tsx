@@ -1,5 +1,6 @@
 import { RichTextInput } from 'ra-input-rich-text';
 import { DateField, Edit, Labeled, required, SimpleForm, TextField } from 'react-admin';
+import dateFormat from '../dateFormat';
 
 export const SettingsEdit = () => (
     <Edit>
@@ -14,10 +15,10 @@ export const SettingsEdit = () => (
                 <TextField source="id" />
             </Labeled>
             <Labeled>
-                <DateField source="created_on" showTime />
+                <DateField source="created_on" options={dateFormat} showTime />
             </Labeled>
             <Labeled>
-                <DateField source="updated_on" showTime />
+                <DateField source="updated_on" options={dateFormat} showTime />
             </Labeled>
             <Labeled>
                 <TextField source="type" />
