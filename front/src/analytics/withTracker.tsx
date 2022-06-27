@@ -63,4 +63,4 @@ const withTracker = (WrappedComponent, options = {}) => {
     return HOC;
 };
 
-export default withTracker);
+export default withTracker;
