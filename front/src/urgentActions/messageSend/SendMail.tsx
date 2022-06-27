@@ -1,12 +1,10 @@
-import React from 'react';
-import { compose } from 'recompose';
 import get from 'lodash.get';
+import { compose } from 'recompose';
 
+import { withSessionData } from '../../DataContext';
+import { isCorrectEmail } from '../../themes/Input';
 import MailTo from '../../themes/MailTo';
 import { templateToBodyText } from '../messageView/templateToBodyText';
-import { isCorrectEmail } from '../../themes/Input';
-import { paramsType } from '../../propTypes';
-import { withSessionData } from '../../DataContext';
 
 import { addCampaignMember, addResponseCount } from '../../services/api';
 

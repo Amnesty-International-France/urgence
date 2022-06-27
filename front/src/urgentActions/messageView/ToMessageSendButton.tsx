@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { withSessionData } from '../../DataContext';
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
 
@@ -14,6 +12,7 @@ const ToMessageSendButton = ({ object, objectExample, setObject, ...rest }: Prop
         if (!object) setObject(objectExample);
     };
 
+    // @ts-expect-error TS(2769): No overload matches this call.
     return <ToUrgentActionPageLink onClick={handleOnClikToMessangeSend} {...rest} />;
 };
 

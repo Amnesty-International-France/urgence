@@ -1,12 +1,11 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 
 import trackEvent from '../../analytics/trackEvent';
-import CopyToClipboardButton from '../CopyToClipboardButton';
 import { black } from '../colors';
+import CopyToClipboardButton from '../CopyToClipboardButton';
 
 const styles = {
     textDecoration: 'none',

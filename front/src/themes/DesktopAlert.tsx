@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
 import { Query } from '@apollo/client/react/components';
 import gql from 'graphql-tag';
+import React, { useEffect } from 'react';
 
 import Alert from './Alert';
 
@@ -30,6 +30,7 @@ const DesktopAlert = () => {
                 if (loading || error || !show) {
                     return null;
                 }
+                // @ts-ignore
                 return <Alert message={data.SettingByType.content} />;
             }}
         </Query>

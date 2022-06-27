@@ -20,8 +20,7 @@ type Props = {
 export const RichText = ({ className, html, style }: Props) => (
     <div
         className={classnames(className, 'rich-text')}
-        // @ts-expect-error TS(2322): Type 'string | undefined' is not assignable to typ... Remove this comment to see the full error message
-        dangerouslySetInnerHTML={{ __html: html }}
+        dangerouslySetInnerHTML={{ __html: html ?? '' }}
         style={{ ...defaultStyle, ...style }}
     />
 );

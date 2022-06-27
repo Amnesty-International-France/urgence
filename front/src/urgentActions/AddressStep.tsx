@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
 import styled from '@emotion/styled';
-import { compose } from 'recompose';
 import classnames from 'classnames';
+import { Component, ReactElement } from 'react';
+import { compose } from 'recompose';
 
 import { withSessionData } from '../DataContext';
-import { withYellowLogo } from '../themes/ThemeContext';
 import Input from '../themes/Input';
+import { withYellowLogo } from '../themes/ThemeContext';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -88,7 +88,7 @@ type Props = {
     setCountry: (...args: any[]) => any;
     setEmail: (...args: any[]) => any;
     className?: string;
-    action?: (...args: any[]) => any;
+    action: (...args: any[]) => ReactElement;
     analyticsCategory?: string;
     step?: string;
 };

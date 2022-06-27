@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from '@emotion/styled';
 
-import { black, yellow, grey, darkGrey } from './colors';
+import { black, darkGrey, grey, yellow } from './colors';
 
 const StyledButton = styled('button')({
     display: 'flex',

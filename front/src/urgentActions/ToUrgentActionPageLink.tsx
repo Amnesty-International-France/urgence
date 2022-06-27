@@ -12,20 +12,18 @@ export const ToUrgentActionPageLink = ({
     analyticsCategory,
     buttonName,
     step,
-    whiteLink
+    whiteLink,
 }: any) => {
     const { slug } = useParams();
     return (
         <Link
             onClick={onClick}
-            // @ts-expect-error TS(2304): Cannot find name 'to'.
-            to={generateUrl(pageName: any, { slug })}
+            to={generateUrl(pageName, { slug })}
             label={label}
             disabled={disabled}
             analyticsCategory={analyticsCategory}
             buttonName={buttonName}
             step={step}
-            // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
             whiteLink={whiteLink}
         />
     );

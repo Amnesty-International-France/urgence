@@ -127,7 +127,7 @@ export const TransitionScreen = ({
     secureUseEffect(() => {
         if (
             !progress ||
-            progress.display == false ||
+            progress.display === false ||
             !progress.objective ||
             !progress.message ||
             !responseCount ||
@@ -189,74 +189,45 @@ export const TransitionScreen = ({
 
     const urlToRedirect = registered ? 'share' : 'register';
     return (
-        // @ts-expect-error TS(2304): Cannot find name 'div'.
         <div className={className}>
-            // @ts-expect-error TS(2749): 'Paper' refers to a value, but is being used as a ...
-            Remove this comment to see the full error message
             <Paper className="paper" elevation={4} square>
-                // @ts-expect-error TS(2304): Cannot find name 'div'.
                 <div className="step">
                     {displayProgress && (
-                        // @ts-expect-error TS(2304): Cannot find name 'div'.
                         <div className="progress">
-                            // @ts-expect-error TS(2304): Cannot find name 'div'.
                             <div className="progressChart">
-                                // @ts-expect-error TS(2749): 'CircularProgressbarWithChildren'
-                                refers to a valu... Remove this comment to see the full error
-                                message
                                 <CircularProgressbarWithChildren
-                                    // @ts-expect-error TS(2304): Cannot find name 'value'.
                                     value={responseCount}
-                                    // @ts-expect-error TS(2304): Cannot find name 'maxValue'.
                                     maxValue={progress.objective}
-                                    // @ts-expect-error TS(2588): Cannot assign to 'styles' because it is a constant... Remove this comment to see the full error message
                                     styles={buildStyles({
-                                        // @ts-expect-error TS(2300): Duplicate identifier '(Missing)'.
                                         pathColor: '#ef8200',
-                                        // @ts-expect-error TS(2300): Duplicate identifier '(Missing)'.
                                         strokeLinecap: 'butt',
                                     })}
                                 >
-                                    // @ts-expect-error TS(2304): Cannot find name 'div'.
                                     <div
                                         className="progressChartContent"
-                                        // @ts-expect-error TS(2304): Cannot find name 'dangerouslySetInnerHTML'.
                                         dangerouslySetInnerHTML={{
                                             __html: textToHtml(formatText(progress.message)),
                                         }}
-                                        // @ts-expect-error TS(2365): Operator '<' cannot be applied to types 'boolean' ... Remove this comment to see the full error message
                                     ></div>
                                 </CircularProgressbarWithChildren>
                             </div>
                         </div>
                     )}
-                    // @ts-expect-error TS(2304): Cannot find name 'h1'.
                     <h1>
-                        // @ts-expect-error TS(2709): Cannot use namespace 'LongText' as a type.
                         <LongText text={title} />
                     </h1>
-                    // @ts-expect-error TS(2552): Cannot find name 'message'. Did you mean
-                    'onmessag... Remove this comment to see the full error message
                     {message && (
-                        // @ts-expect-error TS(2304): Cannot find name 'div'.
                         <div className="text">
-                            // @ts-expect-error TS(2749): 'RichText' refers to a value, but is being
-                            used as... Remove this comment to see the full error message
                             <RichText html={message} />
                         </div>
                     )}
-                    // @ts-expect-error TS(2304): Cannot find name 'interpelationMode'.
                     {interpelationMode === 'rs' && (
-                        // @ts-expect-error TS(2304): Cannot find name 'div'.
                         <div className="social-media">
-                            // @ts-expect-error TS(2709): Cannot use namespace 'LinkTwitter' as a
-                            type.
                             <LinkTwitter text={getTwitterText()} action={addTwitterMember} />
                         </div>
                     )}
                 </div>
             </Paper>
-            // @ts-expect-error TS(2304): Cannot find name 'interpelationMode'.
             {interpelationMode === 'email' && <div className="actions">{actions()}</div>}
         </div>
     );

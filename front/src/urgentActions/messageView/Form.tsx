@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 
 import Input from '../../themes/Input';
 import RichText from '../../themes/RichText';

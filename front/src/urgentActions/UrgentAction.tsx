@@ -20,7 +20,7 @@ import Register from './register/Register';
 import RegisterButton from './register/RegisterButton';
 import ShareStep from './share/ShareStep';
 import Story from './story/Story';
-import ThankStep from './ThankStep';
+import ThankStep, { ThanksType } from './ThankStep';
 
 const query = gql`
     query urgentActionBySlug($slug: String!) {
@@ -161,7 +161,7 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
         const responseCount = get(data, 'UrgentAction.response_count');
         const id = get(data, 'UrgentAction.id');
         return (
-            <Story
+            <Story // @ts-ignore
                 story={story}
                 step={step}
                 callToAction={callToAction}
@@ -179,7 +179,7 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
         const buttonView = get(data, 'UrgentAction.message.button_view', 'Suivant');
 
         return (
-            <MessageView
+            <MessageView // @ts-ignore
                 text={text}
                 objectIndication={objectIndication}
                 objectExample={objectExample}
@@ -209,14 +209,14 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
         const gdprMessage = get(data, 'GdprMessage.content');
 
         return (
-            <MessageSend
+            <MessageSend // @ts-ignore
                 text={text}
                 messageTemplate={messageTemplate}
                 gdprMessage={gdprMessage}
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
-                    <SendMail
+                    <SendMail // @ts-ignore
                         label={buttonSend}
                         step={step}
                         recipient={recipient}
@@ -238,7 +238,7 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
         const emailThank = get(data, 'UrgentAction.email_thank');
 
         return (
-            <ShareStep
+            <ShareStep // @ts-ignore
                 slug={slug}
                 step={step}
                 data={emailThank}
@@ -251,7 +251,7 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
         const register = get(data, 'UrgentAction.register');
 
         return (
-            <Register
+            <Register // @ts-ignore
                 step={step}
                 data={register}
                 gdprRegister={get(data, 'GdprRegister.content')}
@@ -271,11 +271,11 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
     }
 
     if (step === 'thanks-end') {
-        const thankEnd = get(data, 'UrgentAction.end_thank');
+        const thankEnd = get(data, 'UrgentAction.end_thank') as ThanksType | undefined;
         const emailThank = get(data, 'UrgentAction.email_thank');
 
         return (
-            <ThankStep
+            <ThankStep // @ts-ignore
                 data={thankEnd}
                 slug={slug}
                 step={step}

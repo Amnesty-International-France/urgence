@@ -1,9 +1,8 @@
-import React from 'react';
 import get from 'lodash.get';
 
-import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
 import { withSessionData } from '../../DataContext';
 import { registerContact } from '../../services/api';
+import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
 
 type OwnProps = {
     auId: string;

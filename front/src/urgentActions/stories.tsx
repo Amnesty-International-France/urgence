@@ -56,21 +56,25 @@ storiesOf('Story Step', module)
     ))
     .add('Top Picture, Yellow Background', () => (
         <div style={{ height: '100vh' }}>
+            {/* @ts-ignore */}
             <StoryStep {...defaultStoryProps} />
         </div>
     ))
     .add('Top Picture, Pink Background', () => (
         <div style={{ height: '100vh' }}>
+            {/* @ts-ignore */}
             <StoryStep {...defaultStoryProps} />
         </div>
     ))
     .add('No Picture, Yellow Background', () => (
         <div style={{ height: '100vh' }}>
+            {/* @ts-ignore */}
             <StoryStep {...defaultStoryProps} />
         </div>
     ))
     .add('Bottom Picture, Black Background', () => (
         <div style={{ height: '100vh' }}>
+            {/* @ts-ignore */}
             <StoryStep {...defaultStoryProps} />
         </div>
     ));
@@ -171,7 +175,10 @@ storiesOf('Thanks', module)
             <ThemeProvider>
                 <Div100Vh>
                     <AppLogo />
-                    <ThankStep data={data} />
+                    <ThankStep
+                        // @ts-ignore guillaumep
+                        data={data}
+                    />
                 </Div100Vh>
             </ThemeProvider>
         );
@@ -186,7 +193,10 @@ storiesOf('Thanks', module)
             <ThemeProvider>
                 <Div100Vh>
                     <AppLogo />
-                    <ThankStep data={data} />
+                    <ThankStep
+                        // @ts-ignore guillaumep
+                        data={data}
+                    />
                 </Div100Vh>
             </ThemeProvider>
         );

@@ -25,6 +25,7 @@ describe('MessageView', () => {
     it('should display a 404 message if there is no message template', () => {
         const test = (messageTemplate: any, shouldBeErrored: any) => {
             const props = { ...defaultProps, messageTemplate };
+            // @ts-ignore
             const wrapper = shallow(<MessageView {...props} />);
 
             const error = wrapper.find('.error');
@@ -38,6 +39,7 @@ describe('MessageView', () => {
     });
 
     it('should display a <LetterView />', () => {
+        // @ts-ignore
         const wrapper = shallow(<MessageView {...defaultProps} />);
 
         const letter = wrapper.find(LetterView);
@@ -45,6 +47,7 @@ describe('MessageView', () => {
     });
 
     it('should display a <Form />', () => {
+        // @ts-ignore
         const wrapper = shallow(<MessageView {...defaultProps} />);
 
         const form = wrapper.find(Form);
@@ -52,6 +55,7 @@ describe('MessageView', () => {
     });
 
     it('should display a <RichText />', () => {
+        // @ts-ignore
         const wrapper = shallow(<MessageView {...defaultProps} />);
 
         const text = wrapper.find(RichText);

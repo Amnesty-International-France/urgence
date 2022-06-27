@@ -33,6 +33,7 @@ describe('<Story />', () => {
     it('should display a 404 message if story has no configured step', () => {
         const test = (story: any) => {
             const props = { ...defaultProps, story };
+            // @ts-ignore guillaumep
             const wrapper = shallow(<Story {...props} />);
 
             const redirect = wrapper.find(Redirect);
@@ -59,6 +60,7 @@ describe('<Story />', () => {
                 },
             },
         };
+        // @ts-ignore guillaumep
         const wrapper = shallow(<Story {...props} />);
 
         const redirect = wrapper.find(Redirect);
@@ -75,9 +77,10 @@ describe('<Story />', () => {
                 { ...defaultStep, id: '3', content: 'World' },
             ],
         };
-
+        // @ts-ignore guillaumep
         const wrapper = shallow(<Story {...props} />);
         const carousel = wrapper.find(Carousel);
+        // @ts-ignore guillaumep
         const renderProp = carousel.prop('children')();
         const children = renderProp.props.children;
 
@@ -100,10 +103,12 @@ describe('<Story />', () => {
                 },
             };
 
+            // @ts-ignore guillaumep
             const wrapper = shallow(<Story {...props} />);
             const carousel = wrapper.find(Carousel);
             const afterChange = carousel.prop('afterChange');
 
+            // @ts-ignore guillaumep
             afterChange(1);
 
             expect(props.context.changeLogoColor).toHaveBeenCalledWith({
@@ -125,11 +130,12 @@ describe('<Story />', () => {
                 },
             };
 
+            // @ts-ignore guillaumep
             const wrapper = shallow(<Story {...props} />);
             const carousel = wrapper.find(Carousel);
             const afterChange = carousel.prop('afterChange');
 
-            afterChange(4);
+            afterChange && afterChange(4);
 
             expect(props.context.changeLogoColor).toHaveBeenCalledWith({
                 logoColor: white,

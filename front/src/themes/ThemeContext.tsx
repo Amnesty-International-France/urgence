@@ -1,8 +1,8 @@
-import React, { createContext, Component } from 'react';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
-import { lifecycle, compose } from 'recompose';
+import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { Component, createContext } from 'react';
+import { compose, lifecycle } from 'recompose';
 
-import { black, white, yellow, lightGrey } from './colors';
+import { black, lightGrey, white, yellow } from './colors';
 
 // @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
 const { Consumer, Provider } = createContext();
@@ -59,6 +59,7 @@ export const withLightGreyBackground = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
+            // @ts-ignore guillaumep
             this.props.context.changeBackgroundColor({ backgroundColor: lightGrey });
         },
     }),
@@ -68,6 +69,7 @@ export const withYellowBackground = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
+            // @ts-ignore guillaumep
             this.props.context.changeBackgroundColor({ backgroundColor: yellow });
         },
     }),
@@ -77,6 +79,7 @@ export const withBlackLogo = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
+            // @ts-ignore guillaumep
             this.props.context.changeLogoColor({ logoColor: white, logoBackgroundColor: black });
         },
     }),
@@ -86,6 +89,7 @@ export const withYellowLogo = compose(
     withThemeContext,
     lifecycle({
         componentDidMount() {
+            // @ts-ignore guillaumep
             this.props.context.changeLogoColor({ logoColor: black, logoBackgroundColor: yellow });
         },
     }),

@@ -1,5 +1,5 @@
 import React from 'react';
-import { black, yellow, grey, darkGrey } from './colors';
+import { black, darkGrey, grey, yellow } from './colors';
 
 import styled from '@emotion/styled';
 

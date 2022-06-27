@@ -1,4 +1,3 @@
-import React from 'react';
 import { faTelegram } from '@fortawesome/free-brands-svg-icons';
 
 import ShareLink from './ShareLink';

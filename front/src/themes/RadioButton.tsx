@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
 import styled from '@emotion/styled';
 import classnames from 'classnames';
-import { paramsType } from '../propTypes';
+import { Component } from 'react';
 import trackEvent from '../analytics/trackEvent';
 import withRouter from '../withRouter';
 
@@ -125,7 +124,7 @@ export class RadioButton extends Component<Props, State> {
                                     );
                                 }}
                             />
-                            <label htmlFor={index}>{item}</label>
+                            <label htmlFor={index.toString()}>{item}</label>
                         </div>
                     );
                 })}

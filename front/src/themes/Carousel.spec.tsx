@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import Swiper from 'swiper/js/swiper.js';
+import Swiper from 'swiper';
 import { Carousel } from './Carousel';
 
 jest.mock('swiper');
@@ -18,6 +18,7 @@ describe('<Carousel />', () => {
     };
 
     beforeEach(() => {
+        // @ts-ignore guillaumep
         Swiper.mockImplementation(() => swiperInstance);
     });
 

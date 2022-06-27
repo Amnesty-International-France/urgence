@@ -33,7 +33,6 @@ describe('<AddressStep />', () => {
             action: jest.fn(),
         };
 
-        // @ts-expect-error TS(2352): Conversion of type '{ action: jest.Mock<any, any>;... Remove this comment to see the full error message
         shallow(<AddressStep {...props} />);
         expect(props.action).toHaveBeenCalledWith(false);
     });
@@ -50,7 +49,7 @@ describe('<AddressStep />', () => {
             email: null,
         };
 
-        // @ts-expect-error TS(2352): Conversion of type '{ action: jest.Mock<any, any>;... Remove this comment to see the full error message
+        // @ts-expect-error TS(2352)
         shallow(<AddressStep {...props} />);
         expect(props.action).toHaveBeenCalledWith(true);
     });
@@ -83,8 +82,9 @@ describe('<AddressStep />', () => {
         const input = wrapper.find('.addressMain');
 
         expect(input.prop('value')).toBe('addressMain value');
+        // @ts-ignore guillaumep
         expect(input.prop('onChange')).toBe(wrapper.instance().setAddressMain);
-
+        // @ts-ignore guillaumep
         wrapper.instance().setAddressMain({ target: { value: 'new value' } });
         expect(props.setAddressMain).toBeCalledWith('new value');
     });
@@ -99,9 +99,9 @@ describe('<AddressStep />', () => {
         const wrapper = shallow(<AddressStep {...props} />);
         const input = wrapper.find('.addressMore');
 
-        expect(input.prop('value')).toBe('addressMore value');
+        expect(input.prop('value')).toBe('addressMore value'); // @ts-ignore guillaumep
         expect(input.prop('onChange')).toBe(wrapper.instance().setAddressMore);
-
+        // @ts-ignore guillaumep
         wrapper.instance().setAddressMore({ target: { value: 'new value' } });
         expect(props.setAddressMore).toBeCalledWith('new value');
     });
@@ -112,13 +112,13 @@ describe('<AddressStep />', () => {
             setPostalCode: jest.fn(),
         };
 
-        // @ts-expect-error TS(2352): Conversion of type '{ setPostalCode: jest.Mock<any... Remove this comment to see the full error message
+        // @ts-ignore guillaumep
         const wrapper = shallow(<AddressStep {...props} />);
         const input = wrapper.find('.postalCode');
 
-        expect(input.prop('value')).toBe('postalCode value');
+        expect(input.prop('value')).toBe('postalCode value'); // @ts-ignore guillaumep
         expect(input.prop('onChange')).toBe(wrapper.instance().setPostalCode);
-
+        // @ts-ignore guillaumep
         wrapper.instance().setPostalCode({ target: { value: 'new value' } });
         expect(props.setPostalCode).toBeCalledWith('new value');
     });
@@ -133,9 +133,10 @@ describe('<AddressStep />', () => {
         const wrapper = shallow(<AddressStep {...props} />);
         const input = wrapper.find('.city');
 
-        expect(input.prop('value')).toBe('city value');
+        expect(input.prop('value')).toBe('city value'); // @ts-ignore guillaumep
         expect(input.prop('onChange')).toBe(wrapper.instance().setCity);
 
+        // @ts-ignore guillaumep
         wrapper.instance().setCity({ target: { value: 'new value' } });
         expect(props.setCity).toBeCalledWith('new value');
     });
@@ -150,9 +151,9 @@ describe('<AddressStep />', () => {
         const wrapper = shallow(<AddressStep {...props} />);
         const input = wrapper.find('.country');
 
-        expect(input.prop('value')).toBe('country value');
+        expect(input.prop('value')).toBe('country value'); // @ts-ignore guillaumep
         expect(input.prop('onChange')).toBe(wrapper.instance().setCountry);
-
+        // @ts-ignore guillaumep
         wrapper.instance().setCountry({ target: { value: 'new value' } });
         expect(props.setCountry).toBeCalledWith('new value');
     });
@@ -167,9 +168,9 @@ describe('<AddressStep />', () => {
         const wrapper = shallow(<AddressStep {...props} />);
         const input = wrapper.find('.email');
 
-        expect(input.prop('value')).toBe('email value');
+        expect(input.prop('value')).toBe('email value'); // @ts-ignore guillaumep
         expect(input.prop('onChange')).toBe(wrapper.instance().setEmail);
-
+        // @ts-ignore guillaumep
         wrapper.instance().setEmail({ target: { value: 'new value' } });
         expect(props.setEmail).toBeCalledWith('new value');
     });

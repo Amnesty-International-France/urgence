@@ -111,4 +111,5 @@ export const MessageSend = ({
 // @ts-expect-error TS(2769): No overload matches this call.
 const WithStylesMessageSend = styled(MessageSend)(styles);
 
+// @ts-ignore guillaumep
 export default compose(withYellowLogo, withSessionData)(WithStylesMessageSend);

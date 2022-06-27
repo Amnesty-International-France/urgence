@@ -1,24 +1,23 @@
-import React, { Component, Fragment } from 'react';
 import styled from '@emotion/styled';
+import { Component, Fragment } from 'react';
 import { compose } from 'recompose';
+import ANALYTICS_CATEGORIES from '../../analytics/categories';
 import Act from '../Act';
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
-import ANALYTICS_CATEGORIES from '../../analytics/categories';
 
-import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 
 import { black, white, yellow } from '../../themes/colors';
 import { withThemeContext } from '../../themes/ThemeContext';
-import { StoryStepPropType, paramsType } from '../../propTypes';
 
-import Carousel from '../../themes/Carousel';
+import { Navigate, NavigateFunction } from 'react-router';
 import generateUrl from '../../services/generateUrl';
-import StorySlide from './StorySlide';
-import StoryCover from './StoryCover';
-import StoryStep from './StoryStep';
-import { Navigate } from 'react-router';
+import Carousel from '../../themes/Carousel';
 import withRouter from '../../withRouter';
+import StoryCover from './StoryCover';
+import StorySlide from './StorySlide';
+import StoryStep from './StoryStep';
 
 const styles = {
     '& .icon': {
@@ -37,7 +36,7 @@ type StoryProps = {
         changeLogoColor: (...args: any[]) => any;
     };
     story?: any[]; // TODO: PropTypes.shape(StoryStepPropType)
-    navigate?: (...args: any[]) => any;
+    navigate: NavigateFunction;
     // @ts-expect-error TS(2749): 'paramsType' refers to a value, but is being used ... Remove this comment to see the full error message
     params?: paramsType;
     callToAction?: any;
@@ -71,7 +70,6 @@ export class Story extends Component<StoryProps> {
         const { context, params, navigate } = this.props;
 
         context.changeLogoColor(getLogoColorForStoryStep('act'));
-        // @ts-expect-error TS(2722): Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
         navigate(generateUrl('act', params));
     };
 
@@ -159,4 +157,5 @@ export class Story extends Component<StoryProps> {
 
 export const WithStylesStory = styled(Story)(styles);
 
+// @ts-ignore guillaumep
 export default compose(withThemeContext, withRouter)(WithStylesStory);

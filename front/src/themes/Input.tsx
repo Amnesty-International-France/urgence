@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
 import styled from '@emotion/styled';
+import { Component } from 'react';
 
 import { TextField } from '@material-ui/core';
-import { paramsType } from '../propTypes';
 
-import CheckAdornment from './CheckAdornment';
 import trackEvent from '../analytics/trackEvent';
 import withRouter from '../withRouter';
+import CheckAdornment from './CheckAdornment';
 
 const styles = {
     '& .textfield': {
@@ -98,6 +97,7 @@ export class Input extends Component<InputProps1, InputState1> {
                     error={showError && error}
                     helperText={error ? helperText : ''}
                     InputProps={{
+                        // @ts-ignore
                         endAdornment: <CheckAdornment isValid={showValid} />,
                     }}
                     onChange={(event) => {

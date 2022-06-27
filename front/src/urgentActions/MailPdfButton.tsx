@@ -79,4 +79,5 @@ export class MailPdfButton extends Component<Props> {
     }
 }
 
+// @ts-ignore
 export default compose(withSessionData)(MailPdfButton);

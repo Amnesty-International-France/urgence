@@ -1,5 +1,4 @@
 import get from 'lodash.get';
-import React from 'react';
 
 import TransitionScreen from '../themes/TransitionScreen';
 
@@ -16,7 +15,7 @@ type Props = OwnProps & typeof Act.defaultProps;
 
 // @ts-expect-error TS(7022): 'Act' implicitly has type 'any' because it does no... Remove this comment to see the full error message
 const Act = ({ data, actions }: Props) => (
-    <TransitionScreen
+    <TransitionScreen // @ts-ignore guillaumep
         className="act"
         actions={actions}
         title={get(data, 'title')}

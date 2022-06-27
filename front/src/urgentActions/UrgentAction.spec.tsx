@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-// @ts-expect-error TS(2305): Module '"react-router-dom"' has no exported member... Remove this comment to see the full error message
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router';
 
 import { renderUrgentActionWithData, UrgentAction } from './UrgentAction';
 import Story from './story/Story';
@@ -60,7 +59,7 @@ describe('<UrgentActionWithData />', () => {
         const UrgentActionWithData = renderUrgentActionWithData('on-the-way', 'story');
         const wrapper = shallow(<UrgentActionWithData {...props} />);
 
-        const redirect = wrapper.find(Redirect);
+        const redirect = wrapper.find(Navigate);
         expect(redirect.length).toEqual(1);
         expect(redirect.prop('to')).toEqual('/error');
     });
@@ -126,6 +125,7 @@ describe('<UrgentAction />', () => {
                     },
                 },
             };
+            // @ts-ignore
             const renderedComponent = shallow(<UrgentAction {...props} />);
             expect(renderedComponent.find(Story).length).toBe(1);
 
@@ -170,8 +170,11 @@ describe('<UrgentAction />', () => {
             expect(message.prop('objectIndication')).toBe('object indication');
             expect(message.prop('objectExample')).toBe('object example');
             expect(message.prop('text')).toBe('text view');
+            // @ts-ignore
             expect(message.prop('messageTemplate').length).toBe(2);
+            // @ts-ignore
             expect(message.prop('messageTemplate')[0].value).toBe('first message');
+            // @ts-ignore
             expect(message.prop('messageTemplate')[1].value).toBe('second message');
         });
 
@@ -204,7 +207,7 @@ describe('<UrgentAction />', () => {
             const message = renderedComponent.find(MessageView);
             expect(message.length).toBe(1);
 
-            const sendMail = message.prop('action');
+            const sendMail = message.prop('action') as any;
             expect(sendMail.props.label).toBe('button view');
         });
     });
@@ -277,7 +280,7 @@ describe('<UrgentAction />', () => {
             const message = renderedComponent.find(MessageSend);
             expect(message.length).toBe(1);
 
-            const sendMail = message.prop('action');
+            const sendMail = message.prop('action') as any;
             expect(sendMail.props.label).toBe('button send');
             expect(sendMail.props.recipient).toEqual({ mail: 'mail' });
         });
@@ -350,7 +353,7 @@ describe('<UrgentAction />', () => {
             const register = renderedComponent.find(Register);
             expect(register.length).toBe(1);
 
-            const data = register.prop('data');
+            const data = register.prop('data') as any;
             expect(data.title).toBe('Subscribe to Urgent Action Network!');
             expect(data.text).toBe('My Message');
         });
@@ -418,7 +421,7 @@ describe('<UrgentAction />', () => {
             const share = renderedComponent.find(ShareStep);
             expect(share.length).toBe(1);
 
-            const data = share.prop('data');
+            const data = share.prop('data') as any;
             expect(data.title).toBe('Thanks!');
             expect(data.text).toBe('My Message');
         });
@@ -450,7 +453,7 @@ describe('<UrgentAction />', () => {
             const thanks = renderedComponent.find(ThankStep);
             expect(thanks.length).toBe(1);
 
-            const data = thanks.prop('data');
+            const data = thanks.prop('data') as any;
             expect(data.title).toBe('Merci de votre engagement !');
             expect(data.text).toBe("N'oubliez pas d'envoyer la lettre !");
         });

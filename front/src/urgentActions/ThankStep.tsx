@@ -31,12 +31,16 @@ const styles = {
     },
 };
 
+export type ThanksType =
+    | {
+          title: string;
+          text: string;
+      }
+    | undefined;
+
 type OwnProps = {
     className: string;
-    data?: {
-        title: string;
-        text: string;
-    };
+    data?: ThanksType;
     slug: string;
     step?: string;
     dataShare?: {

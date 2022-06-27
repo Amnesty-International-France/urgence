@@ -1,17 +1,17 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import { Fragment, ReactElement, useEffect, useState } from 'react';
 
-import classnames from 'classnames';
 import styled from '@emotion/styled';
+import classnames from 'classnames';
+import Swiper from 'swiper';
 import IconButton from './IconButton';
-import Swiper from 'swiper/js/swiper.js';
 
-import 'swiper/css/swiper.css';
+import 'swiper/css';
 
-import { black } from './colors';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import MobileDetect from 'mobile-detect';
 import { red } from '@material-ui/core/colors';
+import MobileDetect from 'mobile-detect';
+import { black } from './colors';
 
 const styles = {
     height: '100%',
@@ -41,7 +41,7 @@ type Props = {
     afterChange?: (...args: any[]) => any;
     afterLastChange?: (...args: any[]) => any;
     className?: string;
-    children?: (...args: any[]) => any;
+    children: (...args: any[]) => ReactElement;
     current?: number;
     initialSlide?: number;
     total?: number;
@@ -103,6 +103,7 @@ export const Carousel = ({
 
     const initSwiper = () => {
         let swiper: any;
+        // @ts-ignore TODO guillaumep
         swiper = new Swiper(container, {
             initialSlide,
             direction: 'horizontal',
@@ -129,7 +130,11 @@ export const Carousel = ({
 
     return (
         <div className={className}>
-            <div className="swiper-container" ref={setContainer}>
+            <div
+                className="swiper"
+                //@ts-ignore TODO
+                ref={setContainer}
+            >
                 <div className="swiper-wrapper">{children()}</div>
             </div>
 

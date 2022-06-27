@@ -1,16 +1,16 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import { compose } from 'recompose';
-import classnames from 'classnames';
 import Paper from '@material-ui/core/Paper';
+import classnames from 'classnames';
+import React from 'react';
+import { compose } from 'recompose';
 
-import { white, black } from '../../themes/colors';
+import { black, white } from '../../themes/colors';
 
+import { withSessionData } from '../../DataContext';
+import RichText from '../../themes/RichText';
+import { withYellowLogo } from '../../themes/ThemeContext';
 import Form from './Form';
 import LetterView from './LetterView';
-import { withYellowLogo } from '../../themes/ThemeContext';
-import RichText from '../../themes/RichText';
-import { withSessionData } from '../../DataContext';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -152,5 +152,5 @@ export const MessageView = ({ className, text, messageTemplate, action, ...props
 
 // @ts-expect-error TS(2769): No overload matches this call.
 const WithStylesMessageView = styled(MessageView)(styles);
-
+// @ts-expect-error TS(2769): No overload matches this call.
 export default compose(withYellowLogo, withSessionData)(WithStylesMessageView);

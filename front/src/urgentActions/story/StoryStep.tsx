@@ -1,10 +1,8 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import Paper from '@material-ui/core/Paper';
 
-import RichText from '../../themes/RichText';
-import { StoryStepPropType } from '../../propTypes';
 import { black, white } from '../../themes/colors';
+import RichText from '../../themes/RichText';
 
 const styles = {
     position: 'relative',

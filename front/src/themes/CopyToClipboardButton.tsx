@@ -19,7 +19,7 @@ type CopyToClipboardProps = {
 
 const CopyToClipboard = ({ children, textToCopy, ...props }: CopyToClipboardProps) => {
     if (!textToCopy) {
-        return;
+        return null;
     }
 
     const [copied, setCopied] = secureUseState(false);

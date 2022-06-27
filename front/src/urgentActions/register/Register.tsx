@@ -1,20 +1,19 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import Paper from '@material-ui/core/Paper';
+import classnames from 'classnames';
 import get from 'lodash.get';
 import { compose } from 'recompose';
-import classnames from 'classnames';
-import Paper from '@material-ui/core/Paper';
 
-import RichText from '../../themes/RichText';
-import LongText from '../../themes/LongText';
+import { black, white } from '../../themes/colors';
 import { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
-import { white, black } from '../../themes/colors';
-import { withYellowLogo, withYellowBackground } from '../../themes/ThemeContext';
+import LongText from '../../themes/LongText';
+import RichText from '../../themes/RichText';
+import { withYellowBackground, withYellowLogo } from '../../themes/ThemeContext';
 
 import { withSessionData } from '../../DataContext';
 
-import Form from './Form';
 import LegalInformation from '../LegalInformation';
+import Form from './Form';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -142,4 +141,5 @@ export default compose(
     withYellowLogo,
     withYellowBackground,
     withSessionData,
+    // @ts-ignore
 )(WithStylesRegisterActivist);

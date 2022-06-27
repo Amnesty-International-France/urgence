@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 
 import Input, { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';

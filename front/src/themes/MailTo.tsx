@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
-import React, { Component } from 'react';
-import MobileDetect from 'mobile-detect';
 import styled from '@emotion/styled';
 import classnames from 'classnames';
-import { paramsType } from '../propTypes';
+import MobileDetect from 'mobile-detect';
+import { Component } from 'react';
 import trackEvent from '../analytics/trackEvent';
 import withRouter from '../withRouter';
 import { styles } from './Link';
@@ -81,7 +80,6 @@ export class MailTo extends Component<Props> {
             className,
             analyticsCategory,
             step,
-            // @ts-expect-error TS(2339): Property 'params' does not exist on type 'Readonly... Remove this comment to see the full error message
             params: { slug },
         } = this.props;
 

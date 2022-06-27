@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classnames from 'classnames';
 import IconButton from '@material-ui/core/IconButton';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import classnames from 'classnames';
+import React, { Fragment } from 'react';
 
 import trackEvent from '../../analytics/trackEvent';
 import { secureUseEffect } from '../../hooks/secureHooks';

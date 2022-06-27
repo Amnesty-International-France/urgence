@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import classnames from 'classnames';
-import { paramsType } from '../propTypes';
+import React, { Component } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import trackEvent from '../analytics/trackEvent';
 import withRouter from '../withRouter';
-import { black, white, grey, darkGrey } from './colors';
+import { black, darkGrey, grey, white } from './colors';
 
 export const styles = {
     display: 'flex',
