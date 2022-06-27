@@ -8,11 +8,11 @@ import RichText from '../themes/RichText';
 
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { useNavigate, useParams } from 'react-router';
 import { compose } from 'recompose';
 import permanentData from '../data/permanentData';
 import { withSessionData } from '../DataContext';
 import { secureUseEffect, secureUseState } from '../hooks/secureHooks';
-import { paramsType } from '../propTypes';
 import { addCampaignMemberTwitter, addResponseCount } from '../services/api';
 import generateUrl from '../services/generateUrl';
 import LinkTwitter from './Sharing/LinkTwitter';
@@ -111,10 +111,8 @@ export const TransitionScreen = ({
     message,
     progress,
     responseCount,
-    history,
     interpelationMode,
     twitterAction,
-    match: { params: slug },
     auId,
 }) => {
     const [displayProgress, setDisplayProgress] = secureUseState(false);
@@ -123,6 +121,8 @@ export const TransitionScreen = ({
     const email = permanentData.getEmail();
     const civility = permanentData.getCivility();
     const phone = permanentData.getPhone();
+    const { slug } = useParams();
+    const navigate = useNavigate();
 
     secureUseEffect(() => {
         if (
@@ -181,7 +181,7 @@ export const TransitionScreen = ({
                 })
                 .catch(() => {});
         }
-        history.push(generateUrl(urlToRedirect, slug));
+        navigate(generateUrl(urlToRedirect, slug));
     };
 
     const urlToRedirect = registered ? 'share' : 'register';
@@ -240,8 +240,6 @@ TransitionScreen.propTypes = {
     progress: PropTypes.any,
     responseCount: PropTypes.number,
     interpelationMode: PropTypes.string,
-    history: PropTypes.any,
-    match: paramsType,
     registered: PropTypes.any,
     twitterAction: PropTypes.shape({
         title: PropTypes.string,
@@ -249,7 +247,7 @@ TransitionScreen.propTypes = {
         hashtags: PropTypes.string,
         url: PropTypes.string,
     }),
-    auId: PropTypes.number,
+    auId: PropTypes.string,
 };
 
 TransitionScreen.defaultProps = {

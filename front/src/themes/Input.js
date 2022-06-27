@@ -7,6 +7,7 @@ import { paramsType } from '../propTypes';
 
 import CheckAdornment from './CheckAdornment';
 import trackEvent from '../analytics/trackEvent';
+import withRouter from '../withRouter';
 
 const styles = {
     '& .textfield': {
@@ -57,16 +58,15 @@ export class Input extends Component {
             error,
             helperText,
             label,
-            match: { params: slug },
             noValidate,
             onChange,
             staticContext,
             step,
+            params: { slug },
             value,
             ...otherProps
         } = this.props;
         const { showError, showValid } = this.state;
-
         if (!noValidate) {
             this.showValidState(!error);
         }
@@ -114,7 +114,7 @@ Input.propTypes = {
     error: PropTypes.bool,
     helperText: PropTypes.string,
     label: PropTypes.string.isRequired,
-    match: paramsType,
+    params: paramsType,
     noValidate: PropTypes.bool,
     onChange: PropTypes.func,
     staticContext: PropTypes.object,
@@ -122,4 +122,4 @@ Input.propTypes = {
     value: PropTypes.string.isRequired,
 };
 
-export default styled(Input)(styles);
+export default withRouter(styled(Input)(styles));

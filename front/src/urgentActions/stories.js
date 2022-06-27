@@ -83,12 +83,10 @@ storiesOf('Story', module)
                 }}
                 loading={false}
                 history={history}
-                match={{
-                    params: {
-                        id: '4ea88eef-18c7-47d7-90ab-cd160909268f',
-                        slug: 'you-are-my-only-hope',
-                        page: 0,
-                    },
+                params={{
+                    id: '4ea88eef-18c7-47d7-90ab-cd160909268f',
+                    slug: 'you-are-my-only-hope',
+                    page: 0,
                 }}
                 story={[
                     {

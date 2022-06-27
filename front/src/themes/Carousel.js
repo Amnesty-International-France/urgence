@@ -4,14 +4,15 @@ import classnames from 'classnames';
 import styled from '@emotion/styled';
 import IconButton from './IconButton';
 import PropTypes from 'prop-types';
-import Swiper from 'swiper';
+import Swiper from 'swiper/js/swiper.js';
 
-//import 'swiper/css/swiper.css'; Needed ?
+import 'swiper/css/swiper.css';
 
 import { black } from './colors';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MobileDetect from 'mobile-detect';
+import { red } from '@material-ui/core/colors';
 
 const styles = {
     height: '100%',
@@ -24,6 +25,7 @@ const styles = {
         padding: '5px',
         height: '60px',
         zIndex: '100',
+        backgroundColor: red,
         '.right': {
             right: '20px',
         },
@@ -89,7 +91,8 @@ export const Carousel = ({
     }, [container]);
 
     const initSwiper = () => {
-        const swiper = new Swiper(container, {
+        let swiper;
+        swiper = new Swiper(container, {
             initialSlide,
             direction: 'horizontal',
             on: {

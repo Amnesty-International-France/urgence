@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import classnames from 'classnames';
 import { paramsType } from '../propTypes';
 import trackEvent from '../analytics/trackEvent';
+import withRouter from '../withRouter';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic',
@@ -54,11 +55,10 @@ export class RadioButton extends Component {
             onChange,
             error,
             analyticsCategory,
-            match: {
-                params: { slug },
-            },
+            params: { slug },
             step,
         } = this.props;
+
         const { showError } = this.state;
         return (
             <div className={className}>
@@ -128,7 +128,7 @@ RadioButton.propTypes = {
     choices: PropTypes.array.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
-    match: paramsType,
+    params: paramsType,
 };
 
-export default styled(RadioButton)(styles);
+export default withRouter(styled(RadioButton)(styles));

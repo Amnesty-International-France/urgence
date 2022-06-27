@@ -68,10 +68,9 @@ export class Link extends Component {
             analyticsCategory,
             buttonName,
             step,
-            params,
+            params: { slug },
             whiteLink,
         } = this.props;
-        const slug = params.slug;
 
         return (
             <RouterLink

@@ -19,6 +19,7 @@ import StorySlide from './StorySlide';
 import StoryCover from './StoryCover';
 import StoryStep from './StoryStep';
 import { Navigate } from 'react-router';
+import withRouter from '../../withRouter';
 
 const styles = {
     '& .icon': {
@@ -34,10 +35,8 @@ export class Story extends Component {
     afterChange = (page) => {
         const {
             context,
-            match: {
-                params: { slug, page: currentPage },
-            },
-            history,
+            params: { slug, page: currentPage },
+            navigate,
             story,
         } = this.props;
 
@@ -51,26 +50,20 @@ export class Story extends Component {
         }
 
         context.changeLogoColor(getLogoColorForStoryStep('story'));
-        history.push(generateUrl('story', { slug, page }));
+        navigate(generateUrl('story', { slug, page }));
     };
 
     afterLastChange = () => {
-        const {
-            context,
-            match: { params },
-            history,
-        } = this.props;
+        const { context, params, navigate } = this.props;
 
         context.changeLogoColor(getLogoColorForStoryStep('act'));
-        history.push(generateUrl('act', params));
+        navigate(generateUrl('act', params));
     };
 
     componentDidMount() {
         const {
             context,
-            match: {
-                params: { step },
-            },
+            params: { step },
         } = this.props;
 
         context.changeLogoColor(getLogoColorForStoryStep(step));
@@ -82,9 +75,7 @@ export class Story extends Component {
             story,
             callToAction,
             responseCount,
-            match: {
-                params: { page },
-            },
+            params: { page },
             auId,
         } = this.props;
 
@@ -157,15 +148,13 @@ Story.propTypes = {
         changeLogoColor: PropTypes.func.isRequired,
     }).isRequired,
     story: PropTypes.arrayOf(PropTypes.shape(StoryStepPropType)),
-    history: PropTypes.shape({
-        push: PropTypes.func.isRequired,
-    }).isRequired,
-    match: paramsType,
+    navigate: PropTypes.func,
+    params: paramsType,
     callToAction: PropTypes.object,
     responseCount: PropTypes.number,
-    auId: PropTypes.number,
+    auId: PropTypes.string,
 };
 
 export const WithStylesStory = styled(Story)(styles);
 
-export default compose(withThemeContext)(WithStylesStory);
+export default compose(withThemeContext, withRouter)(WithStylesStory);

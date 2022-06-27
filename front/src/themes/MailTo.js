@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import classnames from 'classnames';
 import { paramsType } from '../propTypes';
 import trackEvent from '../analytics/trackEvent';
-
+import withRouter from '../withRouter';
 import { styles } from './Link';
 
 export const buildMailDest = (recipient, subject, body) => {
@@ -30,9 +30,7 @@ export class MailTo extends Component {
             disabled,
             analyticsCategory,
             step,
-            match: {
-                params: { slug },
-            },
+            params: { slug },
         } = this.props;
         trackEvent(analyticsCategory, 'Display', 'button', 'SendMail', slug, step, {
             disabled: disabled ? 'disabled' : 'active',
@@ -65,9 +63,7 @@ export class MailTo extends Component {
             className,
             analyticsCategory,
             step,
-            match: {
-                params: { slug },
-            },
+            params: { slug },
         } = this.props;
 
         const dest = buildMailDest(recipient, subject, body);
@@ -117,4 +113,4 @@ MailTo.propTypes = {
     match: paramsType,
 };
 
-export default styled(MailTo)(styles);
+export default withRouter(styled(MailTo)(styles));
