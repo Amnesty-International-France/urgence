@@ -7,6 +7,7 @@ import { Navigate } from 'react-router-dom';
 import LoadingScreen from './themes/LoadingScreen';
 
 import generateUrl from './services/generateUrl';
+import { ApolloError } from '@apollo/client';
 
 const Div = styled.div`
     fontSize: 33,
@@ -39,18 +40,13 @@ const query = gql`
 `;
 
 const HomePage = () => (
-    // @ts-expect-error TS(2314): Generic type 'Query<TData, TVariables>' requires 2... Remove this comment to see the full error message
     <Query query={query}>
-        // @ts-expect-error TS(2349): This expression is not callable.
-        {({ data, error, loading }) => {
-            // @ts-expect-error TS(2552): Cannot find name 'error'. Did you mean 'Error'?
+        {({ data, loading, error }: { data: any; loading: boolean; error?: ApolloError }) => {
             if (error) {
-                // @ts-expect-error TS(2552): Cannot find name 'error'. Did you mean 'Error'?
                 console.error(error);
                 return <Navigate to={generateUrl('error')} />;
             }
 
-            // @ts-expect-error TS(2304): Cannot find name 'loading'.
             if (loading) {
                 return (
                     <Div>
@@ -59,7 +55,6 @@ const HomePage = () => (
                 );
             }
 
-            // @ts-expect-error TS(2304): Cannot find name 'data'.
             const slug = get(data, 'UrgentAction.slug');
             return <Navigate to={generateUrl('ua', { slug })} />;
         }}
