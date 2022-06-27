@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import classnames from 'classnames';
-import { routeMatch } from '../propTypes';
+import { paramsType } from '../propTypes';
 import trackEvent from '../analytics/trackEvent';
-
+import withRouter from '../withRouter';
 import { black, white, grey, darkGrey } from './colors';
 
 export const styles = {
@@ -51,17 +51,8 @@ export const styles = {
 
 export class Link extends Component {
     componentDidMount() {
-        const {
-            label,
-            disabled,
-            analyticsCategory,
-            buttonName,
-            step,
-            match: {
-                params: { slug },
-            },
-        } = this.props;
-        trackEvent(analyticsCategory, 'Display', 'button', buttonName, slug, step, {
+        const { label, disabled, analyticsCategory, buttonName, step, params } = this.props;
+        trackEvent(analyticsCategory, 'Display', 'button', buttonName, params.slug, step, {
             disabled: disabled ? 'disabled' : 'active',
             label,
         });
@@ -77,11 +68,10 @@ export class Link extends Component {
             analyticsCategory,
             buttonName,
             step,
-            match: {
-                params: { slug },
-            },
+            params,
             whiteLink,
         } = this.props;
+        const slug = params.slug;
 
         return (
             <RouterLink
@@ -110,7 +100,7 @@ Link.propTypes = {
     analyticsCategory: PropTypes.string,
     buttonName: PropTypes.string,
     step: PropTypes.string,
-    match: routeMatch,
+    params: paramsType,
     whiteLink: PropTypes.bool,
 };
 
@@ -118,4 +108,4 @@ Link.defaultProps = {
     whiteLink: false,
 };
 
-export default styled(Link)(styles);
+export default withRouter(styled(Link)(styles));

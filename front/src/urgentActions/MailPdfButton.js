@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import generateUrl from '../services/generateUrl';
 import { withSessionData } from '../DataContext';
-import { routeMatch } from '../propTypes';
+import { paramsType } from '../propTypes';
 
 export class MailPdfButton extends Component {
     sendMail = () => {
@@ -72,7 +72,7 @@ MailPdfButton.propTypes = {
     city: PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    match: routeMatch,
+    match: paramsType,
     disabled: PropTypes.bool,
     buttonText: PropTypes.string.isRequired,
     analyticsCategory: PropTypes.string,

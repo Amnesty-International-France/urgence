@@ -6,7 +6,7 @@ import get from 'lodash.get';
 import MailTo from '../../themes/MailTo';
 import { templateToBodyText } from '../messageView/templateToBodyText';
 import { isCorrectEmail } from '../../themes/Input';
-import { routeMatch } from '../../propTypes';
+import { paramsType } from '../../propTypes';
 import { withSessionData } from '../../DataContext';
 
 import { addCampaignMember, addResponseCount } from '../../services/api';
@@ -75,7 +75,7 @@ SendMail.propTypes = {
         copies_to: PropTypes.string,
         cci: PropTypes.string,
     }).isRequired,
-    match: routeMatch,
+    match: paramsType,
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,

@@ -11,7 +11,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { black, white, yellow } from '../../themes/colors';
 import { withThemeContext } from '../../themes/ThemeContext';
-import { StoryStepPropType, routeMatch } from '../../propTypes';
+import { StoryStepPropType, paramsType } from '../../propTypes';
 
 import Carousel from '../../themes/Carousel';
 import generateUrl from '../../services/generateUrl';
@@ -160,7 +160,7 @@ Story.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
-    match: routeMatch,
+    match: paramsType,
     callToAction: PropTypes.object,
     responseCount: PropTypes.number,
     auId: PropTypes.number,

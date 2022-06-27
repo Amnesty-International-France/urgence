@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import classnames from 'classnames';
-import { routeMatch } from '../propTypes';
+import { paramsType } from '../propTypes';
 import trackEvent from '../analytics/trackEvent';
 
 const styles = {
@@ -128,7 +128,7 @@ RadioButton.propTypes = {
     choices: PropTypes.array.isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
-    match: routeMatch,
+    match: paramsType,
 };
 
 export default styled(RadioButton)(styles);

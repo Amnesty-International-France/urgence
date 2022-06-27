@@ -1,14 +1,14 @@
+import { Query } from '@apollo/client/react/components';
 import styled from '@emotion/styled';
 import gql from 'graphql-tag';
 import get from 'lodash.get';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
-import { Query } from '@apollo/client/react/components';
-import { Navigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
 
+import { useParams } from 'react-router';
 import ANALYTICS_CATEGORIES from '../analytics/categories';
 import { DataProvider } from '../DataContext';
-import { routeMatch } from '../propTypes';
 import SEO from '../SEO';
 import generateUrl from '../services/generateUrl';
 import LoadingScreen from '../themes/LoadingScreen';
@@ -138,9 +138,11 @@ const query = gql`
     }
 `;
 
-export const UrgentAction = ({ history, slug, step, data }) => {
+export const UrgentAction = ({ slug, step, data }) => {
+    console.log('UrgentAction', slug, step, data);
     const story = get(data, 'UrgentAction.story');
 
+    const navigate = useNavigate();
     if (!story || !story.length) {
         return <Navigate to={generateUrl('home')} />;
     }
@@ -217,7 +219,7 @@ export const UrgentAction = ({ history, slug, step, data }) => {
                         analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                         auId={id}
                         afterMail={({ registered }) =>
-                            history.push(generateUrl(registered ? 'share' : 'register', { slug }))
+                            navigate.push(generateUrl(registered ? 'share' : 'register', { slug }))
                         }
                     />
                 }
@@ -278,7 +280,6 @@ export const UrgentAction = ({ history, slug, step, data }) => {
 };
 
 UrgentAction.propTypes = {
-    history: PropTypes.object.isRequired,
     slug: PropTypes.string.isRequired,
     step: PropTypes.string,
     data: PropTypes.object,
@@ -292,7 +293,7 @@ const StepperContainer = styled('div')({
 });
 
 export const renderUrgentActionWithData =
-    (history, slug, step, page) =>
+    (slug, step, page) =>
     ({
         /* eslint-disable react/prop-types */
         data,
@@ -317,29 +318,20 @@ export const renderUrgentActionWithData =
                     <Stepper data={data} step={step} page={page} />
                 </StepperContainer>
                 {socialMetadata && <SEO socialMetadata={socialMetadata} />}
-                <UrgentAction history={history} slug={slug} step={step} data={data} />
+                <UrgentAction slug={slug} step={step} data={data} />
             </Fragment>
         );
     };
 
-export const UrgentActionWithData = ({
-    history,
-    match: {
-        params: { slug, step, page },
-    },
-}) => (
-    <DataProvider>
-        <Query query={query} variables={{ slug }}>
-            {renderUrgentActionWithData(history, slug, step, page)}
-        </Query>
-    </DataProvider>
-);
-
-UrgentActionWithData.propTypes = {
-    history: PropTypes.shape({
-        push: PropTypes.func.isRequired,
-    }).isRequired,
-    match: routeMatch,
+export const UrgentActionWithData = () => {
+    const { slug, step, page } = useParams();
+    return (
+        <DataProvider>
+            <Query query={query} variables={{ slug }}>
+                {renderUrgentActionWithData(slug, step, page)}
+            </Query>
+        </DataProvider>
+    );
 };
 
 export default UrgentActionWithData;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Link from '../themes/Link';
-import { routeMatch } from '../propTypes';
+import { paramsType } from '../propTypes';
 import generateUrl from '../services/generateUrl';
 
 export const ToUrgentActionPageLink = ({
@@ -35,7 +35,7 @@ ToUrgentActionPageLink.propTypes = {
     pageName: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
-    match: routeMatch,
+    match: paramsType,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
     buttonName: PropTypes.string,

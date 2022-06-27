@@ -12,7 +12,7 @@ import { compose } from 'recompose';
 import permanentData from '../data/permanentData';
 import { withSessionData } from '../DataContext';
 import { secureUseEffect, secureUseState } from '../hooks/secureHooks';
-import { routeMatch } from '../propTypes';
+import { paramsType } from '../propTypes';
 import { addCampaignMemberTwitter, addResponseCount } from '../services/api';
 import generateUrl from '../services/generateUrl';
 import LinkTwitter from './Sharing/LinkTwitter';
@@ -241,7 +241,7 @@ TransitionScreen.propTypes = {
     responseCount: PropTypes.number,
     interpelationMode: PropTypes.string,
     history: PropTypes.any,
-    match: routeMatch,
+    match: paramsType,
     registered: PropTypes.any,
     twitterAction: PropTypes.shape({
         title: PropTypes.string,

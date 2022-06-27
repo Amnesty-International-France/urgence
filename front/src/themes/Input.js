@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 import { TextField } from '@material-ui/core';
-import { routeMatch } from '../propTypes';
+import { paramsType } from '../propTypes';
 
 import CheckAdornment from './CheckAdornment';
 import trackEvent from '../analytics/trackEvent';
@@ -114,7 +114,7 @@ Input.propTypes = {
     error: PropTypes.bool,
     helperText: PropTypes.string,
     label: PropTypes.string.isRequired,
-    match: routeMatch,
+    match: paramsType,
     noValidate: PropTypes.bool,
     onChange: PropTypes.func,
     staticContext: PropTypes.object,

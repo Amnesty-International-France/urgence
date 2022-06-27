@@ -4,7 +4,7 @@ import MobileDetect from 'mobile-detect';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import classnames from 'classnames';
-import { routeMatch } from '../propTypes';
+import { paramsType } from '../propTypes';
 import trackEvent from '../analytics/trackEvent';
 
 import { styles } from './Link';
@@ -114,7 +114,7 @@ MailTo.propTypes = {
     }).isRequired,
     analyticsCategory: PropTypes.string,
     step: PropTypes.string,
-    match: routeMatch,
+    match: paramsType,
 };
 
 export default styled(MailTo)(styles);

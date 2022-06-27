@@ -49,9 +49,21 @@ const App = ({ className, client }: { className?: string; client: ApolloClient<u
                                         element={<Analytics WrappedComponent={ErrorPage} />}
                                     />
                                     <Route
-                                        path="/ua/:slug/:step?/:page?*"
+                                        path="/ua/:slug"
                                         element={<Analytics WrappedComponent={UrgentAction} />}
-                                    />
+                                    >
+                                        <Route
+                                            path=":step"
+                                            element={<Analytics WrappedComponent={UrgentAction} />}
+                                        >
+                                            <Route
+                                                path=":page/*"
+                                                element={
+                                                    <Analytics WrappedComponent={UrgentAction} />
+                                                }
+                                            />
+                                        </Route>
+                                    </Route>
                                     <Route
                                         path="*"
                                         element={<Navigate to={generateUrl('error')} />}
