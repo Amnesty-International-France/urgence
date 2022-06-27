@@ -1,6 +1,5 @@
 import React, { createContext, Component } from 'react';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reco... Remove this comment to see the full error message
 import { lifecycle, compose } from 'recompose';
 
 import { black, white, yellow, lightGrey } from './colors';

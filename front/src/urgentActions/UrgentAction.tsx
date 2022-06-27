@@ -1,7 +1,6 @@
 import { Query } from '@apollo/client/react/components';
 import styled from '@emotion/styled';
 import gql from 'graphql-tag';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import get from 'lodash.get';
 import { Fragment } from 'react';
 import { Navigate, useNavigate } from 'react-router';
@@ -203,7 +202,7 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
 
     if (step === 'message-send') {
         const id = get(data, 'UrgentAction.id');
-        const text = get(data, 'UrgentAction.message.text_send');
+        const text = get(data, 'UrgentAction.message.text_send') as string;
         const messageTemplate = get(data, 'UrgentAction.message.message_template');
         const recipient = get(data, 'UrgentAction.message.recipient');
         const buttonSend = get(data, 'UrgentAction.message.button_send', "J'envoie");
@@ -285,6 +284,8 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
             />
         );
     }
+
+    return null;
 };
 
 const StepperContainer = styled('div')({

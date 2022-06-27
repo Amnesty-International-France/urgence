@@ -9,7 +9,6 @@ import RichText from './RichText';
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate, useParams } from 'react-router';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reco... Remove this comment to see the full error message
 import { compose } from 'recompose';
 import permanentData from '../data/permanentData';
 import { withSessionData } from '../DataContext';

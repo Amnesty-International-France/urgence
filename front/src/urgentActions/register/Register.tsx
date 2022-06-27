@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import get from 'lodash.get';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reco... Remove this comment to see the full error message
 import { compose } from 'recompose';
 import classnames from 'classnames';
 import Paper from '@material-ui/core/Paper';

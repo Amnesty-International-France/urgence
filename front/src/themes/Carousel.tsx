@@ -3,7 +3,6 @@ import React, { Fragment, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import styled from '@emotion/styled';
 import IconButton from './IconButton';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'swip... Remove this comment to see the full error message
 import Swiper from 'swiper/js/swiper.js';
 
 import 'swiper/css/swiper.css';

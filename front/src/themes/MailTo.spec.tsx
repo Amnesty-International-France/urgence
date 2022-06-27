@@ -1,7 +1,5 @@
 import React from 'react';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { shallow } from 'enzyme';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'ramd... Remove this comment to see the full error message
 import { assocPath } from 'ramda';
 
 import { MailTo, buildMailDest } from './MailTo';

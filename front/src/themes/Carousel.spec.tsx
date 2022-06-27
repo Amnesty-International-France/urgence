@@ -1,7 +1,5 @@
 import React from 'react';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { mount, shallow } from 'enzyme';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'swip... Remove this comment to see the full error message
 import Swiper from 'swiper/js/swiper.js';
 import { Carousel } from './Carousel';
 

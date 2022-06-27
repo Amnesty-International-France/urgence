@@ -1,9 +1,7 @@
 import React from 'react';
 import App from './App';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { shallow, mount } from 'enzyme';
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module '../t... Remove this comment to see the full error message
 import getApolloClientMock from '../testUtils/getApolloClientMock';
 
 describe('App', () => {

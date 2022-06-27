@@ -1,7 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 import styled from '@emotion/styled';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reco... Remove this comment to see the full error message
 import { compose } from 'recompose';
 import { Paper } from '@material-ui/core';
 

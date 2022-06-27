@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reco... Remove this comment to see the full error message
 import { compose } from 'recompose';
 
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';

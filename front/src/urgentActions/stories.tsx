@@ -8,7 +8,6 @@ import { WithStylesStory as Story } from './story/Story';
 import Act from './Act';
 import ThankStep from './ThankStep';
 import Link from '../themes/Link';
-// @ts-expect-error TS(7016): Could not find a declaration file for module '../.... Remove this comment to see the full error message
 import { routerDecorator, history } from '../../.storybook/decorators';
 import { ThemeProvider } from '../themes/ThemeContext';
 import AppLogo from '../themes/AppLogo';

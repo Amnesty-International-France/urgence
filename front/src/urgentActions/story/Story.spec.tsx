@@ -1,5 +1,4 @@
 import React from 'react';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { shallow } from 'enzyme';
 // @ts-expect-error TS(2305): Module '"react-router-dom"' has no exported member... Remove this comment to see the full error message
 import { Redirect } from 'react-router-dom';
