@@ -3,8 +3,8 @@ import GoogleAnalytics from 'react-ga';
 import ReactPixel from 'react-facebook-pixel';
 import PropTypes from 'prop-types';
 
-const withTracker = (WrappedComponent, options = {}) => {
-    const trackPage = (page, AURef, step) => {
+const withTracker = (WrappedComponent: any, options = {}) => {
+    const trackPage = (page: any, AURef: any, step: any) => {
         GoogleAnalytics.set({
             page,
             dimension1: AURef,
@@ -29,7 +29,9 @@ const withTracker = (WrappedComponent, options = {}) => {
 
         componentDidMount() {
             const {
+                // @ts-expect-error TS(2339): Property 'location' does not exist on type 'Readon... Remove this comment to see the full error message
                 location: { pathname, search },
+                // @ts-expect-error TS(2339): Property 'match' does not exist on type 'Readonly<... Remove this comment to see the full error message
                 match: {
                     params: { slug, step, page },
                 },
@@ -39,9 +41,11 @@ const withTracker = (WrappedComponent, options = {}) => {
             trackPage(pageUrl, slug, `${step}${page ? page : ''}`);
         }
 
-        componentDidUpdate(prevProps) {
+        componentDidUpdate(prevProps: any) {
             const {
+                // @ts-expect-error TS(2339): Property 'location' does not exist on type 'Readon... Remove this comment to see the full error message
                 location: { pathname, search },
+                // @ts-expect-error TS(2339): Property 'match' does not exist on type 'Readonly<... Remove this comment to see the full error message
                 match: {
                     params: { slug, step, page },
                 },
@@ -56,6 +60,7 @@ const withTracker = (WrappedComponent, options = {}) => {
         }
 
         render() {
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <WrappedComponent {...this.props} />;
         }
     };

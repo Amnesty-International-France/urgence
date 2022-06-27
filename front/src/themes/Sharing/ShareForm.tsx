@@ -1,13 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
+// @ts-expect-error TS(6142): Module './LinkFacebook' was resolved to '/home/gui... Remove this comment to see the full error message
 import LinkFacebook from './LinkFacebook';
+// @ts-expect-error TS(6142): Module './LinkTwitter' was resolved to '/home/guil... Remove this comment to see the full error message
 import LinkTwitter from './LinkTwitter';
+// @ts-expect-error TS(6142): Module './LinkWhatsapp' was resolved to '/home/gui... Remove this comment to see the full error message
 import LinkWhatsapp from './LinkWhatsapp';
+// @ts-expect-error TS(6142): Module './CopyToClipboard' was resolved to '/home/... Remove this comment to see the full error message
 import CopyToClipboard from './CopyToClipboard';
 import { black } from '../colors';
 
+// @ts-expect-error TS(6142): Module '../../DataContext' was resolved to '/home/... Remove this comment to see the full error message
 import { withSessionData } from '../../DataContext';
 
 const styles = {
@@ -33,6 +37,22 @@ const styles = {
     },
 };
 
+type OwnProps = {
+    slug?: string;
+    step?: string;
+    link: string;
+    message: string;
+    registered?: string;
+    active_twitter?: boolean;
+    twitter_message?: string;
+    analyticsCategory?: string;
+    className?: string;
+};
+
+// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
+type Props = OwnProps & typeof ShareForm.defaultProps;
+
+// @ts-expect-error TS(7022): 'ShareForm' implicitly has type 'any' because it d... Remove this comment to see the full error message
 export const ShareForm = ({
     className,
     slug,
@@ -41,11 +61,15 @@ export const ShareForm = ({
     message,
     twitter_message,
     analyticsCategory,
-}) => {
+}: Props) => {
     return (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={className}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="share-block">
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div className="share-text">Partagez l&apos;action avec vos proches</div>
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <CopyToClipboard
                     slug={slug}
                     step={step}
@@ -53,21 +77,27 @@ export const ShareForm = ({
                     analyticsCategory={analyticsCategory}
                 />
             </div>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="share-block">
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div>Ou utilisez vos réseaux sociaux favoris</div>
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div className="share-links">
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <LinkFacebook
                         slug={slug}
                         step={step}
                         url={encodeURIComponent(link)}
                         analyticsCategory={analyticsCategory}
                     />
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <LinkTwitter
                         slug={slug}
                         step={step}
                         text={`${twitter_message} - ${encodeURIComponent(link)}`}
                         analyticsCategory={analyticsCategory}
                     />
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <LinkWhatsapp
                         slug={slug}
                         step={step}
@@ -80,22 +110,11 @@ export const ShareForm = ({
     );
 };
 
-ShareForm.propTypes = {
-    slug: PropTypes.string,
-    step: PropTypes.string,
-    link: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
-    registered: PropTypes.string,
-    active_twitter: PropTypes.bool,
-    twitter_message: PropTypes.string,
-    analyticsCategory: PropTypes.string,
-    className: PropTypes.string,
-};
-
 ShareForm.defaultProps = {
     registered: false,
     message: '',
     auId: '',
 };
 
+// @ts-expect-error TS(2769): No overload matches this call.
 export default styled(withSessionData(ShareForm))(styles);

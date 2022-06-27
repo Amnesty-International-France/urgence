@@ -2,8 +2,9 @@ import React, { Fragment, useEffect, useState } from 'react';
 
 import classnames from 'classnames';
 import styled from '@emotion/styled';
+// @ts-expect-error TS(6142): Module './IconButton' was resolved to '/home/guill... Remove this comment to see the full error message
 import IconButton from './IconButton';
-import PropTypes from 'prop-types';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'swip... Remove this comment to see the full error message
 import Swiper from 'swiper/js/swiper.js';
 
 import 'swiper/css/swiper.css';
@@ -38,6 +39,16 @@ const styles = {
     },
 };
 
+type Props = {
+    afterChange?: (...args: any[]) => any;
+    afterLastChange?: (...args: any[]) => any;
+    className?: string;
+    children?: (...args: any[]) => any;
+    current?: number;
+    initialSlide?: number;
+    total?: number;
+};
+
 export const Carousel = ({
     afterChange,
     afterLastChange,
@@ -46,21 +57,23 @@ export const Carousel = ({
     current,
     initialSlide,
     total,
-}) => {
+}: Props) => {
     const [swiper, setSwiper] = useState(null);
     const [container, setContainer] = useState(null);
 
     const slideNext = () => {
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         !isOnMobile() && swiper.slideNext();
     };
 
     const slidePrevious = () => {
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         !isOnMobile() && swiper.slidePrev();
     };
-    const handleSwiperClick = (swipper) =>
-        function (event) {
+    const handleSwiperClick = (swipper: any) =>
+        function (event: any) {
             if (!container) return;
-            const containerRect = container.getBoundingClientRect();
+            const containerRect = (container as any).getBoundingClientRect();
             const containerWidth = containerRect.width;
             const containerLeft = containerRect.left;
             const clickX = event.clientX;
@@ -84,14 +97,14 @@ export const Carousel = ({
                     if (isOnMobile()) {
                         document.removeEventListener('click', handleSwiperClick(swiper), false);
                     }
-                    swiper.destroy();
+                    (swiper as any).destroy();
                 }, 500);
             }
         };
     }, [container]);
 
     const initSwiper = () => {
-        let swiper;
+        let swiper: any;
         swiper = new Swiper(container, {
             initialSlide,
             direction: 'horizontal',
@@ -101,8 +114,10 @@ export const Carousel = ({
                         return;
                     }
                     if (swiper.isEnd) {
+                        // @ts-expect-error TS(2722): Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
                         afterLastChange();
                     } else {
+                        // @ts-expect-error TS(2722): Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
                         afterChange(swiper.activeIndex);
                     }
                 },
@@ -115,14 +130,21 @@ export const Carousel = ({
     };
 
     return (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={className}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="swiper-container" ref={setContainer}>
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div className="swiper-wrapper">{children()}</div>
             </div>
 
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Fragment>
+                {/* @ts-expect-error TS(2532): Object is possibly 'undefined'. */}
                 {current != total + 1 && (
+                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <div className={classnames('swiper-controls right')}>
+                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <IconButton
                             className={classnames({
                                 'next-arrow': current !== total,
@@ -130,16 +152,20 @@ export const Carousel = ({
                             })}
                             onClick={slideNext}
                         >
+                            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                             <FontAwesomeIcon icon={faArrowRight} color={black} className="icon" />
                         </IconButton>
                     </div>
                 )}
                 {current != 1 && (
+                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <div className={classnames('swiper-controls left')}>
+                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <IconButton
                             className={classnames('left transparent previous-arrow')}
                             onClick={slidePrevious}
                         >
+                            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                             <FontAwesomeIcon icon={faArrowLeft} className="icon" />
                         </IconButton>
                     </div>
@@ -149,14 +175,5 @@ export const Carousel = ({
     );
 };
 
-Carousel.propTypes = {
-    afterChange: PropTypes.func,
-    afterLastChange: PropTypes.func,
-    className: PropTypes.string,
-    children: PropTypes.func,
-    current: PropTypes.number,
-    initialSlide: PropTypes.number,
-    total: PropTypes.number,
-};
-
+// @ts-expect-error TS(2769): No overload matches this call.
 export default styled(Carousel)(styles);

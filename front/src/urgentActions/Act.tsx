@@ -1,10 +1,23 @@
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import get from 'lodash.get';
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import TransitionScreen from '../themes/TransitionScreen';
 
-const Act = ({ data, actions }) => (
+type OwnProps = {
+    actions?: (...args: any[]) => any;
+    data?: {
+        title: string;
+        message: string;
+    };
+};
+
+// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
+type Props = OwnProps & typeof Act.defaultProps;
+
+// @ts-expect-error TS(7022): 'Act' implicitly has type 'any' because it does no... Remove this comment to see the full error message
+const Act = ({ data, actions }: Props) => (
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <TransitionScreen
         className="act"
         actions={actions}
@@ -17,14 +30,6 @@ const Act = ({ data, actions }) => (
         auId={get(data, 'auId')}
     />
 );
-
-Act.propTypes = {
-    actions: PropTypes.func,
-    data: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        message: PropTypes.string.isRequired,
-    }),
-};
 
 Act.defaultProps = {
     actions: () => {},

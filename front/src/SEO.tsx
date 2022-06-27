@@ -1,8 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import Helmet from 'react-helmet';
 
-const SEO = ({ socialMetadata, lang, url, siteName }) => {
+type OwnProps = {
+    siteName: string;
+    url: string;
+    lang: string;
+    socialMetadata?: any;
+};
+
+// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
+type Props = OwnProps & typeof SEO.defaultProps;
+
+// @ts-expect-error TS(7022): 'SEO' implicitly has type 'any' because it does no... Remove this comment to see the full error message
+const SEO = ({ socialMetadata, lang, url, siteName }: Props) => {
     const title = socialMetadata.title || 'Action urgente';
     const description = socialMetadata.description || 'Action urgente';
     const meta = [
@@ -64,6 +75,7 @@ const SEO = ({ socialMetadata, lang, url, siteName }) => {
     }
 
     return (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <Helmet
             htmlAttributes={{
                 lang,
@@ -79,13 +91,6 @@ SEO.defaultProps = {
     siteName: 'Réaction Rapide',
     url: global.origin,
     lang: `fr`,
-};
-
-SEO.propTypes = {
-    siteName: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    lang: PropTypes.string.isRequired,
-    socialMetadata: PropTypes.any,
 };
 
 export default SEO;

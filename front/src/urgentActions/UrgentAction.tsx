@@ -1,26 +1,39 @@
 import { Query } from '@apollo/client/react/components';
 import styled from '@emotion/styled';
 import gql from 'graphql-tag';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import get from 'lodash.get';
-import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 
 import { useParams } from 'react-router';
 import ANALYTICS_CATEGORIES from '../analytics/categories';
+// @ts-expect-error TS(6142): Module '../DataContext' was resolved to '/home/gui... Remove this comment to see the full error message
 import { DataProvider } from '../DataContext';
+// @ts-expect-error TS(6142): Module '../SEO' was resolved to '/home/guillaume/d... Remove this comment to see the full error message
 import SEO from '../SEO';
 import generateUrl from '../services/generateUrl';
+// @ts-expect-error TS(6142): Module '../themes/LoadingScreen' was resolved to '... Remove this comment to see the full error message
 import LoadingScreen from '../themes/LoadingScreen';
+// @ts-expect-error TS(6142): Module '../themes/Stepper' was resolved to '/home/... Remove this comment to see the full error message
 import Stepper from '../themes/Stepper';
+// @ts-expect-error TS(6142): Module './messageSend/MessageSend' was resolved to... Remove this comment to see the full error message
 import MessageSend from './messageSend/MessageSend';
+// @ts-expect-error TS(6142): Module './messageSend/SendMail' was resolved to '/... Remove this comment to see the full error message
 import SendMail from './messageSend/SendMail';
+// @ts-expect-error TS(6142): Module './messageView/MessageView' was resolved to... Remove this comment to see the full error message
 import MessageView from './messageView/MessageView';
+// @ts-expect-error TS(6142): Module './messageView/ToMessageSendButton' was res... Remove this comment to see the full error message
 import ToMessageSendButton from './messageView/ToMessageSendButton';
+// @ts-expect-error TS(6142): Module './register/Register' was resolved to '/hom... Remove this comment to see the full error message
 import Register from './register/Register';
+// @ts-expect-error TS(6142): Module './register/RegisterButton' was resolved to... Remove this comment to see the full error message
 import RegisterButton from './register/RegisterButton';
+// @ts-expect-error TS(6142): Module './share/ShareStep' was resolved to '/home/... Remove this comment to see the full error message
 import ShareStep from './share/ShareStep';
+// @ts-expect-error TS(6142): Module './story/Story' was resolved to '/home/guil... Remove this comment to see the full error message
 import Story from './story/Story';
+// @ts-expect-error TS(6142): Module './ThankStep' was resolved to '/home/guilla... Remove this comment to see the full error message
 import ThankStep from './ThankStep';
 
 const query = gql`
@@ -138,16 +151,24 @@ const query = gql`
     }
 `;
 
-export const UrgentAction = ({ slug, step, data }) => {
+type UrgentActionProps = {
+    slug: string;
+    step?: string;
+    data?: any;
+};
+
+export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
     console.log('UrgentAction', slug, step, data);
     const story = get(data, 'UrgentAction.story');
 
     const navigate = useNavigate();
     if (!story || !story.length) {
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         return <Navigate to={generateUrl('home')} />;
     }
 
     if (!step) {
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         return <Navigate to={generateUrl('story', { slug })} />;
     }
 
@@ -156,6 +177,7 @@ export const UrgentAction = ({ slug, step, data }) => {
         const responseCount = get(data, 'UrgentAction.response_count');
         const id = get(data, 'UrgentAction.id');
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <Story
                 story={story}
                 step={step}
@@ -174,6 +196,7 @@ export const UrgentAction = ({ slug, step, data }) => {
         const buttonView = get(data, 'UrgentAction.message.button_view', 'Suivant');
 
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <MessageView
                 text={text}
                 objectIndication={objectIndication}
@@ -182,6 +205,7 @@ export const UrgentAction = ({ slug, step, data }) => {
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
+                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <ToMessageSendButton
                         label={buttonView}
                         step={step}
@@ -204,6 +228,7 @@ export const UrgentAction = ({ slug, step, data }) => {
         const gdprMessage = get(data, 'GdprMessage.content');
 
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <MessageSend
                 text={text}
                 messageTemplate={messageTemplate}
@@ -211,6 +236,7 @@ export const UrgentAction = ({ slug, step, data }) => {
                 step={step}
                 analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
+                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <SendMail
                         label={buttonSend}
                         step={step}
@@ -218,8 +244,10 @@ export const UrgentAction = ({ slug, step, data }) => {
                         messageTemplate={messageTemplate}
                         analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                         auId={id}
-                        afterMail={({ registered }) =>
-                            navigate.push(generateUrl(registered ? 'share' : 'register', { slug }))
+                        afterMail={({ registered }: any) =>
+                            (navigate as any).push(
+                                generateUrl(registered ? 'share' : 'register', { slug }),
+                            )
                         }
                     />
                 }
@@ -231,6 +259,7 @@ export const UrgentAction = ({ slug, step, data }) => {
         const emailThank = get(data, 'UrgentAction.email_thank');
 
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <ShareStep
                 slug={slug}
                 step={step}
@@ -244,12 +273,14 @@ export const UrgentAction = ({ slug, step, data }) => {
         const register = get(data, 'UrgentAction.register');
 
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <Register
                 step={step}
                 data={register}
                 gdprRegister={get(data, 'GdprRegister.content')}
                 analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
-                action={(disabled, formValues) => (
+                action={(disabled: any, formValues: any) => (
+                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <RegisterButton
                         auId={get(data, 'UrgentAction.id')}
                         step={step}
@@ -268,6 +299,7 @@ export const UrgentAction = ({ slug, step, data }) => {
         const emailThank = get(data, 'UrgentAction.email_thank');
 
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <ThankStep
                 data={thankEnd}
                 slug={slug}
@@ -279,12 +311,6 @@ export const UrgentAction = ({ slug, step, data }) => {
     }
 };
 
-UrgentAction.propTypes = {
-    slug: PropTypes.string.isRequired,
-    step: PropTypes.string,
-    data: PropTypes.object,
-};
-
 const StepperContainer = styled('div')({
     position: 'absolute',
     top: '20px',
@@ -293,31 +319,40 @@ const StepperContainer = styled('div')({
 });
 
 export const renderUrgentActionWithData =
-    (slug, step, page) =>
+    (slug: any, step: any, page: any) =>
     ({
         /* eslint-disable react/prop-types */
         data,
+
         error,
+
         loading,
-        /* eslint-enable react/prop-types */
-    }) => {
+    }: /* eslint-enable react/prop-types */
+    any) => {
         if (error) {
             console.error(error);
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <Navigate to={generateUrl('error')} />;
         }
 
         if (loading) {
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <LoadingScreen />;
         }
 
         const socialMetadata = get(data, 'UrgentAction.social_metadata');
 
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <Fragment>
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <StepperContainer>
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <Stepper data={data} step={step} page={page} />
                 </StepperContainer>
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 {socialMetadata && <SEO socialMetadata={socialMetadata} />}
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <UrgentAction slug={slug} step={step} data={data} />
             </Fragment>
         );
@@ -326,7 +361,9 @@ export const renderUrgentActionWithData =
 export const UrgentActionWithData = () => {
     const { slug, step, page } = useParams();
     return (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <DataProvider>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Query query={query} variables={{ slug }}>
                 {renderUrgentActionWithData(slug, step, page)}
             </Query>

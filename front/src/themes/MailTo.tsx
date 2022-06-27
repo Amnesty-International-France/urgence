@@ -1,15 +1,16 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react';
 import MobileDetect from 'mobile-detect';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import classnames from 'classnames';
 import { paramsType } from '../propTypes';
 import trackEvent from '../analytics/trackEvent';
+// @ts-expect-error TS(6142): Module '../withRouter' was resolved to '/home/guil... Remove this comment to see the full error message
 import withRouter from '../withRouter';
+// @ts-expect-error TS(6142): Module './Link' was resolved to '/home/guillaume/d... Remove this comment to see the full error message
 import { styles } from './Link';
 
-export const buildMailDest = (recipient, subject, body) => {
+export const buildMailDest = (recipient: any, subject: any, body: any) => {
     const mail = recipient.mail || 'example@mail.com';
     return `mailto:${encodeURIComponent(mail)}?subject=${encodeURIComponent(
         subject,
@@ -18,8 +19,28 @@ export const buildMailDest = (recipient, subject, body) => {
         .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '');
 };
 
-export class MailTo extends Component {
-    constructor(props) {
+type Props = {
+    className: string;
+    afterMail: (...args: any[]) => any;
+    subject: string;
+    body: string;
+    label: string;
+    disabled?: boolean;
+    recipient: {
+        mail: string;
+        copies_to?: string;
+        cci?: string;
+    };
+    analyticsCategory?: string;
+    step?: string;
+    // @ts-expect-error TS(2749): 'paramsType' refers to a value, but is being used ... Remove this comment to see the full error message
+    match?: paramsType;
+};
+
+export class MailTo extends Component<Props> {
+    md: any;
+
+    constructor(props: Props) {
         super(props);
         this.md = new MobileDetect(navigator.userAgent);
     }
@@ -30,6 +51,7 @@ export class MailTo extends Component {
             disabled,
             analyticsCategory,
             step,
+            // @ts-expect-error TS(2339): Property 'params' does not exist on type 'Readonly... Remove this comment to see the full error message
             params: { slug },
         } = this.props;
         trackEvent(analyticsCategory, 'Display', 'button', 'SendMail', slug, step, {
@@ -38,7 +60,7 @@ export class MailTo extends Component {
         });
     }
 
-    openMailer = (dest) => {
+    openMailer = (dest: any) => {
         console.log('window', window);
         console.log('dest', dest);
         console.log(`window.open("${dest}", 'mailto')`);
@@ -63,6 +85,7 @@ export class MailTo extends Component {
             className,
             analyticsCategory,
             step,
+            // @ts-expect-error TS(2339): Property 'params' does not exist on type 'Readonly... Remove this comment to see the full error message
             params: { slug },
         } = this.props;
 
@@ -70,9 +93,10 @@ export class MailTo extends Component {
         const isIphone = this.md.is('iPhone');
         const options = {};
         if (isIphone) {
-            options.href = dest;
+            (options as any).href = dest;
         }
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <a
                 className={classnames(className, { disabled })}
                 onClick={(event) => {
@@ -87,6 +111,7 @@ export class MailTo extends Component {
                 }}
                 target={isIphone ? 'mailto' : '_self'}
                 rel="noopener noreferrer"
+                // @ts-expect-error TS(2322): Type '{ children: string; className: string; onCli... Remove this comment to see the full error message
                 disabled={disabled}
                 {...options}
             >
@@ -96,21 +121,5 @@ export class MailTo extends Component {
     }
 }
 
-MailTo.propTypes = {
-    className: PropTypes.string.isRequired,
-    afterMail: PropTypes.func.isRequired,
-    subject: PropTypes.string.isRequired,
-    body: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
-    recipient: PropTypes.shape({
-        mail: PropTypes.string.isRequired,
-        copies_to: PropTypes.string,
-        cci: PropTypes.string,
-    }).isRequired,
-    analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
-    match: paramsType,
-};
-
+// @ts-expect-error TS(2769): No overload matches this call.
 export default withRouter(styled(MailTo)(styles));

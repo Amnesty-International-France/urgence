@@ -1,20 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import get from 'lodash.get';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reco... Remove this comment to see the full error message
 import { compose } from 'recompose';
 import classnames from 'classnames';
 import Paper from '@material-ui/core/Paper';
 
+// @ts-expect-error TS(6142): Module '../../themes/RichText' was resolved to '/h... Remove this comment to see the full error message
 import RichText from '../../themes/RichText';
+// @ts-expect-error TS(6142): Module '../../themes/LongText' was resolved to '/h... Remove this comment to see the full error message
 import LongText from '../../themes/LongText';
+// @ts-expect-error TS(6142): Module '../../themes/Input' was resolved to '/home... Remove this comment to see the full error message
 import { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
 import { white, black } from '../../themes/colors';
+// @ts-expect-error TS(6142): Module '../../themes/ThemeContext' was resolved to... Remove this comment to see the full error message
 import { withYellowLogo, withYellowBackground } from '../../themes/ThemeContext';
 
+// @ts-expect-error TS(6142): Module '../../DataContext' was resolved to '/home/... Remove this comment to see the full error message
 import { withSessionData } from '../../DataContext';
 
+// @ts-expect-error TS(6142): Module './Form' was resolved to '/home/guillaume/d... Remove this comment to see the full error message
 import Form from './Form';
+// @ts-expect-error TS(6142): Module '../LegalInformation' was resolved to '/hom... Remove this comment to see the full error message
 import LegalInformation from '../LegalInformation';
 
 const styles = {
@@ -70,66 +78,84 @@ const styles = {
     },
 };
 
-const isDisabled = (props) => {
+const isDisabled = (props: any) => {
     const { firstname, lastname, phone, email } = props;
     return !firstname || !lastname || !isCorrectPhone(phone) || !isCorrectEmail(email);
 };
 
-export const RegisterActivist = ({ data, gdprRegister, action, className, ...props }) => {
+type RegisterActivistProps = {
+    className?: string;
+    data?: {
+        text: string;
+        phone_indication?: string;
+        button: string;
+    };
+    gdprRegister?: string;
+    analyticsCategory?: string;
+    step?: string;
+    civility?: string;
+    firstname?: string;
+    lastname?: string;
+    email?: string;
+    phoneIndication?: string;
+    phone?: string;
+    setCivility: (...args: any[]) => any;
+    setFirstname: (...args: any[]) => any;
+    setLastname: (...args: any[]) => any;
+    setEmail: (...args: any[]) => any;
+    setPhone: (...args: any[]) => any;
+    action: (...args: any[]) => any;
+};
+
+export const RegisterActivist = ({
+    data,
+    gdprRegister,
+    action,
+    className,
+    ...props
+}: RegisterActivistProps) => {
     const { firstname, lastname, phone, email, civility } = props;
     const title = get(data, 'title');
     const text = get(data, 'text');
     const phoneIndication = get(data, 'phone_indication');
 
     return (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={classnames('register', className)}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Paper className="paper" elevation={6} square>
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div className="header">
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <h1>
+                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <LongText text={title} />
                     </h1>
                     {text && (
+                        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                         <div className="text">
+                            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                             <RichText html={text} />
                         </div>
                     )}
                 </div>
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div className="form-step">
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <Form phoneIndication={phoneIndication} {...props} />
                 </div>
             </Paper>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="action">
                 {action(isDisabled(props), { firstname, lastname, phone, email, civility })}
             </div>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <LegalInformation content={gdprRegister} />
         </div>
     );
 };
 
-RegisterActivist.propTypes = {
-    className: PropTypes.string,
-    data: PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        phone_indication: PropTypes.string,
-        button: PropTypes.string.isRequired,
-    }),
-    gdprRegister: PropTypes.string,
-    analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
-    civility: PropTypes.string,
-    firstname: PropTypes.string,
-    lastname: PropTypes.string,
-    email: PropTypes.string,
-    phoneIndication: PropTypes.string,
-    phone: PropTypes.string,
-    setCivility: PropTypes.func.isRequired,
-    setFirstname: PropTypes.func.isRequired,
-    setLastname: PropTypes.func.isRequired,
-    setEmail: PropTypes.func.isRequired,
-    setPhone: PropTypes.func.isRequired,
-    action: PropTypes.func.isRequired,
-};
-
+// @ts-expect-error TS(2769): No overload matches this call.
 const WithStylesRegisterActivist = styled(RegisterActivist)(styles);
 
 export default compose(

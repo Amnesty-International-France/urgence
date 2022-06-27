@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import classnames from 'classnames';
 import { paramsType } from '../propTypes';
 import trackEvent from '../analytics/trackEvent';
+// @ts-expect-error TS(6142): Module '../withRouter' was resolved to '/home/guil... Remove this comment to see the full error message
 import withRouter from '../withRouter';
 import { black, white, grey, darkGrey } from './colors';
 
@@ -49,7 +49,27 @@ export const styles = {
     },
 };
 
-export class Link extends Component {
+type OwnProps = {
+    to: string;
+    label?: string | React.ReactNode;
+    disabled?: boolean;
+    className?: string;
+    onClick?: (...args: any[]) => any;
+    analyticsCategory?: string;
+    buttonName?: string;
+    step?: string;
+    // @ts-expect-error TS(2749): 'paramsType' refers to a value, but is being used ... Remove this comment to see the full error message
+    params?: paramsType;
+    whiteLink?: boolean;
+};
+
+type Props = OwnProps & typeof Link.defaultProps;
+
+export class Link extends Component<Props> {
+    static defaultProps = {
+        whiteLink: false,
+    };
+
     componentDidMount() {
         const { label, disabled, analyticsCategory, buttonName, step, params } = this.props;
         trackEvent(analyticsCategory, 'Display', 'button', buttonName, params.slug, step, {
@@ -73,6 +93,7 @@ export class Link extends Component {
         } = this.props;
 
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <RouterLink
                 to={to}
                 className={classnames(className, { disabled: disabled, white: whiteLink })}
@@ -90,21 +111,5 @@ export class Link extends Component {
     }
 }
 
-Link.propTypes = {
-    to: PropTypes.string.isRequired,
-    label: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.node.isRequired]),
-    disabled: PropTypes.bool,
-    className: PropTypes.string,
-    onClick: PropTypes.func,
-    analyticsCategory: PropTypes.string,
-    buttonName: PropTypes.string,
-    step: PropTypes.string,
-    params: paramsType,
-    whiteLink: PropTypes.bool,
-};
-
-Link.defaultProps = {
-    whiteLink: false,
-};
-
+// @ts-expect-error TS(2769): No overload matches this call.
 export default withRouter(styled(Link)(styles));

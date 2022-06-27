@@ -1,11 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import get from 'lodash.get';
 
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
+// @ts-expect-error TS(6142): Module '../../DataContext' was resolved to '/home/... Remove this comment to see the full error message
 import { withSessionData } from '../../DataContext';
 import { registerContact } from '../../services/api';
 
+type OwnProps = {
+    auId: string;
+    formValues?: any;
+    setRegistered: (...args: any[]) => any;
+    disabled?: boolean;
+    buttonText: string;
+    analyticsCategory?: string;
+    step?: string;
+};
+
+// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
+type Props = OwnProps & typeof RegisterButton.defaultProps;
+
+// @ts-expect-error TS(7022): 'RegisterButton' implicitly has type 'any' because... Remove this comment to see the full error message
 export const RegisterButton = ({
     disabled,
     buttonText,
@@ -14,7 +29,7 @@ export const RegisterButton = ({
     setRegistered,
     formValues,
     auId,
-}) => {
+}: Props) => {
     const { firstname, lastname, phone, email, civility } = formValues;
     const register = () => {
         return registerContact(auId, { email, phone, firstname, lastname, civility }).then(
@@ -23,7 +38,7 @@ export const RegisterButton = ({
                     // eslint-disable-next-line no-console
                     console.log(
                         'Failed registering campaign member',
-                        result.errors.map((error) => `- ${error.message}`).join('\n'),
+                        result.errors.map((error: any) => `- ${error.message}`).join('\n'),
                     );
                 }
                 const isRegistered = get(result, 'data.registerContact.registered', false);
@@ -33,6 +48,7 @@ export const RegisterButton = ({
     };
 
     return (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <ToUrgentActionPageLink
             onClick={register}
             pageName="thanks-end"
@@ -43,16 +59,6 @@ export const RegisterButton = ({
             buttonName="Register"
         />
     );
-};
-
-RegisterButton.propTypes = {
-    auId: PropTypes.string.isRequired,
-    formValues: PropTypes.object,
-    setRegistered: PropTypes.func.isRequired,
-    disabled: PropTypes.bool,
-    buttonText: PropTypes.string.isRequired,
-    analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
 };
 
 RegisterButton.defaultProps = {

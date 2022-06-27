@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 const styles = {
@@ -12,15 +11,16 @@ const styles = {
     padding: '0.5rem 1rem',
 };
 
-export const TextArea = ({ className, children, ...otherProps }) => (
+type Props = {
+    className?: string;
+    children?: React.ReactNode;
+};
+
+export const TextArea = ({ className, children, ...otherProps }: Props) => (
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <textarea className={className} {...otherProps}>
         {children}
     </textarea>
 );
-
-TextArea.propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-};
 
 export default styled(TextArea)(styles);

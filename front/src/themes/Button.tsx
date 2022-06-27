@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 import { black, yellow, grey, darkGrey } from './colors';
@@ -34,15 +33,16 @@ const StyledButton = styled('button')({
     },
 });
 
-export const Button = ({ label, onClick, className, disabled }) => (
+type Props = {
+    label: string;
+    className?: string;
+    disabled?: boolean;
+    onClick?: (...args: any[]) => any;
+};
+
+export const Button = ({ label, onClick, className, disabled }: Props) => (
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <StyledButton className={className} onClick={onClick} disabled={disabled}>
         {label.toUpperCase()}
     </StyledButton>
 );
-
-Button.propTypes = {
-    label: PropTypes.string.isRequired,
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-    onClick: PropTypes.func,
-};

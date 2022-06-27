@@ -7,7 +7,7 @@ const addCampaignMemberQuery = `
     }
 `;
 
-export const addCampaignMember = (urgentActionId, member) =>
+export const addCampaignMember = (urgentActionId: any, member: any) =>
     fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
         method: 'POST',
         body: JSON.stringify({
@@ -32,7 +32,7 @@ const addCampaignMemberTwitterQuery = `
     }
 `;
 
-export const addCampaignMemberTwitter = (urgentActionId, member) =>
+export const addCampaignMemberTwitter = (urgentActionId: any, member: any) =>
     fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
         method: 'POST',
         body: JSON.stringify({
@@ -56,7 +56,7 @@ const registerContactQuery = `
     }
 `;
 
-export const registerContact = (id, member) =>
+export const registerContact = (id: any, member: any) =>
     fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
         method: 'POST',
         body: JSON.stringify({
@@ -80,7 +80,7 @@ const addResponseCountQuery = `
     }
 `;
 
-export const addResponseCount = (id) =>
+export const addResponseCount = (id: any) =>
     fetch(`${process.env.REACT_APP_API_URL}/graphql`, {
         method: 'POST',
         body: JSON.stringify({

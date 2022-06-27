@@ -1,11 +1,14 @@
 import React from 'react';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { shallow, mount } from 'enzyme';
 
+// @ts-expect-error TS(6142): Module './Input' was resolved to '/home/guillaume/... Remove this comment to see the full error message
 import { Input, isCorrectEmail, isCorrectPhone } from './Input';
 
 describe('<Input />', () => {
     it('should render an Input with correct value and label', () => {
         const wrapper = shallow(
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <Input value="value" label="Title" match={{ params: { slug: 'im-a-slug' } }} />,
         );
         const input = wrapper.find('TextField');
@@ -16,9 +19,11 @@ describe('<Input />', () => {
 
     it('should render an Adornment if there is no error', () => {
         const wrapper = shallow(
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <Input
                 value="value"
                 label="Title"
+                // @ts-expect-error TS(2769): No overload matches this call.
                 match={{ params: { slug: 'im-a-slug' } }}
                 error={false}
             />,
@@ -32,9 +37,11 @@ describe('<Input />', () => {
 
     it('should render no Adornment if there is an error', () => {
         const wrapper = shallow(
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <Input
                 value="value"
                 label="Title"
+                // @ts-expect-error TS(2769): No overload matches this call.
                 match={{ params: { slug: 'im-a-slug' } }}
                 error={true}
             />,

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { black, yellow, grey, darkGrey } from './colors';
 
 import styled from '@emotion/styled';
@@ -31,7 +30,20 @@ const IconButtonContainer = styled('div')({
     },
 });
 
-const IconButton = ({ className, children, onClick, onMouseEnter, onMouseLeave }) => (
+type OwnProps = {
+    className?: string;
+    children: React.ReactElement;
+    onClick: (...args: any[]) => any;
+    onMouseEnter?: (...args: any[]) => any;
+    onMouseLeave?: (...args: any[]) => any;
+};
+
+// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
+type Props = OwnProps & typeof IconButton.defaultProps;
+
+// @ts-expect-error TS(7022): 'IconButton' implicitly has type 'any' because it ... Remove this comment to see the full error message
+const IconButton = ({ className, children, onClick, onMouseEnter, onMouseLeave }: Props) => (
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <IconButtonContainer
         className={className}
         onClick={onClick}
@@ -41,14 +53,6 @@ const IconButton = ({ className, children, onClick, onMouseEnter, onMouseLeave }
         {children}
     </IconButtonContainer>
 );
-
-IconButton.propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.element.isRequired,
-    onClick: PropTypes.func.isRequired,
-    onMouseEnter: PropTypes.func,
-    onMouseLeave: PropTypes.func,
-};
 
 IconButton.defaultProps = {
     onMouseEnter: () => {},

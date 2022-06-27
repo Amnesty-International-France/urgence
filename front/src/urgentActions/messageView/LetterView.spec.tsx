@@ -1,7 +1,10 @@
 import React from 'react';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { mount } from 'enzyme';
 
+// @ts-expect-error TS(6142): Module './LetterView' was resolved to '/home/guill... Remove this comment to see the full error message
 import LetterView from './LetterView';
+// @ts-expect-error TS(6142): Module './MessageSection' was resolved to '/home/g... Remove this comment to see the full error message
 import MessageSection from './MessageSection';
 
 describe('LetterView', () => {
@@ -19,6 +22,7 @@ describe('LetterView', () => {
     };
 
     it('display all messageTemplate steps', () => {
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         const wrapper = mount(<LetterView {...defaultProps} />);
 
         const messages = wrapper.find(MessageSection);

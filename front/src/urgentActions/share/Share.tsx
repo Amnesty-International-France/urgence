@@ -1,13 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import get from 'lodash.get';
 
+// @ts-expect-error TS(6142): Module '../../themes/RichText' was resolved to '/h... Remove this comment to see the full error message
 import RichText from '../../themes/RichText';
+// @ts-expect-error TS(6142): Module '../../themes/LongText' was resolved to '/h... Remove this comment to see the full error message
 import LongText from '../../themes/LongText';
+// @ts-expect-error TS(6142): Module '../../themes/Sharing/ShareForm' was resolv... Remove this comment to see the full error message
 import ShareForm from '../../themes/Sharing/ShareForm';
 
 import generateUrl from '../../services/generateUrl';
+// @ts-expect-error TS(6142): Module '../../themes/Sharing/LinkTelegram' was res... Remove this comment to see the full error message
 import LinkTelegram from '../../themes/Sharing/LinkTelegram';
 
 const styles = {
@@ -43,9 +47,25 @@ const styles = {
         },
     },
 };
-const getLinkFromSlug = (slug) => `${global.origin}${generateUrl('ua', { slug })}`;
+const getLinkFromSlug = (slug: any) => `${global.origin}${generateUrl('ua', { slug })}`;
 
-const Share = ({ className, slug, step, data, analyticsCategory }) => {
+type OwnShareProps = {
+    className?: string;
+    slug: string;
+    step?: string;
+    data?: {
+        title: string;
+        text: string;
+        share?: any;
+    };
+    analyticsCategory?: string;
+};
+
+// @ts-expect-error TS(2456): Type alias 'ShareProps' circularly references itse... Remove this comment to see the full error message
+type ShareProps = OwnShareProps & typeof Share.defaultProps;
+
+// @ts-expect-error TS(7022): 'Share' implicitly has type 'any' because it does ... Remove this comment to see the full error message
+const Share = ({ className, slug, step, data, analyticsCategory }: ShareProps) => {
     const title = get(data, 'title');
     const text = get(data, 'text');
     const share = get(data, 'share');
@@ -54,17 +74,24 @@ const Share = ({ className, slug, step, data, analyticsCategory }) => {
     const link = getLinkFromSlug(slug);
 
     return (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={className}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="header">
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <h1>
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <LongText text={title} />
                 </h1>
                 {text && (
+                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <div className="text">
+                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <RichText html={text} />
                     </div>
                 )}
             </div>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <ShareForm
                 {...share}
                 slug={slug}
@@ -73,7 +100,9 @@ const Share = ({ className, slug, step, data, analyticsCategory }) => {
                 analyticsCategory={analyticsCategory}
             />
             {telegram && telegram.url && telegram.message && (
+                // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                 <div className="telegram">
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <hr
                         style={{
                             color: '#c4c4c4',
@@ -83,10 +112,14 @@ const Share = ({ className, slug, step, data, analyticsCategory }) => {
                             marginBottom: '1rem',
                         }}
                     />
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <div className="text">
+                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <RichText html={telegram.message} />
                     </div>
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <div className="link">
+                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <LinkTelegram
                             slug={slug}
                             step={step}
@@ -102,18 +135,6 @@ const Share = ({ className, slug, step, data, analyticsCategory }) => {
     );
 };
 
-Share.propTypes = {
-    className: PropTypes.string,
-    slug: PropTypes.string.isRequired,
-    step: PropTypes.string,
-    data: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        share: PropTypes.object,
-    }),
-    analyticsCategory: PropTypes.string,
-};
-
 Share.defaultProps = {
     slug: 'new-ua',
     data: {
@@ -123,4 +144,5 @@ Share.defaultProps = {
     },
 };
 
+// @ts-expect-error TS(2769): No overload matches this call.
 export default styled(Share)(styles);

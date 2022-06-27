@@ -1,13 +1,34 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reco... Remove this comment to see the full error message
 import { compose } from 'recompose';
 
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import generateUrl from '../services/generateUrl';
+// @ts-expect-error TS(6142): Module '../DataContext' was resolved to '/home/gui... Remove this comment to see the full error message
 import { withSessionData } from '../DataContext';
 import { paramsType } from '../propTypes';
 
-export class MailPdfButton extends Component {
+type Props = {
+    auId: string;
+    object: string;
+    civility: string;
+    firstname: string;
+    lastname: string;
+    addressMain: string;
+    addressMore?: string;
+    postalCode: string;
+    city: string;
+    country: string;
+    email: string;
+    // @ts-expect-error TS(2749): 'paramsType' refers to a value, but is being used ... Remove this comment to see the full error message
+    match?: paramsType;
+    disabled?: boolean;
+    buttonText: string;
+    analyticsCategory?: string;
+    step?: string;
+};
+
+export class MailPdfButton extends Component<Props> {
     sendMail = () => {
         const {
             auId,
@@ -47,6 +68,7 @@ export class MailPdfButton extends Component {
         const { disabled, buttonText, analyticsCategory, step } = this.props;
 
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <ToUrgentActionPageLink
                 onClick={this.sendMail}
                 pageName="thanks-end"
@@ -59,24 +81,5 @@ export class MailPdfButton extends Component {
         );
     }
 }
-
-MailPdfButton.propTypes = {
-    auId: PropTypes.string.isRequired,
-    object: PropTypes.string.isRequired,
-    civility: PropTypes.string.isRequired,
-    firstname: PropTypes.string.isRequired,
-    lastname: PropTypes.string.isRequired,
-    addressMain: PropTypes.string.isRequired,
-    addressMore: PropTypes.string,
-    postalCode: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    match: paramsType,
-    disabled: PropTypes.bool,
-    buttonText: PropTypes.string.isRequired,
-    analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
-};
 
 export default compose(withSessionData)(MailPdfButton);

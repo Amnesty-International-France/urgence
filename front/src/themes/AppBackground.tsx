@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
+// @ts-expect-error TS(6142): Module './ThemeContext' was resolved to '/home/gui... Remove this comment to see the full error message
 import { withThemeContext } from './ThemeContext';
 
 const Rectangle = styled('div')(
@@ -33,20 +33,23 @@ const Triangle = styled('div')(
     }),
 );
 
-export const AppBackground = ({ className, context }) => (
+type Props = {
+    className?: string;
+    context: {
+        backgroundColor?: string;
+        logoColor?: string;
+        logoBackgroundColor?: string;
+    };
+};
+
+export const AppBackground = ({ className, context }: Props) => (
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <div className={className}>
+        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <Rectangle color={context.backgroundColor} />
+        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <Triangle color={context.backgroundColor} />
     </div>
 );
-
-AppBackground.propTypes = {
-    className: PropTypes.string,
-    context: PropTypes.shape({
-        backgroundColor: PropTypes.string,
-        logoColor: PropTypes.string,
-        logoBackgroundColor: PropTypes.string,
-    }).isRequired,
-};
 
 export default withThemeContext(AppBackground);

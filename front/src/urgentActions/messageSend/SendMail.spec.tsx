@@ -1,7 +1,10 @@
 import React from 'react';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { shallow } from 'enzyme';
 
+// @ts-expect-error TS(6142): Module '../../themes/MailTo' was resolved to '/hom... Remove this comment to see the full error message
 import MailTo from '../../themes/MailTo';
+// @ts-expect-error TS(6142): Module './SendMail' was resolved to '/home/guillau... Remove this comment to see the full error message
 import { SendMail } from './SendMail';
 
 import { addCampaignMember } from '../../services/api';
@@ -25,7 +28,7 @@ describe('SendMail', () => {
     };
 
     beforeEach(() => {
-        addCampaignMember.mockReturnValue(Promise.resolve());
+        (addCampaignMember as any).mockReturnValue(Promise.resolve());
     });
 
     describe('MailTo', () => {
@@ -34,6 +37,7 @@ describe('SendMail', () => {
                 ...defaultProps,
                 ...defaultContext,
             };
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const wrapper = shallow(<SendMail {...props} />);
 
             expect(wrapper.find(MailTo).prop('body')).toBe('hello\n\nworld\n\nfirstname lastname');
@@ -44,6 +48,7 @@ describe('SendMail', () => {
                 ...defaultProps,
                 ...defaultContext,
             };
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const wrapper = shallow(<SendMail {...props} />);
 
             expect(wrapper.find(MailTo).prop('recipient')).toBe(defaultProps.recipient);
@@ -55,6 +60,7 @@ describe('SendMail', () => {
                 ...defaultProps,
                 ...defaultContext,
             };
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const wrapper = shallow(<SendMail {...props} />);
 
             expect(wrapper.find(MailTo).prop('subject')).toBe('object');
@@ -70,7 +76,7 @@ describe('SendMail', () => {
                     },
                 },
             };
-            addCampaignMember.mockReturnValue(Promise.resolve(addCampaignMemberResult));
+            (addCampaignMember as any).mockReturnValue(Promise.resolve(addCampaignMemberResult));
 
             const props = {
                 ...defaultProps,
@@ -78,6 +84,7 @@ describe('SendMail', () => {
                 afterMail: jest.fn(),
                 registered: 'true',
             };
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const wrapper = shallow(<SendMail {...props} />);
 
             wrapper
@@ -97,7 +104,7 @@ describe('SendMail', () => {
                     },
                 },
             };
-            addCampaignMember.mockReturnValue(Promise.resolve(addCampaignMemberResult));
+            (addCampaignMember as any).mockReturnValue(Promise.resolve(addCampaignMemberResult));
 
             const props = {
                 ...defaultProps,
@@ -105,6 +112,7 @@ describe('SendMail', () => {
                 afterMail: jest.fn(),
                 registered: 'false',
             };
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const wrapper = shallow(<SendMail {...props} />);
 
             wrapper

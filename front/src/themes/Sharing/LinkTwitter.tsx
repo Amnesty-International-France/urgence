@@ -1,10 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
+// @ts-expect-error TS(6142): Module './ShareLink' was resolved to '/home/guilla... Remove this comment to see the full error message
 import ShareLink from './ShareLink';
 
-export const LinkTwitter = ({ slug, step, text, action, analyticsCategory }) => (
+type OwnProps = {
+    slug?: string;
+    step?: string;
+    text: string;
+    action?: (...args: any[]) => any;
+    analyticsCategory?: string;
+};
+
+// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
+type Props = OwnProps & typeof LinkTwitter.defaultProps;
+
+// @ts-expect-error TS(7022): 'LinkTwitter' implicitly has type 'any' because it... Remove this comment to see the full error message
+export const LinkTwitter = ({ slug, step, text, action, analyticsCategory }: Props) => (
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <ShareLink
         customClass="twitter-share-button"
         slug={slug}
@@ -19,14 +32,6 @@ export const LinkTwitter = ({ slug, step, text, action, analyticsCategory }) => 
         backgroundColor="#4caaea"
     />
 );
-
-LinkTwitter.propTypes = {
-    slug: PropTypes.string,
-    step: PropTypes.string,
-    text: PropTypes.string.isRequired,
-    action: PropTypes.func,
-    analyticsCategory: PropTypes.string,
-};
 
 LinkTwitter.defaultProps = {
     text: '',

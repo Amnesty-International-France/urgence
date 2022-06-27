@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import get from 'lodash.get';
 import Paper from '@material-ui/core/Paper';
 
 import { white, black } from '../../themes/colors';
+// @ts-expect-error TS(6142): Module '../../themes/RichText' was resolved to '/h... Remove this comment to see the full error message
 import RichText from '../../themes/RichText';
 import MobileDetect from 'mobile-detect';
 
@@ -74,7 +75,25 @@ const isOnMobile = () => {
     const md = new MobileDetect(global.navigator.userAgent);
     return md.mobile();
 };
-export const StoryCover = ({ className, content, medium, mediumDesktop, isMobile }) => {
+
+type StoryCoverProps = {
+    className?: string;
+    content: string;
+    medium?: {
+        src: string;
+    };
+    mediumDesktop?: {
+        src: string;
+    };
+    isMobile?: boolean;
+};
+export const StoryCover = ({
+    className,
+    content,
+    medium,
+    mediumDesktop,
+    isMobile,
+}: StoryCoverProps) => {
     const currentMedium = isMobile || isOnMobile() || !mediumDesktop ? medium : mediumDesktop;
     const src = get(currentMedium, 'src.rawFile.preview') || get(currentMedium, 'src');
     const imageSrc = typeof src === 'string' ? src : '';
@@ -82,7 +101,9 @@ export const StoryCover = ({ className, content, medium, mediumDesktop, isMobile
     const croppedImageSrc = imageSrc.replace(lastUrlParam, '/crop-$1');
 
     return (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={className}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Paper
                 className="paper"
                 style={{
@@ -96,8 +117,11 @@ export const StoryCover = ({ className, content, medium, mediumDesktop, isMobile
                 elevation={6}
                 square
             >
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div className="step">
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <div className="content">
+                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <RichText html={content} />
                     </div>
                 </div>
@@ -106,16 +130,5 @@ export const StoryCover = ({ className, content, medium, mediumDesktop, isMobile
     );
 };
 
-StoryCover.propTypes = {
-    className: PropTypes.string,
-    content: PropTypes.string.isRequired,
-    medium: PropTypes.shape({
-        src: PropTypes.string.isRequired,
-    }),
-    mediumDesktop: PropTypes.shape({
-        src: PropTypes.string.isRequired,
-    }),
-    isMobile: PropTypes.bool,
-};
-
+// @ts-expect-error TS(2769): No overload matches this call.
 export default styled(StoryCover)(styles);

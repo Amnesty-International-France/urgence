@@ -1,7 +1,10 @@
 import React from 'react';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { shallow } from 'enzyme';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'ramd... Remove this comment to see the full error message
 import { assocPath } from 'ramda';
 
+// @ts-expect-error TS(6142): Module './MailTo' was resolved to '/home/guillaume... Remove this comment to see the full error message
 import { MailTo, buildMailDest } from './MailTo';
 
 describe('MailTo', () => {
@@ -17,6 +20,7 @@ describe('MailTo', () => {
     };
 
     it('should render a mailto link ', () => {
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         const wrapper = shallow(<MailTo {...defaultProps} />);
 
         expect(wrapper.find('a').length).toBe(1);
@@ -52,6 +56,7 @@ describe('MailTo', () => {
             disabled: true,
         };
 
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         const wrapper = shallow(<MailTo {...props} />);
 
         expect(wrapper.find('a').prop('className')).toBe('disabled');

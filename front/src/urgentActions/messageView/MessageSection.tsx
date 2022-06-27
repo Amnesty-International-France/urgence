@@ -1,19 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
+// @ts-expect-error TS(6142): Module '../../themes/RichText' was resolved to '/h... Remove this comment to see the full error message
 import RichText from '../../themes/RichText';
 
-export const MessageSection = ({ className, content }) => (
+type Props = {
+    className?: string;
+    content?: string;
+};
+
+export const MessageSection = ({ className, content }: Props) => (
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <div className={className}>
+        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <RichText html={(content || '').trim().replace(/\n/g, '<br>')} />
     </div>
 );
-
-MessageSection.propTypes = {
-    className: PropTypes.string,
-    content: PropTypes.string,
-};
 
 export default styled(MessageSection)({
     '& .rich-text, & > p': {

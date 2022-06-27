@@ -1,16 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reco... Remove this comment to see the full error message
 import { compose } from 'recompose';
 import classnames from 'classnames';
 import Paper from '@material-ui/core/Paper';
 
 import { white, black } from '../../themes/colors';
 
+// @ts-expect-error TS(6142): Module './Form' was resolved to '/home/guillaume/d... Remove this comment to see the full error message
 import Form from './Form';
+// @ts-expect-error TS(6142): Module '../../themes/ThemeContext' was resolved to... Remove this comment to see the full error message
 import { withYellowLogo } from '../../themes/ThemeContext';
+// @ts-expect-error TS(6142): Module '../../themes/RichText' was resolved to '/h... Remove this comment to see the full error message
 import RichText from '../../themes/RichText';
+// @ts-expect-error TS(6142): Module '../../DataContext' was resolved to '/home/... Remove this comment to see the full error message
 import { withSessionData } from '../../DataContext';
+// @ts-expect-error TS(6142): Module '../LegalInformation' was resolved to '/hom... Remove this comment to see the full error message
 import LegalInformation from '../LegalInformation';
 
 const styles = {
@@ -59,6 +64,26 @@ const styles = {
     },
 };
 
+type Props = {
+    className?: string;
+    text: string;
+    messageTemplate?: {
+        value: string;
+    }[];
+    civility?: string;
+    firstname?: string;
+    lastname?: string;
+    email?: string;
+    setCivility: (...args: any[]) => any;
+    setFirstname: (...args: any[]) => any;
+    setLastname: (...args: any[]) => any;
+    setEmail: (...args: any[]) => any;
+    gdprMessage?: string;
+    action: React.ReactNode;
+    analyticsCategory?: string;
+    step?: string;
+};
+
 export const MessageSend = ({
     text,
     messageTemplate,
@@ -66,47 +91,39 @@ export const MessageSend = ({
     action,
     className,
     ...props
-}) => {
+}: Props) => {
     if (!messageTemplate || !messageTemplate.length) {
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         return <p className="error">Cette action urgente n&#39;existe plus.</p>;
     }
 
     return (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={classnames('message-send', className)}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Paper className="paper" elevation={6} square>
                 {text && (
+                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <div className="text">
+                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <RichText html={text} />
                     </div>
                 )}
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div className="form-step">
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <Form {...props} />
                 </div>
             </Paper>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="action">{action}</div>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <LegalInformation content={gdprMessage} />
         </div>
     );
 };
 
-MessageSend.propTypes = {
-    className: PropTypes.string,
-    text: PropTypes.string.isRequired,
-    messageTemplate: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired })),
-    civility: PropTypes.string,
-    firstname: PropTypes.string,
-    lastname: PropTypes.string,
-    email: PropTypes.string,
-    setCivility: PropTypes.func.isRequired,
-    setFirstname: PropTypes.func.isRequired,
-    setLastname: PropTypes.func.isRequired,
-    setEmail: PropTypes.func.isRequired,
-    gdprMessage: PropTypes.string,
-    action: PropTypes.node.isRequired,
-    analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
-};
-
+// @ts-expect-error TS(2769): No overload matches this call.
 const WithStylesMessageSend = styled(MessageSend)(styles);
 
 export default compose(withYellowLogo, withSessionData)(WithStylesMessageSend);

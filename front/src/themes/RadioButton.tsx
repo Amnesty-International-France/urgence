@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import classnames from 'classnames';
 import { paramsType } from '../propTypes';
 import trackEvent from '../analytics/trackEvent';
+// @ts-expect-error TS(6142): Module '../withRouter' was resolved to '/home/guil... Remove this comment to see the full error message
 import withRouter from '../withRouter';
 
 const styles = {
@@ -36,7 +36,23 @@ const styles = {
     },
 };
 
-export class RadioButton extends Component {
+type Props = {
+    className?: string;
+    label?: string;
+    value?: string;
+    name?: string;
+    onChange?: (...args: any[]) => any;
+    error?: boolean;
+    choices: any[];
+    analyticsCategory?: string;
+    step?: string;
+    // @ts-expect-error TS(2749): 'paramsType' refers to a value, but is being used ... Remove this comment to see the full error message
+    params?: paramsType;
+};
+
+type State = any;
+
+export class RadioButton extends Component<Props, State> {
     state = {
         showError: false,
     };
@@ -61,18 +77,23 @@ export class RadioButton extends Component {
 
         const { showError } = this.state;
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <div className={className}>
                 {label && (
+                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <p className={classnames('label', { warning: showError && error })}>{label}</p>
                 )}
                 {choices.map((item, index) => {
                     return (
+                        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                         <div className="item" key={index}>
+                            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                             <input
                                 type="radio"
                                 name={name}
                                 value={item}
                                 checked={value === item}
+                                // @ts-expect-error TS(2322): Type 'number' is not assignable to type 'string'.
                                 id={index}
                                 className="circle"
                                 onChange={(event) => {
@@ -109,6 +130,7 @@ export class RadioButton extends Component {
                                     );
                                 }}
                             />
+                            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                             <label htmlFor={index}>{item}</label>
                         </div>
                     );
@@ -118,17 +140,5 @@ export class RadioButton extends Component {
     }
 }
 
-RadioButton.propTypes = {
-    className: PropTypes.string,
-    label: PropTypes.string,
-    value: PropTypes.string,
-    name: PropTypes.string,
-    onChange: PropTypes.func,
-    error: PropTypes.bool,
-    choices: PropTypes.array.isRequired,
-    analyticsCategory: PropTypes.string,
-    step: PropTypes.string,
-    params: paramsType,
-};
-
+// @ts-expect-error TS(2769): No overload matches this call.
 export default withRouter(styled(RadioButton)(styles));

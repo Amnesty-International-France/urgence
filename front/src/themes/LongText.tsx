@@ -1,15 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const textToHtml = (str) => (str ? str.replace(/(?:\r\n|\r|\n)/g, '<br/>') : '');
+const textToHtml = (str: any) => (str ? str.replace(/(?:\r\n|\r|\n)/g, '<br/>') : '');
 
-export const LongText = ({ text }) => (
+type OwnLongTextProps = {
+    text: string;
+};
+
+// @ts-expect-error TS(2456): Type alias 'LongTextProps' circularly references i... Remove this comment to see the full error message
+type LongTextProps = OwnLongTextProps & typeof LongText.defaultProps;
+
+// @ts-expect-error TS(7022): 'LongText' implicitly has type 'any' because it do... Remove this comment to see the full error message
+export const LongText = ({ text }: LongTextProps) => (
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <span className="long-text" dangerouslySetInnerHTML={{ __html: textToHtml(text) }} />
 );
-
-LongText.propTypes = {
-    text: PropTypes.string.isRequired,
-};
 
 LongText.defaultProps = {
     text: '',

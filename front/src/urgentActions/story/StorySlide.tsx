@@ -1,6 +1,5 @@
 import React from 'react';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 import 'slick-carousel/slick/slick.css';
@@ -13,16 +12,18 @@ const styles = {
     },
 };
 
-export const StorySlide = ({ children, className, step }) => (
+type Props = {
+    children: (...args: any[]) => any;
+    className?: string;
+    step?: any;
+};
+
+export const StorySlide = ({ children, className, step }: Props) => (
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <div className={classnames(className, 'swiper-slide')}>
+        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <div className="story-step">{children({ ...step })}</div>
     </div>
 );
-
-StorySlide.propTypes = {
-    children: PropTypes.func.isRequired,
-    className: PropTypes.string,
-    step: PropTypes.object,
-};
 
 export default styled(StorySlide)(styles);

@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import get from 'lodash.get';
 import classNames from 'classnames';
 
@@ -31,7 +31,15 @@ const steps = {
     'message-send': 3,
 };
 
-const Stepper = ({ className, data, step, page }) => {
+type Props = {
+    className?: string;
+    data: any;
+    step?: string;
+    page?: string;
+};
+
+const Stepper = ({ className, data, step, page }: Props) => {
+    // @ts-expect-error TS(2538): Type 'undefined' cannot be used as an index type.
     const stepNumber = steps[step];
     if (stepNumber == null) {
         return null;
@@ -45,19 +53,14 @@ const Stepper = ({ className, data, step, page }) => {
     const stepStyle = { width: `calc(${100 / total}% - 6px)` };
 
     return (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={className}>
             {stepStates.map((stepState, i) => (
+                // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                 <div key={i} className={classNames('step', stepState)} style={stepStyle} />
             ))}
         </div>
     );
-};
-
-Stepper.propTypes = {
-    className: PropTypes.string,
-    data: PropTypes.object.isRequired,
-    step: PropTypes.string,
-    page: PropTypes.string,
 };
 
 export default styled(Stepper)(styles);

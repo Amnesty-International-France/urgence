@@ -3,13 +3,21 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Div100Vh from 'react-div-100vh';
 
+// @ts-expect-error TS(6142): Module './story/StoryStep' was resolved to '/home/... Remove this comment to see the full error message
 import StoryStep from './story/StoryStep';
+// @ts-expect-error TS(6142): Module './story/Story' was resolved to '/home/guil... Remove this comment to see the full error message
 import { WithStylesStory as Story } from './story/Story';
+// @ts-expect-error TS(6142): Module './Act' was resolved to '/home/guillaume/de... Remove this comment to see the full error message
 import Act from './Act';
+// @ts-expect-error TS(6142): Module './ThankStep' was resolved to '/home/guilla... Remove this comment to see the full error message
 import ThankStep from './ThankStep';
+// @ts-expect-error TS(6142): Module '../themes/Link' was resolved to '/home/gui... Remove this comment to see the full error message
 import Link from '../themes/Link';
+// @ts-expect-error TS(7016): Could not find a declaration file for module '../.... Remove this comment to see the full error message
 import { routerDecorator, history } from '../../.storybook/decorators';
+// @ts-expect-error TS(6142): Module '../themes/ThemeContext' was resolved to '/... Remove this comment to see the full error message
 import { ThemeProvider } from '../themes/ThemeContext';
+// @ts-expect-error TS(6142): Module '../themes/AppLogo' was resolved to '/home/... Remove this comment to see the full error message
 import AppLogo from '../themes/AppLogo';
 
 const defaultStoryProps = {
@@ -23,8 +31,11 @@ const defaultStoryProps = {
 
 storiesOf('Story Step', module)
     .add('Top Picture, Black Background', () => (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div style={{ height: '100vh' }}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <StoryStep
+                // @ts-expect-error TS(2322): Type '{ medium: { src: string; title: string; }; c... Remove this comment to see the full error message
                 medium={{
                     src: '/img/abdolfatah-soltani.jpg',
                     title: 'Abdolfatah Soltani',
@@ -39,9 +50,12 @@ storiesOf('Story Step', module)
         </div>
     ))
     .add('Top Picture, All Text Sizes', () => (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div style={{ height: '100vh' }}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <StoryStep
                 {...defaultStoryProps}
+                // @ts-expect-error TS(2322): Type '{ content: string; }' is not assignable to t... Remove this comment to see the full error message
                 content={`
                     <p>
                         Le 26 mars, une cour d'appel militaire a confirmé <span class="ql-size-large">la condamnation à mort</span> des deux hommes,
@@ -53,22 +67,30 @@ storiesOf('Story Step', module)
         </div>
     ))
     .add('Top Picture, Yellow Background', () => (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div style={{ height: '100vh' }}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <StoryStep {...defaultStoryProps} />
         </div>
     ))
     .add('Top Picture, Pink Background', () => (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div style={{ height: '100vh' }}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <StoryStep {...defaultStoryProps} />
         </div>
     ))
     .add('No Picture, Yellow Background', () => (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div style={{ height: '100vh' }}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <StoryStep {...defaultStoryProps} />
         </div>
     ))
     .add('Bottom Picture, Black Background', () => (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div style={{ height: '100vh' }}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <StoryStep {...defaultStoryProps} />
         </div>
     ));
@@ -76,11 +98,14 @@ storiesOf('Story Step', module)
 storiesOf('Story', module)
     .addDecorator(routerDecorator)
     .add('Full Story', () => (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div style={{ height: '100vh' }}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Story
                 context={{
                     changeLogoColor: action('Changing logo color'),
                 }}
+                // @ts-expect-error TS(2322): Type '{ context: { changeLogoColor: HandlerFunctio... Remove this comment to see the full error message
                 loading={false}
                 history={history}
                 params={{
@@ -141,12 +166,17 @@ storiesOf('Act', module)
         };
 
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <ThemeProvider>
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <Div100Vh>
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <AppLogo />
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <Act
                         data={data}
                         actions={() => (
+                            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                             <Link to="#" label={data.button} onClick={action('Link clicked')} />
                         )}
                     />
@@ -165,9 +195,13 @@ storiesOf('Thanks', module)
         };
 
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <ThemeProvider>
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <Div100Vh>
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <AppLogo />
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <ThankStep data={data} />
                 </Div100Vh>
             </ThemeProvider>
@@ -180,9 +214,13 @@ storiesOf('Thanks', module)
         };
 
         return (
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <ThemeProvider>
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <Div100Vh>
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <AppLogo />
+                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <ThankStep data={data} />
                 </Div100Vh>
             </ThemeProvider>

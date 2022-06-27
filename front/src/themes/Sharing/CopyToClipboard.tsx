@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import Button from '@material-ui/core/Button';
 
 import trackEvent from '../../analytics/trackEvent';
+// @ts-expect-error TS(6142): Module '../CopyToClipboardButton' was resolved to ... Remove this comment to see the full error message
 import CopyToClipboardButton from '../CopyToClipboardButton';
 import { black } from '../colors';
 
@@ -42,7 +42,28 @@ const styles = {
     },
 };
 
-export const CopyToClipboard = ({ className, slug, step, url, action, analyticsCategory }) => (
+type OwnProps = {
+    className: string;
+    slug?: string;
+    step?: string;
+    url: string;
+    action?: (...args: any[]) => any;
+    analyticsCategory?: string;
+};
+
+// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
+type Props = OwnProps & typeof CopyToClipboard.defaultProps;
+
+// @ts-expect-error TS(7022): 'CopyToClipboard' implicitly has type 'any' becaus... Remove this comment to see the full error message
+export const CopyToClipboard = ({
+    className,
+    slug,
+    step,
+    url,
+    action,
+    analyticsCategory,
+}: Props) => (
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <Button
         className={className}
         onClick={(event) => {
@@ -54,27 +75,23 @@ export const CopyToClipboard = ({ className, slug, step, url, action, analyticsC
         }}
         variant="outlined"
     >
+        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <CopyToClipboardButton textToCopy={url}>
+            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="inline">
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <span className="url">{url}</span>
+                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <FontAwesomeIcon icon={faLink} size="2x" className="icon" />
             </div>
         </CopyToClipboardButton>
     </Button>
 );
 
-CopyToClipboard.propTypes = {
-    className: PropTypes.string.isRequired,
-    slug: PropTypes.string,
-    step: PropTypes.string,
-    url: PropTypes.string.isRequired,
-    action: PropTypes.func,
-    analyticsCategory: PropTypes.string,
-};
-
 CopyToClipboard.defaultProps = {
     url: '',
     action: () => {},
 };
 
+// @ts-expect-error TS(2769): No overload matches this call.
 export default styled(CopyToClipboard)(styles);

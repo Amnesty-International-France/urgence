@@ -3,18 +3,23 @@ import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 
 import { black, yellow } from '../themes/colors';
+// @ts-expect-error TS(6142): Module '../themes/LongText' was resolved to '/home... Remove this comment to see the full error message
 import LongText from '../themes/LongText';
+// @ts-expect-error TS(6142): Module '../themes/RichText' was resolved to '/home... Remove this comment to see the full error message
 import RichText from '../themes/RichText';
 
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate, useParams } from 'react-router';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reco... Remove this comment to see the full error message
 import { compose } from 'recompose';
 import permanentData from '../data/permanentData';
+// @ts-expect-error TS(6142): Module '../DataContext' was resolved to '/home/gui... Remove this comment to see the full error message
 import { withSessionData } from '../DataContext';
 import { secureUseEffect, secureUseState } from '../hooks/secureHooks';
 import { addCampaignMemberTwitter, addResponseCount } from '../services/api';
 import generateUrl from '../services/generateUrl';
+// @ts-expect-error TS(6142): Module './Sharing/LinkTwitter' was resolved to '/h... Remove this comment to see the full error message
 import LinkTwitter from './Sharing/LinkTwitter';
 
 const styles = {
@@ -113,8 +118,8 @@ export const TransitionScreen = ({
     responseCount,
     interpelationMode,
     twitterAction,
-    auId,
-}) => {
+    auId
+}: any) => {
     const [displayProgress, setDisplayProgress] = secureUseState(false);
     const firstname = permanentData.getFirstname();
     const lastname = permanentData.getLastname();
@@ -133,14 +138,17 @@ export const TransitionScreen = ({
             !responseCount ||
             !responseCount < progress.display_threshold
         ) {
+            // @ts-expect-error TS(2349): This expression is not callable.
             setDisplayProgress(false);
             return;
         }
+        // @ts-expect-error TS(2349): This expression is not callable.
         setDisplayProgress(true);
+    // @ts-expect-error TS(2554): Expected 1 arguments, but got 2.
     }, [progress]);
 
-    const textToHtml = (str) => (str ? str.replace(/(?:\r\n|\r|\n)/g, '<br/>') : '');
-    const formatText = (text) => {
+    const textToHtml = (str: any) => str ? str.replace(/(?:\r\n|\r|\n)/g, '<br/>') : '';
+    const formatText = (text: any) => {
         if (!text) {
             return '';
         }
@@ -175,7 +183,7 @@ export const TransitionScreen = ({
                         // eslint-disable-next-line no-console
                         console.log(
                             'Failed adding campaign member twitter',
-                            result.errors.map((error) => `- ${error.message}`).join('\n'),
+                            result.errors.map((error: any) => `- ${error.message}`).join('\n'),
                         );
                     }
                 })
@@ -186,46 +194,69 @@ export const TransitionScreen = ({
 
     const urlToRedirect = registered ? 'share' : 'register';
     return (
+        // @ts-expect-error TS(2304): Cannot find name 'div'.
         <div className={className}>
+            // @ts-expect-error TS(2749): 'Paper' refers to a value, but is being used as a ... Remove this comment to see the full error message
             <Paper className="paper" elevation={4} square>
+                // @ts-expect-error TS(2304): Cannot find name 'div'.
                 <div className="step">
                     {displayProgress && (
+                        // @ts-expect-error TS(2304): Cannot find name 'div'.
                         <div className="progress">
+                            // @ts-expect-error TS(2304): Cannot find name 'div'.
                             <div className="progressChart">
+                                // @ts-expect-error TS(2749): 'CircularProgressbarWithChildren' refers to a valu... Remove this comment to see the full error message
                                 <CircularProgressbarWithChildren
+                                    // @ts-expect-error TS(2304): Cannot find name 'value'.
                                     value={responseCount}
+                                    // @ts-expect-error TS(2304): Cannot find name 'maxValue'.
                                     maxValue={progress.objective}
+                                    // @ts-expect-error TS(2588): Cannot assign to 'styles' because it is a constant... Remove this comment to see the full error message
                                     styles={buildStyles({
+                                        // @ts-expect-error TS(2300): Duplicate identifier '(Missing)'.
                                         pathColor: '#ef8200',
+                                        // @ts-expect-error TS(2300): Duplicate identifier '(Missing)'.
                                         strokeLinecap: 'butt',
                                     })}
                                 >
+                                    // @ts-expect-error TS(2304): Cannot find name 'div'.
                                     <div
                                         className="progressChartContent"
+                                        // @ts-expect-error TS(2304): Cannot find name 'dangerouslySetInnerHTML'.
                                         dangerouslySetInnerHTML={{
                                             __html: textToHtml(formatText(progress.message)),
                                         }}
+                                    // @ts-expect-error TS(2365): Operator '<' cannot be applied to types 'boolean' ... Remove this comment to see the full error message
                                     ></div>
                                 </CircularProgressbarWithChildren>
                             </div>
                         </div>
                     )}
+                    // @ts-expect-error TS(2304): Cannot find name 'h1'.
                     <h1>
+                        // @ts-expect-error TS(2709): Cannot use namespace 'LongText' as a type.
                         <LongText text={title} />
                     </h1>
+                    // @ts-expect-error TS(2552): Cannot find name 'message'. Did you mean 'onmessag... Remove this comment to see the full error message
                     {message && (
+                        // @ts-expect-error TS(2304): Cannot find name 'div'.
                         <div className="text">
+                            // @ts-expect-error TS(2749): 'RichText' refers to a value, but is being used as... Remove this comment to see the full error message
                             <RichText html={message} />
                         </div>
                     )}
 
+                    // @ts-expect-error TS(2304): Cannot find name 'interpelationMode'.
                     {interpelationMode === 'rs' && (
+                        // @ts-expect-error TS(2304): Cannot find name 'div'.
                         <div className="social-media">
+                            // @ts-expect-error TS(2709): Cannot use namespace 'LinkTwitter' as a type.
                             <LinkTwitter text={getTwitterText()} action={addTwitterMember} />
                         </div>
                     )}
                 </div>
             </Paper>
+            // @ts-expect-error TS(2304): Cannot find name 'interpelationMode'.
             {interpelationMode === 'email' && <div className="actions">{actions()}</div>}
         </div>
     );
@@ -256,4 +287,5 @@ TransitionScreen.defaultProps = {
     message: '',
 };
 
+// @ts-expect-error TS(2769): No overload matches this call.
 export default styled(compose(withSessionData)(TransitionScreen))(styles);

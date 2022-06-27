@@ -1,5 +1,7 @@
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { shallow } from 'enzyme';
 
+// @ts-expect-error TS(6142): Module './AddressStep' was resolved to '/home/guil... Remove this comment to see the full error message
 import { AddressStep } from './AddressStep';
 
 describe('<AddressStep />', () => {
@@ -21,6 +23,7 @@ describe('<AddressStep />', () => {
     };
 
     it('should put action result inside .action div', () => {
+        // @ts-expect-error TS(2352): Conversion of type '{ action: () => string; classN... Remove this comment to see the full error message
         const wrapper = shallow(<AddressStep {...defaultProps} />);
         const action = wrapper.find('.action');
         expect(action.html()).toBe('<div class="action">action</div>');
@@ -32,6 +35,7 @@ describe('<AddressStep />', () => {
             action: jest.fn(),
         };
 
+        // @ts-expect-error TS(2352): Conversion of type '{ action: jest.Mock<any, any>;... Remove this comment to see the full error message
         shallow(<AddressStep {...props} />);
         expect(props.action).toHaveBeenCalledWith(false);
     });
@@ -48,6 +52,7 @@ describe('<AddressStep />', () => {
             email: null,
         };
 
+        // @ts-expect-error TS(2352): Conversion of type '{ action: jest.Mock<any, any>;... Remove this comment to see the full error message
         shallow(<AddressStep {...props} />);
         expect(props.action).toHaveBeenCalledWith(true);
     });
@@ -64,6 +69,7 @@ describe('<AddressStep />', () => {
             email: 'myemail',
         };
 
+        // @ts-expect-error TS(2352): Conversion of type '{ action: jest.Mock<any, any>;... Remove this comment to see the full error message
         shallow(<AddressStep {...props} />);
         expect(props.action).toHaveBeenCalledWith(false);
     });
@@ -74,6 +80,7 @@ describe('<AddressStep />', () => {
             setAddressMain: jest.fn(),
         };
 
+        // @ts-expect-error TS(2352): Conversion of type '{ setAddressMain: jest.Mock<an... Remove this comment to see the full error message
         const wrapper = shallow(<AddressStep {...props} />);
         const input = wrapper.find('.addressMain');
 
@@ -90,6 +97,7 @@ describe('<AddressStep />', () => {
             setAddressMore: jest.fn(),
         };
 
+        // @ts-expect-error TS(2352): Conversion of type '{ setAddressMore: jest.Mock<an... Remove this comment to see the full error message
         const wrapper = shallow(<AddressStep {...props} />);
         const input = wrapper.find('.addressMore');
 
@@ -106,6 +114,7 @@ describe('<AddressStep />', () => {
             setPostalCode: jest.fn(),
         };
 
+        // @ts-expect-error TS(2352): Conversion of type '{ setPostalCode: jest.Mock<any... Remove this comment to see the full error message
         const wrapper = shallow(<AddressStep {...props} />);
         const input = wrapper.find('.postalCode');
 
@@ -122,6 +131,7 @@ describe('<AddressStep />', () => {
             setCity: jest.fn(),
         };
 
+        // @ts-expect-error TS(2352): Conversion of type '{ setCity: jest.Mock<any, any>... Remove this comment to see the full error message
         const wrapper = shallow(<AddressStep {...props} />);
         const input = wrapper.find('.city');
 
@@ -138,6 +148,7 @@ describe('<AddressStep />', () => {
             setCountry: jest.fn(),
         };
 
+        // @ts-expect-error TS(2352): Conversion of type '{ setCountry: jest.Mock<any, a... Remove this comment to see the full error message
         const wrapper = shallow(<AddressStep {...props} />);
         const input = wrapper.find('.country');
 
@@ -154,6 +165,7 @@ describe('<AddressStep />', () => {
             setEmail: jest.fn(),
         };
 
+        // @ts-expect-error TS(2352): Conversion of type '{ setEmail: jest.Mock<any, any... Remove this comment to see the full error message
         const wrapper = shallow(<AddressStep {...props} />);
         const input = wrapper.find('.email');
 

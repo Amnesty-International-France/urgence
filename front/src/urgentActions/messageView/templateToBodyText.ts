@@ -1,5 +1,5 @@
-export const templateToBodyText = (template, civility, firstname, lastname) =>
+export const templateToBodyText = (template: any, civility: any, firstname: any, lastname: any) =>
     template
-        .map(({ value }) => value.trim())
+        .map(({ value }: any) => value.trim())
         .join('\n\n')
         .concat(firstname && lastname ? `\n\n${firstname} ${lastname}` : '');

@@ -1,11 +1,14 @@
 import React from 'react';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { shallow } from 'enzyme';
 
+// @ts-expect-error TS(6142): Module './Image' was resolved to '/home/guillaume/... Remove this comment to see the full error message
 import { Image } from './Image';
 
 describe('<Image />', () => {
     it('should render a div with correct background image and title', () => {
         const wrapper = shallow(
+            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <Image src="http://localhost:4000/static/foo.jpg" title="Hello!" />,
         );
         const image = wrapper.find('div');
@@ -22,6 +25,7 @@ describe('<Image />', () => {
                 preview: 'http://localhost:4000/static/foo.jpg',
             },
         };
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         const wrapper = shallow(<Image src={src} title="Hello!" />);
         const image = wrapper.find('div');
 

@@ -1,5 +1,4 @@
 import React, { createContext, useState } from 'react';
-import PropTypes from 'prop-types';
 
 import data from './data';
 
@@ -20,7 +19,11 @@ const { Provider, Consumer } = createContext({
 
 export const DataConsumer = Consumer;
 
-export const DataProvider = ({ children }) => {
+type DataProviderProps = {
+    children: React.ReactNode;
+};
+
+export const DataProvider = ({ children }: DataProviderProps) => {
     const [object, setMailObject] = useState(data.getMailObject());
     const [civility, setCivility] = useState(data.getCivility());
     const [firstname, setFirstname] = useState(data.getFirstname());
@@ -34,57 +37,57 @@ export const DataProvider = ({ children }) => {
     const [email, setEmail] = useState(data.getEmail());
     const [registered, setRegistered] = useState(data.getRegistered());
 
-    const handleSetObject = (newObject) => {
+    const handleSetObject = (newObject: any) => {
         setMailObject(newObject);
         data.setMailObject(newObject);
     };
 
-    const handleSetCivility = (newCivility) => {
+    const handleSetCivility = (newCivility: any) => {
         setCivility(newCivility);
         data.setCivility(newCivility);
     };
 
-    const handleSetFirstname = (newFirstname) => {
+    const handleSetFirstname = (newFirstname: any) => {
         setFirstname(newFirstname);
         data.setFirstname(newFirstname);
     };
 
-    const handleSetLastname = (newLastname) => {
+    const handleSetLastname = (newLastname: any) => {
         setLastname(newLastname);
         data.setLastname(newLastname);
     };
 
-    const handleSetAddressMain = (newAddressMain) => {
+    const handleSetAddressMain = (newAddressMain: any) => {
         setAddressMain(newAddressMain);
         data.setAddressMain(newAddressMain);
     };
 
-    const handleSetAddressMore = (newAddressMore) => {
+    const handleSetAddressMore = (newAddressMore: any) => {
         setAddressMore(newAddressMore);
         data.setAddressMore(newAddressMore);
     };
 
-    const handleSetPostalCode = (newPostalCode) => {
+    const handleSetPostalCode = (newPostalCode: any) => {
         setPostalCode(newPostalCode);
         data.setPostalCode(newPostalCode);
     };
 
-    const handleSetCity = (newCity) => {
+    const handleSetCity = (newCity: any) => {
         setCity(newCity);
         data.setCity(newCity);
     };
 
-    const handleSetCountry = (newCountry) => {
+    const handleSetCountry = (newCountry: any) => {
         setCountry(newCountry);
         data.setCountry(newCountry);
     };
 
-    const handleSetPhone = (newPhone) => {
+    const handleSetPhone = (newPhone: any) => {
         setPhone(newPhone);
         data.setPhone(newPhone);
     };
 
-    const handleSetEmail = (newEmail) => {
+    const handleSetEmail = (newEmail: any) => {
         setEmail(newEmail);
         data.setEmail(newEmail);
     };
@@ -95,6 +98,7 @@ export const DataProvider = ({ children }) => {
     };
 
     return (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <Provider
             value={{
                 object,
@@ -109,6 +113,7 @@ export const DataProvider = ({ children }) => {
                 phone,
                 email,
                 registered,
+                // @ts-expect-error TS(2322): Type '{ object: any; civility: any; firstname: any... Remove this comment to see the full error message
                 setObject: handleSetObject,
                 setCivility: handleSetCivility,
                 setFirstname: handleSetFirstname,
@@ -128,9 +133,8 @@ export const DataProvider = ({ children }) => {
     );
 };
 
-DataProvider.propTypes = {
-    children: PropTypes.node.isRequired,
-};
-
-export const withSessionData = (Component) => (props) =>
-    <DataConsumer>{(context) => <Component {...props} {...context} />}</DataConsumer>;
+export const withSessionData = (Component: any) => (props: any) =>
+    (
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+        <DataConsumer>{(context) => <Component {...props} {...context} />}</DataConsumer>
+    );

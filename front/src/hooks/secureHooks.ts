@@ -12,22 +12,22 @@ import { useState, useEffect } from 'react';
  * See https://fb.me/react-invalid-hook-call for tips about how to debug and fix this problem.
  */
 
-export const secureUseState = (defaultValue) => {
+export const secureUseState = (defaultValue: any) => {
     try {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         return useState(defaultValue);
     } catch (error) {
-        console.warn("useState doesn't work through admin preview", error.message);
+        console.warn("useState doesn't work through admin preview", (error as any).message);
         return [false, () => true];
     }
 };
 
-export const secureUseEffect = (action) => {
+export const secureUseEffect = (action: any) => {
     try {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         return useEffect(action);
     } catch (error) {
-        console.warn("useEffect doesn't work through admin preview", error.message);
+        console.warn("useEffect doesn't work through admin preview", (error as any).message);
         return [false, () => true];
     }
 };

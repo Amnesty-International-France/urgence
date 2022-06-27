@@ -50,6 +50,7 @@ describe('generateUrl', () => {
     });
 
     it('should throw error if receiving unknow route', () => {
+        // @ts-expect-error TS(2554): Expected 1-2 arguments, but got 0.
         expect(() => generateUrl()).toThrow('Unknown route undefined passed to generateUrl');
         expect(() => generateUrl('bad_route')).toThrow(
             'Unknown route bad_route passed to generateUrl',
