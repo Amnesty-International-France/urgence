@@ -7,22 +7,15 @@ import { compose } from 'recompose';
 import classnames from 'classnames';
 import Paper from '@material-ui/core/Paper';
 
-// @ts-expect-error TS(6142): Module '../../themes/RichText' was resolved to '/h... Remove this comment to see the full error message
 import RichText from '../../themes/RichText';
-// @ts-expect-error TS(6142): Module '../../themes/LongText' was resolved to '/h... Remove this comment to see the full error message
 import LongText from '../../themes/LongText';
-// @ts-expect-error TS(6142): Module '../../themes/Input' was resolved to '/home... Remove this comment to see the full error message
 import { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
 import { white, black } from '../../themes/colors';
-// @ts-expect-error TS(6142): Module '../../themes/ThemeContext' was resolved to... Remove this comment to see the full error message
 import { withYellowLogo, withYellowBackground } from '../../themes/ThemeContext';
 
-// @ts-expect-error TS(6142): Module '../../DataContext' was resolved to '/home/... Remove this comment to see the full error message
 import { withSessionData } from '../../DataContext';
 
-// @ts-expect-error TS(6142): Module './Form' was resolved to '/home/guillaume/d... Remove this comment to see the full error message
 import Form from './Form';
-// @ts-expect-error TS(6142): Module '../LegalInformation' was resolved to '/hom... Remove this comment to see the full error message
 import LegalInformation from '../LegalInformation';
 
 const styles = {
@@ -120,36 +113,25 @@ export const RegisterActivist = ({
     const phoneIndication = get(data, 'phone_indication');
 
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={classnames('register', className)}>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Paper className="paper" elevation={6} square>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div className="header">
-                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <h1>
-                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <LongText text={title} />
                     </h1>
                     {text && (
-                        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                         <div className="text">
-                            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                             <RichText html={text} />
                         </div>
                     )}
                 </div>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div className="form-step">
-                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <Form phoneIndication={phoneIndication} {...props} />
                 </div>
             </Paper>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="action">
                 {action(isDisabled(props), { firstname, lastname, phone, email, civility })}
             </div>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <LegalInformation content={gdprRegister} />
         </div>
     );

@@ -11,7 +11,6 @@ type LongTextProps = OwnLongTextProps & typeof LongText.defaultProps;
 
 // @ts-expect-error TS(7022): 'LongText' implicitly has type 'any' because it do... Remove this comment to see the full error message
 export const LongText = ({ text }: LongTextProps) => (
-    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <span className="long-text" dangerouslySetInnerHTML={{ __html: textToHtml(text) }} />
 );
 

@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import classnames from 'classnames';
 import { paramsType } from '../propTypes';
 import trackEvent from '../analytics/trackEvent';
-// @ts-expect-error TS(6142): Module '../withRouter' was resolved to '/home/guil... Remove this comment to see the full error message
 import withRouter from '../withRouter';
 import { black, white, grey, darkGrey } from './colors';
 
@@ -93,7 +92,6 @@ export class Link extends Component<Props> {
         } = this.props;
 
         return (
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <RouterLink
                 to={to}
                 className={classnames(className, { disabled: disabled, white: whiteLink })}

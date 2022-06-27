@@ -7,13 +7,9 @@ import Paper from '@material-ui/core/Paper';
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import get from 'lodash.get';
 
-// @ts-expect-error TS(6142): Module '../themes/RichText' was resolved to '/home... Remove this comment to see the full error message
 import RichText from '../themes/RichText';
-// @ts-expect-error TS(6142): Module '../themes/LongText' was resolved to '/home... Remove this comment to see the full error message
 import LongText from '../themes/LongText';
-// @ts-expect-error TS(6142): Module '../themes/ThemeContext' was resolved to '/... Remove this comment to see the full error message
 import { withBlackLogo, withYellowBackground } from '../themes/ThemeContext';
-// @ts-expect-error TS(6142): Module './share/Share' was resolved to '/home/guil... Remove this comment to see the full error message
 import Share from './share/Share';
 
 const styles = {
@@ -62,24 +58,16 @@ export const ThankStep = ({ className, data, slug, step, dataShare, analyticsCat
     const text = get(data, 'text');
 
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={classnames('thank', className)}>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Paper className="paper" elevation={6} square>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div>
-                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <h1>
-                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <LongText text={title} />
                     </h1>
-                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     {text && <RichText html={text} />}
                 </div>
             </Paper>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Paper className="paper paper-share" elevation={6} square>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <Share
                     slug={slug}
                     step={step}

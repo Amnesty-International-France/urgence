@@ -58,7 +58,6 @@ const CopyToClipboard = ({ children, textToCopy, ...props }: CopyToClipboardProp
     }, [copied]);
 
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <Tooltip title={copied ? 'Lien copié !' : 'Cliquer pour copier'} open={hovered}>
             {/* @ts-expect-error TS(2769): No overload matches this call. */}
             {React.cloneElement(children, {

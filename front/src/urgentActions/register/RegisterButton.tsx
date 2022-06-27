@@ -3,7 +3,6 @@ import React from 'react';
 import get from 'lodash.get';
 
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
-// @ts-expect-error TS(6142): Module '../../DataContext' was resolved to '/home/... Remove this comment to see the full error message
 import { withSessionData } from '../../DataContext';
 import { registerContact } from '../../services/api';
 
@@ -48,7 +47,6 @@ export const RegisterButton = ({
     };
 
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <ToUrgentActionPageLink
             onClick={register}
             pageName="thanks-end"

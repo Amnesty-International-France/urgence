@@ -49,7 +49,6 @@ export const ShareLink = ({
         });
     });
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <Fragment>
             {customScript}
             {/* @ts-expect-error TS(2769): No overload matches this call. */}
@@ -71,9 +70,7 @@ export const ShareLink = ({
                     });
                 }}
             >
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <SvgIcon>
-                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <FontAwesomeIcon icon={icon} size="2x" />
                 </SvgIcon>
             </IconButton>

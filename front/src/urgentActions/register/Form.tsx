@@ -1,10 +1,7 @@
 import React, { Fragment } from 'react';
 
-// @ts-expect-error TS(6142): Module '../../themes/Input' was resolved to '/home... Remove this comment to see the full error message
 import Input, { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
-// @ts-expect-error TS(6142): Module '../../themes/RadioButton' was resolved to ... Remove this comment to see the full error message
 import RadioButton from '../../themes/RadioButton';
-// @ts-expect-error TS(6142): Module '../../themes/RichText' was resolved to '/h... Remove this comment to see the full error message
 import RichText from '../../themes/RichText';
 
 type OwnProps = {
@@ -63,9 +60,7 @@ const Form = ({
     };
 
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <Fragment>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <RadioButton
                 value={civility}
                 name="civility"
@@ -77,7 +72,6 @@ const Form = ({
                 autoComplete="civility"
                 choices={['M.', 'Mme.', 'Autre']}
             />
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Input
                 className="firstname"
                 value={firstname}
@@ -88,7 +82,6 @@ const Form = ({
                 autoComplete="given-name"
                 label="Votre prénom *"
             />
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Input
                 className="lastname"
                 value={lastname}
@@ -99,7 +92,6 @@ const Form = ({
                 autoComplete="family-name"
                 label="Votre nom *"
             />
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Input
                 className="email"
                 type="email"
@@ -111,9 +103,7 @@ const Form = ({
                 step={step}
                 label="Votre adresse e-mail *"
             />
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <RichText className="phone-indication" html={phoneIndication} />
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Input
                 className="phone"
                 type="phone"

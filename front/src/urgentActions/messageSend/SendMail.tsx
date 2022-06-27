@@ -4,13 +4,10 @@ import { compose } from 'recompose';
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import get from 'lodash.get';
 
-// @ts-expect-error TS(6142): Module '../../themes/MailTo' was resolved to '/hom... Remove this comment to see the full error message
 import MailTo from '../../themes/MailTo';
 import { templateToBodyText } from '../messageView/templateToBodyText';
-// @ts-expect-error TS(6142): Module '../../themes/Input' was resolved to '/home... Remove this comment to see the full error message
 import { isCorrectEmail } from '../../themes/Input';
 import { paramsType } from '../../propTypes';
-// @ts-expect-error TS(6142): Module '../../DataContext' was resolved to '/home/... Remove this comment to see the full error message
 import { withSessionData } from '../../DataContext';
 
 import { addCampaignMember, addResponseCount } from '../../services/api';
@@ -90,7 +87,6 @@ export const SendMail = ({
     const body = templateToBodyText(messageTemplate, civility, firstname, lastname);
 
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <MailTo
             disabled={!isCorrectEmail(email) || !object || !civility || !firstname || !lastname}
             label={label}

@@ -4,7 +4,6 @@ import { compose } from 'recompose';
 
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 import generateUrl from '../services/generateUrl';
-// @ts-expect-error TS(6142): Module '../DataContext' was resolved to '/home/gui... Remove this comment to see the full error message
 import { withSessionData } from '../DataContext';
 import { paramsType } from '../propTypes';
 
@@ -68,7 +67,6 @@ export class MailPdfButton extends Component<Props> {
         const { disabled, buttonText, analyticsCategory, step } = this.props;
 
         return (
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <ToUrgentActionPageLink
                 onClick={this.sendMail}
                 pageName="thanks-end"

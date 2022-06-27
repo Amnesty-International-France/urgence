@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import classnames from 'classnames';
 import { paramsType } from '../propTypes';
 import trackEvent from '../analytics/trackEvent';
-// @ts-expect-error TS(6142): Module '../withRouter' was resolved to '/home/guil... Remove this comment to see the full error message
 import withRouter from '../withRouter';
 
 const styles = {
@@ -77,17 +76,13 @@ export class RadioButton extends Component<Props, State> {
 
         const { showError } = this.state;
         return (
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <div className={className}>
                 {label && (
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <p className={classnames('label', { warning: showError && error })}>{label}</p>
                 )}
                 {choices.map((item, index) => {
                     return (
-                        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                         <div className="item" key={index}>
-                            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                             <input
                                 type="radio"
                                 name={name}
@@ -130,7 +125,6 @@ export class RadioButton extends Component<Props, State> {
                                     );
                                 }}
                             />
-                            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                             <label htmlFor={index}>{item}</label>
                         </div>
                     );

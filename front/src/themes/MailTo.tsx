@@ -5,9 +5,7 @@ import styled from '@emotion/styled';
 import classnames from 'classnames';
 import { paramsType } from '../propTypes';
 import trackEvent from '../analytics/trackEvent';
-// @ts-expect-error TS(6142): Module '../withRouter' was resolved to '/home/guil... Remove this comment to see the full error message
 import withRouter from '../withRouter';
-// @ts-expect-error TS(6142): Module './Link' was resolved to '/home/guillaume/d... Remove this comment to see the full error message
 import { styles } from './Link';
 
 export const buildMailDest = (recipient: any, subject: any, body: any) => {
@@ -33,8 +31,7 @@ type Props = {
     };
     analyticsCategory?: string;
     step?: string;
-    // @ts-expect-error TS(2749): 'paramsType' refers to a value, but is being used ... Remove this comment to see the full error message
-    match?: paramsType;
+    params?: any;
 };
 
 export class MailTo extends Component<Props> {
@@ -51,7 +48,6 @@ export class MailTo extends Component<Props> {
             disabled,
             analyticsCategory,
             step,
-            // @ts-expect-error TS(2339): Property 'params' does not exist on type 'Readonly... Remove this comment to see the full error message
             params: { slug },
         } = this.props;
         trackEvent(analyticsCategory, 'Display', 'button', 'SendMail', slug, step, {
@@ -96,7 +92,6 @@ export class MailTo extends Component<Props> {
             (options as any).href = dest;
         }
         return (
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <a
                 className={classnames(className, { disabled })}
                 onClick={(event) => {

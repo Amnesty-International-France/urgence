@@ -5,10 +5,8 @@ import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import { Paper } from '@material-ui/core';
 
-// @ts-expect-error TS(6142): Module '../../themes/ThemeContext' was resolved to... Remove this comment to see the full error message
 import { withBlackLogo, withYellowBackground } from '../../themes/ThemeContext';
 import { white, black } from '../../themes/colors';
-// @ts-expect-error TS(6142): Module './Share' was resolved to '/home/guillaume/... Remove this comment to see the full error message
 import Share from './Share';
 
 const styles = {
@@ -43,11 +41,8 @@ type Props = OwnProps & typeof ShareStep.defaultProps;
 
 // @ts-expect-error TS(7022): 'ShareStep' implicitly has type 'any' because it d... Remove this comment to see the full error message
 const ShareStep = ({ className, slug, step, data, analyticsCategory }: Props) => (
-    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <div className={classnames('share', className)}>
-        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <Paper className="paper" elevation={6} square>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Share slug={slug} step={step} data={data} analyticsCategory={analyticsCategory} />
         </Paper>
     </div>

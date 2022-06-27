@@ -2,7 +2,6 @@ import React from 'react';
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { shallow } from 'enzyme';
 
-// @ts-expect-error TS(6142): Module './MailPdfButton' was resolved to '/home/gu... Remove this comment to see the full error message
 import { MailPdfButton } from './MailPdfButton';
 import ToUrgentActionPageLink from './ToUrgentActionPageLink';
 
@@ -23,7 +22,6 @@ describe('MailPdfButton', () => {
     };
 
     it('should render ToUrgentActionPageLink', () => {
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         const wrapper = shallow(<MailPdfButton {...defaultProps} />);
         const link = wrapper.find(ToUrgentActionPageLink);
 
@@ -34,7 +32,6 @@ describe('MailPdfButton', () => {
 
     it('sendMail should call fetch', () => {
         global.fetch = jest.fn();
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         const sendMail = shallow(<MailPdfButton {...defaultProps} />).instance().sendMail;
         sendMail();
         expect(global.fetch).toHaveBeenCalledWith(

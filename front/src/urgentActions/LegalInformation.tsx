@@ -1,6 +1,5 @@
 import React from 'react';
 
-// @ts-expect-error TS(6142): Module '../themes/RichText' was resolved to '/home... Remove this comment to see the full error message
 import RichText from '../themes/RichText';
 
 const styles = {
@@ -19,7 +18,6 @@ const LegalInformation = ({ content }: Props) => {
     if (!content) {
         return null;
     }
-    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     return <RichText className="legal-information" html={content} style={styles} />;
 };
 

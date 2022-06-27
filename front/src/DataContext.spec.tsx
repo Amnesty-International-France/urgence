@@ -2,7 +2,6 @@ import React from 'react';
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { mount } from 'enzyme';
 
-// @ts-expect-error TS(6142): Module './DataContext' was resolved to '/home/guil... Remove this comment to see the full error message
 import { DataProvider, DataConsumer } from './DataContext';
 import data from './data';
 
@@ -29,13 +28,10 @@ describe('DataContext', () => {
 
         const render = (context: any) => {
             contextTest = { ...context };
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -69,13 +65,10 @@ describe('DataContext', () => {
     it('should have a "setObject" method to change the state "object"', () => {
         const render = (context: any) => {
             context.setObject('new object');
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -86,13 +79,10 @@ describe('DataContext', () => {
     it('should have a "setCivility" method to change the state "civility"', () => {
         const render = (context: any) => {
             context.setCivility('new civility');
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -103,13 +93,10 @@ describe('DataContext', () => {
     it('should have a "setFirstname" method to change the state "firstname"', () => {
         const render = (context: any) => {
             context.setFirstname('new firstname');
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -120,13 +107,10 @@ describe('DataContext', () => {
     it('should have a "setLastname" method to change the state "lastname"', () => {
         const render = (context: any) => {
             context.setLastname('new lastname');
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -137,13 +121,10 @@ describe('DataContext', () => {
     it('should have a "setAddressMain" method to change the state "addressMain"', () => {
         const render = (context: any) => {
             context.setAddressMain('new addressMain');
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -154,13 +135,10 @@ describe('DataContext', () => {
     it('should have a "setAddressMore" method to change the state "addressMore"', () => {
         const render = (context: any) => {
             context.setAddressMore('new addressMore');
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -171,13 +149,10 @@ describe('DataContext', () => {
     it('should have a "setPostalCode" method to change the state "postalCode"', () => {
         const render = (context: any) => {
             context.setPostalCode('new postalCode');
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -188,13 +163,10 @@ describe('DataContext', () => {
     it('should have a "setCity" method to change the state "city"', () => {
         const render = (context: any) => {
             context.setCity('new city');
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -205,13 +177,10 @@ describe('DataContext', () => {
     it('should have a "setCountry" method to change the state "country"', () => {
         const render = (context: any) => {
             context.setCountry('new country');
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -222,13 +191,10 @@ describe('DataContext', () => {
     it('should have a "setPhone" method to change the state "phone"', () => {
         const render = (context: any) => {
             context.setPhone('new phone');
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -239,13 +205,10 @@ describe('DataContext', () => {
     it('should have a "setEmail" method to change the state "email"', () => {
         const render = (context: any) => {
             context.setEmail('new email');
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -256,13 +219,10 @@ describe('DataContext', () => {
     it('should have a "setRegistered" method to change the state "registered"', () => {
         const render = (context: any) => {
             context.setRegistered('true');
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );
@@ -273,13 +233,10 @@ describe('DataContext', () => {
     it('should have a "setRegistered" method with a default param to change the state "registered"', () => {
         const render = (context: any) => {
             context.setRegistered();
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             return <span>OK</span>;
         };
         mount(
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <DataProvider>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <DataConsumer>{render}</DataConsumer>
             </DataProvider>,
         );

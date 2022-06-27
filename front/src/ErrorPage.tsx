@@ -1,15 +1,11 @@
 import React, { Fragment } from 'react';
 import styled from '@emotion/styled';
 
-// @ts-expect-error TS(6142): Module './SEO' was resolved to '/home/guillaume/de... Remove this comment to see the full error message
 import SEO from './SEO';
 import generateUrl from './services/generateUrl';
-// @ts-expect-error TS(6142): Module './themes/ThemeContext' was resolved to '/h... Remove this comment to see the full error message
 import { withYellowLogo } from './themes/ThemeContext';
 import { white, yellow, black } from './themes/colors';
-// @ts-expect-error TS(6142): Module './themes/Link' was resolved to '/home/guil... Remove this comment to see the full error message
 import Link from './themes/Link';
-// @ts-expect-error TS(6142): Module './icons/AmnestyCandle' was resolved to '/h... Remove this comment to see the full error message
 import AmnestyCandle from './icons/AmnestyCandle';
 
 const styles = {
@@ -59,19 +55,12 @@ type Props = OwnProps & typeof ErrorPage.defaultProps;
 
 // @ts-expect-error TS(7022): 'ErrorPage' implicitly has type 'any' because it d... Remove this comment to see the full error message
 const ErrorPage = ({ className, title, description }: Props) => (
-    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <Fragment>
-        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <SEO socialMetadata={{ title, description }} />
-        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <div className={className}>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <AmnestyCandle className="candle" />
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <p className="error">{description}</p>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="actions">
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <Link to={generateUrl('home')} label="Participer à notre dernière action urgente" />
             </div>
         </div>

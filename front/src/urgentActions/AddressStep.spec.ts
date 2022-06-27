@@ -1,7 +1,6 @@
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
 import { shallow } from 'enzyme';
 
-// @ts-expect-error TS(6142): Module './AddressStep' was resolved to '/home/guil... Remove this comment to see the full error message
 import { AddressStep } from './AddressStep';
 
 describe('<AddressStep />', () => {

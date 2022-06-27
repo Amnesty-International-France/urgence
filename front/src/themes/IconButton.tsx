@@ -43,7 +43,6 @@ type Props = OwnProps & typeof IconButton.defaultProps;
 
 // @ts-expect-error TS(7022): 'IconButton' implicitly has type 'any' because it ... Remove this comment to see the full error message
 const IconButton = ({ className, children, onClick, onMouseEnter, onMouseLeave }: Props) => (
-    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <IconButtonContainer
         className={className}
         onClick={onClick}

@@ -7,15 +7,10 @@ import Paper from '@material-ui/core/Paper';
 
 import { white, black } from '../../themes/colors';
 
-// @ts-expect-error TS(6142): Module './Form' was resolved to '/home/guillaume/d... Remove this comment to see the full error message
 import Form from './Form';
-// @ts-expect-error TS(6142): Module './LetterView' was resolved to '/home/guill... Remove this comment to see the full error message
 import LetterView from './LetterView';
-// @ts-expect-error TS(6142): Module '../../themes/ThemeContext' was resolved to... Remove this comment to see the full error message
 import { withYellowLogo } from '../../themes/ThemeContext';
-// @ts-expect-error TS(6142): Module '../../themes/RichText' was resolved to '/h... Remove this comment to see the full error message
 import RichText from '../../themes/RichText';
-// @ts-expect-error TS(6142): Module '../../DataContext' was resolved to '/home/... Remove this comment to see the full error message
 import { withSessionData } from '../../DataContext';
 
 const styles = {
@@ -128,42 +123,29 @@ type Props = {
 
 export const MessageView = ({ className, text, messageTemplate, action, ...props }: Props) => {
     if (!messageTemplate || !messageTemplate.length) {
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         return <p className="error">Cette action urgente n&#39;existe plus.</p>;
     }
 
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={classnames('message-view', className)}>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Paper className="paper" elevation={6} square>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div className="form-step">
-                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <p className="label-step">
-                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <span>Étape 1:</span> saisir l&#39;objet de l&#39;email
                     </p>
-                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <Form {...props} />
                 </div>
 
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <p className="label-step">
-                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <span>Étape 2:</span> envoyer l&#39;email
                 </p>
                 {text && (
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <div className="text">
-                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <RichText html={text} />
                     </div>
                 )}
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <LetterView messageTemplate={messageTemplate} />
             </Paper>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="action">{action}</div>
         </div>
     );

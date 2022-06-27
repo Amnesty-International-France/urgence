@@ -98,7 +98,6 @@ export const DataProvider = ({ children }: DataProviderProps) => {
     };
 
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <Provider
             value={{
                 object,
@@ -134,7 +133,4 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 };
 
 export const withSessionData = (Component: any) => (props: any) =>
-    (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
-        <DataConsumer>{(context) => <Component {...props} {...context} />}</DataConsumer>
-    );
+    <DataConsumer>{(context) => <Component {...props} {...context} />}</DataConsumer>;

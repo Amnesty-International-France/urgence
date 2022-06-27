@@ -5,9 +5,7 @@ import { shallow } from 'enzyme';
 import { Redirect } from 'react-router-dom';
 
 import { black, white, yellow } from '../../themes/colors';
-// @ts-expect-error TS(6142): Module '../../themes/Carousel' was resolved to '/h... Remove this comment to see the full error message
 import Carousel from '../../themes/Carousel';
-// @ts-expect-error TS(6142): Module './Story' was resolved to '/home/guillaume/... Remove this comment to see the full error message
 import { Story, getLogoColorForStoryStep } from './Story';
 
 const defaultStep = {
@@ -36,7 +34,6 @@ describe('<Story />', () => {
     it('should display a 404 message if story has no configured step', () => {
         const test = (story: any) => {
             const props = { ...defaultProps, story };
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const wrapper = shallow(<Story {...props} />);
 
             const redirect = wrapper.find(Redirect);
@@ -63,7 +60,6 @@ describe('<Story />', () => {
                 },
             },
         };
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         const wrapper = shallow(<Story {...props} />);
 
         const redirect = wrapper.find(Redirect);
@@ -81,7 +77,6 @@ describe('<Story />', () => {
             ],
         };
 
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         const wrapper = shallow(<Story {...props} />);
         const carousel = wrapper.find(Carousel);
         const renderProp = carousel.prop('children')();
@@ -106,7 +101,6 @@ describe('<Story />', () => {
                 },
             };
 
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const wrapper = shallow(<Story {...props} />);
             const carousel = wrapper.find(Carousel);
             const afterChange = carousel.prop('afterChange');
@@ -132,7 +126,6 @@ describe('<Story />', () => {
                 },
             };
 
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const wrapper = shallow(<Story {...props} />);
             const carousel = wrapper.find(Carousel);
             const afterChange = carousel.prop('afterChange');

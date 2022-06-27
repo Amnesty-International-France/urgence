@@ -17,7 +17,6 @@ type Props = OwnProps & typeof Act.defaultProps;
 
 // @ts-expect-error TS(7022): 'Act' implicitly has type 'any' because it does no... Remove this comment to see the full error message
 const Act = ({ data, actions }: Props) => (
-    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <TransitionScreen
         className="act"
         actions={actions}

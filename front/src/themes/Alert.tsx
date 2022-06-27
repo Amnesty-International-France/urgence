@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import MobileDetect from 'mobile-detect';
 
-// @ts-expect-error TS(6142): Module './RichText' was resolved to '/home/guillau... Remove this comment to see the full error message
 import { RichText } from './RichText';
 
 const styles = {
@@ -33,7 +32,6 @@ const Alert = ({ className, message }: AlertProps) => {
     };
 
     return open ? (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <Snackbar
             className={className}
             anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
@@ -42,12 +40,9 @@ const Alert = ({ className, message }: AlertProps) => {
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             message={<RichText html={message} />}
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             TransitionComponent={(props) => <Slide {...props} direction="up" />}
             action={
-                // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                 <FontAwesomeIcon
                     icon={faTimes}
                     size="1x"

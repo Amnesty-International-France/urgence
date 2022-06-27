@@ -53,10 +53,8 @@ const Stepper = ({ className, data, step, page }: Props) => {
     const stepStyle = { width: `calc(${100 / total}% - 6px)` };
 
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={className}>
             {stepStates.map((stepState, i) => (
-                // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                 <div key={i} className={classNames('step', stepState)} style={stepStyle} />
             ))}
         </div>

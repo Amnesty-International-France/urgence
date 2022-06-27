@@ -5,7 +5,6 @@ import get from 'lodash.get';
 import { Query } from '@apollo/client/react/components';
 import { Navigate } from 'react-router-dom';
 
-// @ts-expect-error TS(6142): Module './themes/LoadingScreen' was resolved to '/... Remove this comment to see the full error message
 import LoadingScreen from './themes/LoadingScreen';
 
 import generateUrl from './services/generateUrl';

@@ -4,22 +4,14 @@ import { shallow } from 'enzyme';
 // @ts-expect-error TS(2305): Module '"react-router-dom"' has no exported member... Remove this comment to see the full error message
 import { Redirect } from 'react-router-dom';
 
-// @ts-expect-error TS(6142): Module './UrgentAction' was resolved to '/home/gui... Remove this comment to see the full error message
 import { renderUrgentActionWithData, UrgentAction } from './UrgentAction';
-// @ts-expect-error TS(6142): Module './story/Story' was resolved to '/home/guil... Remove this comment to see the full error message
 import Story from './story/Story';
-// @ts-expect-error TS(6142): Module './messageView/MessageView' was resolved to... Remove this comment to see the full error message
 import MessageView from './messageView/MessageView';
-// @ts-expect-error TS(6142): Module './messageSend/MessageSend' was resolved to... Remove this comment to see the full error message
 import MessageSend from './messageSend/MessageSend';
-// @ts-expect-error TS(6142): Module './share/ShareStep' was resolved to '/home/... Remove this comment to see the full error message
 import ShareStep from './share/ShareStep';
-// @ts-expect-error TS(6142): Module './register/Register' was resolved to '/hom... Remove this comment to see the full error message
 import Register from './register/Register';
-// @ts-expect-error TS(6142): Module './ThankStep' was resolved to '/home/guilla... Remove this comment to see the full error message
 import ThankStep from './ThankStep';
 
-// @ts-expect-error TS(6142): Module '../themes/LoadingScreen' was resolved to '... Remove this comment to see the full error message
 import LoadingScreen from '../themes/LoadingScreen';
 
 jest.mock('../data');
@@ -53,7 +45,6 @@ describe('<UrgentActionWithData />', () => {
 
         // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
         const UrgentActionWithData = renderUrgentActionWithData('on-the-way', 'story');
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         const wrapper = shallow(<UrgentActionWithData {...props} />);
 
         const loading = wrapper.find(LoadingScreen);
@@ -68,7 +59,6 @@ describe('<UrgentActionWithData />', () => {
 
         // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
         const UrgentActionWithData = renderUrgentActionWithData('on-the-way', 'story');
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         const wrapper = shallow(<UrgentActionWithData {...props} />);
 
         const redirect = wrapper.find(Redirect);
@@ -108,7 +98,6 @@ describe('<UrgentAction />', () => {
                     },
                 },
             };
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const wrapper = shallow(<UrgentAction {...props} />);
             const story = wrapper.find(Story);
 
@@ -138,7 +127,6 @@ describe('<UrgentAction />', () => {
                     },
                 },
             };
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const renderedComponent = shallow(<UrgentAction {...props} />);
             expect(renderedComponent.find(Story).length).toBe(1);
 
@@ -175,7 +163,6 @@ describe('<UrgentAction />', () => {
                 },
             };
 
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
             const message = renderedComponent.find(MessageView);
@@ -213,7 +200,6 @@ describe('<UrgentAction />', () => {
                 },
             };
 
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
             const message = renderedComponent.find(MessageView);
@@ -252,7 +238,6 @@ describe('<UrgentAction />', () => {
                 },
             };
 
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
             const message = renderedComponent.find(MessageSend);
@@ -288,7 +273,6 @@ describe('<UrgentAction />', () => {
                 },
             };
 
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
             const message = renderedComponent.find(MessageSend);
@@ -331,7 +315,6 @@ describe('<UrgentAction />', () => {
                 },
             };
 
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
             const message = renderedComponent.find(MessageSend);
@@ -363,7 +346,6 @@ describe('<UrgentAction />', () => {
                 },
             };
 
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
             const register = renderedComponent.find(Register);
@@ -399,7 +381,6 @@ describe('<UrgentAction />', () => {
                 },
             };
 
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
             const register = renderedComponent.find(Register);
@@ -433,7 +414,6 @@ describe('<UrgentAction />', () => {
                 },
             };
 
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
             const share = renderedComponent.find(ShareStep);
@@ -466,7 +446,6 @@ describe('<UrgentAction />', () => {
                 },
             };
 
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             const renderedComponent = shallow(<UrgentAction {...props} />);
 
             const thanks = renderedComponent.find(ThankStep);

@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 
 import { ToUrgentActionPageLink } from './ToUrgentActionPageLink';
 import generateUrl from '../services/generateUrl';
-// @ts-expect-error TS(6142): Module '../themes/Link' was resolved to '/home/gui... Remove this comment to see the full error message
 import Link from '../themes/Link';
 
 jest.mock('../services/generateUrl');
@@ -27,7 +26,6 @@ describe('<ToUrgentActionPageLink />', () => {
     });
 
     it('should render Link with correct props', () => {
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         const wrapper = shallow(<ToUrgentActionPageLink {...defaultProps} />);
 
         const link = wrapper.find(Link);

@@ -4,10 +4,8 @@ import styled from '@emotion/styled';
 import { TextField } from '@material-ui/core';
 import { paramsType } from '../propTypes';
 
-// @ts-expect-error TS(6142): Module './CheckAdornment' was resolved to '/home/g... Remove this comment to see the full error message
 import CheckAdornment from './CheckAdornment';
 import trackEvent from '../analytics/trackEvent';
-// @ts-expect-error TS(6142): Module '../withRouter' was resolved to '/home/guil... Remove this comment to see the full error message
 import withRouter from '../withRouter';
 
 const styles = {
@@ -90,9 +88,7 @@ export class Input extends Component<InputProps1, InputState1> {
         }
 
         return (
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <div className={className}>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <TextField
                     className="textfield"
                     variant="outlined"
@@ -102,7 +98,6 @@ export class Input extends Component<InputProps1, InputState1> {
                     error={showError && error}
                     helperText={error ? helperText : ''}
                     InputProps={{
-                        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                         endAdornment: <CheckAdornment isValid={showValid} />,
                     }}
                     onChange={(event) => {

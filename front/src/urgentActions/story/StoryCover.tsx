@@ -5,7 +5,6 @@ import get from 'lodash.get';
 import Paper from '@material-ui/core/Paper';
 
 import { white, black } from '../../themes/colors';
-// @ts-expect-error TS(6142): Module '../../themes/RichText' was resolved to '/h... Remove this comment to see the full error message
 import RichText from '../../themes/RichText';
 import MobileDetect from 'mobile-detect';
 
@@ -101,9 +100,7 @@ export const StoryCover = ({
     const croppedImageSrc = imageSrc.replace(lastUrlParam, '/crop-$1');
 
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={className}>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Paper
                 className="paper"
                 style={{
@@ -117,11 +114,8 @@ export const StoryCover = ({
                 elevation={6}
                 square
             >
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div className="step">
-                    {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                     <div className="content">
-                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <RichText html={content} />
                     </div>
                 </div>

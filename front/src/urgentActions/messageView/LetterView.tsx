@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-// @ts-expect-error TS(6142): Module './MessageSection' was resolved to '/home/g... Remove this comment to see the full error message
 import MessageSection from './MessageSection';
-// @ts-expect-error TS(6142): Module './ShowButton' was resolved to '/home/guill... Remove this comment to see the full error message
 import ShowButton from './ShowButton';
 
 type Props = {
@@ -40,9 +38,7 @@ class LetterView extends Component<Props, State> {
         const { showAllText, letterOverflow } = this.state;
 
         return (
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <div className="letter">
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div
                     ref={this.contentText}
                     className={classnames(
@@ -54,7 +50,6 @@ class LetterView extends Component<Props, State> {
                 >
                     {/* @ts-expect-error TS(2532): Object is possibly 'undefined'. */}
                     {messageTemplate.map(({ value }, key) => (
-                        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                         <MessageSection
                             key={key}
                             className="letter-message-section"
@@ -62,7 +57,6 @@ class LetterView extends Component<Props, State> {
                         />
                     ))}
                     {letterOverflow && (
-                        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                         <span
                             className={classnames(
                                 'end',
@@ -72,7 +66,6 @@ class LetterView extends Component<Props, State> {
                     )}
                 </div>
                 {letterOverflow && (
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <ShowButton showAllText={showAllText} action={this.setShowMode} />
                 )}
             </div>

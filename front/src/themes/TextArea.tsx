@@ -17,7 +17,6 @@ type Props = {
 };
 
 export const TextArea = ({ className, children, ...otherProps }: Props) => (
-    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <textarea className={className} {...otherProps}>
         {children}
     </textarea>

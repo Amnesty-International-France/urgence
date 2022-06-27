@@ -43,20 +43,15 @@ type Props = OwnProps & typeof ShowButton.defaultProps;
 
 // @ts-expect-error TS(7022): 'ShowButton' implicitly has type 'any' because it ... Remove this comment to see the full error message
 const ShowButton = ({ showAllText, action }: Props) => (
-    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <StyledSpan onClick={action}>
         {showAllText ? (
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <span className="text">
                 Voir moins&nbsp;&nbsp;
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <strong className="upText">︿</strong>
             </span>
         ) : (
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <span className="text">
                 Voir plus&nbsp;&nbsp;
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <strong className="downText">﹀</strong>
             </span>
         )}

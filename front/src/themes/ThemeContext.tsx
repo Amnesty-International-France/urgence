@@ -44,9 +44,7 @@ export class ThemeProvider extends Component<ThemeProviderProps, ThemeProviderSt
 
     render() {
         return (
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <MuiThemeProvider theme={this.theme}>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <Provider value={this.state}>{(this.props as any).children}</Provider>
             </MuiThemeProvider>
         );
@@ -56,10 +54,7 @@ export class ThemeProvider extends Component<ThemeProviderProps, ThemeProviderSt
 export const ThemeConsumer = Consumer;
 
 export const withThemeContext = (BaseComponent: any) => (props: any) =>
-    (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
-        <ThemeConsumer>{(context) => <BaseComponent context={context} {...props} />}</ThemeConsumer>
-    );
+    <ThemeConsumer>{(context) => <BaseComponent context={context} {...props} />}</ThemeConsumer>;
 
 export const withLightGreyBackground = compose(
     withThemeContext,

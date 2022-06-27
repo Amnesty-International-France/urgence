@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from 'react';
 
 import classnames from 'classnames';
 import styled from '@emotion/styled';
-// @ts-expect-error TS(6142): Module './IconButton' was resolved to '/home/guill... Remove this comment to see the full error message
 import IconButton from './IconButton';
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'swip... Remove this comment to see the full error message
 import Swiper from 'swiper/js/swiper.js';
@@ -130,21 +129,15 @@ export const Carousel = ({
     };
 
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className={className}>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="swiper-container" ref={setContainer}>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <div className="swiper-wrapper">{children()}</div>
             </div>
 
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <Fragment>
                 {/* @ts-expect-error TS(2532): Object is possibly 'undefined'. */}
                 {current != total + 1 && (
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <div className={classnames('swiper-controls right')}>
-                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <IconButton
                             className={classnames({
                                 'next-arrow': current !== total,
@@ -152,20 +145,16 @@ export const Carousel = ({
                             })}
                             onClick={slideNext}
                         >
-                            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                             <FontAwesomeIcon icon={faArrowRight} color={black} className="icon" />
                         </IconButton>
                     </div>
                 )}
                 {current != 1 && (
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <div className={classnames('swiper-controls left')}>
-                        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                         <IconButton
                             className={classnames('left transparent previous-arrow')}
                             onClick={slidePrevious}
                         >
-                            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                             <FontAwesomeIcon icon={faArrowLeft} className="icon" />
                         </IconButton>
                     </div>

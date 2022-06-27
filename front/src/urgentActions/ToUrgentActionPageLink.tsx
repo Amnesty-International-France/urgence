@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 
 import { useParams } from 'react-router';
 import generateUrl from '../services/generateUrl';
-// @ts-expect-error TS(6142): Module '../themes/Link' was resolved to '/home/gui... Remove this comment to see the full error message
 import Link from '../themes/Link';
 
 export const ToUrgentActionPageLink = ({
@@ -17,7 +16,6 @@ export const ToUrgentActionPageLink = ({
 }: any) => {
     const { slug } = useParams();
     return (
-        // @ts-expect-error TS(2749): 'Link' refers to a value, but is being used as a t... Remove this comment to see the full error message
         <Link
             onClick={onClick}
             // @ts-expect-error TS(2304): Cannot find name 'to'.

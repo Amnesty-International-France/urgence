@@ -5,7 +5,6 @@ import { faLink } from '@fortawesome/free-solid-svg-icons';
 import Button from '@material-ui/core/Button';
 
 import trackEvent from '../../analytics/trackEvent';
-// @ts-expect-error TS(6142): Module '../CopyToClipboardButton' was resolved to ... Remove this comment to see the full error message
 import CopyToClipboardButton from '../CopyToClipboardButton';
 import { black } from '../colors';
 
@@ -63,7 +62,6 @@ export const CopyToClipboard = ({
     action,
     analyticsCategory,
 }: Props) => (
-    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <Button
         className={className}
         onClick={(event) => {
@@ -75,13 +73,9 @@ export const CopyToClipboard = ({
         }}
         variant="outlined"
     >
-        {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <CopyToClipboardButton textToCopy={url}>
-            {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="inline">
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <span className="url">{url}</span>
-                {/* @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <FontAwesomeIcon icon={faLink} size="2x" className="icon" />
             </div>
         </CopyToClipboardButton>
