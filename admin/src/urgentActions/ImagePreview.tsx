@@ -1,20 +1,39 @@
-import { ImageField, RaRecord } from 'react-admin';
+import Box from '@mui/material/Box';
+import { useState } from 'react';
+import { ImageField, RaRecord, useInput } from 'react-admin';
+import ReactCrop, { Crop } from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 
 type ImagePreviewProps = {
     source: string;
+    parentField: string;
     record?: RaRecord;
+    croppable?: boolean;
 };
 
-export const ImagePreview = ({ source, record }: ImagePreviewProps) => {
-    if (!record || !record.src) {
+export const ImagePreview = ({ parentField, record, croppable }: ImagePreviewProps) => {
+    const { field } = useInput({ source: `${parentField}.crop` });
+    const [crop, setCrop] = useState<Crop>(field.value);
+
+    const src = (record && record.src) || record;
+
+    if (!record) {
         return null;
     }
 
     return (
-        <ImageField
-            record={record}
-            source={source}
-            sx={{ margin: '0 0.5rem 0.5rem', '& img': { maxHeight: '9rem' } }}
-        />
+        <Box sx={{ margin: '0 0.5rem 0.5rem', '& img': { maxHeight: '9rem' } }}>
+            {croppable ? (
+                <ReactCrop
+                    crop={crop}
+                    onChange={(_, percentCrop) => setCrop(percentCrop)}
+                    onComplete={(_, completePercentCrop) => field.onChange(completePercentCrop)}
+                >
+                    <img alt="Crop me" src={src} />
+                </ReactCrop>
+            ) : (
+                <ImageField record={{ src }} source="src" />
+            )}
+        </Box>
     );
 };

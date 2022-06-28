@@ -1,4 +1,8 @@
 import Box from '@mui/material/Box';
+//@ts-ignore
+import { ThemeProvider } from 'front/src/themes/ThemeContext';
+//@ts-ignore
+import AppLogo from 'front/src/themes/AppLogo';
 
 type FrontPreviewProps = {
     children: React.ReactNode;
@@ -19,7 +23,19 @@ export const FrontPreview = ({ children, previewDevice }: FrontPreviewProps) => 
                 backgroundColor: '#fff',
             }}
         >
-            {children}
+            <ThemeProvider>
+                <Box
+                    sx={{
+                        position: 'relative',
+                        width: 'fit-content !important',
+                        height: 'fit-content !important',
+                        padding: '0px !important',
+                    }}
+                >
+                    <AppLogo />
+                </Box>
+                {children}
+            </ThemeProvider>
         </Box>
     );
 };

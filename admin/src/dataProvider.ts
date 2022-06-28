@@ -1,9 +1,10 @@
-import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { getToken } from './authentication/authProvider';
+import { createUploadLink } from 'apollo-upload-client';
 import buildApolloClient from 'ra-data-graphql-simple';
+import { getToken } from './authentication/authProvider';
 
-export const httpLink = createHttpLink({
+export const httpLink = createUploadLink({
     uri: `${process.env.REACT_APP_API_URL}/graphql`,
 });
 
