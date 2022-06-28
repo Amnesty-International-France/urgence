@@ -1,18 +1,16 @@
-import { Fragment, ReactNode, useRef } from 'react';
+import { ReactNode, useRef } from 'react';
 
 import styled from '@emotion/styled';
 import classnames from 'classnames';
 
+import SwiperClass, { Navigation } from 'swiper';
+import 'swiper/css';
 import { Swiper } from 'swiper/react';
-import SwiperClass from 'swiper';
-import 'swiper/css/bundle';
 
 import IconButton from './IconButton';
 
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { red } from '@material-ui/core/colors';
-import MobileDetect from 'mobile-detect';
 import { black } from './colors';
 
 const styles = {
@@ -22,17 +20,14 @@ const styles = {
         bottom: '20px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '5px',
+        justifyContent: 'space-between',
+        padding: '5px 30px',
         height: '60px',
         zIndex: '100',
-        backgroundColor: red,
-        '.right': {
-            right: '20px',
-        },
-        '.left': {
-            left: '20px',
-        },
+        width: '100%',
+    },
+    '& .hidden': {
+        visibility: 'hidden',
     },
     '& .icon': {
         cursor: 'pointer',
@@ -58,18 +53,12 @@ export const Carousel = ({
     initialSlide,
     total,
 }: Props) => {
-    const swiper = useRef<SwiperClass | null>(null);
     if (total == null) {
         total = 0;
     }
-    const slideNext = () => {
-        console.log(swiper);
-        !isOnMobile() && swiper.current && swiper.current.slideNext();
-    };
 
-    const slidePrevious = () => {
-        !isOnMobile() && swiper.current && swiper.current.slidePrev();
-    };
+    const buttonPrev = useRef<HTMLDivElement>(null);
+    const buttonNext = useRef<HTMLDivElement>(null);
     const handleSwiperClick = (swiper: SwiperClass) =>
         function (event: any) {
             if (!swiper) return;
@@ -85,14 +74,10 @@ export const Carousel = ({
             }
         };
 
-    const isOnMobile = () => {
-        const md = new MobileDetect(global.navigator.userAgent);
-        return md.mobile();
-    };
-
     return (
         <div className={className}>
             <Swiper
+                modules={[Navigation]}
                 initialSlide={initialSlide}
                 onSlideChange={(swiper: SwiperClass) => {
                     if (swiper.isEnd) {
@@ -101,6 +86,10 @@ export const Carousel = ({
                         afterChange(swiper.activeIndex);
                     }
                 }}
+                navigation={{
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                }}
                 direction="horizontal"
                 onClick={(swiper: SwiperClass) => handleSwiperClick(swiper)}
             >
@@ -108,29 +97,30 @@ export const Carousel = ({
             </Swiper>
 
             <div className="swiper-controls">
-                {current !== total + 1 && (
-                    <div className={classnames('right')}>
-                        <IconButton
-                            className={classnames({
-                                'next-arrow': current !== total,
-                                'last-arrow': current === total,
-                            })}
-                            onClick={slideNext}
-                        >
-                            <FontAwesomeIcon icon={faArrowRight} color={black} className="icon" />
-                        </IconButton>
-                    </div>
-                )}
-                {current !== 1 && (
-                    <div className={classnames('swiper-button-prev left')}>
-                        <IconButton
-                            className={classnames('left transparent previous-arrow')}
-                            onClick={slidePrevious}
-                        >
-                            <FontAwesomeIcon icon={faArrowLeft} className="icon" />
-                        </IconButton>
-                    </div>
-                )}
+                <div
+                    ref={buttonPrev}
+                    className={classnames('swiper-button-prev left', current === 1 ? 'hidden' : '')}
+                >
+                    <IconButton className={classnames('left transparent previous-arrow')}>
+                        <FontAwesomeIcon icon={faArrowLeft} className="icon" />
+                    </IconButton>
+                </div>
+                <div
+                    ref={buttonNext}
+                    className={classnames(
+                        'swiper-button-next right',
+                        current === total + 1 ? 'hidden' : '',
+                    )}
+                >
+                    <IconButton
+                        className={classnames({
+                            'next-arrow': current !== total,
+                            'last-arrow': current === total,
+                        })}
+                    >
+                        <FontAwesomeIcon icon={faArrowRight} color={black} className="icon" />
+                    </IconButton>
+                </div>
             </div>
         </div>
     );
