@@ -23,7 +23,8 @@ export const FrontPreview = ({ children, previewDevice }: FrontPreviewProps) => 
                 backgroundColor: '#fff',
             }}
         >
-            <ThemeProvider>
+            TODO
+            {/* <ThemeProvider>
                 <Box
                     sx={{
                         position: 'relative',
@@ -35,7 +36,7 @@ export const FrontPreview = ({ children, previewDevice }: FrontPreviewProps) => 
                     <AppLogo />
                 </Box>
                 {children}
-            </ThemeProvider>
+            </ThemeProvider> */}
         </Box>
     );
 };
