@@ -1,18 +1,14 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
-type OwnProps = {
+export type SEOProps = {
     siteName: string;
     url: string;
     lang: string;
     socialMetadata?: any;
 };
 
-// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
-type Props = OwnProps & typeof SEO.defaultProps;
-
-// @ts-expect-error TS(7022): 'SEO' implicitly has type 'any' because it does no... Remove this comment to see the full error message
-const SEO = ({ socialMetadata, lang, url, siteName }: Props) => {
+const SEO = ({ socialMetadata, lang, url, siteName }: SEOProps) => {
     const title = socialMetadata.title || 'Action urgente';
     const description = socialMetadata.description || 'Action urgente';
     const meta = [

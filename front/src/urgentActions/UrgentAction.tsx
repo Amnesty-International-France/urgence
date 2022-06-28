@@ -144,7 +144,6 @@ type UrgentActionProps = {
 };
 
 export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
-    console.log('UrgentAction', slug, step, data);
     const story = get(data, 'UrgentAction.story');
 
     const navigate = useNavigate();
@@ -224,9 +223,7 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
                         analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                         auId={id}
                         afterMail={({ registered }: any) =>
-                            (navigate as any).push(
-                                generateUrl(registered ? 'share' : 'register', { slug }),
-                            )
+                            navigate(generateUrl(registered ? 'share' : 'register', { slug }))
                         }
                     />
                 }

@@ -15,10 +15,11 @@ import DesktopAlert from './themes/DesktopAlert';
 import RouterScrollToTop from './themes/RouterScrollToTop';
 import { ThemeProvider } from './themes/ThemeContext';
 import UrgentAction from './urgentActions/UrgentAction';
+import { HelmetProvider } from 'react-helmet-async';
 
 export const Div100Vw = styled.div`
     & {
-        width: '100vw';
+        width: 100vw;
     }
 `;
 
@@ -29,52 +30,58 @@ const App = ({ className, client }: { className?: string; client: ApolloClient<u
     });
 
     return (
-        <ApolloProvider client={client}>
-            <ThemeProvider>
-                <Div100Vw>
-                    <Div100Vh className={className}>
-                        <AppBackground />
-                        <AppLogo />
-                        <DesktopAlert />
-                        <BrowserRouter>
-                            <RouterScrollToTop>
-                                <Routes>
-                                    <Route
-                                        path={generateUrl('home')}
-                                        element={<Analytics WrappedComponent={HomePage} />}
-                                    />
-
-                                    <Route
-                                        path={generateUrl('error')}
-                                        element={<Analytics WrappedComponent={ErrorPage} />}
-                                    />
-                                    <Route
-                                        path="/ua/:slug"
-                                        element={<Analytics WrappedComponent={UrgentAction} />}
-                                    >
+        <HelmetProvider>
+            <ApolloProvider client={client}>
+                <ThemeProvider>
+                    <Div100Vw>
+                        <Div100Vh className={className}>
+                            <AppBackground />
+                            <AppLogo />
+                            <DesktopAlert />
+                            <BrowserRouter>
+                                <RouterScrollToTop>
+                                    <Routes>
                                         <Route
-                                            path=":step"
+                                            path={generateUrl('home')}
+                                            element={<Analytics WrappedComponent={HomePage} />}
+                                        />
+
+                                        <Route
+                                            path={generateUrl('error')}
+                                            element={<Analytics WrappedComponent={ErrorPage} />}
+                                        />
+                                        <Route
+                                            path="/ua/:slug"
                                             element={<Analytics WrappedComponent={UrgentAction} />}
                                         >
                                             <Route
-                                                path=":page/*"
+                                                path=":step"
                                                 element={
                                                     <Analytics WrappedComponent={UrgentAction} />
                                                 }
-                                            />
+                                            >
+                                                <Route
+                                                    path=":page/*"
+                                                    element={
+                                                        <Analytics
+                                                            WrappedComponent={UrgentAction}
+                                                        />
+                                                    }
+                                                />
+                                            </Route>
                                         </Route>
-                                    </Route>
-                                    <Route
-                                        path="*"
-                                        element={<Navigate to={generateUrl('error')} />}
-                                    />
-                                </Routes>
-                            </RouterScrollToTop>
-                        </BrowserRouter>
-                    </Div100Vh>
-                </Div100Vw>
-            </ThemeProvider>
-        </ApolloProvider>
+                                        <Route
+                                            path="*"
+                                            element={<Navigate to={generateUrl('error')} />}
+                                        />
+                                    </Routes>
+                                </RouterScrollToTop>
+                            </BrowserRouter>
+                        </Div100Vh>
+                    </Div100Vw>
+                </ThemeProvider>
+            </ApolloProvider>
+        </HelmetProvider>
     );
 };
 

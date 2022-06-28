@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Component, Fragment } from 'react';
+import { Component } from 'react';
 import { compose } from 'recompose';
 import ANALYTICS_CATEGORIES from '../../analytics/categories';
 import Act from '../Act';
@@ -12,12 +12,14 @@ import { black, white, yellow } from '../../themes/colors';
 import { withThemeContext } from '../../themes/ThemeContext';
 
 import { Navigate, NavigateFunction } from 'react-router';
+import { SwiperSlide } from 'swiper/react';
 import generateUrl from '../../services/generateUrl';
 import Carousel from '../../themes/Carousel';
 import withRouter from '../../withRouter';
 import StoryCover from './StoryCover';
 import StorySlide from './StorySlide';
 import StoryStep from './StoryStep';
+import { paramsType } from '../../propTypes';
 
 const styles = {
     '& .icon': {
@@ -37,8 +39,7 @@ type StoryProps = {
     };
     story?: any[]; // TODO: PropTypes.shape(StoryStepPropType)
     navigate: NavigateFunction;
-    // @ts-expect-error TS(2749): 'paramsType' refers to a value, but is being used ... Remove this comment to see the full error message
-    params?: paramsType;
+    params?: any;
     callToAction?: any;
     responseCount?: number;
     auId?: string;
@@ -111,43 +112,44 @@ export class Story extends Component<StoryProps> {
                         afterChange={this.afterChange}
                         afterLastChange={this.afterLastChange}
                     >
-                        {() => (
-                            <Fragment>
-                                <StorySlide step={cover}>
-                                    {(storyCoverProps) => <StoryCover {...storyCoverProps} />}
+                        <SwiperSlide>
+                            <StorySlide step={cover}>
+                                {(storyCoverProps) => <StoryCover {...storyCoverProps} />}
+                            </StorySlide>
+                        </SwiperSlide>
+                        {restStory.map((step, index) => (
+                            <SwiperSlide key={index + 1}>
+                                <StorySlide step={step}>
+                                    {(storyStepProps) => <StoryStep {...storyStepProps} />}
                                 </StorySlide>
+                            </SwiperSlide>
+                        ))}
 
-                                {restStory.map((step, index) => (
-                                    <StorySlide key={index + 1} step={step}>
-                                        {(storyStepProps) => <StoryStep {...storyStepProps} />}
-                                    </StorySlide>
-                                ))}
-
-                                <StorySlide>
-                                    {(storyProps) => (
-                                        <Act
-                                            {...storyProps}
-                                            data={{
-                                                ...callToAction,
-                                                response_count: responseCount,
-                                                auId,
-                                            }}
-                                            actions={() =>
-                                                callToAction && callToAction.button ? (
-                                                    <ToUrgentActionPageLink
-                                                        label={callToAction.button}
-                                                        step="act"
-                                                        pageName="message-view"
-                                                        analyticsCategory={ANALYTICS_CATEGORIES.ACT}
-                                                        buttonName="OpenMessageView"
-                                                    />
-                                                ) : null
-                                            }
-                                        />
-                                    )}
-                                </StorySlide>
-                            </Fragment>
-                        )}
+                        <SwiperSlide>
+                            <StorySlide>
+                                {(storyProps) => (
+                                    <Act
+                                        {...storyProps}
+                                        data={{
+                                            ...callToAction,
+                                            response_count: responseCount,
+                                            auId,
+                                        }}
+                                        actions={() =>
+                                            callToAction && callToAction.button ? (
+                                                <ToUrgentActionPageLink
+                                                    label={callToAction.button}
+                                                    step="act"
+                                                    pageName="message-view"
+                                                    analyticsCategory={ANALYTICS_CATEGORIES.ACT}
+                                                    buttonName="OpenMessageView"
+                                                />
+                                            ) : null
+                                        }
+                                    />
+                                )}
+                            </StorySlide>
+                        </SwiperSlide>
                     </Carousel>
                 )}
             </div>

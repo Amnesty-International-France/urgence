@@ -1,11 +1,13 @@
-import { Fragment, ReactElement, useEffect, useState } from 'react';
+import { Fragment, ReactNode, useRef } from 'react';
 
 import styled from '@emotion/styled';
 import classnames from 'classnames';
-import Swiper from 'swiper';
-import IconButton from './IconButton';
 
-import 'swiper/css';
+import { Swiper } from 'swiper/react';
+import SwiperClass from 'swiper';
+import 'swiper/css/bundle';
+
+import IconButton from './IconButton';
 
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -38,10 +40,10 @@ const styles = {
 };
 
 type Props = {
-    afterChange?: (...args: any[]) => any;
-    afterLastChange?: (...args: any[]) => any;
+    afterChange: (...args: any[]) => any;
+    afterLastChange: (...args: any[]) => any;
     className?: string;
-    children: (...args: any[]) => ReactElement;
+    children: ReactNode[] | ReactNode;
     current?: number;
     initialSlide?: number;
     total?: number;
@@ -56,30 +58,30 @@ export const Carousel = ({
     initialSlide,
     total,
 }: Props) => {
-    const [swiper, setSwiper] = useState(null);
-    const [container, setContainer] = useState(null);
-
+    const swiper = useRef<SwiperClass | null>(null);
+    if (total == null) {
+        total = 0;
+    }
     const slideNext = () => {
-        // @ts-expect-error TS(2531): Object is possibly 'null'.
-        !isOnMobile() && swiper.slideNext();
+        console.log(swiper);
+        !isOnMobile() && swiper.current && swiper.current.slideNext();
     };
 
     const slidePrevious = () => {
-        // @ts-expect-error TS(2531): Object is possibly 'null'.
-        !isOnMobile() && swiper.slidePrev();
+        !isOnMobile() && swiper.current && swiper.current.slidePrev();
     };
-    const handleSwiperClick = (swipper: any) =>
+    const handleSwiperClick = (swiper: SwiperClass) =>
         function (event: any) {
-            if (!container) return;
-            const containerRect = (container as any).getBoundingClientRect();
+            if (!swiper) return;
+            const containerRect = swiper.el.getBoundingClientRect();
             const containerWidth = containerRect.width;
             const containerLeft = containerRect.left;
             const clickX = event.clientX;
             const hasClickTheLeftSide = clickX < containerLeft + containerWidth * 0.3;
             if (hasClickTheLeftSide) {
-                swipper.slidePrev();
+                swiper.slidePrev();
             } else {
-                swipper.slideNext();
+                swiper.slideNext();
             }
         };
 
@@ -87,61 +89,27 @@ export const Carousel = ({
         const md = new MobileDetect(global.navigator.userAgent);
         return md.mobile();
     };
-    useEffect(() => {
-        initSwiper();
-        return () => {
-            if (swiper) {
-                setTimeout(() => {
-                    if (isOnMobile()) {
-                        document.removeEventListener('click', handleSwiperClick(swiper), false);
-                    }
-                    (swiper as any).destroy();
-                }, 500);
-            }
-        };
-    }, [container]);
-
-    const initSwiper = () => {
-        let swiper: any;
-        // @ts-ignore TODO guillaumep
-        swiper = new Swiper(container, {
-            initialSlide,
-            direction: 'horizontal',
-            on: {
-                slideChange: () => {
-                    if (!swiper) {
-                        return;
-                    }
-                    if (swiper.isEnd) {
-                        // @ts-expect-error TS(2722): Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-                        afterLastChange();
-                    } else {
-                        // @ts-expect-error TS(2722): Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-                        afterChange(swiper.activeIndex);
-                    }
-                },
-            },
-        });
-        if (isOnMobile()) {
-            document.addEventListener('click', handleSwiperClick(swiper), false);
-        }
-        setSwiper(swiper);
-    };
 
     return (
         <div className={className}>
-            <div
-                className="swiper"
-                //@ts-ignore TODO
-                ref={setContainer}
+            <Swiper
+                initialSlide={initialSlide}
+                onSlideChange={(swiper: SwiperClass) => {
+                    if (swiper.isEnd) {
+                        afterLastChange();
+                    } else {
+                        afterChange(swiper.activeIndex);
+                    }
+                }}
+                direction="horizontal"
+                onClick={(swiper: SwiperClass) => handleSwiperClick(swiper)}
             >
-                <div className="swiper-wrapper">{children()}</div>
-            </div>
+                {children}
+            </Swiper>
 
-            <Fragment>
-                {/* @ts-expect-error TS(2532): Object is possibly 'undefined'. */}
-                {current != total + 1 && (
-                    <div className={classnames('swiper-controls right')}>
+            <div className="swiper-controls">
+                {current !== total + 1 && (
+                    <div className={classnames('right')}>
                         <IconButton
                             className={classnames({
                                 'next-arrow': current !== total,
@@ -153,8 +121,8 @@ export const Carousel = ({
                         </IconButton>
                     </div>
                 )}
-                {current != 1 && (
-                    <div className={classnames('swiper-controls left')}>
+                {current !== 1 && (
+                    <div className={classnames('swiper-button-prev left')}>
                         <IconButton
                             className={classnames('left transparent previous-arrow')}
                             onClick={slidePrevious}
@@ -163,7 +131,7 @@ export const Carousel = ({
                         </IconButton>
                     </div>
                 )}
-            </Fragment>
+            </div>
         </div>
     );
 };

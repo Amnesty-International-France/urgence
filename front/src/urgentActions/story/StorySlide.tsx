@@ -18,7 +18,7 @@ type Props = {
 };
 
 export const StorySlide = ({ children, className, step }: Props) => (
-    <div className={classnames(className, 'swiper-slide')}>
+    <div className={classnames(className)}>
         <div className="story-step">{children({ ...step })}</div>
     </div>
 );
