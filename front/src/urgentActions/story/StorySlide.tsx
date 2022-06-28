@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import classnames from 'classnames';
+import React from 'react';
 
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';

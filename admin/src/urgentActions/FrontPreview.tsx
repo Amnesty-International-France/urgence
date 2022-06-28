@@ -1,8 +1,5 @@
 import Box from '@mui/material/Box';
-//@ts-ignore
-import { ThemeProvider } from 'front/src/themes/ThemeContext';
-//@ts-ignore
-import AppLogo from 'front/src/themes/AppLogo';
+import { ThemeProvider, AppLogo } from 'urgent_reaction';
 
 type FrontPreviewProps = {
     children: React.ReactNode;
@@ -34,7 +31,6 @@ export const FrontPreview = ({ children, previewDevice }: FrontPreviewProps) => 
                 >
                     <AppLogo />
                 </Box>
-                {children}
             </ThemeProvider>
         </Box>
     );

@@ -5,11 +5,7 @@ import { Card } from './Card';
 import { FrontPreview } from './FrontPreview';
 import { MediumInput } from './MediumInput';
 
-//@ts-ignore
-import StoryCover from 'front/src/urgentActions/story/StoryCover';
-//@ts-ignore
-import StorySlide from 'front/src/urgentActions/story/StorySlide';
-//@ts-ignore
+import { StoryCover, StoryStep, StorySlide } from 'urgent_reaction';
 
 import { FormData } from './UrgentActionsForm';
 

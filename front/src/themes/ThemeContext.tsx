@@ -1,6 +1,7 @@
 import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { Component, createContext } from 'react';
 import { compose, lifecycle } from 'recompose';
+import React from 'react';
 
 import { black, lightGrey, white, yellow } from './colors';
 
