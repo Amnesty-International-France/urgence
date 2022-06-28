@@ -8,7 +8,7 @@ help: ## SOS? Usage make help (default).
 #### STARTING ###
 
 DOCKER_COMPOSE = docker compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
-DOCKER_COMPOSE_BUILD = docker compose -p reaction-rapide-build -f docker-compose.build.yml
+DOCKER_COMPOSE_BUILD = docker compose -f docker-compose.build.yml
 DOCKER_COMPOSE_TEST = docker compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
 DOCKER_COMPOSE_E2E = docker compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
 DOCKER_COMPOSE_STAGING = docker compose -p reaction-rapide-staging -f docker-compose.yml -f docker-compose.staging.yml
@@ -178,29 +178,29 @@ deploy-production:
 	NODE_ENV=production node deploy.js
 
 build-storybook:
-	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps storybook
+	$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-storybook run --rm --no-deps storybook
 
 build-front:
 ifeq ($(NODE_ENV),staging)
-	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_staging
+	$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-front run --rm --no-deps front_staging
 else
     ifeq ($(NODE_ENV),production)
-		$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_prod
+		$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-front run --rm --no-deps front_prod
     else
-		$(DOCKER_COMPOSE_BUILD) run --rm --no-deps front_dev
+		$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-front run --rm --no-deps front_dev
     endif
 endif
 
 build-admin:
 ifeq ($(NODE_ENV), staging)
-	$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_staging
+	$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-admin run --rm --no-deps admin_staging
 else
     ifeq ($(NODE_ENV), production)
-		$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_prod
+		$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-admin run --rm --no-deps admin_prod
     else
-		$(DOCKER_COMPOSE_BUILD) run --rm --no-deps admin_dev
+		$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-admin run --rm --no-deps admin_dev
     endif
 endif
 
 build-api:
-	$(DOCKER_COMPOSE) run --rm --no-deps api yarn run build
+	$(DOCKER_COMPOSE) -p reaction-rapide-build-api run --rm --no-deps api yarn run build

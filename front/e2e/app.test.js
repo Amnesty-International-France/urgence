@@ -27,8 +27,8 @@ describe.skip('Urgent Action', () => {
     let urgentAction;
 
     beforeAll(async () => {
-        urgentAction = await fetch('http://api:4000/test/createUrgentAction').then(r => r.json());
-        await fetch('http://api:4000/test/createSettings').then(r => r.json());
+        urgentAction = await fetch('http://api:4000/test/createUrgentAction').then((r) => r.json());
+        await fetch('http://api:4000/test/createSettings').then((r) => r.json());
     });
 
     afterAll(async () => {

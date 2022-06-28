@@ -181,12 +181,11 @@ export const updateUrgentAction = async (
         .then((rows) => rows[0])
         .then((row) => parseJsonFromRow<UrgentAction>(row));
 
-export const removeDefaultToOther = async (id: string) => {
+export const removeDefaultToOther = async (id: string) =>
     client<UrgentActionDb>(table)
         .update({ is_default: false })
         .where('is_default', '=', true)
-        .and.where('id', '<>', id);
-};
+        .where('id', '<>', id);
 
 export const removeUrgentAction = async (id: string) =>
     client<UrgentActionDb>(table).where({ id }).delete();

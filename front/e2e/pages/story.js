@@ -1,6 +1,6 @@
 import { By, until } from 'selenium-webdriver';
 
-export default driver => {
+export default (driver) => {
     const elements = {
         activeSlide: By.className('swiper-slide-active'),
         activeSlideText: By.css('.swiper-slide-active .rich-text'),
