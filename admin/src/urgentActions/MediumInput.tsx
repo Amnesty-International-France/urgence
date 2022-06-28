@@ -5,9 +5,10 @@ import { ImagePreview } from './ImagePreview';
 type MediumInputProps = {
     source: string;
     label?: string;
+    croppable?: boolean;
 };
 
-export const MediumInput = ({ source, label }: MediumInputProps) => {
+export const MediumInput = ({ source, label, croppable }: MediumInputProps) => {
     return (
         <Labeled label={label || 'Medium'}>
             <Box
@@ -18,7 +19,7 @@ export const MediumInput = ({ source, label }: MediumInputProps) => {
                 }}
             >
                 <ImageInput
-                    source={source}
+                    source={`${source}.src`}
                     placeholder={<p>Drop a picture to upload, or click to select it</p>}
                     accept="image/*"
                     label={false}
@@ -47,7 +48,7 @@ export const MediumInput = ({ source, label }: MediumInputProps) => {
                         },
                     }}
                 >
-                    <ImagePreview source="src" />
+                    <ImagePreview source="src" parentField={source} croppable={croppable} />
                 </ImageInput>
                 <FormDataConsumer>
                     {({ formData }: { formData: FormData }) => {
