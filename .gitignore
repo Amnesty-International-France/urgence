@@ -15,6 +15,9 @@ var/amnesty-prod.pub
 var/uploads
 var/
 
+dist/
+build/
+
 .env
 
 ## Api
