@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import { RichTextInput } from 'ra-input-rich-text';
 import { FormDataConsumer, required, TextInput } from 'react-admin';
 import { Card } from './Card';
-import { FrontPreview } from './FrontPreview';
 import { getScreenIndex, REGISTER } from './screenIndex';
 import { FormData } from './UrgentActionsForm';
 
@@ -71,9 +70,6 @@ export const RegisterInput = ({ source }: RegisterInputProps) => {
                                     validate={[required()]}
                                 />
                             </Card>
-                            <FrontPreview previewDevice="mobile">
-                                TODO : Front Preview Mobile
-                            </FrontPreview>
                         </Box>
                     );
                 }}

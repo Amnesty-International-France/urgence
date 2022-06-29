@@ -12,7 +12,6 @@ import {
 } from 'react-admin';
 import isEmail from 'validator/lib/isEmail';
 import { Card } from './Card';
-import { FrontPreview } from './FrontPreview';
 import { ParagraphTemplateInput } from './ParagraphTemplateInput';
 import { getScreenIndex, MESSAGE_VIEW } from './screenIndex';
 import { FormData } from './UrgentActionsForm';
@@ -163,15 +162,6 @@ export const MessageViewInput = ({ source }: MessageViewInputProps) => {
                                     validate={[required(), minLength(3), maxLength(25)]}
                                 />
                             </Card>
-                            <Box sx={{ flex: 1 }}>
-                                {hasMessageTemplate ? (
-                                    <FrontPreview previewDevice="mobile">
-                                        TODO : Front Preview Mobile
-                                    </FrontPreview>
-                                ) : (
-                                    <p>You should write a message to see this preview</p>
-                                )}
-                            </Box>
                         </Box>
                     );
                 }}

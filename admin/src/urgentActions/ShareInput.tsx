@@ -3,7 +3,6 @@ import { RichTextInput } from 'ra-input-rich-text';
 import { FormDataConsumer, Labeled, required, TextInput } from 'react-admin';
 
 import { Card } from './Card';
-import { FrontPreview } from './FrontPreview';
 import { getScreenIndex, SHARE } from './screenIndex';
 import { FormData } from './UrgentActionsForm';
 
@@ -92,9 +91,6 @@ export const ShareInput = ({ source }: ShareInputProps) => {
                                     </>
                                 </Labeled>
                             </Card>
-                            <FrontPreview previewDevice="mobile">
-                                TODO : Front Preview Mobile
-                            </FrontPreview>
                         </Box>
                     );
                 }}
