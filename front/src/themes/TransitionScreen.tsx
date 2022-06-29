@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
 
-import { black, yellow } from './colors';
+import { black, yellow } from 'amnesty-components';
 import LongText from './LongText';
 import RichText from './RichText';
 

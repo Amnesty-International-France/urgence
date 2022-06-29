@@ -10,10 +10,10 @@ import ErrorPage from './ErrorPage';
 import HomePage from './HomePage';
 import generateUrl from './services/generateUrl';
 import AppBackground from './themes/AppBackground';
-import AppLogo from './themes/AppLogo';
+import AppLogo from 'amnesty-components';
 import DesktopAlert from './themes/DesktopAlert';
 import RouterScrollToTop from './themes/RouterScrollToTop';
-import { ThemeProvider } from './themes/ThemeContext';
+import { ThemeProvider } from 'amnesty-components';
 import UrgentAction from './urgentActions/UrgentAction';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -36,6 +36,7 @@ const App = ({ className, client }: { className?: string; client: ApolloClient<u
                     <Div100Vw>
                         <Div100Vh className={className}>
                             <AppBackground />
+                            {/* @ts-ignore */}
                             <AppLogo />
                             <DesktopAlert />
                             <BrowserRouter>

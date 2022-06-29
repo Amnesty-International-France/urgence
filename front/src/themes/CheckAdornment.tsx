@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { InputAdornment } from '@mui/material';
-import { green } from './colors';
+import { green } from 'amnesty-components';
 
 const styles = {
     '& .check': {

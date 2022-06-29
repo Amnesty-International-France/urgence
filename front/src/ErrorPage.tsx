@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 
 import SEO from './SEO';
 import generateUrl from './services/generateUrl';
-import { withYellowLogo } from './themes/ThemeContext';
-import { white, yellow, black } from './themes/colors';
+import { withYellowLogo } from 'amnesty-components';
+import { white, yellow, black } from 'amnesty-components';
 import Link from './themes/Link';
 import AmnestyCandle from './icons/AmnestyCandle';
 

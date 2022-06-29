@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@mui/material/Button';
 
 import trackEvent from '../../analytics/trackEvent';
-import { black } from '../colors';
+import { black } from 'amnesty-components';
 import CopyToClipboardButton from '../CopyToClipboardButton';
 
 const styles = {

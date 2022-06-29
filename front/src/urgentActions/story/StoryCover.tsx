@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import get from 'lodash.get';
 import Paper from '@mui/material/Paper';
 
-import { white, black } from '../../themes/colors';
+import { white, black } from 'amnesty-components';
 import RichText from '../../themes/RichText';
 import MobileDetect from 'mobile-detect';
 

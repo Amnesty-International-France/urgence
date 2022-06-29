@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import classnames from 'classnames';
 import Paper from '@mui/material/Paper';
 
-import { white, black } from '../../themes/colors';
+import { white, black } from 'amnesty-components';
 
 import Form from './Form';
 import { withYellowLogo } from '../../themes/ThemeContext';

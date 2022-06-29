@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { ThemeProvider, AppLogo } from 'urgent_reaction';
+import { ThemeProvider, AppLogo } from 'amnesty-components';
 
 type FrontPreviewProps = {
     children: React.ReactNode;

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { black, darkGrey, grey, yellow } from './colors';
+import { black, darkGrey, grey, yellow } from 'amnesty-components';
 
 const StyledButton = styled('button')({
     display: 'flex',

@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import AmnestyCandle from './AmnestyCandle';
 import AmnestyLogo from './AmnestyLogo';
 
-import { black, yellow } from '../themes/colors';
+import { black, yellow } from 'amnesty-components';
 
 storiesOf('Icons', module)
     .addDecorator((story) => <div style={{ fontSize: 128 }}>{story()}</div>)

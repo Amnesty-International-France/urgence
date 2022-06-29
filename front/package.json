@@ -1,9 +1,6 @@
 {
     "name": "urgent_reaction",
     "version": "0.1.0",
-    "main": "dist/lib.js",
-    "types": "dist/lib.d.ts",
-    "module": "dist/esm/lib.js",
     "private": true,
     "scripts": {
         "start": "yarn start-web",
@@ -15,8 +12,7 @@
         "test-e2e": "jest ./e2e",
         "storybook": "start-storybook -p 9009 -s public",
         "build-storybook": "build-storybook -s public",
-        "lint": "eslint --fix src",
-        "build-lib": "tsup src/lib.ts --silent --clean --format cjs,esm --minify --keep-names --metafile --sourcemap --dts --legacy-output"
+        "lint": "eslint --fix src"
     },
     "dependencies": {
         "@apollo/client": "^3.6.9",
@@ -30,6 +26,7 @@
         "@mui/material": "^5.8.6",
         "@mui/styles": "^5.8.6",
         "@types/prop-types": "^15.7.5",
+        "amnesty-components": "link:./../amnesty-components",
         "chalk": "~5.0.1",
         "classnames": "~2.3.1",
         "css-loader": "~6.7.1",
@@ -39,6 +36,7 @@
         "fs-extra": "~10.1.0",
         "graphql": "~16.5.0",
         "graphql-tag": "~2.12.6",
+        "link": "^1.5.0",
         "lodash.get": "~4.4.2",
         "mobile-detect": "~1.4.5",
         "object-assign": "~4.1.1",

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import trackEvent from '../analytics/trackEvent';
 import withRouter from '../withRouter';
-import { black, darkGrey, grey, white } from './colors';
+import { black, darkGrey, grey, white } from 'amnesty-components';
 
 export const styles = {
     display: 'flex',

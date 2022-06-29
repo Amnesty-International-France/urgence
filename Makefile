@@ -192,6 +192,7 @@ else
 endif
 
 build-admin:
+	cd amnesty-components && yarn build
 ifeq ($(NODE_ENV), staging)
 	$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-admin run --rm --no-deps admin_staging
 else

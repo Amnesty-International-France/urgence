@@ -5,7 +5,7 @@ import { Card } from './Card';
 import { FrontPreview } from './FrontPreview';
 import { MediumInput } from './MediumInput';
 
-import { StoryCover, StoryStep, StorySlide } from 'urgent_reaction';
+// import { StoryCover, StoryStep, StorySlide } from 'urgent_reaction';
 
 import { FormData } from './UrgentActionsForm';
 
@@ -54,7 +54,8 @@ export const StoryTemplateInput = ({ source }: StoryTemplateInputProps) => {
                         </Card>
                         <Box sx={{ flex: 1 }}>
                             <FrontPreview previewDevice="mobile">
-                                <StorySlide
+                                Test
+                                {/* <StorySlide
                                     className=""
                                     step={
                                         formData.story
@@ -75,10 +76,11 @@ export const StoryTemplateInput = ({ source }: StoryTemplateInputProps) => {
                                             // <StoryStep {...props} />
                                         )
                                     }
-                                </StorySlide>
+                                </StorySlide> */}
                             </FrontPreview>
                             <FrontPreview previewDevice="desktop">
-                                <StorySlide
+                                Test
+                                {/* <StorySlide
                                     className=""
                                     step={
                                         formData.story
@@ -99,7 +101,7 @@ export const StoryTemplateInput = ({ source }: StoryTemplateInputProps) => {
                                             // <StoryStep {...props} />
                                         )
                                     }
-                                </StorySlide>
+                                </StorySlide> */}
                             </FrontPreview>
                         </Box>
                     </>

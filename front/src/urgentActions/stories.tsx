@@ -9,7 +9,7 @@ import Act from './Act';
 import ThankStep from './ThankStep';
 import Link from '../themes/Link';
 import { routerDecorator, history } from '../../.storybook/decorators';
-import { ThemeProvider } from '../themes/ThemeContext';
+import { ThemeProvider } from 'amnesty-components';
 import AppLogo from '../themes/AppLogo';
 
 const defaultStoryProps = {

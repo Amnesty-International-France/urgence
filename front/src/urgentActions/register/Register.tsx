@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import get from 'lodash.get';
 import { compose } from 'recompose';
 
-import { black, white } from '../../themes/colors';
+import { black, white } from 'amnesty-components';
 import { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
 import LongText from '../../themes/LongText';
 import RichText from '../../themes/RichText';

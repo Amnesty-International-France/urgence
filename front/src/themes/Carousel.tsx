@@ -11,7 +11,7 @@ import IconButton from './IconButton';
 
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { black } from './colors';
+import { black } from 'amnesty-components';
 
 const styles = {
     height: '100%',

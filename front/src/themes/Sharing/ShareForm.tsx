@@ -5,7 +5,7 @@ import LinkFacebook from './LinkFacebook';
 import LinkTwitter from './LinkTwitter';
 import LinkWhatsapp from './LinkWhatsapp';
 import CopyToClipboard from './CopyToClipboard';
-import { black } from '../colors';
+import { black } from 'amnesty-components';
 
 import { withSessionData } from '../../DataContext';
 

@@ -7,7 +7,7 @@ import get from 'lodash.get';
 
 import RichText from '../themes/RichText';
 import LongText from '../themes/LongText';
-import { withBlackLogo, withYellowBackground } from '../themes/ThemeContext';
+import { withBlackLogo, withYellowBackground } from 'amnesty-components';
 import Share from './share/Share';
 
 const styles = {

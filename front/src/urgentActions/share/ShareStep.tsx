@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import { Paper } from '@mui/material';
 
 import { withBlackLogo, withYellowBackground } from '../../themes/ThemeContext';
-import { white, black } from '../../themes/colors';
+import { white, black } from 'amnesty-components';
 import Share from './Share';
 
 const styles = {

@@ -13,6 +13,7 @@
         "@types/react": "^18.0.0",
         "@types/react-dom": "^18.0.0",
         "@types/validator": "^13.7.3",
+        "amnesty-components": "link:./../amnesty-components",
         "apollo-upload-client": "^17.0.0",
         "graphql": "^16.5.0",
         "jwt-decode": "^3.1.2",
@@ -26,7 +27,6 @@
         "react-scripts": "5.0.1",
         "slugify": "^1.6.5",
         "typescript": "^4.4.2",
-        "urgent_reaction": "link:./../front",
         "validator": "^13.7.0",
         "web-vitals": "^2.1.0"
     },

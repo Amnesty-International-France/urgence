@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import React from 'react';
 import { compose } from 'recompose';
 
-import { black, white } from '../../themes/colors';
+import { black, white } from 'amnesty-components';
 
 import { withSessionData } from '../../DataContext';
 import RichText from '../../themes/RichText';

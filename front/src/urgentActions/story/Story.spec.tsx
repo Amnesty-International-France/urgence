@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 // @ts-expect-error TS(2305): Module '"react-router-dom"' has no exported member... Remove this comment to see the full error message
 import { Redirect } from 'react-router-dom';
 
-import { black, white, yellow } from '../../themes/colors';
+import { black, white, yellow } from 'amnesty-components';
 import Carousel from '../../themes/Carousel';
 import { Story, getLogoColorForStoryStep } from './Story';
 
