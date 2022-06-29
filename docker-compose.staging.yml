@@ -30,7 +30,7 @@ services:
                 window: 120s
 
     nginx:
-        image: nginx
+        image: nginx:1.22
         ports:
             - '80:80'
             - '443:443'

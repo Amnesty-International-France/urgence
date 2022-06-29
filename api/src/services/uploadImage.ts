@@ -67,6 +67,7 @@ export const uploadImage = async (upload: string | { rawFile: Promise<Upload> },
         );
     }
     if (crop) {
+        console.log('over here');
         await sharp(path)
             .metadata()
             .then(({ width, height }) => {
