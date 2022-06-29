@@ -144,7 +144,7 @@ jobs:
     deploy:
         name: 🚀 Deploy
         needs: [test, test-e2e, build]
-        if: github.ref == 'refs/heads/master' && ${{ false }}
+        if: ${{ false }}
         runs-on: ubuntu-latest
         steps:
             - name: 🛑 Cancel Previous Runs

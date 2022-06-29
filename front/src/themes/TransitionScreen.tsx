@@ -131,7 +131,7 @@ export const TransitionScreen = ({
             !progress.objective ||
             !progress.message ||
             !responseCount ||
-            !responseCount < progress.display_threshold
+            responseCount < progress.display_threshold
         ) {
             // @ts-expect-error TS(2349): This expression is not callable.
             setDisplayProgress(false);
