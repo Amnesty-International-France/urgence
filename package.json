@@ -14,14 +14,12 @@
         "graphql-tag": "~2.8.0"
     },
     "devDependencies": {
+        "@svgr/cli": "~2.0.0",
         "@types/convict": "^6.1.1",
         "jest": "~22.4.4",
         "jest-canvas-mock": "~2.0.0",
         "jest-cli": "~22.4.4",
         "prettier": "~1.19.1",
-        "shipit-cli": "~4.0.2",
-        "shipit-deploy": "~4.0.2",
-        "svgr": "~1.9.2",
         "uuid-by-string": "~0.6.0"
     },
     "scripts": {
