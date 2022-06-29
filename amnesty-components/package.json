@@ -2,11 +2,18 @@
     "name": "amnesty-components",
     "version": "1.0.0",
     "description": "Components library for amnesty front and admin",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
+        }
+    },   
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "scripts": {
         "build": "tsup src/index.ts --silent --clean --format cjs,esm --minify --keep-names --metafile --sourcemap --dts",
-        "start": "chokidar --initial src/**/* -c 'yarn build'",
+        "start": "chokidar --initial 'src/**/*' -c 'yarn build'",
         "test": "jest"
     },
     "devDependencies": {

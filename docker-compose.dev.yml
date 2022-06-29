@@ -66,9 +66,12 @@ services:
         image: node:18
         user: '${UID}:${GID}'
         command: 'yarn start'
+        environment:
+            - NODE_ENV=development
+            - SHELL=bash
         volumes:
-            - ./amnesty-components:/app
-        working_dir: /app
+            - .:/app
+        working_dir: /app/amnesty-components
 
     storybook:
         image: node:12
