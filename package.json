@@ -52,5 +52,6 @@
             "\\.svg$": "<rootDir>/__mocks__/svgMock.js",
             "\\.css$": "<rootDir>/__mocks__/styleMock.js"
         }
-    }
+    },
+    "packageManager": "yarn@3.2.1"
 }

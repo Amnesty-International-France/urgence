@@ -20,8 +20,7 @@ install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install yarn
 
 install-production: ## Install all dependencies in production mode. Usage `make install-prod`.
-	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api bash -c "yarn config set unsafe-perm true && yarn install --production"
-	$(DOCKER_COMPOSE) run --rm --no-deps api bash -c "yarn config set unsafe-perm true && yarn install --production"
+	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install bash -c "yarn workspaces focus --production reaction-rapide-api"
 
 start: ## Start the project with docker. Usage `make start`.
 	$(DOCKER_COMPOSE) up --force-recreate -d
