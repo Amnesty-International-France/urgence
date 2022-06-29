@@ -68,21 +68,6 @@ jobs:
             - name: 📥 Download deps
               uses: bahmutov/npm-install@v1
 
-            - name: 📥 Download deps api
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: api
-
-            - name: 📥 Download deps front
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: front
-
-            - name: 📥 Download deps admin
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: admin
-
             - name: 🔎 Type check
               run: make typecheck
 
@@ -104,25 +89,11 @@ jobs:
             - name: 📥 Download deps
               uses: bahmutov/npm-install@v1
 
-            - name: 📥 Download deps api
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: api
-
-            - name: 📥 Download deps front
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: front
-
-            - name: 📥 Download deps admin
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: admin
-
             - name: 🔎 Run Test
               run: make test-unit
 
     test-e2e:
+        if: ${{ false }}
         name: 🔗 Test e2e
         runs-on: ubuntu-latest
         steps:
@@ -139,21 +110,6 @@ jobs:
 
             - name: 📥 Download deps
               uses: bahmutov/npm-install@v1
-
-            - name: 📥 Download deps api
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: api
-
-            - name: 📥 Download deps front
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: front
-
-            - name: 📥 Download deps admin
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: admin
 
             - name: 🔎 Run Test e2e
               run: make test-e2e
@@ -175,21 +131,6 @@ jobs:
 
             - name: 📥 Download deps
               uses: bahmutov/npm-install@v1
-
-            - name: 📥 Download deps api
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: api
-
-            - name: 📥 Download deps front
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: front
-
-            - name: 📥 Download deps admin
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: admin
 
             - name: 🛠️ Build front
               run: make build-front
@@ -219,21 +160,6 @@ jobs:
 
             - name: 📥 Download deps
               uses: bahmutov/npm-install@v1
-
-            - name: 📥 Download deps api
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: api
-
-            - name: 📥 Download deps front
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: front
-
-            - name: 📥 Download deps admin
-              uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: admin
 
             - name: 🕵️‍♂️ Installing ssh
               run: mkdir ~/.ssh && echo $KEY >> ~/.ssh/amnesty-staging

@@ -8,20 +8,14 @@ import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
-import { black, white, yellow } from 'amnesty-components';
-import { withThemeContext } from 'amnesty-components';
+import { black, white, withThemeContext, yellow } from 'amnesty-components';
 
+import { StoryCover, StorySlide, StoryStep } from 'amnesty-components';
 import { Navigate, NavigateFunction } from 'react-router';
 import { SwiperSlide } from 'swiper/react';
 import generateUrl from '../../services/generateUrl';
 import Carousel from '../../themes/Carousel';
 import withRouter from '../../withRouter';
-import { StoryCover, StorySlide, StoryStep } from 'amnesty-components';
-import { paramsType } from '../../propTypes';
-
-console.log('StoryStep', StoryStep);
-console.log('StorySlide', StorySlide);
-console.log('StoryCover', StoryCover);
 
 const styles = {
     '& .icon': {
