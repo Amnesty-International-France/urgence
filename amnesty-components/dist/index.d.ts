@@ -48,4 +48,6 @@ declare const colors: {
     darkGrey: string;
 };
 
-export { _default as AppLogo, ThemeConsumer, ThemeProvider, black, colors, darkGrey, green, grey, lightGrey, orange, pink, transparent, white, withBlackLogo, withLightGreyBackground, withThemeContext, withYellowBackground, withYellowLogo, yellow };
+declare const AmnestyLogo: any;
+
+export { AmnestyLogo, _default as AppLogo, ThemeConsumer, ThemeProvider, black, colors, darkGrey, green, grey, lightGrey, orange, pink, transparent, white, withBlackLogo, withLightGreyBackground, withThemeContext, withYellowBackground, withYellowLogo, yellow };

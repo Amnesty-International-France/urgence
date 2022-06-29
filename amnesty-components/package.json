@@ -4,7 +4,7 @@
     "description": "Components library for amnesty front and admin",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
-    "module": "dist/esm/index.js",
+    "module": "dist/index.mjs",
     "scripts": {
         "build": "tsup src/index.ts --silent --clean --format cjs,esm --minify --keep-names --metafile --sourcemap --dts",
         "test": "jest"
