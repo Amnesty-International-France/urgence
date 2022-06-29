@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import get from 'lodash.get';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 
 import { white, black } from '../../themes/colors';
 import RichText from '../../themes/RichText';

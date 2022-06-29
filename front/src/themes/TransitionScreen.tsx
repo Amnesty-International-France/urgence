@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
 
 import { black, yellow } from './colors';

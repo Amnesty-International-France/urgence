@@ -1,4 +1,4 @@
-import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { Component, createContext } from 'react';
 import { compose, lifecycle } from 'recompose';
 import React from 'react';

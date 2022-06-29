@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import classnames from 'classnames';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 
 import { white, black } from '../../themes/colors';
 

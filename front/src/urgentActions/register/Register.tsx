@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 import classnames from 'classnames';
 import get from 'lodash.get';
 import { compose } from 'recompose';
