@@ -17,10 +17,6 @@ import generateUrl from '../../services/generateUrl';
 import Carousel from '../../themes/Carousel';
 import withRouter from '../../withRouter';
 
-console.log('StoryStep', StoryStep);
-console.log('StorySlide', StorySlide);
-console.log('StoryCover', StoryCover);
-
 const styles = {
     '& .icon': {
         cursor: 'pointer',

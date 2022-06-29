@@ -2,13 +2,6 @@
     "name": "amnesty-components",
     "version": "1.0.0",
     "description": "Components library for amnesty front and admin",
-    "exports": {
-        ".": {
-            "types": "./dist/index.d.ts",
-            "import": "./dist/index.mjs",
-            "require": "./dist/index.js"
-        }
-    },   
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "scripts": {
