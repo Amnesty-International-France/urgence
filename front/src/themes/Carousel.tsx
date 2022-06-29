@@ -25,6 +25,10 @@ const styles = {
         height: '60px',
         zIndex: '100',
         width: '100%',
+        pointerEvents: 'none',
+        '& div': {
+            pointerEvents: 'auto',
+        },
     },
     '& .hidden': {
         visibility: 'hidden',
