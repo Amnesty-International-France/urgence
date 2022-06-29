@@ -1,4 +1,11 @@
 {
+    "private": true,
+    "workspaces": [
+        "amnesty-components",
+        "api",
+        "front",
+        "admin"
+    ],
     "dependencies": {
         "@types/graphql-upload": "^8.0.11",
         "convict": "~4.2.0",

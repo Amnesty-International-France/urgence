@@ -8,6 +8,7 @@ help: ## SOS? Usage make help (default).
 #### STARTING ###
 
 DOCKER_COMPOSE = docker compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
+DOCKER_COMPOSE_INSTALL = docker compose -p reaction-rapide -f docker-compose.install.yml
 DOCKER_COMPOSE_BUILD = docker compose -f docker-compose.build.yml
 DOCKER_COMPOSE_TEST = docker compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
 DOCKER_COMPOSE_E2E = docker compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
@@ -16,10 +17,7 @@ DOCKER_COMPOSE_PROD = docker compose -p reaction-rapide-prod -f docker-compose.y
 DOCKER_COMPOSE_DEV_NGINX = docker compose -p reaction-rapide-dev-nginx -f docker-compose.yml -f docker-compose.dev-nginx.yml
 
 install: ## Install all dependencies. Usage `make install`.
-	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api yarn install
-	$(DOCKER_COMPOSE) run --rm --no-deps api yarn install
-	$(DOCKER_COMPOSE) run --rm --no-deps admin yarn install
-	$(DOCKER_COMPOSE) run --rm --no-deps front yarn install
+	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install yarn
 
 install-production: ## Install all dependencies in production mode. Usage `make install-prod`.
 	$(DOCKER_COMPOSE) run --rm --no-deps --workdir=/app api bash -c "yarn config set unsafe-perm true && yarn install --production"
@@ -180,7 +178,10 @@ deploy-production:
 build-storybook:
 	$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-storybook run --rm --no-deps storybook
 
-build-front:
+build-components: ## Build the components. Usage `make build-components`.
+	$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-components run --rm --no-deps amnesty-components
+
+build-front: build-components
 ifeq ($(NODE_ENV),staging)
 	$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-front run --rm --no-deps front_staging
 else
@@ -191,8 +192,7 @@ else
     endif
 endif
 
-build-admin:
-	cd amnesty-components && yarn build
+build-admin: build-components
 ifeq ($(NODE_ENV), staging)
 	$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-admin run --rm --no-deps admin_staging
 else
@@ -205,3 +205,18 @@ endif
 
 build-api:
 	$(DOCKER_COMPOSE) -p reaction-rapide-build-api run --rm --no-deps api yarn run build
+
+clean: # Clean the build folder and stop all docker. Usage `make clean`.
+	$(DOCKER_COMPOSE) down
+	$(DOCKER_COMPOSE_TEST) down
+	$(DOCKER_COMPOSE_E2E) down
+	$(DOCKER_COMPOSE_DEV_NGINX) down
+	$(DOCKER_COMPOSE_STAGING) down
+	$(DOCKER_COMPOSE_PROD) down
+	$(DOCKER_COMPOSE_BUILD) down
+	$(DOCKER_COMPOSE_INSTALL) down
+	rm -rf api/dist/
+	rm -rf api/.pm2/
+	rm -rf admin/build/
+	rm -rf front/build/
+	rm -rf amnesty-components/dist/

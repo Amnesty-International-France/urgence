@@ -62,6 +62,14 @@ services:
             - POSTGRES_DB=reaction-rapide
             - PGDATA=/var/lib/postgresql/data/amnesty
 
+    amnesty-components:
+        image: node:18
+        user: '${UID}:${GID}'
+        command: 'yarn start'
+        volumes:
+            - ./amnesty-components:/app
+        working_dir: /app
+
     storybook:
         image: node:12
         user: '${UID}:${GID}'
