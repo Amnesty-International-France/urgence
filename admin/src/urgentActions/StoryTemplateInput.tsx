@@ -5,7 +5,7 @@ import { Card } from './Card';
 import { FrontPreview } from './FrontPreview';
 import { MediumInput } from './MediumInput';
 
-// import { StoryCover, StoryStep, StorySlide } from 'urgent_reaction';
+import { StoryCover, StoryStep, StorySlide } from 'amnesty-components';
 
 import { FormData } from './UrgentActionsForm';
 
@@ -54,8 +54,7 @@ export const StoryTemplateInput = ({ source }: StoryTemplateInputProps) => {
                         </Card>
                         <Box sx={{ flex: 1 }}>
                             <FrontPreview previewDevice="mobile">
-                                Test
-                                {/* <StorySlide
+                                <StorySlide
                                     className=""
                                     step={
                                         formData.story
@@ -72,15 +71,13 @@ export const StoryTemplateInput = ({ source }: StoryTemplateInputProps) => {
                                         index === 0 ? (
                                             <StoryCover {...props} className="cover" isMobile />
                                         ) : (
-                                            "Erreur à l'import de StoryStep"
-                                            // <StoryStep {...props} />
+                                            <StoryStep {...props} />
                                         )
                                     }
-                                </StorySlide> */}
+                                </StorySlide>
                             </FrontPreview>
                             <FrontPreview previewDevice="desktop">
-                                Test
-                                {/* <StorySlide
+                                <StorySlide
                                     className=""
                                     step={
                                         formData.story
@@ -97,11 +94,10 @@ export const StoryTemplateInput = ({ source }: StoryTemplateInputProps) => {
                                         index === 0 ? (
                                             <StoryCover {...props} className="cover" />
                                         ) : (
-                                            "Erreur à l'import de StoryStep"
-                                            // <StoryStep {...props} />
+                                            <StoryStep {...props} />
                                         )
                                     }
-                                </StorySlide> */}
+                                </StorySlide>
                             </FrontPreview>
                         </Box>
                     </>

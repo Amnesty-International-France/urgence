@@ -49,12 +49,14 @@ body {
     font-size: 14px;
 }
 
-.ql-size-large {
+.ql-size-large,
+.story-step h2 {
     font-weight: bold;
     font-size: 28px;
 }
 
-.ql-size-huge {
+.ql-size-huge,
+.story-step h1 {
     font-weight: bold;
     font-size: 42px;
 }

@@ -30,7 +30,10 @@ const styles = {
         flex: '1 0 0',
         alignItems: 'flex-end',
     },
-    '& .rich-text > p': {
+    '& .rich-text > h1': {
+        display: 'inline',
+    },
+    '& .rich-text > p, & .rich-text > h1, & .rich-text > h2': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
         textTransform: 'uppercase',
         margin: '0 12px',
@@ -40,7 +43,7 @@ const styles = {
             fontSize: '24px',
         },
     },
-    '& .ql-size-large': {
+    '& .ql-size-large, & h2': {
         color: white,
         backgroundColor: black,
         fontSize: '26px',
@@ -54,7 +57,7 @@ const styles = {
             padding: '8px 0',
         },
     },
-    '& .ql-size-huge': {
+    '& .ql-size-huge, & h1': {
         color: black,
         backgroundColor: white,
         fontSize: '36px',
