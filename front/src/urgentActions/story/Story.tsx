@@ -9,7 +9,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
 import { black, white, yellow } from 'amnesty-components';
-import { withThemeContext } from '../../themes/ThemeContext';
+import { withThemeContext } from 'amnesty-components';
 
 import { Navigate, NavigateFunction } from 'react-router';
 import { SwiperSlide } from 'swiper/react';

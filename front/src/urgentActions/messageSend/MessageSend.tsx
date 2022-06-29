@@ -7,7 +7,7 @@ import Paper from '@mui/material/Paper';
 import { white, black } from 'amnesty-components';
 
 import Form from './Form';
-import { withYellowLogo } from '../../themes/ThemeContext';
+import { withYellowLogo } from 'amnesty-components';
 import RichText from '../../themes/RichText';
 import { withSessionData } from '../../DataContext';
 import LegalInformation from '../LegalInformation';

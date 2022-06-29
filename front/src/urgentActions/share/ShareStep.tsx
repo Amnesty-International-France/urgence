@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import { Paper } from '@mui/material';
 
-import { withBlackLogo, withYellowBackground } from '../../themes/ThemeContext';
+import { withBlackLogo, withYellowBackground } from 'amnesty-components';
 import { white, black } from 'amnesty-components';
 import Share from './Share';
 

@@ -8,7 +8,7 @@ import { black, white } from 'amnesty-components';
 
 import { withSessionData } from '../../DataContext';
 import RichText from '../../themes/RichText';
-import { withYellowLogo } from '../../themes/ThemeContext';
+import { withYellowLogo } from 'amnesty-components';
 import Form from './Form';
 import LetterView from './LetterView';
 

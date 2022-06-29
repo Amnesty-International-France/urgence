@@ -4894,9 +4894,13 @@ ajv@^8.0.0, ajv@^8.6.0, ajv@^8.8.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-"amnesty-components@link:../amnesty-components":
-  version "0.0.0"
-  uid ""
+amnesty-components@./../amnesty-components:
+  version "1.0.0"
+  dependencies:
+    "@emotion/react" "^11.9.3"
+    "@emotion/styled" "^11.9.3"
+    "@mui/material" "^5.8.6"
+    recompose "^0.30.0"
 
 ansi-align@^2.0.0:
   version "2.0.0"

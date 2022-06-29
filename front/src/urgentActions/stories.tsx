@@ -10,7 +10,7 @@ import ThankStep from './ThankStep';
 import Link from '../themes/Link';
 import { routerDecorator, history } from '../../.storybook/decorators';
 import { ThemeProvider } from 'amnesty-components';
-import AppLogo from '../themes/AppLogo';
+import AppLogo from 'amnesty-components';
 
 const defaultStoryProps = {
     content: `
@@ -150,6 +150,7 @@ storiesOf('Act', module)
         return (
             <ThemeProvider>
                 <Div100Vh>
+                    {/* @ts-ignore */}
                     <AppLogo />
                     <Act
                         data={data}
@@ -174,6 +175,7 @@ storiesOf('Thanks', module)
         return (
             <ThemeProvider>
                 <Div100Vh>
+                    {/* @ts-ignore */}
                     <AppLogo />
                     <ThankStep
                         // @ts-ignore guillaumep
@@ -192,6 +194,7 @@ storiesOf('Thanks', module)
         return (
             <ThemeProvider>
                 <Div100Vh>
+                    {/* @ts-ignore */}
                     <AppLogo />
                     <ThankStep
                         // @ts-ignore guillaumep

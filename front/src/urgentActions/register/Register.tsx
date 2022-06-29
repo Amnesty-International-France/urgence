@@ -8,7 +8,7 @@ import { black, white } from 'amnesty-components';
 import { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
 import LongText from '../../themes/LongText';
 import RichText from '../../themes/RichText';
-import { withYellowBackground, withYellowLogo } from '../../themes/ThemeContext';
+import { withYellowBackground, withYellowLogo } from 'amnesty-components';
 
 import { withSessionData } from '../../DataContext';
 
