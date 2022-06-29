@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import Share from './Share';
-import RichText from '../../themes/RichText';
+import { RichText } from 'amnesty-components';
 import LongText from '../../themes/LongText';
 import ShareForm from '../../themes/Sharing/ShareForm';
 import LinkTelegram from '../../themes/Sharing/LinkTelegram';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import RichText from '../themes/RichText';
+import { RichText } from 'amnesty-components';
 
 const styles = {
     fontSize: '14px',

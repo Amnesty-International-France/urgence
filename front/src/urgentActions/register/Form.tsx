@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 
 import Input, { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
 import RadioButton from '../../themes/RadioButton';
-import RichText from '../../themes/RichText';
+import { RichText } from 'amnesty-components';
 
 type OwnProps = {
     analyticsCategory?: string;

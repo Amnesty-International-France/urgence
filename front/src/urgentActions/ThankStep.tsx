@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import Paper from '@mui/material/Paper';
 import get from 'lodash.get';
 
-import RichText from '../themes/RichText';
+import { RichText } from 'amnesty-components';
 import LongText from '../themes/LongText';
 import { withBlackLogo, withYellowBackground } from 'amnesty-components';
 import Share from './share/Share';

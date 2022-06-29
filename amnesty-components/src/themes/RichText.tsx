@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { black } from 'amnesty-components';
+import { black } from './colors';
 
 const defaultStyle = {
     color: black,

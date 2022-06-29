@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 
 import Input from '../../themes/Input';
-import RichText from '../../themes/RichText';
+import { RichText } from 'amnesty-components';
 
 type Props = {
     analyticsCategory?: string;

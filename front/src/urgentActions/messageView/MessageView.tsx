@@ -7,7 +7,7 @@ import { compose } from 'recompose';
 import { black, white } from 'amnesty-components';
 
 import { withSessionData } from '../../DataContext';
-import RichText from '../../themes/RichText';
+import { RichText } from 'amnesty-components';
 import { withYellowLogo } from 'amnesty-components';
 import Form from './Form';
 import LetterView from './LetterView';

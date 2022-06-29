@@ -7,7 +7,7 @@ import { compose } from 'recompose';
 import { black, white } from 'amnesty-components';
 import { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
 import LongText from '../../themes/LongText';
-import RichText from '../../themes/RichText';
+import { RichText } from 'amnesty-components';
 import { withYellowBackground, withYellowLogo } from 'amnesty-components';
 
 import { withSessionData } from '../../DataContext';

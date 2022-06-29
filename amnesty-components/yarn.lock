@@ -902,6 +902,18 @@
     jest-matcher-utils "^28.0.0"
     pretty-format "^28.0.0"
 
+"@types/lodash.get@^4.4.7":
+  version "4.4.7"
+  resolved "https://registry.yarnpkg.com/@types/lodash.get/-/lodash.get-4.4.7.tgz#1ea63d8b94709f6bc9e231f252b31440abe312cf"
+  integrity sha512-af34Mj+KdDeuzsJBxc/XeTtOx0SZHZNLd+hdrn+PcKGQs0EG2TJTzQAOTCZTgDJCArahlCzLWSy8c2w59JRz7Q==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.182"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.182.tgz#05301a4d5e62963227eaafe0ce04dd77c54ea5c2"
+  integrity sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==
+
 "@types/node@*":
   version "18.0.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.0.0.tgz#67c7b724e1bcdd7a8821ce0d5ee184d3b4dd525a"
@@ -1325,6 +1337,11 @@ cjs-module-lexer@^1.0.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-1.2.2.tgz#9f84ba3244a512f3a54e5277e8eef4c489864e40"
   integrity sha512-cOU9usZw8/dXIXKtwa8pM0OTJQuJkxMN6w30csNRUerHfeQ5R6U3kkU/FtJeIf3M202OHfY2U8ccInBG7/xogA==
+
+classnames@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
+  integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
 
 cliui@^7.0.2:
   version "7.0.4"
@@ -2801,6 +2818,11 @@ lodash.flattendeep@^4.4.0:
   resolved "https://registry.yarnpkg.com/lodash.flattendeep/-/lodash.flattendeep-4.4.0.tgz#fb030917f86a3134e5bc9bec0d69e0013ddfedb2"
   integrity sha512-uHaJFihxmJcEX3kT4I23ABqKKalJ/zDrDg0lsFtc1h+3uw49SIJ5beyhx5ExVRti3AvKoOJngIj7xz3oylPdWQ==
 
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==
+
 lodash.isequal@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
@@ -2883,6 +2905,11 @@ minimatch@^3.0.4, minimatch@^3.1.1:
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
   dependencies:
     brace-expansion "^1.1.7"
+
+mobile-detect@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/mobile-detect/-/mobile-detect-1.4.5.tgz#da393c3c413ca1a9bcdd9ced653c38281c0fb6ad"
+  integrity sha512-yc0LhH6tItlvfLBugVUEtgawwFU2sIe+cSdmRJJCTMZ5GEJyLxNyC/NIOAOGk67Fa8GNpOttO3Xz/1bHpXFD/g==
 
 moo@^0.5.0:
   version "0.5.1"
@@ -3412,6 +3439,11 @@ slash@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
+
+slick-carousel@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/slick-carousel/-/slick-carousel-1.8.1.tgz#a4bfb29014887bb66ce528b90bd0cda262cc8f8d"
+  integrity sha512-XB9Ftrf2EEKfzoQXt3Nitrt/IPbT+f1fgqBdoxO3W/+JYvtEOW6EgxnWfr9GH6nmULv7Y2tPmEX3koxThVmebA==
 
 source-map-resolve@^0.6.0:
   version "0.6.0"

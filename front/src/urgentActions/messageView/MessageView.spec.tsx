@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import RichText from '../../themes/RichText';
+import { RichText } from 'amnesty-components';
 import { MessageView } from './MessageView';
 import LetterView from './LetterView';
 import Form from './Form';

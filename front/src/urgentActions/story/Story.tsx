@@ -16,10 +16,12 @@ import { SwiperSlide } from 'swiper/react';
 import generateUrl from '../../services/generateUrl';
 import Carousel from '../../themes/Carousel';
 import withRouter from '../../withRouter';
-import StoryCover from './StoryCover';
-import StorySlide from './StorySlide';
-import StoryStep from './StoryStep';
+import { StoryCover, StorySlide, StoryStep } from 'amnesty-components';
 import { paramsType } from '../../propTypes';
+
+console.log('StoryStep', StoryStep);
+console.log('StorySlide', StorySlide);
+console.log('StoryCover', StoryCover);
 
 const styles = {
     '& .icon': {

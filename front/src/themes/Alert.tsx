@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import MobileDetect from 'mobile-detect';
 
-import { RichText } from './RichText';
+import { RichText } from 'amnesty-components';
 
 const styles = {
     '& .alert-icon': {

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { black, yellow } from 'amnesty-components';
 import LongText from './LongText';
-import RichText from './RichText';
+import { RichText } from 'amnesty-components';
 
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
