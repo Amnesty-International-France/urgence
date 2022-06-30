@@ -70,10 +70,13 @@ export const uploadImage = async (upload: string | { rawFile: Promise<Upload> },
         await sharp(path)
             .metadata()
             .then(({ width, height }) => {
-                if (!width || !height) {
+                if (!width || !height || width < 10 || height < 10) {
                     throw new Error('Upload failed please retry');
                 }
-                const { x, y, width: cropWidthPercent, height: cropHeightPercent } = crop;
+                const { x, y } = crop;
+                const cropWidthPercent = crop.width !== 0 ? crop.width : 100;
+                const cropHeightPercent = crop.height !== 0 ? crop.height : 100;
+
                 const cropX = Math.floor((x * width) / 100);
                 const cropY = Math.floor((y * height) / 100);
                 const cropWidth = Math.floor((width * cropWidthPercent) / 100);

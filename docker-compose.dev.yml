@@ -107,7 +107,7 @@ services:
             - '3000:3000'
 
     nginx:
-        image: nginx:1.21
+        image: nginx:1.22
         ports:
             - '80:80'
         volumes:
