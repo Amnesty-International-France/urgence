@@ -25,7 +25,7 @@ services:
             - /home/ubuntu/amnesty/uploads:/app/uploads
         deploy:
             restart_policy:
-                condition: unless-stopped
+                condition: on-failure
                 delay: 5s
                 window: 120s
 
@@ -48,7 +48,7 @@ services:
             - api
         deploy:
             restart_policy:
-                condition: unless-stopped
+                condition: on-failure
                 delay: 5s
                 window: 120s
 
@@ -61,6 +61,6 @@ services:
             - '~/amnesty/data:/var/lib/postgresql/data/'
         deploy:
             restart_policy:
-                condition: unless-stopped
+                condition: on-failure
                 delay: 5s
                 window: 120s

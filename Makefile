@@ -203,7 +203,7 @@ else
 endif
 
 build-api:
-	$(DOCKER_COMPOSE) -p reaction-rapide-build-api run --rm --no-deps api yarn run build
+	docker-compose -f docker-compose.yml -f docker-compose.dev.yml -p reaction-rapide-build-api run --rm --no-deps api yarn run build
 
 clean: # Clean the build folder and stop all docker. Usage `make clean`.
 	$(DOCKER_COMPOSE) down
