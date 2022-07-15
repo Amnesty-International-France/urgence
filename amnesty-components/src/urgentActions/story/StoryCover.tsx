@@ -106,12 +106,10 @@ export const StoryCover = ({
             <Paper
                 className="paper"
                 style={{
-                    ...{
                         backgroundImage: `url(${croppedImageSrc}), url(${imageSrc})`,
                         backgroundPosition: 'top',
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
-                    },
                 }}
                 elevation={6}
                 square
