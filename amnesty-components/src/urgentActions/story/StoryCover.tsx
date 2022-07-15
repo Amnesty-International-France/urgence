@@ -43,7 +43,7 @@ const styles = {
             fontSize: '24px',
         },
     },
-    '& .ql-size-large, & h2': {
+    '& .ql-size-large, & .rich-text > h2': {
         color: white,
         backgroundColor: black,
         fontSize: '26px',
@@ -57,7 +57,7 @@ const styles = {
             padding: '8px 0',
         },
     },
-    '& .ql-size-huge, & h1': {
+    '& .ql-size-huge, & .rich-text > h1': {
         color: black,
         backgroundColor: white,
         fontSize: '36px',
