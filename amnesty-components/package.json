@@ -3,10 +3,10 @@
     "version": "1.0.0",
     "description": "Components library for amnesty front and admin",
     "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
+    "typings": "./dist/index.d.ts",
     "scripts": {
         "build": "tsup src/index.ts --silent --clean --format cjs,esm --minify --keep-names --metafile --sourcemap --dts",
-        "start": "chokidar --initial 'src/**/*' -c 'yarn build'",
+        "start": "tsc -w --preserveWatchOutput",
         "test": "jest"
     },
     "devDependencies": {
