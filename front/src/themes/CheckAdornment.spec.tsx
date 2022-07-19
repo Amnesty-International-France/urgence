@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { InputAdornment } from '@material-ui/core';
+import { InputAdornment } from '@mui/material';
 
 import { CheckAdornment } from './CheckAdornment';
 

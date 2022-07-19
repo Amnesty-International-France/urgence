@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { black } from '../themes/colors';
+import { black } from 'amnesty-components';
 
 const styles = {
     textAlign: 'center',

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import get from 'lodash.get';
 
-import RichText from '../../themes/RichText';
+import { RichText } from 'amnesty-components';
 import LongText from '../../themes/LongText';
 import ShareForm from '../../themes/Sharing/ShareForm';
 

@@ -3,14 +3,13 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Div100Vh from 'react-div-100vh';
 
-import StoryStep from './story/StoryStep';
+import { StoryStep } from 'amnesty-components';
 import { WithStylesStory as Story } from './story/Story';
 import Act from './Act';
 import ThankStep from './ThankStep';
 import Link from '../themes/Link';
 import { routerDecorator, history } from '../../.storybook/decorators';
-import { ThemeProvider } from '../themes/ThemeContext';
-import AppLogo from '../themes/AppLogo';
+import { ThemeProvider, AppLogo } from 'amnesty-components';
 
 const defaultStoryProps = {
     content: `

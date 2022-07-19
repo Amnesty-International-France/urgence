@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import RichText from '../../themes/RichText';
+import { RichText } from 'amnesty-components';
 
 type Props = {
     className?: string;

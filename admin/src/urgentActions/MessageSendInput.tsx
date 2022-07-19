@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import { RichTextInput } from 'ra-input-rich-text';
 import { FormDataConsumer, maxLength, minLength, required, TextInput } from 'react-admin';
 import { Card } from './Card';
-import { FrontPreview } from './FrontPreview';
 import { getScreenIndex, MESSAGE_SEND } from './screenIndex';
 import { FormData } from './UrgentActionsForm';
 
@@ -59,15 +58,6 @@ export const MessageSendInput = ({ source }: MessageSendInputProps) => (
                                 validate={[required(), minLength(3), maxLength(25)]}
                             />
                         </Card>
-                        <Box sx={{ flex: 1 }}>
-                            {hasMessageTemplate ? (
-                                <FrontPreview previewDevice="mobile">
-                                    TODO : Front Preview Mobile
-                                </FrontPreview>
-                            ) : (
-                                <p>You should write a message to see this preview</p>
-                            )}
-                        </Box>
                     </Box>
                 );
             }}

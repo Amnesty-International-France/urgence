@@ -62,6 +62,17 @@ services:
             - POSTGRES_DB=reaction-rapide
             - PGDATA=/var/lib/postgresql/data/amnesty
 
+    amnesty-components:
+        image: node:18
+        user: '${UID}:${GID}'
+        command: 'yarn start'
+        environment:
+            - NODE_ENV=development
+            - SHELL=bash
+        volumes:
+            - .:/app
+        working_dir: /app/amnesty-components
+
     storybook:
         image: node:12
         user: '${UID}:${GID}'
@@ -96,7 +107,7 @@ services:
             - '3000:3000'
 
     nginx:
-        image: nginx:1.21
+        image: nginx:1.22
         ports:
             - '80:80'
         volumes:

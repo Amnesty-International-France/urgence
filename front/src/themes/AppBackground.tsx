@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { withThemeContext } from './ThemeContext';
+import { withThemeContext } from 'amnesty-components';
 
 const Rectangle = styled('div')(
     {

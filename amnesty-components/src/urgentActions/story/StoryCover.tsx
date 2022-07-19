@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import get from 'lodash.get';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 
 import { white, black } from '../../themes/colors';
 import RichText from '../../themes/RichText';
@@ -30,7 +30,7 @@ const styles = {
         flex: '1 0 0',
         alignItems: 'flex-end',
     },
-    '& .rich-text > p': {
+    '& .rich-text > p, & .rich-text > h1, & .rich-text > h2': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
         textTransform: 'uppercase',
         margin: '0 12px',
@@ -40,7 +40,8 @@ const styles = {
             fontSize: '24px',
         },
     },
-    '& .ql-size-large': {
+    '& .ql-size-large, & .rich-text > h2': {
+        display: 'inline',
         color: white,
         backgroundColor: black,
         fontSize: '26px',
@@ -48,13 +49,18 @@ const styles = {
         lineHeight: '39px',
         boxShadow: `12px 0 0 ${black}, -12px 0 0 ${black}`,
         boxDecorationBreak: 'clone',
+        '&::before': {
+            content: "''",
+            display: 'block',
+        },
         '@media (min-width: 1024px)': {
             fontSize: '52px',
             lineHeight: '78px',
             padding: '8px 0',
         },
     },
-    '& .ql-size-huge': {
+    '& .ql-size-huge, & .rich-text > h1': {
+        display: 'inline',
         color: black,
         backgroundColor: white,
         fontSize: '36px',
@@ -103,12 +109,10 @@ export const StoryCover = ({
             <Paper
                 className="paper"
                 style={{
-                    ...{
-                        backgroundImage: `url(${croppedImageSrc}), url(${imageSrc})`,
-                        backgroundPosition: 'top',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundSize: 'cover',
-                    },
+                    backgroundImage: `url(${croppedImageSrc}), url(${imageSrc})`,
+                    backgroundPosition: 'top',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
                 }}
                 elevation={6}
                 square

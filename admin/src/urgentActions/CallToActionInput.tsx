@@ -10,7 +10,6 @@ import {
     TextInput,
 } from 'react-admin';
 import { Card } from './Card';
-import { FrontPreview } from './FrontPreview';
 import { ParticipationInput } from './ParticipationInput';
 import { CALL_TO_ACTION, getScreenIndex } from './screenIndex';
 import { FormData } from './UrgentActionsForm';
@@ -106,11 +105,6 @@ export const CallToActionInput = () => {
                                     </Labeled>
                                 )}
                             </Card>
-                            <Box sx={{ flex: 1 }}>
-                                <FrontPreview previewDevice="mobile">
-                                    TODO : Front Preview Mobile
-                                </FrontPreview>
-                            </Box>
                         </Box>
                     );
                 }}

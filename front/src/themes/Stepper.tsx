@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import get from 'lodash.get';
 import classNames from 'classnames';
 
-import { black, darkGrey } from './colors';
+import { black, darkGrey } from 'amnesty-components';
 
 const styles = {
     display: 'flex',

@@ -33,7 +33,7 @@ services:
             - '4000:4000'
 
     nginx:
-        image: nginx
+        image: nginx:1.22
         ports:
             - '80:80'
         volumes:

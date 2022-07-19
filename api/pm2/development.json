@@ -1,7 +1,7 @@
 {
     "apps": [
         {
-            "exec_interpreter": "./node_modules/.bin/babel-node",
+            "exec_interpreter": "../node_modules/.bin/babel-node",
             "interpreter_args": "-x .ts --",
             "exec_mode": "fork",
             "name": "reaction-rapide",

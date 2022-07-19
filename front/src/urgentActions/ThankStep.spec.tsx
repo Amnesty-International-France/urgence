@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 
 import LongText from '../themes/LongText';
-import RichText from '../themes/RichText';
+import { RichText } from 'amnesty-components';
 import { ThankStep } from './ThankStep';
 import Share from './share/Share';
 

@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 import classnames from 'classnames';
 import React from 'react';
 import { compose } from 'recompose';
 
-import { black, white } from '../../themes/colors';
+import { black, white } from 'amnesty-components';
 
 import { withSessionData } from '../../DataContext';
-import RichText from '../../themes/RichText';
-import { withYellowLogo } from '../../themes/ThemeContext';
+import { RichText } from 'amnesty-components';
+import { withYellowLogo } from 'amnesty-components';
 import Form from './Form';
 import LetterView from './LetterView';
 

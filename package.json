@@ -1,4 +1,11 @@
 {
+    "private": true,
+    "workspaces": [
+        "amnesty-components",
+        "api",
+        "front",
+        "admin"
+    ],
     "dependencies": {
         "@types/graphql-upload": "^8.0.11",
         "convict": "~4.2.0",
@@ -7,14 +14,12 @@
         "graphql-tag": "~2.8.0"
     },
     "devDependencies": {
+        "@svgr/cli": "~2.0.0",
         "@types/convict": "^6.1.1",
         "jest": "~22.4.4",
         "jest-canvas-mock": "~2.0.0",
         "jest-cli": "~22.4.4",
         "prettier": "~1.19.1",
-        "shipit-cli": "~4.0.2",
-        "shipit-deploy": "~4.0.2",
-        "svgr": "~1.9.2",
         "uuid-by-string": "~0.6.0"
     },
     "scripts": {
@@ -45,5 +50,6 @@
             "\\.svg$": "<rootDir>/__mocks__/svgMock.js",
             "\\.css$": "<rootDir>/__mocks__/styleMock.js"
         }
-    }
+    },
+    "packageManager": "yarn@3.2.1"
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 
 import { TransitionScreen } from './TransitionScreen';
-import RichText from './RichText';
+import { RichText } from 'amnesty-components';
 import LongText from './LongText';
 import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 

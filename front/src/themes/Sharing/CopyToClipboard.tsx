@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
 import trackEvent from '../../analytics/trackEvent';
-import { black } from '../colors';
+import { black } from 'amnesty-components';
 import CopyToClipboardButton from '../CopyToClipboardButton';
 
 const styles = {

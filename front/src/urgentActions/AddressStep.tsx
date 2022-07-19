@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 
 import { withSessionData } from '../DataContext';
 import Input from '../themes/Input';
-import { withYellowLogo } from '../themes/ThemeContext';
+import { withYellowLogo } from 'amnesty-components';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',

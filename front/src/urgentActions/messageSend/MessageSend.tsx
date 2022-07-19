@@ -2,13 +2,13 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import classnames from 'classnames';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 
-import { white, black } from '../../themes/colors';
+import { white, black } from 'amnesty-components';
 
 import Form from './Form';
-import { withYellowLogo } from '../../themes/ThemeContext';
-import RichText from '../../themes/RichText';
+import { withYellowLogo } from 'amnesty-components';
+import { RichText } from 'amnesty-components';
 import { withSessionData } from '../../DataContext';
 import LegalInformation from '../LegalInformation';
 

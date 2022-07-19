@@ -1,13 +1,11 @@
-import React from 'react';
-import classnames from 'classnames';
-import { compose } from 'recompose';
 import styled from '@emotion/styled';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
+import classnames from 'classnames';
 import get from 'lodash.get';
+import { compose } from 'recompose';
 
-import RichText from '../themes/RichText';
+import { RichText, withBlackLogo, withYellowBackground } from 'amnesty-components';
 import LongText from '../themes/LongText';
-import { withBlackLogo, withYellowBackground } from '../themes/ThemeContext';
 import Share from './share/Share';
 
 const styles = {

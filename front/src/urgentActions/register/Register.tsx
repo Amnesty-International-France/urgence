@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 import classnames from 'classnames';
 import get from 'lodash.get';
 import { compose } from 'recompose';
 
-import { black, white } from '../../themes/colors';
+import { black, white } from 'amnesty-components';
 import { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
 import LongText from '../../themes/LongText';
-import RichText from '../../themes/RichText';
-import { withYellowBackground, withYellowLogo } from '../../themes/ThemeContext';
+import { RichText } from 'amnesty-components';
+import { withYellowBackground, withYellowLogo } from 'amnesty-components';
 
 import { withSessionData } from '../../DataContext';
 

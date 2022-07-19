@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { white } from '../../themes/colors';
+import { white } from 'amnesty-components';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',

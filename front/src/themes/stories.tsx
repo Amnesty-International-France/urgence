@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 
-import RichText from './RichText';
+import { RichText } from 'amnesty-components';
 import Image from './Image';
 import { Button } from './Button';
 import LoadingScreen from './LoadingScreen';

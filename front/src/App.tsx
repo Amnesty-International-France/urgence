@@ -1,21 +1,20 @@
-import styled from '@emotion/styled';
 import { ApolloClient, ApolloProvider } from '@apollo/client';
+import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import Div100Vh from 'react-div-100vh';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Analytics from './analytics/Analytics';
 
+import { AppLogo, ThemeProvider } from 'amnesty-components';
+import { HelmetProvider } from 'react-helmet-async';
 import ErrorPage from './ErrorPage';
 import HomePage from './HomePage';
 import generateUrl from './services/generateUrl';
 import AppBackground from './themes/AppBackground';
-import AppLogo from './themes/AppLogo';
 import DesktopAlert from './themes/DesktopAlert';
 import RouterScrollToTop from './themes/RouterScrollToTop';
-import { ThemeProvider } from './themes/ThemeContext';
 import UrgentAction from './urgentActions/UrgentAction';
-import { HelmetProvider } from 'react-helmet-async';
 
 export const Div100Vw = styled.div`
     & {
