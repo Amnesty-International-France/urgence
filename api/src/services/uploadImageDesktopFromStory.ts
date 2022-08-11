@@ -10,10 +10,11 @@ export const uploadImageDesktopFromStory = async (story: UrgentAction['story'] =
             crop: path<Crop>(['mediumDesktop', 'crop'], storyStep),
         };
     });
+
     const srcs = await Promise.all(
         images.map((img) => uploadImage(img.src as ImageUpload, img.crop)),
     );
-
+    
     return story.map((storyStep, index) =>
         srcs[index] ? assocPath(['mediumDesktop', 'src'], srcs[index], storyStep) : storyStep,
     );

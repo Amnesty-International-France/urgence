@@ -37,7 +37,8 @@ export const uploadImage = async (upload: string | { rawFile: Promise<Upload> },
         if (!match) {
             throw new Error('Upload failed please retry');
         }
-        const filename = match[1];
+        let filename = match[1];
+        filename = filename.substring(0, filename.indexOf('?time'));
         path = `${config.uploadDir}/${filename}`;
         cropPath = `${config.uploadDir}/crop-${filename}`;
     } else {
@@ -46,6 +47,7 @@ export const uploadImage = async (upload: string | { rawFile: Promise<Upload> },
             ? rawFile.file.createReadStream()
             : (await rawFile.promise).createReadStream();
         const savedFileName = getSavedFileName();
+
         path = `${config.uploadDir}/${savedFileName}`;
         cropPath = `${config.uploadDir}/crop-${savedFileName}`;
         url = `${config.uploadUrl}/${savedFileName}`;
@@ -86,5 +88,6 @@ export const uploadImage = async (upload: string | { rawFile: Promise<Upload> },
                     .toFile(cropPath);
             });
     }
-    return url;
+    
+    return url + `?time=${Date.now()}`;
 };
