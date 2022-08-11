@@ -11,10 +11,11 @@ export const uploadImageFromStory = async (story: UrgentAction['story'] = []) =>
             crop: path<Crop>(['medium', 'crop'], storyStep),
         };
     });
+
     const srcs = await Promise.all(
         images.map((img) => uploadImage(img.src as ImageUpload, img.crop)),
     );
-
+    
     return story.map((storyStep, index) =>
         srcs[index] ? assocPath(['medium', 'src'], srcs[index], storyStep) : storyStep,
     );

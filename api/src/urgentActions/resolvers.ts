@@ -107,7 +107,6 @@ export default {
             if (!context || !context.user || context.user.role !== 'admin') {
                 return null;
             }
-
             const preparedUa = await prepareUrgentActionForDatabase(urgentAction);
             const ua = updateUrgentAction(urgentAction.id, preparedUa);
             if (preparedUa.is_default) {
