@@ -8,14 +8,14 @@ help: ## SOS? Usage make help (default).
 
 #### STARTING ###
 
-DOCKER_COMPOSE = docker compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
-DOCKER_COMPOSE_INSTALL = docker compose -p reaction-rapide -f docker-compose.install.yml 
-DOCKER_COMPOSE_BUILD = docker compose -f docker-compose.build.yml
-DOCKER_COMPOSE_TEST = docker compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
-DOCKER_COMPOSE_E2E = docker compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
-DOCKER_COMPOSE_STAGING = docker compose -p reaction-rapide-staging -f docker-compose.yml -f docker-compose.staging.yml
-DOCKER_COMPOSE_PROD = docker compose -p reaction-rapide-prod -f docker-compose.yml -f docker-compose.prod.yml
-DOCKER_COMPOSE_DEV_NGINX = docker compose -p reaction-rapide-dev-nginx -f docker-compose.yml -f docker-compose.dev-nginx.yml
+DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
+DOCKER_COMPOSE_INSTALL = docker-compose -p reaction-rapide -f docker-compose.install.yml
+DOCKER_COMPOSE_BUILD = docker-compose -f docker-compose.build.yml
+DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
+DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
+DOCKER_COMPOSE_STAGING = docker-compose -p reaction-rapide-staging -f docker-compose.yml -f docker-compose.staging.yml
+DOCKER_COMPOSE_PROD = docker-compose -p reaction-rapide-prod -f docker-compose.yml -f docker-compose.prod.yml
+DOCKER_COMPOSE_DEV_NGINX = docker-compose -p reaction-rapide-dev-nginx -f docker-compose.yml -f docker-compose.dev-nginx.yml
 
 install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install yarn
