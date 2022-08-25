@@ -8,10 +8,6 @@ services:
         working_dir: /app/
         volumes:
             - '.:/app'
-            - '/tmp:/tmp'
-            - '~/.cache/.yarn/:/tmp/.cache/.yarn/'
-            - '~/.npm/:/tmp/.npm/'
-            - '~/.yarn/:/tmp/.yarn/'
         environment:
             - NODE_ENV=development
             - HOME=/tmp
