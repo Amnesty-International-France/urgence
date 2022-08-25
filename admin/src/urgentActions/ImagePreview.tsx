@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ImageField, RaRecord, useInput } from 'react-admin';
 import ReactCrop, { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
@@ -13,9 +13,18 @@ type ImagePreviewProps = {
 
 export const ImagePreview = ({ parentField, record, croppable }: ImagePreviewProps) => {
     const { field } = useInput({ source: `${parentField}.crop` });
-    const [crop, setCrop] = useState<Crop>(field.value);
+    const previousImage = useRef();
+    const [crop, setCrop] = useState<Crop | undefined>(field.value);
 
     const src = (record && record.src) || record;
+
+    useEffect(() => {
+        if (!!previousImage.current && previousImage.current !== src) {
+            setCrop(undefined);
+            field.onChange(null);
+        }
+        previousImage.current = src;
+    }, [src]);
 
     if (!record) {
         return null;
