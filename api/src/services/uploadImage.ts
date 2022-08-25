@@ -69,25 +69,23 @@ export const uploadImage = async (upload: string | { rawFile: Promise<Upload> },
         );
     }
     if (crop) {
-        await sharp(path)
-            .metadata()
-            .then(({ width, height }) => {
-                if (!width || !height || width < 10 || height < 10) {
-                    throw new Error('Upload failed please retry');
-                }
-                const { x, y } = crop;
-                const cropWidthPercent = crop.width !== 0 ? crop.width : 100;
-                const cropHeightPercent = crop.height !== 0 ? crop.height : 100;
+        const { width, height } = await sharp(path).metadata();
 
-                const cropX = Math.floor((x * width) / 100);
-                const cropY = Math.floor((y * height) / 100);
-                const cropWidth = Math.floor((width * cropWidthPercent) / 100);
-                const cropHeight = Math.floor((height * cropHeightPercent) / 100);
-                sharp(path)
-                    .extract({ left: cropX, top: cropY, width: cropWidth, height: cropHeight })
-                    .toFile(cropPath);
-            });
+        if (!width || !height || width < 10 || height < 10) {
+            throw new Error('Upload failed please retry');
+        }
+        const { x, y } = crop;
+        const cropWidthPercent = crop.width !== 0 ? crop.width : 100;
+        const cropHeightPercent = crop.height !== 0 ? crop.height : 100;
+
+        const cropX = Math.floor((x * width) / 100);
+        const cropY = Math.floor((y * height) / 100);
+        const cropWidth = Math.floor((width * cropWidthPercent) / 100);
+        const cropHeight = Math.floor((height * cropHeightPercent) / 100);
+        await sharp(path)
+            .extract({ left: cropX, top: cropY, width: cropWidth, height: cropHeight })
+            .toFile(cropPath);
     }
-    
+
     return url + `?time=${Date.now()}`;
 };
