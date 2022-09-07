@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import { FormDataConsumer, ImageInput, Labeled, required, TextInput } from 'react-admin';
 import { ImagePreview } from './ImagePreview';
+import { FormData, Medium } from './UrgentActionsForm';
 
 type MediumInputProps = {
     source: string;
@@ -53,14 +54,13 @@ export const MediumInput = ({ source, label, croppable }: MediumInputProps) => {
                 <FormDataConsumer>
                     {({ formData }: { formData: FormData }) => {
                         const keys = source.split('.');
-
-                        const value = keys.reduce((obj, key) => {
-                            // @ts-ignore
+                        const value = keys.reduce((obj, key) => {    
+                            // @ts-ignore                        
                             if (obj && obj[key]) return obj[key];
                             return null;
-                        }, formData);
+                        }, formData) as unknown as Medium;
                         return (
-                            value && (
+                            value?.src && (
                                 <TextInput
                                     fullWidth
                                     source={`${source}.title`}
