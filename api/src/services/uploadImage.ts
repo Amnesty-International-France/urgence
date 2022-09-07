@@ -64,6 +64,9 @@ export const uploadImage = async (upload: string | { rawFile: Promise<Upload> },
                         // Delete the truncated file
                         fs.unlinkSync(path);
                     }
+                    if (error.name = 'PayloadTooLargeError') {
+                        reject(new Error('Taille de fichier supérieure à 10Mo'));
+                    }
                     reject(error);
                 })
                 .pipe(optimizeFile)
