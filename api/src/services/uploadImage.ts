@@ -14,6 +14,10 @@ export type Crop = {
     height: number;
 };
 
+const removeTimestamp = (filename: string) => {
+    return filename.substring(0, filename.indexOf('?time') > -1 ? filename.indexOf('?time') : filename.length);
+};
+
 export const getSavedFileName = () => {
     const id = shortid.generate();
 
@@ -38,7 +42,7 @@ export const uploadImage = async (upload: string | { rawFile: Promise<Upload> },
             throw new Error('Upload failed please retry');
         }
         let filename = match[1];
-        filename = filename.substring(0, filename.indexOf('?time'));
+        filename = removeTimestamp(filename);
         path = `${config.uploadDir}/${filename}`;
         cropPath = `${config.uploadDir}/crop-${filename}`;
     } else {
@@ -69,23 +73,24 @@ export const uploadImage = async (upload: string | { rawFile: Promise<Upload> },
         );
     }
     if (crop) {
-        const { width, height } = await sharp(path).metadata();
+            const { width, height } = await sharp(path).metadata();
 
-        if (!width || !height || width < 10 || height < 10) {
-            throw new Error('Upload failed please retry');
-        }
-        const { x, y } = crop;
-        const cropWidthPercent = crop.width !== 0 ? crop.width : 100;
-        const cropHeightPercent = crop.height !== 0 ? crop.height : 100;
+            if (!width || !height || width < 10 || height < 10) {
+                throw new Error('Upload failed please retry');
+            }
+            const { x, y } = crop;
+            const cropWidthPercent = crop.width !== 0 ? crop.width : 100;
+            const cropHeightPercent = crop.height !== 0 ? crop.height : 100;
 
-        const cropX = Math.floor((x * width) / 100);
-        const cropY = Math.floor((y * height) / 100);
-        const cropWidth = Math.floor((width * cropWidthPercent) / 100);
-        const cropHeight = Math.floor((height * cropHeightPercent) / 100);
-        await sharp(path)
-            .extract({ left: cropX, top: cropY, width: cropWidth, height: cropHeight })
-            .toFile(cropPath);
+            const cropX = Math.floor((x * width) / 100);
+            const cropY = Math.floor((y * height) / 100);
+            const cropWidth = Math.floor((width * cropWidthPercent) / 100);
+            const cropHeight = Math.floor((height * cropHeightPercent) / 100);
+
+            await sharp(path)
+                .extract({ left: cropX, top: cropY, width: cropWidth, height: cropHeight })
+                .toFile(cropPath);
     }
 
-    return url + `?time=${Date.now()}`;
+    return removeTimestamp(url) + `?time=${Date.now()}`;
 };
