@@ -1,4 +1,3 @@
-import { Upload } from 'graphql-upload';
 import { path, assocPath } from 'ramda';
 import { UrgentAction } from '../urgentActions/repository';
 
@@ -13,9 +12,19 @@ export const uploadImageFromStory = async (story: UrgentAction['story'] = []) =>
     });
 
     const srcs = await Promise.all(
-        images.map((img) => uploadImage(img.src as ImageUpload, img.crop)),
+        images.map(async (image) => {
+            try {
+                return await uploadImage(image.src as ImageUpload, image.crop);
+            } catch (error: any) {
+                if (error.message.includes('extract_area: bad extract area')) {
+                    image.crop = undefined;
+                    return await uploadImage(image.src as ImageUpload, undefined);
+                }
+                throw error;
+            }
+        }),
     );
-    
+
     return story.map((storyStep, index) =>
         srcs[index] ? assocPath(['medium', 'src'], srcs[index], storyStep) : storyStep,
     );
