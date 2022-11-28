@@ -19,6 +19,9 @@ cd amnesty-components/
 yarn install --silent
 yarn run build
 cd ..
+echo "-----"
+echo "amnesty-components/ has been built"
+echo "-----"
 
 echo "build admin/"
 echo "-----"
@@ -26,6 +29,9 @@ cd admin/
 yarn install --silent
 yarn run build
 cd ..
+echo "-----"
+echo "admin/ has been built"
+echo "-----"
 
 echo "build front/"
 echo "-----"
@@ -33,9 +39,17 @@ cd front/
 yarn install --silent
 yarn run build
 cd ..
+echo "-----"
+echo "front/ has been built"
+echo "-----"
 
 echo "build api/"
 echo "-----"
 cd api/
 yarn install --silent
+cd ..
+echo "-----"
+echo "dependencies of api/ have been installed"
+echo "-----"
+
 #yarn workspaces focus --production reaction-rapide-api -vvv
