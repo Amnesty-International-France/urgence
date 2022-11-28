@@ -13,17 +13,17 @@ echo "-----"
 whereis yarn
 echo "-----"
 
+cd amnesty-components/
+yarn install
+yarn run build
+cd ..
+
 cd admin/
 yarn install
 yarn run build
 cd ..
 
 cd front/
-yarn install
-yarn run build
-cd ..
-
-cd amnesty-components/
 yarn install
 yarn run build
 cd ..
