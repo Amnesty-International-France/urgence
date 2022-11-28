@@ -3,5 +3,5 @@ echo "-----"
 yarn --version
 echo "-----"
 yarn install
-yarn run build
-yarn workspaces focus --production reaction-rapide-api
+yarn run build -vvv
+yarn workspaces focus --production reaction-rapide-api -vvv
