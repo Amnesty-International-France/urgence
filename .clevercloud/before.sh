@@ -16,7 +16,7 @@ echo "-----"
 echo "build amnesty-components/"
 echo "-----"
 cd amnesty-components/
-yarn install --silent
+yarn --silent install
 yarn run build
 cd ..
 echo "-----"
@@ -26,7 +26,7 @@ echo "-----"
 echo "build admin/"
 echo "-----"
 cd admin/
-yarn install --silent
+yarn --silent install
 yarn run build
 cd ..
 echo "-----"
@@ -36,7 +36,7 @@ echo "-----"
 echo "build front/"
 echo "-----"
 cd front/
-yarn install --silent
+yarn --silent install
 yarn run build-web
 cd ..
 echo "-----"
@@ -46,7 +46,7 @@ echo "-----"
 echo "build api/"
 echo "-----"
 cd api/
-yarn install --silent
+yarn --silent install
 cd ..
 echo "-----"
 echo "dependencies of api/ have been installed"
