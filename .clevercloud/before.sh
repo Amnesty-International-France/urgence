@@ -37,7 +37,7 @@ echo "build front/"
 echo "-----"
 cd front/
 yarn install --silent
-yarn run build
+yarn run build-web
 cd ..
 echo "-----"
 echo "front/ has been built"
