@@ -1,0 +1,24 @@
+stages:
+  - deploy
+
+variables:
+  BROWSERSLIST_IGNORE_OLD_DATA: 'true'
+
+deploy_clevercloud_manual:
+  image:
+    name: clevercloud/clever-tools:latest
+    entrypoint: [ "/bin/sh", "-c" ]
+  stage: deploy
+  cache: [ ]
+  script: |
+    clever link ${APP_ID}
+    clever deploy
+  variables:
+    APP_ID: app_dbdec903-e149-4672-a47e-8e29a294f56e
+  when: manual
+  only:
+    - master
+    - feature/AIF-1047-deploy-on-clever-cloud
+  environment:
+    name: prod_clevercloud
+    url: https://urgent.amnesty.fr
