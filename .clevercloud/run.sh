@@ -1,2 +1,2 @@
 cd api/
-yarn run start
+#yarn run start
