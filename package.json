@@ -52,7 +52,7 @@
         }
     },
     "packageManager": "yarn@3.2.1",
-    "engines" : {
-        "node" : "^18"
+    "engines": {
+        "node": "^18"
     }
 }
