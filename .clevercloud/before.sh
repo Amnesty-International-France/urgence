@@ -47,9 +47,10 @@ echo "build api/"
 echo "-----"
 cd api/
 yarn install
+yarn run build
 cd ..
 echo "-----"
-echo "dependencies of api/ have been installed"
+echo "front/ has been built"
 echo "-----"
 
 #yarn workspaces focus --production reaction-rapide-api -vvv
