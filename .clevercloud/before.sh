@@ -13,6 +13,11 @@ echo "-----"
 whereis yarn
 echo "-----"
 
+echo "yarn config get cacheFolder"
+echo "-----"
+whereis yarn config get cacheFolder
+echo "-----"
+
 #echo "build amnesty-components/"
 #echo "-----"
 #cd amnesty-components/
