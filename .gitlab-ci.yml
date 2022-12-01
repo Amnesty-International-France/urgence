@@ -43,7 +43,7 @@ build_prod:
     - feature/AIF-1047-deploy-on-clever-cloud
 
 ##### Deploy #####
-deploy_clevercloud_manual:
+deploy_api_manual:
   image:
     name: clevercloud/clever-tools:latest
     entrypoint: [ "/bin/sh", "-c" ]
