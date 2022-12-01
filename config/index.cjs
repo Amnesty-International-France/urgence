@@ -98,6 +98,11 @@ const config = convict({
             default: 'reaction-rapide',
             env: 'POSTGRES_SCHEMA',
         },
+        // source: https://stackoverflow.com/questions/25000183/node-js-postgresql-error-no-pg-hba-conf-entry-for-host/64960461#64960461
+        ssl: {
+            require: true,
+            rejectUnauthorized: false,
+        },
     },
     uploadDir: {
         format: String,
