@@ -18,6 +18,7 @@ variables:
     - echo "transfer the compiled files"
     - cp --recursive front/build/ dist/
     - cp --recursive admin/build/ dist/admin/
+    - cp .clevercloud/static/.htaccess dist/
     # the directory must exist
     - ls -lh ${PWD}/dist/
   artifacts:
