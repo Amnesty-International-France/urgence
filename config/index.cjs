@@ -100,6 +100,7 @@ const config = convict({
         },
         // source: https://stackoverflow.com/questions/25000183/node-js-postgresql-error-no-pg-hba-conf-entry-for-host/64960461#64960461
         ssl: {
+            sslmode: 'require',
             require: true,
             rejectUnauthorized: false,
         },
