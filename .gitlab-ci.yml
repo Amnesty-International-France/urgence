@@ -12,24 +12,22 @@ variables:
   tags:
     - yarn
   stage: build
-  variables:
-    YARN: 'node .yarn/releases/yarn-3.2.1.cjs'
   script:
-    - ${YARN} --version
+    - node .yarn/releases/yarn-3.2.1.cjs --version
     - echo "build amnesty-components/"
     - cd amnesty-components/
-    - ${YARN} install
-    - ${YARN} run build
+    - node .yarn/releases/yarn-3.2.1.cjs install
+    - node .yarn/releases/yarn-3.2.1.cjs run build
     - cd ..
     - echo "build admin/"
     - cd admin/
-    - ${YARN} install
-    - ${YARN} run build
+    - node .yarn/releases/yarn-3.2.1.cjs install
+    - node .yarn/releases/yarn-3.2.1.cjs run build
     - cd ..
     - echo "build front/"
     - cd front/
-    - ${YARN} install
-    - ${YARN} run build-web
+    - node .yarn/releases/yarn-3.2.1.cjs install
+    - node .yarn/releases/yarn-3.2.1.cjs run build-web
     - cd ..
     - echo "transfer the compiled files"
     - rsync -av front/build/ dist/
