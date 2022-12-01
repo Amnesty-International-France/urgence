@@ -16,8 +16,8 @@ variables:
     - node .yarn/releases/yarn-3.2.1.cjs --version
     - .clevercloud/static/build.sh
     - echo "transfer the compiled files"
-    - rsync -av front/build/ dist/
-    - rsync -av admin/build/ dist/admin/
+    - cp --recursive front/build/ dist/
+    - cp --recursive admin/build/ dist/admin/
     # the directory must exist
     - ls -lh ${PWD}/dist/
   artifacts:
