@@ -32,7 +32,7 @@ build_prod:
     REF: $CI_COMMIT_REF_SLUG
     NODE_ENV: production
     REACT_APP_NODE_ENV: production
-    PUBLIC_URL: https://clevercloud.urgent.amnesty.fr/admin
+    PUBLIC_URL: https://clevercloud.urgent.amnesty.fr
     REACT_APP_API_URL: https://clevercloud.api.urgent.amnesty.fr
     REACT_APP_FRONT_BASE_URL: https://clevercloud.urgent.amnesty.fr
     UPLOAD_URL: https://clevercloud.api.urgent.amnesty.fr/static
