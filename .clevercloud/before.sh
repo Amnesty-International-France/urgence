@@ -1,3 +1,7 @@
+echo "-----"
+echo "execute after.sh"
+echo "-----"
+
 echo "node version"
 echo "-----"
 node --version
@@ -55,7 +59,11 @@ yarn install
 yarn run build
 cd ..
 echo "-----"
-echo "front/ has been built"
+echo "api/ has been built"
 echo "-----"
 
 #yarn workspaces focus --production reaction-rapide-api -vvv
+
+echo "-----"
+echo "after.sh has been executed"
+echo "-----"
