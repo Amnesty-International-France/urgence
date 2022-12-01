@@ -92,6 +92,7 @@ upload_static_content:
     DIRECTORY: 'dist/'
   only:
     - master
+    - feature/AIF-1047-deploy-on-clever-cloud
   when: manual
   environment:
     name: prod_static
