@@ -16,6 +16,8 @@ variables:
     - node .yarn/releases/yarn-3.2.1.cjs --version
     - .clevercloud/static/build.sh
     - echo "transfer the compiled files"
+    - mkdir -p dist/
+    - cp .clevercloud/static/.htaccess dist/
     - cp --recursive front/build/ dist/
     - cp --recursive admin/build/ dist/admin/
     # the directory must exist
