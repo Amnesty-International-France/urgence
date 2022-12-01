@@ -1,9 +1,57 @@
 stages:
+  - build
   - deploy
 
 variables:
   BROWSERSLIST_IGNORE_OLD_DATA: 'true'
 
+.build: &build
+  image: node:18
+  tags:
+    - yarn
+  stage: build
+  script:
+    - echo "build amnesty-components/"
+    - cd amnesty-components/
+    - yarn install
+    - yarn run build
+    - cd ..
+    - echo "build admin/"
+    - cd admin/
+    - yarn install
+    - yarn run build
+    - cd ..
+    - echo "build front/"
+    - cd front/
+    - yarn install
+    - yarn run build-web
+    - cd ..
+    - echo "transfer the compiled files"
+    - rsync -av front/build/ dist/
+    - rsync -av admin/build/ dist/admin/
+    # the directory must exist
+    - ls -lh ${PWD}/dist/
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 24 hrs
+    when: always
+
+build_prod:
+  <<: *build
+  variables:
+    REF: $CI_COMMIT_REF_SLUG
+    NODE_ENV: production
+    REACT_APP_NODE_ENV: production
+    PUBLIC_URL: https://clevercloud.urgent.amnesty.fr/admin
+    REACT_APP_API_URL: https://clevercloud.api.urgent.amnesty.fr
+    REACT_APP_FRONT_BASE_URL: https://clevercloud.urgent.amnesty.fr
+    UPLOAD_URL: https://clevercloud.api.urgent.amnesty.fr/static
+  only:
+    - master
+    - feature/AIF-1047-deploy-on-clever-cloud
+
+##### Deploy #####
 deploy_clevercloud_manual:
   image:
     name: clevercloud/clever-tools:latest
@@ -20,5 +68,31 @@ deploy_clevercloud_manual:
     - master
     - feature/AIF-1047-deploy-on-clever-cloud
   environment:
-    name: prod_clevercloud
-    url: https://urgent.amnesty.fr
+    name: prod_api
+    url: https://clevercloud.api.urgent.amnesty.fr
+
+.upload: &upload
+  stage: deploy
+  image: alpine:latest
+  before_script:
+    - apk update && apk add openssh-client rsync
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\nStrictHostKeyChecking no\n" > ~/.ssh/config
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | ssh-add -
+    - ls -lh ${PWD}/${DIRECTORY}
+  script:
+    - rsync -atv --delete-after -e 'ssh' ${PWD}/${DIRECTORY} userfce04088@app-fce04088-294c-41c6-b03a-0b5fb6fce9a9-fsbucket.services.clever-cloud.com:/
+
+upload_static_content:
+  <<: *upload
+  dependencies: ['build_prod']
+  needs: ['build_prod']
+  variables:
+    DIRECTORY: 'dist/'
+  only:
+    - master
+  when: manual
+  environment:
+    name: prod_static
+    url: https://clevercloud.urgent.amnesty.fr
