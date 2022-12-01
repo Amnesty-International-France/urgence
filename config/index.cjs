@@ -98,10 +98,6 @@ const config = convict({
             default: 'reaction-rapide',
             env: 'POSTGRES_SCHEMA',
         },
-        ssl: {
-            rejectUnauthorized: false,
-            checkServerIdentity: false,
-        },
     },
     uploadDir: {
         format: String,
