@@ -7,16 +7,6 @@ variables:
   # don't treat warnings as errors
   CI: 'false'
 
-cache:
-  key:
-    files:
-      - yarn.lock
-  paths:
-    - admin/node_modules/
-    - amnesty-components/node_modules/
-    - front/node_modules/
-    - node_modules/
-
 .build: &build
   image: node:18
   tags:
