@@ -4,27 +4,32 @@ stages:
 
 variables:
   BROWSERSLIST_IGNORE_OLD_DATA: 'true'
+  # don't treat warnings as errors
+  CI: 'false'
 
 .build: &build
   image: node:18
   tags:
     - yarn
   stage: build
+  variables:
+    YARN: 'node .yarn/releases/yarn-3.2.1.cjs'
   script:
+    - ${YARN} --version
     - echo "build amnesty-components/"
     - cd amnesty-components/
-    - yarn install
-    - yarn run build
+    - ${YARN} install
+    - ${YARN} run build
     - cd ..
     - echo "build admin/"
     - cd admin/
-    - yarn install
-    - yarn run build
+    - ${YARN} install
+    - ${YARN} run build
     - cd ..
     - echo "build front/"
     - cd front/
-    - yarn install
-    - yarn run build-web
+    - ${YARN} install
+    - ${YARN} run build-web
     - cd ..
     - echo "transfer the compiled files"
     - rsync -av front/build/ dist/
