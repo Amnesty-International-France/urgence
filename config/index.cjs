@@ -99,9 +99,7 @@ const config = convict({
             env: 'POSTGRES_SCHEMA',
         },
         ssl: {
-            format: Boolean,
-            default: false,
-            env: 'POSTGRES_SSL',
+            rejectUnauthorized: false
         },
     },
     uploadDir: {
