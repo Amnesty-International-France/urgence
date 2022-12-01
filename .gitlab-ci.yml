@@ -7,6 +7,16 @@ variables:
   # don't treat warnings as errors
   CI: 'false'
 
+cache:
+  key:
+    files:
+      - yarn.lock
+  paths:
+    - admin/node_modules/
+    - amnesty-components/node_modules/
+    - front/node_modules/
+    - node_modules/
+
 .build: &build
   image: node:18
   tags:
@@ -14,21 +24,7 @@ variables:
   stage: build
   script:
     - node .yarn/releases/yarn-3.2.1.cjs --version
-    - echo "build amnesty-components/"
-    - cd amnesty-components/
-    - node .yarn/releases/yarn-3.2.1.cjs install
-    - node .yarn/releases/yarn-3.2.1.cjs run build
-    - cd ..
-    - echo "build admin/"
-    - cd admin/
-    - node .yarn/releases/yarn-3.2.1.cjs install
-    - node .yarn/releases/yarn-3.2.1.cjs run build
-    - cd ..
-    - echo "build front/"
-    - cd front/
-    - node .yarn/releases/yarn-3.2.1.cjs install
-    - node .yarn/releases/yarn-3.2.1.cjs run build-web
-    - cd ..
+    - .clevercloud/static/build.sh
     - echo "transfer the compiled files"
     - rsync -av front/build/ dist/
     - rsync -av admin/build/ dist/admin/
