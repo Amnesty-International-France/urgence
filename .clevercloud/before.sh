@@ -1,5 +1,5 @@
 echo "-----"
-echo "execute after.sh"
+echo "execute before.sh"
 echo "-----"
 
 echo "node version"
