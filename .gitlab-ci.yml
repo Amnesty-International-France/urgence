@@ -13,6 +13,7 @@ variables:
     - yarn
   stage: build
   script:
+    - exit 0
     - node .yarn/releases/yarn-3.2.1.cjs --version
     - .clevercloud/static/build.sh
     - echo "transfer the compiled files"
@@ -64,19 +65,18 @@ deploy_clevercloud_manual:
   stage: deploy
   image: alpine:latest
   before_script:
-    - apk update && apk add openssh-client rsync
-    - mkdir -p ~/.ssh
-    - echo -e "Host *\nStrictHostKeyChecking no\n" > ~/.ssh/config
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | ssh-add -
+    - apk update && apk add --no-cache lftp
+    - mkdir -p ${PWD}/${DIRECTORY}
+    - echo "OK" > ${PWD}/${DIRECTORY}/index.html
     - ls -lh ${PWD}/${DIRECTORY}
   script:
-    - rsync -atv --delete-after -e 'ssh' ${PWD}/${DIRECTORY} userfce04088@app-fce04088-294c-41c6-b03a-0b5fb6fce9a9-fsbucket.services.clever-cloud.com:/
+    # source: https://savjee.be/blog/gitlab-ci-deploy-to-ftp-with-lftp/
+    - lftp -e "open ${FTP_HOST}; user ${FTP_USERNAME} ${FTP_PASSWORD}; mirror -X .* -X .*/ --reverse --verbose --delete ${DIRECTORY} /; bye"
 
 upload_static_content:
   <<: *upload
-  dependencies: ['build_prod']
-  needs: ['build_prod']
+#  dependencies: ['build_prod']
+#  needs: ['build_prod']
   variables:
     DIRECTORY: 'dist/'
   only:
