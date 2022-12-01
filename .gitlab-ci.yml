@@ -69,7 +69,7 @@ deploy_clevercloud_manual:
     - ls -lh ${PWD}/${DIRECTORY}
   script:
     # source: https://savjee.be/blog/gitlab-ci-deploy-to-ftp-with-lftp/
-    - lftp -e "open ${FTP_HOST}; user ${FTP_USER} ${FTP_PASSWORD}; mirror -X .* -X .*/ --reverse --no-perms --verbose --delete ${DIRECTORY} /; bye"
+    - lftp -e "open ${FTP_HOST}; user ${FTP_USER} ${FTP_PASSWORD}; mirror --reverse --no-perms --verbose --delete ${DIRECTORY} /; bye"
 
 upload_static_content:
   <<: *upload
