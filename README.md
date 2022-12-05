@@ -32,6 +32,10 @@ By default, it deploys `master` branch. However, it is possible to deploy anothe
 BRANCH=feature make deploy-staging
 ```
 
+### Prod
+
+Deployment on prod is done by creating a tag, e.g. `v1.0.0`.
+
 ## Certificates
 
 Certificates are managed on staging by [certbot](https://github.com/certbot/certbot). The `certbot-auto` script is at the root level of the staging server.
