@@ -51,5 +51,8 @@
             "\\.css$": "<rootDir>/__mocks__/styleMock.js"
         }
     },
-    "packageManager": "yarn@3.2.1"
+    "packageManager": "yarn@3.2.1",
+    "engines": {
+        "node": "^18"
+    }
 }
