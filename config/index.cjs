@@ -98,6 +98,11 @@ const config = convict({
             default: 'reaction-rapide',
             env: 'POSTGRES_SCHEMA',
         },
+        port: {
+            format: 'int',
+            default: 5432,
+            env: 'POSTGRES_PORT',
+        },
     },
     uploadDir: {
         format: String,

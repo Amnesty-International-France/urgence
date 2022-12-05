@@ -44,6 +44,7 @@ const options: Config = {
             },
         };
     },
+    introspection: true,
 };
 
 if (config.env !== 'production') {
