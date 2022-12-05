@@ -52,6 +52,7 @@ deploy_api_prod:
   cache: [ ]
   script: |
     clever link ${APP_ID}
+    clever status
     clever deploy
   variables:
     APP_ID: app_dbdec903-e149-4672-a47e-8e29a294f56e
