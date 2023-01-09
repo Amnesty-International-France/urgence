@@ -27,6 +27,20 @@ variables:
     expire_in: 24 hrs
     when: always
 
+build_static_release:
+  <<: *build
+  variables:
+    REF: $CI_COMMIT_REF_SLUG
+    NODE_ENV: production
+    REACT_APP_NODE_ENV: production
+    FRONT_PUBLIC_URL: https://release.urgent.amnesty.fr
+    ADMIN_PUBLIC_URL: https://release.urgent.amnesty.fr/admin
+    REACT_APP_API_URL: https://release.rapide.amnesty.fr
+    REACT_APP_FRONT_BASE_URL: https://release.urgent.amnesty.fr
+    UPLOAD_URL: https://release.rapide.amnesty.fr/api/static
+  only:
+    - develop
+
 build_static_prod:
   <<: *build
   variables:
@@ -44,6 +58,23 @@ build_static_prod:
     - branches
 
 ##### Deploy #####
+deploy_api_release:
+  image:
+    name: clevercloud/clever-tools:latest
+    entrypoint: [ "/bin/sh", "-c" ]
+  stage: deploy
+  cache: [ ]
+  script: |
+    clever link ${APP_ID}
+    clever deploy
+  variables:
+    APP_ID: app_eff241f8-4f37-48c9-bbb5-233a8d4a4a0b
+  only:
+    - develop
+  environment:
+    name: release_api
+    url: https://release.rapide.amnesty.fr
+
 deploy_api_prod:
   image:
     name: clevercloud/clever-tools:latest
@@ -73,7 +104,22 @@ deploy_api_prod:
     # source: https://savjee.be/blog/gitlab-ci-deploy-to-ftp-with-lftp/
     - lftp -e "open ${FTP_HOST}; user ${FTP_USER} ${FTP_PASSWORD}; mirror --reverse --no-perms --verbose --delete ${DIRECTORY} /; bye"
 
-upload_static_content:
+upload_static_content_release:
+  <<: *upload
+  dependencies: ['build_static_release']
+  needs: ['build_static_release']
+  variables:
+    DIRECTORY: 'dist/'
+    FTP_HOST: $DEVELOP_FTP_HOST
+    FTP_USER: $DEVELOP_FTP_USER
+    FTP_PASSWORD: $DEVELOP_FTP_PASSWORD
+  only:
+    - develop
+  environment:
+    name: release_static
+    url: https://release.urgent.amnesty.fr
+
+upload_static_content_prod:
   <<: *upload
   dependencies: ['build_static_prod']
   needs: ['build_static_prod']
