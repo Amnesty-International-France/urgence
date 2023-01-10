@@ -25,8 +25,14 @@ echo "-----"
 echo "build api/"
 echo "-----"
 cd api/
-yarn install
-yarn run build
+echo "-----"
+echo "install dependencies in api/"
+echo "-----"
+node ../.yarn/releases/yarn-3.2.1.cjs
+echo "-----"
+echo "build api/"
+echo "-----"
+node ../.yarn/releases/yarn-3.2.1.cjs run build
 cd ..
 echo "-----"
 echo "api/ has been built"
