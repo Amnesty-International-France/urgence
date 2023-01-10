@@ -25,7 +25,13 @@ echo "-----"
 echo "build api/"
 echo "-----"
 cd api/
-yarn install
+echo "-----"
+echo "install dependencies in api/"
+echo "-----"
+yarn install --verbose
+echo "-----"
+echo "build api/"
+echo "-----"
 yarn run build
 cd ..
 echo "-----"
