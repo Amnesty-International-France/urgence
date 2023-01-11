@@ -20,33 +20,23 @@ If you run the project in development, you can use:
 
 ## Deployment
 
-Deployment on staging is done through the command:
-
-```sh
-make deploy-staging
-```
-
-By default, it deploys `master` branch. However, it is possible to deploy another branch by setting a `BRANCH` environment variable. For instance:
-
-```sh
-BRANCH=feature make deploy-staging
-```
-
 ### Prod
 
-Deployment on prod is done by creating a tag, e.g. `v1.0.0`.
+Deployment on prod is done by creating a tag, e.g. `v1.0.0`
 
-## Certificates
+URLs:
+- admin : https://urgent.amnesty.fr/admin/
+- front : https://urgent.amnesty.fr
+- API : https://rapide.amnesty.fr/graphql
 
-Certificates are managed on staging by [certbot](https://github.com/certbot/certbot). The `certbot-auto` script is at the root level of the staging server.
+### Release
 
-Certificates should be renewed automatically with cron
+Deployment is done automatically after the `develop` branch has been updated.
 
-To renew the certificate, you should:
-
-1. Stop the running server: `cd amnesty/current && make stop-staging`
-2. Run the renew command `sudo certbot renew`
-3. Restart the server: `cd amnesty/current && make start-staging`
+URLs:
+- admin : https://release.urgent.amnesty.fr/admin/
+- front : https://release.urgent.amnesty.fr/
+- API : https://release.rapide.amnesty.fr/graphql
 
 ## Debugging E2E tests
 
