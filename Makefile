@@ -10,12 +10,8 @@ help: ## SOS? Usage make help (default).
 
 DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
 DOCKER_COMPOSE_INSTALL = docker-compose -p reaction-rapide -f docker-compose.install.yml
-DOCKER_COMPOSE_BUILD = docker-compose -f docker-compose.build.yml
 DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
 DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
-DOCKER_COMPOSE_STAGING = docker-compose -p reaction-rapide-staging -f docker-compose.yml -f docker-compose.staging.yml
-DOCKER_COMPOSE_PROD = docker-compose -p reaction-rapide-prod -f docker-compose.yml -f docker-compose.prod.yml
-DOCKER_COMPOSE_DEV_NGINX = docker-compose -p reaction-rapide-dev-nginx -f docker-compose.yml -f docker-compose.dev-nginx.yml
 
 install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install yarn
@@ -31,33 +27,6 @@ stop: ## Stop the project with docker. Usage `make stop`.
 
 logs:
 	$(DOCKER_COMPOSE) logs -f
-
-start-staging:
-	$(DOCKER_COMPOSE_STAGING) up -d
-
-stop-staging:
-	$(DOCKER_COMPOSE_STAGING) down
-
-logs-staging:
-	$(DOCKER_COMPOSE_STAGING) logs -f
-
-start-production:
-	$(DOCKER_COMPOSE_PROD) up -d
-
-stop-production:
-	$(DOCKER_COMPOSE_PROD) down
-
-logs-production:
-	$(DOCKER_COMPOSE_PROD) logs -f
-
-start-nginx: build-front build-admin
-	${DOCKER_COMPOSE_DEV_NGINX} up --force-recreate
-
-stop-nginx:
-	${DOCKER_COMPOSE_DEV_NGINX} down
-
-log-nginx:
-	${DOCKER_COMPOSE_DEV_NGINX} logs -f
 
 connect-api:
 	$(DOCKER_COMPOSE) exec api bash
@@ -114,34 +83,27 @@ DB_MIGRATE = $(DOCKER_COMPOSE) run --rm api sh -c "/app/var/wait-for-it.sh -h db
 	--migrations-dir=migrations \
 	-e api
 
-DB_MIGRATE_NGINX = $(DOCKER_COMPOSE_DEV_NGINX) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
-	--config=database.cjs \
-	--migrations-dir=migrations \
-	-e api
+migration:
+	mkdir -p var/data # we can't commit it as PostGres wants an empty folder
+	$(DB_MIGRATE) up"
 
 DB_MIGRATE_TEST = $(DOCKER_COMPOSE_TEST) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
 	--config=database.cjs \
 	--migrations-dir=migrations \
 	-e api
 
-DB_MIGRATE_STAGING = $(DOCKER_COMPOSE_STAGING) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
-	--config=database.cjs \
-	--migrations-dir=migrations \
-	-e api
-
-DB_MIGRATE_PROD = $(DOCKER_COMPOSE_PROD) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
-	--config=database.cjs \
-	--migrations-dir=migrations \
-	-e api
+migration-test:
+	mkdir -p var/data # we can't commit it as PostGres wants an empty folder
+	$(DB_MIGRATE_TEST) up"
 
 DB_MIGRATE_E2E = $(DOCKER_COMPOSE_E2E) run --rm api sh -c "/app/var/wait-for-it.sh -h db -p 5432 -t 30 && npx db-migrate \
 	--config=database.cjs \
 	--migrations-dir=migrations \
 	-e api
 
-migration:
+migration-e2e:
 	mkdir -p var/data # we can't commit it as PostGres wants an empty folder
-	$(DB_MIGRATE) up"
+	$(DB_MIGRATE_E2E) up"
 
 migration-new: ## make migration-new MIGRATION_TITLE=whatever-title
 	$(DB_MIGRATE) create ${MIGRATION_TITLE}"
@@ -149,71 +111,13 @@ migration-new: ## make migration-new MIGRATION_TITLE=whatever-title
 migration-down: ## make migration-down NB_MIGRATIONS=2
 	$(DB_MIGRATE) down -c ${NB_MIGRATIONS}"
 
-migration-nginx:
-	$(DB_MIGRATE_NGINX) up"
-
-migration-test:
-	$(DB_MIGRATE_TEST) up"
-
-migration-staging:
-	$(DB_MIGRATE_STAGING) up"
-
-migration-production:
-	$(DB_MIGRATE_PROD) up"
-
-migration-e2e:
-	$(DB_MIGRATE_E2E) up"
-
 populate-db:
 	$(DOCKER_COMPOSE) run --rm api node src/bin/populateDb.js
-
-#### DEPLOYMENT ####
-
-deploy-staging:
-	NODE_ENV=staging node deploy.js
-
-deploy-production:
-	NODE_ENV=production node deploy.js
-
-build-storybook:
-	$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-storybook run --rm --no-deps storybook
-
-build-components: ## Build the components. Usage `make build-components`.
-	$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-components run --rm --no-deps amnesty-components
-
-build-front: build-components
-ifeq ($(NODE_ENV),staging)
-	$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-front run --rm --no-deps front_staging
-else
-    ifeq ($(NODE_ENV),production)
-		$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-front run --rm --no-deps front_prod
-    else
-		$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-front run --rm --no-deps front_dev
-    endif
-endif
-
-build-admin: build-components
-ifeq ($(NODE_ENV), staging)
-	$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-admin run --rm --no-deps admin_staging
-else
-    ifeq ($(NODE_ENV), production)
-		$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-admin run --rm --no-deps admin_prod
-    else
-		$(DOCKER_COMPOSE_BUILD) -p reaction-rapide-build-admin run --rm --no-deps admin_dev
-    endif
-endif
-
-build-api:
-	docker-compose -f docker-compose.yml -f docker-compose.dev.yml -p reaction-rapide-build-api run --rm --no-deps api yarn run build
 
 clean: # Clean the build folder and stop all docker. Usage `make clean`.
 	$(DOCKER_COMPOSE) down
 	$(DOCKER_COMPOSE_TEST) down
 	$(DOCKER_COMPOSE_E2E) down
-	$(DOCKER_COMPOSE_DEV_NGINX) down
-	$(DOCKER_COMPOSE_STAGING) down
-	$(DOCKER_COMPOSE_PROD) down
-	$(DOCKER_COMPOSE_BUILD) down
 	$(DOCKER_COMPOSE_INSTALL) down
 	rm -rf api/dist/
 	rm -rf api/.pm2/
