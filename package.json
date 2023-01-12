@@ -6,21 +6,10 @@
         "front",
         "admin"
     ],
-    "dependencies": {
-        "@types/graphql-upload": "^8.0.11",
-        "convict": "~4.2.0",
-        "express-graphql": "~0.6.12",
-        "graphql": "~0.13.2",
-        "graphql-tag": "~2.8.0"
-    },
     "devDependencies": {
-        "@svgr/cli": "~2.0.0",
-        "@types/convict": "^6.1.1",
         "jest": "~22.4.4",
         "jest-canvas-mock": "~2.0.0",
-        "jest-cli": "~22.4.4",
-        "prettier": "~1.19.1",
-        "uuid-by-string": "~0.6.0"
+        "jest-cli": "~22.4.4"
     },
     "scripts": {
         "test": "NODE_ENV=test jest --ci --forceExit",
