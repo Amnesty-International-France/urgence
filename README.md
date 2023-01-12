@@ -22,7 +22,7 @@ If you run the project in development, you can use:
 
 ### Prod
 
-Deployment on prod is done by [creating a tag](https://gitlab.com/amnesty-fr/amnesty-urgent/-/tags) from the `master` branch, e.g. `v1.0.0`
+Deployment on prod is done by creating a [tag](https://gitlab.com/amnesty-fr/amnesty-urgent/-/tags) from the `master` branch, e.g. `v1.0.0`
 
 URLs:
 - admin : https://urgent.amnesty.fr/admin/
