@@ -98,11 +98,12 @@ deploy_api_prod:
   stage: deploy
   image: alpine:latest
   before_script:
-    - apk update && apk add --no-cache lftp
+    - apk update && apk add --no-cache rclone
     - ls -lh ${PWD}/${DIRECTORY}
-  script:
-    # source: https://savjee.be/blog/gitlab-ci-deploy-to-ftp-with-lftp/
-    - lftp -e "open ${FTP_HOST}; user ${FTP_USER} ${FTP_PASSWORD}; mirror --reverse --no-perms --verbose --delete ${DIRECTORY} /; bye"
+  # source: https://gitlab.com/stavros/neocities-gitlab-ci-demo/-/blob/41cf6bb4a58cfe50a68d51873f8e6fd0d5780fd0/.gitlab-ci.yml
+  script: |
+    rclone config create remote ftp host ${FTP_HOST} user ${FTP_USER} pass ${FTP_PASSWORD}
+    rclone sync -v ${PWD}/${DIRECTORY} remote:
 
 upload_static_content_release:
   <<: *upload
@@ -110,9 +111,10 @@ upload_static_content_release:
   needs: ['build_static_release']
   variables:
     DIRECTORY: 'dist/'
-  script:
-    # source: https://savjee.be/blog/gitlab-ci-deploy-to-ftp-with-lftp/
-    - lftp -e "open ${DEVELOP_FTP_HOST}; user ${DEVELOP_FTP_USER} ${DEVELOP_FTP_PASSWORD}; mirror --reverse --no-perms --verbose --delete ${DIRECTORY} /; bye"
+  # source: https://gitlab.com/stavros/neocities-gitlab-ci-demo/-/blob/41cf6bb4a58cfe50a68d51873f8e6fd0d5780fd0/.gitlab-ci.yml
+  script: |
+    rclone config create remote ftp host ${DEVELOP_FTP_HOST} user ${DEVELOP_FTP_USER} pass ${DEVELOP_FTP_PASSWORD}
+    rclone sync -v ${PWD}/${DIRECTORY} remote:
   only:
     - develop
   environment:
