@@ -45,6 +45,16 @@ test_build_static:
   # we don't need to store the artifacts
   artifacts: {}
 
+test_build_api:
+  <<: *build
+  stage: test
+  script:
+    - .clevercloud/before.sh
+  only:
+    - merge_requests
+  # we don't need to store the artifacts
+  artifacts: {}
+
 build_static_release:
   <<: *build
   variables:
