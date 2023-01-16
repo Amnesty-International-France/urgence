@@ -1,4 +1,5 @@
 stages:
+  - test
   - build
   - deploy
 
@@ -26,6 +27,23 @@ variables:
       - dist/
     expire_in: 24 hrs
     when: always
+
+test_build_static:
+  <<: *build
+  stage: test
+  variables:
+    REF: $CI_COMMIT_REF_SLUG
+    NODE_ENV: production
+    REACT_APP_NODE_ENV: production
+    FRONT_PUBLIC_URL: https://release.urgent.amnesty.fr
+    ADMIN_PUBLIC_URL: https://release.urgent.amnesty.fr/admin
+    REACT_APP_API_URL: https://release.rapide.amnesty.fr
+    REACT_APP_FRONT_BASE_URL: https://release.urgent.amnesty.fr
+    UPLOAD_URL: https://release.rapide.amnesty.fr/api/static
+  only:
+    - merge_requests
+  # we don't need to store the artifacts
+  artifacts: {}
 
 build_static_release:
   <<: *build
