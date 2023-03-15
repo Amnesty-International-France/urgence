@@ -90,3 +90,161 @@ const token = body.access_token:
 ```
 
 ## Références des actions
+
+Lorsqu'une action est crée depuis l'administration de A.U., l'utilisateur renseigne une `campaign_code`. A la creation en base de l'action, ce `campaign_code` permet d'obtenir un `originCode` sur Salesforce (voir `api/src/urgentActions/resolvers.ts` ligne 41) via l'appel suivant :
+
+```JavaScript
+// in api/src/services/salesForceApi.ts
+export const getOriginCodeByCampaignCode = async (access_token: string, campaign_code: string) => {
+    const url = `${QUERY_BASE_URL}/query?q=select+Code_origine__r.Name+from+Campaign+where+Name='${campaign_code}'`;
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+        },
+    });
+    const status = response.status;
+
+    const body = (await response.json()) as { records: [{ Code_origine__r: { Name: string } }] };
+
+    const originCode = body.records[0].Code_origine__r.Name;
+
+    return originCode;
+};
+```
+
+Ces deux valeurs sont stockées en base de données.
+
+Ensuite, lorsque l'on inscrit un utilisateur au programme A.U, on demande à Saleforce un `origineCodeId` à partir de `originCode`. Cette valeur est requise pour enregistrer un utilisateur (voir la suite).
+
+```JavaScript
+// in api/src/services/salesForceApi.ts
+export const getOriginCodeId = async (access_token: string, code: string) => {
+    const url = `${QUERY_BASE_URL}/query?q=SELECT+Id+FROM+Code__c+WHERE+Code__c='${code}'`;
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+            'Content-Type': JSON_TYPE,
+        },
+    });
+
+    const status = response.status;
+    const body = (await response.json()) as { records: [{ Id: string }?] };
+
+    return body.records[0] && body.records[0].Id;
+};
+```
+
+> Questions à poser à Amnesty : A quoi correspondent ces trois codes `campaign_code`, `originCode` et `origineCodeId` ? Ces valeurs peuvent-elle changer ? Peut-on mettre un premier validateur sur le `campaign_code` lors de la création de l'action ?
+
+## Les personnes
+
+A.U. n'enregistre pas dans les participations aux actions dans sa base mais dans Salesforce.
+
+```JavaScript
+// in api/src/services/salesForceApi.ts
+export const addCampaignMember = async (
+    access_token: string,
+    { campaign_code }: { campaign_code: string },
+    { firstname, lastname, email, civility }: CampaignMember,
+    type = 'Email',
+) => {
+    const url = `${QUERY_BASE_URL}/sobjects/CampaignMember`;
+    // ?? pourquoi alors que c'est déja en base ?
+    let origin_code = await getOriginCodeByCampaignCode(access_token, campaign_code);
+    
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            Tech_Email__c: email,
+            Tech_FirstName__c: firstname,
+            Tech_LastName__c: lastname,
+            Tech_CodeOrigine__c: origin_code,
+            Type_de_participation__c: type === 'Tweet' ? 'Twitter' : 'Smartphone',
+            Actions_effectuees__c: type,
+            Status: 'a participé',
+            Tech_Salutation__c: salesForcecivility,
+            Campaign: {
+                Code__c: campaign_code,
+            },
+        }),
+    });
+};
+```
+
+Ensuite A.U. a besoin de savoir si l'email de la personne est déja présente dans Saleforces comme email de contact des personnes enregistrée dans le programme A.U.
+
+```JavaScript
+// in api/src/services/salesForceApi.ts
+export const getContactByEmail = async (access_token: string, email: string) => {
+    const url = `${QUERY_BASE_URL}/query?q=SELECT+Actions_urgentes_via_le_smartphone__c+from+contact+where+email='${encodeURIComponent(
+        email,
+    )}'`;
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+        },
+    });
+
+    const status = response.status;
+    const body = (await response.json()) as {
+        records: { Actions_urgentes_via_le_smartphone__c: boolean }[];
+    };
+
+    const contacts = body.records || [];
+    const registered = contacts.some((record) => !!record.Actions_urgentes_via_le_smartphone__c);
+
+    return {
+        status,
+        body: {
+            contacts,
+            registered,
+        },
+    };
+};
+```
+
+Et si ce n'est pas le cas, l'application va proposer à l'utilisateur de s'inscrire :
+
+```JavaScript
+// in api/src/services/salesForceApi.ts
+export const register = async (
+    access_token: string,
+    { firstname, lastname, email, phone, civility, originCode }: CampaignMember,
+) => {
+    const origineCodeId = await getOriginCodeId(access_token, originCode as string);
+
+    const url = `${QUERY_BASE_URL}/sobjects/Contact`;
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: JSON_TYPE,
+            'Content-Type': JSON_TYPE,
+        },
+        body: JSON.stringify({
+            Actions_urgentes_via_le_smartphone__c: true,
+            Salutation: salesForcecivility,
+            LastName: lastname
+
+,
+            FirstName: firstname,
+            EMAIL: email,
+            MobilePhone: phone,
+            Origine__c: origineCodeId,
+        }),
+    });
+};
+```
