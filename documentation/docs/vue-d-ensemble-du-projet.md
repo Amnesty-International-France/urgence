@@ -10,5 +10,6 @@ summary: "Vue générale des fonctionnalités du projet, de l'architecture et de
 ## Les fonctionnalités
 
 ## L'architecture
+![Vue d'ensemble des différentes briques techniques qui composent le projet Action Urgente](archi.png "Vue d'ensemble des différentes briques techniques qui composent le projet Action Urgente")
 
 ## La stack techique
