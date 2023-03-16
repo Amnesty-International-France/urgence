@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+    next:
+        image: node:18
+        user: '${UID}:${GID}'
+        command: 'npm run dev'
+        working_dir: /app/next
+        volumes:
+            - '.:/app'
+        ports:
+            - '3333:3333'
     admin:
         image: node:18
         user: '${UID}:${GID}'
