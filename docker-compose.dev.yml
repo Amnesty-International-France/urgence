@@ -55,7 +55,6 @@ services:
     db:
         volumes:
             - amnesty-postgres-data:/var/lib/postgresql/data
-        user: '${UID}:${GID}'
         environment:
             - POSTGRES_USER=amnesty
             - POSTGRES_PASSWORD=amnesty
@@ -72,19 +71,6 @@ services:
         volumes:
             - .:/app
         working_dir: /app/amnesty-components
-
-    storybook:
-        image: node:12
-        user: '${UID}:${GID}'
-        command: 'yarn run storybook'
-        working_dir: /app
-        volumes:
-            - './front:/app'
-            - '/tmp:/tmp'
-        environment:
-            - NODE_ENV=development
-        ports:
-            - '9009:9009'
 
     front:
         image: node:18
@@ -113,5 +99,18 @@ services:
         volumes:
             - ./var/uploads:/usr/share/nginx/html
         command: [sh, -c, "chmod -R o+X /app; nginx -g 'daemon off;'"]
+
+    documentation:
+        image: ghcr.io/incaya/incaya-documentation:latest
+        environment:
+            - HUGO_PORT=1500
+        volumes:
+            - ./documentation:/documentation/content:rw
+            - ./logo.jpg:/documentation/static/images/logo.jpg
+            - ./hugo-config.toml:/documentation/config.toml
+        user: '${UID}:${GID}'
+        ports:
+            - 1500:1500
+            - 1501:3000
 volumes:
     amnesty-postgres-data: {}

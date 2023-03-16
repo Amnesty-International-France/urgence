@@ -124,3 +124,24 @@ clean: # Clean the build folder and stop all docker. Usage `make clean`.
 	rm -rf admin/build/
 	rm -rf front/build/
 	rm -rf amnesty-components/dist/
+
+#---------------
+# Documentation
+#---------------
+doc-logs: ## View doc site logs
+	@$(DOCKER_COMPOSE) logs -f documentation
+
+doc-connect: ## Connection to the documentation container
+	@$(DOCKER_COMPOSE) exec documentation bash
+
+doc-new-adr: ## Create a new ADR
+	@$(DOCKER_COMPOSE) run --rm --no-deps documentation bash -ci '\
+		cd /documentation && ./new-adr.sh'
+
+doc-new-doc: ## Create a new document
+	@$(DOCKER_COMPOSE) run --rm --no-deps documentation bash -ci '\
+		cd /documentation && ./new-docs.sh'
+
+doc-generate: ## Génération des fichier statique de documentation
+	@$(DOCKER_COMPOSE) run --rm --no-deps documentation bash -ci '\
+		cd /documentation && hugo'
