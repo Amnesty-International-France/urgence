@@ -1,9 +1,11 @@
 import * as React from "react";
-import { Admin} from 'react-admin';
-
+import { Admin, Resource, ListGuesser } from 'react-admin';
+import dataProvider from './dataProvider';
 
 const App = () => (
-  <Admin />
+  <Admin dataProvider={dataProvider('/api')}>
+    <Resource name="hello" list={ListGuesser} />
+  </Admin>
 );
 
 export default App;
