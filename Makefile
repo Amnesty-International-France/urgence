@@ -8,8 +8,8 @@ help: ## SOS? Usage make help (default).
 
 #### STARTING ###
 
-DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
-DOCKER_COMPOSE_INSTALL = docker-compose -p reaction-rapide -f docker-compose.install.yml
+DOCKER_COMPOSE = docker compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
+DOCKER_COMPOSE_INSTALL = docker compose -p reaction-rapide -f docker-compose.install.yml
 DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
 DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
 
@@ -32,6 +32,9 @@ logs-next:
 
 connect-api:
 	$(DOCKER_COMPOSE) exec api bash
+
+connect-next:
+	$(DOCKER_COMPOSE) exec next bash
 
 #### TESTS ####
 
