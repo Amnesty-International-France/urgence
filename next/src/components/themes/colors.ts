@@ -1,0 +1,23 @@
+export const transparent = 'transparent';
+export const black = '#000';
+export const white = '#fff';
+export const yellow = '#ff0';
+export const pink = 'rgba(210, 3, 109, 1)';
+export const orange = '#ef8200';
+export const green = 'green';
+export const grey = '#ddd';
+export const lightGrey = '#f2f2f2';
+export const darkGrey = '#b7b7b7';
+
+export const colors = {
+    transparent,
+    black,
+    white,
+    yellow,
+    pink,
+    orange,
+    green,
+    grey,
+    lightGrey,
+    darkGrey,
+};

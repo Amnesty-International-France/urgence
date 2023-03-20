@@ -1,5 +1,6 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
+
+import getPool from '../../utils/dbpool'
 
 export type Setting = {
   id?: number;
@@ -9,52 +10,65 @@ export type Setting = {
   content: string;
 };
 
-
-
 type Data = {
   total: number
   data: Array<Setting>
 }
 
-import { Client } from 'pg'
-
-
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data | Setting>
 ) {
   if (req.method === 'GET') {
 
-    const client = new Client({
-      host: 'db',
-      database: 'reaction-rapide',
-      port: 5432,
-      user: 'amnesty',
-      password: 'amnesty',
-    })
-    await client.connect()
-    const result = await client.query({
+    const result = await getPool().query({
       text: 'SELECT id, created_on, updated_on, type, content from settings;',
     })
-
-    //   console.log(result.fields[0].name) // one
-    //   console.log(result.fields[1].name) // two
-    //   console.log(result.rows) // [ [ 1, 2 ] ]
-
-    // client
-    //   .connect()
-    //   .then(() => console.log('connected'))
-    //   .catch((err) => console.error('connection error', err.stack))
-
-    await client.end()
 
     res.status(200).json({
       total: result.rows.length,
       data: result.rows
     });
 
+  } else if (req.method === 'POST') {
+
+    return handlePost(req, res);
+
   } else {
     res.status(405)
   }
+}
+
+
+async function handlePost(req: NextApiRequest,
+  res: NextApiResponse<Data | Setting>) {
+
+  console.log(req.query.settingId)
+
+  console.log(req.body)
+
+  // curl -X POST -H "Content-Type: application/json" -d '{"type": "new type", content":"new content"}' http://localhost:3333/api/settings
+
+  try {
+    const result = await getPool().query({
+      text: 'INSERT INTO settings (type, content) VALUES ($1, $2) RETURNING id;',
+      values: [req.body.type, req.body.content],
+    })
+
+    if (result.rows.length == 0) {
+      res.status(404).end();
+      return;
+    }
+
+    console.log(result)
+
+    res.status(200).json(result.rows[0]);
+
+  } catch (err) {
+    console.log(err)
+  }
+
+
+  res.status(200).end();
+
 }

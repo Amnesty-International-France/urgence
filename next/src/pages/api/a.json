@@ -1,0 +1,80 @@
+{
+    "title": "new titlef",
+    "slug": "new-titlef",
+    "is_default": false,
+    "campaign_code": "ERSERSDF",
+    "story": [],
+    "call_to_action": {
+        "title": "On passe à laction !",
+        "message": "Envoyez dès maintenant un e-mail pour interpeller le Responsable du pouvoir judiciaire.",
+        "button": "Voir lemail",
+        "progress": {
+            "display": false,
+            "objective": 500,
+            "display_threshold": null,
+            "message": "Déjà {{count}} participations sur un objectif de {{objective}}",
+            "__typename": "Progress"
+        },
+        "interpelation_mode": "email",
+        "twitter_action": null,
+        "__typename": "CallToAction"
+    },
+    "message": {
+        "text_view": "Voici un modèle de message que nous vous proposons denvoyer. Vous pourrez bien sûr le personnaliser depuis votre boite mail.",
+        "text_send": "Complétez ce formulaire pour envoyer ce message.",
+        "button_view": "Suivant",
+        "button_send": "Voir lemail",
+        "object_indication": "Indiquez par exemple que vous souhaitez parler de cette situation inacceptable.",
+        "object_example": "",
+        "message_template": [],
+        "recipient": {
+            "mail": "amnesty@marmelab.com",
+            "copies_to": "",
+            "cci": "",
+            "postal_address": null,
+            "button": null,
+            "__typename": "Recipient"
+        },
+        "__typename": "Message"
+    },
+    "email_thank": {
+        "title": "Merci pour votre action ! Et maintenant ?",
+        "text": "Un message, cest bien. Des dizaines, cest encore mieux.<br/><b>Et si 5 de vos amis faisaient comme vous ?</b>",
+        "button": null,
+        "share": {
+            "message": "Jai agi avec Amnesty France !",
+            "twitter_message": "@cible, respectez les droits humains !",
+            "__typename": "Share"
+        },
+        "telegram": {
+            "url": "",
+            "message": "",
+            "__typename": "Telegram"
+        },
+        "__typename": "EmailThanks"
+    },
+    "end_thank": {
+        "title": "Bienvenue !",
+        "text": "Nous comptons sur vous pour la prochaine action urgente.",
+        "__typename": "EndThanks"
+    },
+    "register": {
+        "title": "Merci ! On compte sur vous pour nos prochaines actions !",
+        "text": "Vous aimeriez aider dautres personnes ? Inscrivez-vous pour recevoir nos prochaines Actions Urgentes. <br/> On vous en envoie 1 à 2 par mois.",
+        "phone_indication": "Inscrivez votre numéro de mobile pour recevoir les alertes SMS",
+        "button": "Je minscris",
+        "__typename": "Register"
+    },
+    "social_metadata": {
+        "title": "",
+        "medium": {
+            "title": null,
+            "src": null,
+            "__typename": "MediumSocial"
+        },
+        "description": "",
+        "__typename": "SocialMetadata"
+    },
+    "response_count": 0,
+    "__typename": "UrgentAction"
+}
