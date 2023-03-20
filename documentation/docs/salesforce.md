@@ -7,16 +7,16 @@ weight: 2
 summary: "Point sur les interactions entre Actions Urgentes et le CRM Salesforce d'Amnesty"
 ---
 
-Amnesty France dispose d'un CRM Saleforce centralisant sans doute les contacts (donateurs, signataires de pétitions ...) et les actions (pétitions, actions urgentes ...).
+Amnesty France dispose d'un CRM Salesforce centralisant sans doute les contacts (donateurs, signataires de pétitions ...) et les actions (pétitions, actions urgentes ...).
 
-Actions Urgentes (A.U. pour la suite) interagi Saleforce pour trois choses :
+Actions Urgentes (A.U. pour la suite) interagit avec Salesforce pour trois choses :
 - obtenir le code de référence d'une action,
 - enregistrer la participation d'une personne à une action spécifique,
 - enregistrer une personne dans le programme action urgente (une personne enregistrée dans le programme recevra une alerte dès qu'une nouvelle action est lancée).
 
-## Mode d'interaction avec Saleforce
+## Mode d'interaction avec SalesForce
 
-A.U. échange avec Saleforce via une [API REST](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_rest.htm) (ou au moins web, le qualificatif de REST est contestable...).
+A.U. échange avec SalesForce via une [API REST](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_rest.htm) (ou au moins web, le qualificatif de REST est contestable...).
 
 Voici les variables d'environnements nécessaires à la configuration des échanges :
 
@@ -64,7 +64,7 @@ const config = convict({
 });
 ```
 
-Les échanges nécessite une authentifications réalisée via un échange de token d'authentification.
+Les échanges nécessitent une authentification réalisée via un échange de token d'authentification.
 
 ```JavaScript
 // in api/src/services/salesForceApi.ts
@@ -91,7 +91,7 @@ const token = body.access_token:
 
 ## Références des actions
 
-Lorsqu'une action est crée depuis l'administration de A.U., l'utilisateur renseigne une `campaign_code`. A la creation en base de l'action, ce `campaign_code` permet d'obtenir un `originCode` sur Salesforce (voir `api/src/urgentActions/resolvers.ts` ligne 41) via l'appel suivant :
+Lorsqu'une action est créée depuis l'administration de A.U., l'utilisateur renseigne une `campaign_code`. À la création en base de l'action, ce `campaign_code` permet d'obtenir un `originCode` sur Salesforce (voir `api/src/urgentActions/resolvers.ts` ligne 41) via l'appel suivant :
 
 ```JavaScript
 // in api/src/services/salesForceApi.ts
@@ -116,7 +116,7 @@ export const getOriginCodeByCampaignCode = async (access_token: string, campaign
 
 Ces deux valeurs sont stockées en base de données.
 
-Ensuite, lorsque l'on inscrit un utilisateur au programme A.U, on demande à Saleforce un `origineCodeId` à partir de `originCode`. Cette valeur est requise pour enregistrer un utilisateur (voir la suite).
+Ensuite, lorsque l'on inscrit un utilisateur au programme A.U, on demande à SalesForce un `origineCodeId` à partir de `originCode`. Cette valeur est requise pour enregistrer un utilisateur (voir la suite).
 
 ```JavaScript
 // in api/src/services/salesForceApi.ts
@@ -180,7 +180,7 @@ export const addCampaignMember = async (
 };
 ```
 
-Ensuite A.U. a besoin de savoir si l'email de la personne est déja présente dans Saleforces comme email de contact des personnes enregistrée dans le programme A.U.
+Ensuite A.U. a besoin de savoir si l'email de la personne est déja présente dans SalesForce comme email de contact des personnes enregistrée dans le programme A.U.
 
 ```JavaScript
 // in api/src/services/salesForceApi.ts
