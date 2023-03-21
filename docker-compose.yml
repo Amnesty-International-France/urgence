@@ -1,26 +1,47 @@
 version: '3'
 
 services:
-    api:
-        image: node:18
-        working_dir: /app/api
-        volumes:
-            - '.:/app'
-            - './config:/app/config'
-            - '/tmp:/tmp'
-            - '~/.cache/.yarn/:/tmp/.cache/.yarn/'
-            - '~/.npm/:/tmp/.npm/'
-            - '~/.yarn/:/tmp/.yarn/'
+    documentation:
+        image: ghcr.io/incaya/incaya-documentation:latest
         environment:
-            - NODE_ENV=development
-            - HOME=/tmp
-            - ADMIN_USERNAME
-            - ADMIN_PASSWORD
-            - JWT_SECRET_KEY
-        depends_on:
-            - db
+            - HUGO_PORT=1500
+        volumes:
+            - ./documentation:/documentation/content:rw
+            - ./documentation-config/logo.jpg:/documentation/static/images/logo.jpg
+            - ./documentation-config/hugo-config.toml:/documentation/config.toml
+        user: '${UID}:${GID}'
+        ports:
+            - 1500:1500
+            - 1501:3000
 
     db:
         image: postgres:10
+        volumes:
+            - amnesty-postgres-data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=amnesty
+            - POSTGRES_PASSWORD=amnesty
+            - POSTGRES_DB=reaction-rapide
+            - PGDATA=/var/lib/postgresql/data/amnesty
         ports:
             - '5432:5432'
+
+    next:
+        image: node:18
+        user: '${UID}:${GID}'
+        command: 'npm run dev'
+        working_dir: /app
+        volumes:
+            - './next:/app'
+            - './uploads:/uploads'
+        environment:
+            - POSTGRES_USER=amnesty
+            - POSTGRES_PASSWORD=amnesty
+            - POSTGRES_DB=reaction-rapide
+            - POSTGRES_PORT=5432
+            - POSTGRES_HOST=db
+        ports:
+            - '3333:3333'
+
+volumes:
+    amnesty-postgres-data: {}

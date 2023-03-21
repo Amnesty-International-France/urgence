@@ -1,23 +1,6 @@
 version: '3'
 
 services:
-    next:
-        image: node:18
-        user: '${UID}:${GID}'
-        command: 'npm run dev'
-        working_dir: /app
-        volumes:
-            - './next:/app'
-            - './var/uploads:/uploads'
-        environment:
-            - POSTGRES_USER=amnesty
-            - POSTGRES_PASSWORD=amnesty
-            - POSTGRES_DB=reaction-rapide
-            - POSTGRES_PORT=5432
-            - POSTGRES_HOST=db
-        ports:
-            - '3333:3333'
-
     admin:
         image: node:18
         user: '${UID}:${GID}'
@@ -117,17 +100,5 @@ services:
             - ./var/uploads:/usr/share/nginx/html
         command: [sh, -c, "chmod -R o+X /app; nginx -g 'daemon off;'"]
 
-    documentation:
-        image: ghcr.io/incaya/incaya-documentation:latest
-        environment:
-            - HUGO_PORT=1500
-        volumes:
-            - ./documentation:/documentation/content:rw
-            - ./logo.jpg:/documentation/static/images/logo.jpg
-            - ./hugo-config.toml:/documentation/config.toml
-        user: '${UID}:${GID}'
-        ports:
-            - 1500:1500
-            - 1501:3000
 volumes:
     amnesty-postgres-data: {}
