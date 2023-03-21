@@ -1,33 +1,37 @@
 import Box from '@mui/material/Box';
 import { useEffect, useRef, useState } from 'react';
-import { ImageField, RaRecord, useInput } from 'react-admin';
+import { ImageField, RaRecord, useInput, useRecordContext } from 'react-admin';
 import ReactCrop, { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
 type ImagePreviewProps = {
     source: string;
     parentField: string;
-    record?: RaRecord;
     croppable?: boolean;
 };
 
-export const ImagePreview = ({ parentField, record, croppable }: ImagePreviewProps) => {
-// export const ImagePreview = (props: any) => {
-    // console.log(props);
-    // return null;
+export const ImagePreview = ({ parentField, croppable }: ImagePreviewProps) => {
+    const record = useRecordContext();
     const { field } = useInput({ source: croppable ? `${parentField}.crop` : `${parentField}.src` });
     const previousImage = useRef();
     const [crop, setCrop] = useState<Crop | undefined>(field.value);
 
-    const src = (record && record.src) || record;
+    const [src, setSrc] = useState<string | undefined>(undefined);
+    //const src = (record && record.src) || record;
 
     useEffect(() => {
         if (!!previousImage.current && previousImage.current !== src) {
             setCrop(undefined);
             field.onChange(null);
         }
-        previousImage.current = src;
+        //previousImage.current = src;
     }, [src]);
+
+    useEffect(() => {
+        if (record.src) {
+            setSrc((record && record.src) || record);
+        }
+    }, [record, setSrc]);
 
     if (!record) {
         return null;
