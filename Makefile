@@ -8,7 +8,7 @@ help: ## SOS? Usage make help (default).
 
 #### STARTING ###
 
-DOCKER_COMPOSE = docker compose -p action-urgente
+DOCKER_COMPOSE = docker compose -p reaction-rapide
 
 install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE) run --rm --no-deps next touch ok.ok
