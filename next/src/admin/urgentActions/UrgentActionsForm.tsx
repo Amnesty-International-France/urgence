@@ -166,7 +166,7 @@ export const UrgentActionsForm = () => {
                             helperText={
                                 emptyCode ? (
                                     <Box component="span" sx={{ color: orange[600] }}>
-                                        Activists actions won't be sent down to SalesForce while
+                                        Activists actions won{"'"}t be sent down to SalesForce while
                                         this field remains empty.
                                     </Box>
                                 ) : (

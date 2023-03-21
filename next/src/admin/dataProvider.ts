@@ -64,8 +64,8 @@ export default (
 
         // return httpClient(url, options).then(({ headers, json }) => {
         return httpClient(url).then(({ headers, json }) => {
-            
-            return {...json};
+
+            return { ...json };
         });
     },
 
@@ -104,11 +104,11 @@ export default (
         const options =
             countHeader === 'Content-Range'
                 ? {
-                      // Chrome doesn't return `Content-Range` header if no `Range` is provided in the request.
-                      headers: new Headers({
-                          Range: `${resource}=${rangeStart}-${rangeEnd}`,
-                      }),
-                  }
+                    // Chrome doesn't return `Content-Range` header if no `Range` is provided in the request.
+                    headers: new Headers({
+                        Range: `${resource}=${rangeStart}-${rangeEnd}`,
+                    }),
+                }
                 : {};
 
         return httpClient(url, options).then(({ headers, json }) => {
@@ -120,12 +120,12 @@ export default (
             return {
                 data: json,
                 total: 2,
-                    // countHeader === 'Content-Range'
-                    //     ? parseInt(
-                    //           headers.get('content-range').split('/').pop(),
-                    //           10
-                    //       )
-                    //     : parseInt(headers.get(countHeader.toLowerCase())),
+                // countHeader === 'Content-Range'
+                //     ? parseInt(
+                //           headers.get('content-range').split('/').pop(),
+                //           10
+                //       )
+                //     : parseInt(headers.get(countHeader.toLowerCase())),
             };
         });
     },
@@ -147,13 +147,71 @@ export default (
             )
         ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
 
-    create: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}`, {
+    create: async (resource, params) => {
+
+
+        if (resource === 'urgent-actions') {
+
+            const stories = await Promise.all(params.data.story.map(async (story: any) => {
+                let srcBase64 = null;
+                if (story.medium?.src?.rawFile && story.medium.src.rawFile instanceof File) {
+                    srcBase64 = await convertFileToBase64(story.medium.src.rawFile);
+                }
+                let desktopSrcBase64 = null;
+                if (story.mediumDesktop?.src?.rawFile && story.mediumDesktop.src.rawFile instanceof File) {
+                    desktopSrcBase64 = await convertFileToBase64(story.mediumDesktop.src.rawFile);
+                }
+
+                return {
+                    ...story,
+                    medium: srcBase64 ? { ...story.medium, src: { ...story.medium.src, src: srcBase64 } } : story.medium,
+                    mediumDesktop: desktopSrcBase64 ? { ...story.mediumDesktop, src: { ...story.mediumDesktop.src, src: desktopSrcBase64 } } : story.mediumDesktop
+                };
+            }));
+
+
+            return httpClient(`${apiUrl}/${resource}`, {
+                method: 'POST',
+                body: JSON.stringify({ ...params.data, story: stories }),
+            }).then(({ json }) => ({
+                data: { ...params.data, id: json.id },
+            }));
+        }
+
+        // const newPictures = params.data.pictures.filter(
+        //     (p: any) => p.rawFile instanceof File
+        // );
+        // const formerPictures = params.data.pictures.filter(
+        //     (p: any) => !(p.rawFile instanceof File)
+        // );
+
+        // Promise.all(newPictures.map(convertFileToBase64))
+        //     .then(base64Pictures =>
+        //         base64Pictures.map(picture64 => ({
+        //             src: picture64,
+        //             title: `${params.data.title}`,
+        //         }))
+        //     )
+        //     .then(transformedNewPictures =>
+        //         dataProvider.update(resource, {
+        //             data: {
+        //                 ...params.data,
+        //                 pictures: [
+        //                     ...transformedNewPictures,
+        //                     ...formerPictures,
+        //                 ],
+        //             },
+        //         })
+        //     )
+
+        return httpClient(`${apiUrl}/${resource}`, {
             method: 'POST',
             body: JSON.stringify(params.data),
         }).then(({ json }) => ({
             data: { ...params.data, id: json.id },
-        })),
+        }));
+    },
+
 
     delete: (resource, params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
@@ -170,3 +228,12 @@ export default (
             )
         ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
 });
+
+const convertFileToBase64 = (file: File) =>
+    new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+
+        reader.readAsDataURL(file);
+    });

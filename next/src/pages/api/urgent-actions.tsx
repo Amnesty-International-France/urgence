@@ -1,7 +1,20 @@
+import { url } from 'inspector';
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { urlToHttpOptions } from 'url';
 
 import getPool from '../../utils/dbpool'
 
+import fs from 'fs'
+
+import Jimp from 'jimp'
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '100mb' // Set desired value here
+    }
+  }
+}
 
 // type Position = {
 //   x: number;
@@ -146,13 +159,35 @@ export default async function handler(
   }
 }
 
+const extractDataFromUri = (base64Uri: string) => {
+  const data = base64Uri.split(",")[1];
+  if (!data) {
+    throw new Error("The data URI sheme does not contain any data");
+  }
+  return data;
+};
 
 async function handlePost(req: NextApiRequest,
   res: NextApiResponse<Data | UrgentAction>) {
 
-  console.log(req.query.settingId)
+  console.log(req.query.settingId);
 
-  console.log(req.body)
+  console.log(req.body);
+
+  for (let i = 0; i < req.body.story.length; i++) {
+    const story = req.body.story[i];
+
+    const image = await Jimp.read(Buffer.from(extractDataFromUri(story.medium.src.src), "base64"));
+    try {
+      image.scaleToFit(400, 400).write(`/uploads/ok.jpeg`);
+    } catch (err) {
+      console.error(err);
+    }
+
+
+
+  }
+
 
   // curl -X POST -H "Content-Type: application/json" -d '{"title": "new title"}' http://localhost:3333/api/urgent-actions
   const origin_code = '';

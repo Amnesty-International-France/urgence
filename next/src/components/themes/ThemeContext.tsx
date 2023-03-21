@@ -53,8 +53,12 @@ export class ThemeProvider extends Component<ThemeProviderProps, ThemeProviderSt
 
 export const ThemeConsumer = Consumer;
 
-export const withThemeContext = (BaseComponent: any) => (props: any) =>
-    <ThemeConsumer>{(context) => <BaseComponent context={context} {...props} />}</ThemeConsumer>;
+export const withThemeContext = (BaseComponent: any) => {
+    const withThemeContextFunction = function (props: any) {
+        return <ThemeConsumer>{(context) => <BaseComponent context={context} {...props} />}</ThemeConsumer>;
+    }
+    return withThemeContextFunction;
+}
 
 export const withLightGreyBackground = compose(
     withThemeContext,

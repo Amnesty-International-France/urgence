@@ -11,38 +11,41 @@ type ImagePreviewProps = {
     croppable?: boolean;
 };
 
-export const ImagePreview = ({ parentField, record, croppable }: ImagePreviewProps) => {
-    const { field } = useInput({ source: croppable ? `${parentField}.crop` : `${parentField}.src` });
-    const previousImage = useRef();
-    const [crop, setCrop] = useState<Crop | undefined>(field.value);
+//export const ImagePreview = ({ parentField, record, croppable }: ImagePreviewProps) => {
+export const ImagePreview = (props: any) => {
+    console.log(props);
+    return null;
+    // const { field } = useInput({ source: croppable ? `${parentField}.crop` : `${parentField}.src` });
+    // const previousImage = useRef();
+    // const [crop, setCrop] = useState<Crop | undefined>(field.value);
 
-    const src = (record && record.src) || record;
+    // const src = (record && record.src) || record;
 
-    useEffect(() => {
-        if (!!previousImage.current && previousImage.current !== src) {
-            setCrop(undefined);
-            field.onChange(null);
-        }
-        previousImage.current = src;
-    }, [src]);
+    // useEffect(() => {
+    //     if (!!previousImage.current && previousImage.current !== src) {
+    //         setCrop(undefined);
+    //         field.onChange(null);
+    //     }
+    //     previousImage.current = src;
+    // }, [src]);
 
-    if (!record) {
-        return null;
-    }
+    // if (!record) {
+    //     return null;
+    // }
 
-    return (
-        <Box sx={{ margin: '0 0.5rem 0.5rem', '& img': { maxHeight: '9rem' } }}>
-            {croppable ? (
-                <ReactCrop
-                    crop={crop}
-                    onChange={(_, percentCrop) => setCrop(percentCrop)}
-                    onComplete={(_, completePercentCrop) => field.onChange(completePercentCrop)}
-                >
-                    <img alt="Crop me" src={src} />
-                </ReactCrop>
-            ) : (
-                <ImageField record={{ src }} source="src" />
-            )}
-        </Box>
-    );
+    // return (
+    //     <Box sx={{ margin: '0 0.5rem 0.5rem', '& img': { maxHeight: '9rem' } }}>
+    //         {croppable ? (
+    //             <ReactCrop
+    //                 crop={crop}
+    //                 onChange={(_, percentCrop) => setCrop(percentCrop)}
+    //                 onComplete={(_, completePercentCrop) => field.onChange(completePercentCrop)}
+    //             >
+    //                 <img alt="Crop me" src={src} />
+    //             </ReactCrop>
+    //         ) : (
+    //             <ImageField record={{ src }} source="src" />
+    //         )}
+    //     </Box>
+    // );
 };

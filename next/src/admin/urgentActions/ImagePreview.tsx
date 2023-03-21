@@ -11,7 +11,10 @@ type ImagePreviewProps = {
     croppable?: boolean;
 };
 
-export const ImagePreview = ({ parentField, record, croppable }: ImagePreviewProps) => {
+//export const ImagePreview = ({ parentField, record, croppable }: ImagePreviewProps) => {
+export const ImagePreview = (props: any) => {
+    console.log(props);
+    return null;
     const { field } = useInput({ source: croppable ? `${parentField}.crop` : `${parentField}.src` });
     const previousImage = useRef();
     const [crop, setCrop] = useState<Crop | undefined>(field.value);
