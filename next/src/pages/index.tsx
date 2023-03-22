@@ -1,24 +1,26 @@
-import Head from 'next/head'
-import { GetServerSideProps } from 'next'
+import Head from "next/head";
+import { GetServerSideProps } from "next";
 
-import getPool from '@/utils/dbpool';
+import getPool from "@/utils/dbpool";
+import FrontLayout from "@/components/FrontLayout";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const result = await getPool().query({
     text: `SELECT slug FROM urgent_action WHERE is_default IS TRUE;`,
   });
-  if(result.rows.length) {
-    return {
-      redirect: {
-        destination: `/ua/${result.rows[0].slug}`,
-        permanent: false,
-      },
-    }
-  }
+  // if(result.rows.length) {
+  //   return {
+  //     redirect: {
+  //       destination: `/ua/${result.rows[0].slug}`,
+  //       permanent: false,
+  //     },
+  //   }
+  // }
+  console.log(result);
   return {
-    props: { foo: 'bar'},
-  }
-}
+    props: { foo: "bar" },
+  };
+};
 
 export default function Home({ foo }: { foo: string }) {
   return (
@@ -29,7 +31,9 @@ export default function Home({ foo }: { foo: string }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Action urgente {foo} </h1>
+      <FrontLayout>
+        <h1>Ici le contenu</h1>
+      </FrontLayout>
     </>
-  )
+  );
 }

@@ -11,7 +11,7 @@ help: ## SOS? Usage make help (default).
 DOCKER_COMPOSE = docker compose -p reaction-rapide
 
 install: ## Install all dependencies. Usage `make install`.
-	$(DOCKER_COMPOSE) run --rm --no-deps next touch ok.ok
+	$(DOCKER_COMPOSE) run --rm --no-deps app npm install --legacy-peer-deps
 
 start: ## Start the project with docker. Usage `make start`.
 	$(DOCKER_COMPOSE) up -d
@@ -20,10 +20,10 @@ stop: ## Stop the project with docker. Usage `make stop`.
 	$(DOCKER_COMPOSE) down
 
 logs:
-	$(DOCKER_COMPOSE) logs -f
+	$(DOCKER_COMPOSE) logs app -f 
 
 connect:
-	$(DOCKER_COMPOSE) exec next bash
+	$(DOCKER_COMPOSE) exec app bash
 
 #---------------
 # Documentation
