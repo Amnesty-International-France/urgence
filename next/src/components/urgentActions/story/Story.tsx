@@ -8,14 +8,16 @@ import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
-import { black, white, withThemeContext, yellow } from 'amnesty-components';
+import { black, white, yellow } from '@/components/themes/colors';
+import { withThemeContext } from '@/components/themes/ThemeContext';
 
 import { StoryCover, StorySlide, StoryStep } from '@/components/story';
 import { Navigate, NavigateFunction } from 'react-router';
 import { SwiperSlide } from 'swiper/react';
-import generateUrl from '../../services/generateUrl';
-import Carousel from '../../themes/Carousel';
+import generateUrl from '@/utils/generateUrl';
+import Carousel from '@/components/theme-front/Carousel';
 import withRouter from '../../withRouter';
+import { isConstructorDeclaration } from 'typescript';
 
 const styles = {
     '& .icon': {
@@ -40,6 +42,12 @@ type StoryProps = {
     responseCount?: number;
     auId?: string;
 };
+
+const DebugComponant = ({ data }: { data: any}) => {
+    console.log('DEBUG', data);
+    return <h1>DEBUG COMPONANT</h1>
+}
+
 export class Story extends Component<StoryProps> {
     afterChange = (page: any) => {
         const {
@@ -80,6 +88,7 @@ export class Story extends Component<StoryProps> {
     }
 
     render() {
+        
         const {
             className,
             story,
@@ -90,7 +99,16 @@ export class Story extends Component<StoryProps> {
         } = this.props;
 
         const total = story ? story.length : 0;
-        const current = page != null ? parseInt(page, 10) : total;
+        const current = 0; //page != null ? parseInt(page, 10) : total;
+
+
+        console.log(' ');
+        console.log('-----');
+        console.log('DEBUG Story component');
+        console.log('total', total);
+        console.log('current', current);
+        console.log('-----');
+        console.log(' ');
 
         if (!story || story.length === 0 || current > total) {
             return <Navigate to={generateUrl('error')} />;
@@ -150,6 +168,61 @@ export class Story extends Component<StoryProps> {
                 )}
             </div>
         );
+
+        /*
+        return (
+            <div className={className}>
+                {total > 0 && (
+                    <Carousel
+                        initialSlide={current}
+                        current={current + 1}
+                        total={total}
+                        afterChange={this.afterChange}
+                        afterLastChange={this.afterLastChange}
+                    >
+                        <SwiperSlide>
+                            <StorySlide step={cover}>
+                                {(storyCoverProps) => <StoryCover {...storyCoverProps} />}
+                            </StorySlide>
+                        </SwiperSlide>
+                        {restStory.map((step, index) => (
+                            <SwiperSlide key={index + 1}>
+                                <StorySlide step={step}>
+                                    {(storyStepProps) => <StoryStep {...storyStepProps} />}
+                                </StorySlide>
+                            </SwiperSlide>
+                        ))}
+
+                        <SwiperSlide>
+                            <StorySlide>
+                                {(storyProps) => (
+                                    <Act
+                                        {...storyProps}
+                                        data={{
+                                            ...callToAction,
+                                            response_count: responseCount,
+                                            auId,
+                                        }}
+                                        actions={() =>
+                                            callToAction && callToAction.button ? (
+                                                <ToUrgentActionPageLink
+                                                    label={callToAction.button}
+                                                    step="act"
+                                                    pageName="message-view"
+                                                    analyticsCategory={ANALYTICS_CATEGORIES.ACT}
+                                                    buttonName="OpenMessageView"
+                                                />
+                                            ) : null
+                                        }
+                                    />
+                                )}
+                            </StorySlide>
+                        </SwiperSlide>
+                    </Carousel>
+                )}
+            </div>
+        );
+        */
     }
 }
 

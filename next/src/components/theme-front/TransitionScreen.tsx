@@ -2,19 +2,19 @@ import styled from '@emotion/styled';
 import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
 
-import { black, yellow } from 'amnesty-components';
+import { black, yellow } from '@/components/themes/colors';
 import LongText from './LongText';
-import { RichText } from 'amnesty-components';
+import { RichText } from '@/components/themes/RichText';
 
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { useNavigate, useParams } from 'react-router';
+// import { useNavigate, useParams } from 'react-router';
 import { compose } from 'recompose';
 import permanentData from '../data/permanentData';
 import { withSessionData } from '../DataContext';
 import { secureUseEffect, secureUseState } from '../hooks/secureHooks';
-import { addCampaignMemberTwitter, addResponseCount } from '../services/api';
-import generateUrl from '../services/generateUrl';
+import { addCampaignMemberTwitter, addResponseCount } from '@/utils/api';
+import generateUrl from '@/utils/generateUrl';
 import LinkTwitter from './Sharing/LinkTwitter';
 
 const styles = {
@@ -121,8 +121,11 @@ export const TransitionScreen = ({
     const email = permanentData.getEmail();
     const civility = permanentData.getCivility();
     const phone = permanentData.getPhone();
-    const { slug } = useParams();
-    const navigate = useNavigate();
+    // const { slug } = useParams();
+    // const navigate = useNavigate();
+    // @next-bc
+    const slug = 'toto';
+    const navigate = () => true;
 
     secureUseEffect(() => {
         if (
@@ -228,9 +231,54 @@ export const TransitionScreen = ({
                     )}
                 </div>
             </Paper>
+            {interpelationMode === 'email' && false && <div className="actions">{actions()}</div>}
+        </div>
+    );
+    /*
+    return (
+        <div className={className}>
+            <Paper className="paper" elevation={4} square>
+                <div className="step">
+                    {displayProgress && (
+                        <div className="progress">
+                            <div className="progressChart">
+                                <CircularProgressbarWithChildren
+                                    value={responseCount}
+                                    maxValue={progress.objective}
+                                    styles={buildStyles({
+                                        pathColor: '#ef8200',
+                                        strokeLinecap: 'butt',
+                                    })}
+                                >
+                                    <div
+                                        className="progressChartContent"
+                                        dangerouslySetInnerHTML={{
+                                            __html: textToHtml(formatText(progress.message)),
+                                        }}
+                                    ></div>
+                                </CircularProgressbarWithChildren>
+                            </div>
+                        </div>
+                    )}
+                    <h1>
+                        <LongText text={title} />
+                    </h1>
+                    {message && (
+                        <div className="text">
+                            <RichText html={message} />
+                        </div>
+                    )}
+                    {interpelationMode === 'rs' && (
+                        <div className="social-media">
+                            <LinkTwitter text={getTwitterText()} action={addTwitterMember} />
+                        </div>
+                    )}
+                </div>
+            </Paper>
             {interpelationMode === 'email' && <div className="actions">{actions()}</div>}
         </div>
     );
+    */
 };
 
 TransitionScreen.propTypes = {

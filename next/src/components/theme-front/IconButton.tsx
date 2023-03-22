@@ -1,5 +1,5 @@
 import React from 'react';
-import { black, darkGrey, grey, yellow } from 'amnesty-components';
+import { black, darkGrey, grey, yellow } from '@/components/themes/colors';
 
 import styled from '@emotion/styled';
 

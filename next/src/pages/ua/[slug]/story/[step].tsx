@@ -3,10 +3,17 @@ import { GetServerSideProps } from 'next'
 
 import getPool from '@/utils/dbpool';
 import FrontLayout from "@/components/FrontLayout";
+import Story from '@/components/urgentActions/story/Story';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
-  console.log(context.query.slug);
+  const {slug, step = 0} = context.query;
+
+  if(!slug) {
+    return {
+      notFound: true,
+    }
+  }
 
   const result = await getPool().query({
     text: `SELECT 
@@ -26,9 +33,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         response_count
       FROM urgent_action
       WHERE slug = $1;`,
-    values: [context.query.slug],
+    values: [slug],
 })
-console.log(result.rows.length);
+
 if(!result.rows.length) {
   return {
     notFound: true,
@@ -36,11 +43,11 @@ if(!result.rows.length) {
 }
 
   return {
-    props: { action: result.rows[0]},
+    props: { action: result.rows[0], step },
   }
 }
 
-export default function UrgentAction({ action }: { action: any }) {
+export default function UrgentAction({ action, step }: { action: any, step: any }) {
   return (
     <>
       <Head>
@@ -50,7 +57,13 @@ export default function UrgentAction({ action }: { action: any }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <FrontLayout>
-        <h1>Action urgente { action.title } </h1>
+            <Story // @ts-ignore
+                story={action.story}
+                step={step}
+                callToAction={action.call_to_action}
+                responseCount={action.response_count}
+                auId={action.id}
+            />
       </FrontLayout>
     </>
   )

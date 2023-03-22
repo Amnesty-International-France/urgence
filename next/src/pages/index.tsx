@@ -4,25 +4,26 @@ import { GetServerSideProps } from "next";
 import getPool from "@/utils/dbpool";
 import FrontLayout from "@/components/FrontLayout";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const result = await getPool().query({
     text: `SELECT slug FROM urgent_action WHERE is_default IS TRUE;`,
   });
-  // if(result.rows.length) {
-  //   return {
-  //     redirect: {
-  //       destination: `/ua/${result.rows[0].slug}`,
-  //       permanent: false,
-  //     },
-  //   }
-  // }
-  console.log(result);
+  
+  if(result.rows.length) {
+    return {
+      redirect: {
+        destination: `/ua/${result.rows[0].slug}/story/0`,
+        permanent: false,
+      },
+    }
+  }
+
   return {
     props: { foo: "bar" },
   };
 };
 
-export default function Home({ foo }: { foo: string }) {
+export default function Home() {
   return (
     <>
       <Head>
@@ -32,7 +33,7 @@ export default function Home({ foo }: { foo: string }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <FrontLayout>
-        <h1>Ici le contenu</h1>
+        <h1>Une vraie homepage ?</h1>
       </FrontLayout>
     </>
   );
