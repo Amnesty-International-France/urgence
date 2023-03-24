@@ -18235,6 +18235,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ra-i18n-polyglot@npm:4.11.0":
+  version: 4.11.0
+  resolution: "ra-i18n-polyglot@npm:4.11.0"
+  dependencies:
+    node-polyglot: ^2.2.2
+    ra-core: ^4.11.0
+  checksum: 3847164a9fc317cb9ff9fbe760266cdc6e4198d616ecfb5b02f1272b41f0f9be087d193503ab26410ef93ad2204d30a268baecfab67bcdaffee1e455381d9723
+  languageName: node
+  linkType: hard
+
 "ra-i18n-polyglot@npm:^4.11.0":
   version: 4.11.1
   resolution: "ra-i18n-polyglot@npm:4.11.1"
@@ -18270,6 +18280,15 @@ __metadata:
     react: ^16.9.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0
   checksum: b24206c693ed85ac754ab991e4fdae2aeff9995c6d6b294a4d5bcaba51e2fdc42e459ca6075436c01e571f750bcc407b0aaed919f7747b29e4b2f462e430d637
+  languageName: node
+  linkType: hard
+
+"ra-language-english@npm:4.11.0":
+  version: 4.11.0
+  resolution: "ra-language-english@npm:4.11.0"
+  dependencies:
+    ra-core: ^4.11.0
+  checksum: d66cc636940b096637449765ef917e0ce5bc693c1f32ea519970f27f9ea44baeaaeede075930ffce8ac8e7a5456327bc8e1ac55cda675faf1edd438cf014d12d
   languageName: node
   linkType: hard
 
@@ -18888,7 +18907,9 @@ __metadata:
     jwt-decode: 3.1.2
     prettier: 2.8.8
     ra-data-graphql-simple: 4.11.0
+    ra-i18n-polyglot: 4.11.0
     ra-input-rich-text: 4.11.0
+    ra-language-english: 4.11.0
     ra-ui-materialui: 4.11.0
     react: 18.2.0
     react-admin: 4.11.0
