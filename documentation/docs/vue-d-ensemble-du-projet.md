@@ -39,7 +39,7 @@ L'interface publique permet d'afficher le workflow de l'action en cours :
 ## L'architecture
 ![Vue d'ensemble des différentes briques techniques qui composent le projet Action Urgente](archi.png "Vue d'ensemble des différentes briques techniques qui composent le projet Action Urgente")
 
-## La stack techique
+## La stack technique
 
 Tout le projet est écrit en [**TypeScript**](https://www.typescriptlang.org/docs/).
 
