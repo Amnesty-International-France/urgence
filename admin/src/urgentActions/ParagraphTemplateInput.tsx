@@ -23,12 +23,12 @@ export const ParagraphTemplateInput = ({
         if (!dataMessageTemplate || !dataMessageTemplate[0] || !dataMessageTemplate[0].value) {
             return;
         }
-        const messageLength = dataMessageTemplate[0].value.length;
+        const messageLength = encodeURIComponent(dataMessageTemplate[0].value).length;
         setMailToLength(messageLength + headerCount);
     }, [headerCount, dataMessageTemplate]);
 
     const updateMailToLenght = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const messageLength = event.target.value.length;
+        const messageLength = encodeURIComponent(event.target.value).length;
         setMailToLength(messageLength + headerCount);
     };
     return (

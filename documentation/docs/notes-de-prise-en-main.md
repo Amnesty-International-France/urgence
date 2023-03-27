@@ -70,7 +70,7 @@ Un compteur de caractère indiquant cette limite de 2000 à donc été mis en pl
 
 ![Compteur mailto](bugMailto.png)
 
-Mais ce compteur ne prend en compte que le corps du mail. Or la longueur de lien mailto va dépendre du corps du texte traité pour être mis dans une URL, mais aussi les emails des destinataires ainsi que le sujet du mail.
+Mais ce compteur ne prend pas en compte l'encodage des caractères du corps du mail.
 
 **Nous proposons donc de revoir le compteur de caractères de l'interface d'administration pour qu'il prenne en compte tous ces paramètres.**
 
