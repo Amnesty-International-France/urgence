@@ -26,17 +26,17 @@ Le modèle de la base de données confirme cette simplicité :
 - des composants visuels isolés dans un module à la manière d'un design system. La complexité induite par cela (comme l'utilisation d'un monorepos ou la mise en place d'un storybook) nous semble inadaptée à la gestion de 3 composants React uniquement utilisés sur le projet A.U. et partagés entre l'administration et le site publique pour faire une simple prévisualisation.
 - une base de données PostgreSQL sollicitée pour gérer 4 tables contenant pour les tables métiers une trentaine d'enregistrements.
 
-Cette stack technique répond au besoin actuel et permettrait sans doute de faire énormément évoluer le projet en complexité métier.Si ce besoin devait être exprimé. 
+Cette stack technique répond au besoin actuel et permettrait sans doute de faire énormément évoluer le projet en complexité métier. Si ce besoin devait être exprimé. 
 
-Mais en l'état, il induit selon nous plus désavantages que d'atouts :
+Mais en l'état, il induit selon nous plus de désavantages que d'atouts :
 
-- **Des difficultés à entrer sur le projet**. Il nous a fallu beaucoup (trop) de temps pour comprendre la simplicité du besoin derrière la complexité technique. Cela est d'autant plus vrai que le projet n'était pas documenté (aucune information claire concernant Salesforce par exemple). Ceci est en partie résolu puisque nous avons documenté au fil de la prise en main. Mais le projet requiert cependant toujours une bonne expérience technique de la part du développeur, ou alors un temps de montée en compétences.
+- **Des difficultés à entrer sur le projet**. Il nous a fallu beaucoup (trop) de temps pour comprendre la simplicité du besoin derrière la complexité technique. Cela est d'autant plus vrai que le projet n'était pas documenté (aucune information claire concernant Salesforce par exemple). Ceci est en partie résolu puisque nous l'avons documenté au fil de la prise en main. Mais le projet requiert cependant toujours une bonne expérience technique de la part du développeur, ou alors un temps de montée en compétences.
 - **Une augmentation du temps d'intervention** : plus de complexité équivaut immanquablement à plus de code, et donc à plus de temps pour intervenir sur la bonne partie de code. Cette remarque est cependant à modérer par le fait que le code legacy est de qualité et bien découpé.
 - **Un cout de maintenance plus élevé. C'est sans doute le principal problème du projet**. Prenons l'exemple du GraphQL. Si ce choix d'architecture d'API nous semble être comparable au choix d'une moissonneuse pour tondre son jardin, il répond au besoin. Mais choisir GraphQL, c'est aussi ajouter **une quinzaine de dépendances au projet**. Mais plus un projet va posséder de dépendances, plus il va demander une maintenance régulière : ces dépendances vont par exemple présenter des failles de sécurité, ou alors évoluer très rapidement (ce qui est particulièrement vrai dans le monde du JavaScript) en imposant ce qu'on appelle des breaking changes (c'est-à-dire des nouvelles versions imposant de reprendre le code pour fonctionner). La maintenance d'Action Urgente n'ayant visiblement pas été faite régulièrement, cela confère **une certaine fragilité au projet**. Aujourd'hui, on ne peut pas opérer de mise à jour de toutes les dépendances sans tout casser. Et certaines dépendances ne sont même plus maintenues ...
-- **Une évolution plus compliquée**, en grande partie due aux problèmes de dépendances précédemment vus.
+- **Une évolution plus compliquée**, en grande partie dûe aux problèmes de dépendances précédemment vus.
 - **Un déploiement plus complexe et plus lent**, puisqu'il faut déployer deux projets (le backend avec son interface d'administration et l'application publique), chacun réclamant des processus de construction spécifique.
 - **Un coût d'hébergement plus élevé** puisque le projet est actuellement composé de deux applicatif et d'une base de données.
-- **Une écoconception relative** : plus le projet va être complexe et possédera de dépendances, plus le coût énergétique global sera élevé : téléchargements plus conséquents, espace disque plus important sur les environnements d'intégration continue, ressources processeurs nécessaires pour générer les builds finaux ...
+- **Une écoconception relative** : plus le projet va être complexe et possédera de dépendances, plus le coût énergétique global sera élevé : téléchargements plus conséquents, espace disque plus important sur les environnements d'intégration continue, ressources processeurs nécessaires pour générer les builds finaux...
 
 ## Première tentative de simplification
 
@@ -76,7 +76,7 @@ Mais ce compteur ne prend en compte que le corps du mail. Or la longueur de lien
 
 ### Clarification du formulaire d'administration des actions
 
-L'interface de création et d'édition d'une action est riche. Tellement riche qu'elle nous semble cruellement manquée d'ergonomie. 
+L'interface de création et d'édition d'une action est riche. Tellement riche qu'elle nous semble cruellement manquer d'ergonomie. 
 
 **Nous proposons donc d'améliorer l'ergonomie de cette interface.**
 
@@ -84,7 +84,7 @@ L'interface de création et d'édition d'une action est riche. Tellement riche q
 
 ### Optimisation du formulaire d'administration des actions
 
-Outre son ergonomie contestable, il apparait que le formulaire de création/édition d'une action est des problèmes de réactivité.
+Outre son ergonomie contestable, il apparait que le formulaire de création/édition d'une action ait des problèmes de réactivité.
 
 Ceci s'explique principalement par le grand nombre d'éditeurs WYSIWYG ouverts sur une page unique.
 
@@ -101,7 +101,7 @@ Lors de la reprise en main de la base de code, les tests e2e (les tests de bout 
 
 ### Suppression du code mort
 
-Il semble que les spécifications d'A.U. est évoluées au cours du temps, mais que le code utilisé pour d'anciennes fonctionnalités n'a pas été supprimé. **Nous aimerions supprimer ce code *mort* au moins pour les fonctionnalités suivantes** :
+Il semble que les spécifications d'A.U. aient évolué au cours du temps, mais que le code utilisé pour d'anciennes fonctionnalités n'a pas été supprimé. **Nous aimerions supprimer ce code *mort* au moins pour les fonctionnalités suivantes** :
 
 - génération d'une lettre en PDF
 - envoie de ce PDF en pièce jointe d'un email envoyé depuis A.U. (via Mailgun),
