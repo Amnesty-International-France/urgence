@@ -60,57 +60,24 @@ Mais nous avons tout de même relevé quelques points qu'il nous semblerait impo
 
 ### Compteur de taille de lien mailto
 
-En fait, il ne s'agit pas ici d'un point que nous avons nous-mêmes relevé, mais d'un problème soulevé directement par l'équipe d'Amnesty.
-
-Le problème régulièrement relevé concerne donc le lien permettant d'ouvrir le client email de l'utilisateur de site avec l'email prérempli (le lien `mailto`). Sous certaines conditions, ce lien ne fonctionne pas.
-
-Ce problème a déjà été traité et il semble effectivement qu'une limitation de taille de ce lien s'impose dans certaines conditions (par exemple depuis Chrome sous Windows avec un client mail Outlook). Dans ce cas, la solution est de limiter la taille du lien à 2000 caractères. 
-
-Un compteur de caractère indiquant cette limite de 2000 à donc été mis en place sur l'éditeur du texte d'email sur l'interface d'administration.
-
-![Compteur mailto](bugMailto.png)
-
-Mais ce compteur ne prend pas en compte l'encodage des caractères du corps du mail.
-
-**Nous proposons donc de revoir le compteur de caractères de l'interface d'administration pour qu'il prenne en compte tous ces paramètres.**
+[Carte Taiga #2](https://tree.taiga.io/project/thomasmaziere-actions-urgentes-amnesty/us/2)
 
 ### Clarification du formulaire d'administration des actions
 
-L'interface de création et d'édition d'une action est riche. Tellement riche qu'elle nous semble cruellement manquer d'ergonomie. 
-
-**Nous proposons donc d'améliorer l'ergonomie de cette interface.**
-
-![Proposition clarification formulaire](propalFormAction.jpg)
+[Carte Taiga #3](https://tree.taiga.io/project/thomasmaziere-actions-urgentes-amnesty/us/3)
 
 ### Optimisation du formulaire d'administration des actions
 
-Outre son ergonomie contestable, il apparait que le formulaire de création/édition d'une action ait des problèmes de réactivité.
-
-Ceci s'explique principalement par le grand nombre d'éditeurs WYSIWYG ouverts sur une page unique.
-
-Si cette lenteur est problématique pour les éditeurs des actions, nous proposons deux pistes afin d'améliorer la réactivité du formulaire.
-
-1. Une première piste consisterait à découper le formulaire en plusieurs étapes indépendantes les unes des autres. Mais cette piste obligera à également travailler sur react-admin qui ne gère pas cela nativement.
-2. Une autre piste consisterait à supprimer les éditeurs WYSIWYG et de laisser les éditeurs ajouter le balisage HTML eux-mêmes (les besoins de balisage étant très simples), ou alors via un balisage simplifié comme le [Markdown](https://fr.wikipedia.org/wiki/Markdown)
+[Carte Taiga #4](https://tree.taiga.io/project/thomasmaziere-actions-urgentes-amnesty/us/4)
 
 ### Remise en place des teste e2e
 
-Lors de la reprise en main de la base de code, les tests e2e (les tests de bout en bout, c'est à dire ceux simulant intégralement un parcours utilisateur en pilotant un navigateur) étaient désactivés. Et effectivement, ils provoquent des erreurs lorsque nous les réactivons.
-
-**Nous voudrions donc remettre en place ces tests afin qu'ils valident l'état actuel de l'application. Ce sera aussi l'occasion de mettre à jour les outils utilisés pour gérer ces tests (passage à Cypress.io), car ceux utilisés sont vieillissants (Selenium).**
+[Carte Taiga #5](https://tree.taiga.io/project/thomasmaziere-actions-urgentes-amnesty/us/5)
 
 ### Suppression du code mort
 
-Il semble que les spécifications d'A.U. aient évolué au cours du temps, mais que le code utilisé pour d'anciennes fonctionnalités n'a pas été supprimé. **Nous aimerions supprimer ce code *mort* au moins pour les fonctionnalités suivantes** :
-
-- génération d'une lettre en PDF
-- envoie de ce PDF en pièce jointe d'un email envoyé depuis A.U. (via Mailgun),
-- maintient d'un [storybook](https://storybook.js.org/) pour certain composant visuel du front
+[Carte Taiga #6](https://tree.taiga.io/project/thomasmaziere-actions-urgentes-amnesty/us/6)
 
 ### Utilisation des identifiants Salesforce plutôt que des codes
 
-Lors de la création d'une action, l'utilisateur doit renseigner un `campaign_code` afin de faire la liaison en cette action et Salesforce. (voir [la documentation sur Salesforce](/docs/salesforce/))
-
-Mais lors de nos échanges avec l'équipe en charge du Salesforce d'Amnesty, il apparait que ce code peut être modifié par l'utilisateur. C'est donc un risque pour la cohérence d'une campagne d'alerte.
-
-**Nous proposons de mettre à jour le code afin que les références à Saleforce soient faites depuis un identifiant (id) stable plutôt que depuis un code modifiable du côté Salesforce.**
+[Carte Taiga #7](https://tree.taiga.io/project/thomasmaziere-actions-urgentes-amnesty/us/7)
