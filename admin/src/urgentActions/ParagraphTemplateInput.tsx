@@ -17,12 +17,9 @@ export const ParagraphTemplateInput = ({
     limit,
     dataMessageTemplate,
 }: ParagraphTemplateInputProps) => {
-    const [mailToLength, setMailToLength] = useState(0);
+    const [mailToLength, setMailToLength] = useState(headerCount);
 
     useEffect(() => {
-        if (!dataMessageTemplate || !dataMessageTemplate[0] || !dataMessageTemplate[0].value) {
-            return;
-        }
         const messageLength = encodeURIComponent(dataMessageTemplate[0].value).length;
         setMailToLength(messageLength + headerCount);
     }, [headerCount, dataMessageTemplate]);
