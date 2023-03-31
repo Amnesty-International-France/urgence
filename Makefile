@@ -16,7 +16,7 @@ DOCKER_COMPOSE_E2E = docker compose -p reaction-rapide-e2e -f docker-compose.yml
 install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install yarn
 
-install-production: ## Install all dependencies in production mode. Usage `make install-prod`.
+install-production: ## Install all dependencies in production mode. Usage `make install-production`.
 	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install bash -c "yarn workspaces focus --production reaction-rapide-api"
 
 start: ## Start the project with docker. Usage `make start`.
