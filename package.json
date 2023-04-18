@@ -7,7 +7,7 @@
         "admin"
     ],
     "devDependencies": {
-        "cypress": "12.8.1",
+        "cypress": "12.10.0",
         "jest": "22.4.4",
         "jest-canvas-mock": "2.0.0",
         "jest-cli": "22.4.4"
@@ -46,6 +46,7 @@
         "node": "18.15.0"
     },
     "resolutions": {
-        "@apollo/client": "3.6.9"
+        "@apollo/client": "3.6.9",
+        "ra-ui-materialui": "4.2.0"
     }
 }

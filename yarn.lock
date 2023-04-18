@@ -12722,9 +12722,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:12.8.1":
-  version: 12.8.1
-  resolution: "cypress@npm:12.8.1"
+"cypress@npm:12.10.0":
+  version: 12.10.0
+  resolution: "cypress@npm:12.10.0"
   dependencies:
     "@cypress/request": ^2.88.10
     "@cypress/xvfb": ^1.2.4
@@ -12740,7 +12740,7 @@ __metadata:
     check-more-types: ^2.24.0
     cli-cursor: ^3.1.0
     cli-table3: ~0.6.1
-    commander: ^5.1.0
+    commander: ^6.2.1
     common-tags: ^1.8.0
     dayjs: ^1.10.4
     debug: ^4.3.4
@@ -12758,7 +12758,7 @@ __metadata:
     listr2: ^3.8.3
     lodash: ^4.17.21
     log-symbols: ^4.0.0
-    minimist: ^1.2.6
+    minimist: ^1.2.8
     ospath: ^1.2.2
     pretty-bytes: ^5.6.0
     proxy-from-env: 1.0.0
@@ -12770,7 +12770,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: a229f2b3ff20b1b533f6d4670303596aef596a394db77ea8eafe2fa8f175b79b9d48ba66262513fa806076be5c857e159539f6d8fd9acf4df9936a2fa649bf1e
+  checksum: 50eaae129df3bd15416113105a6f04d13949859af4cca7f0fc36c8b0e756bf3f6e058f43df574d92abe350c282872dec62ea22da8dc9b6528c827c0976fb14e0
   languageName: node
   linkType: hard
 
@@ -13559,13 +13559,6 @@ __metadata:
   dependencies:
     domelementtype: ^2.3.0
   checksum: 0f58f4a6af63e6f3a4320aa446d28b5790a009018707bce2859dcb1d21144c7876482b5188395a188dfa974238c019e0a1e610d2fc269a12b2c192ea2b0b131c
-  languageName: node
-  linkType: hard
-
-"dompurify@npm:^2.4.3":
-  version: 2.4.5
-  resolution: "dompurify@npm:2.4.5"
-  checksum: d6d3c3b320f15cdb5b26aa1902c3275a3ab2c3705a9df4420bb94691d7c4df67959ec7b91e486c308320791b0ee000456f042734c45d76721e61c2768eac706e
   languageName: node
   linkType: hard
 
@@ -22280,7 +22273,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimist@npm:^1.1.1, minimist@npm:^1.1.3, minimist@npm:^1.2.0, minimist@npm:^1.2.3, minimist@npm:^1.2.5, minimist@npm:^1.2.6":
+"minimist@npm:^1.1.1, minimist@npm:^1.1.3, minimist@npm:^1.2.0, minimist@npm:^1.2.3, minimist@npm:^1.2.5, minimist@npm:^1.2.6, minimist@npm:^1.2.8":
   version: 1.2.8
   resolution: "minimist@npm:1.2.8"
   checksum: 75a6d645fb122dad29c06a7597bddea977258957ed88d7a6df59b5cd3fe4a527e253e9bbf2e783e4b73657f9098b96a5fe96ab8a113655d4109108577ecf85b0
@@ -26231,36 +26224,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ra-ui-materialui@npm:^4.2.0":
-  version: 4.9.3
-  resolution: "ra-ui-materialui@npm:4.9.3"
-  dependencies:
-    autosuggest-highlight: ^3.1.1
-    clsx: ^1.1.1
-    css-mediaquery: ^0.1.2
-    dompurify: ^2.4.3
-    inflection: ~1.12.0
-    jsonexport: ^3.2.0
-    lodash: ~4.17.5
-    prop-types: ^15.7.0
-    query-string: ^7.1.1
-    react-dropzone: ^12.0.4
-    react-error-boundary: ^3.1.4
-    react-query: ^3.32.1
-    react-transition-group: ^4.4.1
-  peerDependencies:
-    "@mui/icons-material": ^5.0.1
-    "@mui/material": ^5.0.2
-    ra-core: ^4.0.0
-    react: ^16.9.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0
-    react-hook-form: "*"
-    react-router: ^6.1.0
-    react-router-dom: ^6.1.0
-  checksum: e3425f597f2af8a60315cc18d31ee9f1f943f37b19c727806efecedc7df4465c66733f8110b4e13f5c7693fd424ae60fbba69b5392f45f6e1a2077997e6aa165
-  languageName: node
-  linkType: hard
-
 "raf@npm:^3.4.1":
   version: 3.4.1
   resolution: "raf@npm:3.4.1"
@@ -28143,7 +28106,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    cypress: 12.8.1
+    cypress: 12.10.0
     jest: 22.4.4
     jest-canvas-mock: 2.0.0
     jest-cli: 22.4.4
