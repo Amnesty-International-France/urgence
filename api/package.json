@@ -6,8 +6,8 @@
     "private": true,
     "dependencies": {
         "@types/ramda": "0.28.14",
-        "@types/shortid": "^0.0.29",
         "@types/sharp": "0.30.4",
+        "@types/shortid": "0.0.29",
         "apollo-server-express": "3.9.0",
         "convict": "6.2.3",
         "cors": "2.8.5",
