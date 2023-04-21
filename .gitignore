@@ -36,7 +36,6 @@ cypress/videos
 
 ## Front
 /front/build
-/front/storybook-static
 /front/.expo
 
 ## Admin
