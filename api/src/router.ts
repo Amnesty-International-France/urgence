@@ -2,12 +2,9 @@ import bodyParser from 'body-parser';
 import { Router } from 'express';
 import { getMetaDataTemplateBySlug } from './urgentActions/metadata';
 
-import urgentActionsRouter from './urgentActions/router';
-
 const router = Router();
 
 router.use(bodyParser.json());
-router.use('/urgent-actions', urgentActionsRouter);
 
 router.get(/metadata/, async (req, res, next) => {
     const url = req.url;

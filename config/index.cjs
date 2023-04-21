@@ -114,47 +114,6 @@ const config = convict({
         default: 'http://localhost',
         env: 'UPLOAD_URL',
     },
-    mailer: {
-        emitter: {
-            format: String,
-            default: 'webmestre@amnesty.fr',
-            env: 'MAIL_EMITTER',
-        },
-        smtp: {
-            service: {
-                format: String,
-                default: 'smtp',
-                env: 'SMTP_SERVICE',
-            },
-            host: {
-                format: String,
-                default: 'smtp.mailgun.org',
-                env: 'SMTP_HOST',
-            },
-            port: {
-                format: 'int',
-                default: 465,
-                env: 'SMTP_PORT',
-            },
-            ignoreTLS: {
-                format: Boolean,
-                default: false,
-                env: 'SMTP_IGNORE_TLS',
-            },
-            auth: {
-                user: {
-                    format: String,
-                    default: 'postmaster',
-                    env: 'SMTP_USER',
-                },
-                pass: {
-                    format: String,
-                    default: '',
-                    env: 'SMTP_PASSWORD',
-                },
-            },
-        },
-    },
     salesforce: {
         baseUrl: {
             format: String,
