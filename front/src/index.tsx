@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 import App from './App';
-import registerGA from './analytics/registerGA';
-import registerFB from './analytics/registerFB';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const client = new ApolloClient({
@@ -18,9 +16,5 @@ root.render(
         <App client={client} />
     </React.StrictMode>,
 );
-
-// Should be loaded before React App
-registerGA();
-registerFB();
 
 serviceWorkerRegistration.register();

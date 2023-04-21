@@ -3,7 +3,6 @@ import { Component } from 'react';
 
 import { TextField } from '@mui/material';
 
-import trackEvent from '../analytics/trackEvent';
 import withRouter from '../withRouter';
 import CheckAdornment from './CheckAdornment';
 
@@ -104,18 +103,8 @@ export class Input extends Component<InputProps1, InputState1> {
                         if (onChange) onChange(event);
                         this.showErrorState();
                     }}
-                    onBlur={(event) => {
+                    onBlur={() => {
                         this.showErrorState();
-                        trackEvent(analyticsCategory, 'Exit', 'field', label, slug, step, {
-                            state: showValid ? 'valid' : error ? 'invalid' : 'null',
-                            value: event.target.value,
-                        });
-                    }}
-                    onFocus={(event) => {
-                        trackEvent(analyticsCategory, 'Enter', 'field', label, slug, step, {
-                            state: showValid ? 'valid' : error ? 'invalid' : 'null',
-                            value: event.target.value,
-                        });
                     }}
                     {...otherProps}
                 />
