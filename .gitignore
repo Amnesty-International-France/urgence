@@ -28,6 +28,8 @@ build/
 
 .env
 
+cypress/videos
+
 ## Api
 /api/dist/
 /api/.pm2

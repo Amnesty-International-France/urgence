@@ -14,8 +14,25 @@ describe('admin action form', () => {
 
   it('displays the counter for mailTo', () => {
     cy.get('[aria-label=Create]').scrollIntoView().click();
-    cy.contains('Message View').parent().contains('Add').click();
-    cy.contains('16/2000 We recommend not to exceed for mailTo function.');
+    cy.contains('Code Campagne').type('AU_WEBTEST');
+    //cy.contains('Titre').click().type('au-webtest-titre');
+    cy.contains('label', 'Titre')
+      .invoke('attr', 'for')
+      .then((id) => {
+        // note that the last Cypress command inside the `cy.then`
+        // changes the yielded subject to its result
+        cy.get('#' + id)
+      })
+      .type('au-webtest-titre');
+    // cy.contains('Message View').parent().contains('Add').click();
+    // cy.contains('16/2000 We recommend not to exceed for mailTo function.');
+    cy.get('[aria-label=Save]').scrollIntoView().click();
+    cy.contains('Element created');
+    cy.contains('Urgent actions').click();
+    cy.contains('AU_WEBTEST').parent().parent().children().first().click();
+    cy.contains('Delete').click({force: true});
+    cy.contains('Element deleted');
+    cy.get('body').should('not.contain', 'AU_WEBTEST');
   })
 
 })
