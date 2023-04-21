@@ -10,8 +10,6 @@
         "eject-web": "react-scripts eject",
         "test": "yarn run test-web",
         "test-e2e": "jest ./e2e",
-        "storybook": "start-storybook -p 9009 -s public",
-        "build-storybook": "build-storybook -s public",
         "lint": "eslint --fix src"
     },
     "dependencies": {
@@ -68,10 +66,6 @@
         "whatwg-fetch": "3.6.2"
     },
     "devDependencies": {
-        "@storybook/addon-actions": "6.5.9",
-        "@storybook/addon-links": "6.5.9",
-        "@storybook/addons": "6.5.9",
-        "@storybook/react": "6.5.9",
         "@testing-library/jest-dom": "5.16.4",
         "@testing-library/react": "13.3.0",
         "@testing-library/user-event": "14.2.1",
@@ -98,7 +92,6 @@
         "@types/resolve": "1.20.2",
         "@types/selenium-webdriver": "4.1.1",
         "@types/slick-carousel": "1.6.37",
-        "@types/storybook-react-router": "1.0.1",
         "@types/sw-precache-webpack-plugin": "0.11.2",
         "@types/testing-library__jest-dom": "5.14.5",
         "@types/testing-library__user-event": "4.2.0",
@@ -111,7 +104,6 @@
         "prettier": "2.7.1",
         "react-test-renderer": "18.2.0",
         "selenium-webdriver": "4.3.0",
-        "storybook-react-router": "1.0.8",
         "tsup": "6.1.2",
         "typescript": "4.7.4"
     },

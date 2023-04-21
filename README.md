@@ -14,10 +14,6 @@ You can now access different applications:
 -   Admin: http://localhost:5000
 -   Front app: http://localhost:3000
 
-If you run the project in development, you can use:
-
--   Storybook: http://localhost:9009
-
 ## Deployment
 
 ### Prod
