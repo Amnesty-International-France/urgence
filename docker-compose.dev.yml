@@ -21,13 +21,6 @@ services:
         ports:
             - '5000:5000'
 
-    maildev:
-        image: djfarrelly/maildev
-        expose:
-            - '25'
-        ports:
-            - '1080:80'
-
     api:
         user: '${UID}:${GID}'
         command: 'yarn run start-dev'
@@ -35,10 +28,6 @@ services:
             - ADMIN_USERNAME=admin
             - ADMIN_PASSWORD=password
             - JWT_SECRET_KEY=foobarS3CR3T!
-            - SMTP_HOST=maildev
-            - SMTP_PORT=25
-            - SMTP_IGNORE_TLS=true
-            - SMTP_USER=
             - API_PREFIX_URL=
             - PM2_HOME=.pm2
             - SF_BASE_URL
