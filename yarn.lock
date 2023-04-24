@@ -20807,27 +20807,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-facebook-pixel@npm:1.0.4":
-  version: 1.0.4
-  resolution: "react-facebook-pixel@npm:1.0.4"
-  checksum: cfd6fa5d6f4191ea0508c0313b9e0206edf2117645ba38021030bfa22eb2d2d087c8159d974e037057def4e6c18bd6618a1308e19b0bfe2092ac4521e79669bd
-  languageName: node
-  linkType: hard
-
 "react-fast-compare@npm:^3.1.1, react-fast-compare@npm:^3.2.0":
   version: 3.2.1
   resolution: "react-fast-compare@npm:3.2.1"
   checksum: 209b4dc3a9cc79c074a26ec020459efd8be279accaca612db2edb8ada2a28849ea51cf3d246fc0fafb344949b93a63a43798b6c1787559b0a128571883fe6859
-  languageName: node
-  linkType: hard
-
-"react-ga@npm:3.3.1":
-  version: 3.3.1
-  resolution: "react-ga@npm:3.3.1"
-  peerDependencies:
-    prop-types: ^15.6.0
-    react: ^15.6.2 || ^16.0 || ^17 || ^18
-  checksum: 3026976d0249fbf80e7b5dad7707964198064d7ac460f3397de40524e76dd6c29dead0900f850e2bd3135a86a9b083af8cda9cfa087f195852bf8d2b17c1fcfb
   languageName: node
   linkType: hard
 
@@ -24699,8 +24682,6 @@ __metadata:
     react-dev-utils: 12.0.1
     react-div-100vh: 0.7.0
     react-dom: 18.2.0
-    react-facebook-pixel: 1.0.4
-    react-ga: 3.3.1
     react-helmet: 6.1.0
     react-helmet-async: 1.3.0
     react-router: 6.3.0

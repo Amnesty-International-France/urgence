@@ -4,7 +4,6 @@ import SvgIcon from '@mui/material/SvgIcon';
 import classnames from 'classnames';
 import React, { Fragment } from 'react';
 
-import trackEvent from '../../analytics/trackEvent';
 import { secureUseEffect } from '../../hooks/secureHooks';
 
 type OwnProps = {
@@ -42,12 +41,6 @@ export const ShareLink = ({
     buttonName,
     backgroundColor,
 }: Props) => {
-    secureUseEffect(() => {
-        trackEvent(analyticsCategory, 'Display', 'button', buttonName, slug, step, {
-            disabled: 'active',
-            label: title,
-        });
-    });
     return (
         <Fragment>
             {customScript}
@@ -64,10 +57,6 @@ export const ShareLink = ({
                     if (action) {
                         action(event);
                     }
-                    trackEvent(analyticsCategory, 'Click', 'button', buttonName, slug, step, {
-                        disabled: 'active',
-                        label: title,
-                    });
                 }}
             >
                 <SvgIcon>

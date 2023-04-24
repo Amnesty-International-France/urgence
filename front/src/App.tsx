@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import Div100Vh from 'react-div-100vh';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import Analytics from './analytics/Analytics';
 
 import { AppLogo, ThemeProvider } from 'amnesty-components';
 import { HelmetProvider } from 'react-helmet-async';
@@ -40,33 +39,11 @@ const App = ({ className, client }: { className?: string; client: ApolloClient<u
                             <BrowserRouter>
                                 <RouterScrollToTop>
                                     <Routes>
-                                        <Route
-                                            path={generateUrl('home')}
-                                            element={<Analytics WrappedComponent={HomePage} />}
-                                        />
-
-                                        <Route
-                                            path={generateUrl('error')}
-                                            element={<Analytics WrappedComponent={ErrorPage} />}
-                                        />
-                                        <Route
-                                            path="/ua/:slug"
-                                            element={<Analytics WrappedComponent={UrgentAction} />}
-                                        >
-                                            <Route
-                                                path=":step"
-                                                element={
-                                                    <Analytics WrappedComponent={UrgentAction} />
-                                                }
-                                            >
-                                                <Route
-                                                    path=":page/*"
-                                                    element={
-                                                        <Analytics
-                                                            WrappedComponent={UrgentAction}
-                                                        />
-                                                    }
-                                                />
+                                        <Route path={generateUrl('home')} element={<HomePage />} />
+                                        <Route path={generateUrl('error')} element={<ErrorPage />} />
+                                        <Route path="/ua/:slug" element={<UrgentAction />} >
+                                            <Route path=":step" element={<UrgentAction />}>
+                                                <Route path=":page/*" element={<UrgentAction />} />
                                             </Route>
                                         </Route>
                                         <Route

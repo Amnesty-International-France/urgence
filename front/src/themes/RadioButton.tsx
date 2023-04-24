@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import classnames from 'classnames';
 import { Component } from 'react';
-import trackEvent from '../analytics/trackEvent';
 import withRouter from '../withRouter';
 
 const styles = {
@@ -68,9 +67,6 @@ export class RadioButton extends Component<Props, State> {
             value,
             onChange,
             error,
-            analyticsCategory,
-            params: { slug },
-            step,
         } = this.props;
 
         const { showError } = this.state;
@@ -94,34 +90,8 @@ export class RadioButton extends Component<Props, State> {
                                     this.showErrorState();
                                     if (onChange) onChange(event);
                                 }}
-                                onBlur={(event) => {
+                                onBlur={() => {
                                     this.showErrorState();
-                                    trackEvent(
-                                        analyticsCategory,
-                                        'Exit',
-                                        'field',
-                                        label,
-                                        slug,
-                                        step,
-                                        {
-                                            state: error ? 'invalid' : 'valid',
-                                            value: event.target.value,
-                                        },
-                                    );
-                                }}
-                                onFocus={(event) => {
-                                    trackEvent(
-                                        analyticsCategory,
-                                        'Click',
-                                        'field',
-                                        label,
-                                        slug,
-                                        step,
-                                        {
-                                            state: error ? 'invalid' : 'valid',
-                                            value: event.target.value,
-                                        },
-                                    );
                                 }}
                             />
                             <label htmlFor={index.toString()}>{item}</label>

@@ -3,7 +3,6 @@ import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@mui/material/Button';
 
-import trackEvent from '../../analytics/trackEvent';
 import { black } from 'amnesty-components';
 import CopyToClipboardButton from '../CopyToClipboardButton';
 
@@ -55,20 +54,13 @@ type Props = OwnProps & typeof CopyToClipboard.defaultProps;
 // @ts-expect-error TS(7022): 'CopyToClipboard' implicitly has type 'any' becaus... Remove this comment to see the full error message
 export const CopyToClipboard = ({
     className,
-    slug,
-    step,
     url,
     action,
-    analyticsCategory,
 }: Props) => (
     <Button
         className={className}
         onClick={(event) => {
             if (action) action(event);
-            trackEvent(analyticsCategory, 'Click', 'button', 'CopyToClipboard', slug, step, {
-                disabled: false,
-                label: 'Copy to clipboard',
-            });
         }}
         variant="outlined"
     >
