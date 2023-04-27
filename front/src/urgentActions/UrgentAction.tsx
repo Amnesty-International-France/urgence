@@ -15,6 +15,7 @@ import MessageSend from './messageSend/MessageSend';
 import SendMail from './messageSend/SendMail';
 import MessageView from './messageView/MessageView';
 import ToMessageSendButton from './messageView/ToMessageSendButton';
+import MessageCopy from './messageCopy/MessageCopy';
 import Register from './register/Register';
 import RegisterButton from './register/RegisterButton';
 import ShareStep from './share/ShareStep';
@@ -217,7 +218,32 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
                         recipient={recipient}
                         messageTemplate={messageTemplate}
                         auId={id}
-                        afterMail={({ registered }: any) =>
+                        afterMail={({ failed, registered }: any) =>
+                            navigate(generateUrl(failed ? 'message-send-copy' : (registered ? 'share' : 'register'), { slug }))
+                        }
+                    />
+                }
+            />
+        );
+    }
+
+    if (step === 'message-send-copy') {
+        const id = get(data, 'UrgentAction.id');
+        const messageTemplate = get(data, 'UrgentAction.message.message_template');
+        const recipient = get(data, 'UrgentAction.message.recipient');
+
+        return (
+            <MessageCopy // @ts-ignore
+                text='En cliquant sur le bouton ci-dessous, votre messagerie va s&#39;ouvrir et le message sera automatiquement copié dans votre presse-papiers. Il ne vous restera plus qu&#39;à le coller et envoyer l&#39;email.'
+                messageTemplate={messageTemplate}
+                action={
+                    <SendMail // @ts-ignore
+                        label='Ouvrir ma messagerie'
+                        step={step}
+                        recipient={recipient}
+                        messageTemplate={messageTemplate}
+                        auId={id}
+                        afterMail={({ failed, registered }: any) =>
                             navigate(generateUrl(registered ? 'share' : 'register', { slug }))
                         }
                     />

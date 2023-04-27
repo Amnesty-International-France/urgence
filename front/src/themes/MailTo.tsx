@@ -15,6 +15,24 @@ export const buildMailDest = (recipient: any, subject: any, body: any) => {
         .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '');
 };
 
+export const buildMailDestWithoutBody = (recipient: any, subject: any) => {
+    const mail = recipient.mail || 'example@mail.com';
+    return `mailto:${encodeURIComponent(mail)}?subject=${encodeURIComponent(
+        subject,
+    )}`
+        .concat(recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '')
+        .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '');
+};
+
+export const copy = (textToCopy: any) => {
+    const textField = document.createElement('textarea');
+    textField.innerHTML = textToCopy;
+    document.body.appendChild(textField);
+    textField.select();
+    document.execCommand('copy');
+    textField.remove();
+};
+
 type Props = {
     className: string;
     afterMail: (...args: any[]) => any;
@@ -40,20 +58,6 @@ export class MailTo extends Component<Props> {
         this.md = new MobileDetect(navigator.userAgent);
     }
 
-    openMailer = (dest: any) => {
-        console.log('window', window);
-        console.log('dest', dest);
-        console.log(`window.open("${dest}", 'mailto')`);
-
-        window.open(dest, 'mailto');
-        window.focus();
-        setTimeout(function () {
-            if (!window.document.hasFocus()) {
-                window.close();
-            }
-        }, 500);
-    };
-
     render() {
         const {
             recipient = {},
@@ -63,9 +67,11 @@ export class MailTo extends Component<Props> {
             disabled,
             afterMail,
             className,
+            step,
         } = this.props;
 
         const dest = buildMailDest(recipient, subject, body);
+        const destWithoutBody = buildMailDestWithoutBody(recipient, subject);
         const isIphone = this.md.is('iPhone');
         const options = {};
         if (isIphone) {
@@ -76,9 +82,14 @@ export class MailTo extends Component<Props> {
                 className={classnames(className, { disabled })}
                 onClick={(event) => {
                     if (!isIphone) {
-                        this.openMailer(dest);
+                        if (step === 'message-send-copy') {
+                            copy(body);
+                            window.open(destWithoutBody, 'mailto');
+                        } else {
+                            window.open(dest, 'mailto');
+                        }
                     }
-                    setTimeout(() => afterMail(event), 500);
+                    setTimeout(() => afterMail(event, navigator.platform == 'Win32' && window.document.hasFocus()), 500);
                 }}
                 target={isIphone ? 'mailto' : '_self'}
                 rel="noopener noreferrer"

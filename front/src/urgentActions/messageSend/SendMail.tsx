@@ -58,7 +58,7 @@ export const SendMail = ({
     registered,
     setRegistered,
 }: Props) => {
-    const handleAfterMail = () => {
+    const handleAfterMail = ( e: any, failed: boolean) => {
         addResponseCount(auId);
 
         let isRegistered = registered;
@@ -76,7 +76,7 @@ export const SendMail = ({
             })
             .catch(() => {})
             .then(() => {
-                afterMail({ registered: isRegistered });
+                afterMail({ failed: failed, registered: isRegistered });
             });
     };
 

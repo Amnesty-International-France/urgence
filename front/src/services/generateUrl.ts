@@ -14,6 +14,8 @@ export default (name: any, params = {}) => {
             return `/ua/${(params as any).slug}/message-view`;
         case 'message-send':
             return `/ua/${(params as any).slug}/message-send`;
+        case 'message-send-copy':
+            return `/ua/${(params as any).slug}/message-send-copy`;
         case 'thanks':
             return `/ua/${(params as any).slug}/thanks`;
         case 'register':
