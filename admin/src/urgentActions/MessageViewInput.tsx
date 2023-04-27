@@ -12,6 +12,7 @@ import {
 } from 'react-admin';
 import isEmail from 'validator/lib/isEmail';
 import { Card } from './Card';
+import { MailToCheck } from './MailToCheck';
 import { ParagraphTemplateInput } from './ParagraphTemplateInput';
 import { getScreenIndex, MESSAGE_VIEW } from './screenIndex';
 import { FormData } from './UrgentActionsForm';
@@ -20,28 +21,25 @@ type MessageViewInputProps = {
     source: string;
 };
 
-type Recipient = {
-    mail: string | null;
-    copies_to: string | null;
-    cci: string | null;
-};
-
 export const validateEmailsList = (text: string) =>
     text && !!text.split(',').find((t) => !isEmail(t))
         ? 'Must contain only emails separated by a comma.'
         : null;
 
-const getMailToHeaderLength = (recipient: Recipient, subject: string) => {
+const getMailToLink = (data: any) => {
+    if (!data) {
+        return `mailto:?subject=&body=`;
+    }
     return `mailto:${encodeURIComponent(
-        recipient && recipient.mail ? recipient.mail : '',
-    )}?subject=${encodeURIComponent(subject)}`
+        data.recipient && data.recipient.mail ? data.recipient.mail : '',
+    )}?subject=${encodeURIComponent(data.object_example)}`
+        .concat(data.message_template && data.message_template[0] && data.message_template[0].value ? `&body=${encodeURIComponent(data.message_template[0].value)}` : '')
         .concat(
-            recipient && recipient.copies_to
-                ? `&cc=${encodeURIComponent(recipient.copies_to)}`
+            data.recipient && data.recipient.copies_to
+                ? `&cc=${encodeURIComponent(data.recipient.copies_to)}`
                 : '',
         )
-        .concat(recipient && recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '')
-        .length;
+        .concat(data.recipient && data.recipient.cci ? `&bcc=${encodeURIComponent(data.recipient.cci)}` : '');
 };
 
 export const MessageViewInput = ({ source }: MessageViewInputProps) => {
@@ -59,9 +57,7 @@ export const MessageViewInput = ({ source }: MessageViewInputProps) => {
                     const data = formData[source];
                     const hasMessageTemplate =
                         data && data.message_template && data.message_template.length > 0;
-                    const mailToHeaderLength = data
-                        ? getMailToHeaderLength(data.recipient, data.object_example)
-                        : 0;
+                    const mailTo = getMailToLink(data);
                     const storySteps = formData.story ? formData.story.length : 0;
                     const interpelationMode = formData.call_to_action?.interpelation_mode;
                     return (
@@ -123,14 +119,17 @@ export const MessageViewInput = ({ source }: MessageViewInputProps) => {
                                                 disableReordering
                                             >
                                                 <ParagraphTemplateInput
-                                                    headerCount={mailToHeaderLength}
-                                                    limit={2000}
-                                                    dataMessageTemplate={
-                                                        data && data.message_template
-                                                    }
+                                                    mailToLength={mailTo.length}
                                                 />
                                             </SimpleFormIterator>
                                         </ArrayInput>
+                                    </>
+                                </Labeled>
+                                <Labeled label="Tester l'ouverture du lien mailto">
+                                    <>
+                                        <MailToCheck
+                                            mailTo={mailTo}
+                                        />
                                     </>
                                 </Labeled>
                                 <Labeled label="Destinataires">
