@@ -12,7 +12,7 @@ import {
 } from 'react-admin';
 import isEmail from 'validator/lib/isEmail';
 import { Card } from './Card';
-import { MailToCheck } from './MailToCheck';
+import { MailtoCheck } from './MailtoCheck';
 import { ParagraphTemplateInput } from './ParagraphTemplateInput';
 import { getScreenIndex, MESSAGE_VIEW } from './screenIndex';
 import { FormData } from './UrgentActionsForm';
@@ -26,7 +26,7 @@ export const validateEmailsList = (text: string) =>
         ? 'Must contain only emails separated by a comma.'
         : null;
 
-const getMailToLink = (data: any) => {
+const getMailtoLink = (data: any) => {
     if (!data) {
         return `mailto:?subject=&body=`;
     }
@@ -57,7 +57,7 @@ export const MessageViewInput = ({ source }: MessageViewInputProps) => {
                     const data = formData[source];
                     const hasMessageTemplate =
                         data && data.message_template && data.message_template.length > 0;
-                    const mailTo = getMailToLink(data);
+                    const mailto = getMailtoLink(data);
                     const storySteps = formData.story ? formData.story.length : 0;
                     const interpelationMode = formData.call_to_action?.interpelation_mode;
                     return (
@@ -119,7 +119,7 @@ export const MessageViewInput = ({ source }: MessageViewInputProps) => {
                                                 disableReordering
                                             >
                                                 <ParagraphTemplateInput
-                                                    mailToLength={mailTo.length}
+                                                    mailtoLength={mailto.length}
                                                 />
                                             </SimpleFormIterator>
                                         </ArrayInput>
@@ -127,8 +127,8 @@ export const MessageViewInput = ({ source }: MessageViewInputProps) => {
                                 </Labeled>
                                 <Labeled label="Tester l'ouverture du lien mailto">
                                     <>
-                                        <MailToCheck
-                                            mailTo={mailTo}
+                                        <MailtoCheck
+                                            mailto={mailto}
                                         />
                                     </>
                                 </Labeled>

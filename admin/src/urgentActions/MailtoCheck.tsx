@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-type MailToCheckProps = {
-    mailTo: string;
+type MailtoCheckProps = {
+    mailto: string;
 };
 
-export const MailToCheck = ({ mailTo }: MailToCheckProps) => {
+export const MailtoCheck = ({ mailto }: MailtoCheckProps) => {
     const [status, setStatus] = useState('en attente d\'un clic');
 
     const checkFocus = () => {
-        if (navigator.platform == 'Win32' && document.hasFocus()) {
+        if (navigator.platform === 'Win32' && document.hasFocus()) {
             setStatus('❌ l\'ouverture du lien mailto n\'a pas fonctionné');
         } else {
             setStatus('✅ l\'ouverture du lien mailto a fonctionné');
@@ -18,11 +18,11 @@ export const MailToCheck = ({ mailTo }: MailToCheckProps) => {
     return (
         <>
             <a
-                href={mailTo}
+                href={mailto}
                 onClick={
                     (e) => {
                         e.preventDefault();
-                        window.open(mailTo, 'mailto');
+                        window.open(mailto, 'mailto');
                         setTimeout(checkFocus, 500);
                     }
                 }

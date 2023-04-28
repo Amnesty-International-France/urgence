@@ -2,12 +2,12 @@ import { TextInput } from 'react-admin';
 
 type ParagraphTemplateInputProps = {
     source?: string;
-    mailToLength: number;
+    mailtoLength: number;
 };
 
 export const ParagraphTemplateInput = ({
     source,
-    mailToLength,
+    mailtoLength,
 }: ParagraphTemplateInputProps) => {
     return (
         <TextInput
@@ -15,7 +15,7 @@ export const ParagraphTemplateInput = ({
             label={false}
             multiline
             fullWidth
-            helperText={`${mailToLength}/2000 We recommend not to exceed for mailTo function.`}
+            helperText={`${mailtoLength}/2000 We recommend not to exceed for mailTo function.`}
         />
     );
 };
