@@ -7,9 +7,9 @@
         "admin"
     ],
     "devDependencies": {
-        "cypress": "12.10.0",
+        "cypress": "12.11.0",
         "jest": "22.4.4",
-        "jest-canvas-mock": "2.0.0",
+        "jest-canvas-mock": "2.5.0",
         "jest-cli": "22.4.4"
     },
     "scripts": {
