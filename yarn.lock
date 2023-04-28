@@ -8425,10 +8425,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colorette@npm:2.0.16":
-  version: 2.0.16
-  resolution: "colorette@npm:2.0.16"
-  checksum: cd55596a3a2d1071c1a28eee7fd8a5387593ff1bd10a3e8d0a6221499311fe34a9f2b9272d77c391e0e003dcdc8934fb2f8d106e7ef1f7516f8060c901d41a27
+"colorette@npm:2.0.19":
+  version: 2.0.19
+  resolution: "colorette@npm:2.0.19"
+  checksum: 888cf5493f781e5fcf54ce4d49e9d7d698f96ea2b2ef67906834bb319a392c667f9ec69f4a10e268d2946d13a9503d2d19b3abaaaf174e3451bfe91fb9d82427
   languageName: node
   linkType: hard
 
@@ -16266,20 +16266,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knex-paginate@npm:3.0.1":
-  version: 3.0.1
-  resolution: "knex-paginate@npm:3.0.1"
+"knex-paginate@npm:3.1.1":
+  version: 3.1.1
+  resolution: "knex-paginate@npm:3.1.1"
   peerDependencies:
     knex: ">= 0.95.0"
-  checksum: 7e7b402977cb311fbbdb4323da9abca3f507fe880a280200e1a544bef6119215a4b3743eb984c580bfb70ef477ea7aca67a2f4bb1b74d03f22c0b718859e4ffd
+  checksum: 685fd13b8cc4d507eeedce55cd7afb12d89e884dd8a05d2388be89f95ec082f08a3d09988eac5fcb74bcc0a6cdb8b14c658cc5ff264ae478bc9bee760f434d81
   languageName: node
   linkType: hard
 
-"knex@npm:2.1.0":
-  version: 2.1.0
-  resolution: "knex@npm:2.1.0"
+"knex@npm:2.4.2":
+  version: 2.4.2
+  resolution: "knex@npm:2.4.2"
   dependencies:
-    colorette: 2.0.16
+    colorette: 2.0.19
     commander: ^9.1.0
     debug: 4.3.4
     escalade: ^3.1.1
@@ -16310,7 +16310,7 @@ __metadata:
       optional: true
   bin:
     knex: bin/cli.js
-  checksum: 60ff38de9135cba3ec3daef37e2b7f4fe07a03636da3c2eaed0072a1dbc96a1dca6698ad8645c0c3501b3a8cb6d3da29409cdcb7513c21083041cfecc2ae3e2e
+  checksum: cfb6436c0e3df3cd1f55d3637e4f222d1acbc7b6ec3757e52c92cbf0a7da4055d40156d707ffede57dc155af75d7f5739a49d1b31d8755bc77bc0e4e2a570748
   languageName: node
   linkType: hard
 
@@ -16436,12 +16436,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"link@npm:1.5.0":
-  version: 1.5.0
-  resolution: "link@npm:1.5.0"
+"link@npm:1.5.1":
+  version: 1.5.1
+  resolution: "link@npm:1.5.1"
   bin:
     link: dist/cli.js
-  checksum: f0cb98981bd2e5cf7686a2f2edaa721bdf5a5278f6a2ba66da7e1b4e24d01591f556ebac0ae310c652c14140d13595913181428bb2afd8dd4ab6432bce0e82c3
+  checksum: 85f3b8816e98287ef26390e526b6edf5b94437aecb40a15e523a539738ac04cee82a8c8f11d5b1821c7948454b05f5ed41d99a9a4618966b36827d42679faeae
   languageName: node
   linkType: hard
 
@@ -17867,9 +17867,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nunjucks@npm:3.2.3":
-  version: 3.2.3
-  resolution: "nunjucks@npm:3.2.3"
+"nunjucks@npm:3.2.4":
+  version: 3.2.4
+  resolution: "nunjucks@npm:3.2.4"
   dependencies:
     a-sync-waterfall: ^1.0.0
     asap: ^2.0.3
@@ -17881,7 +17881,7 @@ __metadata:
       optional: true
   bin:
     nunjucks-precompile: bin/precompile
-  checksum: 9d0125acf917166675af2d9b5d525b6d3edaba68ec6f8c92edee8ad05140cfa8aef12feb46f4c3da52ed2836cadfb9d26fbf1fa9d9be6bef4660d03ce1e89dbe
+  checksum: 8b902a9deb9ff0f5c9ebbd2c7f96dfe5800bf42bdfc91d8f829fc0440ec1f87901593e20479f5ba1bddcc9f2472b16a5e932be5863dcdec0899a27c01a03df32
   languageName: node
   linkType: hard
 
@@ -18621,7 +18621,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pg-pool@npm:^3.5.1, pg-pool@npm:^3.6.0":
+"pg-pool@npm:^3.6.0":
   version: 3.6.0
   resolution: "pg-pool@npm:3.6.0"
   peerDependencies:
@@ -18630,7 +18630,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pg-protocol@npm:^1.5.0, pg-protocol@npm:^1.6.0":
+"pg-protocol@npm:^1.6.0":
   version: 1.6.0
   resolution: "pg-protocol@npm:1.6.0"
   checksum: e12662d2de2011e0c3a03f6a09f435beb1025acdc860f181f18a600a5495dc38a69d753bbde1ace279c8c442536af9c1a7c11e1d0fe3fad3aa1348b28d9d2683
@@ -18650,27 +18650,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pg@npm:8.7.3":
-  version: 8.7.3
-  resolution: "pg@npm:8.7.3"
-  dependencies:
-    buffer-writer: 2.0.0
-    packet-reader: 1.0.0
-    pg-connection-string: ^2.5.0
-    pg-pool: ^3.5.1
-    pg-protocol: ^1.5.0
-    pg-types: ^2.1.0
-    pgpass: 1.x
-  peerDependencies:
-    pg-native: ">=2.0.0"
-  peerDependenciesMeta:
-    pg-native:
-      optional: true
-  checksum: d0e7040967779b9ccea16897f099510bcaf6bc86f77a6d8fa7e293c24d8bd2fd2ec46d99d6d1adc9be4cc8f254aa909361346b693088c1ba4501414f7afb2fe3
-  languageName: node
-  linkType: hard
-
-"pg@npm:^8.0.3":
+"pg@npm:8.10.0, pg@npm:^8.0.3":
   version: 8.10.0
   resolution: "pg@npm:8.10.0"
   dependencies:
@@ -21191,13 +21171,13 @@ __metadata:
     jest: 28.1.2
     jsonwebtoken: 8.5.1
     jwt-decode: 3.1.2
-    knex: 2.1.0
-    knex-paginate: 3.0.1
+    knex: 2.4.2
+    knex-paginate: 3.1.1
     lodash.get: 4.4.2
     lodash.omit: 4.5.0
     lodash.pick: 4.4.0
-    nunjucks: 3.2.3
-    pg: 8.7.3
+    nunjucks: 3.2.4
+    pg: 8.10.0
     pm2: 5.2.0
     prettier: 2.7.1
     ramda: 0.28.0
@@ -24631,7 +24611,7 @@ __metadata:
     graphql: 16.5.0
     graphql-tag: 2.12.6
     jest: 28.1.2
-    link: 1.5.0
+    link: 1.5.1
     lodash.get: 4.4.2
     mobile-detect: 1.4.5
     object-assign: 4.1.1
