@@ -3997,7 +3997,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/core@npm:^2.0.0-beta.181, @tiptap/core@npm:^2.0.3":
+"@tiptap/core@npm:^2.0.0-beta.181, @tiptap/core@npm:^2.0.0-beta.217, @tiptap/core@npm:^2.0.3":
   version: 2.0.3
   resolution: "@tiptap/core@npm:2.0.3"
   peerDependencies:
@@ -4064,7 +4064,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-color@npm:^2.0.0-beta.9":
+"@tiptap/extension-color@npm:^2.0.0-beta.217":
   version: 2.0.3
   resolution: "@tiptap/extension-color@npm:2.0.3"
   peerDependencies:
@@ -4133,7 +4133,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-highlight@npm:^2.0.0-beta.33":
+"@tiptap/extension-highlight@npm:^2.0.0-beta.217":
   version: 2.0.3
   resolution: "@tiptap/extension-highlight@npm:2.0.3"
   peerDependencies:
@@ -4162,7 +4162,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-image@npm:^2.0.0-beta.27":
+"@tiptap/extension-image@npm:^2.0.0-beta.217":
   version: 2.0.3
   resolution: "@tiptap/extension-image@npm:2.0.3"
   peerDependencies:
@@ -4180,7 +4180,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-link@npm:^2.0.0-beta.20":
+"@tiptap/extension-link@npm:^2.0.0-beta.217":
   version: 2.0.3
   resolution: "@tiptap/extension-link@npm:2.0.3"
   dependencies:
@@ -4219,7 +4219,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-placeholder@npm:^2.0.0-beta.30":
+"@tiptap/extension-placeholder@npm:^2.0.0-beta.217":
   version: 2.0.3
   resolution: "@tiptap/extension-placeholder@npm:2.0.3"
   peerDependencies:
@@ -4238,7 +4238,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-text-align@npm:^2.0.0-beta.23":
+"@tiptap/extension-text-align@npm:^2.0.0-beta.217":
   version: 2.0.3
   resolution: "@tiptap/extension-text-align@npm:2.0.3"
   peerDependencies:
@@ -4247,7 +4247,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-text-style@npm:^2.0.0-beta.23":
+"@tiptap/extension-text-style@npm:^2.0.0-beta.217":
   version: 2.0.3
   resolution: "@tiptap/extension-text-style@npm:2.0.3"
   peerDependencies:
@@ -4265,7 +4265,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-underline@npm:^2.0.0-beta.16":
+"@tiptap/extension-underline@npm:^2.0.0-beta.217":
   version: 2.0.3
   resolution: "@tiptap/extension-underline@npm:2.0.3"
   peerDependencies:
@@ -4274,7 +4274,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/pm@npm:2.0.3":
+"@tiptap/pm@npm:2.0.3, @tiptap/pm@npm:^2.0.0-beta.217":
   version: 2.0.3
   resolution: "@tiptap/pm@npm:2.0.3"
   dependencies:
@@ -4302,7 +4302,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/react@npm:^2.0.0-beta.63":
+"@tiptap/react@npm:^2.0.0-beta.217":
   version: 2.0.3
   resolution: "@tiptap/react@npm:2.0.3"
   dependencies:
@@ -4344,7 +4344,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/starter-kit@npm:^2.0.0-beta.101":
+"@tiptap/starter-kit@npm:^2.0.0-beta.217":
   version: 2.0.3
   resolution: "@tiptap/starter-kit@npm:2.0.3"
   dependencies:
@@ -20388,7 +20388,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ra-core@npm:^4.2.0, ra-core@npm:^4.9.3":
+"ra-core@npm:^4.9.3":
   version: 4.9.3
   resolution: "ra-core@npm:4.9.3"
   dependencies:
@@ -20443,7 +20443,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ra-i18n-polyglot@npm:^4.2.0":
+"ra-i18n-polyglot@npm:^4.9.3":
   version: 4.9.3
   resolution: "ra-i18n-polyglot@npm:4.9.3"
   dependencies:
@@ -20453,20 +20453,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ra-input-rich-text@npm:4.2.0":
-  version: 4.2.0
-  resolution: "ra-input-rich-text@npm:4.2.0"
+"ra-input-rich-text@npm:4.9.4":
+  version: 4.9.4
+  resolution: "ra-input-rich-text@npm:4.9.4"
   dependencies:
-    "@tiptap/extension-color": ^2.0.0-beta.9
-    "@tiptap/extension-highlight": ^2.0.0-beta.33
-    "@tiptap/extension-image": ^2.0.0-beta.27
-    "@tiptap/extension-link": ^2.0.0-beta.20
-    "@tiptap/extension-placeholder": ^2.0.0-beta.30
-    "@tiptap/extension-text-align": ^2.0.0-beta.23
-    "@tiptap/extension-text-style": ^2.0.0-beta.23
-    "@tiptap/extension-underline": ^2.0.0-beta.16
-    "@tiptap/react": ^2.0.0-beta.63
-    "@tiptap/starter-kit": ^2.0.0-beta.101
+    "@tiptap/core": ^2.0.0-beta.217
+    "@tiptap/extension-color": ^2.0.0-beta.217
+    "@tiptap/extension-highlight": ^2.0.0-beta.217
+    "@tiptap/extension-image": ^2.0.0-beta.217
+    "@tiptap/extension-link": ^2.0.0-beta.217
+    "@tiptap/extension-placeholder": ^2.0.0-beta.217
+    "@tiptap/extension-text-align": ^2.0.0-beta.217
+    "@tiptap/extension-text-style": ^2.0.0-beta.217
+    "@tiptap/extension-underline": ^2.0.0-beta.217
+    "@tiptap/pm": ^2.0.0-beta.217
+    "@tiptap/react": ^2.0.0-beta.217
+    "@tiptap/starter-kit": ^2.0.0-beta.217
     clsx: ^1.1.1
   peerDependencies:
     "@mui/icons-material": ^5.0.1
@@ -20475,11 +20477,11 @@ __metadata:
     ra-ui-materialui: ^4.0.0
     react: ^16.9.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0
-  checksum: 7e5187f3a87055b2bb5098d525165af2c1aef10ea2d272e4e3de707484b8b1e6b5470037ad9d2e9b06c61f2760ba64240a01bb5416fbdd4f89ecf5ddde661355
+  checksum: ec1f773120f9e347526cfbfbc68febea8796c33e9079b4bb768798aa3358b5ea0589a082314d8fe721704f277c79bb05a61a7a7b49f6a298bfbcc3112ad321e8
   languageName: node
   linkType: hard
 
-"ra-language-english@npm:^4.2.0":
+"ra-language-english@npm:^4.9.3":
   version: 4.9.3
   resolution: "ra-language-english@npm:4.9.3"
   dependencies:
@@ -20622,26 +20624,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-admin@npm:4.2.0":
-  version: 4.2.0
-  resolution: "react-admin@npm:4.2.0"
+"react-admin@npm:4.9.4":
+  version: 4.9.4
+  resolution: "react-admin@npm:4.9.4"
   dependencies:
     "@emotion/react": ^11.4.1
     "@emotion/styled": ^11.3.0
     "@mui/icons-material": ^5.0.1
     "@mui/material": ^5.0.2
     history: ^5.1.0
-    ra-core: ^4.2.0
-    ra-i18n-polyglot: ^4.2.0
-    ra-language-english: ^4.2.0
-    ra-ui-materialui: ^4.2.0
-    react-hook-form: ^7.31.0
+    ra-core: ^4.9.3
+    ra-i18n-polyglot: ^4.9.3
+    ra-language-english: ^4.9.3
+    ra-ui-materialui: ^4.9.4
+    react-hook-form: ^7.40.0
     react-router: ^6.1.0
     react-router-dom: ^6.1.0
   peerDependencies:
     react: ^16.9.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0
-  checksum: b4a5e739ef9be8c3fadc994f94afb298e89701231ce0f6bd8dbc432148d9c6ed9697e35651dcff2b390ede4d3c191921aa807ddda6c5ef2b04fb2d61473e5d50
+  checksum: 35806b929a8b61b4a7dbad13fc7afbf0aafef1e183ec697f3f202d0ca80ac6a20db173c2a3e895cd45d30724cc68f9dd6bc0c953c54554f8bd7a19480a4e88cb
   languageName: node
   linkType: hard
 
@@ -20789,7 +20791,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.31.0":
+"react-hook-form@npm:^7.40.0":
   version: 7.43.9
   resolution: "react-hook-form@npm:7.43.9"
   peerDependencies:
@@ -21112,10 +21114,10 @@ __metadata:
     jwt-decode: 3.1.2
     prettier: 2.7.1
     ra-data-graphql-simple: 4.2.0
-    ra-input-rich-text: 4.2.0
-    ra-ui-materialui: 4.2.0
+    ra-input-rich-text: 4.9.4
+    ra-ui-materialui: 4.9.4
     react: 18.2.0
-    react-admin: 4.2.0
+    react-admin: 4.9.4
     react-dom: 18.2.0
     react-image-crop: 10.0.4
     react-scripts: 5.0.1
