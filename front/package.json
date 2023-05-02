@@ -13,7 +13,7 @@
         "lint": "eslint --fix src"
     },
     "dependencies": {
-        "@apollo/client": "3.6.9",
+        "@apollo/client": "3.7.13",
         "@emotion/primitives": "11.10.6",
         "@emotion/react": "11.10.8",
         "@emotion/styled": "11.10.8",
