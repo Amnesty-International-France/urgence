@@ -4975,16 +4975,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.0.5":
-  version: 18.0.5
-  resolution: "@types/react-dom@npm:18.0.5"
-  dependencies:
-    "@types/react": "*"
-  checksum: cd48b81950f499b52a3f0c08261f00046f9b7c96699fa249c9664e257e820daf6ecac815cd1028cebc9d105094adc39d047d1efd79214394b8b2d515574c0787
-  languageName: node
-  linkType: hard
-
-"@types/react-dom@npm:^18.0.0":
+"@types/react-dom@npm:18.2.1, @types/react-dom@npm:^18.0.0":
   version: 18.2.1
   resolution: "@types/react-dom@npm:18.2.1"
   dependencies:
@@ -4993,12 +4984,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-helmet@npm:6.1.5":
-  version: 6.1.5
-  resolution: "@types/react-helmet@npm:6.1.5"
+"@types/react-helmet@npm:6.1.6":
+  version: 6.1.6
+  resolution: "@types/react-helmet@npm:6.1.6"
   dependencies:
     "@types/react": "*"
-  checksum: d059cc084d3b3071cce3421bb1170dd42819cf39b81afe60d4fbd66c5ef9ffeaadf1802df80efd9553258f621678f69ceb5a21d73df0d8539d40ae9a0f995485
+  checksum: 81560c56bfe854b6a43aee31360862588ac875d1177b975da5ce049ac9aa2f7c98dcde65d4397bfaa04e468f40cf3ab2975a2ef966a69d64a60493422898698d
   languageName: node
   linkType: hard
 
@@ -5011,12 +5002,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-slick@npm:0.23.9":
-  version: 0.23.9
-  resolution: "@types/react-slick@npm:0.23.9"
+"@types/react-slick@npm:0.23.10":
+  version: 0.23.10
+  resolution: "@types/react-slick@npm:0.23.10"
   dependencies:
     "@types/react": "*"
-  checksum: 4fe5ad2333ee07762662ba26c91ef0e3e4beee4abf392d23a1eaaec5521eedea3a9092177d77a62fd1d6bb2b44e771e0c13bbb672bf438515d5dd6696c44c36f
+  checksum: 1e53fe8385e853881741a450d15c52d6433334b671fee4044939037f8e5b83968cb91fd9dbe7e6686e906882ebcf370b81bd55b6688f8e810020e23a968c0385
   languageName: node
   linkType: hard
 
@@ -5038,7 +5029,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
+"@types/react@npm:*, @types/react@npm:18.2.0":
   version: 18.2.0
   resolution: "@types/react@npm:18.2.0"
   dependencies:
@@ -5046,17 +5037,6 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: db3d92b423150222a666329f7aa3023e3e942044700557b8a7d161530847e621aec9f56c9e7f71761b06dd164c8a7b17ad52355863efe80963dffa5537e8e5fd
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:18.0.14":
-  version: 18.0.14
-  resolution: "@types/react@npm:18.0.14"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: 608eb57a383eedc54c79949673e5e8314f6b0c61542bff58721c8c47a18c23e2832e77c656050c2c2c004b62cf25582136c7c56fe1b6263a285c065fae31dbcf
   languageName: node
   linkType: hard
 
@@ -6022,7 +6002,7 @@ __metadata:
     "@types/enzyme": 3.10.13
     "@types/jest": 28.1.8
     "@types/lodash.get": 4.4.7
-    "@types/react": 18.0.14
+    "@types/react": 18.2.0
     "@types/recompose": 0.30.10
     chokidar-cli: 3.0.0
     classnames: 2.3.2
@@ -12581,7 +12561,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"history@npm:^5.1.0, history@npm:^5.2.0":
+"history@npm:^5.1.0":
   version: 5.3.0
   resolution: "history@npm:5.3.0"
   dependencies:
@@ -20154,9 +20134,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ra-input-rich-text@npm:4.9.4":
-  version: 4.9.4
-  resolution: "ra-input-rich-text@npm:4.9.4"
+"ra-input-rich-text@npm:4.10.1":
+  version: 4.10.1
+  resolution: "ra-input-rich-text@npm:4.10.1"
   dependencies:
     "@tiptap/core": ^2.0.0-beta.217
     "@tiptap/extension-color": ^2.0.0-beta.217
@@ -20178,7 +20158,7 @@ __metadata:
     ra-ui-materialui: ^4.0.0
     react: ^16.9.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0
-  checksum: ec1f773120f9e347526cfbfbc68febea8796c33e9079b4bb768798aa3358b5ea0589a082314d8fe721704f277c79bb05a61a7a7b49f6a298bfbcc3112ad321e8
+  checksum: 5b4219fa54ae9fa592b73e98189146b0146b63289aae98504571c2716a5ee63da3e0ad0cb567bde19959aff04b73c4db045aa1ce2ec4f153b36063ac08f5495f
   languageName: node
   linkType: hard
 
@@ -20191,37 +20171,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ra-ui-materialui@npm:4.9.4":
-  version: 4.9.4
-  resolution: "ra-ui-materialui@npm:4.9.4"
-  dependencies:
-    autosuggest-highlight: ^3.1.1
-    clsx: ^1.1.1
-    css-mediaquery: ^0.1.2
-    dompurify: ^2.4.3
-    inflection: ~1.12.0
-    jsonexport: ^3.2.0
-    lodash: ~4.17.5
-    prop-types: ^15.7.0
-    query-string: ^7.1.1
-    react-dropzone: ^12.0.4
-    react-error-boundary: ^3.1.4
-    react-query: ^3.32.1
-    react-transition-group: ^4.4.1
-  peerDependencies:
-    "@mui/icons-material": ^5.0.1
-    "@mui/material": ^5.0.2
-    ra-core: ^4.0.0
-    react: ^16.9.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0
-    react-hook-form: "*"
-    react-router: ^6.1.0
-    react-router-dom: ^6.1.0
-  checksum: 74728edc0c7313f5d881bbd66e8f24d5cb24443b3bc9ee803174de93dd82edb2a374ed6ee93cc27a6db22b4aa4d1830446c3071c1c32c39571deb2b6e44ad815
-  languageName: node
-  linkType: hard
-
-"ra-ui-materialui@npm:^4.9.4":
+"ra-ui-materialui@npm:4.10.1, ra-ui-materialui@npm:^4.9.4":
   version: 4.10.1
   resolution: "ra-ui-materialui@npm:4.10.1"
   dependencies:
@@ -20541,14 +20491,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-image-crop@npm:10.0.4":
-  version: 10.0.4
-  resolution: "react-image-crop@npm:10.0.4"
+"react-image-crop@npm:10.0.9":
+  version: 10.0.9
+  resolution: "react-image-crop@npm:10.0.9"
   dependencies:
-    clsx: ^1.1.1
+    clsx: ^1.2.1
   peerDependencies:
     react: ">=16.13.1"
-  checksum: e0fb2fd8f56498595dddff0e853c090065a6584012c6552869272d5e77ca56af01f9482b78aa6b59e969af5e00765c2a1429fe5b02e250637551f97e7c0bf876
+  checksum: 52f2644f727851b323b62f333943b9537a626c7d4e1874441f5b5df0946aa3440d37159de260060556c42468c84d60db66ee8f2c4507c74127531dde68c7d5e4
   languageName: node
   linkType: hard
 
@@ -20605,20 +20555,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:6.3.0":
-  version: 6.3.0
-  resolution: "react-router-dom@npm:6.3.0"
-  dependencies:
-    history: ^5.2.0
-    react-router: 6.3.0
-  peerDependencies:
-    react: ">=16.8"
-    react-dom: ">=16.8"
-  checksum: 77603a654f8a8dc7f65535a2e5917a65f8d9ffcb06546d28dd297e52adcc4b8a84377e0115f48dca330b080af2da3e78f29d590c89307094d36927d2b1751ec3
-  languageName: node
-  linkType: hard
-
-"react-router-dom@npm:^6.1.0":
+"react-router-dom@npm:6.11.0, react-router-dom@npm:^6.1.0":
   version: 6.11.0
   resolution: "react-router-dom@npm:6.11.0"
   dependencies:
@@ -20639,17 +20576,6 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: c27d64b074da711d59a94d7b64fe82360da8a49077a5e8326c27e9fb48a7650080f73b5ba3b94d0b11f2d7e315255fabc3bad818cd26d1cec3a52220ad9d64cd
-  languageName: node
-  linkType: hard
-
-"react-router@npm:6.3.0":
-  version: 6.3.0
-  resolution: "react-router@npm:6.3.0"
-  dependencies:
-    history: ^5.2.0
-  peerDependencies:
-    react: ">=16.8"
-  checksum: 7be673f5e72104be01e6ab274516bdb932efd93305243170690f6560e3bd1035dd1df3d3c9ce1e0f452638a2529f43a1e77dcf0934fc8031c4783da657be13ca
   languageName: node
   linkType: hard
 
@@ -20784,22 +20710,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-transition-group@npm:4.4.2":
-  version: 4.4.2
-  resolution: "react-transition-group@npm:4.4.2"
-  dependencies:
-    "@babel/runtime": ^7.5.5
-    dom-helpers: ^5.0.1
-    loose-envify: ^1.4.0
-    prop-types: ^15.6.2
-  peerDependencies:
-    react: ">=16.6.0"
-    react-dom: ">=16.6.0"
-  checksum: b67bf5b3e86dbab72d658b9a52a3589e5960583ab28c7c66272427d8fe30d4c7de422d5046ae96bd2683cdf80cc3264b2516f5ce80cae1dbe6cf3ca6dda392c5
-  languageName: node
-  linkType: hard
-
-"react-transition-group@npm:^4.4.1, react-transition-group@npm:^4.4.5":
+"react-transition-group@npm:4.4.5, react-transition-group@npm:^4.4.1, react-transition-group@npm:^4.4.5":
   version: 4.4.5
   resolution: "react-transition-group@npm:4.4.5"
   dependencies:
@@ -20837,8 +20748,8 @@ __metadata:
     "@types/jest": 28.1.8
     "@types/jsonwebtoken": 8.5.9
     "@types/node": 18.16.3
-    "@types/react": 18.0.14
-    "@types/react-dom": 18.0.5
+    "@types/react": 18.2.0
+    "@types/react-dom": 18.2.1
     "@types/validator": 13.7.15
     apollo-upload-client: 17.0.0
     graphql: 16.5.0
@@ -20846,12 +20757,12 @@ __metadata:
     jwt-decode: 3.1.2
     prettier: 2.8.8
     ra-data-graphql-simple: 4.2.0
-    ra-input-rich-text: 4.9.4
-    ra-ui-materialui: 4.9.4
+    ra-input-rich-text: 4.10.1
+    ra-ui-materialui: 4.10.1
     react: 18.2.0
     react-admin: 4.9.4
     react-dom: 18.2.0
-    react-image-crop: 10.0.4
+    react-image-crop: 10.0.9
     react-scripts: 5.0.1
     slugify: 1.6.6
     typescript: 4.9.5
@@ -24284,11 +24195,11 @@ __metadata:
     "@types/prop-types": 15.7.5
     "@types/qs": 6.9.7
     "@types/ramda": 0.28.25
-    "@types/react": 18.0.14
+    "@types/react": 18.2.0
     "@types/react-dev-utils": 9.0.11
-    "@types/react-dom": 18.0.5
-    "@types/react-helmet": 6.1.5
-    "@types/react-slick": 0.23.9
+    "@types/react-dom": 18.2.1
+    "@types/react-helmet": 6.1.6
+    "@types/react-slick": 0.23.10
     "@types/react-test-renderer": 18.0.0
     "@types/react-transition-group": 4.4.5
     "@types/recompose": 0.30.10
@@ -24328,12 +24239,12 @@ __metadata:
     react-dom: 18.2.0
     react-helmet: 6.1.0
     react-helmet-async: 1.3.0
-    react-router: 6.3.0
-    react-router-dom: 6.3.0
+    react-router: 6.11.0
+    react-router-dom: 6.11.0
     react-scripts: 5.0.1
     react-slick: 0.29.0
     react-test-renderer: 18.2.0
-    react-transition-group: 4.4.2
+    react-transition-group: 4.4.5
     recompose: 0.30.0
     resolve: 1.22.3
     selenium-webdriver: 4.9.0
