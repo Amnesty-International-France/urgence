@@ -4563,14 +4563,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express-serve-static-core@npm:4.17.29":
-  version: 4.17.29
-  resolution: "@types/express-serve-static-core@npm:4.17.29"
+"@types/express-serve-static-core@npm:4.17.31":
+  version: 4.17.31
+  resolution: "@types/express-serve-static-core@npm:4.17.31"
   dependencies:
     "@types/node": "*"
     "@types/qs": "*"
     "@types/range-parser": "*"
-  checksum: ec4194dc59276ec6dd906887fc377be0cadf4aaa4d535d9052ab9624937ef2b984a8d9da2c11c96979e21f3d9f78f1da93e767dbcec637f7f13d2e3003151145
+  checksum: 009bfbe1070837454a1056aa710d0390ee5fb8c05dfe5a1691cc3e2ca88dc256f80e1ca27cb51a978681631d2f6431bfc9ec352ea46dd0c6eb183d0170bde5df
   languageName: node
   linkType: hard
 
@@ -4586,15 +4586,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:4.17.13":
-  version: 4.17.13
-  resolution: "@types/express@npm:4.17.13"
+"@types/express@npm:4.17.14":
+  version: 4.17.14
+  resolution: "@types/express@npm:4.17.14"
   dependencies:
     "@types/body-parser": "*"
     "@types/express-serve-static-core": ^4.17.18
     "@types/qs": "*"
     "@types/serve-static": "*"
-  checksum: 12a2a0e6c4b993fc0854bec665906788aea0d8ee4392389d7a98a5de1eefdd33c9e1e40a91f3afd274011119c506f7b4126acb97fae62ae20b654974d44cba12
+  checksum: 15c1af46d02de834e4a225eccaa9d85c0370fdbb3ed4e1bc2d323d24872309961542b993ae236335aeb3e278630224a6ea002078d39e651d78a3b0356b1eaa79
   languageName: node
   linkType: hard
 
@@ -6152,7 +6152,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"apollo-server-core@npm:^3.9.0":
+"apollo-server-core@npm:^3.12.0":
   version: 3.12.0
   resolution: "apollo-server-core@npm:3.12.0"
   dependencies:
@@ -6203,25 +6203,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"apollo-server-express@npm:3.9.0":
-  version: 3.9.0
-  resolution: "apollo-server-express@npm:3.9.0"
+"apollo-server-express@npm:3.12.0":
+  version: 3.12.0
+  resolution: "apollo-server-express@npm:3.12.0"
   dependencies:
     "@types/accepts": ^1.3.5
     "@types/body-parser": 1.19.2
     "@types/cors": 2.8.12
-    "@types/express": 4.17.13
-    "@types/express-serve-static-core": 4.17.29
+    "@types/express": 4.17.14
+    "@types/express-serve-static-core": 4.17.31
     accepts: ^1.3.5
-    apollo-server-core: ^3.9.0
-    apollo-server-types: ^3.6.1
+    apollo-server-core: ^3.12.0
+    apollo-server-types: ^3.8.0
     body-parser: ^1.19.0
     cors: ^2.8.5
     parseurl: ^1.3.3
   peerDependencies:
     express: ^4.17.1
     graphql: ^15.3.0 || ^16.0.0
-  checksum: 04219816fe72e0852281765766e12393161e514c2b11f2b001dd53a3f238998477511d06229988c7804dcd073eda0702bf9f2c72b555f530d32722cbf56fb687
+  checksum: bd4bc213f506e2aeb2be961961de51e431f8774344b349e9b02f475714a623703eb62423ad968a8f8b6859919ae0d1912c40cf15a4df24e6f81b4f4c5653e70b
   languageName: node
   linkType: hard
 
@@ -6236,7 +6236,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"apollo-server-types@npm:^3.6.1, apollo-server-types@npm:^3.8.0":
+"apollo-server-types@npm:^3.8.0":
   version: 3.8.0
   resolution: "apollo-server-types@npm:3.8.0"
   dependencies:
@@ -20751,7 +20751,7 @@ __metadata:
     "@types/sinonjs__fake-timers": 8.1.2
     "@types/supertest": 2.0.12
     "@types/validator": 13.7.15
-    apollo-server-express: 3.9.0
+    apollo-server-express: 3.12.0
     babel-watch: 7.7.2
     convict: 6.2.4
     cors: 2.8.5
