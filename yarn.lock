@@ -20069,7 +20069,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ra-core@npm:^4.10.1, ra-core@npm:^4.9.3":
+"ra-core@npm:^4.10.1":
   version: 4.10.1
   resolution: "ra-core@npm:4.10.1"
   dependencies:
@@ -20124,7 +20124,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ra-i18n-polyglot@npm:^4.9.3":
+"ra-i18n-polyglot@npm:^4.10.1":
   version: 4.10.1
   resolution: "ra-i18n-polyglot@npm:4.10.1"
   dependencies:
@@ -20162,7 +20162,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ra-language-english@npm:^4.9.3":
+"ra-language-english@npm:^4.10.1":
   version: 4.10.1
   resolution: "ra-language-english@npm:4.10.1"
   dependencies:
@@ -20171,7 +20171,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ra-ui-materialui@npm:4.10.1, ra-ui-materialui@npm:^4.9.4":
+"ra-ui-materialui@npm:^4.10.1":
   version: 4.10.1
   resolution: "ra-ui-materialui@npm:4.10.1"
   dependencies:
@@ -20306,26 +20306,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-admin@npm:4.9.4":
-  version: 4.9.4
-  resolution: "react-admin@npm:4.9.4"
+"react-admin@npm:4.10.1":
+  version: 4.10.1
+  resolution: "react-admin@npm:4.10.1"
   dependencies:
     "@emotion/react": ^11.4.1
     "@emotion/styled": ^11.3.0
     "@mui/icons-material": ^5.0.1
     "@mui/material": ^5.0.2
     history: ^5.1.0
-    ra-core: ^4.9.3
-    ra-i18n-polyglot: ^4.9.3
-    ra-language-english: ^4.9.3
-    ra-ui-materialui: ^4.9.4
+    ra-core: ^4.10.1
+    ra-i18n-polyglot: ^4.10.1
+    ra-language-english: ^4.10.1
+    ra-ui-materialui: ^4.10.1
     react-hook-form: ^7.40.0
     react-router: ^6.1.0
     react-router-dom: ^6.1.0
   peerDependencies:
     react: ^16.9.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0
-  checksum: 35806b929a8b61b4a7dbad13fc7afbf0aafef1e183ec697f3f202d0ca80ac6a20db173c2a3e895cd45d30724cc68f9dd6bc0c953c54554f8bd7a19480a4e88cb
+  checksum: fa53f428551bb185a7d4c24e4d534e37d415e6fc3033873ff4ca3efd79639f2134c8583c77c139e93af309d02cbb71bbb1d4212e3f712250a0f9b68ca84fee10
   languageName: node
   linkType: hard
 
@@ -20758,9 +20758,8 @@ __metadata:
     prettier: 2.8.8
     ra-data-graphql-simple: 4.2.0
     ra-input-rich-text: 4.10.1
-    ra-ui-materialui: 4.10.1
     react: 18.2.0
-    react-admin: 4.9.4
+    react-admin: 4.10.1
     react-dom: 18.2.0
     react-image-crop: 10.0.9
     react-scripts: 5.0.1
