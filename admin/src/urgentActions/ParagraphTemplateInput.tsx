@@ -12,7 +12,7 @@ export const ParagraphTemplateInput = ({
     return (
         <TextInput
             source={`${source}.value`}
-            label={false}
+            label="Corps du mail"
             multiline
             fullWidth
             helperText={`${mailtoLength}/2000 We recommend not to exceed for mailTo function.`}

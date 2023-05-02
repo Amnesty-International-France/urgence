@@ -19,9 +19,6 @@ export const MessageSendInput = ({ source }: MessageSendInputProps) => (
         <FormDataConsumer>
             {({ formData }: { formData: FormData }) => {
                 //@ts-ignore
-                const data = formData[source];
-                const hasMessageTemplate =
-                    data && data.message_template && data.message_template.length > 0;
                 const storySteps = formData.story ? formData.story.length : 0;
                 const interpelationMode = formData.call_to_action?.interpelation_mode;
 

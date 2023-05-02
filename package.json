@@ -46,7 +46,6 @@
         "node": "18.15.0"
     },
     "resolutions": {
-        "@apollo/client": "3.6.9",
-        "ra-ui-materialui": "4.2.0"
+        "@apollo/client": "3.6.9"
     }
 }
