@@ -46,6 +46,6 @@
         "node": "18.15.0"
     },
     "resolutions": {
-        "@apollo/client": "3.6.9"
+        "@apollo/client": "3.8.0-alpha.12"
     }
 }

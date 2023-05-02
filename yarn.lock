@@ -42,18 +42,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/client@npm:3.6.9":
-  version: 3.6.9
-  resolution: "@apollo/client@npm:3.6.9"
+"@apollo/client@npm:3.8.0-alpha.12":
+  version: 3.8.0-alpha.12
+  resolution: "@apollo/client@npm:3.8.0-alpha.12"
   dependencies:
     "@graphql-typed-document-node/core": ^3.1.1
-    "@wry/context": ^0.6.0
+    "@wry/context": ^0.7.0
     "@wry/equality": ^0.5.0
     "@wry/trie": ^0.3.0
     graphql-tag: ^2.12.6
     hoist-non-react-statics: ^3.3.2
-    optimism: ^0.16.1
+    optimism: ^0.17.0
     prop-types: ^15.7.2
+    response-iterator: ^0.2.6
     symbol-observable: ^4.0.0
     ts-invariant: ^0.10.3
     tslib: ^2.3.0
@@ -62,15 +63,18 @@ __metadata:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
     graphql-ws: ^5.5.5
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     subscriptions-transport-ws: ^0.9.0 || ^0.11.0
   peerDependenciesMeta:
     graphql-ws:
       optional: true
     react:
       optional: true
+    react-dom:
+      optional: true
     subscriptions-transport-ws:
       optional: true
-  checksum: a3c037ef3465cb5d736d8495c9c2dcb9741e39d9c102f147b479af1923c5913f710981a311d1098b9969ebe87769b749c22274decb5977ad0619032e7ac2cf26
+  checksum: 01becb414da2652b49c2b04b9eec209949db5262025957a851adfd30959b4bbf5bfe682b73ca7edc54edfe0bcb9227378bc3fe8c42a8c5f5c8ac335fb1867413
   languageName: node
   linkType: hard
 
@@ -5649,15 +5653,6 @@ __metadata:
     "@webassemblyjs/ast": 1.11.5
     "@xtuc/long": 4.2.2
   checksum: c2995224c56b403be7fce7afbb3ad6b2ceadce07a47b28bce745eabb0435fa363c0180bca907d28703ece02422d0de219e689253b55de288c79b8f92416c1d71
-  languageName: node
-  linkType: hard
-
-"@wry/context@npm:^0.6.0":
-  version: 0.6.1
-  resolution: "@wry/context@npm:0.6.1"
-  dependencies:
-    tslib: ^2.3.0
-  checksum: 4187863175061a8f54659f124e3e5c202e010b2b65bf886b4de9777ce8a45cf183b6f6d88f1f537002cbcbea52103a2eadc337d494106490def10acaf9522c5d
   languageName: node
   linkType: hard
 
@@ -17774,13 +17769,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"optimism@npm:^0.16.1":
-  version: 0.16.2
-  resolution: "optimism@npm:0.16.2"
+"optimism@npm:^0.17.0":
+  version: 0.17.1
+  resolution: "optimism@npm:0.17.1"
   dependencies:
     "@wry/context": ^0.7.0
     "@wry/trie": ^0.3.0
-  checksum: a98ed9a0b8ee2b031010222099b60860d52860bf8182889f2695a7cf2185f21aca59020f78e2b47c0ae7697843caa576798d792967314ff59f6aa7c5d9de7f3a
+    tslib: ^2.3.0
+  checksum: 15e34e9b1ffef876cdc403cceb3e3dec6728dfd61ebc4538ef4ba92019f756030c433738c4d294a8ccb3b3d5a7a08c7de836d494e9d87876050b96e01ec9b72f
   languageName: node
   linkType: hard
 
@@ -21407,6 +21403,13 @@ __metadata:
   bin:
     resolve: bin/resolve
   checksum: 4bf9f4f8a458607af90518ff73c67a4bc1a38b5a23fef2bb0ccbd45e8be89820a1639b637b0ba377eb2be9eedfb1739a84cde24fe4cd670c8207d8fea922b011
+  languageName: node
+  linkType: hard
+
+"response-iterator@npm:^0.2.6":
+  version: 0.2.6
+  resolution: "response-iterator@npm:0.2.6"
+  checksum: b0db3c0665a0d698d65512951de9623c086b9c84ce015a76076d4bd0bf733779601d0b41f0931d16ae38132fba29e1ce291c1f8e6550fc32daaa2dc3ab4f338d
   languageName: node
   linkType: hard
 
