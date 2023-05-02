@@ -20050,23 +20050,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ra-data-graphql-simple@npm:4.2.0":
-  version: 4.2.0
-  resolution: "ra-data-graphql-simple@npm:4.2.0"
+"ra-data-graphql-simple@npm:4.10.1":
+  version: 4.10.1
+  resolution: "ra-data-graphql-simple@npm:4.10.1"
   dependencies:
     "@apollo/client": ^3.3.19
     graphql-ast-types-browser: ~1.0.2
     lodash: ~4.17.5
     pluralize: ~7.0.0
-    ra-data-graphql: ^4.2.0
+    ra-data-graphql: ^4.10.1
   peerDependencies:
     graphql: ^15.6.0
     ra-core: ^4.0.0
-  checksum: 9eb69a9ba605898e0725649ae19a808bfe04245f644da09c8b225463dcfa61350eac82c88af5ab30308728c4ecd49ab2fe5bed51e761fbfc02d8f5979d7326f1
+  checksum: 84d45e5c87f555d939906a8e92ab579bd2d40e45d4d8d3113f60ff189e6d5f4df01c048b4582d197a6c37657e4b52dac0f4be7ae49c9de225d3c26b0ed2c0fb9
   languageName: node
   linkType: hard
 
-"ra-data-graphql@npm:^4.2.0":
+"ra-data-graphql@npm:^4.10.1":
   version: 4.10.1
   resolution: "ra-data-graphql@npm:4.10.1"
   dependencies:
@@ -20712,7 +20712,7 @@ __metadata:
     jsonwebtoken: 8.5.1
     jwt-decode: 3.1.2
     prettier: 2.8.8
-    ra-data-graphql-simple: 4.2.0
+    ra-data-graphql-simple: 4.10.1
     ra-input-rich-text: 4.10.1
     react: 18.2.0
     react-admin: 4.10.1
