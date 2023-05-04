@@ -6,8 +6,8 @@ import { Component } from 'react';
 import withRouter from '../withRouter';
 import { styles } from './Link';
 
-export const buildMailDest = (recipient: any, subject: any, body: any) => {
-    const mail = recipient.mail || 'example@mail.com';
+export const buildMailDest = (recipient: Recipient, subject: any, body: any) => {
+    const mail = recipient.mail || 'example@mail.test';
     return `mailto:${encodeURIComponent(mail)}?subject=${encodeURIComponent(
         subject,
     )}&body=${encodeURIComponent(body)}`
@@ -15,8 +15,8 @@ export const buildMailDest = (recipient: any, subject: any, body: any) => {
         .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '');
 };
 
-export const buildMailDestWithoutBody = (recipient: any, subject: any) => {
-    const mail = recipient.mail || 'example@mail.com';
+export const buildMailDestWithoutBody = (recipient: Recipient, subject: string) => {
+    const mail = recipient.mail || 'example@mail.test';
     return `mailto:${encodeURIComponent(mail)}?subject=${encodeURIComponent(
         subject,
     )}`
@@ -33,6 +33,12 @@ export const copy = (textToCopy: any) => {
     textField.remove();
 };
 
+type Recipient = {
+    mail: string;
+    copies_to?: string;
+    cci?: string;
+};
+
 type Props = {
     className: string;
     afterMail: (...args: any[]) => any;
@@ -40,11 +46,7 @@ type Props = {
     body: string;
     label: string;
     disabled?: boolean;
-    recipient: {
-        mail: string;
-        copies_to?: string;
-        cci?: string;
-    };
+    recipient: Recipient;
     analyticsCategory?: string;
     step?: string;
     params?: any;
@@ -60,7 +62,7 @@ export class MailTo extends Component<Props> {
 
     render() {
         const {
-            recipient = {},
+            recipient,
             subject,
             body,
             label,
@@ -89,7 +91,7 @@ export class MailTo extends Component<Props> {
                             window.open(dest, 'mailto');
                         }
                     }
-                    setTimeout(() => afterMail(event, navigator.platform == 'Win32' && window.document.hasFocus()), 500);
+                    setTimeout(() => afterMail(event, navigator.platform === 'Win32' && window.document.hasFocus()), 500);
                 }}
                 target={isIphone ? 'mailto' : '_self'}
                 rel="noopener noreferrer"
