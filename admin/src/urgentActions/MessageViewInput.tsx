@@ -1,13 +1,11 @@
 import Box from '@mui/material/Box';
 import { RichTextInput } from 'ra-input-rich-text';
 import {
-    ArrayInput,
     FormDataConsumer,
     Labeled,
     maxLength,
     minLength,
     required,
-    SimpleFormIterator,
     TextInput,
 } from 'react-admin';
 import isEmail from 'validator/lib/isEmail';
@@ -55,8 +53,6 @@ export const MessageViewInput = ({ source }: MessageViewInputProps) => {
                 {({ formData }: { formData: FormData }) => {
                     //@ts-ignore
                     const data = formData[source];
-                    const hasMessageTemplate =
-                        data && data.message_template && data.message_template.length > 0;
                     const mailto = getMailtoLink(data);
                     const storySteps = formData.story ? formData.story.length : 0;
                     const interpelationMode = formData.call_to_action?.interpelation_mode;
@@ -104,25 +100,10 @@ export const MessageViewInput = ({ source }: MessageViewInputProps) => {
                                             defaultValue="Voici un modèle de message que nous vous proposons d'envoyer. Vous pourrez bien sûr le personnaliser depuis votre boite mail."
                                         />
 
-                                        <ArrayInput
-                                            label="Corps du mail"
-                                            source={`${source}.message_template`}
-                                            sx={{
-                                                '& .RaSimpleFormIterator-indexContainer': {
-                                                    display: 'none',
-                                                },
-                                            }}
-                                        >
-                                            <SimpleFormIterator
-                                                disableAdd={hasMessageTemplate}
-                                                disableRemove
-                                                disableReordering
-                                            >
-                                                <ParagraphTemplateInput
-                                                    mailtoLength={mailto.length}
-                                                />
-                                            </SimpleFormIterator>
-                                        </ArrayInput>
+                                        <ParagraphTemplateInput
+                                            source={`${source}.message_template[0]`}
+                                            mailtoLength={mailto.length}
+                                        />
                                     </>
                                 </Labeled>
                                 <Labeled label="Tester l'ouverture du lien mailto">

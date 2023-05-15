@@ -26,12 +26,28 @@ describe('admin action form', () => {
       .type('au-webtest-titre');
     // cy.contains('Message View').parent().contains('Add').click();
     // cy.contains('16/2000 We recommend not to exceed for mailTo function.');
+    // cy.get('[name="message.recipient.mail"]').type('test@test.test');
+
+    cy.get('[name="message.message_template[0].value"]')
+    .scrollIntoView()
+    .type('Corps du mail');
+
+    cy.contains('label', 'Mail To')
+    .invoke('attr', 'for')
+    .then((id) => {
+      // note that the last Cypress command inside the `cy.then`
+      // changes the yielded subject to its result
+      cy.get('[name="' + id + '"]')
+    })
+    .scrollIntoView()
+    .type('test@test.test');
     cy.get('[aria-label=Save]').scrollIntoView().click();
     cy.contains('Element created');
     cy.contains('Urgent actions').click();
     cy.contains('AU_WEBTEST').parent().parent().children().first().click();
     cy.contains('Delete').click({force: true});
     cy.contains('Element deleted');
+    cy.wait(6000);
     cy.get('body').should('not.contain', 'AU_WEBTEST');
   })
 
