@@ -22,7 +22,7 @@ const DesktopAlert = () => {
         if (url.includes('/story/0')) {
             setShow(true);
         }
-    });
+    }, []);
 
     return (
         <Query query={query}>

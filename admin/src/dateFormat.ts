@@ -1,4 +1,4 @@
-const dateFormat = {
+const dateFormat: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
