@@ -6,7 +6,6 @@ import { Fragment } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 
 import { useParams } from 'react-router';
-import ANALYTICS_CATEGORIES from '../analytics/categories';
 import { DataProvider } from '../DataContext';
 import SEO from '../SEO';
 import generateUrl from '../services/generateUrl';
@@ -184,13 +183,11 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
                 objectExample={objectExample}
                 messageTemplate={messageTemplate}
                 step={step}
-                analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
                     <ToMessageSendButton
                         label={buttonView}
                         step={step}
                         pageName="message-send"
-                        analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                         objectExample={objectExample}
                         buttonName="OpenMessageSend"
                     />
@@ -213,14 +210,12 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
                 messageTemplate={messageTemplate}
                 gdprMessage={gdprMessage}
                 step={step}
-                analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                 action={
                     <SendMail // @ts-ignore
                         label={buttonSend}
                         step={step}
                         recipient={recipient}
                         messageTemplate={messageTemplate}
-                        analyticsCategory={ANALYTICS_CATEGORIES.MESSAGE}
                         auId={id}
                         afterMail={({ registered }: any) =>
                             navigate(generateUrl(registered ? 'share' : 'register', { slug }))
@@ -239,7 +234,6 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
                 slug={slug}
                 step={step}
                 data={emailThank}
-                analyticsCategory={ANALYTICS_CATEGORIES.SHARE}
             />
         );
     }
@@ -252,14 +246,12 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
                 step={step}
                 data={register}
                 gdprRegister={get(data, 'GdprRegister.content')}
-                analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                 action={(disabled: any, formValues: any) => (
                     <RegisterButton
                         auId={get(data, 'UrgentAction.id')}
                         step={step}
                         disabled={disabled}
                         buttonText={get(register, 'button')}
-                        analyticsCategory={ANALYTICS_CATEGORIES.REGISTER}
                         formValues={formValues}
                     />
                 )}
@@ -277,7 +269,6 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
                 slug={slug}
                 step={step}
                 dataShare={emailThank}
-                analyticsCategory={ANALYTICS_CATEGORIES.SHARE}
             />
         );
     }
@@ -294,36 +285,36 @@ const StepperContainer = styled('div')({
 
 export const renderUrgentActionWithData =
     (slug: any, step: any, page: any) =>
-    ({
-        /* eslint-disable react/prop-types */
-        data,
+        ({
+            /* eslint-disable react/prop-types */
+            data,
 
-        error,
+            error,
 
-        loading,
-    }: /* eslint-enable react/prop-types */
-    any) => {
-        if (error) {
-            console.error(error);
-            return <Navigate to={generateUrl('error')} />;
-        }
+            loading,
+        }: /* eslint-enable react/prop-types */
+            any) => {
+            if (error) {
+                console.error(error);
+                return <Navigate to={generateUrl('error')} />;
+            }
 
-        if (loading) {
-            return <LoadingScreen />;
-        }
+            if (loading) {
+                return <LoadingScreen />;
+            }
 
-        const socialMetadata = get(data, 'UrgentAction.social_metadata');
+            const socialMetadata = get(data, 'UrgentAction.social_metadata');
 
-        return (
-            <Fragment>
-                <StepperContainer>
-                    <Stepper data={data} step={step} page={page} />
-                </StepperContainer>
-                {socialMetadata && <SEO socialMetadata={socialMetadata} />}
-                <UrgentAction slug={slug} step={step} data={data} />
-            </Fragment>
-        );
-    };
+            return (
+                <Fragment>
+                    <StepperContainer>
+                        <Stepper data={data} step={step} page={page} />
+                    </StepperContainer>
+                    {socialMetadata && <SEO socialMetadata={socialMetadata} />}
+                    <UrgentAction slug={slug} step={step} data={data} />
+                </Fragment>
+            );
+        };
 
 export const UrgentActionWithData = () => {
     const { slug, step, page } = useParams();

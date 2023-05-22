@@ -1,0 +1,55 @@
+baseURL = "http://localhost:1500"
+languageCode = 'fr'
+defaultContentLanguage = 'fr'
+title = "Actions Urgentes - Amnesty France"
+
+pygmentsCodeFences = true
+pygmentsCodefencesGuessSyntax = true
+pygmentsUseClasses = true
+
+[outputFormats.SearchIndex]
+baseName = "search"
+mediaType = "application/json"
+
+[outputs]
+home = [ "HTML", "SearchIndex" ]
+
+# Controls how many words are printed in the content summary on the docs homepage.
+# See https://gohugo.io/content-management/summaries/
+summaryLength = 50
+
+[[menu.main]]
+    name = "Accueil"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "Documentation"
+    url = "/docs/"
+    weight = 2
+
+[[menu.main]]
+    name = "Exploitation"
+    url = "/exploitation/"
+    weight = 3
+
+[[menu.main]]
+    name = "ADRs"
+    url = "/adrs/"
+    weight = 4
+
+[[menu.main]]
+    name = "Recherche"
+    url = "/recherche/"
+    weight = 5
+
+[params]
+  homepage_button_link = '/docs/vue-d-ensemble-du-projet'
+  homepage_button_text = "Vue d'ensemble du projet"
+  mainSections = ['docs', 'exploitation', 'adrs', 'recherche']
+  footer_link_url = 'https://www.amnesty.fr'
+  footer_link_title = 'Amnesty France'
+
+  [params.logo]
+      mobile = "/images/logo.jpg"
+      standard  = "/images/logo.jpg"

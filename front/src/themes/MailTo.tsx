@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import classnames from 'classnames';
 import MobileDetect from 'mobile-detect';
 import { Component } from 'react';
-import trackEvent from '../analytics/trackEvent';
 import withRouter from '../withRouter';
 import { styles } from './Link';
 
@@ -41,20 +40,6 @@ export class MailTo extends Component<Props> {
         this.md = new MobileDetect(navigator.userAgent);
     }
 
-    componentDidMount() {
-        const {
-            label,
-            disabled,
-            analyticsCategory,
-            step,
-            params: { slug },
-        } = this.props;
-        trackEvent(analyticsCategory, 'Display', 'button', 'SendMail', slug, step, {
-            disabled: disabled ? 'disabled' : 'active',
-            label,
-        });
-    }
-
     openMailer = (dest: any) => {
         console.log('window', window);
         console.log('dest', dest);
@@ -78,9 +63,6 @@ export class MailTo extends Component<Props> {
             disabled,
             afterMail,
             className,
-            analyticsCategory,
-            step,
-            params: { slug },
         } = this.props;
 
         const dest = buildMailDest(recipient, subject, body);
@@ -97,10 +79,6 @@ export class MailTo extends Component<Props> {
                         this.openMailer(dest);
                     }
                     setTimeout(() => afterMail(event), 500);
-                    trackEvent(analyticsCategory, 'Click', 'button', 'SendMail', slug, step, {
-                        disabled: disabled ? 'disabled' : 'active',
-                        label,
-                    });
                 }}
                 target={isIphone ? 'mailto' : '_self'}
                 rel="noopener noreferrer"

@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import classnames from 'classnames';
 import React, { Component } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import trackEvent from '../analytics/trackEvent';
 import withRouter from '../withRouter';
 import { black, darkGrey, grey, white } from 'amnesty-components';
 
@@ -68,14 +67,6 @@ export class Link extends Component<Props> {
         whiteLink: false,
     };
 
-    componentDidMount() {
-        const { label, disabled, analyticsCategory, buttonName, step, params } = this.props;
-        trackEvent(analyticsCategory, 'Display', 'button', buttonName, params.slug, step, {
-            disabled: disabled ? 'disabled' : 'active',
-            label,
-        });
-    }
-
     render() {
         const {
             to,
@@ -83,10 +74,6 @@ export class Link extends Component<Props> {
             disabled,
             className,
             onClick,
-            analyticsCategory,
-            buttonName,
-            step,
-            params: { slug },
             whiteLink,
         } = this.props;
 
@@ -96,10 +83,6 @@ export class Link extends Component<Props> {
                 className={classnames(className, { disabled: disabled, white: whiteLink })}
                 onClick={(event) => {
                     if (onClick) onClick(event);
-                    trackEvent(analyticsCategory, 'Click', 'button', buttonName, slug, step, {
-                        disabled: disabled ? 'disabled' : 'active',
-                        label,
-                    });
                 }}
             >
                 {label}

@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { Component } from 'react';
 import { compose } from 'recompose';
-import ANALYTICS_CATEGORIES from '../../analytics/categories';
 import Act from '../Act';
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
 
@@ -137,7 +136,6 @@ export class Story extends Component<StoryProps> {
                                                     label={callToAction.button}
                                                     step="act"
                                                     pageName="message-view"
-                                                    analyticsCategory={ANALYTICS_CATEGORIES.ACT}
                                                     buttonName="OpenMessageView"
                                                 />
                                             ) : null

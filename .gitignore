@@ -28,13 +28,14 @@ build/
 
 .env
 
+cypress/videos
+
 ## Api
 /api/dist/
 /api/.pm2
 
 ## Front
 /front/build
-/front/storybook-static
 /front/.expo
 
 ## Admin

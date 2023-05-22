@@ -1,5 +1,5 @@
-export UID=$(id -u)
-export GID=$(id -g)
+export UID=$(shell id -u)
+export GID=$(shell id -g)
 
 default: help
 
@@ -8,15 +8,15 @@ help: ## SOS? Usage make help (default).
 
 #### STARTING ###
 
-DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
-DOCKER_COMPOSE_INSTALL = docker-compose -p reaction-rapide -f docker-compose.install.yml
-DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
-DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
+DOCKER_COMPOSE = docker compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
+DOCKER_COMPOSE_INSTALL = docker compose -p reaction-rapide -f docker-compose.install.yml
+DOCKER_COMPOSE_TEST = docker compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
+DOCKER_COMPOSE_E2E = docker compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
 
 install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install yarn
 
-install-production: ## Install all dependencies in production mode. Usage `make install-prod`.
+install-production: ## Install all dependencies in production mode. Usage `make install-production`.
 	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install bash -c "yarn workspaces focus --production reaction-rapide-api"
 
 start: ## Start the project with docker. Usage `make start`.
@@ -124,3 +124,24 @@ clean: # Clean the build folder and stop all docker. Usage `make clean`.
 	rm -rf admin/build/
 	rm -rf front/build/
 	rm -rf amnesty-components/dist/
+
+#---------------
+# Documentation
+#---------------
+doc-logs: ## View doc site logs
+	@$(DOCKER_COMPOSE) logs -f documentation
+
+doc-connect: ## Connection to the documentation container
+	@$(DOCKER_COMPOSE) exec documentation bash
+
+doc-new-adr: ## Create a new ADR
+	@$(DOCKER_COMPOSE) run --rm --no-deps documentation bash -ci '\
+		cd /documentation && ./new-adr.sh'
+
+doc-new-doc: ## Create a new document
+	@$(DOCKER_COMPOSE) run --rm --no-deps documentation bash -ci '\
+		cd /documentation && ./new-docs.sh'
+
+doc-generate: ## Génération des fichier statique de documentation
+	@$(DOCKER_COMPOSE) run --rm --no-deps documentation bash -ci '\
+		cd /documentation && hugo'

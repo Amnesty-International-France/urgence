@@ -1,44 +1,21 @@
-import React, { useEffect, useState } from 'react';
-
 import { TextInput } from 'react-admin';
 
 type ParagraphTemplateInputProps = {
     source?: string;
-    headerCount: number;
-    limit: number;
-    dataMessageTemplate: {
-        value: string;
-    }[];
+    mailtoLength: number;
 };
 
 export const ParagraphTemplateInput = ({
     source,
-    headerCount,
-    limit,
-    dataMessageTemplate,
+    mailtoLength,
 }: ParagraphTemplateInputProps) => {
-    const [mailToLength, setMailToLength] = useState(0);
-
-    useEffect(() => {
-        if (!dataMessageTemplate || !dataMessageTemplate[0] || !dataMessageTemplate[0].value) {
-            return;
-        }
-        const messageLength = dataMessageTemplate[0].value.length;
-        setMailToLength(messageLength + headerCount);
-    }, [headerCount, dataMessageTemplate]);
-
-    const updateMailToLenght = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const messageLength = event.target.value.length;
-        setMailToLength(messageLength + headerCount);
-    };
     return (
         <TextInput
             source={`${source}.value`}
-            label={false}
+            label="Corps du mail"
             multiline
             fullWidth
-            helperText={`${mailToLength}/${limit} We recommend not to exceed for mailTo function.`}
-            onChange={updateMailToLenght}
+            helperText={`${mailtoLength}/2000 We recommend not to exceed for mailTo function.`}
         />
     );
 };

@@ -21,13 +21,6 @@ services:
         ports:
             - '5000:5000'
 
-    maildev:
-        image: djfarrelly/maildev
-        expose:
-            - '25'
-        ports:
-            - '1080:80'
-
     api:
         user: '${UID}:${GID}'
         command: 'yarn run start-dev'
@@ -35,10 +28,6 @@ services:
             - ADMIN_USERNAME=admin
             - ADMIN_PASSWORD=password
             - JWT_SECRET_KEY=foobarS3CR3T!
-            - SMTP_HOST=maildev
-            - SMTP_PORT=25
-            - SMTP_IGNORE_TLS=true
-            - SMTP_USER=
             - API_PREFIX_URL=
             - PM2_HOME=.pm2
             - SF_BASE_URL
@@ -55,7 +44,6 @@ services:
     db:
         volumes:
             - amnesty-postgres-data:/var/lib/postgresql/data
-        user: '${UID}:${GID}'
         environment:
             - POSTGRES_USER=amnesty
             - POSTGRES_PASSWORD=amnesty
@@ -73,19 +61,6 @@ services:
             - .:/app
         working_dir: /app/amnesty-components
 
-    storybook:
-        image: node:12
-        user: '${UID}:${GID}'
-        command: 'yarn run storybook'
-        working_dir: /app
-        volumes:
-            - './front:/app'
-            - '/tmp:/tmp'
-        environment:
-            - NODE_ENV=development
-        ports:
-            - '9009:9009'
-
     front:
         image: node:18
         user: '${UID}:${GID}'
@@ -100,8 +75,6 @@ services:
         environment:
             - HOME=/tmp
             - REACT_APP_API_URL=http://localhost:4000
-            - REACT_APP_GA=UA-136476291-2
-            - REACT_APP_FB=2385476921667035
             - NODE_ENV=development
         ports:
             - '3000:3000'
@@ -113,5 +86,18 @@ services:
         volumes:
             - ./var/uploads:/usr/share/nginx/html
         command: [sh, -c, "chmod -R o+X /app; nginx -g 'daemon off;'"]
+
+    documentation:
+        image: ghcr.io/incaya/incaya-documentation:latest
+        environment:
+            - HUGO_PORT=1500
+        volumes:
+            - ./documentation:/documentation/content:rw
+            - ./logo.jpg:/documentation/static/images/logo.jpg
+            - ./hugo-config.toml:/documentation/config.toml
+        user: '${UID}:${GID}'
+        ports:
+            - 1500:1500
+            - 1501:3000
 volumes:
     amnesty-postgres-data: {}
