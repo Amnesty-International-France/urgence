@@ -82,7 +82,7 @@ build_static_prod:
     REACT_APP_FRONT_BASE_URL: https://urgent.amnesty.fr
     UPLOAD_URL: https://rapide.amnesty.fr/api/static
   rules:
-    - if: $CI_COMMIT_TAG && $CI_COMMIT_BRANCH == "master"
+    - if: $CI_COMMIT_TAG
 
 ##### Deploy #####
 deploy_api_release:
@@ -117,7 +117,7 @@ deploy_api_prod:
   variables:
     APP_ID: app_34694fec-6a00-4c07-a001-6dac13102615
   rules:
-    - if: $CI_COMMIT_TAG && $CI_COMMIT_BRANCH == "master"
+    - if: $CI_COMMIT_TAG
   environment:
     name: prod_api
     url: https://rapide.amnesty.fr
@@ -160,7 +160,7 @@ upload_static_content_prod:
     rclone config create remote ftp host ${PROD_FTP_HOST} user ${PROD_FTP_USER} pass ${PROD_FTP_PASSWORD}
     rclone sync -v ${PWD}/${DIRECTORY} remote:
   rules:
-    - if: $CI_COMMIT_TAG && $CI_COMMIT_BRANCH == "master"
+    - if: $CI_COMMIT_TAG
   environment:
     name: prod_static
     url: https://urgent.amnesty.fr
