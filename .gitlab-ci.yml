@@ -129,10 +129,6 @@ deploy_api_prod:
   before_script:
     - apk update && apk add --no-cache rclone
     - ls -lh ${PWD}/${DIRECTORY}
-  # source: https://gitlab.com/stavros/neocities-gitlab-ci-demo/-/blob/41cf6bb4a58cfe50a68d51873f8e6fd0d5780fd0/.gitlab-ci.yml
-  script: |
-    rclone config create remote ftp host ${FTP_HOST} user ${FTP_USER} pass ${FTP_PASSWORD}
-    rclone sync -v ${PWD}/${DIRECTORY} remote:
 
 upload_static_content_release:
   <<: *upload
@@ -159,6 +155,10 @@ upload_static_content_prod:
   needs: ['build_static_prod']
   variables:
     DIRECTORY: 'dist/'
+  # source: https://gitlab.com/stavros/neocities-gitlab-ci-demo/-/blob/41cf6bb4a58cfe50a68d51873f8e6fd0d5780fd0/.gitlab-ci.yml
+  script: |
+    rclone config create remote ftp host ${PROD_FTP_HOST} user ${PROD_FTP_USER} pass ${PROD_FTP_PASSWORD}
+    rclone sync -v ${PWD}/${DIRECTORY} remote:
   rules:
     - if: $CI_COMMIT_TAG && $CI_COMMIT_BRANCH == "master"
   environment:
