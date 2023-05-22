@@ -28,16 +28,11 @@ const getMailtoLink = (data: any) => {
     if (!data) {
         return `mailto:?subject=&body=`;
     }
-    return `mailto:${encodeURIComponent(
-        data.recipient && data.recipient.mail ? data.recipient.mail : '',
-    )}?subject=${encodeURIComponent(data.object_example)}`
-        .concat(data.message_template && data.message_template[0] && data.message_template[0].value ? `&body=${encodeURIComponent(data.message_template[0].value)}` : '')
-        .concat(
-            data.recipient && data.recipient.copies_to
-                ? `&cc=${encodeURIComponent(data.recipient.copies_to)}`
-                : '',
-        )
-        .concat(data.recipient && data.recipient.cci ? `&bcc=${encodeURIComponent(data.recipient.cci)}` : '');
+    return `mailto:${data.recipient && data.recipient.mail ? encodeURIComponent(data.recipient.mail) : ''}
+        ?subject=${data.object_example ? encodeURIComponent(data.object_example) : ''}
+        &body=${data.message_template && data.message_template[0] && data.message_template[0].value ? encodeURIComponent(data.message_template[0].value) : ''}
+        ${data.recipient && data.recipient.copies_to ? '&cc=' + encodeURIComponent(data.recipient.copies_to) : ''}
+        ${data.recipient && data.recipient.cci ? '&bcc=' + encodeURIComponent(data.recipient.cci) : ''}`;
 };
 
 export const MessageViewInput = ({ source }: MessageViewInputProps) => {

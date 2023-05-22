@@ -237,9 +237,7 @@ export const register = async (
         body: JSON.stringify({
             Actions_urgentes_via_le_smartphone__c: true,
             Salutation: salesForcecivility,
-            LastName: lastname
-
-,
+            LastName: lastname,
             FirstName: firstname,
             EMAIL: email,
             MobilePhone: phone,
