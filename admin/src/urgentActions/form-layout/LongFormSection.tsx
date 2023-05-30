@@ -61,6 +61,6 @@ const Root = styled('section', {
     [`& .${RaLongFormSection.stack}`]: {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
-        width: 'fit-content',
+        width: '100%',
     },
 }));
