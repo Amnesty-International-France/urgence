@@ -2,7 +2,6 @@ import get from 'lodash.get';
 import { compose } from 'recompose';
 
 import { withSessionData } from '../../DataContext';
-import { isCorrectEmail } from '../../themes/Input';
 import MailTo from '../../themes/MailTo';
 import { templateToBodyText } from '../messageView/templateToBodyText';
 
@@ -81,10 +80,8 @@ export const SendMail = ({
     };
 
     const body = templateToBodyText(messageTemplate, civility, firstname, lastname);
-
     return (
         <MailTo
-            disabled={!isCorrectEmail(email) || !object || !civility || !firstname || !lastname}
             label={label}
             recipient={recipient}
             subject={object}

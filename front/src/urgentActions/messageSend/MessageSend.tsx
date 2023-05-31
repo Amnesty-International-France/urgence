@@ -42,6 +42,19 @@ const styles = {
     '& .text:': {
         margin: '0.5em 0',
     },
+    '& .see-mail-disabled': {
+        display: 'block',
+        backgroundColor: '#b7b7b7',
+        alignItems: 'center',
+        fontWeight: 'bold',
+        fontSize: '26px',
+        padding: '0 1em',
+        lineHeight: '42px',
+        minWidth: '42px',
+        color: '#f2f2f2',
+        textTransform: 'uppercase',
+        fontFamily: 'Amnesty Trade Gothic Condensed',
+    },
     '& .form-step': {
         margin: '1em 0',
     },
@@ -54,9 +67,43 @@ const styles = {
             '& a': {
                 width: 'fit-content',
             },
+            '& .see-mail-disabled': {
+                width: 'fit-content',
+            },
+        },
+    },
+    '@media (max-width: 1024px)': {
+        '& .see-mail-disabled': {
+            width: '100%',
+            textAlign: 'center',
         },
     },
 };
+
+
+type IsValidProps = {
+    civility?: string;
+    firstname?: string;
+    lastname?: string;
+    email?: string;
+};
+
+export const isValid = ({civility, firstname, lastname, email}: IsValidProps): boolean => {
+    if (
+        typeof civility === 'string' &&
+        civility.trim().length && 
+        typeof firstname === 'string' &&
+        firstname.trim().length &&
+        typeof lastname === 'string' &&
+        lastname.trim().length &&
+        typeof email === 'string' &&
+        email.trim().length
+    ) {
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+    }
+
+    return false;
+}
 
 type Props = {
     className?: string;
@@ -78,6 +125,8 @@ type Props = {
     step?: string;
 };
 
+
+
 export const MessageSend = ({
     text,
     messageTemplate,
@@ -86,6 +135,9 @@ export const MessageSend = ({
     className,
     ...props
 }: Props) => {
+    const {civility, firstname, lastname, email} = props;
+    const displayAction = isValid({civility, firstname, lastname, email});
+
     if (!messageTemplate || !messageTemplate.length) {
         return <p className="error">Cette action urgente n&#39;existe plus.</p>;
     }
@@ -102,7 +154,8 @@ export const MessageSend = ({
                     <Form {...props} />
                 </div>
             </Paper>
-            <div className="action">{action}</div>
+            {displayAction && <div className="action">{action}</div>}
+            {!displayAction && <div className="action"><div className="see-mail-disabled">Voir l'email</div></div>}
             <LegalInformation content={gdprMessage} />
         </div>
     );
