@@ -24,6 +24,7 @@ export const UrgentActionsList = () => (
             />
             <BooleanField source="is_default" label="Set As Default" />
             <NumberField source="response_count" label="Compteur participation" />
+            <NumberField source="response_errors" label="Erreurs mailto" />
             <TextField source="call_to_action.interpelation_mode" label="Type participation" />
             <EditButton />
             <PreviewLink />

@@ -298,6 +298,7 @@ export default gql`
         register: Register
         social_metadata: SocialMetadata
         response_count: Int
+        response_errors: Int
     }
 
     input CampaignMemberInput {
