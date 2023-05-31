@@ -109,20 +109,20 @@ export class Story extends Component<StoryProps> {
                     >
                         <SwiperSlide>
                             <StorySlide step={cover}>
-                                {(storyCoverProps) => <StoryCover {...storyCoverProps} />}
+                                {(storyCoverProps: any) => <StoryCover {...storyCoverProps} />}
                             </StorySlide>
                         </SwiperSlide>
                         {restStory.map((step, index) => (
                             <SwiperSlide key={index + 1}>
                                 <StorySlide step={step}>
-                                    {(storyStepProps) => <StoryStep {...storyStepProps} />}
+                                    {(storyStepProps: any) => <StoryStep {...storyStepProps} />}
                                 </StorySlide>
                             </SwiperSlide>
                         ))}
 
                         <SwiperSlide>
                             <StorySlide>
-                                {(storyProps) => (
+                                {(storyProps: any) => (
                                     <Act
                                         {...storyProps}
                                         data={{
