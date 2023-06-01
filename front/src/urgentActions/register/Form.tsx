@@ -71,6 +71,7 @@ const Form = ({
                 label="Civilité *"
                 autoComplete="civility"
                 choices={['M.', 'Mme.', 'Autre']}
+                required={true}
             />
             <Input
                 className="firstname"
@@ -80,7 +81,8 @@ const Form = ({
                 analyticsCategory={analyticsCategory}
                 step={step}
                 autoComplete="given-name"
-                label="Votre prénom *"
+                label="Votre prénom"
+                required={true}
             />
             <Input
                 className="lastname"
@@ -90,7 +92,8 @@ const Form = ({
                 analyticsCategory={analyticsCategory}
                 step={step}
                 autoComplete="family-name"
-                label="Votre nom *"
+                label="Votre nom"
+                required={true}
             />
             <Input
                 className="email"
@@ -101,7 +104,8 @@ const Form = ({
                 autoComplete="email"
                 analyticsCategory={analyticsCategory}
                 step={step}
-                label="Votre adresse e-mail *"
+                label="Votre adresse e-mail"
+                required={true}
             />
             <RichText className="phone-indication" html={phoneIndication} />
             <Input
@@ -113,8 +117,9 @@ const Form = ({
                 autoComplete="phone"
                 analyticsCategory={analyticsCategory}
                 step={step}
-                label="Votre téléphone mobile *"
+                label="Votre téléphone mobile"
                 helperText="(+33) 6 XX XX XX XX"
+                required={true}
             />
         </Fragment>
     );

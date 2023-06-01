@@ -56,6 +56,7 @@ export const Form = ({
                 label="Civilité *"
                 autoComplete="civility"
                 choices={['M.', 'Mme.', 'Autre']}
+                required={true}
             />
             <Input
                 className="firstname"
@@ -65,7 +66,8 @@ export const Form = ({
                 analyticsCategory={analyticsCategory}
                 step={step}
                 autoComplete="given-name"
-                label="Votre prénom *"
+                label="Votre prénom"
+                required={true}
             />
             <Input
                 className="lastname"
@@ -75,7 +77,8 @@ export const Form = ({
                 analyticsCategory={analyticsCategory}
                 step={step}
                 autoComplete="family-name"
-                label="Votre nom *"
+                label="Votre nom"
+                required={true}
             />
             <Input
                 className="email"
@@ -86,7 +89,8 @@ export const Form = ({
                 autoComplete="email"
                 analyticsCategory={analyticsCategory}
                 step={step}
-                label="Votre adresse e-mail *"
+                label="Votre adresse e-mail"
+                required={true}
             />
         </Fragment>
     );
