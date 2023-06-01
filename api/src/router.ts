@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
 import { Router } from 'express';
 import { getMetaDataTemplateBySlug } from './urgentActions/metadata';
-import { getUrgentAction, updateUrgentAction } from './urgentActions/repository';
+import { incrementMailtoCounter } from './urgentActions/repository';
 
 const router = Router();
 
@@ -17,21 +17,13 @@ router.get(/metadata/, async (req, res, next) => {
     return res.send(metadata);
 });
 
-router.get('/campaign/:id/mailto/:status', async (req, res) => {
+router.post('/campaign/:id/record-mailto', async (req, res) => {
     try {
-        const action = await getUrgentAction(req.params.id);
-        if (!action) {
-            throw new Error('Urgent action not found.');
-        }
-
-        await updateUrgentAction(action.id, {
-            'mailto_count': action['mailto_count'] + 1,
-            'mailto_errors': req.params?.status === 'failure' ? action['mailto_errors'] + 1 : action['mailto_errors'],
-        });
-
-        return res.send({msg: 'ok' });
+        await incrementMailtoCounter(req.params.id, req.body.status);
+        res.status(204).send();
     } catch (error: any) {
-        res.status(400).send({ msg: 'Urgent action not found.' })
+        console.log(error)
+        res.status(500).send({ msg: "An error occurred while managing the campaign's mailto counter." })
     }
 });
 

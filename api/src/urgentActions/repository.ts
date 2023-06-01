@@ -193,3 +193,12 @@ export const removeDefaultToOther = async (id: string) =>
 
 export const removeUrgentAction = async (id: string) =>
     client<UrgentActionDb>(table).where({ id }).delete();
+
+
+export const incrementMailtoCounter = async (actionId: string, status: string) => {
+    if (status === 'failure') {
+        return client.raw('update urgent_action set mailto_count = mailto_count + 1, mailto_errors = mailto_errors + 1 where id = ?', [actionId])
+    } else {
+        return client.raw('update urgent_action set mailto_count = mailto_count + 1 where id = ?', [actionId]);
+    }
+}
