@@ -77,7 +77,8 @@ export type UrgentActionDb = {
     last_edition_date?: string;
     social_metadata: string;
     response_count: number;
-    response_errors: number;
+    mailto_count: number;
+    mailto_errors: number;
 };
 
 export type UrgentAction = {
@@ -95,7 +96,8 @@ export type UrgentAction = {
     creation_date: string; // TODO Verify if this is a string or a Object
     last_edition_date?: string; // TODO Verify if this is a string or a Object
     response_count: number;
-    response_errors: number;
+    mailto_count: number;
+    mailto_errors: number;
 
     story: StoryStep[];
     social_metadata: SocialMetadata;

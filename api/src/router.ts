@@ -17,15 +17,17 @@ router.get(/metadata/, async (req, res, next) => {
     return res.send(metadata);
 });
 
-router.put('/campaign/:id/mailto-error', async (req, res) => {
+router.get('/campaign/:id/mailto/:status', async (req, res) => {
     try {
         const action = await getUrgentAction(req.params.id);
         if (!action) {
             throw new Error('Urgent action not found.');
         }
 
-        const nbErrors = action['response_errors'] + 1;
-        await updateUrgentAction(action.id, { 'response_errors': nbErrors});
+        await updateUrgentAction(action.id, {
+            'mailto_count': action['mailto_count'] + 1,
+            'mailto_errors': req.params?.status === 'failure' ? action['mailto_errors'] + 1 : action['mailto_errors'],
+        });
 
         return res.send({msg: 'ok' });
     } catch (error: any) {

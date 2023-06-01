@@ -6,6 +6,7 @@ import {
     List,
     NumberField,
     TextField,
+    FunctionField,
 } from 'react-admin';
 import dateFormat from '../dateFormat';
 import PreviewLink from './PreviewLink';
@@ -24,7 +25,17 @@ export const UrgentActionsList = () => (
             />
             <BooleanField source="is_default" label="Set As Default" />
             <NumberField source="response_count" label="Compteur participation" />
-            <NumberField source="response_errors" label="Erreurs mailto" />
+            <FunctionField
+                label="Compteur mailto"
+                render={(record: any) => {
+                        if (record.mailto_count) {
+                            return `${record.mailto_count} dont ${record.mailto_errors} erreurs.`
+                        } else {
+                            return 'données absentes'
+                        }
+                    }  
+                }
+            />
             <TextField source="call_to_action.interpelation_mode" label="Type participation" />
             <EditButton />
             <PreviewLink />
