@@ -6,7 +6,13 @@ import { Component } from 'react';
 import withRouter from '../withRouter';
 import { styles } from './Link';
 
-export const buildMailDest = (recipient: any, subject: any, body: any) => {
+type Recipient = {
+    mail?: string;
+    copies_to?: string;
+    cci?: string;
+};
+
+export const buildMailDest = (recipient: Recipient, subject: string, body: any) => {
     const mail = recipient.mail || 'example@mail.com';
     return `mailto:${encodeURIComponent(mail)}?subject=${encodeURIComponent(
         subject,
@@ -22,11 +28,7 @@ type Props = {
     body: string;
     label: string;
     disabled?: boolean;
-    recipient: {
-        mail: string;
-        copies_to?: string;
-        cci?: string;
-    };
+    recipient: Recipient;
     analyticsCategory?: string;
     step?: string;
     params?: any;
@@ -40,23 +42,9 @@ export class MailTo extends Component<Props> {
         this.md = new MobileDetect(navigator.userAgent);
     }
 
-    openMailer = (dest: any) => {
-        console.log('window', window);
-        console.log('dest', dest);
-        console.log(`window.open("${dest}", 'mailto')`);
-
-        window.open(dest, 'mailto');
-        window.focus();
-        setTimeout(function () {
-            if (!window.document.hasFocus()) {
-                window.close();
-            }
-        }, 500);
-    };
-
     render() {
         const {
-            recipient = {},
+            recipient,
             subject,
             body,
             label,
@@ -76,9 +64,9 @@ export class MailTo extends Component<Props> {
                 className={classnames(className, { disabled })}
                 onClick={(event) => {
                     if (!isIphone) {
-                        this.openMailer(dest);
+                        window.open(dest, 'mailto');
                     }
-                    setTimeout(() => afterMail(event), 500);
+                    setTimeout(() => afterMail(event, navigator.userAgent.indexOf("Win") !== -1 && window.document.hasFocus()), 500);
                 }}
                 target={isIphone ? 'mailto' : '_self'}
                 rel="noopener noreferrer"
