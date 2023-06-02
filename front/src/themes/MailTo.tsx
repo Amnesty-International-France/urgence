@@ -66,7 +66,7 @@ export class MailTo extends Component<Props> {
                     if (!isIphone) {
                         window.open(dest, 'mailto');
                     }
-                    setTimeout(() => afterMail(event, navigator.userAgent.indexOf("Win") !== -1 && window.document.hasFocus()), 500);
+                    setTimeout(() => afterMail(event, navigator.userAgent.indexOf('Win') !== -1 && window.document.hasFocus()), 500);
                 }}
                 target={isIphone ? 'mailto' : '_self'}
                 rel="noopener noreferrer"

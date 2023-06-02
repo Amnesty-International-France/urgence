@@ -8,7 +8,7 @@ export const MailtoCheck = ({ mailto }: MailtoCheckProps) => {
     const [status, setStatus] = useState('en attente d\'un clic');
 
     const checkFocus = () => {
-        if (navigator.platform === 'Win32' && document.hasFocus()) {
+        if (navigator.userAgent.indexOf('Win') && document.hasFocus()) {
             setStatus('❌ l\'ouverture du lien mailto n\'a pas fonctionné');
         } else {
             setStatus('✅ l\'ouverture du lien mailto a fonctionné');
