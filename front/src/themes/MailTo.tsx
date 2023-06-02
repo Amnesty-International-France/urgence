@@ -42,6 +42,16 @@ export class MailTo extends Component<Props> {
         this.md = new MobileDetect(navigator.userAgent);
     }
 
+    openMailer = (dest: any) => {
+        window.open(dest, 'mailto');
+        window.focus();
+        setTimeout(function () {
+            if (!window.document.hasFocus()) {
+                window.close();
+            }
+        }, 500);
+    };
+
     render() {
         const {
             recipient,
@@ -52,6 +62,8 @@ export class MailTo extends Component<Props> {
             afterMail,
             className,
         } = this.props;
+
+        
 
         const dest = buildMailDest(recipient, subject, body);
         const isIphone = this.md.is('iPhone');
@@ -64,7 +76,7 @@ export class MailTo extends Component<Props> {
                 className={classnames(className, { disabled })}
                 onClick={(event) => {
                     if (!isIphone) {
-                        window.open(dest, 'mailto');
+                        this.openMailer(dest);
                     }
                     setTimeout(() => afterMail(event, navigator.userAgent.indexOf('Win') !== -1 && window.document.hasFocus()), 500);
                 }}
