@@ -42,67 +42,13 @@ export const StoryTemplateInput = ({ source }: StoryTemplateInputProps) => {
                 width: '100%',
             }}
         >
-            <FormDataConsumer>
-                {({ formData }: { formData: FormData }) => (
-                    <>
-                        <Card>
-                            {index === 0 ? (
-                                <StoryCoverInput source={source} />
-                            ) : (
-                                <StoryStepInput source={source} />
-                            )}
-                        </Card>
-                        <Box sx={{ flex: 1 }}>
-                            <FrontPreview previewDevice="mobile">
-                                <StorySlide
-                                    className=""
-                                    step={
-                                        formData.story
-                                            ? {
-                                                  ...defaultFormData,
-                                                  ...formData.story[index],
-                                              }
-                                            : {
-                                                  ...defaultFormData,
-                                              }
-                                    }
-                                >
-                                    {(props: any) =>
-                                        index === 0 ? (
-                                            <StoryCover {...props} className="cover" isMobile />
-                                        ) : (
-                                            <StoryStep {...props} />
-                                        )
-                                    }
-                                </StorySlide>
-                            </FrontPreview>
-                            <FrontPreview previewDevice="desktop">
-                                <StorySlide
-                                    className=""
-                                    step={
-                                        formData.story
-                                            ? {
-                                                  ...defaultFormData,
-                                                  ...formData.story[index],
-                                              }
-                                            : {
-                                                  ...defaultFormData,
-                                              }
-                                    }
-                                >
-                                    {(props: any) =>
-                                        index === 0 ? (
-                                            <StoryCover {...props} className="cover" />
-                                        ) : (
-                                            <StoryStep {...props} />
-                                        )
-                                    }
-                                </StorySlide>
-                            </FrontPreview>
-                        </Box>
-                    </>
+            <Card>
+                {index === 0 ? (
+                    <StoryCoverInput source={source} />
+                ) : (
+                    <StoryStepInput source={source} />
                 )}
-            </FormDataConsumer>
+            </Card>
         </Box>
     );
 };

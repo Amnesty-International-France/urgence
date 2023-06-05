@@ -119,22 +119,12 @@ const ActionForm = () => {
             <LongForm.Section label="Call to action">
                 <Part4CallToAction />
             </LongForm.Section>
-            <FormDataConsumer>
-                {({ formData }: { formData: FormData }) => {
-                    if (formData.call_to_action?.interpelation_mode === 'email') {
-                        return (
-                            <>
-                                <LongForm.Section label="Message view">
-                                    <Part5MessageView />
-                                </LongForm.Section>
-                                <LongForm.Section label="Message send">
-                                    <Part6MessageSend />
-                                </LongForm.Section>
-                            </>
-                        );
-                    }
-                }}
-            </FormDataConsumer>
+            <LongForm.Section label="Message view">
+                <Part5MessageView />
+            </LongForm.Section>
+            <LongForm.Section label="Message send">
+                <Part6MessageSend />
+            </LongForm.Section>
             <LongForm.Section label="Share">
                 <Part7Share />
             </LongForm.Section>
