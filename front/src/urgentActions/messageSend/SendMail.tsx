@@ -5,7 +5,7 @@ import { withSessionData } from '../../DataContext';
 import MailTo from '../../themes/MailTo';
 import { templateToBodyText } from '../messageView/templateToBodyText';
 
-import { addCampaignMember, addResponseCount } from '../../services/api';
+import { addCampaignMember, addResponseCount, recordMailto } from '../../services/api';
 
 type OwnProps = {
     className?: string;
@@ -57,8 +57,9 @@ export const SendMail = ({
     registered,
     setRegistered,
 }: Props) => {
-    const handleAfterMail = () => {
+    const handleAfterMail = (e: any, failed: boolean) => {
         addResponseCount(auId);
+        recordMailto(auId, failed ? 'failure' : 'success');
 
         let isRegistered = registered;
         return addCampaignMember(auId, { email, firstname, lastname, civility })
@@ -75,7 +76,7 @@ export const SendMail = ({
             })
             .catch(() => {})
             .then(() => {
-                afterMail({ registered: isRegistered });
+                afterMail({ failed, registered: isRegistered });
             });
     };
 

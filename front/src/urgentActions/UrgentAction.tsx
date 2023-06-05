@@ -217,9 +217,12 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
                         recipient={recipient}
                         messageTemplate={messageTemplate}
                         auId={id}
-                        afterMail={({ registered }: any) =>
-                            navigate(generateUrl(registered ? 'share' : 'register', { slug }))
-                        }
+                        afterMail={({ failed, registered }: any) => {
+                            if (failed) {
+                                global.console.log('Failed to open mailto link')
+                            }
+                            navigate(generateUrl(registered ? 'share' : 'register', { slug }));
+                        }}
                     />
                 }
             />
