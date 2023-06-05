@@ -32,6 +32,8 @@ logs-api:
 
 connect-api:
 	$(DOCKER_COMPOSE) exec api bash
+connect-admin:
+	$(DOCKER_COMPOSE) exec admin bash
 
 #### TESTS ####
 
