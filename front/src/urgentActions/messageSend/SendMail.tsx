@@ -1,5 +1,6 @@
 import get from 'lodash.get';
 import { compose } from 'recompose';
+import { useState } from 'react';
 
 import { withSessionData } from '../../DataContext';
 import MailTo from '../../themes/MailTo';
@@ -57,13 +58,17 @@ export const SendMail = ({
     registered,
     setRegistered,
 }: Props) => {
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleAfterMail = (e: any, failed: boolean) => {
+        setIsLoading(true);
         addResponseCount(auId);
         recordMailto(auId, failed ? 'failure' : 'success');
 
         let isRegistered = registered;
         return addCampaignMember(auId, { email, firstname, lastname, civility })
             .then((result) => {
+                setIsLoading(false)
                 if (result.errors && result.errors.length) {
                     // eslint-disable-next-line no-console
                     console.log(
@@ -74,7 +79,7 @@ export const SendMail = ({
                 isRegistered = get(result, 'data.addCampaignMember.registered', false);
                 setRegistered(isRegistered ? 'true' : 'false');
             })
-            .catch(() => {})
+            .catch(() => {setIsLoading(false)})
             .then(() => {
                 afterMail({ failed, registered: isRegistered });
             });
@@ -91,12 +96,9 @@ export const SendMail = ({
             analyticsCategory={analyticsCategory}
             match={match}
             step={step}
+            disabled={isLoading}
         />
     );
-};
-
-SendMail.defaultProps = {
-    onMailSent: () => {},
 };
 
 export default compose(withSessionData)(SendMail);
