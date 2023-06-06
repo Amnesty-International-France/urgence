@@ -11,9 +11,10 @@ import {
     useState,
 } from 'react';
 import {
+    FormDataConsumer,
+    FormGroupsContext,
     getFormGroupState,
     Toolbar,
-    FormGroupsContext,
     useTranslate,
 } from 'react-admin';
 import { useFormState } from 'react-hook-form';
@@ -21,9 +22,49 @@ import { Card, CardContent, MenuItem, MenuList, SxProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
+import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 
 import { useScrollSpy } from './useScrollSpy';
 import { LongFormSectionProps } from './LongFormSection';
+import { FormData } from './index';
+import { MailtoCheck } from '../MailtoCheck';
+import PreviewLink from '../PreviewLink';
+import PreviewQrCode from '../PreviewQrCode';
+
+
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 10,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: 'grey',
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 5,
+    backgroundColor: '#1a90ff',
+  },
+}));
+const normalise = (value: number) => (value * 100) / 2000;
+
+const MailtoLength = ({ mailto }: { mailto: string }) => {
+    return (
+        <>
+            <p>Longeur de l'email : {mailto.length}/2000</p>
+            <BorderLinearProgress variant="determinate" value={normalise(mailto.length)} />
+        </>
+    )
+}
+
+
+const getMailtoLink = (data: any) => {
+    if (!data) {
+        return `mailto:?subject=&body=`;
+    }
+    return `mailto:${data.recipient && data.recipient.mail ? encodeURIComponent(data.recipient.mail) : ''}
+        ?subject=${data.object_example ? encodeURIComponent(data.object_example) : ''}
+        &body=${data.message_template && data.message_template[0] && data.message_template[0].value ? encodeURIComponent(data.message_template[0].value) : ''}
+        ${data.recipient && data.recipient.copies_to ? '&cc=' + encodeURIComponent(data.recipient.copies_to) : ''}
+        ${data.recipient && data.recipient.cci ? '&bcc=' + encodeURIComponent(data.recipient.cci) : ''}`;
+};
 
 /**
  * Form layout for long forms.
@@ -185,6 +226,23 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
                         ) : null
                     )}
                 </MenuList>
+                <CardContent>
+                    <FormDataConsumer>
+                        {({ formData }: { formData: FormData }) => {
+                            //@ts-ignore
+                            const data = formData.message;
+                            const mailto = getMailtoLink(data);
+                            return (
+                                <>
+                                    <MailtoCheck mailto={mailto} />
+                                    <MailtoLength mailto={mailto} />
+                                    <PreviewLink />
+                                    <PreviewQrCode />
+                                </>
+                            );
+                        }}
+                    </FormDataConsumer>
+                </CardContent>
             </Card>
             <Card className={LongFormViewClasses.main}>
                 <CardContent>
@@ -210,6 +268,7 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
                     <Toolbar className={LongFormViewClasses.toolbar} />
                 )}
             </Card>
+            
         </Root>
     );
 };
