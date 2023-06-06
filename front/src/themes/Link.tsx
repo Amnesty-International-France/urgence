@@ -44,6 +44,25 @@ export const styles = {
         paddingLeft: '55px',
         textAlign: 'left',
     },
+    '.maildisabled': {
+        display: 'block',
+        backgroundColor: '#b7b7b7',
+        alignItems: 'center',
+        fontWeight: 'bold',
+        fontSize: '26px',
+        padding: '0 1em',
+        lineHeight: '42px',
+        width: '42px',
+        color: '#f2f2f2',
+        textTransform: 'uppercase',
+        fontFamily: 'Amnesty Trade Gothic Condensed',
+    },
+    '@media (max-width: 1024px)': {
+        '.maildisabled': {
+            width: '100%',
+            textAlign: 'center',
+        },
+    },
 };
 
 type OwnProps = {
