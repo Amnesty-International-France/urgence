@@ -3,7 +3,7 @@ import ActionForm from './form';
 
 export const UrgentActionsCreate = () => {
     return (
-        <Create component="div">
+        <Create>
             <SimpleForm>
                 <ActionForm />
             </SimpleForm>

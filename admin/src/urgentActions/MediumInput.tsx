@@ -54,8 +54,8 @@ export const MediumInput = ({ source, label, croppable }: MediumInputProps) => {
                 <FormDataConsumer>
                     {({ formData }: { formData: FormData }) => {
                         const keys = source.split('.');
-                        const value = keys.reduce((obj, key) => {    
-                            // @ts-ignore                        
+                        const value = keys.reduce((obj, key) => {
+                            // @ts-ignore
                             if (obj && obj[key]) return obj[key];
                             return null;
                         }, formData) as unknown as Medium;

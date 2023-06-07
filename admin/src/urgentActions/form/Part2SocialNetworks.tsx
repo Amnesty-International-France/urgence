@@ -1,8 +1,6 @@
 import { TextInput } from 'react-admin';
-import Box from '@mui/material/Box';
-import { purple } from '@mui/material/colors';
 
-import { MediumInput } from '../MediumInput';
+import { MediumInput } from './MediumInput';
 
 const Part2SocialNetworks = () => {
     return (

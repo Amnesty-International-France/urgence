@@ -1,7 +1,77 @@
-import { MessageViewInput } from '../MessageViewInput';
+import Box from '@mui/material/Box';
+import { RichTextInput } from 'ra-input-rich-text';
+import { Labeled, maxLength, minLength, required, TextInput } from 'react-admin';
+import isEmail from 'validator/lib/isEmail';
+import { Card } from './Card';
+import { ParagraphTemplateInput } from './ParagraphTemplateInput';
 
-const Part5MessageView = () => {
-    return <MessageViewInput source="message" />;
+type MessageViewInputProps = {
+    source: string;
+};
+
+export const validateEmailsList = (text: string) =>
+    text && !!text.split(',').find((t) => !isEmail(t))
+        ? 'Must contain only emails separated by a comma.'
+        : null;
+
+export const Part5MessageView = ({ source }: MessageViewInputProps) => {
+    return (
+        <Box sx={{ display: 'flex', alignItems: 'start', width: '100%' }}>
+            <Card>
+                <Labeled label="Object">
+                    <>
+                        <RichTextInput
+                            fullWidth
+                            label="Introduction étape 1 (objet)"
+                            source={`${source}.object_indication`}
+                            defaultValue="Nous vous en proposons un mais vous pouvez le personnaliser"
+                        />
+                        <TextInput fullWidth source={`${source}.object_example`} label="Exemple" />
+                    </>
+                </Labeled>
+                <Labeled label="Message">
+                    <>
+                        <RichTextInput
+                            fullWidth
+                            label="Introduction étape 2 (message)"
+                            source={`${source}.text_view`}
+                            defaultValue="Voici un modèle de message que nous vous proposons d'envoyer. Vous pourrez bien sûr le personnaliser depuis votre boite mail."
+                        />
+                        <ParagraphTemplateInput source={`${source}.message_template[0]`} />
+                    </>
+                </Labeled>
+
+                <Labeled label="Destinataires">
+                    <>
+                        <TextInput
+                            fullWidth
+                            label="Mail To"
+                            source={`${source}.recipient.mail`}
+                            validate={validateEmailsList}
+                        />
+                        <TextInput
+                            fullWidth
+                            label="Copies To"
+                            source={`${source}.recipient.copies_to`}
+                            validate={validateEmailsList}
+                        />
+                        <TextInput
+                            fullWidth
+                            label="CCI"
+                            source={`${source}.recipient.cci`}
+                            validate={validateEmailsList}
+                        />
+                    </>
+                </Labeled>
+                <TextInput
+                    source={`${source}.button_view`}
+                    label="Bouton"
+                    defaultValue="Suivant"
+                    validate={[required(), minLength(3), maxLength(25)]}
+                />
+            </Card>
+        </Box>
+    );
 };
 
 export default Part5MessageView;

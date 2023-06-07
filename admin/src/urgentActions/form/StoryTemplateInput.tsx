@@ -76,29 +76,31 @@ export const StoryTemplateInput = ({ source }: StoryTemplateInputProps) => {
                                     }
                                 </StorySlide>
                             </FrontPreview>
-                            <FrontPreview previewDevice="desktop">
-                                <StorySlide
-                                    className=""
-                                    step={
-                                        formData.story
-                                            ? {
-                                                  ...defaultFormData,
-                                                  ...formData.story[index],
-                                              }
-                                            : {
-                                                  ...defaultFormData,
-                                              }
-                                    }
-                                >
-                                    {(props: any) =>
-                                        index === 0 ? (
-                                            <StoryCover {...props} className="cover" />
-                                        ) : (
-                                            <StoryStep {...props} />
-                                        )
-                                    }
-                                </StorySlide>
-                            </FrontPreview>
+                            {index === 0 && (
+                                <FrontPreview previewDevice="desktop">
+                                    <StorySlide
+                                        className=""
+                                        step={
+                                            formData.story
+                                                ? {
+                                                      ...defaultFormData,
+                                                      ...formData.story[index],
+                                                  }
+                                                : {
+                                                      ...defaultFormData,
+                                                  }
+                                        }
+                                    >
+                                        {(props: any) =>
+                                            index === 0 ? (
+                                                <StoryCover {...props} className="cover" />
+                                            ) : (
+                                                <StoryStep {...props} />
+                                            )
+                                        }
+                                    </StorySlide>
+                                </FrontPreview>
+                            )}
                         </Box>
                     </>
                 )}

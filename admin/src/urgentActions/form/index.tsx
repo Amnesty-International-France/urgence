@@ -118,19 +118,19 @@ const ActionForm = () => {
                 <Part4CallToAction />
             </LongForm.Section>
             <LongForm.Section label="Message view">
-                <Part5MessageView />
+                <Part5MessageView source="message" />
             </LongForm.Section>
             <LongForm.Section label="Message send">
-                <Part6MessageSend />
+                <Part6MessageSend source="message" />
             </LongForm.Section>
             <LongForm.Section label="Share">
-                <Part7Share />
+                <Part7Share source="email_thank" />
             </LongForm.Section>
             <LongForm.Section label="Register">
-                <Part8Register />
+                <Part8Register source="register" />
             </LongForm.Section>
             <LongForm.Section label="Thanks">
-                <Part9Thanks />
+                <Part9Thanks source="end_thank" />
             </LongForm.Section>
         </LongForm>
     );
