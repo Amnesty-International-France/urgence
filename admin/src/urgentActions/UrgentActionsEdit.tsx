@@ -4,7 +4,7 @@ import { UrgentActionsTitle } from './UrgentActionsTitle';
 
 export const UrgentActionsEdit = () => {
     return (
-        <Edit title={<UrgentActionsTitle />} component="div">
+        <Edit title={<UrgentActionsTitle />}>
             <ActionForm />
         </Edit>
     );

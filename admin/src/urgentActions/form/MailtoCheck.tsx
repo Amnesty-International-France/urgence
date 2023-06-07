@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 type MailtoCheckProps = {
@@ -29,7 +28,7 @@ const MailtoCheck = ({ mailto }: MailtoCheckProps) => {
     if (status === 'ok') {
         return (
             <Button
-                sx={{ width: '100%' }}
+                sx={{ width: '100%', marginBottom: '0.5rem' }}
                 variant="contained"
                 color="success"
                 startIcon={<CheckCircleOutlineIcon />}
@@ -42,7 +41,12 @@ const MailtoCheck = ({ mailto }: MailtoCheckProps) => {
 
     if (status === 'error') {
         return (
-            <Button sx={{ width: '100%' }} variant="contained" color="error" size="small">
+            <Button
+                sx={{ width: '100%', marginBottom: '0.5rem' }}
+                variant="contained"
+                color="error"
+                size="small"
+            >
                 mailto en erreur
             </Button>
         );
@@ -52,7 +56,7 @@ const MailtoCheck = ({ mailto }: MailtoCheckProps) => {
         <Button
             variant="contained"
             color="info"
-            sx={{ width: '100%' }}
+            sx={{ width: '100%', marginBottom: '0.5rem' }}
             href={mailto}
             onClick={(e) => {
                 e.preventDefault();

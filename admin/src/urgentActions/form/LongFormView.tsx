@@ -14,6 +14,7 @@ import {
     FormDataConsumer,
     FormGroupsContext,
     getFormGroupState,
+    SaveButton,
     Toolbar,
     useTranslate,
 } from 'react-admin';
@@ -28,7 +29,6 @@ import { LongFormSectionProps } from './LongFormSection';
 import { FormData } from './index';
 import MailtoCheck from './MailtoCheck';
 import MailtoLength from './MailtoLength';
-import PreviewLink from './PreviewLink';
 import PreviewQrCode from './PreviewQrCode';
 
 const getMailtoLink = (data: any) => {
@@ -186,6 +186,7 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
                             <MenuItem
                                 selected={activeSection === index}
                                 key={index}
+                                sx={{ fontSize: '0.8rem', lineHeight: '0.8rem' }}
                                 onClick={() => {
                                     window.scrollTo(0, sectionRefs.current[index].offsetTop - 60);
                                 }}
@@ -217,8 +218,8 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
                                 <>
                                     <MailtoLength mailto={mailto} />
                                     <MailtoCheck mailto={mailto} />
-                                    <PreviewLink />
                                     <PreviewQrCode />
+                                    <SaveButton sx={{ width: '100%' }} size="small" />
                                 </>
                             );
                         }}

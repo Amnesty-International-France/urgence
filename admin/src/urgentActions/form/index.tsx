@@ -1,5 +1,3 @@
-import { FormDataConsumer } from 'react-admin';
-
 import { LongForm } from './LongForm';
 import Part1Camgaign from './Part1Campaign';
 import Part2SocialNetworks from './Part2SocialNetworks';

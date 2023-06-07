@@ -21,18 +21,15 @@ const MailtoLength = ({ mailto }: { mailto: string }) => {
         mailto.length > 2000 ? 'error' : mailto.length > 1600 ? 'warning' : 'success';
     return (
         <div style={{ fontSize: '0.8rem', lineHeight: '1rem', margin: '0 0 1rem 0' }}>
-            Longueur du mailto : <strong style={{ color }}>{mailto.length}</strong>
+            mailto : <strong style={{ color }}>{mailto.length}</strong> / 2000
             <br />
             <BorderLinearProgress
                 color={progressColor}
                 variant="determinate"
                 value={normalise(mailto.length)}
             />
-            (sur les 2000 recommandés)
         </div>
     );
 };
 
 export default MailtoLength;
-
-//  #ed6c02 red
