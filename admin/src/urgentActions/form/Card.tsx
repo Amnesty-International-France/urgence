@@ -3,13 +3,14 @@ import CardContent from '@mui/material/CardContent';
 
 type CardProps = {
     children: React.ReactNode;
+    size?: string;
 };
 
-export const Card = ({ children }: CardProps) => (
+export const Card = ({ size = 'full', children }: CardProps) => (
     <MuiCard
         sx={{
             margin: '1rem 1rem 2rem',
-            width: 450,
+            width: size === 'full' ? '100%' : 450,
         }}
     >
         <CardContent

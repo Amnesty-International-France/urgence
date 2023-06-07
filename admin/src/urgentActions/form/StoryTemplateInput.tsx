@@ -1,5 +1,11 @@
 import Box from '@mui/material/Box';
-import { RichTextInput } from 'ra-input-rich-text';
+import {
+    RichTextInput,
+    RichTextInputToolbar,
+    LevelSelect,
+    FormatButtons,
+    LinkButtons,
+} from 'ra-input-rich-text';
 import { FormDataConsumer, required, useSimpleFormIteratorItem } from 'react-admin';
 import { Card } from './Card';
 import { FrontPreview } from './FrontPreview';
@@ -20,7 +26,18 @@ const defaultFormData = {
 
 const StoryCoverInput = ({ source }: StoryTemplateInputProps) => (
     <>
-        <RichTextInput source={`${source}.content`} label="Text" validate={required()} />
+        <RichTextInput
+            source={`${source}.content`}
+            label="Text"
+            validate={required()}
+            toolbar={
+                <RichTextInputToolbar>
+                    <LevelSelect />
+                    <FormatButtons />
+                    <LinkButtons />
+                </RichTextInputToolbar>
+            }
+        />
         <MediumInput source={`${source}.medium`} label="Cover Mobile" croppable />
         <MediumInput source={`${source}.mediumDesktop`} label="Cover Desktop" croppable />
     </>
@@ -28,7 +45,18 @@ const StoryCoverInput = ({ source }: StoryTemplateInputProps) => (
 
 const StoryStepInput = ({ source }: StoryTemplateInputProps) => (
     <>
-        <RichTextInput source={`${source}.content`} label="Text" validate={required()} />
+        <RichTextInput
+            source={`${source}.content`}
+            label="Text"
+            validate={required()}
+            toolbar={
+                <RichTextInputToolbar>
+                    <LevelSelect />
+                    <FormatButtons />
+                    <LinkButtons />
+                </RichTextInputToolbar>
+            }
+        />
     </>
 );
 
@@ -45,7 +73,7 @@ export const StoryTemplateInput = ({ source }: StoryTemplateInputProps) => {
             <FormDataConsumer>
                 {({ formData }: { formData: FormData }) => (
                     <>
-                        <Card>
+                        <Card size="mobile">
                             {index === 0 ? (
                                 <StoryCoverInput source={source} />
                             ) : (
