@@ -22,48 +22,38 @@ import { Card, CardContent, MenuItem, MenuList, SxProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 
 import { useScrollSpy } from './useScrollSpy';
 import { LongFormSectionProps } from './LongFormSection';
 import { FormData } from './index';
-import { MailtoCheck } from '../MailtoCheck';
-import PreviewLink from '../PreviewLink';
-import PreviewQrCode from '../PreviewQrCode';
-
-
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: 10,
-  borderRadius: 5,
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: 'grey',
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 5,
-    backgroundColor: '#1a90ff',
-  },
-}));
-const normalise = (value: number) => (value * 100) / 2000;
-
-const MailtoLength = ({ mailto }: { mailto: string }) => {
-    return (
-        <>
-            <p>Longeur de l'email : {mailto.length}/2000</p>
-            <BorderLinearProgress variant="determinate" value={normalise(mailto.length)} />
-        </>
-    )
-}
-
+import MailtoCheck from './MailtoCheck';
+import MailtoLength from './MailtoLength';
+import PreviewLink from './PreviewLink';
+import PreviewQrCode from './PreviewQrCode';
 
 const getMailtoLink = (data: any) => {
     if (!data) {
         return `mailto:?subject=&body=`;
     }
-    return `mailto:${data.recipient && data.recipient.mail ? encodeURIComponent(data.recipient.mail) : ''}
+    return `mailto:${
+        data.recipient && data.recipient.mail ? encodeURIComponent(data.recipient.mail) : ''
+    }
         ?subject=${data.object_example ? encodeURIComponent(data.object_example) : ''}
-        &body=${data.message_template && data.message_template[0] && data.message_template[0].value ? encodeURIComponent(data.message_template[0].value) : ''}
-        ${data.recipient && data.recipient.copies_to ? '&cc=' + encodeURIComponent(data.recipient.copies_to) : ''}
-        ${data.recipient && data.recipient.cci ? '&bcc=' + encodeURIComponent(data.recipient.cci) : ''}`;
+        &body=${
+            data.message_template && data.message_template[0] && data.message_template[0].value
+                ? encodeURIComponent(data.message_template[0].value)
+                : ''
+        }
+        ${
+            data.recipient && data.recipient.copies_to
+                ? '&cc=' + encodeURIComponent(data.recipient.copies_to)
+                : ''
+        }
+        ${
+            data.recipient && data.recipient.cci
+                ? '&bcc=' + encodeURIComponent(data.recipient.cci)
+                : ''
+        }`;
 };
 
 /**
@@ -133,7 +123,7 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
         (label: string) => {
             const fields = formGroups.getGroupFields(label);
             const fieldStates = fields
-                .map<FieldState>(field => {
+                .map<FieldState>((field) => {
                     return {
                         name: field,
                         error: get(errors, field, undefined),
@@ -142,7 +132,7 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
                         isTouched: get(touchedFields, field, false),
                     };
                 })
-                .filter(fieldState => fieldState != undefined); // eslint-disable-line
+                .filter((fieldState) => fieldState != undefined); // eslint-disable-line
             const newState = getFormGroupState(fieldStates);
             setFormGroupStates((oldState: any) => {
                 if (isEqual(oldState[label], newState)) {
@@ -152,11 +142,11 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
             });
             // eslint-disable-next-line react-hooks/exhaustive-deps
         },
-        [dirtyFields, errors, touchedFields, formGroups]
+        [dirtyFields, errors, touchedFields, formGroups],
     );
     useEffect(
         () => {
-            Children.toArray(children).map(section => {
+            Children.toArray(children).map((section) => {
                 if (!isValidElement(section)) return;
                 updateGroupState(section.props.label);
             });
@@ -166,19 +156,19 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
             // eslint-disable-next-line
             JSON.stringify({ dirtyFields, errors, touchedFields }),
             updateGroupState,
-        ]
+        ],
     );
     useEffect(() => {
         // Whenever the group content changes (input are added or removed)
         // we must update its state
-        const subscriptions = Children.toArray(children).map(section => {
+        const subscriptions = Children.toArray(children).map((section) => {
             if (!isValidElement(section)) return;
             return formGroups.subscribe(section.props.label, () => {
                 updateGroupState(section.props.label);
             });
         });
         return () => {
-            subscriptions.forEach(unsubscribe => {
+            subscriptions.forEach((unsubscribe) => {
                 if (typeof unsubscribe === 'function') {
                     unsubscribe();
                 }
@@ -197,17 +187,11 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
                                 selected={activeSection === index}
                                 key={index}
                                 onClick={() => {
-                                    window.scrollTo(
-                                        0,
-                                        sectionRefs.current[index].offsetTop -
-                                            60
-                                    );
+                                    window.scrollTo(0, sectionRefs.current[index].offsetTop - 60);
                                 }}
                                 className={
-                                    !formGroupStates[formSection.props?.label]
-                                        ?.isValid &&
-                                    (formGroupStates[formSection.props?.label]
-                                        ?.isTouched ||
+                                    !formGroupStates[formSection.props?.label]?.isValid &&
+                                    (formGroupStates[formSection.props?.label]?.isTouched ||
                                         isSubmitted)
                                         ? LongFormViewClasses.error
                                         : ''
@@ -217,13 +201,10 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
                                     _: formSection.props?.label,
                                 })}
                                 {formSection.props?.cardinality
-                                    ? ` (${
-                                          (formSection as ReactElement)?.props
-                                              ?.cardinality
-                                      })`
+                                    ? ` (${(formSection as ReactElement)?.props?.cardinality})`
                                     : null}
                             </MenuItem>
-                        ) : null
+                        ) : null,
                     )}
                 </MenuList>
                 <CardContent>
@@ -234,8 +215,8 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
                             const mailto = getMailtoLink(data);
                             return (
                                 <>
-                                    <MailtoCheck mailto={mailto} />
                                     <MailtoLength mailto={mailto} />
+                                    <MailtoCheck mailto={mailto} />
                                     <PreviewLink />
                                     <PreviewQrCode />
                                 </>
@@ -257,7 +238,7 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
                                   },
                                   key: index,
                               })
-                            : null
+                            : null,
                     )}
                 </CardContent>
                 {toolbar ? (
@@ -268,7 +249,6 @@ export const LongFormView = ({ children, sx, toolbar }: LongFormViewProps) => {
                     <Toolbar className={LongFormViewClasses.toolbar} />
                 )}
             </Card>
-            
         </Root>
     );
 };
