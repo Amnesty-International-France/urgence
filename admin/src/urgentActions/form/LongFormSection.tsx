@@ -29,23 +29,22 @@ export interface LongFormSectionProps {
  *     </LongFormSection>
  * );
  */
-export const LongFormSection = React.forwardRef<
-    HTMLElement,
-    LongFormSectionProps
->(function LongFormSection({ children, label, sx }: LongFormSectionProps, ref) {
-    const translate = useTranslate();
-    return (
-        <Root ref={ref} sx={sx}>
-            <FormGroupContextProvider name={label}>
-                <Typography variant="h4" gutterBottom>
-                    {translate(label, { _: label })}
-                </Typography>
-                <Stack className={RaLongFormSection.stack}>{children}</Stack>
-                <Divider sx={{ mb: 4 }} />
-            </FormGroupContextProvider>
-        </Root>
-    );
-});
+export const LongFormSection = React.forwardRef<HTMLElement, LongFormSectionProps>(
+    function LongFormSection({ children, label, sx }: LongFormSectionProps, ref) {
+        const translate = useTranslate();
+        return (
+            <Root ref={ref} sx={sx}>
+                <FormGroupContextProvider name={label}>
+                    <Typography variant="h4" gutterBottom>
+                        {translate(label, { _: label })}
+                    </Typography>
+                    <Stack className={RaLongFormSection.stack}>{children}</Stack>
+                    <Divider sx={{ mb: 4, border: '1px black dashed' }} />
+                </FormGroupContextProvider>
+            </Root>
+        );
+    },
+);
 
 const PREFIX = 'RaLongFormSection';
 
