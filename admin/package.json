@@ -12,7 +12,7 @@
         "@types/apollo-upload-client": "17.0.2",
         "@types/jest": "29.5.2",
         "@types/node": "20.2.5",
-        "@types/react": "18.2.8",
+        "@types/react": "18.2.9",
         "@types/react-dom": "18.2.4",
         "@types/validator": "13.7.17",
         "apollo-upload-client": "17.0.0",
@@ -59,7 +59,7 @@
         ]
     },
     "devDependencies": {
-        "@babel/plugin-proposal-private-property-in-object": "7.21.10",
+        "@babel/plugin-proposal-private-property-in-object": "7.21.11",
         "@types/jsonwebtoken": "9.0.2",
         "jsonwebtoken": "9.0.0",
         "prettier": "2.8.8"

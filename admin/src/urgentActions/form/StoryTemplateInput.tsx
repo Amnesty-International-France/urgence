@@ -136,29 +136,3 @@ export const StoryTemplateInput = ({ source }: StoryTemplateInputProps) => {
         </Box>
     );
 };
-
-/*
-<FrontPreview previewDevice="desktop">
-                                <StorySlide
-                                    className=""
-                                    step={
-                                        formData.story
-                                            ? {
-                                                  ...defaultFormData,
-                                                  ...formData.story[index],
-                                              }
-                                            : {
-                                                  ...defaultFormData,
-                                              }
-                                    }
-                                >
-                                    {(props: any) =>
-                                        index === 0 ? (
-                                            <StoryCover {...props} className="cover" />
-                                        ) : (
-                                            <StoryStep {...props} />
-                                        )
-                                    }
-                                </StorySlide>
-                            </FrontPreview>
-*/
