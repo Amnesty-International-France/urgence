@@ -4,7 +4,7 @@ import { UrgentActionsTitle } from './UrgentActionsTitle';
 
 export const UrgentActionsEdit = () => {
     return (
-        <Edit title={<UrgentActionsTitle />} redirect={false}>
+        <Edit title={<UrgentActionsTitle />} redirect={false} mutationMode="pessimistic">
             <ActionForm />
         </Edit>
     );

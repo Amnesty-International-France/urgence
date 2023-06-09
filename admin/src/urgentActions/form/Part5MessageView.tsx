@@ -1,7 +1,6 @@
 import { RichTextInput } from 'ra-input-rich-text';
 import { Labeled, maxLength, minLength, required, TextInput } from 'react-admin';
 import isEmail from 'validator/lib/isEmail';
-import { ParagraphTemplateInput } from './ParagraphTemplateInput';
 
 type MessageViewInputProps = {
     source: string;
@@ -34,7 +33,13 @@ export const Part5MessageView = ({ source }: MessageViewInputProps) => {
                         source={`${source}.text_view`}
                         defaultValue="Voici un modèle de message que nous vous proposons d'envoyer. Vous pourrez bien sûr le personnaliser depuis votre boite mail."
                     />
-                    <ParagraphTemplateInput source={`${source}.message_template[0]`} />
+                    <TextInput
+                        source={`${source}.message_template[0].value`}
+                        label="Corps du mail"
+                        validate={[required()]}
+                        multiline
+                        fullWidth
+                    />
                 </>
             </Labeled>
 
@@ -44,7 +49,7 @@ export const Part5MessageView = ({ source }: MessageViewInputProps) => {
                         fullWidth
                         label="Mail To"
                         source={`${source}.recipient.mail`}
-                        validate={validateEmailsList}
+                        validate={[required(), validateEmailsList]}
                     />
                     <TextInput
                         fullWidth
