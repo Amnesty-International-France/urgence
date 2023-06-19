@@ -6,7 +6,7 @@ const styles = {
     height: 'auto',
     maxWidth: 200,
     width: '100%',
-    margin: '1rem 0',
+    margin: '0.5rem 0',
     '& .preview-title': {
         marginBottom: '0.5rem',
         textAlign: 'center',
@@ -47,7 +47,6 @@ const PreviewQrCodeUnstyled = ({ className }: { className?: string }) => {
 
     return (
         <div className={className}>
-            <span className="preview-title">Preview</span>
             <a
                 href={`${process.env.REACT_APP_FRONT_BASE_URL}/ua/${record.slug}`}
                 target="_blank"

@@ -63,16 +63,16 @@ const StoryStepInput = ({ source }: StoryTemplateInputProps) => (
 export const StoryTemplateInput = ({ source }: StoryTemplateInputProps) => {
     const { index } = useSimpleFormIteratorItem();
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                alignItems: 'start',
-                width: '100%',
-            }}
-        >
-            <FormDataConsumer>
-                {({ formData }: { formData: FormData }) => (
-                    <>
+        <FormDataConsumer>
+            {({ formData }: { formData: FormData }) => (
+                <>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'start',
+                            width: '100%',
+                        }}
+                    >
                         <Card size="mobile">
                             {index === 0 ? (
                                 <StoryCoverInput source={source} />
@@ -104,35 +104,37 @@ export const StoryTemplateInput = ({ source }: StoryTemplateInputProps) => {
                                     }
                                 </StorySlide>
                             </FrontPreview>
-                            {index === 0 && (
-                                <FrontPreview previewDevice="desktop">
-                                    <StorySlide
-                                        className=""
-                                        step={
-                                            formData.story
-                                                ? {
-                                                      ...defaultFormData,
-                                                      ...formData.story[index],
-                                                  }
-                                                : {
-                                                      ...defaultFormData,
-                                                  }
-                                        }
-                                    >
-                                        {(props: any) =>
-                                            index === 0 ? (
-                                                <StoryCover {...props} className="cover" />
-                                            ) : (
-                                                <StoryStep {...props} />
-                                            )
-                                        }
-                                    </StorySlide>
-                                </FrontPreview>
-                            )}
                         </Box>
-                    </>
-                )}
-            </FormDataConsumer>
-        </Box>
+                    </Box>
+                    {index === 0 && (
+                        <Box sx={{ flex: 1 }}>
+                            <FrontPreview previewDevice="desktop">
+                                <StorySlide
+                                    className=""
+                                    step={
+                                        formData.story
+                                            ? {
+                                                  ...defaultFormData,
+                                                  ...formData.story[index],
+                                              }
+                                            : {
+                                                  ...defaultFormData,
+                                              }
+                                    }
+                                >
+                                    {(props: any) =>
+                                        index === 0 ? (
+                                            <StoryCover {...props} className="cover" />
+                                        ) : (
+                                            <StoryStep {...props} />
+                                        )
+                                    }
+                                </StorySlide>
+                            </FrontPreview>
+                        </Box>
+                    )}
+                </>
+            )}
+        </FormDataConsumer>
     );
 };

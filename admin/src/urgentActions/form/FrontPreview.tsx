@@ -11,7 +11,7 @@ export const FrontPreview = ({ children, previewDevice }: FrontPreviewProps) => 
         <Box
             sx={{
                 height: 600,
-                width: previewDevice === 'mobile' ? 375 : 650,
+                width: previewDevice === 'mobile' ? 375 : 850,
                 margin: '1rem',
                 overflow: 'auto',
                 fontFamily: "'Amnesty Trade Gothic', 'Arial', sans-serif",
