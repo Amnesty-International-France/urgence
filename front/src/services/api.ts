@@ -94,3 +94,12 @@ export const addResponseCount = (id: any) =>
             'content-type': 'application/json',
         },
     }).then((res) => res.json());
+
+export const recordMailto = (id: any, status: string) =>
+    fetch(`${process.env.REACT_APP_API_URL}/campaign/${id}/record-mailto`, {
+        method: 'POST',
+        body: JSON.stringify({ status }),
+        headers: {
+            'content-type': 'application/json',
+        },
+    });

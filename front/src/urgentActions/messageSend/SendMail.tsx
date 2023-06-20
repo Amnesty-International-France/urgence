@@ -1,12 +1,12 @@
 import get from 'lodash.get';
 import { compose } from 'recompose';
+import { useState } from 'react';
 
 import { withSessionData } from '../../DataContext';
-import { isCorrectEmail } from '../../themes/Input';
 import MailTo from '../../themes/MailTo';
 import { templateToBodyText } from '../messageView/templateToBodyText';
 
-import { addCampaignMember, addResponseCount } from '../../services/api';
+import { addCampaignMember, addResponseCount, recordMailto } from '../../services/api';
 
 type OwnProps = {
     className?: string;
@@ -58,12 +58,17 @@ export const SendMail = ({
     registered,
     setRegistered,
 }: Props) => {
-    const handleAfterMail = () => {
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleAfterMail = (e: any, failed: boolean) => {
+        setIsLoading(true);
         addResponseCount(auId);
+        recordMailto(auId, failed ? 'failure' : 'success');
 
         let isRegistered = registered;
         return addCampaignMember(auId, { email, firstname, lastname, civility })
             .then((result) => {
+                setIsLoading(false)
                 if (result.errors && result.errors.length) {
                     // eslint-disable-next-line no-console
                     console.log(
@@ -74,17 +79,15 @@ export const SendMail = ({
                 isRegistered = get(result, 'data.addCampaignMember.registered', false);
                 setRegistered(isRegistered ? 'true' : 'false');
             })
-            .catch(() => {})
+            .catch(() => {setIsLoading(false)})
             .then(() => {
-                afterMail({ registered: isRegistered });
+                afterMail({ failed, registered: isRegistered });
             });
     };
 
     const body = templateToBodyText(messageTemplate, civility, firstname, lastname);
-
     return (
         <MailTo
-            disabled={!isCorrectEmail(email) || !object || !civility || !firstname || !lastname}
             label={label}
             recipient={recipient}
             subject={object}
@@ -93,12 +96,9 @@ export const SendMail = ({
             analyticsCategory={analyticsCategory}
             match={match}
             step={step}
+            disabled={isLoading}
         />
     );
-};
-
-SendMail.defaultProps = {
-    onMailSent: () => {},
 };
 
 export default compose(withSessionData)(SendMail);

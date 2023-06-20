@@ -43,6 +43,7 @@ type InputProps1 = {
     staticContext?: any;
     step?: string;
     value: string;
+    required?: boolean;
 };
 
 type InputState1 = any;
@@ -78,6 +79,7 @@ export class Input extends Component<InputProps1, InputState1> {
             step,
             params: { slug },
             value,
+            required = false,
             ...otherProps
         } = this.props;
         const { showError, showValid } = this.state;
@@ -95,6 +97,7 @@ export class Input extends Component<InputProps1, InputState1> {
                     value={value}
                     error={showError && error}
                     helperText={error ? helperText : ''}
+                    required={required}
                     InputProps={{
                         // @ts-ignore
                         endAdornment: <CheckAdornment isValid={showValid} />,

@@ -14,6 +14,7 @@ import { withSessionData } from '../../DataContext';
 
 import LegalInformation from '../LegalInformation';
 import Form from './Form';
+import { isValid as isValidUserInformation } from '../messageSend/MessageSend';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -55,6 +56,19 @@ const styles = {
     '& .form-step': {
         margin: '1em 0',
     },
+    '& .register-disabled': {
+        display: 'block',
+        backgroundColor: '#b7b7b7',
+        alignItems: 'center',
+        fontWeight: 'bold',
+        fontSize: '26px',
+        padding: '0 1em',
+        lineHeight: '42px',
+        minWidth: '42px',
+        color: '#f2f2f2',
+        textTransform: 'uppercase',
+        fontFamily: 'Amnesty Trade Gothic Condensed',
+    },
     '@media (min-width: 1024px)': {
         fontSize: '24px',
         '&.paper': {
@@ -66,12 +80,34 @@ const styles = {
             },
         },
     },
+    '@media (max-width: 1024px)': {
+        '& .register-disabled': {
+            width: '100%',
+            textAlign: 'center',
+        },
+    },
 };
 
 const isDisabled = (props: any) => {
     const { firstname, lastname, phone, email } = props;
     return !firstname || !lastname || !isCorrectPhone(phone) || !isCorrectEmail(email);
 };
+
+type IsValidProps = {
+    civility?: string;
+    firstname?: string;
+    lastname?: string;
+    email?: string;
+    phone?: string;
+};
+
+export const isValid = ({civility, firstname, lastname, email, phone}: IsValidProps): boolean => {
+    if (!isValidUserInformation({civility, firstname, lastname, email})) {
+        return false;
+    }
+
+    return isCorrectPhone(phone);
+}
 
 type RegisterActivistProps = {
     className?: string;
@@ -108,6 +144,7 @@ export const RegisterActivist = ({
     const title = get(data, 'title');
     const text = get(data, 'text');
     const phoneIndication = get(data, 'phone_indication');
+    const displayAction = isValid({firstname, lastname, phone, email, civility});
 
     return (
         <div className={classnames('register', className)}>
@@ -126,9 +163,10 @@ export const RegisterActivist = ({
                     <Form phoneIndication={phoneIndication} {...props} />
                 </div>
             </Paper>
-            <div className="action">
+            {displayAction && <div className="action">
                 {action(isDisabled(props), { firstname, lastname, phone, email, civility })}
-            </div>
+            </div>}
+            {!displayAction && <div className="action"><div className="register-disabled">Je m'inscris</div></div>}
             <LegalInformation content={gdprRegister} />
         </div>
     );

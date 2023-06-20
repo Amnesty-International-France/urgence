@@ -2,7 +2,7 @@ version: '3'
 
 services:
     test:
-        image: node:18
+        image: node:18.15.0
         user: '${UID}:${GID}'
         command: 'yarn run test'
         working_dir: /app/api/

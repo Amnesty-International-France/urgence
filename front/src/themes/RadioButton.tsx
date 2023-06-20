@@ -45,6 +45,7 @@ type Props = {
     step?: string;
     // @ts-expect-error TS(2749): 'paramsType' refers to a value, but is being used ... Remove this comment to see the full error message
     params?: paramsType;
+    required?: boolean;
 };
 
 type State = any;
@@ -67,6 +68,7 @@ export class RadioButton extends Component<Props, State> {
             value,
             onChange,
             error,
+            required = false
         } = this.props;
 
         const { showError } = this.state;
@@ -93,6 +95,7 @@ export class RadioButton extends Component<Props, State> {
                                 onBlur={() => {
                                     this.showErrorState();
                                 }}
+                                required={required}
                             />
                             <label htmlFor={index.toString()}>{item}</label>
                         </div>

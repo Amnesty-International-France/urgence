@@ -5,8 +5,43 @@ import MobileDetect from 'mobile-detect';
 import { Component } from 'react';
 import withRouter from '../withRouter';
 import { styles } from './Link';
+import { Wait } from '../icons';
 
-export const buildMailDest = (recipient: any, subject: any, body: any) => {
+const waitStyles = {
+    display: 'block',
+    backgroundColor: '#b7b7b7',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    fontSize: '20px',
+    padding: '0 1em',
+    lineHeight: '42px',
+    minWidth: '42px',
+    color: '#f2f2f2',
+    textTransform: 'uppercase',
+    fontFamily: 'Amnesty Trade Gothic Condensed',
+
+    '@media (max-width: 1024px)': {
+        width: '100%',
+        textAlign: 'center',
+    },
+};
+const WaitWithoutStyle = ({ className }: { className?: string }) => {
+    return (
+        <div className={className}>
+            <Wait />
+        </div>
+    );
+};
+// @ts-expect-error TS(2769): No overload matches this call.
+const WaitWithStyle = styled(WaitWithoutStyle)(waitStyles);
+
+type Recipient = {
+    mail?: string;
+    copies_to?: string;
+    cci?: string;
+};
+
+export const buildMailDest = (recipient: Recipient, subject: string, body: any) => {
     const mail = recipient.mail || 'example@mail.com';
     return `mailto:${encodeURIComponent(mail)}?subject=${encodeURIComponent(
         subject,
@@ -22,11 +57,7 @@ type Props = {
     body: string;
     label: string;
     disabled?: boolean;
-    recipient: {
-        mail: string;
-        copies_to?: string;
-        cci?: string;
-    };
+    recipient: Recipient;
     analyticsCategory?: string;
     step?: string;
     params?: any;
@@ -41,10 +72,6 @@ export class MailTo extends Component<Props> {
     }
 
     openMailer = (dest: any) => {
-        console.log('window', window);
-        console.log('dest', dest);
-        console.log(`window.open("${dest}", 'mailto')`);
-
         window.open(dest, 'mailto');
         window.focus();
         setTimeout(function () {
@@ -55,21 +82,17 @@ export class MailTo extends Component<Props> {
     };
 
     render() {
-        const {
-            recipient = {},
-            subject,
-            body,
-            label,
-            disabled,
-            afterMail,
-            className,
-        } = this.props;
+        const { recipient, subject, body, label, disabled, afterMail, className } = this.props;
 
         const dest = buildMailDest(recipient, subject, body);
         const isIphone = this.md.is('iPhone');
         const options = {};
         if (isIphone) {
             (options as any).href = dest;
+        }
+
+        if (disabled) {
+            return <WaitWithStyle />;
         }
         return (
             <a
@@ -78,7 +101,15 @@ export class MailTo extends Component<Props> {
                     if (!isIphone) {
                         this.openMailer(dest);
                     }
-                    setTimeout(() => afterMail(event), 500);
+                    setTimeout(
+                        () =>
+                            afterMail(
+                                event,
+                                navigator.userAgent.indexOf('Win') !== -1 &&
+                                    window.document.hasFocus(),
+                            ),
+                        500,
+                    );
                 }}
                 target={isIphone ? 'mailto' : '_self'}
                 rel="noopener noreferrer"

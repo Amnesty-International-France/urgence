@@ -27,6 +27,8 @@ stop: ## Stop the project with docker. Usage `make stop`.
 
 logs:
 	$(DOCKER_COMPOSE) logs -f
+logs-api:
+	$(DOCKER_COMPOSE) logs api -f
 
 connect-api:
 	$(DOCKER_COMPOSE) exec api bash

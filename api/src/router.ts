@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import { Router } from 'express';
 import { getMetaDataTemplateBySlug } from './urgentActions/metadata';
+import { incrementMailtoCounter } from './urgentActions/repository';
 
 const router = Router();
 
@@ -14,6 +15,16 @@ router.get(/metadata/, async (req, res, next) => {
     const metadata = await getMetaDataTemplateBySlug(slug);
 
     return res.send(metadata);
+});
+
+router.post('/campaign/:id/record-mailto', async (req, res) => {
+    try {
+        await incrementMailtoCounter(req.params.id, req.body.status);
+        res.status(204).send();
+    } catch (error: any) {
+        console.log(error)
+        res.status(500).send({ msg: "An error occurred while managing the campaign's mailto counter." })
+    }
 });
 
 if (process.env.NODE_ENV === 'test') {

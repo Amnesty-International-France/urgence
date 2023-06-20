@@ -77,6 +77,8 @@ export type UrgentActionDb = {
     last_edition_date?: string;
     social_metadata: string;
     response_count: number;
+    mailto_count: number;
+    mailto_errors: number;
 };
 
 export type UrgentAction = {
@@ -94,6 +96,8 @@ export type UrgentAction = {
     creation_date: string; // TODO Verify if this is a string or a Object
     last_edition_date?: string; // TODO Verify if this is a string or a Object
     response_count: number;
+    mailto_count: number;
+    mailto_errors: number;
 
     story: StoryStep[];
     social_metadata: SocialMetadata;
@@ -189,3 +193,12 @@ export const removeDefaultToOther = async (id: string) =>
 
 export const removeUrgentAction = async (id: string) =>
     client<UrgentActionDb>(table).where({ id }).delete();
+
+
+export const incrementMailtoCounter = async (actionId: string, status: string) => {
+    if (status === 'failure') {
+        return client.raw('update urgent_action set mailto_count = mailto_count + 1, mailto_errors = mailto_errors + 1 where id = ?', [actionId])
+    } else {
+        return client.raw('update urgent_action set mailto_count = mailto_count + 1 where id = ?', [actionId]);
+    }
+}
