@@ -43,7 +43,7 @@
     },
     "packageManager": "yarn@3.2.1",
     "engines": {
-        "node": "18.16.0"
+        "node": "18.15.0"
     },
     "resolutions": {
         "@apollo/client": "3.8.0-alpha.12"

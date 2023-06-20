@@ -9,7 +9,7 @@ variables:
     CI: 'false'
 
 .build: &build
-    image: node:18.16.0
+    image: node:18.15.0
     tags:
         - yarn
     stage: build
