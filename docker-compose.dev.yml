@@ -2,7 +2,7 @@ version: '3'
 
 services:
     admin:
-        image: node:18
+        image: node:18.16.0
         user: '${UID}:${GID}'
         command: 'yarn run start'
         working_dir: /app/admin
@@ -51,7 +51,7 @@ services:
             - PGDATA=/var/lib/postgresql/data/amnesty
 
     amnesty-components:
-        image: node:18
+        image: node:18.16.0
         user: '${UID}:${GID}'
         command: 'yarn start'
         environment:
@@ -62,7 +62,7 @@ services:
         working_dir: /app/amnesty-components
 
     front:
-        image: node:18
+        image: node:18.16.0
         user: '${UID}:${GID}'
         command: 'yarn run start-web'
         working_dir: /app/front
