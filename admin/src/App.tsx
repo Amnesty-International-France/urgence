@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useEffect, useState } from 'react';
-import { Admin, DataProvider, Resource } from 'react-admin';
+import { Admin, DataProvider, Resource, localStorageStore } from 'react-admin';
 import { authProvider } from './authentication/authProvider';
 import CustomLoginPage from './authentication/CustomLoginPage';
 import { getApolloClient } from './dataProvider';
@@ -11,9 +11,17 @@ import { theme } from './theme';
 import urgentActions from './urgentActions';
 
 const App = () => {
+    const store = localStorageStore();
     const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
     useEffect(() => {
         getApolloClient().then((graphQlDataProvider) => setDataProvider(() => graphQlDataProvider));
+        // Collapse left menu by default
+        if (!store.getItem('sidebar.open')) {
+            store.setItem(
+                `sidebar.open`,
+                false,
+            );
+        }
     }, []);
 
     return (
@@ -26,7 +34,9 @@ const App = () => {
                     dataProvider={dataProvider}
                     authProvider={authProvider}
                     loginPage={CustomLoginPage}
+                    store={store}
                     requireAuth
+                    disableTelemetry
                 >
                     <Resource {...urgentActions} />
                     <Resource {...settings} />
