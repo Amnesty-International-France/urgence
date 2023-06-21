@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { FormDataConsumer, ImageInput, Labeled, required, TextInput } from 'react-admin';
 import { ImagePreview } from './ImagePreview';
-import { FormData, Medium } from './UrgentActionsForm';
+import { FormData, Medium } from './index';
 
 type MediumInputProps = {
     source: string;

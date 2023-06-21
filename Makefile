@@ -29,9 +29,15 @@ logs:
 	$(DOCKER_COMPOSE) logs -f
 logs-api:
 	$(DOCKER_COMPOSE) logs api -f
+logs-admin:
+	$(DOCKER_COMPOSE) logs admin -f
+logs-front:
+	$(DOCKER_COMPOSE) logs front -f
 
 connect-api:
 	$(DOCKER_COMPOSE) exec api bash
+connect-admin:
+	$(DOCKER_COMPOSE) exec admin bash
 
 #### TESTS ####
 

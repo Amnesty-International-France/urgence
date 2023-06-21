@@ -1,12 +1,10 @@
-import { Create, SimpleForm } from 'react-admin';
-import { UrgentActionsForm } from './UrgentActionsForm';
+import { Create } from 'react-admin';
+import ActionForm from './form';
 
 export const UrgentActionsCreate = () => {
     return (
         <Create>
-            <SimpleForm>
-                <UrgentActionsForm />
-            </SimpleForm>
+            <ActionForm />
         </Create>
     );
 };
