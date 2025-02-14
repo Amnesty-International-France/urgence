@@ -14,7 +14,7 @@ You can now access different applications:
 -   Admin: http://localhost:5000
 -   Front app: http://localhost:3000
 
-## Documentatino
+## Documentation
 
 The project is partly documented.
 
