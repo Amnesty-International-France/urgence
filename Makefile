@@ -12,6 +12,7 @@ DOCKER_COMPOSE = docker compose -p reaction-rapide -f docker-compose.yml -f dock
 DOCKER_COMPOSE_INSTALL = docker compose -p reaction-rapide -f docker-compose.install.yml
 DOCKER_COMPOSE_TEST = docker compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
 DOCKER_COMPOSE_E2E = docker compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
+DOCKER_COMPOSE_DOC = docker compose -p reaction-rapide-doc -f docker-compose.doc.yml
 
 install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install yarn
@@ -136,20 +137,19 @@ clean: # Clean the build folder and stop all docker. Usage `make clean`.
 #---------------
 # Documentation
 #---------------
+doc-start: ## Start documentation tool
+	@$(DOCKER_COMPOSE_DOC) up -d
+
+doc-start: ## Stop documentation tool
+	@$(DOCKER_COMPOSE_DOC) up -d
+
 doc-logs: ## View doc site logs
-	@$(DOCKER_COMPOSE) logs -f documentation
+	@$(DOCKER_COMPOSE_DOC) logs -f documentation
 
 doc-connect: ## Connection to the documentation container
-	@$(DOCKER_COMPOSE) exec documentation bash
+	@$(DOCKER_COMPOSE_DOC) exec documentation bash
 
-doc-new-adr: ## Create a new ADR
-	@$(DOCKER_COMPOSE) run --rm --no-deps documentation bash -ci '\
-		cd /documentation && ./new-adr.sh'
+doc-new-content: ## Create a new content
+	@$(DOCKER_COMPOSE_DOC) run --rm --no-deps documentation bash -ci '\
+		cd /documentation && ./new-content.sh'
 
-doc-new-doc: ## Create a new document
-	@$(DOCKER_COMPOSE) run --rm --no-deps documentation bash -ci '\
-		cd /documentation && ./new-docs.sh'
-
-doc-generate: ## Génération des fichier statique de documentation
-	@$(DOCKER_COMPOSE) run --rm --no-deps documentation bash -ci '\
-		cd /documentation && hugo'
