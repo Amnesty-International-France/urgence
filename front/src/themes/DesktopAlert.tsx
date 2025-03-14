@@ -1,6 +1,5 @@
-import { Query } from '@apollo/client/react/components';
-import gql from 'graphql-tag';
-import React, { useEffect } from 'react';
+import { useQuery, gql } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
 
 import Alert from './Alert';
 
@@ -15,7 +14,8 @@ const query = gql`
 `;
 
 const DesktopAlert = () => {
-    const [show, setShow] = React.useState(false);
+    const [show, setShow] = useState(false);
+    const { data, loading, error } = useQuery(query);
 
     useEffect(() => {
         const url = window.location.href;
@@ -24,17 +24,11 @@ const DesktopAlert = () => {
         }
     }, []);
 
-    return (
-        <Query query={query}>
-            {({ data, loading, error }: any) => {
-                if (loading || error || !show) {
-                    return null;
-                }
-                // @ts-ignore
-                return <Alert message={data.SettingByType.content} />;
-            }}
-        </Query>
-    );
+    if (!show || loading || error) {
+        return null;
+    }
+    // @ts-ignore
+    return <Alert message={data?.SettingByType?.content} />;
 };
 
 export default DesktopAlert;
