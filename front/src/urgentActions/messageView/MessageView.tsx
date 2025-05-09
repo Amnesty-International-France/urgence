@@ -17,6 +17,9 @@ const styles = {
     fontSize: '18px',
     padding: '60px 15px 20px',
     height: 'calc(100vh - 30px)',
+    '@media (orientation: landscape)': {
+        padding: '60px 100px 20px 15px',
+    },
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',

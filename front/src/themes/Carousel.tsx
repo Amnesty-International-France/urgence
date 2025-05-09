@@ -106,7 +106,7 @@ export const Carousel = ({
                     className={classnames('swiper-button-prev left', current === 1 ? 'hidden' : '')}
                 >
                     <IconButton className={classnames('left transparent previous-arrow')}>
-                        <FontAwesomeIcon icon={faArrowLeft} className="icon" />
+                        <FontAwesomeIcon icon={faArrowLeft} className="icon" color={black}/>
                     </IconButton>
                 </div>
                 <div

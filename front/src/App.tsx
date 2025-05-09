@@ -10,7 +10,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import ErrorPage from './ErrorPage';
 import HomePage from './HomePage';
 import generateUrl from './services/generateUrl';
-import AppBackground from './themes/AppBackground';
 import DesktopAlert from './themes/DesktopAlert';
 import RouterScrollToTop from './themes/RouterScrollToTop';
 import UrgentAction from './urgentActions/UrgentAction';
@@ -33,15 +32,17 @@ const App = ({ className, client }: { className?: string; client: ApolloClient<u
                 <ThemeProvider>
                     <Div100Vw>
                         <Div100Vh className={className}>
-                            <AppBackground />
                             <AppLogo />
                             <DesktopAlert />
                             <BrowserRouter>
                                 <RouterScrollToTop>
                                     <Routes>
                                         <Route path={generateUrl('home')} element={<HomePage />} />
-                                        <Route path={generateUrl('error')} element={<ErrorPage />} />
-                                        <Route path="/ua/:slug" element={<UrgentAction />} >
+                                        <Route
+                                            path={generateUrl('error')}
+                                            element={<ErrorPage />}
+                                        />
+                                        <Route path="/ua/:slug" element={<UrgentAction />}>
                                             <Route path=":step" element={<UrgentAction />}>
                                                 <Route path=":page/*" element={<UrgentAction />} />
                                             </Route>
