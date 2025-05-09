@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import get from 'lodash.get';
 import Paper from '@mui/material/Paper';
 
-import { white, black } from '../../themes/colors';
+import { white, black, yellow } from '../../themes/colors';
 import RichText from '../../themes/RichText';
 import MobileDetect from 'mobile-detect';
 
@@ -62,11 +62,11 @@ const styles = {
     '& .ql-size-huge, & .rich-text > h1': {
         display: 'inline',
         color: black,
-        backgroundColor: white,
+        backgroundColor: yellow,
         fontSize: '36px',
         lineHeight: '54px',
         padding: '6px 0',
-        boxShadow: `12px 0 0 ${white}, -12px 0 0 ${white}`,
+        boxShadow: `12px 0 0 ${yellow}, -12px 0 0 ${yellow}`,
         boxDecorationBreak: 'clone',
         '@media (min-width: 1024px)': {
             fontSize: '72px',
