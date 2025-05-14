@@ -4,6 +4,8 @@ import get from 'lodash.get';
 import LeftSideColumn from './LeftSideColumn';
 import RightSideColumn from './RightSideColumn';
 import { yellow } from 'amnesty-components';
+import generateUrl from '../../services/generateUrl';
+import VerticalNavigation from './VerticalNavigation';
 
 const styles = {
     position: 'relative',
@@ -24,7 +26,7 @@ const styles = {
     },
     '& .right': {
         position: 'relative',
-    }
+    },
 };
 
 type UrgentActionLayoutProps = {
@@ -46,6 +48,13 @@ const UrgentActionLayout = ({ className, slug, step, data, page }: UrgentActionL
     const croppedImageSrc = imageSrc.replace(lastUrlParam, '/crop-$1');
     const imagePath = `url(${croppedImageSrc}), url(${imageSrc})`;
 
+    const storyLink = story.map((story: any, index: number) => `/ua/${slug}/story/${index}`);
+    const actLink = get(data, 'UrgentAction.call_to_action') ? generateUrl('act', { slug }) : '';
+    const messageViewLink = get(data, 'UrgentAction.message.text_view') ? generateUrl('message-view', { slug }) : '';
+    const messageSendLink = get(data, 'UrgentAction.message.text_send') ? generateUrl('message-send', { slug }) : '';
+
+    let links = [...storyLink, actLink, messageViewLink, messageSendLink];
+
     return (
         <div className={className}>
             <LeftSideColumn // @ts-ignore
@@ -54,11 +63,15 @@ const UrgentActionLayout = ({ className, slug, step, data, page }: UrgentActionL
                 page={page}
                 step={step}
             />
+            <VerticalNavigation // @ts-ignore
+                links={links}
+                step={step}
+            />
             <RightSideColumn // @ts-ignore
                 data={globalData}
                 step={step}
-                page={page}
                 slug={slug}
+                links={links}
             />
         </div>
     );

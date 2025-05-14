@@ -1,16 +1,19 @@
 import styled from '@emotion/styled';
 import { black, RichText, yellow } from 'amnesty-components';
 import ToUrgentActionPageLink from '../ToUrgentActionPageLink';
-import get from 'lodash.get';
 import classnames from 'classnames';
 import generateUrl from '../../services/generateUrl';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
+import MessageView from '../messageView/MessageView';
+import ToMessageSendButton from '../messageView/ToMessageSendButton';
+import MessageSend from '../messageSend/MessageSend';
+import SendMail from '../messageSend/SendMail';
 
 const styles = {
     height: '100%',
     transition: ' transform .5s ease-in-out',
-    '& .item': {
+    '& > .item': {
         position: 'absolute',
         width: '100%',
         height: '100%',
@@ -52,7 +55,7 @@ const styles = {
         },
     },
 
-    '& .item.yellow': {
+    '& > .item.yellow': {
         padding: '0 6rem 0 3rem',
         display: 'flex',
         gap: '34px',
@@ -123,44 +126,36 @@ const styles = {
         },
     },
 
-    '& .item.none': {
+    '& > .item.message-view': {
+        display: 'flex',
+        alignItems: 'center'
+    },
+
+    '& > .item.none': {
         display: 'none !important',
     },
-    '& .item.current': {
+    '& > .item.current': {
         opacity: 1,
         transform: 'translate(-50%, -50%) scale(100%)',
     },
-    '& .item.before': {
+    '& > .item.before': {
         top: 0,
     },
-    '& .item.after': {
+    '& > .item.after': {
         top: '100%',
     },
 };
 
 type RightSideColumnProps = {
+    links: any;
     className?: string;
     step?: string;
     data: any;
-    page?: string;
     slug?: string;
 };
-const RightSideColumn = ({ className, data, step, page, slug }: RightSideColumnProps) => {
+const RightSideColumn = ({ className, data, step, slug, links }: RightSideColumnProps) => {
     const { pathname } = useLocation();
-
-    const story = get(data, 'story');
-
-    const act = get(data, 'call_to_action');
-    const messageView = get(data, 'message.text_view');
-    const messageSend = get(data, 'message.text_send');
-
-    const storyLink = story.map((story: any, index: number) => `/ua/${slug}/story/${index}`);
-
-    const actLink = act ? generateUrl('act', { slug }) : '';
-    const messageViewLink = messageView ? generateUrl('message-view', { slug }) : '';
-    const messageSendLink = messageSend ? generateUrl('message-send', { slug }) : '';
-
-    let links = [...storyLink, actLink, messageViewLink, messageSendLink];
+    const navigate = useNavigate();
 
     let linkIndex = links.indexOf(pathname);
 
@@ -198,8 +193,7 @@ const RightSideColumn = ({ className, data, step, page, slug }: RightSideColumnP
                         className={classnames(
                             'item yellow',
                             linkIndex === data.story.length && 'current',
-                        )}
-                    >
+                        )}>
                         {data.call_to_action.progress.display && (
                             <div className="progress">
                                 <div className="progressChart">
@@ -246,6 +240,52 @@ const RightSideColumn = ({ className, data, step, page, slug }: RightSideColumnP
                                 buttonName="OpenMessageView"
                             />
                         </div>
+                    </div>
+                    <div className={classnames(
+                        'item message-view',
+                        linkIndex === data.story.length + 1 && 'current',
+                    )}>
+                        <MessageView // @ts-ignore
+                            text={data.message.text_view}
+                            objectIndication={data.message.object_indication}
+                            objectExample={data.message.object_example}
+                            messageTemplate={data.message.message_template}
+                            step={step}
+                            action={
+                                <ToMessageSendButton
+                                    label={data.message.button_view}
+                                    step={step}
+                                    pageName="message-send"
+                                    objectExample={data.message.object_example}
+                                    buttonName="OpenMessageSend"
+                                />
+                            }
+                        />
+                    </div>
+                    <div className={classnames(
+                        'item message-send',
+                        linkIndex === data.story.length + 2 && 'current',
+                    )}>
+                        <MessageSend // @ts-ignore
+                            text={data.message.text_send}
+                            messageTemplate={data.message.text_send}
+                            step={step}
+                            action={
+                                <SendMail // @ts-ignore
+                                    label={data.message.button_send}
+                                    step={step}
+                                    recipient={data.message.recipient}
+                                    messageTemplate={data.message.message_template}
+                                    auId={data.id}
+                                    afterMail={({ failed, registered }: any) => {
+                                        if (failed) {
+                                            global.console.log('Failed to open mailto link');
+                                        }
+                                        navigate(generateUrl(registered ? 'share' : 'register', { slug }));
+                                    }}
+                                />
+                            }
+                        />
                     </div>
                 </div>
             </div>

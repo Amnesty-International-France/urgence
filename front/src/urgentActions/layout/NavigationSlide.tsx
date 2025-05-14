@@ -11,6 +11,7 @@ const styles = {
     position: 'absolute',
     bottom: '1rem',
     right: '1rem',
+    zIndex: '10',
 
     '& .up, .down': {
         width: '3.6rem',
@@ -62,14 +63,13 @@ type NavigationSlideProps = {
     className?: string;
     links?: any;
     step: string;
-    page: any;
 };
 
-const NavigationSlide = ({ className, links, step, page }: NavigationSlideProps) => {
+const NavigationSlide = ({ className, links, step }: NavigationSlideProps) => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
     let index = links.indexOf(pathname);
-    
+
 
     const nextPage = () => {
         if (index >= links.length) {
