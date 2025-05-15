@@ -3,6 +3,9 @@ import { black } from 'amnesty-components';
 import { useLocation, useNavigate } from 'react-router';
 
 const styles = {
+    position: 'absolute',
+    top: '2rem',
+    right: '1rem',
     display: 'flex',
     flexDirection: 'column',
     width: '3.6rem',
