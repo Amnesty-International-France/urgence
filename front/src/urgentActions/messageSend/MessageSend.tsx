@@ -13,10 +13,11 @@ const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
     padding: '60px 15px 20px',
+    height: 'calc(100vh - 30px)',
     '@media (orientation: landscape)': {
         padding: '60px 120px 20px 60px',
+        minHeight: 'calc(100vh - 30px)',
     },
-    height: 'calc(100vh - 30px)',
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',

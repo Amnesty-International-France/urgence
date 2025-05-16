@@ -15,12 +15,12 @@ import MessageView from './messageView/MessageView';
 import ToMessageSendButton from './messageView/ToMessageSendButton';
 import Register from './register/Register';
 import RegisterButton from './register/RegisterButton';
-import ShareStep from './share/ShareStep';
 import Story from './story/Story';
 import ThankStep, { ThanksType } from './ThankStep';
-import UrgentActionLayout from './layout/UrgentActionLayout';
 import MobileDetect from 'mobile-detect';
 import Stepper from '../themes/Stepper';
+import ShareStep from './share/ShareStep';
+import UrgentActionLayout from './layout/UrgentActionLayout';
 
 const query = gql`
     query urgentActionBySlug($slug: String!) {
@@ -161,141 +161,138 @@ export const UrgentAction = ({ slug, step, data, page }: UrgentActionProps) => {
         return <Navigate to={generateUrl('story', { slug })} />;
     }
 
-    if (step === 'story' || step === 'act' || step === 'message-view' || step === 'message-send') {
-        if (isOnMobile()) {
-            const callToAction = get(data, 'UrgentAction.call_to_action');
-            const responseCount = get(data, 'UrgentAction.response_count');
-            const id = get(data, 'UrgentAction.id');
 
-            if (step === 'message-view') {
-                const text = get(data, 'UrgentAction.message.text_view');
-                const objectIndication = get(data, 'UrgentAction.message.object_indication');
-                const objectExample = get(data, 'UrgentAction.message.object_example');
-                const messageTemplate = get(data, 'UrgentAction.message.message_template');
-                const buttonView = get(data, 'UrgentAction.message.button_view', 'Suivant');
+    if (isOnMobile()) {
+        const callToAction = get(data, 'UrgentAction.call_to_action');
+        const responseCount = get(data, 'UrgentAction.response_count');
+        const id = get(data, 'UrgentAction.id');
 
-                return (
-                    <MessageView // @ts-ignore
-                        text={text}
-                        objectIndication={objectIndication}
-                        objectExample={objectExample}
-                        messageTemplate={messageTemplate}
-                        step={step}
-                        action={
-                            <ToMessageSendButton
-                                label={buttonView}
-                                step={step}
-                                pageName="message-send"
-                                objectExample={objectExample}
-                                buttonName="OpenMessageSend"
-                            />
-                        }
-                    />
-                );
-            }
-
-            if (step === 'message-send') {
-                const id = get(data, 'UrgentAction.id');
-                const text = get(data, 'UrgentAction.message.text_send') as string;
-                const messageTemplate = get(data, 'UrgentAction.message.message_template');
-                const recipient = get(data, 'UrgentAction.message.recipient');
-                const buttonSend = get(data, 'UrgentAction.message.button_send', 'J\'envoie');
-                const gdprMessage = get(data, 'GdprMessage.content');
-
-                return (
-                    <MessageSend // @ts-ignore
-                        text={text}
-                        messageTemplate={messageTemplate}
-                        gdprMessage={gdprMessage}
-                        step={step}
-                        action={
-                            <SendMail // @ts-ignore
-                                label={buttonSend}
-                                step={step}
-                                recipient={recipient}
-                                messageTemplate={messageTemplate}
-                                auId={id}
-                                afterMail={({ failed, registered }: any) => {
-                                    if (failed) {
-                                        global.console.log('Failed to open mailto link');
-                                    }
-                                    navigate(generateUrl(registered ? 'share' : 'register', { slug }));
-                                }}
-                            />
-                        }
-                    />
-                );
-            }
+        if (step === 'message-view') {
+            const text = get(data, 'UrgentAction.message.text_view');
+            const objectIndication = get(data, 'UrgentAction.message.object_indication');
+            const objectExample = get(data, 'UrgentAction.message.object_example');
+            const messageTemplate = get(data, 'UrgentAction.message.message_template');
+            const buttonView = get(data, 'UrgentAction.message.button_view', 'Suivant');
 
             return (
-                <Story // @ts-ignore
-                    story={story}
+                <MessageView // @ts-ignore
+                    text={text}
+                    objectIndication={objectIndication}
+                    objectExample={objectExample}
+                    messageTemplate={messageTemplate}
                     step={step}
-                    callToAction={callToAction}
-                    responseCount={responseCount}
-                    auId={id}
-                />
-            );
-        } else {
-            return (
-                <UrgentActionLayout // @ts-ignore
-                    slug={slug}
-                    step={step}
-                    data={data}
-                    page={page}
+                    action={
+                        <ToMessageSendButton
+                            label={buttonView}
+                            step={step}
+                            pageName="message-send"
+                            objectExample={objectExample}
+                            buttonName="OpenMessageSend"
+                        />
+                    }
                 />
             );
         }
-    }
 
-    if (step === 'share') {
-        const emailThank = get(data, 'UrgentAction.email_thank');
+        if (step === 'message-send') {
+            const id = get(data, 'UrgentAction.id');
+            const text = get(data, 'UrgentAction.message.text_send') as string;
+            const messageTemplate = get(data, 'UrgentAction.message.message_template');
+            const recipient = get(data, 'UrgentAction.message.recipient');
+            const buttonSend = get(data, 'UrgentAction.message.button_send', 'J\'envoie');
+            const gdprMessage = get(data, 'GdprMessage.content');
+
+            return (
+                <MessageSend // @ts-ignore
+                    text={text}
+                    messageTemplate={messageTemplate}
+                    gdprMessage={gdprMessage}
+                    step={step}
+                    action={
+                        <SendMail // @ts-ignore
+                            label={buttonSend}
+                            step={step}
+                            recipient={recipient}
+                            messageTemplate={messageTemplate}
+                            auId={id}
+                            afterMail={({ failed, registered }: any) => {
+                                if (failed) {
+                                    global.console.log('Failed to open mailto link');
+                                }
+                                navigate(generateUrl(registered ? 'share' : 'register', { slug }));
+                            }}
+                        />
+                    }
+                />
+            );
+        }
+
+        if (step === 'share') {
+            const emailThank = get(data, 'UrgentAction.email_thank');
+
+            return (
+                <ShareStep // @ts-ignore
+                    slug={slug}
+                    step={step}
+                    data={emailThank}
+                />
+            );
+        }
+
+        if (step === 'register') {
+            const register = get(data, 'UrgentAction.register');
+
+            return (
+                <Register // @ts-ignore
+                    step={step}
+                    data={register}
+                    gdprRegister={get(data, 'GdprRegister.content')}
+                    action={(disabled: any, formValues: any) => (
+                        <RegisterButton
+                            auId={get(data, 'UrgentAction.id')}
+                            step={step}
+                            disabled={disabled}
+                            buttonText={get(register, 'button')}
+                            formValues={formValues}
+                        />
+                    )}
+                />
+            );
+        }
+
+        if (step === 'thanks-end') {
+            const thankEnd = get(data, 'UrgentAction.end_thank') as ThanksType | undefined;
+            const emailThank = get(data, 'UrgentAction.email_thank');
+
+            return (
+                <ThankStep // @ts-ignore
+                    data={thankEnd}
+                    slug={slug}
+                    step={step}
+                    dataShare={emailThank}
+                />
+            );
+        }
 
         return (
-            <ShareStep // @ts-ignore
-                slug={slug}
+            <Story // @ts-ignore
+                story={story}
                 step={step}
-                data={emailThank}
+                callToAction={callToAction}
+                responseCount={responseCount}
+                auId={id}
             />
         );
     }
 
-    if (step === 'register') {
-        const register = get(data, 'UrgentAction.register');
-
-        return (
-            <Register // @ts-ignore
-                step={step}
-                data={register}
-                gdprRegister={get(data, 'GdprRegister.content')}
-                action={(disabled: any, formValues: any) => (
-                    <RegisterButton
-                        auId={get(data, 'UrgentAction.id')}
-                        step={step}
-                        disabled={disabled}
-                        buttonText={get(register, 'button')}
-                        formValues={formValues}
-                    />
-                )}
-            />
-        );
-    }
-
-    if (step === 'thanks-end') {
-        const thankEnd = get(data, 'UrgentAction.end_thank') as ThanksType | undefined;
-        const emailThank = get(data, 'UrgentAction.email_thank');
-
-        return (
-            <ThankStep // @ts-ignore
-                data={thankEnd}
-                slug={slug}
-                step={step}
-                dataShare={emailThank}
-            />
-        );
-    }
-
-    return null;
+    return (
+        <UrgentActionLayout // @ts-ignore
+            slug={slug}
+            step={step}
+            data={data}
+            page={page}
+        />
+    );
 };
 
 const StepperContainer = styled('div')({
@@ -334,13 +331,13 @@ export const renderUrgentActionWithData =
                 <Fragment>
                     {
                         isOnMobile() &&
-                            <>
-                                <AppBackground />
-                                <StepperContainer>
-                                    <Stepper // @ts-ignore
-                                        data={data} step={step} page={page} />
-                                </StepperContainer>
-                            </>
+                        <>
+                            <AppBackground />
+                            <StepperContainer>
+                                <Stepper // @ts-ignore
+                                    data={data} step={step} page={page} />
+                            </StepperContainer>
+                        </>
                     }
                     {socialMetadata && <SEO socialMetadata={socialMetadata} />}
                     <UrgentAction slug={slug} step={step} data={data} page={page} />

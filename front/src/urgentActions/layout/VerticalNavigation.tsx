@@ -15,7 +15,14 @@ const styles = {
     top: '0',
     right: '0',
 };
+
 const VerticalNavigation = ({ links, className, step }: VerticalNavigationProps) => {
+    const filteredLink = links.filter((link: string) =>
+        !link.includes('/share') &&
+        !link.includes('/thanks-end') &&
+        !link.includes('/register'),
+    );
+
     return (
         <div className={className}>
             {
@@ -27,10 +34,10 @@ const VerticalNavigation = ({ links, className, step }: VerticalNavigationProps)
                 ) &&
                 <>
                     <RoundedStepper // @ts-ignore
-                        links={links}
+                        links={filteredLink}
                     />
                     <NavigationSlide // @ts-ignore
-                        links={links}
+                        links={filteredLink}
                         step={step}
                     />
                 </>
