@@ -9,10 +9,16 @@ import MessageView from '../messageView/MessageView';
 import ToMessageSendButton from '../messageView/ToMessageSendButton';
 import MessageSend from '../messageSend/MessageSend';
 import SendMail from '../messageSend/SendMail';
+import ShareStep from '../share/ShareStep';
+import Register from '../register/Register';
+import { RegisterButton } from '../register/RegisterButton';
+import get from 'lodash.get';
+import { ThankStep } from '../ThankStep';
 
 const styles = {
     height: '100%',
     transition: ' transform .5s ease-in-out',
+
     '& > .item': {
         position: 'absolute',
         width: '100%',
@@ -55,13 +61,17 @@ const styles = {
         },
     },
 
-    '& > .item.yellow': {
-        padding: '0 6rem 0 3rem',
+    '& > .item.yellow, & > .item.message-view, & > .item.share, & > .item.thanks-end, .item.register ': {
         display: 'flex',
-        gap: '34px',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+
+    '& > .item.yellow': {
+        padding: '0 6rem 0 3rem',
+        gap: '34px',
+
         '& p': {
             margin: 0,
         },
@@ -107,6 +117,7 @@ const styles = {
             fontFamily: 'Amnesty Trade Gothic Condensed',
             textTransform: 'uppercase',
             margin: 0,
+
             '@media (min-width: 1441px)': {
                 fontSize: '3rem!important',
             },
@@ -116,10 +127,12 @@ const styles = {
             textAlign: 'center',
             letterSpacing: '0',
             fontSize: '20px !important',
+            margin: 0,
+
             '@media (min-width: 1441px)': {
                 fontSize: '28px !important',
             },
-            margin: 0,
+
             '& strong': {
                 fontWeight: '700',
             },
@@ -127,9 +140,100 @@ const styles = {
     },
 
     '& > .item.message-view': {
-        display: 'flex',
-        alignItems: 'center'
+        '& > .message-view': {
+            overflowY: 'auto',
+        },
     },
+
+    '& > .item.share': {
+        '& > .share': {
+            height: 'fit-content',
+
+            '& .share-text': {
+                fontSize: '2rem',
+                textAlign: 'center',
+                letterSpacing: '0',
+                fontWeight: '700',
+                fontFamily: 'Amnesty Trade Gothic Condensed',
+                textTransform: 'uppercase',
+                margin: 0,
+
+                '@media (min-width: 1441px)': {
+                    fontSize: '3rem!important',
+                },
+            },
+        },
+    },
+
+    '& > .item.share > .share, & > .item.thanks-end > .thank': {
+        '& .share-block > .share-block-title, .share-text': {
+            fontSize: '16px !important',
+
+            '@media (min-width: 1441px)': {
+                fontSize: '20px !important',
+            },
+            margin: 0,
+
+            '& strong': {
+                fontWeight: '700',
+            },
+        },
+        '& .url': {
+            textAlign: 'center',
+            letterSpacing: '0',
+            fontSize: '20px !important',
+
+            '@media (min-width: 1441px)': {
+                fontSize: '28px !important',
+            },
+            margin: 0,
+            marginRight: '10px',
+
+            '& strong': {
+                fontWeight: '700',
+            },
+        },
+    },
+
+    '& > .item.thanks-end': {
+        '& > .thank': {
+            '@media (orientation: landscape)': {
+                padding: '60px 120px 20px 60px',
+            },
+
+            '& > h1': {
+                textAlign: 'center',
+                letterSpacing: '0',
+                fontSize: '20px !important',
+                margin: 0,
+                marginRight: '10px',
+
+                '& strong': {
+                    fontWeight: '700',
+                },
+
+                '@media (min-width: 1441px)': {
+                    fontSize: '28px !important',
+                },
+            },
+
+            '& > .rich-text': {
+                textAlign: 'center',
+                fontSize: '16px !important',
+
+                '@media (min-width: 1441px)': {
+                    fontSize: '20px !important',
+                },
+                margin: 0,
+
+                '& strong': {
+                    fontWeight: '700',
+                },
+            },
+        },
+    },
+
+    '& > .item.register': {},
 
     '& > .item.none': {
         display: 'none !important',
@@ -165,15 +269,16 @@ const RightSideColumn = ({ className, data, step, slug, links }: RightSideColumn
             return '';
         }
 
-        text = text.replace('{{count}}', data.response_count);
-        text = text.replace('{{objective}}', data.call_to_action.progress.objective);
+        text = text.replace('{{count}}', data.UrgentAction.response_count);
+        text = text.replace('{{objective}}', data.UrgentAction.call_to_action.progress.objective);
         return text;
     };
+
     return (
         <>
             <div className="right">
                 <div className={className}>
-                    {data.story.map((story: any, index: number) => (
+                    {data.UrgentAction.story.map((story: any, index: number) => (
                         <div
                             key={index}
                             className={classnames(
@@ -192,14 +297,14 @@ const RightSideColumn = ({ className, data, step, slug, links }: RightSideColumn
                     <div
                         className={classnames(
                             'item yellow',
-                            linkIndex === data.story.length && 'current',
+                            linkIndex === data.UrgentAction.story.length && 'current',
                         )}>
-                        {data.call_to_action.progress.display && (
+                        {data.UrgentAction.call_to_action.progress.display && (
                             <div className="progress">
                                 <div className="progressChart">
                                     <CircularProgressbarWithChildren
-                                        value={data.responseCount}
-                                        maxValue={data.call_to_action.progress.objective}
+                                        value={data.UrgentAction.responseCount}
+                                        maxValue={data.UrgentAction.call_to_action.progress.objective}
                                         background
                                         backgroundPadding={1}
                                         styles={buildStyles({
@@ -215,7 +320,7 @@ const RightSideColumn = ({ className, data, step, slug, links }: RightSideColumn
                                                 dangerouslySetInnerHTML={{
                                                     __html: textToHtml(
                                                         formatText(
-                                                            data.call_to_action.progress.message,
+                                                            data.UrgentAction.call_to_action.progress.message,
                                                         ),
                                                     ),
                                                 }}
@@ -226,15 +331,15 @@ const RightSideColumn = ({ className, data, step, slug, links }: RightSideColumn
                             </div>
                         )}
 
-                        <p className="title">{data.call_to_action.title}</p>
+                        <p className="title">{data.UrgentAction.call_to_action.title}</p>
 
                         <p
                             className={'message'}
-                            dangerouslySetInnerHTML={{ __html: data.call_to_action.message ?? '' }}
+                            dangerouslySetInnerHTML={{ __html: data.UrgentAction.call_to_action.message ?? '' }}
                         />
                         <div style={{ width: 'fit-content' }}>
                             <ToUrgentActionPageLink
-                                label={data.call_to_action.button}
+                                label={data.UrgentAction.call_to_action.button}
                                 step="act"
                                 pageName="message-view"
                                 buttonName="OpenMessageView"
@@ -243,20 +348,20 @@ const RightSideColumn = ({ className, data, step, slug, links }: RightSideColumn
                     </div>
                     <div className={classnames(
                         'item message-view',
-                        linkIndex === data.story.length + 1 && 'current',
+                        linkIndex === data.UrgentAction.story.length + 1 && 'current',
                     )}>
                         <MessageView // @ts-ignore
-                            text={data.message.text_view}
-                            objectIndication={data.message.object_indication}
-                            objectExample={data.message.object_example}
-                            messageTemplate={data.message.message_template}
+                            text={data.UrgentAction.message.text_view}
+                            objectIndication={data.UrgentAction.message.object_indication}
+                            objectExample={data.UrgentAction.message.object_example}
+                            messageTemplate={data.UrgentAction.message.message_template}
                             step={step}
                             action={
                                 <ToMessageSendButton
-                                    label={data.message.button_view}
+                                    label={data.UrgentAction.message.button_view}
                                     step={step}
                                     pageName="message-send"
-                                    objectExample={data.message.object_example}
+                                    objectExample={data.UrgentAction.message.object_example}
                                     buttonName="OpenMessageSend"
                                 />
                             }
@@ -264,19 +369,19 @@ const RightSideColumn = ({ className, data, step, slug, links }: RightSideColumn
                     </div>
                     <div className={classnames(
                         'item message-send',
-                        linkIndex === data.story.length + 2 && 'current',
+                        linkIndex === data.UrgentAction.story.length + 2 && 'current',
                     )}>
                         <MessageSend // @ts-ignore
-                            text={data.message.text_send}
-                            messageTemplate={data.message.text_send}
+                            text={data.UrgentAction.message.text_send}
+                            messageTemplate={data.UrgentAction.message.text_send}
                             step={step}
                             action={
                                 <SendMail // @ts-ignore
-                                    label={data.message.button_send}
+                                    label={data.UrgentAction.message.button_send}
                                     step={step}
-                                    recipient={data.message.recipient}
-                                    messageTemplate={data.message.message_template}
-                                    auId={data.id}
+                                    recipient={data.UrgentAction.message.recipient}
+                                    messageTemplate={data.UrgentAction.message.message_template}
+                                    auId={data.UrgentAction.id}
                                     afterMail={({ failed, registered }: any) => {
                                         if (failed) {
                                             global.console.log('Failed to open mailto link');
@@ -287,6 +392,46 @@ const RightSideColumn = ({ className, data, step, slug, links }: RightSideColumn
                             }
                         />
                     </div>
+                    <div className={classnames(
+                        'item share',
+                        linkIndex === data.UrgentAction.story.length + 3 && 'current',
+                    )}>
+                        <ShareStep // @ts-ignore
+                            slug={slug}
+                            step={step}
+                            data={data.UrgentAction.emailThank}
+                        />
+                    </div>
+                    <div className={classnames(
+                        'item register',
+                        linkIndex === data.UrgentAction.story.length + 4 && 'current',
+                    )}>
+                        <Register // @ts-ignore
+                            step={step}
+                            data={data.UrgentAction.register}
+                            gdprRegister={get(data, 'GdprRegister.content')}
+                            action={(disabled: any, formValues: any) => (
+                                <RegisterButton
+                                    auId={data.UrgentAction.id}
+                                    step={step}
+                                    disabled={disabled}
+                                    buttonText={data.UrgentAction.register.button}
+                                    formValues={formValues}
+                                />
+                            )}
+                        />
+                    </div>
+                    <div className={classnames(
+                        'item thanks-end',
+                        linkIndex === data.UrgentAction.story.length + 5 && 'current',
+                    )}>
+                        <ThankStep // @ts-ignore
+                            data={data.UrgentAction.end_thank}
+                            slug={slug}
+                            step={step}
+                            dataShare={data.UrgentAction.end_thank.email_thank}
+                        />
+                    </div>
                 </div>
             </div>
             <div
@@ -294,7 +439,7 @@ const RightSideColumn = ({ className, data, step, slug, links }: RightSideColumn
                     width: '55vw',
                     height: '100vh',
                     position: 'fixed',
-                    opacity: linkIndex === data.story.length ? 1 : 0,
+                    opacity: linkIndex === data.UrgentAction.story.length ? 1 : 0,
                     background: yellow,
                     right: 0,
                     top: 0,

@@ -36,7 +36,7 @@ const styles = {
 
 type RoundedStepperProps = {
     className?: string;
-    links: any;
+    links: Array<string>;
 };
 
 const RoundedStepper = ({ className, links }: RoundedStepperProps) => {
@@ -45,6 +45,7 @@ const RoundedStepper = ({ className, links }: RoundedStepperProps) => {
     const navigateTo = (link: string) => {
         navigate(link);
     };
+
 
     return (
         <div className={className}>

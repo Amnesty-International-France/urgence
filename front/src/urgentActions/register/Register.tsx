@@ -4,23 +4,27 @@ import classnames from 'classnames';
 import get from 'lodash.get';
 import { compose } from 'recompose';
 
-import { black, white } from 'amnesty-components';
+import { black, RichText, white, withYellowBackground, withYellowLogo } from 'amnesty-components';
 import { isCorrectEmail, isCorrectPhone } from '../../themes/Input';
 import LongText from '../../themes/LongText';
-import { RichText } from 'amnesty-components';
-import { withYellowBackground, withYellowLogo } from 'amnesty-components';
 
 import { withSessionData } from '../../DataContext';
 
 import LegalInformation from '../LegalInformation';
 import Form from './Form';
 import { isValid as isValidUserInformation } from '../messageSend/MessageSend';
+import MobileDetect from 'mobile-detect';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
     padding: '60px 15px 20px',
     height: 'calc(100vh - 30px)',
+    overflowY: 'auto',
+    '@media (orientation: landscape)': {
+        padding: '60px 120px 20px 60px',
+        minHeight: 'calc(100vh - 30px)',
+    },
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
@@ -101,13 +105,13 @@ type IsValidProps = {
     phone?: string;
 };
 
-export const isValid = ({civility, firstname, lastname, email, phone}: IsValidProps): boolean => {
-    if (!isValidUserInformation({civility, firstname, lastname, email})) {
+export const isValid = ({ civility, firstname, lastname, email, phone }: IsValidProps): boolean => {
+    if (!isValidUserInformation({ civility, firstname, lastname, email })) {
         return false;
     }
 
     return isCorrectPhone(phone);
-}
+};
 
 type RegisterActivistProps = {
     className?: string;
@@ -134,39 +138,66 @@ type RegisterActivistProps = {
 };
 
 export const RegisterActivist = ({
-    data,
-    gdprRegister,
-    action,
-    className,
-    ...props
-}: RegisterActivistProps) => {
+                                     data,
+                                     gdprRegister,
+                                     action,
+                                     className,
+                                     ...props
+                                 }: RegisterActivistProps) => {
     const { firstname, lastname, phone, email, civility } = props;
     const title = get(data, 'title');
     const text = get(data, 'text');
     const phoneIndication = get(data, 'phone_indication');
-    const displayAction = isValid({firstname, lastname, phone, email, civility});
+    const displayAction = isValid({ firstname, lastname, phone, email, civility });
+    const isOnMobile = () => {
+        const md = new MobileDetect(global.navigator.userAgent);
+        return md.mobile();
+    };
 
     return (
         <div className={classnames('register', className)}>
-            <Paper className="paper" elevation={6} square>
-                <div className="header">
-                    <h1>
-                        <LongText text={title} />
-                    </h1>
-                    {text && (
-                        <div className="text">
-                            <RichText html={text} />
+            {isOnMobile() ?
+                (
+                    <Paper className="paper" elevation={6} square>
+                        <div className="header">
+                            <h1>
+                                <LongText text={title} />
+                            </h1>
+                            {text && (
+                                <div className="text">
+                                    <RichText html={text} />
+                                </div>
+                            )}
                         </div>
-                    )}
-                </div>
-                <div className="form-step">
-                    <Form phoneIndication={phoneIndication} {...props} />
-                </div>
-            </Paper>
+                        <div className="form-step">
+                            <Form phoneIndication={phoneIndication} {...props} />
+                        </div>
+                    </Paper>
+                ) : (
+                    <>
+                        <div className="header">
+                            <h1>
+                                <LongText text={title} />
+                            </h1>
+                            {text && (
+                                <div className="text">
+                                    <RichText html={text} />
+                                </div>
+                            )}
+                        </div>
+                        <div className="form-step">
+                            <Form phoneIndication={phoneIndication} {...props} />
+                        </div>
+                    </>
+                )
+
+            }
             {displayAction && <div className="action">
                 {action(isDisabled(props), { firstname, lastname, phone, email, civility })}
             </div>}
-            {!displayAction && <div className="action"><div className="register-disabled">Je m'inscris</div></div>}
+            {!displayAction && <div className="action">
+                <div className="register-disabled">Je m'inscris</div>
+            </div>}
             <LegalInformation content={gdprRegister} />
         </div>
     );

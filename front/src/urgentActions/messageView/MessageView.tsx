@@ -14,8 +14,12 @@ const styles = {
     fontSize: '18px',
     padding: '60px 15px 20px',
     height: 'calc(100vh - 30px)',
+    overflowY: 'auto',
+
     '@media (orientation: landscape)': {
         padding: '60px 120px 20px 60px',
+        minHeight: 'calc(100vh - 30px)',
+
     },
     '& .paper': {
         display: 'flex',
@@ -164,7 +168,7 @@ export const MessageView = ({ className, text, messageTemplate, action, ...props
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
-                        height: '100%'
+                        minHeight: '100%'
                     }}>
                         <div className="form-step">
                             <p className="label-step">

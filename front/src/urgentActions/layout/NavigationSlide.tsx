@@ -70,7 +70,6 @@ const NavigationSlide = ({ className, links, step }: NavigationSlideProps) => {
     const navigate = useNavigate();
     let index = links.indexOf(pathname);
 
-
     const nextPage = () => {
         if (index >= links.length) {
             navigate(links[links.length]);

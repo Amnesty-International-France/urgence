@@ -38,7 +38,6 @@ type UrgentActionLayoutProps = {
 };
 
 const UrgentActionLayout = ({ className, slug, step, data, page }: UrgentActionLayoutProps) => {
-    const globalData = get(data, 'UrgentAction');
     const story = get(data, 'UrgentAction.story');
     const articleTitle = story[0].content;
     const imgSrc = story[0]['mediumDesktop'];
@@ -52,8 +51,19 @@ const UrgentActionLayout = ({ className, slug, step, data, page }: UrgentActionL
     const actLink = get(data, 'UrgentAction.call_to_action') ? generateUrl('act', { slug }) : '';
     const messageViewLink = get(data, 'UrgentAction.message.text_view') ? generateUrl('message-view', { slug }) : '';
     const messageSendLink = get(data, 'UrgentAction.message.text_send') ? generateUrl('message-send', { slug }) : '';
+    const sharedLink = get(data, 'UrgentAction.email_thank') ? generateUrl('share', { slug }) : '';
+    const registerLink = get(data, 'UrgentAction.register') ? generateUrl('register', { slug }) : '';
+    const thankEndLink = get(data, 'UrgentAction.end_thank') ? generateUrl('thanks-end', { slug }) : '';
 
-    let links = [...storyLink, actLink, messageViewLink, messageSendLink];
+    let links = [
+        ...storyLink,
+        actLink,
+        messageViewLink,
+        messageSendLink,
+        sharedLink,
+        registerLink,
+        thankEndLink,
+    ];
 
     return (
         <div className={className}>
@@ -68,7 +78,7 @@ const UrgentActionLayout = ({ className, slug, step, data, page }: UrgentActionL
                 step={step}
             />
             <RightSideColumn // @ts-ignore
-                data={globalData}
+                data={data}
                 step={step}
                 slug={slug}
                 links={links}

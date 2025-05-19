@@ -62,7 +62,13 @@ interface LeftSideColumnProps {
 
 const LeftSideColumn = ({ className, title, image, page, step }: LeftSideColumnProps) => {
     const moveTitle =
-        Number(page) > 0 || step === 'act' || step === 'message-view' || step === 'message-send'
+        Number(page) > 0 ||
+        step === 'act' ||
+        step === 'message-view' ||
+        step === 'message-send' ||
+        step === 'share' ||
+        step === 'register' ||
+        step === 'thanks-end'
             ? 'move'
             : '';
     return (
