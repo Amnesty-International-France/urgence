@@ -1,13 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import classnames from 'classnames';
-import Paper from '@mui/material/Paper';
 import { black, RichText, white, withYellowLogo } from 'amnesty-components';
 import Form from './Form';
 import { withSessionData } from '../../DataContext';
 import LegalInformation from '../LegalInformation';
-import MobileDetect from 'mobile-detect';
+import PaperForMobile from '../layout/PaperForMobile';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -41,7 +40,7 @@ const styles = {
 
         '@media (max-width: 1024px)': {
             marginTop: '-30px',
-        }
+        },
     },
     '& .text:': {
         margin: '0.5em 0',
@@ -83,7 +82,6 @@ const styles = {
         },
     },
 };
-
 
 type IsValidProps = {
     civility?: string;
@@ -129,71 +127,41 @@ type Props = {
     step?: string;
 };
 
-
 export const MessageSend = ({
-                                text,
-                                messageTemplate,
-                                gdprMessage,
-                                action,
-                                className,
-                                ...props
-                            }: Props) => {
+    text,
+    messageTemplate,
+    gdprMessage,
+    action,
+    className,
+    ...props
+}: Props) => {
     const { civility, firstname, lastname, email } = props;
     const displayAction = isValid({ civility, firstname, lastname, email });
-    const isOnMobile = () => {
-        const md = new MobileDetect(global.navigator.userAgent);
-        return md.mobile();
-    };
+
     if (!messageTemplate || !messageTemplate.length) {
         return <p className="error">Cette action urgente n&#39;existe plus.</p>;
     }
 
     return (
         <div className={classnames('message-send', className)}>
-            {
-                isOnMobile() ? (
-                        <>
-                            <Paper className="paper" elevation={6} square>
-                                {text && (
-                                    <div className="text">
-                                        <RichText html={text} />
-                                    </div>
-                                )}
-                                <div className="form-step">
-                                    <Form {...props} />
-                                </div>
-                            </Paper>
-                            {displayAction && <div className="action">{action}</div>}
-                            {!displayAction && <div className="action">
-                                <div className="see-mail-disabled">Voir l'email</div>
-                            </div>}
-                            <LegalInformation content={gdprMessage} />
-                        </>
-                    ) :
-                    (
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            height: '100%',
-                        }}>
-                            {text && (
-                                <div className="text">
-                                    <RichText html={text} />
-                                </div>
-                            )}
-                            <div className="form-step">
-                                <Form {...props} />
-                            </div>
-                            {displayAction && <div className="action">{action}</div>}
-                            {!displayAction && <div className="action">
-                                <div className="see-mail-disabled">Voir l'email</div>
-                            </div>}
-                            <LegalInformation content={gdprMessage} />
-                        </div>
-                    )
-            }</div>
-
+            <PaperForMobile elevation={6} className={'paper'}>
+                {text && (
+                    <div className="text">
+                        <RichText html={text} />
+                    </div>
+                )}
+                <div className="form-step">
+                    <Form {...props} />
+                </div>
+                {displayAction && <div className="action">{action}</div>}
+                {!displayAction && (
+                    <div className="action">
+                        <div className="see-mail-disabled">Voir l'email</div>
+                    </div>
+                )}
+                <LegalInformation content={gdprMessage} />
+            </PaperForMobile>
+        </div>
     );
 };
 

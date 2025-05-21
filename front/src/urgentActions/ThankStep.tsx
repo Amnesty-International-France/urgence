@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import Paper from '@mui/material/Paper';
 import classnames from 'classnames';
 import get from 'lodash.get';
 import { compose } from 'recompose';
@@ -7,10 +6,12 @@ import { compose } from 'recompose';
 import { RichText, withBlackLogo, withYellowBackground } from 'amnesty-components';
 import LongText from '../themes/LongText';
 import Share from './share/Share';
-import MobileDetect from 'mobile-detect';
+import Paper from '@mui/material/Paper';
 
 const styles = {
     padding: '60px 15px 20px',
+    width: '100%',
+
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
@@ -18,7 +19,6 @@ const styles = {
         width: '100%',
         padding: '20px',
         alignItems: 'center',
-
     },
     '& .paper-share': {
         marginTop: '20px',
@@ -37,9 +37,9 @@ const styles = {
 
 export type ThanksType =
     | {
-    title: string;
-    text: string;
-}
+          title: string;
+          text: string;
+      }
     | undefined;
 
 type OwnProps = {
@@ -63,51 +63,24 @@ export const ThankStep = ({ className, data, slug, step, dataShare, analyticsCat
     const title = get(data, 'title');
     const text = get(data, 'text');
 
-    const isOnMobile = () => {
-        const md = new MobileDetect(global.navigator.userAgent);
-        return md.mobile();
-    };
-
-
     return (
         <div className={classnames('thank', className)}>
-            {isOnMobile()
-                ? (
-                    <Paper className="paper" elevation={6} square>
-                        <>
-                            <h1>
-                                <LongText text={title} />
-                            </h1>
-                            {text && <RichText html={text} />}
-                        </>
-                    </Paper>
-                ) : (
-                    <>
-                        <h1>
-                            <LongText text={title} />
-                        </h1>
-                        {text && <RichText html={text} />}
-                    </>
-                )
-            }{isOnMobile()
-            ? (
-                <Paper className="paper paper-share" elevation={6} square>
-                    <Share
-                        slug={slug}
-                        step={step}
-                        data={dataShare}
-                        analyticsCategory={analyticsCategory}
-                    />
-                </Paper>
-            ) : (
+            <Paper elevation={6} className={'paper'}>
+                <>
+                    <h1>
+                        <LongText text={title} />
+                    </h1>
+                    {text && <RichText html={text} />}
+                </>
+            </Paper>
+            <Paper elevation={6} className={'paper paper-share'}>
                 <Share
                     slug={slug}
                     step={step}
                     data={dataShare}
                     analyticsCategory={analyticsCategory}
                 />
-            )
-        }
+            </Paper>
         </div>
     );
 };

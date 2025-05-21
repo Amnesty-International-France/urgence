@@ -2,11 +2,10 @@ import React from 'react';
 import classnames from 'classnames';
 import styled from '@emotion/styled';
 import { compose } from 'recompose';
-import { Paper } from '@mui/material';
 
 import { black, white, withBlackLogo, withYellowBackground } from 'amnesty-components';
 import Share from './Share';
-import MobileDetect from 'mobile-detect';
+import PaperForMobile from '../layout/PaperForMobile';
 
 const styles = {
     padding: '60px 15px 20px',
@@ -46,34 +45,18 @@ type OwnProps = {
 type Props = OwnProps & typeof ShareStep.defaultProps;
 
 // @ts-expect-error TS(7022): 'ShareStep' implicitly has type 'any' because it d... Remove this comment to see the full error message
-const ShareStep = ({ className, slug, step, data, analyticsCategory }: Props) => {
-    const isOnMobile = () => {
-        const md = new MobileDetect(global.navigator.userAgent);
-        return md.mobile();
-    };
-
-    return (
+const ShareStep = ({ className, slug, step, data, analyticsCategory }: Props) => (
         <div className={classnames('share', className)}>
-            {isOnMobile() ?
-                <Paper className="paper" elevation={6} square>
-                    <Share
-                        slug={slug}
-                        step={step}
-                        data={data}
-                        analyticsCategory={analyticsCategory}
-                    />
-                </Paper>
-                :
+            <PaperForMobile elevation={6} className={'paper'}>
                 <Share
                     slug={slug}
                     step={step}
                     data={data}
                     analyticsCategory={analyticsCategory}
                 />
-            }
+            </PaperForMobile>
         </div>
     );
-};
 
 ShareStep.defaultProps = {
     slug: 'new-ua',

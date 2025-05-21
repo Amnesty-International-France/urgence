@@ -68,7 +68,7 @@ export class RadioButton extends Component<Props, State> {
             value,
             onChange,
             error,
-            required = false
+            required = false,
         } = this.props;
 
         const { showError } = this.state;

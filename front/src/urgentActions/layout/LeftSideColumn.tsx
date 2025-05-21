@@ -12,8 +12,9 @@ const styles = {
         transition: 'all .5s ease',
         width: '45vw',
         '& > h1': {
+            width: 'fit-content',
+            margin: '0',
             fontFamily: 'Amnesty Trade Gothic Condensed',
-            display: 'inline',
             color: black,
             backgroundColor: yellow,
             fontSize: '80px',
@@ -27,9 +28,10 @@ const styles = {
             },
         },
         '& > h2': {
+            width: 'fit-content',
+            margin: '0',
             fontFamily: 'Amnesty Trade Gothic Condensed',
             textTransform: 'uppercase',
-            display: 'inline',
             color: white,
             backgroundColor: black,
             fontSize: '46px',
@@ -71,6 +73,9 @@ const LeftSideColumn = ({ className, title, image, page, step }: LeftSideColumnP
         step === 'thanks-end'
             ? 'move'
             : '';
+
+    console.log(title);
+
     return (
         <div className={'left'}>
             <div
@@ -82,7 +87,7 @@ const LeftSideColumn = ({ className, title, image, page, step }: LeftSideColumnP
                     backgroundSize: 'cover',
                 }}
             >
-                <RichText html={title?.replace('<h2', '<br/><h2')} className={moveTitle} />
+                <RichText html={title} className={moveTitle} />
             </div>
         </div>
     );

@@ -46,7 +46,6 @@ const RoundedStepper = ({ className, links }: RoundedStepperProps) => {
         navigate(link);
     };
 
-
     return (
         <div className={className}>
             {links.map((link: string, i: number) => (
