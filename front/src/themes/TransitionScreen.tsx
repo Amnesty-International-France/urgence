@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import Paper from '@mui/material/Paper';
 import { black, RichText, yellow } from 'amnesty-components';
 import LongText from './LongText';
 
@@ -14,6 +13,7 @@ import { secureUseEffect, secureUseState } from '../hooks/secureHooks';
 import { addCampaignMemberTwitter, addResponseCount } from '../services/api';
 import generateUrl from '../services/generateUrl';
 import LinkTwitter from './Sharing/LinkTwitter';
+import PaperForMobile from '../urgentActions/layout/PaperForMobile';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -30,31 +30,7 @@ const styles = {
             height: '85vh',
         },
     },
-    '& .progress': {
-        marginBottom: '60px',
-        display: 'flex',
-        justifyContent: 'center',
-        '@media (min-width: 350px)': {
-            marginBottom: '80px',
-        },
 
-        '& .progressChart': {
-            width: '250px',
-            height: '250px',
-        },
-        '& .progressChartContent': {
-            fontSize: 18,
-            paddingLeft: '25px',
-            paddingRight: '25px',
-            textAlign: 'center',
-        },
-    },
-    '& .step': {
-        margin: '100px 20px 60px',
-        '@media (min-width: 350px)': {
-            margin: '160px 20px 80px',
-        },
-    },
     '& h1': {
         fontFamily: 'Amnesty Trade Gothic Condensed',
         fontSize: '30px',
@@ -125,7 +101,7 @@ export const TransitionScreen = ({
     secureUseEffect(() => {
         if (
             !progress ||
-            progress.display === false ||
+            !progress.display ||
             !progress.objective ||
             !progress.message ||
             !responseCount ||
@@ -188,7 +164,7 @@ export const TransitionScreen = ({
     const urlToRedirect = registered ? 'share' : 'register';
     return (
         <div className={className}>
-            <Paper className="paper" elevation={4} square>
+            <PaperForMobile elevation={4} className={'paper'}>
                 <div className="step">
                     {displayProgress && (
                         <div className="progress">
@@ -196,17 +172,24 @@ export const TransitionScreen = ({
                                 <CircularProgressbarWithChildren
                                     value={responseCount}
                                     maxValue={progress.objective}
+                                    background
+                                    backgroundPadding={1}
                                     styles={buildStyles({
-                                        pathColor: '#ef8200',
+                                        backgroundColor: black,
+                                        textColor: 'red',
+                                        pathColor: 'black',
+                                        trailColor: yellow,
                                         strokeLinecap: 'butt',
                                     })}
                                 >
-                                    <div
-                                        className="progressChartContent"
-                                        dangerouslySetInnerHTML={{
-                                            __html: textToHtml(formatText(progress.message)),
-                                        }}
-                                    ></div>
+                                    <div className={'progress-info'}>
+                                        <div
+                                            className="progressChartContent"
+                                            dangerouslySetInnerHTML={{
+                                                __html: textToHtml(formatText(progress.message)),
+                                            }}
+                                        ></div>
+                                    </div>
                                 </CircularProgressbarWithChildren>
                             </div>
                         </div>
@@ -225,7 +208,7 @@ export const TransitionScreen = ({
                         </div>
                     )}
                 </div>
-            </Paper>
+            </PaperForMobile>
             {interpelationMode === 'email' && <div className="actions">{actions()}</div>}
         </div>
     );

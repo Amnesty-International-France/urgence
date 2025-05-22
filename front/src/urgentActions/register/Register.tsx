@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import Paper from '@mui/material/Paper';
 import classnames from 'classnames';
 import get from 'lodash.get';
 import { compose } from 'recompose';
@@ -13,7 +12,7 @@ import { withSessionData } from '../../DataContext';
 import LegalInformation from '../LegalInformation';
 import Form from './Form';
 import { isValid as isValidUserInformation } from '../messageSend/MessageSend';
-import MobileDetect from 'mobile-detect';
+import PaperForMobile from '../layout/PaperForMobile';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
@@ -149,49 +148,24 @@ export const RegisterActivist = ({
     const text = get(data, 'text');
     const phoneIndication = get(data, 'phone_indication');
     const displayAction = isValid({ firstname, lastname, phone, email, civility });
-    const isOnMobile = () => {
-        const md = new MobileDetect(global.navigator.userAgent);
-        return md.mobile();
-    };
 
     return (
         <div className={classnames('register', className)}>
-            {isOnMobile() ?
-                (
-                    <Paper className="paper" elevation={6} square>
-                        <div className="header">
-                            <h1>
-                                <LongText text={title} />
-                            </h1>
-                            {text && (
-                                <div className="text">
-                                    <RichText html={text} />
-                                </div>
-                            )}
+            <PaperForMobile elevation={6} className={'paper'}>
+                <div className="header">
+                    <h1>
+                        <LongText text={title} />
+                    </h1>
+                    {text && (
+                        <div className="text">
+                            <RichText html={text} />
                         </div>
-                        <div className="form-step">
-                            <Form phoneIndication={phoneIndication} {...props} />
-                        </div>
-                    </Paper>
-                ) : (
-                    <>
-                        <div className="header">
-                            <h1>
-                                <LongText text={title} />
-                            </h1>
-                            {text && (
-                                <div className="text">
-                                    <RichText html={text} />
-                                </div>
-                            )}
-                        </div>
-                        <div className="form-step">
-                            <Form phoneIndication={phoneIndication} {...props} />
-                        </div>
-                    </>
-                )
-
-            }
+                    )}
+                </div>
+                <div className="form-step">
+                    <Form phoneIndication={phoneIndication} {...props} />
+                </div>
+            </PaperForMobile>
             {displayAction && <div className="action">
                 {action(isDisabled(props), { firstname, lastname, phone, email, civility })}
             </div>}
