@@ -68,7 +68,7 @@ export const ShareForm = ({
                 />
             </div>
             <div className="share-block">
-                <div>Ou utilisez vos réseaux sociaux favoris</div>
+                <div className={'share-block-title'}>Ou utilisez vos réseaux sociaux favoris</div>
                 <div className="share-links">
                     <LinkFacebook
                         slug={slug}

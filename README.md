@@ -14,6 +14,29 @@ You can now access different applications:
 -   Admin: http://localhost:5000
 -   Front app: http://localhost:3000
 
+## Documentation
+
+The project is partly documented.
+
+This documentation is written in `markdown` and can be found in the `documentation` directory.
+
+This documentation can be displayed via the [incaya-documentation](https://codeberg.org/INCAYA/incaya-documentation) project  using the following recipes:
+
+```bash
+# Start documentation
+$ make doc-start
+# Stop documentation
+$ make doc-stop
+# Create a new content
+$ make doc-new-content
+```
+
+Once the `make start` recipe has been launched, you have access to :
+
+- the documentation site : http://localhost:1500/
+- an instance of Excalidraw if you need to create illustrations : http://localhost:1501/
+
+
 ## Deployment
 
 ### Prod

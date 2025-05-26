@@ -8,12 +8,17 @@ import ShareForm from '../../themes/Sharing/ShareForm';
 
 import generateUrl from '../../services/generateUrl';
 import LinkTelegram from '../../themes/Sharing/LinkTelegram';
+import classNames from 'classnames';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
     '& .header': {
         margin: '0.5em 0',
+
+        '@media (orientation: landscape)': {
+            margin: '2.5em 0',
+        },
     },
     '& .telegram': {
         margin: '1em 0',
@@ -69,7 +74,7 @@ const Share = ({ className, slug, step, data, analyticsCategory }: ShareProps) =
     const link = getLinkFromSlug(slug);
 
     return (
-        <div className={className}>
+        <div className={classNames('thanks-share', className)}>
             <div className="header">
                 <h1>
                     <LongText text={title} />

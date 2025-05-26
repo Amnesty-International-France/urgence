@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+    documentation:
+        image: rg.fr-par.scw.cloud/incaya-public-docker-registry/incaya-documentation:fr
+        environment:
+            - HUGO_PORT=1500
+        volumes:
+            - ./documentation:/documentation/content:rw
+            - ./logo.jpg:/documentation/static/images/logo.jpg
+            - ./hugo-config.toml:/documentation/config.toml
+        user: '${UID}:${GID}'
+        ports:
+            - 1500:1500
+            - 1501:3000

@@ -1,29 +1,32 @@
 import styled from '@emotion/styled';
-import Paper from '@mui/material/Paper';
 import classnames from 'classnames';
 import React from 'react';
 import { compose } from 'recompose';
-
-import { black, white } from 'amnesty-components';
-
+import { black, RichText, white, withYellowLogo } from 'amnesty-components';
 import { withSessionData } from '../../DataContext';
-import { RichText } from 'amnesty-components';
-import { withYellowLogo } from 'amnesty-components';
 import Form from './Form';
 import LetterView from './LetterView';
+import PaperForMobile from '../layout/PaperForMobile';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
     padding: '60px 15px 20px',
     height: 'calc(100vh - 30px)',
+    overflowY: 'auto',
+
+    '@media (orientation: landscape)': {
+        padding: '60px 120px 20px 60px',
+        minHeight: 'calc(100vh - 30px)',
+
+    },
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         minHeight: '100%',
         width: '100%',
-        padding: '100px 20px 20px 20px',
+        padding: '100px 20px 20px 20px !important',
         color: black,
         backgroundColor: white,
     },
@@ -33,11 +36,14 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '5px 15px',
-        marginTop: '-30px',
         height: '60px',
         '& a': {
             width: '100%',
         },
+
+        '@media (max-width: 1024px)': {
+            marginTop: '-30px',
+        }
     },
     '& .text:': {
         margin: '0.5em 0',
@@ -127,7 +133,7 @@ export const MessageView = ({ className, text, messageTemplate, action, ...props
 
     return (
         <div className={classnames('message-view', className)}>
-            <Paper className="paper" elevation={6} square>
+            <PaperForMobile elevation={6} className={'paper'}>
                 <div className="form-step">
                     <p className="label-step">
                         <span>Étape 1:</span> saisir l&#39;objet de l&#39;email
@@ -144,7 +150,7 @@ export const MessageView = ({ className, text, messageTemplate, action, ...props
                     </div>
                 )}
                 <LetterView messageTemplate={messageTemplate} />
-            </Paper>
+            </PaperForMobile>
             <div className="action">{action}</div>
         </div>
     );

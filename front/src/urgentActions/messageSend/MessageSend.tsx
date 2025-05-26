@@ -2,21 +2,21 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import classnames from 'classnames';
-import Paper from '@mui/material/Paper';
-
-import { white, black } from 'amnesty-components';
-
+import { black, RichText, white, withYellowLogo } from 'amnesty-components';
 import Form from './Form';
-import { withYellowLogo } from 'amnesty-components';
-import { RichText } from 'amnesty-components';
 import { withSessionData } from '../../DataContext';
 import LegalInformation from '../LegalInformation';
+import PaperForMobile from '../layout/PaperForMobile';
 
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
     padding: '60px 15px 20px',
     height: 'calc(100vh - 30px)',
+    '@media (orientation: landscape)': {
+        padding: '60px 120px 20px 60px',
+        minHeight: 'calc(100vh - 30px)',
+    },
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
@@ -33,10 +33,13 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '5px 15px',
-        marginTop: '-30px',
         height: '60px',
         '& a': {
             width: '100%',
+        },
+
+        '@media (max-width: 1024px)': {
+            marginTop: '-30px',
         },
     },
     '& .text:': {
@@ -80,7 +83,6 @@ const styles = {
     },
 };
 
-
 type IsValidProps = {
     civility?: string;
     firstname?: string;
@@ -88,10 +90,10 @@ type IsValidProps = {
     email?: string;
 };
 
-export const isValid = ({civility, firstname, lastname, email}: IsValidProps): boolean => {
+export const isValid = ({ civility, firstname, lastname, email }: IsValidProps): boolean => {
     if (
         typeof civility === 'string' &&
-        civility.trim().length && 
+        civility.trim().length &&
         typeof firstname === 'string' &&
         firstname.trim().length &&
         typeof lastname === 'string' &&
@@ -103,7 +105,7 @@ export const isValid = ({civility, firstname, lastname, email}: IsValidProps): b
     }
 
     return false;
-}
+};
 
 type Props = {
     className?: string;
@@ -125,8 +127,6 @@ type Props = {
     step?: string;
 };
 
-
-
 export const MessageSend = ({
     text,
     messageTemplate,
@@ -135,8 +135,8 @@ export const MessageSend = ({
     className,
     ...props
 }: Props) => {
-    const {civility, firstname, lastname, email} = props;
-    const displayAction = isValid({civility, firstname, lastname, email});
+    const { civility, firstname, lastname, email } = props;
+    const displayAction = isValid({ civility, firstname, lastname, email });
 
     if (!messageTemplate || !messageTemplate.length) {
         return <p className="error">Cette action urgente n&#39;existe plus.</p>;
@@ -144,7 +144,7 @@ export const MessageSend = ({
 
     return (
         <div className={classnames('message-send', className)}>
-            <Paper className="paper" elevation={6} square>
+            <PaperForMobile elevation={6} className={'paper'}>
                 {text && (
                     <div className="text">
                         <RichText html={text} />
@@ -153,10 +153,14 @@ export const MessageSend = ({
                 <div className="form-step">
                     <Form {...props} />
                 </div>
-            </Paper>
-            {displayAction && <div className="action">{action}</div>}
-            {!displayAction && <div className="action"><div className="see-mail-disabled">Voir l'email</div></div>}
-            <LegalInformation content={gdprMessage} />
+                {displayAction && <div className="action">{action}</div>}
+                {!displayAction && (
+                    <div className="action">
+                        <div className="see-mail-disabled">Voir l'email</div>
+                    </div>
+                )}
+                <LegalInformation content={gdprMessage} />
+            </PaperForMobile>
         </div>
     );
 };

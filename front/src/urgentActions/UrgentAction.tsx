@@ -3,23 +3,24 @@ import styled from '@emotion/styled';
 import gql from 'graphql-tag';
 import get from 'lodash.get';
 import { Fragment } from 'react';
-import { Navigate, useNavigate } from 'react-router';
-
-import { useParams } from 'react-router';
+import { Navigate, useNavigate, useParams } from 'react-router';
 import { DataProvider } from '../DataContext';
+import AppBackground from '../themes/AppBackground';
 import SEO from '../SEO';
 import generateUrl from '../services/generateUrl';
 import LoadingScreen from '../themes/LoadingScreen';
-import Stepper from '../themes/Stepper';
 import MessageSend from './messageSend/MessageSend';
 import SendMail from './messageSend/SendMail';
 import MessageView from './messageView/MessageView';
 import ToMessageSendButton from './messageView/ToMessageSendButton';
 import Register from './register/Register';
 import RegisterButton from './register/RegisterButton';
-import ShareStep from './share/ShareStep';
 import Story from './story/Story';
 import ThankStep, { ThanksType } from './ThankStep';
+import MobileDetect from 'mobile-detect';
+import Stepper from '../themes/Stepper';
+import ShareStep from './share/ShareStep';
+import UrgentActionLayout from './layout/UrgentActionLayout';
 
 const query = gql`
     query urgentActionBySlug($slug: String!) {
@@ -140,9 +141,15 @@ type UrgentActionProps = {
     slug: string;
     step?: string;
     data?: any;
+    page?: string;
 };
 
-export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
+export const UrgentAction = ({ slug, step, data, page }: UrgentActionProps) => {
+    const isOnMobile = () => {
+        const md = new MobileDetect(global.navigator.userAgent);
+        return md.mobile();
+    };
+
     const story = get(data, 'UrgentAction.story');
 
     const navigate = useNavigate();
@@ -154,10 +161,119 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
         return <Navigate to={generateUrl('story', { slug })} />;
     }
 
-    if (step === 'story' || step === 'act') {
+
+    if (isOnMobile()) {
         const callToAction = get(data, 'UrgentAction.call_to_action');
         const responseCount = get(data, 'UrgentAction.response_count');
         const id = get(data, 'UrgentAction.id');
+
+        if (step === 'message-view') {
+            const text = get(data, 'UrgentAction.message.text_view');
+            const objectIndication = get(data, 'UrgentAction.message.object_indication');
+            const objectExample = get(data, 'UrgentAction.message.object_example');
+            const messageTemplate = get(data, 'UrgentAction.message.message_template');
+            const buttonView = get(data, 'UrgentAction.message.button_view', 'Suivant');
+
+            return (
+                <MessageView // @ts-ignore
+                    text={text}
+                    objectIndication={objectIndication}
+                    objectExample={objectExample}
+                    messageTemplate={messageTemplate}
+                    step={step}
+                    action={
+                        <ToMessageSendButton
+                            label={buttonView}
+                            step={step}
+                            pageName="message-send"
+                            objectExample={objectExample}
+                            buttonName="OpenMessageSend"
+                        />
+                    }
+                />
+            );
+        }
+
+        if (step === 'message-send') {
+            const id = get(data, 'UrgentAction.id');
+            const text = get(data, 'UrgentAction.message.text_send') as string;
+            const messageTemplate = get(data, 'UrgentAction.message.message_template');
+            const recipient = get(data, 'UrgentAction.message.recipient');
+            const buttonSend = get(data, 'UrgentAction.message.button_send', 'J\'envoie');
+            const gdprMessage = get(data, 'GdprMessage.content');
+
+            return (
+                <MessageSend // @ts-ignore
+                    text={text}
+                    messageTemplate={messageTemplate}
+                    gdprMessage={gdprMessage}
+                    step={step}
+                    action={
+                        <SendMail // @ts-ignore
+                            label={buttonSend}
+                            step={step}
+                            recipient={recipient}
+                            messageTemplate={messageTemplate}
+                            auId={id}
+                            afterMail={({ failed, registered }: any) => {
+                                if (failed) {
+                                    global.console.log('Failed to open mailto link');
+                                }
+                                navigate(generateUrl(registered ? 'share' : 'register', { slug }));
+                            }}
+                        />
+                    }
+                />
+            );
+        }
+
+        if (step === 'share') {
+            const emailThank = get(data, 'UrgentAction.email_thank');
+
+            return (
+                <ShareStep // @ts-ignore
+                    slug={slug}
+                    step={step}
+                    data={emailThank}
+                />
+            );
+        }
+
+        if (step === 'register') {
+            const register = get(data, 'UrgentAction.register');
+
+            return (
+                <Register // @ts-ignore
+                    step={step}
+                    data={register}
+                    gdprRegister={get(data, 'GdprRegister.content')}
+                    action={(disabled: any, formValues: any) => (
+                        <RegisterButton
+                            auId={get(data, 'UrgentAction.id')}
+                            step={step}
+                            disabled={disabled}
+                            buttonText={get(register, 'button')}
+                            formValues={formValues}
+                        />
+                    )}
+                />
+            );
+        }
+
+        if (step === 'thanks-end') {
+            const thankEnd = get(data, 'UrgentAction.end_thank') as ThanksType | undefined;
+            const emailThank = get(data, 'UrgentAction.email_thank');
+
+            return (
+                <ThankStep // @ts-ignore
+                    data={thankEnd}
+                    slug={slug}
+                    step={step}
+                    dataShare={emailThank}
+                />
+            );
+        }
+
         return (
             <Story // @ts-ignore
                 story={story}
@@ -169,114 +285,14 @@ export const UrgentAction = ({ slug, step, data }: UrgentActionProps) => {
         );
     }
 
-    if (step === 'message-view') {
-        const text = get(data, 'UrgentAction.message.text_view');
-        const objectIndication = get(data, 'UrgentAction.message.object_indication');
-        const objectExample = get(data, 'UrgentAction.message.object_example');
-        const messageTemplate = get(data, 'UrgentAction.message.message_template');
-        const buttonView = get(data, 'UrgentAction.message.button_view', 'Suivant');
-
-        return (
-            <MessageView // @ts-ignore
-                text={text}
-                objectIndication={objectIndication}
-                objectExample={objectExample}
-                messageTemplate={messageTemplate}
-                step={step}
-                action={
-                    <ToMessageSendButton
-                        label={buttonView}
-                        step={step}
-                        pageName="message-send"
-                        objectExample={objectExample}
-                        buttonName="OpenMessageSend"
-                    />
-                }
-            />
-        );
-    }
-
-    if (step === 'message-send') {
-        const id = get(data, 'UrgentAction.id');
-        const text = get(data, 'UrgentAction.message.text_send') as string;
-        const messageTemplate = get(data, 'UrgentAction.message.message_template');
-        const recipient = get(data, 'UrgentAction.message.recipient');
-        const buttonSend = get(data, 'UrgentAction.message.button_send', "J'envoie");
-        const gdprMessage = get(data, 'GdprMessage.content');
-
-        return (
-            <MessageSend // @ts-ignore
-                text={text}
-                messageTemplate={messageTemplate}
-                gdprMessage={gdprMessage}
-                step={step}
-                action={
-                    <SendMail // @ts-ignore
-                        label={buttonSend}
-                        step={step}
-                        recipient={recipient}
-                        messageTemplate={messageTemplate}
-                        auId={id}
-                        afterMail={({ failed, registered }: any) => {
-                            if (failed) {
-                                global.console.log('Failed to open mailto link')
-                            }
-                            navigate(generateUrl(registered ? 'share' : 'register', { slug }));
-                        }}
-                    />
-                }
-            />
-        );
-    }
-
-    if (step === 'share') {
-        const emailThank = get(data, 'UrgentAction.email_thank');
-
-        return (
-            <ShareStep // @ts-ignore
-                slug={slug}
-                step={step}
-                data={emailThank}
-            />
-        );
-    }
-
-    if (step === 'register') {
-        const register = get(data, 'UrgentAction.register');
-
-        return (
-            <Register // @ts-ignore
-                step={step}
-                data={register}
-                gdprRegister={get(data, 'GdprRegister.content')}
-                action={(disabled: any, formValues: any) => (
-                    <RegisterButton
-                        auId={get(data, 'UrgentAction.id')}
-                        step={step}
-                        disabled={disabled}
-                        buttonText={get(register, 'button')}
-                        formValues={formValues}
-                    />
-                )}
-            />
-        );
-    }
-
-    if (step === 'thanks-end') {
-        const thankEnd = get(data, 'UrgentAction.end_thank') as ThanksType | undefined;
-        const emailThank = get(data, 'UrgentAction.email_thank');
-
-        return (
-            <ThankStep // @ts-ignore
-                data={thankEnd}
-                slug={slug}
-                step={step}
-                dataShare={emailThank}
-            />
-        );
-    }
-
-    return null;
+    return (
+        <UrgentActionLayout // @ts-ignore
+            slug={slug}
+            step={step}
+            data={data}
+            page={page}
+        />
+    );
 };
 
 const StepperContainer = styled('div')({
@@ -289,14 +305,12 @@ const StepperContainer = styled('div')({
 export const renderUrgentActionWithData =
     (slug: any, step: any, page: any) =>
         ({
-            /* eslint-disable react/prop-types */
-            data,
-
-            error,
-
-            loading,
-        }: /* eslint-enable react/prop-types */
-            any) => {
+             /* eslint-disable react/prop-types */
+             data,
+             error,
+             loading,
+         }: /* eslint-enable react/prop-types */
+         any) => {
             if (error) {
                 console.error(error);
                 return <Navigate to={generateUrl('error')} />;
@@ -306,21 +320,34 @@ export const renderUrgentActionWithData =
                 return <LoadingScreen />;
             }
 
+            const isOnMobile = () => {
+                const md = new MobileDetect(global.navigator.userAgent);
+                return md.mobile();
+            };
+
             const socialMetadata = get(data, 'UrgentAction.social_metadata');
 
             return (
                 <Fragment>
-                    <StepperContainer>
-                        <Stepper data={data} step={step} page={page} />
-                    </StepperContainer>
+                    {
+                        isOnMobile() &&
+                        <>
+                            <AppBackground />
+                            <StepperContainer>
+                                <Stepper // @ts-ignore
+                                    data={data} step={step} page={page} />
+                            </StepperContainer>
+                        </>
+                    }
                     {socialMetadata && <SEO socialMetadata={socialMetadata} />}
-                    <UrgentAction slug={slug} step={step} data={data} />
+                    <UrgentAction slug={slug} step={step} data={data} page={page} />
                 </Fragment>
             );
         };
 
 export const UrgentActionWithData = () => {
     const { slug, step, page } = useParams();
+
     return (
         <DataProvider>
             <Query query={query} variables={{ slug }}>

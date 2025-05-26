@@ -74,11 +74,13 @@ export class MailTo extends Component<Props> {
     openMailer = (dest: any) => {
         window.open(dest, 'mailto');
         window.focus();
-        setTimeout(function () {
-            if (!window.document.hasFocus()) {
-                window.close();
-            }
-        }, 500);
+        if (window.opener) {
+            setTimeout(function () {
+                if (!window.document.hasFocus()) {
+                    window.close();
+                }
+            }, 500);
+        }
     };
 
     render() {

@@ -11,7 +11,7 @@ Incaya a été mandaté par Amnesty en mars 2023 pour reprendre en main la base 
 
 ## Architecture globale du projet
 
-Ce qui ressort de manière forte de l'analyse de l'architecture globale du projet, c'est l'inadéquation entre la simplicité des fonctionnalités du projet et les solutions techniques choisies pour les mettre en oeuvre.
+**Ce qui ressort de manière forte de l'analyse de l'architecture globale du projet, c'est l'inadéquation entre la simplicité des fonctionnalités du projet et les solutions techniques choisies pour les mettre en oeuvre.**
 
 En effet, le projet consiste à gérer un objet métier finalement assez simple, les actions urgentes, puisque constituées de contenus éditoriaux (du texte parfois formaté en HTML et des images) et d'un identifiant technique les reliant au Salesforce Amnesty. 
 
@@ -22,9 +22,9 @@ Le modèle de la base de données confirme cette simplicité :
 ![Le modèle de base de données](modelActionUrgente.png)
 
 **Face à cela, les outils et l'organisation du projet mis en place sont très performants, mais sont plutôt prévus pour répondre à des projets d'envergure avec beaucoup plus de complexité métiers** :
-- une API en GraphQL dont le point fort est d'éviter les problèmes de retour de données insuffisants (under-fetching) ou surnuméraires (over-fetching). Dans le cas d'A.U. ce problème ne se pose pas vu la simplicité des données.
-- des composants visuels isolés dans un module à la manière d'un design system. La complexité induite par cela (comme l'utilisation d'un monorepos ou la mise en place d'un storybook) nous semble inadaptée à la gestion de 3 composants React uniquement utilisés sur le projet A.U. et partagés entre l'administration et le site publique pour faire une simple prévisualisation.
-- une base de données PostgreSQL sollicitée pour gérer 4 tables contenant pour les tables métiers une trentaine d'enregistrements.
+- **une API en GraphQL** dont le point fort est d'éviter les problèmes de retour de données insuffisants (under-fetching) ou surnuméraires (over-fetching). Dans le cas d'A.U. ce problème ne se pose pas vu la simplicité des données.
+- des composants visuels isolés dans un module **à la manière d'un design system**. La complexité induite par cela (comme l'utilisation d'un monorepos ou la mise en place d'un storybook) nous semble inadaptée à la gestion de 3 composants React uniquement utilisés sur le projet A.U. et partagés entre l'administration et le site publique pour faire une simple prévisualisation.
+- une **base de données PostgreSQL sollicitée pour gérer 4 tables** contenant pour les tables métiers une trentaine d'enregistrements.
 
 Cette stack technique répond au besoin actuel et permettrait sans doute de faire énormément évoluer le projet en complexité métier. Si ce besoin devait être exprimé. 
 
@@ -58,26 +58,7 @@ Si les notes précédentes pointent les problèmes, **la base de code actuelle n
 
 Mais nous avons tout de même relevé quelques points qu'il nous semblerait important d'adresser dans le cadre de la maintenance.
 
-### Compteur de taille de lien mailto
-
-[Carte Taiga #2](https://tree.taiga.io/project/thomasmaziere-actions-urgentes-amnesty/us/2)
-
-### Clarification du formulaire d'administration des actions
-
-[Carte Taiga #3](https://tree.taiga.io/project/thomasmaziere-actions-urgentes-amnesty/us/3)
-
-### Optimisation du formulaire d'administration des actions
-
-[Carte Taiga #4](https://tree.taiga.io/project/thomasmaziere-actions-urgentes-amnesty/us/4)
-
-### Remise en place des teste e2e
-
-[Carte Taiga #5](https://tree.taiga.io/project/thomasmaziere-actions-urgentes-amnesty/us/5)
-
-### Suppression du code mort
-
-[Carte Taiga #6](https://tree.taiga.io/project/thomasmaziere-actions-urgentes-amnesty/us/6)
-
-### Utilisation des identifiants Salesforce plutôt que des codes
-
-[Carte Taiga #7](https://tree.taiga.io/project/thomasmaziere-actions-urgentes-amnesty/us/7)
+- Optimisation du formulaire d'administration des actions
+- Remise en place des teste e2e
+- Suppression du code mort
+- Utilisation des identifiants Salesforce plutôt que des codes

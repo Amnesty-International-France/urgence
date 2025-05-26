@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import generateUrl from '../services/generateUrl';
 import Link from '../themes/Link';
 
-export const ToUrgentActionPageLink = ({
+export const    ToUrgentActionPageLink = ({
     label,
     pageName,
     disabled,
