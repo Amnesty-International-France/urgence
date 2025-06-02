@@ -28,7 +28,8 @@ const styles = {
         transform: 'translate(-50%, -50%) scale(30%)',
         opacity: 0,
         transition: 'all ease 0.5s',
-
+        overflowY: 'auto',
+        
         '.card': {
             zIndex: '20',
             position: 'absolute',
