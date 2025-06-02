@@ -28,7 +28,6 @@ const styles = {
         transform: 'translate(-50%, -50%) scale(30%)',
         opacity: 0,
         transition: 'all ease 0.5s',
-        overflowY: 'auto',
         
         '.card': {
             zIndex: '20',
@@ -146,6 +145,11 @@ const styles = {
     },
 
     '& > .item.message-view': {
+        '& > .message-view': {
+            overflowY: 'auto',
+        },
+    },
+    '& > .item.message-send': {
         '& > .message-view': {
             overflowY: 'auto',
         },
