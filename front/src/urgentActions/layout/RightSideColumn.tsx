@@ -63,14 +63,13 @@ const styles = {
 
     '& > .item.yellow': {
         padding: '0 6rem 0 3rem',
-        gap: '34px',
 
         '& p': {
             margin: 0,
         },
 
         '& > .act': {
-            '& > .step': {
+            '.step': {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -212,7 +211,7 @@ const styles = {
             alignItems: 'center',
             justifyContent: 'center',
             height: '100%',
-            
+
             '&> .paper': {
                 width: '100%',
                 padding: '20px',

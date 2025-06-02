@@ -18,7 +18,14 @@ import PaperForMobile from '../urgentActions/layout/PaperForMobile';
 const styles = {
     fontFamily: 'Amnesty Trade Gothic LT',
     fontSize: '18px',
-    margin: '60px 15px 15px',
+    padding: '60px 15px 20px',
+    height: 'calc(100vh - 30px)',
+    overflowY: 'auto',
+
+    '@media (orientation: landscape)': {
+        padding: '60px 120px 20px 60px',
+        minHeight: 'calc(100vh - 30px)',
+    },
     '& .paper': {
         display: 'flex',
         flexDirection: 'column',
@@ -26,8 +33,49 @@ const styles = {
         minHeight: '300px',
         color: black,
         backgroundColor: yellow,
-        '@media (min-width: 1024px)': {
-            height: '85vh',
+        
+        '& .step': {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+
+            margin: '100px 20px 60px',
+            '@media (min-width: 350px)': {
+                margin: '160px 20px 80px',
+            },
+
+            '& .progress': {
+                width: '18rem',
+                backgroundColor: 'transparent',
+                borderRadius: '50%',
+                position: 'relative',
+
+                '& .progress-info': {
+                    position: 'absolute',
+                    width: '82%',
+                    height: '82%',
+                    borderRadius: '50%',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%,-50%)',
+                    backgroundColor: 'white',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+
+                    '& .progressChartContent': {
+                        fontSize: 22,
+                        paddingLeft: '25px',
+                        paddingRight: '25px',
+                        textAlign: 'center',
+                        fontWeight: 300,
+                        lineHeight: 1.3,
+                        '@media (min-width: 1441px)': {
+                            fontSize: 25,
+                        },
+                    },
+                },
+            },
         },
     },
 
