@@ -26,6 +26,29 @@ const App = ({ className, client }: { className?: string; client: ApolloClient<u
         document.getElementById('root').className = 'loaded';
     });
 
+    useEffect(() => {
+        const adsId = process.env.REACT_APP_GOOGLE_ADS_ID;
+
+        if (!adsId) {
+            console.warn('REACT_APP_GOOGLE_ADS_ID manquant !');
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${adsId}`;
+        document.head.appendChild(script);
+
+        const configScript = document.createElement('script');
+        configScript.innerHTML = `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${adsId}');
+        `;
+        document.head.appendChild(configScript);
+    }, []);
+
     return (
         <HelmetProvider>
             <ApolloProvider client={client}>

@@ -52,6 +52,7 @@ services:
             - HOME=/tmp
             - REACT_APP_API_URL=http://api:4000
             - NODE_ENV=development
+            - REACT_APP_GOOGLE_ADS_ID=G-XXXXXXXXXX
         working_dir: /app/front
 
     api:

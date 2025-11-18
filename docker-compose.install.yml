@@ -11,3 +11,4 @@ services:
         environment:
             - NODE_ENV=development
             - HOME=/tmp
+            - REACT_APP_GOOGLE_ADS_ID=G-XXXXXXXXXX
