@@ -34,19 +34,30 @@ const App = ({ className, client }: { className?: string; client: ApolloClient<u
             return;
         }
 
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = `https://www.googletagmanager.com/gtag/js?id=${adsId}`;
-        document.head.appendChild(script);
+        document.head.insertAdjacentHTML(
+            'afterbegin',
+            `
+        <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!=='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer',${adsId});</script>
+<!-- End Google Tag Manager -->
+`,
+        );
 
-        const configScript = document.createElement('script');
-        configScript.innerHTML = `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${adsId}');
-        `;
-        document.head.appendChild(configScript);
+        document.body.insertAdjacentHTML(
+            'afterbegin',
+            `
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=${adsId}"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  `,
+        );
     }, []);
 
     return (
