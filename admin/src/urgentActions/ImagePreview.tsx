@@ -11,12 +11,16 @@ type ImagePreviewProps = {
     croppable?: boolean;
 };
 
-export const ImagePreview = ({ parentField, record, croppable }: ImagePreviewProps) => {
-    const { field } = useInput({ source: croppable ? `${parentField}.crop` : `${parentField}.src` });
-    const previousImage = useRef();
+const CroppableImagePreview = ({
+    parentField,
+    src,
+}: {
+    parentField: string;
+    src: string;
+}) => {
+    const { field } = useInput({ source: `${parentField}.crop` });
+    const previousImage = useRef<string>();
     const [crop, setCrop] = useState<Crop | undefined>(field.value);
-
-    const src = (record && record.src) || record;
 
     useEffect(() => {
         if (!!previousImage.current && previousImage.current !== src) {
@@ -24,7 +28,21 @@ export const ImagePreview = ({ parentField, record, croppable }: ImagePreviewPro
             field.onChange(null);
         }
         previousImage.current = src;
-    }, [src]);
+    }, [field, src]);
+
+    return (
+        <ReactCrop
+            crop={crop}
+            onChange={(_, percentCrop) => setCrop(percentCrop)}
+            onComplete={(_, completePercentCrop) => field.onChange(completePercentCrop)}
+        >
+            <img alt="Crop me" src={src} />
+        </ReactCrop>
+    );
+};
+
+export const ImagePreview = ({ parentField, record, croppable }: ImagePreviewProps) => {
+    const src = ((record && record.src) || record) as string;
 
     if (!record) {
         return null;
@@ -33,13 +51,7 @@ export const ImagePreview = ({ parentField, record, croppable }: ImagePreviewPro
     return (
         <Box sx={{ margin: '0 0.5rem 0.5rem', '& img': { maxHeight: '9rem' } }}>
             {croppable ? (
-                <ReactCrop
-                    crop={crop}
-                    onChange={(_, percentCrop) => setCrop(percentCrop)}
-                    onComplete={(_, completePercentCrop) => field.onChange(completePercentCrop)}
-                >
-                    <img alt="Crop me" src={src} />
-                </ReactCrop>
+                <CroppableImagePreview parentField={parentField} src={src} />
             ) : (
                 <ImageField record={{ src }} source="src" />
             )}
