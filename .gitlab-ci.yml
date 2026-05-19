@@ -9,8 +9,6 @@ variables:
 
 .build: &build
   image: node:18
-  tags:
-    - yarn
   stage: build
   script:
     - node .yarn/releases/yarn-3.2.1.cjs --version
