@@ -95,6 +95,7 @@ deploy_api_release:
     clever deploy
   variables:
     APP_ID: app_eff241f8-4f37-48c9-bbb5-233a8d4a4a0b
+    GIT_DEPTH: "0"
   only:
     - develop
   environment:
@@ -112,6 +113,7 @@ deploy_api_prod:
     clever deploy
   variables:
     APP_ID: app_34694fec-6a00-4c07-a001-6dac13102615
+    GIT_DEPTH: "0"
   only:
     - /^v[0-9]+\.[0-9]+\.[0-9]+$/
   except:
