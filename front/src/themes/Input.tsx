@@ -37,6 +37,7 @@ type InputProps1 = {
     error?: boolean;
     helperText?: string;
     label: string;
+    navigate?: (...args: any[]) => any;
     // @ts-expect-error TS(2749): 'paramsType' refers to a value, but is being used ... Remove this comment to see the full error message
     params?: paramsType;
     noValidate?: boolean;
@@ -58,6 +59,12 @@ export class Input extends Component<InputProps1, InputState1> {
         if (!this.props.noValidate) this.showValidState(!this.props.error);
     }
 
+    componentDidUpdate(prevProps: InputProps1) {
+        if (!this.props.noValidate && prevProps.error !== this.props.error) {
+            this.showValidState(!this.props.error);
+        }
+    }
+
     showErrorState = () => {
         if (!this.state.showError) this.setState({ showError: true });
     };
@@ -73,6 +80,7 @@ export class Input extends Component<InputProps1, InputState1> {
             error,
             helperText,
             label,
+            navigate,
             noValidate,
             onChange,
             staticContext,
@@ -82,9 +90,6 @@ export class Input extends Component<InputProps1, InputState1> {
             ...otherProps
         } = this.props;
         const { showError, showValid } = this.state;
-        if (!noValidate) {
-            this.showValidState(!error);
-        }
 
         return (
             <div className={className}>
