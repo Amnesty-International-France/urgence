@@ -1,0 +1,151 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - develop
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+env:
+  BROWSERSLIST_IGNORE_OLD_DATA: 'true'
+  CI: 'false'
+
+jobs:
+  build_static_release:
+    runs-on: ubuntu-latest
+    container: node:18
+    if: github.ref == 'refs/heads/develop'
+    env:
+      REF: ${{ github.ref_name }}
+      NODE_ENV: production
+      REACT_APP_NODE_ENV: production
+      FRONT_PUBLIC_URL: https://release.urgent.amnesty.fr
+      ADMIN_PUBLIC_URL: https://release.urgent.amnesty.fr/admin
+      REACT_APP_API_URL: https://release.rapide.amnesty.fr
+      REACT_APP_FRONT_BASE_URL: https://release.urgent.amnesty.fr
+      UPLOAD_URL: https://release.rapide.amnesty.fr/api/static
+    steps:
+      - uses: actions/checkout@v4
+      - run: node .yarn/releases/yarn-3.2.1.cjs --version
+      - run: .clevercloud/static/build.sh
+      - name: Transfer compiled files
+        run: |
+          cp --recursive front/build/ dist/
+          cp --recursive admin/build/ dist/admin/
+          cp .clevercloud/static/.htaccess dist/
+          ls -lh ${PWD}/dist/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dist-release
+          path: dist/
+          retention-days: 1
+
+  build_static_prod:
+    runs-on: ubuntu-latest
+    container: node:18
+    if: startsWith(github.ref, 'refs/tags/v')
+    env:
+      REF: ${{ github.ref_name }}
+      NODE_ENV: production
+      REACT_APP_NODE_ENV: production
+      FRONT_PUBLIC_URL: https://urgent.amnesty.fr
+      ADMIN_PUBLIC_URL: https://urgent.amnesty.fr/admin
+      REACT_APP_API_URL: https://rapide.amnesty.fr
+      REACT_APP_FRONT_BASE_URL: https://urgent.amnesty.fr
+      UPLOAD_URL: https://rapide.amnesty.fr/api/static
+    steps:
+      - uses: actions/checkout@v4
+      - run: node .yarn/releases/yarn-3.2.1.cjs --version
+      - run: .clevercloud/static/build.sh
+      - name: Transfer compiled files
+        run: |
+          cp --recursive front/build/ dist/
+          cp --recursive admin/build/ dist/admin/
+          cp .clevercloud/static/.htaccess dist/
+          ls -lh ${PWD}/dist/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dist-prod
+          path: dist/
+          retention-days: 1
+
+  deploy_api_release:
+    runs-on: ubuntu-latest
+    container: clevercloud/clever-tools:latest
+    if: github.ref == 'refs/heads/develop'
+    environment:
+      name: release_api
+      url: https://release.rapide.amnesty.fr
+    env:
+      APP_ID: app_eff241f8-4f37-48c9-bbb5-233a8d4a4a0b
+      CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+      CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: |
+          clever link ${APP_ID}
+          clever deploy
+
+  deploy_api_prod:
+    runs-on: ubuntu-latest
+    container: clevercloud/clever-tools:latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    environment:
+      name: prod_api
+      url: https://rapide.amnesty.fr
+    env:
+      APP_ID: app_34694fec-6a00-4c07-a001-6dac13102615
+      CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+      CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: |
+          clever link ${APP_ID}
+          clever deploy
+
+  upload_static_content_release:
+    runs-on: ubuntu-latest
+    container: alpine:latest
+    needs: build_static_release
+    if: github.ref == 'refs/heads/develop'
+    environment:
+      name: release_static
+      url: https://release.urgent.amnesty.fr
+    steps:
+      - name: Install rclone
+        run: apk update && apk add --no-cache rclone
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist-release
+          path: dist/
+      - run: ls -lh ${PWD}/dist/
+      - run: |
+          rclone config create remote ftp host ${{ secrets.DEVELOP_FTP_HOST }} user ${{ secrets.DEVELOP_FTP_USER }} pass ${{ secrets.DEVELOP_FTP_PASSWORD }}
+          rclone sync -v ${PWD}/dist/ remote:
+
+  upload_static_content_prod:
+    runs-on: ubuntu-latest
+    container: alpine:latest
+    needs: build_static_prod
+    if: startsWith(github.ref, 'refs/tags/v')
+    environment:
+      name: prod_static
+      url: https://urgent.amnesty.fr
+    steps:
+      - name: Install rclone
+        run: apk update && apk add --no-cache rclone
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist-prod
+          path: dist/
+      - run: ls -lh ${PWD}/dist/
+      - run: |
+          rclone config create remote ftp host ${{ secrets.FTP_HOST }} user ${{ secrets.FTP_USER }} pass ${{ secrets.FTP_PASSWORD }}
+          rclone sync -v ${PWD}/dist/ remote:
