@@ -45,8 +45,6 @@ jobs:
   deploy-api:
     name: Deploy API (Production)
     runs-on: ubuntu-latest
-    container:
-      image: clevercloud/clever-tools:latest
     environment:
       name: prod_api
       url: https://rapide.amnesty.fr
@@ -54,6 +52,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Install clever-tools
+        run: npm install -g clever-tools@4.10.0
       - name: Deploy API
         env:
           CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
