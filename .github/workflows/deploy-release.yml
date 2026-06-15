@@ -1,0 +1,90 @@
+name: Deploy Release
+
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  BROWSERSLIST_IGNORE_OLD_DATA: 'true'
+  CI: 'false'
+
+jobs:
+  build-static:
+    name: Build Static (Release)
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+      REACT_APP_NODE_ENV: production
+      FRONT_PUBLIC_URL: https://release.urgent.amnesty.fr
+      ADMIN_PUBLIC_URL: https://release.urgent.amnesty.fr/admin
+      REACT_APP_API_URL: https://release.rapide.amnesty.fr
+      REACT_APP_FRONT_BASE_URL: https://release.urgent.amnesty.fr
+      UPLOAD_URL: https://release.rapide.amnesty.fr/api/static
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.15.0'
+      - name: Build
+        run: |
+          node .yarn/releases/yarn-3.2.1.cjs --version
+          bash .clevercloud/static/build.sh
+          mkdir -p dist/admin/
+          cp -r front/build/. dist/
+          cp -r admin/build/. dist/admin/
+          cp .clevercloud/static/.htaccess dist/
+          ls -lh dist/
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-release
+          path: dist/
+          retention-days: 1
+
+  deploy-api:
+    name: Deploy API (Release)
+    runs-on: ubuntu-latest
+    environment:
+      name: release_api
+      url: https://release.rapide.amnesty.fr
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install clever-tools
+        run: npm install -g clever-tools
+      - name: Deploy API
+        env:
+          CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+          CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
+        run: |
+          clever link app_eff241f8-4f37-48c9-bbb5-233a8d4a4a0b
+          clever deploy --force
+
+  upload-static:
+    name: Upload Static (Release)
+    runs-on: ubuntu-latest
+    needs: build-static
+    environment:
+      name: release_static
+      url: https://release.urgent.amnesty.fr
+    steps:
+      - name: Install rclone
+        run: sudo apt-get update && sudo apt-get install -y rclone
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-release
+          path: dist/
+      - name: Sync to FTP
+        env:
+          FTP_HOST: ${{ secrets.DEVELOP_FTP_HOST }}
+          FTP_USER: ${{ secrets.DEVELOP_FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.DEVELOP_FTP_PASSWORD }}
+        run: |
+          ls -lh dist/
+          rclone sync -v dist/ :ftp: \
+            --ftp-host="$FTP_HOST" \
+            --ftp-user="$FTP_USER" \
+            --ftp-pass="$(rclone obscure "$FTP_PASSWORD")"
