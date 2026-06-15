@@ -176,21 +176,6 @@ const config = convict({
             default: '',
             env: 'SF_CONSUMER_SECRET',
         },
-        username: {
-            format: String,
-            default: '',
-            env: 'SF_USERNAME',
-        },
-        password: {
-            format: String,
-            default: '',
-            env: 'SF_PASSWORD',
-        },
-        securityToken: {
-            format: String,
-            default: '',
-            env: 'SF_SECURITY_TOKEN',
-        },
     },
 });
 

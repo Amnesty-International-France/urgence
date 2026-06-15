@@ -8,13 +8,14 @@ help: ## SOS? Usage make help (default).
 
 #### STARTING ###
 
-DOCKER_COMPOSE = docker-compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
-DOCKER_COMPOSE_INSTALL = docker-compose -p reaction-rapide -f docker-compose.install.yml
-DOCKER_COMPOSE_TEST = docker-compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
-DOCKER_COMPOSE_E2E = docker-compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
+DOCKER_COMPOSE = docker compose -p reaction-rapide -f docker-compose.yml -f docker-compose.dev.yml
+DOCKER_COMPOSE_INSTALL = docker compose -p reaction-rapide -f docker-compose.install.yml
+DOCKER_COMPOSE_TEST = docker compose -p reaction-rapide-test -f docker-compose.yml -f docker-compose.test.yml
+DOCKER_COMPOSE_E2E = docker compose -p reaction-rapide-e2e -f docker-compose.yml -f docker-compose.e2e.yml
 
 install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install yarn
+	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install bash -c "cd amnesty-components && npx tsc"
 
 install-production: ## Install all dependencies in production mode. Usage `make install-prod`.
 	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install bash -c "yarn workspaces focus --production reaction-rapide-api"
