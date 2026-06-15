@@ -1,6 +1,9 @@
 name: CI/CD
 
 on:
+  pull_request:
+    branches:
+      - develop
   push:
     branches:
       - develop
@@ -87,6 +90,7 @@ jobs:
         with:
           fetch-depth: 0
       - run: npm install -g clever-tools
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - run: |
           clever link ${APP_ID}
           clever deploy
@@ -106,6 +110,7 @@ jobs:
         with:
           fetch-depth: 0
       - run: npm install -g clever-tools
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - run: |
           clever link ${APP_ID}
           clever deploy
