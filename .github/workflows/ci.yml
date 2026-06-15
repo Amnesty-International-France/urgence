@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  pull_request:
+
+env:
+  BROWSERSLIST_IGNORE_OLD_DATA: 'true'
+  CI: 'false'
+
+jobs:
+  test-build-static:
+    name: Test Build Static
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+      REACT_APP_NODE_ENV: production
+      FRONT_PUBLIC_URL: https://release.urgent.amnesty.fr
+      ADMIN_PUBLIC_URL: https://release.urgent.amnesty.fr/admin
+      REACT_APP_API_URL: https://release.rapide.amnesty.fr
+      REACT_APP_FRONT_BASE_URL: https://release.urgent.amnesty.fr
+      UPLOAD_URL: https://release.rapide.amnesty.fr/api/static
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.15.0'
+      - name: Build static
+        run: |
+          node .yarn/releases/yarn-3.2.1.cjs --version
+          bash .clevercloud/static/build.sh
+
+  test-build-api:
+    name: Test Build API
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.15.0'
+      - name: Setup Yarn
+        run: |
+          corepack enable
+          corepack prepare yarn@3.2.1 --activate
+      - name: Build API
+        run: bash .clevercloud/before.sh
