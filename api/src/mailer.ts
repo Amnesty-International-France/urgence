@@ -23,7 +23,6 @@ const transporter = createTransport(config);
 transporter.verify((err) => {
     if (err) {
         console.log(`Error with mailing : ${err}`);
-        throw err;
     }
 });
 
