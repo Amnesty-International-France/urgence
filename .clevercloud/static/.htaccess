@@ -6,4 +6,4 @@ RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
 RewriteRule ^ - [L]
 
 # If the requested resource doesn't exist, use index.php
-RewriteRule ^ /index.html
+RewriteRule ^ /index.php
