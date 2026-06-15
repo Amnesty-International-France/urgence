@@ -89,11 +89,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: npm install -g clever-tools
-      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - run: |
-          clever link ${APP_ID}
-          clever deploy
+      - uses: 47ng/actions-clever-cloud@v2
+        env:
+          CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+          CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
+        with:
+          appID: ${{ env.APP_ID }}
 
   deploy_api_prod:
     runs-on: ubuntu-latest
@@ -109,11 +110,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: npm install -g clever-tools
-      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - run: |
-          clever link ${APP_ID}
-          clever deploy
+      - uses: 47ng/actions-clever-cloud@v2
+        env:
+          CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+          CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
+        with:
+          appID: ${{ env.APP_ID }}
 
   upload_static_content_release:
     runs-on: ubuntu-latest
