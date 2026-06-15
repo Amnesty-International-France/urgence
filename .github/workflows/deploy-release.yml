@@ -61,7 +61,7 @@ jobs:
         run: |
           echo "Token length: ${#CLEVER_TOKEN}"
           echo "Secret length: ${#CLEVER_SECRET}"
-          clever whoami
+          clever profile
       - name: Deploy API
         env:
           CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
