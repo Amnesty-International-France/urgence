@@ -54,6 +54,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Debug auth
+        env:
+          CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+          CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
+        run: |
+          echo "Token length: ${#CLEVER_TOKEN}"
+          echo "Secret length: ${#CLEVER_SECRET}"
+          clever whoami
       - name: Deploy API
         env:
           CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
