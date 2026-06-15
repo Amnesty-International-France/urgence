@@ -92,7 +92,7 @@ jobs:
       - run: npm install -g clever-tools
       - run: |
           clever link ${APP_ID}
-          clever deploy
+          clever deploy --force
         working-directory: ${{ github.workspace }}
 
   deploy_api_prod:
@@ -112,7 +112,7 @@ jobs:
       - run: npm install -g clever-tools
       - run: |
           clever link ${APP_ID}
-          clever deploy
+          clever deploy --force
         working-directory: ${{ github.workspace }}
 
   upload_static_content_release:
