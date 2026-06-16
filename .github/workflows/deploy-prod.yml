@@ -41,6 +41,7 @@ jobs:
         with:
           name: dist-prod
           path: dist/
+          include-hidden-files: true
           retention-days: 1
 
   deploy-api:
