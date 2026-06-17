@@ -5,38 +5,39 @@ import { CampaignMember } from '../urgentActions/campaignMember';
 
 const salesforce = config.salesforce;
 
-const { baseUrl, version, consumerKey, consumerSecret, username, password, securityToken } =
-    salesforce;
+const { baseUrl, version, consumerKey, consumerSecret } = salesforce;
 
 const JSON_TYPE = 'application/json';
-const AUTHENTICATE_URL = `${baseUrl}/oauth2/token?grant_type=password&client_id=${consumerKey}&client_secret=${consumerSecret}&username=${username}&password=${password}${securityToken}`;
+const AUTHENTICATE_URL = `${baseUrl}/oauth2/token`;
 const QUERY_BASE_URL = `${baseUrl}/data/${version}`;
 
 export const authenticate = async () => {
+    const params = `grant_type=client_credentials&client_id=${encodeURIComponent(consumerKey)}&client_secret=${encodeURIComponent(consumerSecret)}`;
+
     console.log('Authentication request', {
         url: AUTHENTICATE_URL,
         method: 'POST',
-        headers: {
-            Accept: JSON_TYPE,
-        },
+        grant_type: 'client_credentials',
     });
 
     const response = await fetch(AUTHENTICATE_URL, {
         method: 'POST',
         headers: {
             Accept: JSON_TYPE,
+            'Content-Type': 'application/x-www-form-urlencoded',
         },
+        body: params,
     });
     const status = response.status;
-    const body = await response.json();
+    const authBody = await response.json();
 
-    console.log('Authentication response', { status, body });
+    console.log('Authentication response', { status, body: authBody });
 
     if (status >= 400) {
-        throw new Error(`Error authenticating to SalesForce: ${body.error_description}`);
+        throw new Error(`Error authenticating to SalesForce: ${authBody.error_description}`);
     }
 
-    return { status, body };
+    return { status, body: authBody };
 };
 
 const isMemberAlreadyAddedError = (errors: { errorCode: string }[]) =>
