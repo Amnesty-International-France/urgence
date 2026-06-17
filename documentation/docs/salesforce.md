@@ -45,48 +45,29 @@ const config = convict({
             default: '',
             env: 'SF_CONSUMER_SECRET',
         },
-        username: {
-            format: String,
-            default: '',
-            env: 'SF_USERNAME',
-        },
-        password: {
-            format: String,
-            default: '',
-            env: 'SF_PASSWORD',
-        },
-        securityToken: {
-            format: String,
-            default: '',
-            env: 'SF_SECURITY_TOKEN',
-        },
     },
 });
 ```
 
-Les échanges nécessitent une authentification réalisée via un échange de token d'authentification.
+Les échanges nécessitent une authentification réalisée via un échange de token d'authentification, basée sur le flow OAuth 2.0 `client_credentials` (la méthode `password` / `username` / `securityToken` étant supprimée par Salesforce à partir du 1er septembre 2026).
 
 ```JavaScript
 // in api/src/services/salesForceApi.ts
-const {
-    baseUrl,
-    consumerKey,
-    consumerSecret,
-    username,
-    password,
-    securityToken
-} = config.salesforce;
+const { baseUrl, consumerKey, consumerSecret } = config.salesforce;
 
-const AUTHENTICATE_URL = `${baseUrl}/oauth2/token?grant_type=password&client_id=${consumerKey}&client_secret=${consumerSecret}&username=${username}&password=${password}${securityToken}`;
+const AUTHENTICATE_URL = `${baseUrl}/oauth2/token`;
+const params = `grant_type=client_credentials&client_id=${encodeURIComponent(consumerKey)}&client_secret=${encodeURIComponent(consumerSecret)}`;
 
 const response = await fetch(AUTHENTICATE_URL, {
     method: 'POST',
     headers: {
         Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
     },
+    body: params,
 });
 const body = await response.json();
-const token = body.access_token:
+const token = body.access_token;
 ```
 
 ## Références des actions
