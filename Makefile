@@ -16,6 +16,7 @@ DOCKER_COMPOSE_DOC = docker compose -p reaction-rapide-doc -f docker-compose.doc
 
 install: ## Install all dependencies. Usage `make install`.
 	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install yarn
+	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps -w /app/amnesty-components install yarn build
 
 install-production: ## Install all dependencies in production mode. Usage `make install-production`.
 	$(DOCKER_COMPOSE_INSTALL) run --rm --no-deps install bash -c "yarn workspaces focus --production reaction-rapide-api"
