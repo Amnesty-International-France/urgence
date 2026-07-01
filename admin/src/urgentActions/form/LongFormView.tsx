@@ -32,28 +32,24 @@ import MailtoLength from './MailtoLength';
 import PreviewQrCode from './PreviewQrCode';
 
 const getMailtoLink = (data: any) => {
-    if (!data) {
-        return `mailto:?subject=&body=`;
+    const mail = data?.recipient?.mail ? encodeURIComponent(data.recipient.mail) : '';
+    // Build only non-empty params on a single line: Outlook (Windows) misparses an
+    // empty `subject=` and chokes on stray whitespace/newlines inside the URL.
+    const params: string[] = [];
+    if (data?.object_example) {
+        params.push(`subject=${encodeURIComponent(data.object_example)}`);
     }
-    return `mailto:${
-        data.recipient && data.recipient.mail ? encodeURIComponent(data.recipient.mail) : ''
+    const bodyValue = data?.message_template?.[0]?.value;
+    if (bodyValue) {
+        params.push(`body=${encodeURIComponent(String(bodyValue).replace(/\r?\n/g, '\r\n'))}`);
     }
-        ?subject=${data.object_example ? encodeURIComponent(data.object_example) : ''}
-        &body=${
-            data.message_template && data.message_template[0] && data.message_template[0].value
-                ? encodeURIComponent(data.message_template[0].value)
-                : ''
-        }
-        ${
-            data.recipient && data.recipient.copies_to
-                ? '&cc=' + encodeURIComponent(data.recipient.copies_to)
-                : ''
-        }
-        ${
-            data.recipient && data.recipient.cci
-                ? '&bcc=' + encodeURIComponent(data.recipient.cci)
-                : ''
-        }`;
+    if (data?.recipient?.copies_to) {
+        params.push(`cc=${encodeURIComponent(data.recipient.copies_to)}`);
+    }
+    if (data?.recipient?.cci) {
+        params.push(`bcc=${encodeURIComponent(data.recipient.cci)}`);
+    }
+    return `mailto:${mail}${params.length ? `?${params.join('&')}` : ''}`;
 };
 
 /**
