@@ -44,6 +44,18 @@ describe('MailTo', () => {
                 'mailto:mail%40gmail.com?subject=the%20subject&body=the%20body&bcc=invisiblecopy%40gmail.com',
             );
         });
+
+        it('should omit the subject param when the subject is empty (Outlook fix)', () => {
+            expect(buildMailDest(defaultProps.recipient, '', 'Monsieur le Président,')).toBe(
+                'mailto:mail%40gmail.com?body=Monsieur%20le%20Pr%C3%A9sident%2C',
+            );
+        });
+
+        it('should encode body line breaks as CRLF for Outlook', () => {
+            expect(buildMailDest(defaultProps.recipient, 'the subject', 'line1\nline2')).toBe(
+                'mailto:mail%40gmail.com?subject=the%20subject&body=line1%0D%0Aline2',
+            );
+        });
     });
 
     it('should add disabled class to link if disabled is true', () => {
