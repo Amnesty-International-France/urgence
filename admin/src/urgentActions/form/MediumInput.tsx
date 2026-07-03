@@ -21,6 +21,11 @@ export const MediumInput = ({ source, label, croppable }: MediumInputProps) => {
             >
                 <ImageInput
                     source={`${source}.src`}
+                    format={(value: string | Medium | undefined) =>
+                        typeof value === 'string' && value
+                            ? { src: value, title: value }
+                            : value
+                    }
                     placeholder={<p>Drop a picture to upload, or click to select it</p>}
                     accept="image/*"
                     label={false}

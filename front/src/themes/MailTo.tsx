@@ -43,11 +43,23 @@ type Recipient = {
 
 export const buildMailDest = (recipient: Recipient, subject: string, body: any) => {
     const mail = recipient.mail || 'example@mail.com';
-    return `mailto:${encodeURIComponent(mail)}?subject=${encodeURIComponent(
-        subject,
-    )}&body=${encodeURIComponent(body)}`
-        .concat(recipient.copies_to ? `&cc=${encodeURIComponent(recipient.copies_to)}` : '')
-        .concat(recipient.cci ? `&bcc=${encodeURIComponent(recipient.cci)}` : '');
+    // Outlook (Windows) misparses an empty `subject=` and absorbs the following
+    // `&body=` into the subject, and expects CRLF line breaks in the body. We
+    // therefore only emit params that have a value, and normalise newlines.
+    const params: string[] = [];
+    if (subject) {
+        params.push(`subject=${encodeURIComponent(subject)}`);
+    }
+    if (body) {
+        params.push(`body=${encodeURIComponent(String(body).replace(/\r?\n/g, '\r\n'))}`);
+    }
+    if (recipient.copies_to) {
+        params.push(`cc=${encodeURIComponent(recipient.copies_to)}`);
+    }
+    if (recipient.cci) {
+        params.push(`bcc=${encodeURIComponent(recipient.cci)}`);
+    }
+    return `mailto:${encodeURIComponent(mail)}${params.length ? `?${params.join('&')}` : ''}`;
 };
 
 type Props = {
