@@ -1,7 +1,14 @@
 RewriteEngine On
 
-# If an existing asset or directory is requested go to it as it is
-RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+# Serve index.php (which injects social network metadata) as the directory index,
+# so that the homepage "/" goes through it instead of serving index.html directly.
+DirectoryIndex index.php index.html
+
+# If an existing file is requested go to it as it is.
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f
+RewriteRule ^ - [L]
+
+# If an existing directory is requested, let Apache serve its DirectoryIndex (index.php).
 RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
 RewriteRule ^ - [L]
 
