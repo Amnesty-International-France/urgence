@@ -79,13 +79,13 @@ export const ShareForm = ({
                     <LinkTwitter
                         slug={slug}
                         step={step}
-                        text={`${twitter_message} - ${encodeURIComponent(link)}`}
+                        text={encodeURIComponent(`${twitter_message} - ${link}`)}
                         analyticsCategory={analyticsCategory}
                     />
                     <LinkWhatsapp
                         slug={slug}
                         step={step}
-                        text={`${message} - ${encodeURIComponent(link)}`}
+                        text={encodeURIComponent(`${message} - ${link}`)}
                         analyticsCategory={analyticsCategory}
                     />
                 </div>
