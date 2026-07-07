@@ -74,8 +74,6 @@ const LeftSideColumn = ({ className, title, image, page, step }: LeftSideColumnP
             ? 'move'
             : '';
 
-    console.log(title);
-
     return (
         <div className={'left'}>
             <div

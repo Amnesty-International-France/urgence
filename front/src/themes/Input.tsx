@@ -38,6 +38,7 @@ type InputProps1 = {
     label: string;
     // @ts-expect-error TS(2749): 'paramsType' refers to a value, but is being used ... Remove this comment to see the full error message
     params?: paramsType;
+    navigate?: any;
     noValidate?: boolean;
     onChange?: (...args: any[]) => any;
     staticContext?: any;
@@ -56,6 +57,12 @@ export class Input extends Component<InputProps1, InputState1> {
 
     componentDidMount() {
         if (!this.props.noValidate) this.showValidState(!this.props.error);
+    }
+
+    componentDidUpdate(prevProps: InputProps1) {
+        if (!this.props.noValidate && prevProps.error !== this.props.error) {
+            this.showValidState(!this.props.error);
+        }
     }
 
     showErrorState = () => {
@@ -78,14 +85,12 @@ export class Input extends Component<InputProps1, InputState1> {
             staticContext,
             step,
             params: { slug },
+            navigate,
             value,
             required = false,
             ...otherProps
         } = this.props;
         const { showError, showValid } = this.state;
-        if (!noValidate) {
-            this.showValidState(!error);
-        }
 
         return (
             <div className={className}>
