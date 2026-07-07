@@ -29,7 +29,7 @@ services:
             - ADMIN_PASSWORD=password
             - JWT_SECRET_KEY=foobarS3CR3T!
             - API_PREFIX_URL=
-            - PM2_HOME=.pm2
+            - PM2_HOME=/var/tmp/.pm2
             - SF_BASE_URL
             - SF_API_VERSION
             - SF_CONSUMER_KEY
