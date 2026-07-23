@@ -34,7 +34,7 @@ jobs:
           cp -r front/build/. dist/
           cp -r admin/build/. dist/admin/
           cp .clevercloud/static/.htaccess dist/
-          echo '<?php readfile(__DIR__ . "/index.html"); ?>' > dist/index.php
+          cp front/public/index.php dist/index.php
           ls -lh dist/
       - name: Upload artifact
         uses: actions/upload-artifact@v4

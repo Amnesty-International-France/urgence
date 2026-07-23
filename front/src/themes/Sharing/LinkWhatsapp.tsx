@@ -18,8 +18,8 @@ export const LinkWhatsapp = ({ slug, step, text, action, analyticsCategory }: Pr
     <ShareLink
         slug={slug}
         step={step}
-        href={`whatsapp://send?text=${text}`}
-        target="whatsapp"
+        href={`https://wa.me/?text=${text}`}
+        target="_blank"
         title="Partage Whatsapp"
         icon={faWhatsapp}
         action={action}
